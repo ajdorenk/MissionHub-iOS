@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		683910871760FD3100E01B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910861760FD3100E01B46 /* UIKit.framework */; };
+		683910891760FD3100E01B46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910881760FD3100E01B46 /* Foundation.framework */; };
+		6839108B1760FD3100E01B46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108A1760FD3100E01B46 /* CoreGraphics.framework */; };
+		6839108D1760FD3100E01B46 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108C1760FD3100E01B46 /* CoreData.framework */; };
+		683910931760FD3100E01B46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 683910911760FD3100E01B46 /* InfoPlist.strings */; };
+		683910951760FD3100E01B46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910941760FD3100E01B46 /* main.m */; };
+		683910991760FD3100E01B46 /* MHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910981760FD3100E01B46 /* MHAppDelegate.m */; };
+		6839109B1760FD3100E01B46 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6839109A1760FD3100E01B46 /* Default.png */; };
+		6839109D1760FD3100E01B46 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6839109C1760FD3100E01B46 /* Default@2x.png */; };
+		6839109F1760FD3100E01B46 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6839109E1760FD3100E01B46 /* Default-568h@2x.png */; };
+		683910A21760FD3100E01B46 /* MissionHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 683910A01760FD3100E01B46 /* MissionHub.xcdatamodeld */; };
+		683910AA1760FD3100E01B46 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910A91760FD3100E01B46 /* SenTestingKit.framework */; };
+		683910AB1760FD3100E01B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910861760FD3100E01B46 /* UIKit.framework */; };
+		683910AC1760FD3100E01B46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910881760FD3100E01B46 /* Foundation.framework */; };
+		683910AD1760FD3100E01B46 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108C1760FD3100E01B46 /* CoreData.framework */; };
+		683910B51760FD3100E01B46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 683910B31760FD3100E01B46 /* InfoPlist.strings */; };
+		683910B81760FD3100E01B46 /* MissionHubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910B71760FD3100E01B46 /* MissionHubTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		683910AE1760FD3100E01B46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6839107B1760FD3100E01B46 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 683910821760FD3100E01B46;
+			remoteInfo = MissionHub;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		683910831760FD3100E01B46 /* MissionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		683910861760FD3100E01B46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		683910881760FD3100E01B46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6839108A1760FD3100E01B46 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6839108C1760FD3100E01B46 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		683910901760FD3100E01B46 /* MissionHub-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MissionHub-Info.plist"; sourceTree = "<group>"; };
+		683910921760FD3100E01B46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		683910941760FD3100E01B46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		683910961760FD3100E01B46 /* MissionHub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MissionHub-Prefix.pch"; sourceTree = "<group>"; };
+		683910971760FD3100E01B46 /* MHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHAppDelegate.h; sourceTree = "<group>"; };
+		683910981760FD3100E01B46 /* MHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHAppDelegate.m; sourceTree = "<group>"; };
+		6839109A1760FD3100E01B46 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		6839109C1760FD3100E01B46 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		6839109E1760FD3100E01B46 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		683910A11760FD3100E01B46 /* MissionHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MissionHub.xcdatamodel; sourceTree = "<group>"; };
+		683910A81760FD3100E01B46 /* MissionHubTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissionHubTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		683910A91760FD3100E01B46 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		683910B21760FD3100E01B46 /* MissionHubTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MissionHubTests-Info.plist"; sourceTree = "<group>"; };
+		683910B41760FD3100E01B46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		683910B61760FD3100E01B46 /* MissionHubTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MissionHubTests.h; sourceTree = "<group>"; };
+		683910B71760FD3100E01B46 /* MissionHubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionHubTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		683910801760FD3100E01B46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				683910871760FD3100E01B46 /* UIKit.framework in Frameworks */,
+				683910891760FD3100E01B46 /* Foundation.framework in Frameworks */,
+				6839108B1760FD3100E01B46 /* CoreGraphics.framework in Frameworks */,
+				6839108D1760FD3100E01B46 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		683910A41760FD3100E01B46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				683910AA1760FD3100E01B46 /* SenTestingKit.framework in Frameworks */,
+				683910AB1760FD3100E01B46 /* UIKit.framework in Frameworks */,
+				683910AC1760FD3100E01B46 /* Foundation.framework in Frameworks */,
+				683910AD1760FD3100E01B46 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6839107A1760FD3100E01B46 = {
+			isa = PBXGroup;
+			children = (
+				6839108E1760FD3100E01B46 /* MissionHub */,
+				683910B01760FD3100E01B46 /* MissionHubTests */,
+				683910851760FD3100E01B46 /* Frameworks */,
+				683910841760FD3100E01B46 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		683910841760FD3100E01B46 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				683910831760FD3100E01B46 /* MissionHub.app */,
+				683910A81760FD3100E01B46 /* MissionHubTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		683910851760FD3100E01B46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				683910861760FD3100E01B46 /* UIKit.framework */,
+				683910881760FD3100E01B46 /* Foundation.framework */,
+				6839108A1760FD3100E01B46 /* CoreGraphics.framework */,
+				6839108C1760FD3100E01B46 /* CoreData.framework */,
+				683910A91760FD3100E01B46 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6839108E1760FD3100E01B46 /* MissionHub */ = {
+			isa = PBXGroup;
+			children = (
+				683910971760FD3100E01B46 /* MHAppDelegate.h */,
+				683910981760FD3100E01B46 /* MHAppDelegate.m */,
+				683910A01760FD3100E01B46 /* MissionHub.xcdatamodeld */,
+				6839108F1760FD3100E01B46 /* Supporting Files */,
+			);
+			path = MissionHub;
+			sourceTree = "<group>";
+		};
+		6839108F1760FD3100E01B46 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				683910901760FD3100E01B46 /* MissionHub-Info.plist */,
+				683910911760FD3100E01B46 /* InfoPlist.strings */,
+				683910941760FD3100E01B46 /* main.m */,
+				683910961760FD3100E01B46 /* MissionHub-Prefix.pch */,
+				6839109A1760FD3100E01B46 /* Default.png */,
+				6839109C1760FD3100E01B46 /* Default@2x.png */,
+				6839109E1760FD3100E01B46 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		683910B01760FD3100E01B46 /* MissionHubTests */ = {
+			isa = PBXGroup;
+			children = (
+				683910B61760FD3100E01B46 /* MissionHubTests.h */,
+				683910B71760FD3100E01B46 /* MissionHubTests.m */,
+				683910B11760FD3100E01B46 /* Supporting Files */,
+			);
+			path = MissionHubTests;
+			sourceTree = "<group>";
+		};
+		683910B11760FD3100E01B46 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				683910B21760FD3100E01B46 /* MissionHubTests-Info.plist */,
+				683910B31760FD3100E01B46 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		683910821760FD3100E01B46 /* MissionHub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 683910BB1760FD3100E01B46 /* Build configuration list for PBXNativeTarget "MissionHub" */;
+			buildPhases = (
+				6839107F1760FD3100E01B46 /* Sources */,
+				683910801760FD3100E01B46 /* Frameworks */,
+				683910811760FD3100E01B46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MissionHub;
+			productName = MissionHub;
+			productReference = 683910831760FD3100E01B46 /* MissionHub.app */;
+			productType = "com.apple.product-type.application";
+		};
+		683910A71760FD3100E01B46 /* MissionHubTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 683910BE1760FD3100E01B46 /* Build configuration list for PBXNativeTarget "MissionHubTests" */;
+			buildPhases = (
+				683910A31760FD3100E01B46 /* Sources */,
+				683910A41760FD3100E01B46 /* Frameworks */,
+				683910A51760FD3100E01B46 /* Resources */,
+				683910A61760FD3100E01B46 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				683910AF1760FD3100E01B46 /* PBXTargetDependency */,
+			);
+			name = MissionHubTests;
+			productName = MissionHubTests;
+			productReference = 683910A81760FD3100E01B46 /* MissionHubTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6839107B1760FD3100E01B46 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MH;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Cru;
+			};
+			buildConfigurationList = 6839107E1760FD3100E01B46 /* Build configuration list for PBXProject "MissionHub" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6839107A1760FD3100E01B46;
+			productRefGroup = 683910841760FD3100E01B46 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				683910821760FD3100E01B46 /* MissionHub */,
+				683910A71760FD3100E01B46 /* MissionHubTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		683910811760FD3100E01B46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				683910931760FD3100E01B46 /* InfoPlist.strings in Resources */,
+				6839109B1760FD3100E01B46 /* Default.png in Resources */,
+				6839109D1760FD3100E01B46 /* Default@2x.png in Resources */,
+				6839109F1760FD3100E01B46 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		683910A51760FD3100E01B46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				683910B51760FD3100E01B46 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		683910A61760FD3100E01B46 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6839107F1760FD3100E01B46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				683910951760FD3100E01B46 /* main.m in Sources */,
+				683910991760FD3100E01B46 /* MHAppDelegate.m in Sources */,
+				683910A21760FD3100E01B46 /* MissionHub.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		683910A31760FD3100E01B46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				683910B81760FD3100E01B46 /* MissionHubTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		683910AF1760FD3100E01B46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 683910821760FD3100E01B46 /* MissionHub */;
+			targetProxy = 683910AE1760FD3100E01B46 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		683910911760FD3100E01B46 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				683910921760FD3100E01B46 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		683910B31760FD3100E01B46 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				683910B41760FD3100E01B46 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		683910B91760FD3100E01B46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		683910BA1760FD3100E01B46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		683910BC1760FD3100E01B46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
+				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		683910BD1760FD3100E01B46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
+				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		683910BF1760FD3100E01B46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
+				INFOPLIST_FILE = "MissionHubTests/MissionHubTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		683910C01760FD3100E01B46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
+				INFOPLIST_FILE = "MissionHubTests/MissionHubTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6839107E1760FD3100E01B46 /* Build configuration list for PBXProject "MissionHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				683910B91760FD3100E01B46 /* Debug */,
+				683910BA1760FD3100E01B46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		683910BB1760FD3100E01B46 /* Build configuration list for PBXNativeTarget "MissionHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				683910BC1760FD3100E01B46 /* Debug */,
+				683910BD1760FD3100E01B46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		683910BE1760FD3100E01B46 /* Build configuration list for PBXNativeTarget "MissionHubTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				683910BF1760FD3100E01B46 /* Debug */,
+				683910C01760FD3100E01B46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		683910A01760FD3100E01B46 /* MissionHub.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				683910A11760FD3100E01B46 /* MissionHub.xcdatamodel */,
+			);
+			currentVersion = 683910A11760FD3100E01B46 /* MissionHub.xcdatamodel */;
+			path = MissionHub.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6839107B1760FD3100E01B46 /* Project object */;
+}
