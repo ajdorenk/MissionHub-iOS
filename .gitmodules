@@ -1,0 +1,6 @@
+[submodule "webrequest"]
+	path = webrequest
+	url = https://github.com/nfarina/webrequest.git
+[submodule "ECSlidingViewController"]
+	path = ECSlidingViewController
+	url = https://github.com/edgecase/ECSlidingViewController.git
