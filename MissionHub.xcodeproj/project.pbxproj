@@ -24,6 +24,22 @@
 		683910AD1760FD3100E01B46 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108C1760FD3100E01B46 /* CoreData.framework */; };
 		683910B51760FD3100E01B46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 683910B31760FD3100E01B46 /* InfoPlist.strings */; };
 		683910B81760FD3100E01B46 /* MissionHubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910B71760FD3100E01B46 /* MissionHubTests.m */; };
+		683910C61760FE4600E01B46 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910C31760FE4600E01B46 /* ECSlidingViewController.m */; };
+		683910C71760FE4600E01B46 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910C31760FE4600E01B46 /* ECSlidingViewController.m */; };
+		683910C81760FE4600E01B46 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910C51760FE4600E01B46 /* UIImage+ImageWithUIView.m */; };
+		683910C91760FE4600E01B46 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910C51760FE4600E01B46 /* UIImage+ImageWithUIView.m */; };
+		683910CC1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683910CB1760FEEF00E01B46 /* MissionHub_iPhone.storyboard */; };
+		683910CD1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683910CB1760FEEF00E01B46 /* MissionHub_iPhone.storyboard */; };
+		683910CF1760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683910CE1760FF1200E01B46 /* MissionHub_iPad.storyboard */; };
+		683910D01760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 683910CE1760FF1200E01B46 /* MissionHub_iPad.storyboard */; };
+		683910D31761087600E01B46 /* MHRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910D21761087600E01B46 /* MHRootViewController.m */; };
+		683910D41761087600E01B46 /* MHRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910D21761087600E01B46 /* MHRootViewController.m */; };
+		683910D81761356000E01B46 /* MHMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910D71761356000E01B46 /* MHMenuViewController.m */; };
+		683910D91761356000E01B46 /* MHMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910D71761356000E01B46 /* MHMenuViewController.m */; };
+		683910E0176144BE00E01B46 /* MHPeopleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910DF176144BD00E01B46 /* MHPeopleListViewController.m */; };
+		683910E1176144BE00E01B46 /* MHPeopleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910DF176144BD00E01B46 /* MHPeopleListViewController.m */; };
+		683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
+		683910E51761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +74,20 @@
 		683910B41760FD3100E01B46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		683910B61760FD3100E01B46 /* MissionHubTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MissionHubTests.h; sourceTree = "<group>"; };
 		683910B71760FD3100E01B46 /* MissionHubTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionHubTests.m; sourceTree = "<group>"; };
+		683910C21760FE4600E01B46 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
+		683910C31760FE4600E01B46 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		683910C41760FE4600E01B46 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		683910C51760FE4600E01B46 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		683910CB1760FEEF00E01B46 /* MissionHub_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MissionHub_iPhone.storyboard; sourceTree = "<group>"; };
+		683910CE1760FF1200E01B46 /* MissionHub_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MissionHub_iPad.storyboard; sourceTree = "<group>"; };
+		683910D11761087600E01B46 /* MHRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHRootViewController.h; path = ViewControllers/MHRootViewController.h; sourceTree = "<group>"; };
+		683910D21761087600E01B46 /* MHRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRootViewController.m; path = ViewControllers/MHRootViewController.m; sourceTree = "<group>"; };
+		683910D61761356000E01B46 /* MHMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHMenuViewController.h; path = ViewControllers/MHMenuViewController.h; sourceTree = "<group>"; };
+		683910D71761356000E01B46 /* MHMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHMenuViewController.m; path = ViewControllers/MHMenuViewController.m; sourceTree = "<group>"; };
+		683910DE176144BD00E01B46 /* MHPeopleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPeopleListViewController.h; path = ViewControllers/MHPeopleListViewController.h; sourceTree = "<group>"; };
+		683910DF176144BD00E01B46 /* MHPeopleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPeopleListViewController.m; path = ViewControllers/MHPeopleListViewController.m; sourceTree = "<group>"; };
+		683910E21761548600E01B46 /* MHSurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSurveyViewController.h; path = ViewControllers/MHSurveyViewController.h; sourceTree = "<group>"; };
+		683910E31761548600E01B46 /* MHSurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurveyViewController.m; path = ViewControllers/MHSurveyViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,9 +150,13 @@
 		6839108E1760FD3100E01B46 /* MissionHub */ = {
 			isa = PBXGroup;
 			children = (
+				683910D51761095000E01B46 /* View Controllers */,
+				683910CA1760FE5B00E01B46 /* Vendor */,
 				683910971760FD3100E01B46 /* MHAppDelegate.h */,
 				683910981760FD3100E01B46 /* MHAppDelegate.m */,
 				683910A01760FD3100E01B46 /* MissionHub.xcdatamodeld */,
+				683910CB1760FEEF00E01B46 /* MissionHub_iPhone.storyboard */,
+				683910CE1760FF1200E01B46 /* MissionHub_iPad.storyboard */,
 				6839108F1760FD3100E01B46 /* Supporting Files */,
 			);
 			path = MissionHub;
@@ -159,6 +193,41 @@
 				683910B31760FD3100E01B46 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		683910C11760FE4600E01B46 /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				683910C21760FE4600E01B46 /* ECSlidingViewController.h */,
+				683910C31760FE4600E01B46 /* ECSlidingViewController.m */,
+				683910C41760FE4600E01B46 /* UIImage+ImageWithUIView.h */,
+				683910C51760FE4600E01B46 /* UIImage+ImageWithUIView.m */,
+			);
+			name = ECSlidingViewController;
+			path = ../ECSlidingViewController/ECSlidingViewController/Vendor/ECSlidingViewController;
+			sourceTree = "<group>";
+		};
+		683910CA1760FE5B00E01B46 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				683910C11760FE4600E01B46 /* ECSlidingViewController */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		683910D51761095000E01B46 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				683910D11761087600E01B46 /* MHRootViewController.h */,
+				683910D21761087600E01B46 /* MHRootViewController.m */,
+				683910D61761356000E01B46 /* MHMenuViewController.h */,
+				683910D71761356000E01B46 /* MHMenuViewController.m */,
+				683910DE176144BD00E01B46 /* MHPeopleListViewController.h */,
+				683910DF176144BD00E01B46 /* MHPeopleListViewController.m */,
+				683910E21761548600E01B46 /* MHSurveyViewController.h */,
+				683910E31761548600E01B46 /* MHSurveyViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +306,8 @@
 				6839109B1760FD3100E01B46 /* Default.png in Resources */,
 				6839109D1760FD3100E01B46 /* Default@2x.png in Resources */,
 				6839109F1760FD3100E01B46 /* Default-568h@2x.png in Resources */,
+				683910CC1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
+				683910CF1760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +316,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				683910B51760FD3100E01B46 /* InfoPlist.strings in Resources */,
+				683910CD1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
+				683910D01760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +347,12 @@
 				683910951760FD3100E01B46 /* main.m in Sources */,
 				683910991760FD3100E01B46 /* MHAppDelegate.m in Sources */,
 				683910A21760FD3100E01B46 /* MissionHub.xcdatamodeld in Sources */,
+				683910C61760FE4600E01B46 /* ECSlidingViewController.m in Sources */,
+				683910C81760FE4600E01B46 /* UIImage+ImageWithUIView.m in Sources */,
+				683910D31761087600E01B46 /* MHRootViewController.m in Sources */,
+				683910D81761356000E01B46 /* MHMenuViewController.m in Sources */,
+				683910E0176144BE00E01B46 /* MHPeopleListViewController.m in Sources */,
+				683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +361,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				683910B81760FD3100E01B46 /* MissionHubTests.m in Sources */,
+				683910C71760FE4600E01B46 /* ECSlidingViewController.m in Sources */,
+				683910C91760FE4600E01B46 /* UIImage+ImageWithUIView.m in Sources */,
+				683910D41761087600E01B46 /* MHRootViewController.m in Sources */,
+				683910D91761356000E01B46 /* MHMenuViewController.m in Sources */,
+				683910E1176144BE00E01B46 /* MHPeopleListViewController.m in Sources */,
+				683910E51761548700E01B46 /* MHSurveyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

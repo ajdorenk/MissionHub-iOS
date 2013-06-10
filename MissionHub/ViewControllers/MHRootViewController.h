@@ -1,5 +1,5 @@
 //
-//  MHSlidingMenuViewController.h
+//  MHRootViewController.h
 //  MissionHub
 //
 //  Created by Michael Harrison on 6/6/13.
@@ -8,6 +8,6 @@
 
 #import "ECSlidingViewController.h"
 
-@interface MHSlidingMenuViewController : ECSlidingViewController
+@interface MHRootViewController : ECSlidingViewController
 
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
+#import "MHMenuViewController.h"
 
-@interface MHSurveyViewController : UIViewController
+@interface MHSurveyViewController : UIViewController <UIWebViewDelegate>
+
+- (IBAction)revealMenu:(id)sender;
 
 @end

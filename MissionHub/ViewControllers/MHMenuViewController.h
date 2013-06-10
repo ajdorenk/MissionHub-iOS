@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
 
-@interface MHMenuViewController : UIViewController
+@interface MHMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

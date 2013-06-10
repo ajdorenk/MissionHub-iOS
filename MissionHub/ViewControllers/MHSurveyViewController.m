@@ -23,10 +23,47 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+	
+	[super viewWillAppear:animated];
+	
+	// shadowPath, shadowOffset, and rotation is handled by ECSlidingViewController.
+	// You just need to set the opacity, radius, and color.
+	self.view.layer.shadowOpacity = 0.75f;
+	self.view.layer.shadowRadius = 10.0f;
+	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+	
+	if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
+		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+	}
+	
+	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
+	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
+	
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (IBAction)revealMenu:(id)sender {
+	
+	[self.slidingViewController anchorTopViewTo:ECRight];
+	
+}
+
+-(void)webViewDidStartLoad:(UIWebView *)webView {
+	
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView {
+	
+}
+
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+	
 }
 
 - (void)didReceiveMemoryWarning

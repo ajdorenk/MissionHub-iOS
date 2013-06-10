@@ -1,5 +1,5 @@
 //
-//  MHContactListViewController.h
+//  MHPeopleListViewController.h
 //  MissionHub
 //
 //  Created by Michael Harrison on 6/6/13.
@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
+#import "MHMenuViewController.h"
 
-@interface MHContactListViewController : UIViewController
+@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate>
+
+- (IBAction)revealMenu:(id)sender;
 
 @end
