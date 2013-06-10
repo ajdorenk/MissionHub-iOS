@@ -1,5 +1,3 @@
-/build
-/ECSlidingViewController
 # Xcode
 .DS_Store
 build/
@@ -18,3 +16,4 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+*.xcuserstate
