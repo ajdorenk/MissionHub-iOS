@@ -40,6 +40,7 @@
 		683910E1176144BE00E01B46 /* MHPeopleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910DF176144BD00E01B46 /* MHPeopleListViewController.m */; };
 		683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
 		683910E51761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
+		ADCDB43E1767AF8700D5B505 /* anderson-ann.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADCDB43D1767AF8700D5B505 /* anderson-ann.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		683910DF176144BD00E01B46 /* MHPeopleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPeopleListViewController.m; path = ViewControllers/MHPeopleListViewController.m; sourceTree = "<group>"; };
 		683910E21761548600E01B46 /* MHSurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSurveyViewController.h; path = ViewControllers/MHSurveyViewController.h; sourceTree = "<group>"; };
 		683910E31761548600E01B46 /* MHSurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurveyViewController.m; path = ViewControllers/MHSurveyViewController.m; sourceTree = "<group>"; };
+		ADCDB43D1767AF8700D5B505 /* anderson-ann.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "anderson-ann.jpg"; path = "../../../../Desktop/anderson-ann.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				683910D21761087600E01B46 /* MHRootViewController.m */,
 				683910D61761356000E01B46 /* MHMenuViewController.h */,
 				683910D71761356000E01B46 /* MHMenuViewController.m */,
+				ADCDB43D1767AF8700D5B505 /* anderson-ann.jpg */,
 				683910DE176144BD00E01B46 /* MHPeopleListViewController.h */,
 				683910DF176144BD00E01B46 /* MHPeopleListViewController.m */,
 				683910E21761548600E01B46 /* MHSurveyViewController.h */,
@@ -308,6 +311,7 @@
 				6839109F1760FD3100E01B46 /* Default-568h@2x.png in Resources */,
 				683910CC1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
 				683910CF1760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
+				ADCDB43E1767AF8700D5B505 /* anderson-ann.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +537,7 @@
 				683910BD1760FD3100E01B46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		683910BE1760FD3100E01B46 /* Build configuration list for PBXNativeTarget "MissionHubTests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +546,7 @@
 				683910C01760FD3100E01B46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
