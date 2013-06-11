@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gp3-NM-vXW">
-                                <color key="backgroundColor" red="0.19387755102040816" green="0.19387755102040816" blue="0.19387755102040816" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.19901945153061229" green="0.19901945153061229" blue="0.19901945153061229" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="548" id="6ga-hx-R6S"/>
                                 </constraints>
