@@ -11,6 +11,16 @@
 		681225721767B75500D8C238 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 681225701767B75500D8C238 /* libsqlite3.dylib */; };
 		681225741767B78B00D8C238 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 681225731767B78B00D8C238 /* FacebookSDKResources.bundle */; };
 		681225751767B78B00D8C238 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 681225731767B78B00D8C238 /* FacebookSDKResources.bundle */; };
+		6812257917681ADD00D8C238 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812257617681ADD00D8C238 /* config.plist */; };
+		6812257A17681ADD00D8C238 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812257617681ADD00D8C238 /* config.plist */; };
+		6812258117681C3C00D8C238 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6812258017681C3C00D8C238 /* SMWebRequest.m */; };
+		6812258217681C3C00D8C238 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6812258017681C3C00D8C238 /* SMWebRequest.m */; };
+		6812258617681CD200D8C238 /* config_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258317681CD200D8C238 /* config_dev.plist */; };
+		6812258717681CD200D8C238 /* config_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258317681CD200D8C238 /* config_dev.plist */; };
+		6812258817681CD200D8C238 /* config_lwi.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258417681CD200D8C238 /* config_lwi.plist */; };
+		6812258917681CD200D8C238 /* config_lwi.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258417681CD200D8C238 /* config_lwi.plist */; };
+		6812258A17681CD200D8C238 /* config_stage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258517681CD200D8C238 /* config_stage.plist */; };
+		6812258B17681CD200D8C238 /* config_stage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258517681CD200D8C238 /* config_stage.plist */; };
 		683910871760FD3100E01B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910861760FD3100E01B46 /* UIKit.framework */; };
 		683910891760FD3100E01B46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910881760FD3100E01B46 /* Foundation.framework */; };
 		6839108B1760FD3100E01B46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108A1760FD3100E01B46 /* CoreGraphics.framework */; };
@@ -44,7 +54,6 @@
 		683910E1176144BE00E01B46 /* MHPeopleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910DF176144BD00E01B46 /* MHPeopleListViewController.m */; };
 		683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
 		683910E51761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
-		68D7AA3A176677C300B9B0B1 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA39176677C300B9B0B1 /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
 		68D7AA3F1766783200B9B0B1 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
 		68D7AA411766862300B9B0B1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA401766862300B9B0B1 /* FacebookSDK.framework */; };
@@ -69,6 +78,12 @@
 		6812256F1767B75500D8C238 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		681225701767B75500D8C238 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		681225731767B78B00D8C238 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		6812257617681ADD00D8C238 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		6812257F17681C3C00D8C238 /* SMWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMWebRequest.h; path = webrequest/SMWebRequest.h; sourceTree = SOURCE_ROOT; };
+		6812258017681C3C00D8C238 /* SMWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMWebRequest.m; path = webrequest/SMWebRequest.m; sourceTree = SOURCE_ROOT; };
+		6812258317681CD200D8C238 /* config_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_dev.plist; sourceTree = "<group>"; };
+		6812258417681CD200D8C238 /* config_lwi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_lwi.plist; sourceTree = "<group>"; };
+		6812258517681CD200D8C238 /* config_stage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_stage.plist; sourceTree = "<group>"; };
 		683910831760FD3100E01B46 /* MissionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683910861760FD3100E01B46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		683910881760FD3100E01B46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,8 +119,6 @@
 		683910DF176144BD00E01B46 /* MHPeopleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPeopleListViewController.m; path = ViewControllers/MHPeopleListViewController.m; sourceTree = "<group>"; };
 		683910E21761548600E01B46 /* MHSurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSurveyViewController.h; path = ViewControllers/MHSurveyViewController.h; sourceTree = "<group>"; };
 		683910E31761548600E01B46 /* MHSurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurveyViewController.m; path = ViewControllers/MHSurveyViewController.m; sourceTree = "<group>"; };
-		68D7AA38176677C300B9B0B1 /* SMWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMWebRequest.h; sourceTree = "<group>"; };
-		68D7AA39176677C300B9B0B1 /* SMWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMWebRequest.m; sourceTree = "<group>"; };
 		68D7AA3C1766783200B9B0B1 /* MHAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAPI.h; path = APIControllers/MHAPI.h; sourceTree = "<group>"; };
 		68D7AA3D1766783200B9B0B1 /* MHAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAPI.m; path = APIControllers/MHAPI.m; sourceTree = "<group>"; };
 		68D7AA401766862300B9B0B1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -247,6 +260,10 @@
 		6839108F1760FD3100E01B46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6812257617681ADD00D8C238 /* config.plist */,
+				6812258317681CD200D8C238 /* config_dev.plist */,
+				6812258417681CD200D8C238 /* config_lwi.plist */,
+				6812258517681CD200D8C238 /* config_stage.plist */,
 				683910901760FD3100E01B46 /* MissionHub-Info.plist */,
 				683910911760FD3100E01B46 /* InfoPlist.strings */,
 				683910941760FD3100E01B46 /* main.m */,
@@ -316,8 +333,8 @@
 		68D7AA371766777800B9B0B1 /* SMWebRequest */ = {
 			isa = PBXGroup;
 			children = (
-				68D7AA38176677C300B9B0B1 /* SMWebRequest.h */,
-				68D7AA39176677C300B9B0B1 /* SMWebRequest.m */,
+				6812257F17681C3C00D8C238 /* SMWebRequest.h */,
+				6812258017681C3C00D8C238 /* SMWebRequest.m */,
 			);
 			name = SMWebRequest;
 			sourceTree = "<group>";
@@ -461,6 +478,10 @@
 				683910CC1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
 				683910CF1760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
 				681225741767B78B00D8C238 /* FacebookSDKResources.bundle in Resources */,
+				6812257917681ADD00D8C238 /* config.plist in Resources */,
+				6812258617681CD200D8C238 /* config_dev.plist in Resources */,
+				6812258817681CD200D8C238 /* config_lwi.plist in Resources */,
+				6812258A17681CD200D8C238 /* config_stage.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +493,10 @@
 				683910CD1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
 				683910D01760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
 				681225751767B78B00D8C238 /* FacebookSDKResources.bundle in Resources */,
+				6812257A17681ADD00D8C238 /* config.plist in Resources */,
+				6812258717681CD200D8C238 /* config_dev.plist in Resources */,
+				6812258917681CD200D8C238 /* config_lwi.plist in Resources */,
+				6812258B17681CD200D8C238 /* config_stage.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,9 +532,9 @@
 				683910D81761356000E01B46 /* MHMenuViewController.m in Sources */,
 				683910E0176144BE00E01B46 /* MHPeopleListViewController.m in Sources */,
 				683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */,
-				68D7AA3A176677C300B9B0B1 /* SMWebRequest.m in Sources */,
 				68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */,
 				68D7AA441766C98000B9B0B1 /* MHLoginViewController.m in Sources */,
+				6812258117681C3C00D8C238 /* SMWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +551,7 @@
 				683910E51761548700E01B46 /* MHSurveyViewController.m in Sources */,
 				68D7AA3F1766783200B9B0B1 /* MHAPI.m in Sources */,
 				68D7AA451766C98000B9B0B1 /* MHLoginViewController.m in Sources */,
+				6812258217681C3C00D8C238 /* SMWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
