@@ -14,11 +14,15 @@
 
 @implementation MHRootViewController
 
+@synthesize realStoryboard;
+@synthesize userInitiatedLogout;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+		self.userInitiatedLogout = NO;
     }
     return self;
 }
@@ -27,19 +31,29 @@
 	
 	[super viewDidLoad];
 	
-	UIStoryboard *storyboard;
+	self.userInitiatedLogout = NO;
 	
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 		
-		storyboard = [UIStoryboard storyboardWithName:@"MissionHub_iPhone" bundle:nil];
+		self.realStoryboard = [UIStoryboard storyboardWithName:@"MissionHub_iPhone" bundle:nil];
 		
 	} else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		
-		storyboard = [UIStoryboard storyboardWithName:@"MissionHub_iPad" bundle:nil];
+		self.realStoryboard = [UIStoryboard storyboardWithName:@"MissionHub_iPad" bundle:nil];
 		
 	}
 	
-	self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"PeopleList"];
+	if ([[MHAPI sharedInstance] accessToken] == nil) {
+		
+		self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"Login"];
+		((MHLoginViewController *)self.topViewController).delegate = self;
+		
+	} else {
+		
+		self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"PeopleList"];
+		
+	}
+	
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -51,6 +65,32 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - MHLoginDelegate methods
+
+-(void)loggedInWithToken:(NSString *)token {
+	
+	[MHAPI sharedInstance].accessToken = token;
+	
+	self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"PeopleList"];
+	[self.slidingViewController resetTopView];
+	
+}
+
+-(void)loggedOut {
+	
+	[MHAPI sharedInstance].accessToken = nil;
+	
+	if (self.userInitiatedLogout) {
+		
+		self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"Login"];
+		[self.slidingViewController resetTopView];
+		
+	}
+	
+	self.userInitiatedLogout = NO;
+	
 }
 
 @end

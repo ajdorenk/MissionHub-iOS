@@ -10,13 +10,52 @@
 
 @implementation MHAppDelegate
 
+@synthesize loginViewController;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	
+	UIStoryboard *storyboard;
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		
+		storyboard = [UIStoryboard storyboardWithName:@"MissionHub_iPhone" bundle:nil];
+		
+	} else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		
+		storyboard = [UIStoryboard storyboardWithName:@"MissionHub_iPad" bundle:nil];
+		
+	}
+	
+	self.loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"Login"];
+	
     return YES;
+}
+
+// Helper method to wrap logic for handling app links.
+- (void)handleAppLink:(FBAccessTokenData *)appLinkToken {
+	
+    // Initialize a new blank session instance...
+    FBSession *appLinkSession = [[FBSession alloc] initWithAppID:nil
+                                                     permissions:nil
+                                                 defaultAudience:FBSessionDefaultAudienceNone
+                                                 urlSchemeSuffix:nil
+                                              tokenCacheStrategy:[FBSessionTokenCachingStrategy nullCacheInstance] ];
+	
+    [FBSession setActiveSession:appLinkSession];
+	
+    // ... and open it from the App Link's Token.
+    [appLinkSession openFromAccessTokenData:appLinkToken
+                          completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                              // Forward any errors to the FBLoginView delegate.
+                              if (error) {
+                                  [self.loginViewController loginView:nil handleError:error];
+                              }
+                          }];
+	
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

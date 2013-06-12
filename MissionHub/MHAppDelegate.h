@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHLoginViewController.h"
 
 @interface MHAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) MHLoginViewController *loginViewController;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

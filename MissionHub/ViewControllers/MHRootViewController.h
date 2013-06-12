@@ -7,7 +7,12 @@
 //
 
 #import "ECSlidingViewController.h"
+#import "MHLoginViewController.h"
+#import "MHAPI.h"
 
-@interface MHRootViewController : ECSlidingViewController
+@interface MHRootViewController : ECSlidingViewController <MHLoginDelegate>
+
+@property (nonatomic, strong) UIStoryboard *realStoryboard;
+@property (nonatomic, assign) BOOL			userInitiatedLogout;
 
 @end
