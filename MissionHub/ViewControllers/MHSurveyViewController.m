@@ -14,6 +14,8 @@
 
 @implementation MHSurveyViewController
 
+@synthesize surveyWebView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -51,6 +53,7 @@
 - (IBAction)revealMenu:(id)sender {
 	
 	[self.slidingViewController anchorTopViewTo:ECRight];
+    
 	
 }
 

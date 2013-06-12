@@ -9,6 +9,8 @@
 #import "MHPeopleListViewController.h"
 
 #import <Foundation/Foundation.h>
+#import "MHSublabel.h"
+
 
 @interface Person : NSObject
 
@@ -26,6 +28,9 @@
 @synthesize imageFile;
 
 @end
+
+
+
 
 
 @interface MHPeopleListViewController ()
@@ -74,12 +79,16 @@
     person1.imageFile = @"anderson-ann.jpg";
 
     Person *person2 = [Person new];
-    person2.name = @"Ann Anderson";
-    person2.gender = @"Female";
+    person2.name = @"George Frank";
+    person2.gender = @"Male";
     person2.imageFile = @"anderson-ann.jpg";
     
     persons = [NSArray arrayWithObjects:person1, person2, nil];
-
+    
+   /* self.Sublabel = [[MHSublabel alloc] initWithFrame:CGRectMake(100.0, 100.0, 50.0, 50.0)];
+    self.Sublabel.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.Sublabel];
+*/
 
 
 }
@@ -89,6 +98,12 @@
 	[self.slidingViewController anchorTopViewTo:ECRight];
 	
 }
+
+/*@synthesize Sublabel;
+*/
+
+
+
 
 #pragma mark - Table view data source
 
@@ -108,8 +123,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"MyCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     
@@ -118,7 +133,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    //Display recipe in the table cell
+    //Display person in the table cell
     Person *person = [persons objectAtIndex:indexPath.row];
     UIImageView *personImageView = (UIImageView *)[cell viewWithTag:100];
     personImageView.image = [UIImage imageNamed:person.imageFile];
@@ -129,6 +144,9 @@
     UILabel *personGenderLabel = (UILabel *)[cell viewWithTag:102];
     personGenderLabel.text = person.gender;
     
+    UIImageView *nameBackgroundView = (UIImageView *)[cell viewWithTag:103];
+    nameBackgroundView.layer.borderColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0].CGColor;
+    nameBackgroundView.layer.borderWidth = 1.0;
     
     return cell;
     
@@ -145,6 +163,11 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    if(indexPath.row==0){
+            [self performSegueWithIdentifier:@"MHSublabel" sender:self];
+        }
+
+    
 }
 
 - (void)didReceiveMemoryWarning

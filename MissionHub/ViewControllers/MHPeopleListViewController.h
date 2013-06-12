@@ -10,8 +10,19 @@
 #import "ECSlidingViewController.h"
 #import "MHMenuViewController.h"
 
-@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate>
+/*
+@class MHSublabel;
+*/
+@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate>{
+  /*    MHSublabel *Sublabel;
+*/
+   }
 
 - (IBAction)revealMenu:(id)sender;
 
+
+/*
+@property(nonatomic, retain) MHSublabel *Sublabel;
+*/
 @end
+

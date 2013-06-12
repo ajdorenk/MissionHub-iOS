@@ -12,6 +12,8 @@
 
 @interface MHSurveyViewController : UIViewController <UIWebViewDelegate>
 
+@property (nonatomic, strong) IBOutlet UIWebView *surveyWebView;
+
 - (IBAction)revealMenu:(id)sender;
 
 @end
