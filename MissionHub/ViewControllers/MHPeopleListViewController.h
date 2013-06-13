@@ -13,10 +13,13 @@
 /*
 @class MHSublabel;
 */
-@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate>{
-  /*    MHSublabel *Sublabel;
-*/
-   }
+@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate> {
+
+    NSArray *_persons;
+    
+}
+
+@property(nonatomic, strong) NSArray *persons;
 
 - (IBAction)revealMenu:(id)sender;
 

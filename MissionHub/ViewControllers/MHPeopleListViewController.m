@@ -10,13 +10,14 @@
 
 #import <Foundation/Foundation.h>
 #import "MHSublabel.h"
+#import "MHPersonCell.h"
 
 
 @interface Person : NSObject
 
 @property (nonatomic, strong) NSString *name; // name of Person
 @property (nonatomic, strong) NSString *gender; // Person gender
-@property (nonatomic, strong) NSString *imageFile; // image filename of Person
+@property (nonatomic, strong) NSString *profilePicturePath; // image filename of Person
 
 @end
 
@@ -25,7 +26,7 @@
 
 @synthesize name;
 @synthesize gender;
-@synthesize imageFile;
+@synthesize profilePicturePath;
 
 @end
 
@@ -37,9 +38,11 @@
 
 @end
 
-@implementation MHPeopleListViewController{
-    NSArray *persons;
-}
+@implementation MHPeopleListViewController
+
+@synthesize persons = _persons;
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,14 +79,55 @@
     Person *person1 = [Person new];
     person1.name = @"Ann Anderson";
     person1.gender = @"Female";
-    person1.imageFile = @"anderson-ann.jpg";
+    person1.profilePicturePath = @"anderson-ann.jpg";
 
     Person *person2 = [Person new];
     person2.name = @"George Frank";
     person2.gender = @"Male";
-    person2.imageFile = @"anderson-ann.jpg";
+    person2.profilePicturePath = @"anderson-ann.jpg";
+
     
-    persons = [NSArray arrayWithObjects:person1, person2, nil];
+    Person *person3 = [Person new];
+    person3.name = @"Lola Gates";
+    person3.gender = @"Female";
+    person3.profilePicturePath = @"anderson-ann.jpg";
+    
+    Person *person4 = [Person new];
+    person4.name = @"Michael Mason";
+    person4.gender = @"Male";
+    person4.profilePicturePath = @"anderson-ann.jpg";
+    
+    Person *person5 = [Person new];
+    person5.name = @"Amy Leslie";
+    person5.gender = @"Female";
+    person5.profilePicturePath = @"anderson-ann.jpg";
+    
+    Person *person6 = [Person new];
+    person6.name = @"Jessica Davis";
+    person6.gender = @"Male";
+    person6.profilePicturePath = @"anderson-ann.jpg";
+    
+    Person *person7 = [Person new];
+    person7.name = @"Sally Fields";
+    person7.gender = @"Female";
+    person7.profilePicturePath = @"anderson-ann.jpg";
+    
+    Person *person8 = [Person new];
+    person8.name = @"Katherine Budincich";
+    person8.gender = @"Male";
+    person8.profilePicturePath = @"anderson-ann.jpg";
+    
+    Person *person9 = [Person new];
+    person9.name = @"Leslie Marks";
+    person9.gender = @"Female";
+    person9.profilePicturePath = @"anderson-ann.jpg";
+    
+    Person *person10 = [Person new];
+    person10.name = @"Kate Middleton";
+    person10.gender = @"Male";
+    person10.profilePicturePath = @"anderson-ann.jpg";
+    
+    self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
     
    /* self.Sublabel = [[MHSublabel alloc] initWithFrame:CGRectMake(100.0, 100.0, 50.0, 50.0)];
     self.Sublabel.backgroundColor = [UIColor whiteColor];
@@ -118,35 +162,28 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return persons.count;
+    return self.persons.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"MyCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     
     // Configure the cell...
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    
+    
     //Display person in the table cell
-    Person *person = [persons objectAtIndex:indexPath.row];
-    UIImageView *personImageView = (UIImageView *)[cell viewWithTag:100];
-    personImageView.image = [UIImage imageNamed:person.imageFile];
-    
-    UILabel *personNameLabel = (UILabel *)[cell viewWithTag:101];
-    personNameLabel.text = person.name;
-    
-    UILabel *personGenderLabel = (UILabel *)[cell viewWithTag:102];
-    personGenderLabel.text = person.gender;
-    
-    UIImageView *nameBackgroundView = (UIImageView *)[cell viewWithTag:103];
-    nameBackgroundView.layer.borderColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0].CGColor;
-    nameBackgroundView.layer.borderWidth = 1.0;
+    Person *person = [self.persons objectAtIndex:indexPath.row];
+    cell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
+    cell.gender.text = person.gender;
+    cell.name.text = person.name;
     
     return cell;
     
@@ -175,5 +212,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+/*-(void)roleTableViewCell:(MHLabelSelectorCell *)cell didTapIconWithRoleItem:(MHLabelSelectorCell *)roleItem {
+	
+	if ([self.selectedRoles hasRole:roleItem]) {
+		
+		[self.selectedRoles removeRole:roleItem];
+		[cell setChecked:NO];
+		
+	} else {
+		
+		[self.selectedRoles addRole:roleItem];
+		[cell setChecked:YES];
+		
+	}
+	
+	//[self.tableView reloadData];
+	
+}
+*/
+
 
 @end

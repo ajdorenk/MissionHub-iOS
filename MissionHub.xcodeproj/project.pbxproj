@@ -42,6 +42,8 @@
 		683910E51761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
 		AD14DC771768E02500E2502B /* MHSublabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD14DC761768E02500E2502B /* MHSublabel.m */; };
 		AD14DC781768E02500E2502B /* MHSublabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD14DC761768E02500E2502B /* MHSublabel.m */; };
+		AD40CB48176A227B003406A3 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD40CB47176A227B003406A3 /* MHPersonCell.m */; };
+		AD40CB4D176A8ACB003406A3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD40CB4C176A8ACB003406A3 /* QuartzCore.framework */; };
 		ADCDB43E1767AF8700D5B505 /* anderson-ann.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADCDB43D1767AF8700D5B505 /* anderson-ann.jpg */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +95,9 @@
 		683910E31761548600E01B46 /* MHSurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurveyViewController.m; path = ViewControllers/MHSurveyViewController.m; sourceTree = "<group>"; };
 		AD14DC751768E02500E2502B /* MHSublabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSublabel.h; path = "Custom UI/MHSublabel.h"; sourceTree = "<group>"; };
 		AD14DC761768E02500E2502B /* MHSublabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSublabel.m; path = "Custom UI/MHSublabel.m"; sourceTree = "<group>"; };
+		AD40CB46176A227B003406A3 /* MHPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPersonCell.h; sourceTree = "<group>"; };
+		AD40CB47176A227B003406A3 /* MHPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPersonCell.m; sourceTree = "<group>"; };
+		AD40CB4C176A8ACB003406A3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ADCDB43D1767AF8700D5B505 /* anderson-ann.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "anderson-ann.jpg"; path = "../../../../Desktop/anderson-ann.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD40CB4D176A8ACB003406A3 /* QuartzCore.framework in Frameworks */,
 				683910871760FD3100E01B46 /* UIKit.framework in Frameworks */,
 				683910891760FD3100E01B46 /* Foundation.framework in Frameworks */,
 				6839108B1760FD3100E01B46 /* CoreGraphics.framework in Frameworks */,
@@ -125,6 +131,7 @@
 		6839107A1760FD3100E01B46 = {
 			isa = PBXGroup;
 			children = (
+				AD40CB4C176A8ACB003406A3 /* QuartzCore.framework */,
 				6839108E1760FD3100E01B46 /* MissionHub */,
 				683910B01760FD3100E01B46 /* MissionHubTests */,
 				683910851760FD3100E01B46 /* Frameworks */,
@@ -243,6 +250,8 @@
 			children = (
 				AD14DC751768E02500E2502B /* MHSublabel.h */,
 				AD14DC761768E02500E2502B /* MHSublabel.m */,
+				AD40CB46176A227B003406A3 /* MHPersonCell.h */,
+				AD40CB47176A227B003406A3 /* MHPersonCell.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -372,6 +381,7 @@
 				683910E0176144BE00E01B46 /* MHPeopleListViewController.m in Sources */,
 				683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */,
 				AD14DC771768E02500E2502B /* MHSublabel.m in Sources */,
+				AD40CB48176A227B003406A3 /* MHPersonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
