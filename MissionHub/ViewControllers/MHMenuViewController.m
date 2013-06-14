@@ -26,7 +26,7 @@
 
 - (void)awakeFromNib
 {
-	self.menuHeaders = @[@"Labels", @"Leaders", @"Surveys", @"Settings"];
+	self.menuHeaders = @[@"LABELS", @"Leaders", @"Surveys", @"Settings"];
 }
 
 - (void)viewDidLoad
@@ -50,13 +50,13 @@
 	
 	UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
 	
-	header.backgroundColor	= [UIColor colorWithRed:(100.0/255.0) green:(100.0/255.0) blue:(100.0/255.0) alpha:1.0];
+	header.backgroundColor	= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
 	header.text				= [self.menuHeaders objectAtIndex:section];
 	header.textColor		= [UIColor colorWithRed:(0.0/255.0) green:(0.0/255.0) blue:(0.0/255.0) alpha:1.0];
-	header.font				= [UIFont fontWithName:@"ArialHebrew-Bold" size:14.0];
+	header.font				= [UIFont fontWithName:@"HelveticaNeue" size:14.0];
 	
 	return header;
-	
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -76,10 +76,12 @@
 	
 	if (indexPath.row == 0) {
 		cell.textLabel.text = @"Survey";
+        cell.textLabel.textColor = [UIColor colorWithRed:(192.0/255.0) green:(192.0/255.0) blue:(192.0/255.0) alpha:1.0];
 	}
 	
 	if (indexPath.row == 1) {
 		cell.textLabel.text = @"List";
+         cell.textLabel.textColor = [UIColor colorWithRed:(192.0/255.0) green:(192.0/255.0) blue:(192.0/255.0) alpha:1.0];
 	}
     
     return cell;
