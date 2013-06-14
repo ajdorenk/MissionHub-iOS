@@ -8,6 +8,12 @@
 
 #import "MHLoginViewController.h"
 
+#define LOGIN_BUTTON_WIDTH 180.0f
+#define LOGIN_BUTTON_HEIGHT 60.0f
+
+
+NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessionStateChangedNotification";
+
 @interface MHLoginViewController ()
 
 @end
@@ -24,6 +30,27 @@
 		[FBLoginView class];
     }
     return self;
+}
+
+-(void)awakeFromNib {
+	
+	FBLoginView *fbLoginView = [[FBLoginView alloc] initWithReadPermissions:@[@"user_birthday",@"email",@"user_interests",@"user_location",@"user_education_history"]];
+	
+	//NSLog(@"%f, %f, %f, %f", CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
+	//	  CGRectGetMidY(self.view.frame) - (LOGIN_BUTTON_HEIGHT / 2),
+	//	  LOGIN_BUTTON_WIDTH,
+	//	  LOGIN_BUTTON_HEIGHT);
+	
+	fbLoginView.delegate	= self;
+	fbLoginView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
+											 CGRectGetMidY(self.view.frame) - (LOGIN_BUTTON_HEIGHT / 2),
+											 LOGIN_BUTTON_WIDTH,
+											 LOGIN_BUTTON_HEIGHT);
+	
+	[self.view addSubview:fbLoginView];
+	
+	[fbLoginView sizeToFit];
+	
 }
 
 - (void)viewDidLoad
@@ -44,6 +71,53 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - FB App switching methods
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+	
+    // Facebook SDK * login flow *
+    // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication fallbackHandler:^(FBAppCall *call) {
+        // Facebook SDK * App Linking *
+        // For simplicity, this sample will ignore the link if the session is already
+        // open but a more advanced app could support features like user switching.
+        if (call.accessTokenData) {
+            if ([FBSession activeSession].isOpen) {
+                NSLog(@"INFO: Ignoring app link because current session is open.");
+            }
+            else {
+                [self handleAppLink:call.accessTokenData];
+            }
+        }
+    }];
+}
+
+// Helper method to wrap logic for handling app links.
+- (void)handleAppLink:(FBAccessTokenData *)appLinkToken {
+	
+    // Initialize a new blank session instance...
+    FBSession *appLinkSession = [[FBSession alloc] initWithAppID:nil
+                                                     permissions:@[@"user_birthday",@"email",@"offline_access",@"user_interests",@"user_location",@"user_education_history"]
+                                                 defaultAudience:FBSessionDefaultAudienceNone
+                                                 urlSchemeSuffix:nil
+                                              tokenCacheStrategy:[FBSessionTokenCachingStrategy nullCacheInstance] ];
+	
+    [FBSession setActiveSession:appLinkSession];
+	
+    // ... and open it from the App Link's Token.
+    [appLinkSession openFromAccessTokenData:appLinkToken
+                          completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                              // Forward any errors to the FBLoginView delegate.
+                              if (error) {
+                                  [self loginView:nil handleError:error];
+                              }
+                          }];
+	
+}
+
 #pragma mark - FBLoginView delegate
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
@@ -54,6 +128,41 @@
 		
 	}
 	
+}
+
+/*
+ * Callback for session changes.
+ */
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
+{
+    switch (state) {
+        case FBSessionStateOpen:
+            if (!error) {
+                // We have a valid session
+                NSLog(@"User session found");
+            }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
+    }
+	
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:FBSessionStateChangedNotification
+     object:session];
+	
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Error"
+                                  message:error.localizedDescription
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {

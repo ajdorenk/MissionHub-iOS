@@ -25,4 +25,19 @@
 	}
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        // Custom initialization
+		
+		NSString *pathToConfigFile = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
+		NSDictionary *configDictionary = [NSDictionary dictionaryWithContentsOfFile:pathToConfigFile];
+		
+		NSLog(@"%@", configDictionary);
+		
+    }
+    return self;
+}
+
 @end

@@ -13,7 +13,7 @@
 		681225751767B78B00D8C238 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 681225731767B78B00D8C238 /* FacebookSDKResources.bundle */; };
 		6812257917681ADD00D8C238 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812257617681ADD00D8C238 /* config.plist */; };
 		6812257A17681ADD00D8C238 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812257617681ADD00D8C238 /* config.plist */; };
-		6812258117681C3C00D8C238 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6812258017681C3C00D8C238 /* SMWebRequest.m */; };
+		6812258117681C3C00D8C238 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6812258017681C3C00D8C238 /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6812258217681C3C00D8C238 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6812258017681C3C00D8C238 /* SMWebRequest.m */; };
 		6812258617681CD200D8C238 /* config_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258317681CD200D8C238 /* config_dev.plist */; };
 		6812258717681CD200D8C238 /* config_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258317681CD200D8C238 /* config_dev.plist */; };
@@ -653,6 +653,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -668,6 +669,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
