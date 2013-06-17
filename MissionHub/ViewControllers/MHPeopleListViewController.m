@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "MHSublabel.h"
 #import "MHPersonCell.h"
-
+#import "MHMenuToolbar.h"   
 
 @interface Person : NSObject
 
@@ -29,6 +29,7 @@
 @synthesize profilePicturePath;
 
 @end
+
 
 
 
@@ -69,6 +70,10 @@
 	
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
+    
+    [self.menu setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.addPerson setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.write setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 	
 }
 
@@ -129,10 +134,6 @@
     
     self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
     
-   /* self.Sublabel = [[MHSublabel alloc] initWithFrame:CGRectMake(100.0, 100.0, 50.0, 50.0)];
-    self.Sublabel.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.Sublabel];
-*/
 
 
 }

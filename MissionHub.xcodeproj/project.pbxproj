@@ -42,6 +42,12 @@
 		683910E51761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
 		AD14DC771768E02500E2502B /* MHSublabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD14DC761768E02500E2502B /* MHSublabel.m */; };
 		AD14DC781768E02500E2502B /* MHSublabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD14DC761768E02500E2502B /* MHSublabel.m */; };
+		AD301117176F646F00D53E35 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = AD301116176F646F00D53E35 /* checkbox.png */; };
+		AD301119176F647600D53E35 /* CheckboxEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = AD301118176F647600D53E35 /* CheckboxEmpty.png */; };
+		AD30111C176F756A00D53E35 /* MHMenuToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30111B176F756A00D53E35 /* MHMenuToolbar.m */; };
+		AD30111E176F93EB00D53E35 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = AD30111D176F93EB00D53E35 /* white.png */; };
+		AD301122176F9E1200D53E35 /* Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = AD301121176F9E1200D53E35 /* Menu.png */; };
+		AD301124176FC64300D53E35 /* sunflower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD301123176FC64300D53E35 /* sunflower.jpg */; };
 		AD40CB48176A227B003406A3 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD40CB47176A227B003406A3 /* MHPersonCell.m */; };
 		AD40CB4D176A8ACB003406A3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD40CB4C176A8ACB003406A3 /* QuartzCore.framework */; };
 		ADCDB43E1767AF8700D5B505 /* anderson-ann.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADCDB43D1767AF8700D5B505 /* anderson-ann.jpg */; };
@@ -95,6 +101,13 @@
 		683910E31761548600E01B46 /* MHSurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurveyViewController.m; path = ViewControllers/MHSurveyViewController.m; sourceTree = "<group>"; };
 		AD14DC751768E02500E2502B /* MHSublabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSublabel.h; path = "Custom UI/MHSublabel.h"; sourceTree = "<group>"; };
 		AD14DC761768E02500E2502B /* MHSublabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSublabel.m; path = "Custom UI/MHSublabel.m"; sourceTree = "<group>"; };
+		AD301116176F646F00D53E35 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkbox.png; path = ../../../../Desktop/checkbox.png; sourceTree = "<group>"; };
+		AD301118176F647600D53E35 /* CheckboxEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckboxEmpty.png; path = ../../../../Desktop/CheckboxEmpty.png; sourceTree = "<group>"; };
+		AD30111A176F756A00D53E35 /* MHMenuToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMenuToolbar.h; sourceTree = "<group>"; };
+		AD30111B176F756A00D53E35 /* MHMenuToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMenuToolbar.m; sourceTree = "<group>"; };
+		AD30111D176F93EB00D53E35 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = white.png; path = ../../../../Desktop/white.png; sourceTree = "<group>"; };
+		AD301121176F9E1200D53E35 /* Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Menu.png; path = ../../../../Desktop/Menu.png; sourceTree = "<group>"; };
+		AD301123176FC64300D53E35 /* sunflower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sunflower.jpg; path = ../../../../Desktop/sunflower.jpg; sourceTree = "<group>"; };
 		AD40CB46176A227B003406A3 /* MHPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPersonCell.h; sourceTree = "<group>"; };
 		AD40CB47176A227B003406A3 /* MHPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPersonCell.m; sourceTree = "<group>"; };
 		AD40CB4C176A8ACB003406A3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -236,6 +249,7 @@
 				683910D21761087600E01B46 /* MHRootViewController.m */,
 				683910D61761356000E01B46 /* MHMenuViewController.h */,
 				683910D71761356000E01B46 /* MHMenuViewController.m */,
+				AD301123176FC64300D53E35 /* sunflower.jpg */,
 				ADCDB43D1767AF8700D5B505 /* anderson-ann.jpg */,
 				683910DE176144BD00E01B46 /* MHPeopleListViewController.h */,
 				683910DF176144BD00E01B46 /* MHPeopleListViewController.m */,
@@ -250,8 +264,14 @@
 			children = (
 				AD14DC751768E02500E2502B /* MHSublabel.h */,
 				AD14DC761768E02500E2502B /* MHSublabel.m */,
+				AD30111A176F756A00D53E35 /* MHMenuToolbar.h */,
+				AD30111B176F756A00D53E35 /* MHMenuToolbar.m */,
+				AD301121176F9E1200D53E35 /* Menu.png */,
 				AD40CB46176A227B003406A3 /* MHPersonCell.h */,
 				AD40CB47176A227B003406A3 /* MHPersonCell.m */,
+				AD301116176F646F00D53E35 /* checkbox.png */,
+				AD30111D176F93EB00D53E35 /* white.png */,
+				AD301118176F647600D53E35 /* CheckboxEmpty.png */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -335,6 +355,11 @@
 				683910CC1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
 				683910CF1760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
 				ADCDB43E1767AF8700D5B505 /* anderson-ann.jpg in Resources */,
+				AD301117176F646F00D53E35 /* checkbox.png in Resources */,
+				AD301119176F647600D53E35 /* CheckboxEmpty.png in Resources */,
+				AD30111E176F93EB00D53E35 /* white.png in Resources */,
+				AD301122176F9E1200D53E35 /* Menu.png in Resources */,
+				AD301124176FC64300D53E35 /* sunflower.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +407,7 @@
 				683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */,
 				AD14DC771768E02500E2502B /* MHSublabel.m in Sources */,
 				AD40CB48176A227B003406A3 /* MHPersonCell.m in Sources */,
+				AD30111C176F756A00D53E35 /* MHMenuToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
