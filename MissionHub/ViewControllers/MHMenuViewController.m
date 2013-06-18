@@ -26,7 +26,7 @@
 
 - (void)awakeFromNib
 {
-	self.menuHeaders = @[@"LABELS", @"Leaders", @"Surveys", @"Settings"];
+	self.menuHeaders = @[@"LABELS", @"LEADERS", @"Surveys", @"Settings"];
 }
 
 - (void)viewDidLoad
@@ -56,7 +56,7 @@
 	header.font				= [UIFont fontWithName:@"HelveticaNeue" size:14.0];
 	
 	return header;
-
+ 
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -75,13 +75,15 @@
 	}
 	
 	if (indexPath.row == 0) {
-		cell.textLabel.text = @"Survey";
-        cell.textLabel.textColor = [UIColor colorWithRed:(192.0/255.0) green:(192.0/255.0) blue:(192.0/255.0) alpha:1.0];
+		cell.textLabel.text         = @"Label 1";
+        cell.textLabel.textColor    = [UIColor colorWithRed:(192.0/255.0) green:(192.0/255.0) blue:(192.0/255.0) alpha:1.0];
+        cell.textLabel.font         = [UIFont fontWithName:@"ArialRoundedMTBold" size:14.0];
 	}
 	
 	if (indexPath.row == 1) {
-		cell.textLabel.text = @"List";
-         cell.textLabel.textColor = [UIColor colorWithRed:(192.0/255.0) green:(192.0/255.0) blue:(192.0/255.0) alpha:1.0];
+		cell.textLabel.text         = @"Label 2";
+        cell.textLabel.textColor    = [UIColor colorWithRed:(192.0/255.0) green:(192.0/255.0) blue:(192.0/255.0) alpha:1.0];
+        cell.textLabel.font         = [UIFont fontWithName:@"ArialRoundedMTBold" size:14.0];
 	}
     
     return cell;

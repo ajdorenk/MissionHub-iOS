@@ -10,8 +10,27 @@
 #import "ECSlidingViewController.h"
 #import "MHMenuViewController.h"
 
-@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate>
+/*
+@class MHSublabel;
+*/
+@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate> {
+
+    NSArray *_persons;
+    
+}
+
+
+
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *menu;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *addPerson;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *write;
+@property(nonatomic, strong) NSArray *persons;
 
 - (IBAction)revealMenu:(id)sender;
 
+
+/*
+@property(nonatomic, retain) MHSublabel *Sublabel;
+*/
 @end
+

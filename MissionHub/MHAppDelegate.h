@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MHLoginViewController.h"
 
+#define AppDelegate (MHAppDelegate *)[[UIApplication sharedApplication] delegate]
+
 @interface MHAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

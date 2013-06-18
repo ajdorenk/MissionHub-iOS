@@ -7,12 +7,15 @@
 //
 
 #import "MHSurveyViewController.h"
+#import "MHMenuToolbar.h"
 
 @interface MHSurveyViewController ()
 
 @end
 
 @implementation MHSurveyViewController
+
+@synthesize surveyWebView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +43,8 @@
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
 	
+    [self.backMenu setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+
 }
 
 - (void)viewDidLoad
@@ -51,6 +56,7 @@
 - (IBAction)revealMenu:(id)sender {
 	
 	[self.slidingViewController anchorTopViewTo:ECRight];
+    
 	
 }
 

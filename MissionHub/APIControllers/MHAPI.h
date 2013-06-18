@@ -10,6 +10,8 @@
 
 @interface MHAPI : NSObject
 
+@property (nonatomic, strong) NSString *baseUrl;
+@property (nonatomic, strong) NSString *apiUrl;
 @property (nonatomic, strong) NSString *accessToken;
 
 + (MHAPI *)sharedInstance;
