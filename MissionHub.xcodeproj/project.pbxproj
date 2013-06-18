@@ -82,6 +82,12 @@
 		AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301135176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301139176FEEB800D53E35 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */; };
+		AD30113D1770CF4F00D53E35 /* topbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = AD30113C1770CF4F00D53E35 /* topbar_background.png */; };
+		AD3011411770D1FD00D53E35 /* addPerson_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3011401770D1FD00D53E35 /* addPerson_button.png */; };
+		AD3011431770D23C00D53E35 /* createLabel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3011421770D23C00D53E35 /* createLabel_button.png */; };
+		AD3011451770D25900D53E35 /* backMenu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3011441770D25900D53E35 /* backMenu_button.png */; };
+		AD3011471770D76700D53E35 /* topbarTag_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3011461770D76700D53E35 /* topbarTag_button.png */; };
+		AD3011491770D76C00D53E35 /* topbarOtherOptions_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3011481770D76C00D53E35 /* topbarOtherOptions_button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +209,12 @@
 		AD30112E176FE4D900D53E35 /* MHPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPersonCell.h; path = "Custom UI/MHPersonCell.h"; sourceTree = "<group>"; };
 		AD30112F176FE4D900D53E35 /* MHPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPersonCell.m; path = "Custom UI/MHPersonCell.m"; sourceTree = "<group>"; };
 		AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		AD30113C1770CF4F00D53E35 /* topbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topbar_background.png; path = ../../../../Desktop/topbar_background.png; sourceTree = "<group>"; };
+		AD3011401770D1FD00D53E35 /* addPerson_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = addPerson_button.png; path = ../../../../Desktop/addPerson_button.png; sourceTree = "<group>"; };
+		AD3011421770D23C00D53E35 /* createLabel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = createLabel_button.png; path = ../../../../Desktop/createLabel_button.png; sourceTree = "<group>"; };
+		AD3011441770D25900D53E35 /* backMenu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backMenu_button.png; path = ../../../../Desktop/backMenu_button.png; sourceTree = "<group>"; };
+		AD3011461770D76700D53E35 /* topbarTag_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topbarTag_button.png; path = ../../../../Desktop/topbarTag_button.png; sourceTree = "<group>"; };
+		AD3011481770D76C00D53E35 /* topbarOtherOptions_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topbarOtherOptions_button.png; path = ../../../../Desktop/topbarOtherOptions_button.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +310,12 @@
 			isa = PBXGroup;
 			children = (
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
+				AD3011401770D1FD00D53E35 /* addPerson_button.png */,
+				AD3011441770D25900D53E35 /* backMenu_button.png */,
+				AD3011421770D23C00D53E35 /* createLabel_button.png */,
+				AD3011461770D76700D53E35 /* topbarTag_button.png */,
+				AD3011481770D76C00D53E35 /* topbarOtherOptions_button.png */,
+				AD30113C1770CF4F00D53E35 /* topbar_background.png */,
 				683AE393176D2DC20027EDE4 /* appicon.png */,
 				683AE394176D2DC20027EDE4 /* appicon-small@2x.png */,
 				683AE395176D2DC20027EDE4 /* appicon-small.png */,
@@ -563,6 +581,12 @@
 				683AE39E176D2DC20027EDE4 /* appicon-small.png in Resources */,
 				683AE3A0176D2DC20027EDE4 /* appicon-small-50.png in Resources */,
 				683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */,
+				AD30113D1770CF4F00D53E35 /* topbar_background.png in Resources */,
+				AD3011411770D1FD00D53E35 /* addPerson_button.png in Resources */,
+				AD3011431770D23C00D53E35 /* createLabel_button.png in Resources */,
+				AD3011451770D25900D53E35 /* backMenu_button.png in Resources */,
+				AD3011471770D76700D53E35 /* topbarTag_button.png in Resources */,
+				AD3011491770D76C00D53E35 /* topbarOtherOptions_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

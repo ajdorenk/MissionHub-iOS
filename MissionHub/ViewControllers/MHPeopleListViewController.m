@@ -68,9 +68,9 @@
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
     
-    [self.menu setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.addPerson setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.write setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.menu setBackgroundImage:[UIImage imageNamed:@"backMenu_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.addPerson setBackgroundImage:[UIImage imageNamed:@"addPerson_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.write setBackgroundImage:[UIImage imageNamed:@"createLabel_button"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 	
 }
 
@@ -141,6 +141,14 @@
 	
 }
 
+-(IBAction)addPersonActivity:(id)sender{
+    NSLog(@"add Person Action");
+}
+
+-(IBAction)addLabelActivity:(id)sender {
+    NSLog(@"Label Action");
+}
+
 /*@synthesize Sublabel;
 */
 
@@ -181,6 +189,7 @@
     cell.gender.text = person.gender;
     cell.name.text = person.name;
     
+    
     return cell;
     
 }
@@ -202,6 +211,12 @@
 
     
 }
+
+
+
+//-(void)addPersonPressed:(id)sender
+//{
+//}
 
 - (void)didReceiveMemoryWarning
 {

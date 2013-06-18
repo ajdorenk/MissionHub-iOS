@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -86,7 +86,7 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwi-SU-ImP" customClass="MHMenuToolbar">
                                 <items>
-                                    <barButtonItem title="Menu" id="4GW-d4-6JW">
+                                    <barButtonItem id="4GW-d4-6JW">
                                         <connections>
                                             <action selector="revealMenu:" destination="aPX-5J-ogf" id="86j-c1-fYG"/>
                                         </connections>
@@ -223,18 +223,25 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="uxC-vh-Gis"/>
-                                    <barButtonItem title="Item" style="done" id="JXh-cr-2H5">
+                                    <barButtonItem style="done" id="JXh-cr-2H5">
                                         <inset key="imageInsets" minX="150" minY="85" maxX="0.0" maxY="80"/>
+                                        <connections>
+                                            <action selector="addPersonActivity:" destination="uNE-mQ-hCw" id="EfH-GV-iFK"/>
+                                        </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Item" id="oaJ-2T-g2q"/>
+                                    <barButtonItem id="oaJ-2T-g2q">
+                                        <connections>
+                                            <action selector="addLabelActivity:" destination="uNE-mQ-hCw" id="V68-MJ-MKE"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="aXI-lt-YUz" firstAttribute="leading" secondItem="cVi-xY-oja" secondAttribute="leading" type="default" id="EEn-Sl-boJ"/>
+                            <constraint firstItem="aXI-lt-YUz" firstAttribute="top" secondItem="cVi-xY-oja" secondAttribute="top" constant="45" id="Hr7-bZ-XYt"/>
                             <constraint firstItem="qEZ-mU-Ly4" firstAttribute="leading" secondItem="cVi-xY-oja" secondAttribute="leading" type="default" id="U63-An-1KK"/>
-                            <constraint firstItem="aXI-lt-YUz" firstAttribute="top" secondItem="cVi-xY-oja" secondAttribute="top" constant="46" id="V8y-R1-eAR"/>
                             <constraint firstItem="qEZ-mU-Ly4" firstAttribute="top" secondItem="cVi-xY-oja" secondAttribute="top" type="default" id="Xbq-qy-uUp"/>
                             <constraint firstItem="aXI-lt-YUz" firstAttribute="trailing" secondItem="cVi-xY-oja" secondAttribute="trailing" type="default" id="eHe-7B-exW"/>
                             <constraint firstItem="qEZ-mU-Ly4" firstAttribute="trailing" secondItem="cVi-xY-oja" secondAttribute="trailing" type="default" id="xK6-KQ-O6j"/>
@@ -257,7 +264,23 @@
                     <view key="view" contentMode="scaleToFill" id="crb-7X-aco">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hnz-5I-xgv" customClass="MHMenuToolbar">
+                                <items>
+                                    <barButtonItem id="Me4-ih-hgl"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="CYd-xl-Urs"/>
+                                    <barButtonItem id="1ax-hy-4GR"/>
+                                    <barButtonItem id="4Xr-iw-iPF"/>
+                                    <barButtonItem id="ZmV-tY-PJ2"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.83163265310000001" blue="0.68719590809999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Hnz-5I-xgv" firstAttribute="trailing" secondItem="crb-7X-aco" secondAttribute="trailing" type="default" id="DNM-pU-VKW"/>
+                            <constraint firstItem="Hnz-5I-xgv" firstAttribute="top" secondItem="crb-7X-aco" secondAttribute="top" constant="-5" id="f1d-Ze-ISp"/>
+                            <constraint firstItem="Hnz-5I-xgv" firstAttribute="leading" secondItem="crb-7X-aco" secondAttribute="leading" type="default" id="hnN-7O-nf8"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MFV-fo-PFx"/>
                 </viewController>
@@ -269,9 +292,6 @@
     <classes>
         <class className="ECSlidingViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
-        </class>
-        <class className="MHMenuToolbar" superclassName="UIToolbar">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuToolbar.h"/>
         </class>
         <class className="FBLoginView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FBLoginView.h"/>
@@ -285,12 +305,17 @@
                 <relationship kind="outlet" name="FBLoginView" candidateClass="FBLoginView"/>
             </relationships>
         </class>
+        <class className="MHMenuToolbar" superclassName="UIToolbar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuToolbar.h"/>
+        </class>
         <class className="MHMenuViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuViewController.h"/>
         </class>
         <class className="MHPeopleListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addLabelActivity:"/>
+                <relationship kind="action" name="addPersonActivity:"/>
                 <relationship kind="action" name="revealMenu:"/>
                 <relationship kind="outlet" name="addPerson" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="menu" candidateClass="UIBarButtonItem"/>

@@ -43,8 +43,9 @@
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
 	
-    [self.backMenu setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.backMenu setBackgroundImage:[UIImage imageNamed:@"back_menu_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 
+    
 }
 
 - (void)viewDidLoad
@@ -67,6 +68,7 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
 	
 }
+
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	
