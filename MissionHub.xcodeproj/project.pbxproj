@@ -54,6 +54,21 @@
 		683910E1176144BE00E01B46 /* MHPeopleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910DF176144BD00E01B46 /* MHPeopleListViewController.m */; };
 		683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
 		683910E51761548700E01B46 /* MHSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683910E31761548600E01B46 /* MHSurveyViewController.m */; };
+		683AE391176D2B1F0027EDE4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
+		683AE398176D2DC20027EDE4 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE392176D2DC20027EDE4 /* appicon@2x.png */; };
+		683AE399176D2DC20027EDE4 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE392176D2DC20027EDE4 /* appicon@2x.png */; };
+		683AE39A176D2DC20027EDE4 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE393176D2DC20027EDE4 /* appicon.png */; };
+		683AE39B176D2DC20027EDE4 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE393176D2DC20027EDE4 /* appicon.png */; };
+		683AE39C176D2DC20027EDE4 /* appicon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE394176D2DC20027EDE4 /* appicon-small@2x.png */; };
+		683AE39D176D2DC20027EDE4 /* appicon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE394176D2DC20027EDE4 /* appicon-small@2x.png */; };
+		683AE39E176D2DC20027EDE4 /* appicon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE395176D2DC20027EDE4 /* appicon-small.png */; };
+		683AE39F176D2DC20027EDE4 /* appicon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE395176D2DC20027EDE4 /* appicon-small.png */; };
+		683AE3A0176D2DC20027EDE4 /* appicon-small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE396176D2DC20027EDE4 /* appicon-small-50.png */; };
+		683AE3A1176D2DC20027EDE4 /* appicon-small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE396176D2DC20027EDE4 /* appicon-small-50.png */; };
+		683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE397176D2DC20027EDE4 /* appicon-72.png */; };
+		683AE3A3176D2DC20027EDE4 /* appicon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE397176D2DC20027EDE4 /* appicon-72.png */; };
+		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
+		68C0689C176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
 		68D7AA3F1766783200B9B0B1 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
 		68D7AA411766862300B9B0B1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA401766862300B9B0B1 /* FacebookSDK.framework */; };
@@ -119,6 +134,15 @@
 		683910DF176144BD00E01B46 /* MHPeopleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPeopleListViewController.m; path = ViewControllers/MHPeopleListViewController.m; sourceTree = "<group>"; };
 		683910E21761548600E01B46 /* MHSurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSurveyViewController.h; path = ViewControllers/MHSurveyViewController.h; sourceTree = "<group>"; };
 		683910E31761548600E01B46 /* MHSurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurveyViewController.m; path = ViewControllers/MHSurveyViewController.m; sourceTree = "<group>"; };
+		683AE390176D2B1F0027EDE4 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		683AE392176D2DC20027EDE4 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
+		683AE393176D2DC20027EDE4 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
+		683AE394176D2DC20027EDE4 /* appicon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-small@2x.png"; sourceTree = "<group>"; };
+		683AE395176D2DC20027EDE4 /* appicon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-small.png"; sourceTree = "<group>"; };
+		683AE396176D2DC20027EDE4 /* appicon-small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-small-50.png"; sourceTree = "<group>"; };
+		683AE397176D2DC20027EDE4 /* appicon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-72.png"; sourceTree = "<group>"; };
+		68C06899176EB832007C79D6 /* MHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHModel.h; path = Models/MHModel.h; sourceTree = "<group>"; };
+		68C0689A176EB832007C79D6 /* MHModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHModel.m; path = Models/MHModel.m; sourceTree = "<group>"; };
 		68D7AA3C1766783200B9B0B1 /* MHAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAPI.h; path = APIControllers/MHAPI.h; sourceTree = "<group>"; };
 		68D7AA3D1766783200B9B0B1 /* MHAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAPI.m; path = APIControllers/MHAPI.m; sourceTree = "<group>"; };
 		68D7AA401766862300B9B0B1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -244,6 +268,7 @@
 		6839108E1760FD3100E01B46 /* MissionHub */ = {
 			isa = PBXGroup;
 			children = (
+				683AE38F176D2A030027EDE4 /* Models */,
 				68D7AA3B176677DA00B9B0B1 /* API Controllers */,
 				683910D51761095000E01B46 /* View Controllers */,
 				683910CA1760FE5B00E01B46 /* Vendor */,
@@ -260,6 +285,13 @@
 		6839108F1760FD3100E01B46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
+				683AE393176D2DC20027EDE4 /* appicon.png */,
+				683AE394176D2DC20027EDE4 /* appicon-small@2x.png */,
+				683AE395176D2DC20027EDE4 /* appicon-small.png */,
+				683AE396176D2DC20027EDE4 /* appicon-small-50.png */,
+				683AE397176D2DC20027EDE4 /* appicon-72.png */,
+				683AE390176D2B1F0027EDE4 /* Entitlements.plist */,
 				6812257617681ADD00D8C238 /* config.plist */,
 				6812258317681CD200D8C238 /* config_dev.plist */,
 				6812258417681CD200D8C238 /* config_lwi.plist */,
@@ -309,6 +341,7 @@
 		683910CA1760FE5B00E01B46 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				68C0689D176F7E5E007C79D6 /* MMReachabilityViewController */,
 				68D7AA371766777800B9B0B1 /* SMWebRequest */,
 				683910C11760FE4600E01B46 /* ECSlidingViewController */,
 			);
@@ -328,6 +361,22 @@
 				683910E31761548600E01B46 /* MHSurveyViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		683AE38F176D2A030027EDE4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				68C06899176EB832007C79D6 /* MHModel.h */,
+				68C0689A176EB832007C79D6 /* MHModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		68C0689D176F7E5E007C79D6 /* MMReachabilityViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MMReachabilityViewController;
 			sourceTree = "<group>";
 		};
 		68D7AA371766777800B9B0B1 /* SMWebRequest */ = {
@@ -482,6 +531,13 @@
 				6812258617681CD200D8C238 /* config_dev.plist in Resources */,
 				6812258817681CD200D8C238 /* config_lwi.plist in Resources */,
 				6812258A17681CD200D8C238 /* config_stage.plist in Resources */,
+				683AE391176D2B1F0027EDE4 /* Entitlements.plist in Resources */,
+				683AE398176D2DC20027EDE4 /* appicon@2x.png in Resources */,
+				683AE39A176D2DC20027EDE4 /* appicon.png in Resources */,
+				683AE39C176D2DC20027EDE4 /* appicon-small@2x.png in Resources */,
+				683AE39E176D2DC20027EDE4 /* appicon-small.png in Resources */,
+				683AE3A0176D2DC20027EDE4 /* appicon-small-50.png in Resources */,
+				683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +553,12 @@
 				6812258717681CD200D8C238 /* config_dev.plist in Resources */,
 				6812258917681CD200D8C238 /* config_lwi.plist in Resources */,
 				6812258B17681CD200D8C238 /* config_stage.plist in Resources */,
+				683AE399176D2DC20027EDE4 /* appicon@2x.png in Resources */,
+				683AE39B176D2DC20027EDE4 /* appicon.png in Resources */,
+				683AE39D176D2DC20027EDE4 /* appicon-small@2x.png in Resources */,
+				683AE39F176D2DC20027EDE4 /* appicon-small.png in Resources */,
+				683AE3A1176D2DC20027EDE4 /* appicon-small-50.png in Resources */,
+				683AE3A3176D2DC20027EDE4 /* appicon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +597,7 @@
 				68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */,
 				68D7AA441766C98000B9B0B1 /* MHLoginViewController.m in Sources */,
 				6812258117681C3C00D8C238 /* SMWebRequest.m in Sources */,
+				68C0689B176EB832007C79D6 /* MHModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +615,7 @@
 				68D7AA3F1766783200B9B0B1 /* MHAPI.m in Sources */,
 				68D7AA451766C98000B9B0B1 /* MHLoginViewController.m in Sources */,
 				6812258217681C3C00D8C238 /* SMWebRequest.m in Sources */,
+				68C0689C176EB832007C79D6 /* MHModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +710,7 @@
 		683910BC1760FD3100E01B46 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../FacebookSDK\"",
@@ -655,6 +720,7 @@
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -662,6 +728,7 @@
 		683910BD1760FD3100E01B46 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../FacebookSDK\"",
@@ -671,6 +738,7 @@
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "909AD43C-AE96-4979-8AAB-6EB11942AD21";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

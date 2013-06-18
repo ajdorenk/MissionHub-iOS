@@ -12,6 +12,8 @@
 
 @interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *button;
+
 - (IBAction)revealMenu:(id)sender;
 
 @end
