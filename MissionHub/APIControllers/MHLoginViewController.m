@@ -51,6 +51,13 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
 	
 	[fbLoginView sizeToFit];
 	
+	fbLoginView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (fbLoginView.frame.size.width / 2),
+										 CGRectGetMidY(self.view.frame) - (fbLoginView.frame.size.height / 2),
+										 fbLoginView.frame.size.width,
+										 fbLoginView.frame.size.height);
+	
+	fbLoginView.alpha = 0.5;
+	
 }
 
 - (void)viewDidLoad

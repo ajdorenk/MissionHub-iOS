@@ -9,7 +9,6 @@
 #import "MHPeopleListViewController.h"
 
 #import <Foundation/Foundation.h>
-#import "MHSublabel.h"
 #import "MHPersonCell.h"
 #import "MHMenuToolbar.h"   
 
@@ -42,8 +41,6 @@
 @implementation MHPeopleListViewController
 
 @synthesize persons = _persons;
-
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -154,14 +151,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return self.persons.count;
 }
