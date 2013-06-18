@@ -68,9 +68,23 @@
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
     
-    [self.menu setBackgroundImage:[UIImage imageNamed:@"backMenu_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.addPerson setBackgroundImage:[UIImage imageNamed:@"addPerson_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.write setBackgroundImage:[UIImage imageNamed:@"createLabel_button"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.backMenuButton setBackgroundImage:[UIImage imageNamed:@"backMenu_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.addPersonButton setBackgroundImage:[UIImage imageNamed:@"addPerson_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.addLabelButton setBackgroundImage:[UIImage imageNamed:@"createLabel_button"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    self.peopleListToolbar.layer.shadowOpacity = 0.3f;
+    self.peopleListToolbar.layer.shadowRadius = 1.0f;
+    self.peopleListToolbar.layer.shadowColor = [UIColor blackColor].CGColor;
+    
+    
+    [self.peopleSearchBar setBackgroundImage:[UIImage imageNamed:@"topbar_background.png"]];
+    self.peopleSearchBar.layer.shadowOpacity = 0.3f;
+    self.peopleSearchBar.layer.shadowRadius = 1.0f;
+    self.peopleSearchBar.layer.shadowColor = [UIColor blackColor].CGColor;
+    /*
+    self.peopleSearchBar.text = @"";
+    self.peopleSearchBar.backgroundColor = [UIColor whiteColor];
+    */
 	
 }
 
@@ -171,28 +185,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MyCell";
-    MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+        static NSString *CellIdentifier = @"MyCell";
+        MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    
-    // Configure the cell...
-    if (cell == nil) {
-        cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    
-    
-    //Display person in the table cell
-    Person *person = [self.persons objectAtIndex:indexPath.row];
-    cell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
-    cell.gender.text = person.gender;
-    cell.name.text = person.name;
-    
-    
-    return cell;
+        if (cell == nil) {
+            cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        //Display person in the table cell
+        Person *person = [self.persons objectAtIndex:indexPath.row];
+        cell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
+        cell.gender.text = person.gender;
+        cell.name.text = person.name;
+        
+        return cell;
     
 }
+
 
 #pragma mark - Table view delegate
 

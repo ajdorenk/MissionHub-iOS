@@ -82,6 +82,7 @@
 		AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301135176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301139176FEEB800D53E35 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */; };
+		AD30114C17710D2F00D53E35 /* MHPeopleSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30114B17710D2F00D53E35 /* MHPeopleSearchBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +204,8 @@
 		AD30112E176FE4D900D53E35 /* MHPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPersonCell.h; path = "Custom UI/MHPersonCell.h"; sourceTree = "<group>"; };
 		AD30112F176FE4D900D53E35 /* MHPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPersonCell.m; path = "Custom UI/MHPersonCell.m"; sourceTree = "<group>"; };
 		AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		AD30114A17710D2F00D53E35 /* MHPeopleSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPeopleSearchBar.h; sourceTree = "<group>"; };
+		AD30114B17710D2F00D53E35 /* MHPeopleSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPeopleSearchBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -469,6 +472,8 @@
 				AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */,
 				AD30112E176FE4D900D53E35 /* MHPersonCell.h */,
 				AD30112F176FE4D900D53E35 /* MHPersonCell.m */,
+				AD30114A17710D2F00D53E35 /* MHPeopleSearchBar.h */,
+				AD30114B17710D2F00D53E35 /* MHPeopleSearchBar.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -625,6 +630,7 @@
 				AD301132176FE4D900D53E35 /* MHMenuToolbar.m in Sources */,
 				AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */,
 				68C0689B176EB832007C79D6 /* MHModel.m in Sources */,
+				AD30114C17710D2F00D53E35 /* MHPeopleSearchBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

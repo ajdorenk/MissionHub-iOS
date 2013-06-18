@@ -133,9 +133,14 @@
                                     <constraint firstAttribute="height" constant="517" id="6oT-Rd-gkQ"/>
                                 </constraints>
                                 <color key="separatorColor" red="0.75294117647058822" green="0.75294117647058822" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="kvx-Xw-Lud">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHPersonCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MyCell" rowHeight="61" id="890-bb-M0z" customClass="MHPersonCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="61"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
@@ -240,20 +245,39 @@
                         <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="aXI-lt-YUz" firstAttribute="leading" secondItem="cVi-xY-oja" secondAttribute="leading" type="default" id="EEn-Sl-boJ"/>
-                            <constraint firstItem="aXI-lt-YUz" firstAttribute="top" secondItem="cVi-xY-oja" secondAttribute="top" constant="45" id="Hr7-bZ-XYt"/>
                             <constraint firstItem="qEZ-mU-Ly4" firstAttribute="leading" secondItem="cVi-xY-oja" secondAttribute="leading" type="default" id="U63-An-1KK"/>
                             <constraint firstItem="qEZ-mU-Ly4" firstAttribute="top" secondItem="cVi-xY-oja" secondAttribute="top" type="default" id="Xbq-qy-uUp"/>
+                            <constraint firstItem="aXI-lt-YUz" firstAttribute="top" secondItem="qEZ-mU-Ly4" secondAttribute="bottom" type="default" id="Xy1-pT-jc9"/>
                             <constraint firstItem="aXI-lt-YUz" firstAttribute="trailing" secondItem="cVi-xY-oja" secondAttribute="trailing" type="default" id="eHe-7B-exW"/>
                             <constraint firstItem="qEZ-mU-Ly4" firstAttribute="trailing" secondItem="cVi-xY-oja" secondAttribute="trailing" type="default" id="xK6-KQ-O6j"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addPerson" destination="JXh-cr-2H5" id="MtO-zN-t2r"/>
-                        <outlet property="menu" destination="O79-Mx-GN9" id="mg4-kD-nfS"/>
-                        <outlet property="write" destination="oaJ-2T-g2q" id="Ukj-Hc-U4V"/>
+                        <outlet property="addLabelButton" destination="oaJ-2T-g2q" id="sll-UZ-JRK"/>
+                        <outlet property="addPersonButton" destination="JXh-cr-2H5" id="zzG-RP-Aht"/>
+                        <outlet property="backMenuButton" destination="O79-Mx-GN9" id="HUa-kB-G82"/>
+                        <outlet property="peopleListToolbar" destination="qEZ-mU-Ly4" id="47m-9F-OVB"/>
+                        <outlet property="peopleSearchBar" destination="kvx-Xw-Lud" id="Hrh-NF-24m"/>
+                        <outlet property="searchDisplayController" destination="yKo-xz-5T5" id="rJW-BU-x7N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUg-m2-Vce" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="8jR-N6-MvD">
+                    <connections>
+                        <outlet property="delegate" destination="uNE-mQ-hCw" id="WvD-Y1-phJ"/>
+                        <outlet property="searchContentsController" destination="uNE-mQ-hCw" id="cWz-TR-XsL"/>
+                        <outlet property="searchResultsDataSource" destination="uNE-mQ-hCw" id="EM3-oz-1gK"/>
+                        <outlet property="searchResultsDelegate" destination="uNE-mQ-hCw" id="yR9-K5-vha"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="yKo-xz-5T5">
+                    <connections>
+                        <outlet property="delegate" destination="uNE-mQ-hCw" id="JnJ-rU-iPC"/>
+                        <outlet property="searchContentsController" destination="uNE-mQ-hCw" id="G5L-XR-Bd3"/>
+                        <outlet property="searchResultsDataSource" destination="uNE-mQ-hCw" id="bJ7-uF-co0"/>
+                        <outlet property="searchResultsDelegate" destination="uNE-mQ-hCw" id="xaL-tg-gvu"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="953" y="67"/>
         </scene>
@@ -314,12 +338,12 @@
         <class className="MHPeopleListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addLabelActivity:"/>
-                <relationship kind="action" name="addPersonActivity:"/>
                 <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="outlet" name="addPerson" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="menu" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="write" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="addLabelButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="addPersonButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="backMenuButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="peopleListToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>
         <class className="MHPersonCell" superclassName="UITableViewCell">

@@ -21,9 +21,11 @@
 
 
 
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *menu;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *addPerson;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *write;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *addPersonButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
+@property (nonatomic, strong) IBOutlet UIToolbar *peopleListToolbar;
+@property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
 @property(nonatomic, strong) NSArray *persons;
 
 - (IBAction)revealMenu:(id)sender;
