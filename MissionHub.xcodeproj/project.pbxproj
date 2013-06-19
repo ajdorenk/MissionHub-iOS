@@ -75,6 +75,10 @@
 		68D7AA471766CDF300B9B0B1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA461766CDF300B9B0B1 /* Social.framework */; };
 		68D7AA491766CE4100B9B0B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA481766CE4100B9B0B1 /* Security.framework */; };
 		68D7AA4B1766CEF200B9B0B1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */; };
+		AD010CB31772051600E6F0E6 /* NewContact_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CB21772051600E6F0E6 /* NewContact_Icon.png */; };
+		AD010CB51772053100E6F0E6 /* NewInteraction_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CB41772053100E6F0E6 /* NewInteraction_Icon.png */; };
+		AD010CB71772053A00E6F0E6 /* BackMenu_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CB61772053A00E6F0E6 /* BackMenu_Icon.png */; };
+		AD010CB917721EBE00E6F0E6 /* searchbar_image.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CB817721EBE00E6F0E6 /* searchbar_image.png */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301131176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301132176FE4D900D53E35 /* MHMenuToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */; };
@@ -197,6 +201,10 @@
 		68D7AA7317679B0000B9B0B1 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		68D7AA7417679B0000B9B0B1 /* FBWebDialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBWebDialogs.h; sourceTree = "<group>"; };
 		68D7AA7517679B0000B9B0B1 /* NSError+FBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+FBError.h"; sourceTree = "<group>"; };
+		AD010CB21772051600E6F0E6 /* NewContact_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewContact_Icon.png; sourceTree = "<group>"; };
+		AD010CB41772053100E6F0E6 /* NewInteraction_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewInteraction_Icon.png; sourceTree = "<group>"; };
+		AD010CB61772053A00E6F0E6 /* BackMenu_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackMenu_Icon.png; sourceTree = "<group>"; };
+		AD010CB817721EBE00E6F0E6 /* searchbar_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar_image.png; sourceTree = "<group>"; };
 		AD30112A176FE4D900D53E35 /* MHCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCheckbox.h; path = "Custom UI/MHCheckbox.h"; sourceTree = "<group>"; };
 		AD30112B176FE4D900D53E35 /* MHCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCheckbox.m; path = "Custom UI/MHCheckbox.m"; sourceTree = "<group>"; };
 		AD30112C176FE4D900D53E35 /* MHMenuToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHMenuToolbar.h; path = "Custom UI/MHMenuToolbar.h"; sourceTree = "<group>"; };
@@ -301,8 +309,12 @@
 			isa = PBXGroup;
 			children = (
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
+				AD010CB21772051600E6F0E6 /* NewContact_Icon.png */,
 				683AE393176D2DC20027EDE4 /* appicon.png */,
+				AD010CB41772053100E6F0E6 /* NewInteraction_Icon.png */,
+				AD010CB61772053A00E6F0E6 /* BackMenu_Icon.png */,
 				683AE394176D2DC20027EDE4 /* appicon-small@2x.png */,
+				AD010CB817721EBE00E6F0E6 /* searchbar_image.png */,
 				683AE395176D2DC20027EDE4 /* appicon-small.png */,
 				683AE396176D2DC20027EDE4 /* appicon-small-50.png */,
 				683AE397176D2DC20027EDE4 /* appicon-72.png */,
@@ -568,6 +580,10 @@
 				683AE39E176D2DC20027EDE4 /* appicon-small.png in Resources */,
 				683AE3A0176D2DC20027EDE4 /* appicon-small-50.png in Resources */,
 				683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */,
+				AD010CB31772051600E6F0E6 /* NewContact_Icon.png in Resources */,
+				AD010CB51772053100E6F0E6 /* NewInteraction_Icon.png in Resources */,
+				AD010CB71772053A00E6F0E6 /* BackMenu_Icon.png in Resources */,
+				AD010CB917721EBE00E6F0E6 /* searchbar_image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

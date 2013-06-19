@@ -43,7 +43,7 @@
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
 	
-    [self.backMenu setBackgroundImage:[UIImage imageNamed:@"back_menu_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.backMenu setBackgroundImage:[UIImage imageNamed:@"BackMenu_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 
     
 }
@@ -53,6 +53,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+
 
 - (IBAction)revealMenu:(id)sender {
 	

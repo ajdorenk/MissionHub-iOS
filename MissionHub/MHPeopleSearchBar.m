@@ -26,11 +26,6 @@
 }
 
 
-- (void)setFrame:(CGRect)frame {
-    frame.size.height = 40;
-    [super setFrame:frame];
-}
-
 
 -(void)layoutSubviews {
     [super layoutSubviews];
@@ -38,8 +33,8 @@
     CGRect frame = searchTextField.frame;
     frame.origin.x = 0;
     frame.origin.y = 0;
-    frame.size.height = 40;
-    frame.size.width = 200;
+    frame.size.height = self.frame.size.height;
+    frame.size.width = self.frame.size.width;
     searchTextField.frame = frame;
 }
 
@@ -52,30 +47,16 @@
             searchTextField = (UITextField *)subview;
         }
     }
-}
-
-- (void)stylizeSearchTextField {
-    // Sets the background to a static black by removing the gradient view
-    for (int i = [self.subviews count] - 1; i >= 0; i--) {
-        UIView *subview = [self.subviews objectAtIndex:i];
-        
-        // This is the gradient behind the textfield
-        if ([subview.description hasPrefix:@"<UISearchBarBackground"]) {
-            [subview removeFromSuperview];
+    /*for(id subview in [self subviews])
+    {
+        if ([subview isKindOfClass:[UIButton class]]) {
+            [subview setEnabled:YES];
         }
-    }
+    }*/
     
-    // now change the search textfield itself
-    searchTextField.borderStyle = UITextBorderStyleNone;
-    searchTextField.backgroundColor = [UIColor whiteColor];
-    searchTextField.background = nil;
-    searchTextField.text = @"";
-    searchTextField.clearButtonMode = UITextFieldViewModeNever;
-    searchTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
-    searchTextField.placeholder = @"";
+    self.showsCancelButton = YES;
+    
 }
-
-
 
 
 /*

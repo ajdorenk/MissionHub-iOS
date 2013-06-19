@@ -133,10 +133,13 @@
                                     <constraint firstAttribute="height" constant="517" id="6oT-Rd-gkQ"/>
                                 </constraints>
                                 <color key="separatorColor" red="0.75294117647058822" green="0.75294117647058822" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="kvx-Xw-Lud">
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="NWB-1I-7KB" customClass="MHPeopleSearchBar">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="uNE-mQ-hCw" id="6Jk-eL-VJy"/>
+                                    </connections>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHPersonCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MyCell" rowHeight="61" id="890-bb-M0z" customClass="MHPersonCell">
@@ -257,8 +260,8 @@
                         <outlet property="addPersonButton" destination="JXh-cr-2H5" id="zzG-RP-Aht"/>
                         <outlet property="backMenuButton" destination="O79-Mx-GN9" id="HUa-kB-G82"/>
                         <outlet property="peopleListToolbar" destination="qEZ-mU-Ly4" id="47m-9F-OVB"/>
-                        <outlet property="peopleSearchBar" destination="kvx-Xw-Lud" id="Hrh-NF-24m"/>
-                        <outlet property="searchDisplayController" destination="yKo-xz-5T5" id="rJW-BU-x7N"/>
+                        <outlet property="peopleSearchBar" destination="NWB-1I-7KB" id="PhS-hJ-qoW"/>
+                        <outlet property="searchDisplayController" destination="fOP-Jd-mDq" id="a2P-60-udl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUg-m2-Vce" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -276,6 +279,14 @@
                         <outlet property="searchContentsController" destination="uNE-mQ-hCw" id="G5L-XR-Bd3"/>
                         <outlet property="searchResultsDataSource" destination="uNE-mQ-hCw" id="bJ7-uF-co0"/>
                         <outlet property="searchResultsDelegate" destination="uNE-mQ-hCw" id="xaL-tg-gvu"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="fOP-Jd-mDq">
+                    <connections>
+                        <outlet property="delegate" destination="uNE-mQ-hCw" id="Anx-9C-MkX"/>
+                        <outlet property="searchContentsController" destination="uNE-mQ-hCw" id="pzG-1P-Q5W"/>
+                        <outlet property="searchResultsDataSource" destination="uNE-mQ-hCw" id="QaU-cz-5vt"/>
+                        <outlet property="searchResultsDelegate" destination="uNE-mQ-hCw" id="ja3-BP-OAc"/>
                     </connections>
                 </searchDisplayController>
             </objects>
@@ -345,6 +356,9 @@
                 <relationship kind="outlet" name="peopleListToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
             </relationships>
+        </class>
+        <class className="MHPeopleSearchBar" superclassName="UISearchBar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleSearchBar.h"/>
         </class>
         <class className="MHPersonCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPersonCell.h"/>

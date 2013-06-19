@@ -10,6 +10,4 @@
 
 @interface MHPeopleSearchBar : UISearchBar
 
-- (void)noSearchField;
-
 @end

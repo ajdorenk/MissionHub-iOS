@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "MHPersonCell.h"
 #import "MHMenuToolbar.h"   
+#import "MHPeopleSearchBar.h"   
 
 @interface Person : NSObject
 
@@ -34,8 +35,8 @@
 
 
 
-@interface MHPeopleListViewController ()
-
+@interface MHPeopleListViewController (Private)
+-(void)setTextFieldLeftView;
 @end
 
 @implementation MHPeopleListViewController
@@ -77,19 +78,23 @@
     self.peopleListToolbar.layer.shadowColor = [UIColor blackColor].CGColor;
     
     
-    [self.peopleSearchBar setBackgroundImage:[UIImage imageNamed:@"topbar_background.png"]];
+
     self.peopleSearchBar.layer.shadowOpacity = 0.3f;
-    self.peopleSearchBar.layer.shadowRadius = 1.0f;
+    self.peopleSearchBar.layer.shadowRadius = 2.0f;
     self.peopleSearchBar.layer.shadowColor = [UIColor blackColor].CGColor;
-    /*
-    self.peopleSearchBar.text = @"";
-    self.peopleSearchBar.backgroundColor = [UIColor whiteColor];
-    */
+    self.peopleSearchBar.placeholder = @"Search";
+    UITextField *text = [[self.peopleSearchBar subviews] objectAtIndex:1];
+    [text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
+    
+    [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"topbar_background.png"] forState:UIControlStateNormal];
 	
 }
 
 - (void)viewDidLoad
 {
+    
+    [self setTextFieldLeftView];
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     Person *person1 = [Person new];
@@ -145,9 +150,32 @@
     
     self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
     
+    
 
 
 }
+
+- (void)setTextFieldLeftView
+{
+    UITextField *searchField = nil;
+    for (UIView *subview in self.peopleSearchBar.subviews)
+    {
+        if ([subview isKindOfClass:[UITextField class]])
+        {
+            searchField = (UITextField *)subview;
+            break;
+        }
+    }
+    
+    if (searchField)
+    {
+        UIImage *image = [UIImage imageNamed:@"searchbar_image.png"];
+        UIImageView *view = [[UIImageView alloc] initWithImage:image];
+        searchField.leftView = view;
+    }
+}
+
+
 
 - (IBAction)revealMenu:(id)sender {
 	
