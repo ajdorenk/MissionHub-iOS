@@ -46,7 +46,7 @@
         if ([subview.class isSubclassOfClass:[UITextField class]]){
             searchTextField = (UITextField *)subview;
         }
-    }
+    } 
     /*for(id subview in [self subviews])
     {
         if ([subview isKindOfClass:[UIButton class]]) {
@@ -54,7 +54,7 @@
         }
     }*/
     
-    self.showsCancelButton = YES;
+    //self.showsCancelButton = YES;
     
 }
 

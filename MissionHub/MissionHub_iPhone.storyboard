@@ -133,17 +133,26 @@
                                     <constraint firstAttribute="height" constant="517" id="6oT-Rd-gkQ"/>
                                 </constraints>
                                 <color key="separatorColor" red="0.75294117647058822" green="0.75294117647058822" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="NWB-1I-7KB" customClass="MHPeopleSearchBar">
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="xzH-mT-y3l" customClass="MHPeopleSearchBar">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
-                                        <outlet property="delegate" destination="uNE-mQ-hCw" id="6Jk-eL-VJy"/>
+                                        <outlet property="delegate" destination="uNE-mQ-hCw" id="591-Ct-dPs"/>
                                     </connections>
                                 </searchBar>
                                 <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="26" id="0BF-ah-4J7">
+                                        <rect key="frame" x="0.0" y="66" width="320" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
                                     <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHPersonCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MyCell" rowHeight="61" id="890-bb-M0z" customClass="MHPersonCell">
-                                        <rect key="frame" x="0.0" y="66" width="320" height="61"/>
+                                        <rect key="frame" x="0.0" y="92" width="320" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
@@ -260,8 +269,8 @@
                         <outlet property="addPersonButton" destination="JXh-cr-2H5" id="zzG-RP-Aht"/>
                         <outlet property="backMenuButton" destination="O79-Mx-GN9" id="HUa-kB-G82"/>
                         <outlet property="peopleListToolbar" destination="qEZ-mU-Ly4" id="47m-9F-OVB"/>
-                        <outlet property="peopleSearchBar" destination="NWB-1I-7KB" id="PhS-hJ-qoW"/>
-                        <outlet property="searchDisplayController" destination="fOP-Jd-mDq" id="a2P-60-udl"/>
+                        <outlet property="peopleSearchBar" destination="xzH-mT-y3l" id="pya-Wj-FiQ"/>
+                        <outlet property="searchDisplayController" destination="g5t-Xv-URR" id="fiJ-Rg-q6I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUg-m2-Vce" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -287,6 +296,31 @@
                         <outlet property="searchContentsController" destination="uNE-mQ-hCw" id="pzG-1P-Q5W"/>
                         <outlet property="searchResultsDataSource" destination="uNE-mQ-hCw" id="QaU-cz-5vt"/>
                         <outlet property="searchResultsDelegate" destination="uNE-mQ-hCw" id="ja3-BP-OAc"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="sUV-sp-m28">
+                    <connections>
+                        <outlet property="delegate" destination="uNE-mQ-hCw" id="pft-lo-cHf"/>
+                        <outlet property="searchContentsController" destination="uNE-mQ-hCw" id="pqm-vH-YMC"/>
+                        <outlet property="searchResultsDataSource" destination="uNE-mQ-hCw" id="sAt-b9-vmR"/>
+                        <outlet property="searchResultsDelegate" destination="uNE-mQ-hCw" id="joC-8L-IYl"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="w5E-Ah-WqE">
+                    <connections>
+                        <outlet property="delegate" destination="uNE-mQ-hCw" id="0dg-Fx-V5u"/>
+                        <outlet property="searchContentsController" destination="uNE-mQ-hCw" id="LUm-gt-z4F"/>
+                        <outlet property="searchResultsDataSource" destination="uNE-mQ-hCw" id="Gnk-oo-KXB"/>
+                        <outlet property="searchResultsDelegate" destination="uNE-mQ-hCw" id="R6Q-Bt-2jT"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="g5t-Xv-URR">
+                    <connections>
+                        <outlet property="delegate" destination="uNE-mQ-hCw" id="VEa-9k-lGb"/>
+                        <outlet property="searchBar" destination="xzH-mT-y3l" id="14O-td-Qdq"/>
+                        <outlet property="searchContentsController" destination="uNE-mQ-hCw" id="r0D-bq-3Fa"/>
+                        <outlet property="searchResultsDataSource" destination="uNE-mQ-hCw" id="GO0-jM-a98"/>
+                        <outlet property="searchResultsDelegate" destination="uNE-mQ-hCw" id="bjh-ki-S9L"/>
                     </connections>
                 </searchDisplayController>
             </objects>

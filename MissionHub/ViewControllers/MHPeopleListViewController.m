@@ -86,7 +86,7 @@
     UITextField *text = [[self.peopleSearchBar subviews] objectAtIndex:1];
     [text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
     
-    [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"topbar_background.png"] forState:UIControlStateNormal];
+    [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
 	
 }
 
@@ -173,8 +173,8 @@
         UIImageView *view = [[UIImageView alloc] initWithImage:image];
         searchField.leftView = view;
     }
+    
 }
-
 
 
 - (IBAction)revealMenu:(id)sender {
