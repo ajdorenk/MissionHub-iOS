@@ -68,9 +68,9 @@
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
     
-    [self.backMenuButton setBackgroundImage:[UIImage imageNamed:@"backMenu_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.addPersonButton setBackgroundImage:[UIImage imageNamed:@"addPerson_button.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.addLabelButton setBackgroundImage:[UIImage imageNamed:@"createLabel_button"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.backMenuButton setBackgroundImage:[UIImage imageNamed:@"BackMenu_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.addPersonButton setBackgroundImage:[UIImage imageNamed:@"NewContact_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.addLabelButton setBackgroundImage:[UIImage imageNamed:@"NewInteraction_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     self.peopleListToolbar.layer.shadowOpacity = 0.3f;
     self.peopleListToolbar.layer.shadowRadius = 1.0f;
