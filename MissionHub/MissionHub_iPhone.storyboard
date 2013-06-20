@@ -142,17 +142,8 @@
                                     </connections>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="26" id="0BF-ah-4J7">
-                                        <rect key="frame" x="0.0" y="66" width="320" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
                                     <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHPersonCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MyCell" rowHeight="61" id="890-bb-M0z" customClass="MHPersonCell">
-                                        <rect key="frame" x="0.0" y="92" width="320" height="61"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
@@ -165,7 +156,18 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view opaque="NO" tag="103" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UxG-Ga-owV">
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPJ-Sk-nZr">
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                        </view>
+                                                    </subviews>
                                                     <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="zPJ-Sk-nZr" firstAttribute="top" secondItem="UxG-Ga-owV" secondAttribute="top" constant="-30" id="8xK-qp-jPy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="zPJ-Sk-nZr" secondAttribute="trailing" constant="9" id="JXQ-hx-6VB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="zPJ-Sk-nZr" secondAttribute="bottom" constant="28" id="isL-ou-Oek"/>
+                                                        <constraint firstItem="zPJ-Sk-nZr" firstAttribute="leading" secondItem="UxG-Ga-owV" secondAttribute="leading" constant="-96" id="nHY-D9-BSU"/>
+                                                    </constraints>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="PersonName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phM-ea-h4G">
                                                     <constraints>
@@ -205,16 +207,16 @@
                                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="phM-ea-h4G" firstAttribute="top" secondItem="890-bb-M0z" secondAttribute="top" constant="5" id="0SJ-qc-mvO"/>
-                                            <constraint firstItem="lFo-bS-li1" firstAttribute="leading" secondItem="890-bb-M0z" secondAttribute="leading" constant="40" id="8Vu-Wg-opD"/>
+                                            <constraint firstItem="lFo-bS-li1" firstAttribute="leading" secondItem="890-bb-M0z" secondAttribute="leading" constant="40" id="AWd-Hh-AqI"/>
+                                            <constraint firstItem="UxG-Ga-owV" firstAttribute="leading" secondItem="890-bb-M0z" secondAttribute="leading" constant="96" id="Oio-mU-pCn"/>
+                                            <constraint firstItem="lFo-bS-li1" firstAttribute="top" secondItem="890-bb-M0z" secondAttribute="top" constant="7" id="Qkr-AX-9km"/>
                                             <constraint firstAttribute="bottom" secondItem="UxG-Ga-owV" secondAttribute="bottom" constant="31" id="UsT-Nr-5Zq"/>
-                                            <constraint firstItem="lFo-bS-li1" firstAttribute="top" secondItem="890-bb-M0z" secondAttribute="top" constant="7" id="Vv3-6b-JhO"/>
                                             <constraint firstItem="UxG-Ga-owV" firstAttribute="top" secondItem="890-bb-M0z" secondAttribute="top" constant="-1" id="b5i-YO-qdU"/>
+                                            <constraint firstItem="BOf-Gs-ks9" firstAttribute="centerY" secondItem="lFo-bS-li1" secondAttribute="centerY" type="default" id="bJm-a3-5AY"/>
                                             <constraint firstItem="BOf-Gs-ks9" firstAttribute="leading" secondItem="890-bb-M0z" secondAttribute="leading" constant="12" id="cDt-Wn-h07"/>
                                             <constraint firstItem="phM-ea-h4G" firstAttribute="leading" secondItem="890-bb-M0z" secondAttribute="leading" constant="102" id="gQY-xv-nDV"/>
                                             <constraint firstAttribute="trailing" secondItem="UxG-Ga-owV" secondAttribute="trailing" constant="-1" id="hmP-vU-gDc"/>
-                                            <constraint firstItem="BOf-Gs-ks9" firstAttribute="centerY" secondItem="890-bb-M0z" secondAttribute="centerY" type="default" id="kaH-dD-JK0"/>
                                             <constraint firstItem="ft9-aR-Wad" firstAttribute="top" secondItem="phM-ea-h4G" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="o3P-Em-SXa"/>
-                                            <constraint firstItem="UxG-Ga-owV" firstAttribute="leading" secondItem="890-bb-M0z" secondAttribute="leading" constant="96" id="oeO-fL-cwZ"/>
                                             <constraint firstItem="ft9-aR-Wad" firstAttribute="leading" secondItem="890-bb-M0z" secondAttribute="leading" constant="113" id="xFh-P9-DkF"/>
                                         </constraints>
                                         <connections>
@@ -383,10 +385,12 @@
         <class className="MHPeopleListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="closePicker:"/>
                 <relationship kind="action" name="revealMenu:"/>
                 <relationship kind="outlet" name="addLabelButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="addPersonButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="backMenuButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="genderPickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="peopleListToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
             </relationships>

@@ -80,6 +80,9 @@
 		AD010CB71772053A00E6F0E6 /* BackMenu_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CB61772053A00E6F0E6 /* BackMenu_Icon.png */; };
 		AD010CB917721EBE00E6F0E6 /* searchbar_image.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CB817721EBE00E6F0E6 /* searchbar_image.png */; };
 		AD010CBB17725BA300E6F0E6 /* Searchbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CBA17725BA300E6F0E6 /* Searchbar_background.png */; };
+		AD010CBD17738F6B00E6F0E6 /* sectionHeaderGender.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CBC17738F6B00E6F0E6 /* sectionHeaderGender.png */; };
+		AD010CBF1773913000E6F0E6 /* sectionHeaderSort.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CBE1773913000E6F0E6 /* sectionHeaderSort.png */; };
+		AD010CC11773920C00E6F0E6 /* sectionHeaderAll.png in Resources */ = {isa = PBXBuildFile; fileRef = AD010CC01773920C00E6F0E6 /* sectionHeaderAll.png */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301131176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301132176FE4D900D53E35 /* MHMenuToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */; };
@@ -207,6 +210,9 @@
 		AD010CB61772053A00E6F0E6 /* BackMenu_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackMenu_Icon.png; sourceTree = "<group>"; };
 		AD010CB817721EBE00E6F0E6 /* searchbar_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar_image.png; sourceTree = "<group>"; };
 		AD010CBA17725BA300E6F0E6 /* Searchbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Searchbar_background.png; sourceTree = "<group>"; };
+		AD010CBC17738F6B00E6F0E6 /* sectionHeaderGender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sectionHeaderGender.png; path = ../../../../Desktop/sectionHeaderGender.png; sourceTree = "<group>"; };
+		AD010CBE1773913000E6F0E6 /* sectionHeaderSort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sectionHeaderSort.png; path = ../../../../Desktop/sectionHeaderSort.png; sourceTree = "<group>"; };
+		AD010CC01773920C00E6F0E6 /* sectionHeaderAll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sectionHeaderAll.png; path = ../../../../Desktop/sectionHeaderAll.png; sourceTree = "<group>"; };
 		AD30112A176FE4D900D53E35 /* MHCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCheckbox.h; path = "Custom UI/MHCheckbox.h"; sourceTree = "<group>"; };
 		AD30112B176FE4D900D53E35 /* MHCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCheckbox.m; path = "Custom UI/MHCheckbox.m"; sourceTree = "<group>"; };
 		AD30112C176FE4D900D53E35 /* MHMenuToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHMenuToolbar.h; path = "Custom UI/MHMenuToolbar.h"; sourceTree = "<group>"; };
@@ -311,7 +317,10 @@
 			isa = PBXGroup;
 			children = (
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
+				AD010CC01773920C00E6F0E6 /* sectionHeaderAll.png */,
 				AD010CB21772051600E6F0E6 /* NewContact_Icon.png */,
+				AD010CBE1773913000E6F0E6 /* sectionHeaderSort.png */,
+				AD010CBC17738F6B00E6F0E6 /* sectionHeaderGender.png */,
 				AD010CBA17725BA300E6F0E6 /* Searchbar_background.png */,
 				683AE393176D2DC20027EDE4 /* appicon.png */,
 				AD010CB41772053100E6F0E6 /* NewInteraction_Icon.png */,
@@ -588,6 +597,9 @@
 				AD010CB71772053A00E6F0E6 /* BackMenu_Icon.png in Resources */,
 				AD010CB917721EBE00E6F0E6 /* searchbar_image.png in Resources */,
 				AD010CBB17725BA300E6F0E6 /* Searchbar_background.png in Resources */,
+				AD010CBD17738F6B00E6F0E6 /* sectionHeaderGender.png in Resources */,
+				AD010CBF1773913000E6F0E6 /* sectionHeaderSort.png in Resources */,
+				AD010CC11773920C00E6F0E6 /* sectionHeaderAll.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

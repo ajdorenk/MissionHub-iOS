@@ -43,6 +43,7 @@
 
 @synthesize persons = _persons;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -87,6 +88,8 @@
     [text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
+    
+    
 	
 }
 
@@ -152,7 +155,6 @@
     
     
 
-
 }
 
 - (void)setTextFieldLeftView
@@ -189,6 +191,36 @@
 
 -(IBAction)addLabelActivity:(id)sender {
     NSLog(@"Label Action");
+}
+
+-(IBAction)checkAllContacts:(id)sender {
+    NSLog(@"Check all");
+}
+
+-(IBAction)showGenderPickerView:(id)sender {
+    NSLog(@"chooseGender");
+    [UIView animateWithDuration:0.3 animations:^{
+        self.genderPickerView.frame = CGRectMake(self.genderPickerView.frame.origin.x,
+                                       332, //Displays the view a little past the
+                                       //center ling of the screen
+                                       self.genderPickerView.frame.size.width,
+                                       self.genderPickerView.frame.size.height);
+    }];
+}
+
+-(IBAction)closePicker:(id)sender
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.genderPickerView.frame = CGRectMake(self.genderPickerView.frame.origin.x,
+                                       460, //Displays the view off the screen
+                                       self.genderPickerView.frame.size.width,
+                                       self.genderPickerView.frame.size.height);
+    }];
+
+}
+
+-(IBAction)sortOnOff:(id)sender {
+    NSLog(@"Toggle sort");
 }
 
 /*@synthesize Sublabel;
@@ -232,14 +264,69 @@
     
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
+    sectionHeader.backgroundColor = [UIColor grayColor];
+ 
+ UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(37, 6.5, 20, 20.0)];
+    headerLabel.textColor = [UIColor whiteColor];
+ headerLabel.backgroundColor = [UIColor clearColor];
+ headerLabel.textAlignment = NSTextAlignmentLeft;
+ [sectionHeader addSubview:headerLabel];
+ 
+ headerLabel.text = @"All";
+    
+    //Add genderButton
+    UIButton *genderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [genderButton setFrame:CGRectMake(94, 5.0, 154.0, 22.0)];
+    //[button setTitle:@"Gender" forState:UIControlStateNormal];
+    [genderButton setTintColor:[UIColor clearColor]];
+    [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderGender.png"] forState:UIControlStateNormal];
 
+    [genderButton setBackgroundColor:[UIColor clearColor]];
+    [genderButton addTarget:self action:@selector(showGenderPickerView:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:genderButton];
+    
+    UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sortButton setFrame:CGRectMake(266, 5.0, 50.0, 22.0)];
+    //[button setTitle:@"Sort" forState:UIControlStateNormal];
+    [sortButton setTintColor:[UIColor clearColor]];
+    [sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
+    
+    [sortButton setBackgroundColor:[UIColor clearColor]];
+    [sortButton addTarget:self action:@selector(closePicker:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:sortButton];
+    
+    
+    UIButton *allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [allButton setFrame:CGRectMake(13.0, 9.0, 14.0, 14.0)];
+    //[button setTitle:@"Sort" forState:UIControlStateNormal];
+    [allButton setTintColor:[UIColor clearColor]];
+    [allButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderAll.png"] forState:UIControlStateNormal];
+    
+    [allButton setBackgroundColor:[UIColor clearColor]];
+    [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:allButton];
+    
+    return sectionHeader;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 32.0;
+}
+ 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
     /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+       *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
