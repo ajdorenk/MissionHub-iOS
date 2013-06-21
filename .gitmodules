@@ -1,9 +1,12 @@
-[submodule "webrequest"]
-	path = webrequest
-	url = https://github.com/nfarina/webrequest.git
-[submodule "ECSlidingViewController"]
-	path = ECSlidingViewController
+[submodule "Libraries/asi-http-request"]
+	path = Libraries/asi-http-request
+	url = https://github.com/pokeb/asi-http-request.git
+[submodule "Libraries/ECSlidingViewController"]
+	path = Libraries/ECSlidingViewController
 	url = https://github.com/edgecase/ECSlidingViewController.git
-[submodule "MMReachabilityViewController"]
-	path = MMReachabilityViewController
+[submodule "Libraries/MMReachabilityViewController"]
+	path = Libraries/MMReachabilityViewController
 	url = https://github.com/michaelharro/MMReachabilityViewController.git
+[submodule "Libraries/ODRefreshControl"]
+	path = Libraries/ODRefreshControl
+	url = https://github.com/Sephiroth87/ODRefreshControl.git

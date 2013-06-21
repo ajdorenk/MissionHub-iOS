@@ -12,7 +12,7 @@
 
 +(NSEntityDescription *)entity {
 	
-	return [[[AppDelegate managedObjectModel] entitiesByName] objectForKey:NSStringFromClass([self class])];
+	return [[[[MHStorage sharedInstance] managedObjectModel] entitiesByName] objectForKey:NSStringFromClass([self class])];
 	
 }
 
@@ -22,6 +22,30 @@
 	[fetchRequest setEntity:[self entity]];
 	
 	return fetchRequest;
+}
+
++(id)newObject:(NSDictionary *)attributes {
+	
+	return [self newObject:attributes inContext:nil];
+	
+}
+
++(id)newObject:(NSDictionary *)attributes inContext:(NSManagedObjectContext *)context {
+	
+	NSManagedObjectContext *contextForCreation = context ? context : [[MHStorage sharedInstance] managedObjectContext];
+	id newObject = [[self alloc] initWithEntity:[self entity] insertIntoManagedObjectContext:contextForCreation];
+	
+	if (attributes != nil) {
+		
+		for (id key in attributes) {
+		
+			[newObject setValue:[attributes valueForKey:key] forKey:key];
+		
+		}
+		
+	}
+	
+	return newObject;
 }
 
 @end

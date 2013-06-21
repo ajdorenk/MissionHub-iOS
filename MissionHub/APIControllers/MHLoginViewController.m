@@ -68,7 +68,7 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
 }
 
 - (void)viewDidUnload {
-    [self setFBLoginView:nil];
+	
     [super viewDidUnload];
 }
 
@@ -100,6 +100,18 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
             }
         }
     }];
+}
+
+- (void)handleDidBecomeActive {
+	
+	[FBSession.activeSession handleDidBecomeActive];
+	
+}
+
+- (void)handleWillTerminate {
+	
+	[FBSession.activeSession close];
+	
 }
 
 // Helper method to wrap logic for handling app links.

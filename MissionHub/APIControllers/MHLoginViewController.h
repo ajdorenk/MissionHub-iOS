@@ -22,10 +22,11 @@ extern NSString *const FBSessionStateChangedNotification;
 @interface MHLoginViewController : UIViewController <FBLoginViewDelegate, MHLoginDelegate>
 
 @property (nonatomic, retain)				id<MHLoginDelegate> delegate;
-@property (unsafe_unretained, nonatomic)	IBOutlet FBLoginView *FBLoginView;
 
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
+- (void)handleDidBecomeActive;
+- (void)handleWillTerminate;
 - (void)handleAppLink:(FBAccessTokenData *)appLinkToken;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "MHStorage.h"
 
 @interface MHModel : NSManagedObject
 

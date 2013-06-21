@@ -7,6 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MHRequestOptions.h"
+#import "NSDictionary+UrlEncodedString.h"
+
+@class MHRequest;
 
 @interface MHAPI : NSObject
 
@@ -14,6 +18,11 @@
 @property (nonatomic, strong) NSString *apiUrl;
 @property (nonatomic, strong) NSString *accessToken;
 
-+ (MHAPI *)sharedInstance;
++(MHAPI *)sharedInstance;
+
+-(NSString *)stringForIndexRequestWith:(MHRequestOptions *)options error:(NSError **)error;
+
+-(void)requestDidFinish:(MHRequest *)request;
+-(void)requestDidFail:(MHRequest *)request;
 
 @end
