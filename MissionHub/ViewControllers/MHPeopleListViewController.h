@@ -16,9 +16,6 @@
 @interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate> {
 
     NSArray *_persons;
-    NSArray *items;
-    UIPickerView *genderPicker;
-    
 }
 
 
@@ -28,14 +25,10 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
 @property (nonatomic, strong) IBOutlet UIToolbar *peopleListToolbar;
 @property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
-@property (nonatomic, strong) IBOutlet UIPickerView *genderPickerView;
-
 
 @property(nonatomic, strong) NSArray *persons;
 
 - (IBAction)revealMenu:(id)sender;
-- (IBAction)closePicker:(id)sender;
-
 /*
 @property(nonatomic, retain) MHSublabel *Sublabel;
 */

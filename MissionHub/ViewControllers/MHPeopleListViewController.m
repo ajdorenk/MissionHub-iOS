@@ -155,6 +155,7 @@
     
     
 
+
 }
 
 - (void)setTextFieldLeftView
@@ -197,26 +198,9 @@
     NSLog(@"Check all");
 }
 
--(IBAction)showGenderPickerView:(id)sender {
+-(IBAction)chooseGender:(id)sender {
     NSLog(@"chooseGender");
-    [UIView animateWithDuration:0.3 animations:^{
-        self.genderPickerView.frame = CGRectMake(self.genderPickerView.frame.origin.x,
-                                       332, //Displays the view a little past the
-                                       //center ling of the screen
-                                       self.genderPickerView.frame.size.width,
-                                       self.genderPickerView.frame.size.height);
-    }];
-}
-
--(IBAction)closePicker:(id)sender
-{
-    [UIView animateWithDuration:0.3 animations:^{
-        self.genderPickerView.frame = CGRectMake(self.genderPickerView.frame.origin.x,
-                                       460, //Displays the view off the screen
-                                       self.genderPickerView.frame.size.width,
-                                       self.genderPickerView.frame.size.height);
-    }];
-
+    
 }
 
 -(IBAction)sortOnOff:(id)sender {
@@ -285,7 +269,7 @@
     [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderGender.png"] forState:UIControlStateNormal];
 
     [genderButton setBackgroundColor:[UIColor clearColor]];
-    [genderButton addTarget:self action:@selector(showGenderPickerView:) forControlEvents:UIControlEventTouchDown];
+    [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:genderButton];
     
@@ -296,7 +280,7 @@
     [sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
     
     [sortButton setBackgroundColor:[UIColor clearColor]];
-    [sortButton addTarget:self action:@selector(closePicker:) forControlEvents:UIControlEventTouchDown];
+    [sortButton addTarget:self action:@selector(sortOnOff:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:sortButton];
     
