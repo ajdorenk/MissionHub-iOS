@@ -218,7 +218,7 @@
     NSLog(@"chooseGender");
 
     UIStoryboard *storyboard = self.storyboard;
-    MHGenderListController *genders = [storyboard
+    UIViewController *genders = [storyboard
                   instantiateViewControllerWithIdentifier:@"genderList"];
     [self presentViewController:genders animated:YES completion:Nil];
 }

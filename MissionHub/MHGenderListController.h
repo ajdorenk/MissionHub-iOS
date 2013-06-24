@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MHGenderListController : UIViewController
+@interface MHGenderListController : UIViewController <UITableViewDelegate>
+{
+}
 
-@property (nonatomic, strong) IBOutlet UIButton *male;
-@property (nonatomic, strong) IBOutlet UIButton *female;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancel;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *done;
+@property (strong, nonatomic) IBOutlet UIToolbar *genderToolbar;
+@property (strong, nonatomic) IBOutlet UITableView *genderListCells;
+
+@property(nonatomic, strong) NSString *genders;
 
 @end

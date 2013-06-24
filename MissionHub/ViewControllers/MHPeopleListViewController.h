@@ -35,12 +35,3 @@
 
 
 
-/*@interface MHgenderListController : UIViewController
-
-//@property (nonatomic, strong) IBOutlet UIViewController *genderListController;
-@property (nonatomic, strong) IBOutlet UIViewController *genderlist;
-@property (nonatomic, strong) IBOutlet UIButton *male;
-@property (nonatomic, strong) IBOutlet UIButton *female;
-
-@end*/
-
