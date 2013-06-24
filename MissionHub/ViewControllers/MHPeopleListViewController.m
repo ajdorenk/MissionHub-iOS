@@ -11,7 +11,8 @@
 #import <Foundation/Foundation.h>
 #import "MHPersonCell.h"
 #import "MHMenuToolbar.h"   
-#import "MHPeopleSearchBar.h"   
+#import "MHPeopleSearchBar.h" 
+#import "MHGenderListController.h"  
 
 @interface Person : NSObject
 
@@ -32,9 +33,24 @@
 
 
 
+/*@interface MHgenderListController ()
 
+@end
 
+@implementation MHgenderListController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+@end
+
+*/
 @interface MHPeopleListViewController (Private)
 -(void)setTextFieldLeftView;
 @end
@@ -200,12 +216,17 @@
 
 -(IBAction)chooseGender:(id)sender {
     NSLog(@"chooseGender");
-    
+
+    UIStoryboard *storyboard = self.storyboard;
+    MHGenderListController *genders = [storyboard
+                  instantiateViewControllerWithIdentifier:@"genderList"];
+    [self presentViewController:genders animated:YES completion:Nil];
 }
 
 -(IBAction)sortOnOff:(id)sender {
     NSLog(@"Toggle sort");
 }
+
 
 /*@synthesize Sublabel;
 */

@@ -19,7 +19,6 @@
 }
 
 
-
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addPersonButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
@@ -33,4 +32,15 @@
 @property(nonatomic, retain) MHSublabel *Sublabel;
 */
 @end
+
+
+
+/*@interface MHgenderListController : UIViewController
+
+//@property (nonatomic, strong) IBOutlet UIViewController *genderListController;
+@property (nonatomic, strong) IBOutlet UIViewController *genderlist;
+@property (nonatomic, strong) IBOutlet UIButton *male;
+@property (nonatomic, strong) IBOutlet UIButton *female;
+
+@end*/
 
