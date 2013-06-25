@@ -5,6 +5,6 @@
 	<key>base_url</key>
 	<string>https://stage.missionhub.com</string>
 	<key>api_url</key>
-	<string>https://stage.missionhub.com/api/v3</string>
+	<string>https://stage.missionhub.com/apis/v3</string>
 </dict>
 </plist>

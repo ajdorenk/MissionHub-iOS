@@ -12,6 +12,7 @@
 
 @synthesize endpoint	= _endpoint;
 @synthesize remoteID	= _remoteID;
+@synthesize filters		= _filters;
 @synthesize includes	= _includes;
 @synthesize limit		= _limit;
 @synthesize offset		= _offset;
@@ -25,6 +26,7 @@
 		
 		self.endpoint	= MHRequestOptionsEndpointPeople;
 		self.remoteID	= 0;
+		self.filters	= [NSDictionary dictionary];
 		self.includes	= [NSMutableIndexSet indexSet];
 		self.limit		= 0;
 		self.offset		= 0;
@@ -37,6 +39,10 @@
 
 -(BOOL)hasRemoteID {
 	return (self.remoteID > 0);
+}
+
+-(BOOL)hasFilters {
+	return ([self.filters count] > 0);
 }
 
 -(BOOL)hasIncludes {
@@ -53,6 +59,42 @@
 
 -(BOOL)hasOrder {
 	return (self.order != MHRequestOptionsOrderNone);
+}
+
+-(void)addInclude:(MHRequestOptionsIncludes)include {
+	
+	[self.includes addIndex:include];
+	
+}
+
+-(void)clearIncludes {
+	
+	[self.includes removeAllIndexes];
+	
+}
+
+-(void)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
+	
+	[self.filters setValue:value forKey:[self stringFromFilter:filter]];
+	
+}
+
+-(void)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
+	
+	[self.filters setValue:value forKey:[self stringFromFilter:filter]];
+	
+}
+
+-(void)removeFilter:(MHRequestOptionsFilters)filter {
+	
+	[self.filters removeObjectForKey:[self stringFromFilter:filter]];
+	
+}
+
+-(void)clearFilters {
+	
+	[self.filters removeAllObjects];
+	
 }
 
 -(NSString *)stringForEndpoint {
@@ -77,6 +119,23 @@
 	includeString = [includeString substringToIndex:[includeString length] - 1];
 	
 	return includeString;
+}
+
+-(NSString *)stringForFilters {
+	
+	__block NSString * filterString = @"";
+	
+	[self.filters enumerateKeysAndObjectsUsingBlock:^(NSString *filter, NSString *value, BOOL *stop) {
+		
+		filterString = [filterString stringByAppendingFormat:@"&filters[%@]=%@", filter, value];
+		
+	}];
+	
+	//remove first & from the start of the string
+	filterString = [filterString substringFromIndex:1];
+	
+	return filterString;
+	
 }
 
 -(NSString *)stringForLimit {
@@ -188,6 +247,42 @@
 	}
 	
 	return endpointString;
+	
+}
+
+
+-(NSString *)stringFromFilter:(MHRequestOptionsFilters)filter {
+	
+	NSString *filterString;
+	
+	switch (filter) {
+		case MHRequestOptionsFilterPeopleEmailLike:
+			filterString = @"email_like";
+			break;
+		case MHRequestOptionsFilterPeopleFirstNameLike:
+			filterString = @"first_name_like";
+			break;
+		case MHRequestOptionsFilterPeopleLastNameLike:
+			filterString = @"last_name_like";
+			break;
+		case MHRequestOptionsFilterPeopleNameLike:
+			filterString = @"name_like";
+			break;
+		case MHRequestOptionsFilterPeopleNameOrEmailLike:
+			filterString = @"name_or_email_like";
+			break;
+		case MHRequestOptionsFilterPeopleRoles:
+			filterString = @"roles";
+			break;
+		case MHRequestOptionsFilterPeopleSurveys:
+			filterString = @"surveys";
+			break;
+			
+		default:
+			break;
+	}
+	
+	return filterString;
 	
 }
 

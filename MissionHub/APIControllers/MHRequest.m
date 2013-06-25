@@ -10,6 +10,10 @@
 
 @implementation MHRequest
 
+@synthesize options			= _options;
+@synthesize successBlock	= _successBlock;
+@synthesize failBlock		= _failBlock;
+
 - (id)initWithURL:(NSURL *)newURL {
 	
 	self = [super initWithURL:newURL];
@@ -19,7 +23,11 @@
 		self.delegate			= [MHAPI sharedInstance];
 		self.didFinishSelector	= @selector(requestDidFinish:);
 		self.didFailSelector	= @selector(requestDidFail:);
+		self.requestMethod		= @"GET";
 		[self addRequestHeader:@"HTTP_ACCEPT" value:@"application/json"];
+		self.options			= nil;
+		self.successBlock		= nil;
+		self.failBlock			= nil;
 		
 	}
 	

@@ -48,6 +48,16 @@ typedef enum {
 } MHRequestOptionsIncludes;
 
 typedef enum {
+	MHRequestOptionsFilterPeopleRoles,
+	MHRequestOptionsFilterPeopleSurveys,
+	MHRequestOptionsFilterPeopleFirstNameLike,
+	MHRequestOptionsFilterPeopleLastNameLike,
+	MHRequestOptionsFilterPeopleNameLike,
+	MHRequestOptionsFilterPeopleEmailLike,
+	MHRequestOptionsFilterPeopleNameOrEmailLike
+} MHRequestOptionsFilters;
+
+typedef enum {
 	MHRequestOptionsOrderNone,
 	MHRequestOptionsOrderCreatedAt,
 	MHRequestOptionsOrderAsc,
@@ -60,6 +70,7 @@ typedef enum {
 	
 	MHRequestOptionsEndpoints	_endpoint;
 	NSUInteger					_remoteID;
+	NSMutableDictionary			*_filters;
 	NSMutableIndexSet			*_includes;
 	NSUInteger					_limit;
 	NSUInteger					_offset;
@@ -69,25 +80,36 @@ typedef enum {
 
 @property (nonatomic, assign) MHRequestOptionsEndpoints	endpoint;
 @property (nonatomic, assign) NSUInteger				remoteID;
+@property (nonatomic, strong) NSMutableDictionary		*filters;
 @property (nonatomic, strong) NSMutableIndexSet			*includes;
 @property (nonatomic, assign) NSUInteger				limit;
 @property (nonatomic, assign) NSUInteger				offset;
 @property (nonatomic, assign) MHRequestOptionsOrders	order;
 
 -(BOOL)hasRemoteID;
+-(BOOL)hasFilters;
 -(BOOL)hasIncludes;
 -(BOOL)hasLimit;
 -(BOOL)hasOffset;
 -(BOOL)hasOrder;
 
+-(void)addInclude:(MHRequestOptionsIncludes)include;
+-(void)clearIncludes;
+-(void)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
+-(void)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
+-(void)removeFilter:(MHRequestOptionsFilters)filter;
+-(void)clearFilters;
+
 -(NSString *)stringForEndpoint;
 -(NSString *)stringInSingluarFormatForEndpoint;
+-(NSString *)stringForFilters;
 -(NSString *)stringForIncludes;
 -(NSString *)stringForLimit;
 -(NSString *)stringForOffset;
 -(NSString *)stringForOrder;
 
 -(NSString *)stringFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
+-(NSString *)stringFromFilter:(MHRequestOptionsFilters)filter;
 -(NSString *)stringInSingluarFormatFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
 -(NSString *)stringFromInclude:(MHRequestOptionsIncludes)include;
 -(NSString *)stringFromOrder:(MHRequestOptionsOrders)order;

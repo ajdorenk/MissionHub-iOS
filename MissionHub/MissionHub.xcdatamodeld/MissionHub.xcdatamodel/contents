@@ -1,101 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Interaction" syncable="YES">
+    <entity name="MHInteraction" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="deleted_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="privacy_setting" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="initiators" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="initiatedInteractions" inverseEntity="Person" syncable="YES"/>
-        <relationship name="receiver" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="receivedInteractions" inverseEntity="Person" syncable="YES"/>
-        <relationship name="type" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="InteractionType" syncable="YES"/>
+        <relationship name="initiators" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="initiatedInteractions" inverseEntity="MHPerson" syncable="YES"/>
+        <relationship name="receiver" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="receivedInteractions" inverseEntity="MHPerson" syncable="YES"/>
+        <relationship name="type" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHInteractionType" inverseName="interactions" inverseEntity="MHInteractionType" syncable="YES"/>
     </entity>
-    <entity name="InteractionType" syncable="YES">
+    <entity name="MHInteractionType" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="i18n" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Organization" inverseName="interactionType" inverseEntity="Organization" syncable="YES"/>
+        <relationship name="interactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="type" inverseEntity="MHInteraction" syncable="YES"/>
+        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="interactionType" inverseEntity="MHOrganization" syncable="YES"/>
     </entity>
-    <entity name="Label" representedClassName="Label" syncable="YES">
+    <entity name="MHLabel" representedClassName="" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="i18n" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="organizations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Organization" inverseName="labels" inverseEntity="Organization" syncable="YES"/>
-        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="labels" inverseEntity="Person" syncable="YES"/>
+        <relationship name="organizations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="labels" inverseEntity="MHOrganization" syncable="YES"/>
+        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="labels" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
-    <entity name="Organization" representedClassName="Organization" syncable="YES">
+    <entity name="MHOrganization" representedClassName="" syncable="YES">
         <attribute name="ancestry" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="show_sub_orgs" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="terminology" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="interactionType" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InteractionType" inverseName="organization" inverseEntity="InteractionType" syncable="YES"/>
-        <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Label" inverseName="organizations" inverseEntity="Label" syncable="YES"/>
-        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="organization" inverseEntity="Person" syncable="YES"/>
-        <relationship name="permissionLevels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PermissionLevel" inverseName="organizations" inverseEntity="PermissionLevel" syncable="YES"/>
-        <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Survey" inverseName="organization" inverseEntity="Survey" syncable="YES"/>
+        <relationship name="interactionType" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteractionType" inverseName="organization" inverseEntity="MHInteractionType" syncable="YES"/>
+        <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHLabel" inverseName="organizations" inverseEntity="MHLabel" syncable="YES"/>
+        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="organization" inverseEntity="MHPerson" syncable="YES"/>
+        <relationship name="permissionLevels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPermissionLevel" inverseName="organizations" inverseEntity="MHPermissionLevel" syncable="YES"/>
+        <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="organization" inverseEntity="MHSurvey" syncable="YES"/>
     </entity>
-    <entity name="PermissionLevel" syncable="YES">
+    <entity name="MHPermissionLevel" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="i18n" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="organizations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Organization" inverseName="permissionLevels" inverseEntity="Organization" syncable="YES"/>
-        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="permissionLevel" inverseEntity="Person" syncable="YES"/>
+        <relationship name="organizations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="permissionLevels" inverseEntity="MHOrganization" syncable="YES"/>
+        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="permissionLevel" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
-    <entity name="Person" representedClassName="Person" syncable="YES">
+    <entity name="MHPerson" representedClassName="" syncable="YES">
         <attribute name="birth_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="campus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="date_became_christian" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fb_uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="firstName" attributeType="String" syncable="YES"/>
+        <attribute name="first_name" attributeType="String" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="graduation_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="last_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="major" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="minor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="year_in_school" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="assignedConacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" syncable="YES"/>
-        <relationship name="initiatedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Interaction" inverseName="initiators" inverseEntity="Interaction" syncable="YES"/>
-        <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Label" inverseName="people" inverseEntity="Label" syncable="YES"/>
-        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Organization" inverseName="people" inverseEntity="Organization" syncable="YES"/>
-        <relationship name="permissionLevel" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PermissionLevel" inverseName="people" inverseEntity="PermissionLevel" syncable="YES"/>
-        <relationship name="receivedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Interaction" inverseName="receiver" inverseEntity="Interaction" syncable="YES"/>
-        <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Survey" inverseName="people" inverseEntity="Survey" syncable="YES"/>
+        <relationship name="assignedConacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="assignedLeader" inverseEntity="MHPerson" syncable="YES"/>
+        <relationship name="assignedLeader" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="assignedConacts" inverseEntity="MHPerson" syncable="YES"/>
+        <relationship name="initiatedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="initiators" inverseEntity="MHInteraction" syncable="YES"/>
+        <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHLabel" inverseName="people" inverseEntity="MHLabel" syncable="YES"/>
+        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="people" inverseEntity="MHOrganization" syncable="YES"/>
+        <relationship name="permissionLevel" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPermissionLevel" inverseName="people" inverseEntity="MHPermissionLevel" syncable="YES"/>
+        <relationship name="receivedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="receiver" inverseEntity="MHInteraction" syncable="YES"/>
+        <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="people" inverseEntity="MHSurvey" syncable="YES"/>
     </entity>
-    <entity name="Survey" syncable="YES">
+    <entity name="MHSurvey" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="is_frozen" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="login_paragraph" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="post_survey_message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Organization" inverseName="surveys" inverseEntity="Organization" syncable="YES"/>
-        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="surveys" inverseEntity="Person" syncable="YES"/>
+        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="surveys" inverseEntity="MHOrganization" syncable="YES"/>
+        <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="surveys" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PermissionLevel" positionX="207" positionY="2921" width="128" height="148"/>
-        <element name="Organization" positionX="493" positionY="2574" width="128" height="238"/>
-        <element name="Person" positionX="232" positionY="2453" width="128" height="373"/>
-        <element name="Label" positionX="259" positionY="3137" width="128" height="148"/>
-        <element name="Survey" positionX="387" positionY="3492" width="128" height="178"/>
-        <element name="Interaction" positionX="-18" positionY="3281" width="128" height="193"/>
-        <element name="InteractionType" positionX="313" positionY="3321" width="128" height="148"/>
+        <element name="MHInteraction" positionX="-18" positionY="3281" width="128" height="193"/>
+        <element name="MHInteractionType" positionX="313" positionY="3321" width="128" height="163"/>
+        <element name="MHLabel" positionX="259" positionY="3137" width="128" height="148"/>
+        <element name="MHOrganization" positionX="493" positionY="2574" width="128" height="238"/>
+        <element name="MHPermissionLevel" positionX="207" positionY="2921" width="128" height="148"/>
+        <element name="MHPerson" positionX="232" positionY="2453" width="128" height="403"/>
+        <element name="MHSurvey" positionX="387" positionY="3492" width="128" height="178"/>
     </elements>
 </model>

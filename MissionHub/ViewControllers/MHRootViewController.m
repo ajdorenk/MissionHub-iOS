@@ -50,6 +50,18 @@
 		
 	} else {
 		
+		[[MHAPI sharedInstance] fetchMeWithOptions:nil
+									  successBlock:^(NSArray *result, MHRequestOptions *options) {
+										  
+										  NSLog(@"SUCCESS");
+										  
+									  } failBlock:^(NSError *error, MHRequestOptions *options) {
+										  
+										  NSLog(@"FAIL");
+										  
+									  }
+		 ];
+		
 		self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"PeopleList"];
 		
 	}

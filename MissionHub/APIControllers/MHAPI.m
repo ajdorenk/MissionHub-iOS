@@ -7,19 +7,21 @@
 //
 
 #import "MHAPI.h"
+#import "MHRequest.h"
 
 @interface MHAPI (PrivateMethods)
 
 -(NSString *)stringForBaseUrlWith:(MHRequestOptions *)options error:(NSError **)error;
--(void)addFacebookTokenToParams:(NSMutableDictionary *)params withError:(NSError **)error;
+-(void)addAccessTokenToParams:(NSMutableDictionary *)params withError:(NSError **)error;
 
 @end
 
 @implementation MHAPI
 
-@synthesize apiUrl;
-@synthesize baseUrl;
-@synthesize accessToken;
+@synthesize queue		= _queue;
+@synthesize apiUrl		= _apiUrl;
+@synthesize baseUrl		= _baseUrl;
+@synthesize accessToken	= _accessToken;
 
 + (MHAPI *)sharedInstance
 {
@@ -40,7 +42,7 @@
     if (self) {
         // Custom initialization
 		
-		NSString *pathToConfigFile		= [[NSBundle mainBundle] pathForResource:@"conig" ofType:@"plist"];
+		NSString *pathToConfigFile		= [[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:pathToConfigFile];
 		
 		self.baseUrl					= [configDictionary valueForKey:@"base_url"];
@@ -59,13 +61,66 @@
 				
 		}
 		
+		self.queue = [[NSOperationQueue alloc] init];
+		
     }
     return self;
 }
 
+-(void)fetchMeWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	MHRequestOptions *requestOptions = (options ? options : [[MHRequestOptions alloc] init]);
+	
+	requestOptions.endpoint = MHRequestOptionsEndpointPeople;
+	
+	NSError *error;
+	NSString *urlString = [self stringForMeRequestWith:requestOptions error:&error];
+	NSLog(@"%@", urlString);
+	if (error) {
+		[MHErrorHandler presentError:error];
+		return;
+	}
+	
+	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	request.delegate			= self;
+	request.options				= requestOptions;
+	request.successBlock		= successBlock;
+	request.failBlock			= failBlock;
+	
+	[self.queue addOperation:request];
+}
+
+-(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error {
+	
+	NSString *urlString	= [self stringForBaseUrlWith:options error:error];
+	NSMutableDictionary	*params	= [[NSMutableDictionary alloc] init];
+	
+	if (*error) {
+		return nil;
+	}
+	
+	urlString = [urlString stringByAppendingString:@"/me?"];
+	
+	if ([options hasIncludes]) {
+		
+		[params setValue:[options stringForIncludes] forKey:@"include"];
+		
+	}
+	
+	[self addAccessTokenToParams:params withError:error];
+	
+	if (*error) {
+		return nil;
+	}
+	
+	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
+	
+	return urlString;
+}
+
 -(NSString *)stringForShowRequestWith:(MHRequestOptions *)options error:(NSError **)error {
 	
-	__block NSString *urlString	= [self stringForBaseUrlWith:options error:error];
+	NSString *urlString	= [self stringForBaseUrlWith:options error:error];
 	NSMutableDictionary	*params	= [[NSMutableDictionary alloc] init];
 	
 	if (*error) {
@@ -84,7 +139,7 @@
 		
 	}
 	
-	[self addFacebookTokenToParams:params withError:error];
+	[self addAccessTokenToParams:params withError:error];
 	
 	if (*error) {
 		return nil;
@@ -105,6 +160,12 @@
 	}
 	
 	urlString = [urlString stringByAppendingString:@"?"];
+	
+	if ([options hasFilters]) {
+		
+		[urlString stringByAppendingString:[options stringForFilters]];
+		
+	}
 	
 	if ([options hasIncludes]) {
 			
@@ -130,7 +191,63 @@
 		
 	}
 	
-	[self addFacebookTokenToParams:params withError:error];
+	[self addAccessTokenToParams:params withError:error];
+	
+	if (*error) {
+		return nil;
+	}
+	
+	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
+	
+	return urlString;
+}
+
+-(NSString *)stringForCreateRequestWith:(MHRequestOptions *)options error:(NSError **)error {
+	
+	NSString *urlString	= [self stringForBaseUrlWith:options error:error];
+	NSMutableDictionary	*params	= [[NSMutableDictionary alloc] init];
+	
+	if (*error) {
+		return nil;
+	}
+	
+	[self addAccessTokenToParams:params withError:error];
+	
+	if (*error) {
+		return nil;
+	}
+	
+	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
+	
+	return urlString;
+}
+
+-(NSString *)stringForUpdateRequestWith:(MHRequestOptions *)options error:(NSError **)error {
+	
+	return [self stringForUpdateOrDeleteRequestWith:options error:error];
+}
+
+-(NSString *)stringForDeleteRequestWith:(MHRequestOptions *)options error:(NSError **)error {
+	
+	return [self stringForUpdateOrDeleteRequestWith:options error:error];
+}
+
+-(NSString *)stringForUpdateOrDeleteRequestWith:(MHRequestOptions *)options error:(NSError **)error {
+	
+	NSString *urlString	= [self stringForBaseUrlWith:options error:error];
+	NSMutableDictionary	*params	= [[NSMutableDictionary alloc] init];
+	
+	if (*error) {
+		return nil;
+	}
+	
+	if ([options hasRemoteID]) {
+		
+		urlString = [urlString stringByAppendingFormat:@"/%d?", options.remoteID];
+		
+	}
+	
+	[self addAccessTokenToParams:params withError:error];
 	
 	if (*error) {
 		return nil;
@@ -145,11 +262,29 @@
 	
 #warning Need to implement general request finished selector
 	
+	NSMutableArray *resultArray = [NSMutableArray array];
+	
+	//parse response and put into result array
+	
+	//call success block if it exists so that the calling method can access the result
+	if (request.successBlock) {
+		request.successBlock(resultArray, request.options);
+	}
+	
 }
 
 -(void)requestDidFail:(MHRequest *)request {
 	
 #warning Need to implement general request failed selector
+	
+	NSError *error;
+	
+	//parse errors and put into NSError object
+	
+	//call fail block if it exists so that the calling method can access the result
+	if (request.failBlock) {
+		request.failBlock(error, request.options);
+	}
 	
 }
 
@@ -189,7 +324,7 @@
 	
 }
 
--(void)addFacebookTokenToParams:(NSMutableDictionary *)params withError:(NSError **)error {
+-(void)addAccessTokenToParams:(NSMutableDictionary *)params withError:(NSError **)error {
 	
 	if ([self accessToken]) {
 		
