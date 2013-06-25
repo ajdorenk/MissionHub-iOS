@@ -17,6 +17,6 @@
 @property (strong, nonatomic) IBOutlet UIToolbar *genderToolbar;
 @property (strong, nonatomic) IBOutlet UITableView *genderListCells;
 
-@property(nonatomic, strong) NSString *genders;
+@property(nonatomic, strong) NSArray *genders;
 
 @end

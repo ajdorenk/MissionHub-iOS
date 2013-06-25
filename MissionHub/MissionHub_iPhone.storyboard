@@ -122,7 +122,6 @@
         <!--Gender List Controller-->
         <scene sceneID="DO8-Yx-Dp8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gqQ-iR-K8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="genderList" id="WwU-Jc-Wsx" userLabel="Gender List Controller" customClass="MHGenderListController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KGX-nk-Snc">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
@@ -194,6 +193,7 @@
                         <outlet property="genderToolbar" destination="d4l-gh-qg3" id="Ntv-B2-ogd"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gqQ-iR-K8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1367" y="-701"/>
         </scene>
@@ -229,11 +229,11 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHPersonCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MyCell" rowHeight="61" id="890-bb-M0z" customClass="MHPersonCell">
+                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHPersonCell" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MyCell" rowHeight="61" id="890-bb-M0z" customClass="MHPersonCell">
                                         <rect key="frame" x="0.0" y="127" width="320" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFo-bS-li1">
@@ -293,7 +293,7 @@
                                             <outlet property="gender" destination="ft9-aR-Wad" id="ko2-Q1-jyZ"/>
                                             <outlet property="name" destination="phM-ea-h4G" id="ix5-Bt-A4F"/>
                                             <outlet property="profilePicture" destination="lFo-bS-li1" id="mG6-g0-74j"/>
-                                            <segue destination="I7x-NW-S7H" kind="modal" id="3ET-ri-kES"/>
+                                            <segue destination="I7x-NW-S7H" kind="modal" id="mU5-VR-SnV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -399,18 +399,14 @@
         <!--Profile View Controller-->
         <scene sceneID="B3I-Hl-ZYn">
             <objects>
-                <viewController storyboardIdentifier="ParallaxedViewController" id="I7x-NW-S7H" customClass="MHProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="" id="I7x-NW-S7H" customClass="MHProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="crb-7X-aco">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hnz-5I-xgv" customClass="MHMenuToolbar">
                                 <items>
-                                    <barButtonItem id="Me4-ih-hgl">
-                                        <connections>
-                                            <action selector="backToPeopleList:" destination="I7x-NW-S7H" id="78B-H1-5JR"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem id="Me4-ih-hgl"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CYd-xl-Urs"/>
                                     <barButtonItem id="1ax-hy-4GR"/>
                                     <barButtonItem id="4Xr-iw-iPF"/>
@@ -425,7 +421,7 @@
                             <constraint firstItem="Hnz-5I-xgv" firstAttribute="leading" secondItem="crb-7X-aco" secondAttribute="leading" type="default" id="hnN-7O-nf8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="MFV-fo-PFx"/>
+                    <navigationItem key="navigationItem" id="Wgb-UV-WIZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G3L-3m-Bbw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -744,7 +740,87 @@
             </objects>
             <point key="canvasLocation" x="1906" y="70"/>
         </scene>
+        <!--My Top View Controller-->
+        <scene sceneID="eF7-fT-yhz">
+            <objects>
+                <viewController storyboardIdentifier="ParallaxedViewController" id="DHq-4H-U64" customClass="MyTopViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cev-z6-1ND">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="IZY-dT-o5o"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gradient_overlay@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="vAc-VX-BIc"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This is some nice car" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNy-Jz-uGm">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="QSA-cd-W6b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="MINI COOPER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuI-2y-2h0">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="ifN-Id-U9l"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="30"/>
+                                <color key="textColor" red="0.93947014760000003" green="1" blue="0.99826180679999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Model 16" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gmq-fY-lbY">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="XVo-Fk-nbD"/>
+                                    <constraint firstAttribute="height" constant="21" id="jgT-WQ-8UB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vAc-VX-BIc" firstAttribute="top" secondItem="Cev-z6-1ND" secondAttribute="top" type="default" id="99n-LA-94g"/>
+                            <constraint firstAttribute="trailing" secondItem="EuI-2y-2h0" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="BQ3-b6-Hwb"/>
+                            <constraint firstItem="Gmq-fY-lbY" firstAttribute="top" secondItem="Cev-z6-1ND" secondAttribute="top" constant="89" id="G8N-Bx-4Gm"/>
+                            <constraint firstAttribute="trailing" secondItem="gNy-Jz-uGm" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="R4k-es-7Py"/>
+                            <constraint firstItem="vAc-VX-BIc" firstAttribute="leading" secondItem="Cev-z6-1ND" secondAttribute="leading" type="default" id="VdW-xn-j5x"/>
+                            <constraint firstItem="IZY-dT-o5o" firstAttribute="trailing" secondItem="Cev-z6-1ND" secondAttribute="trailing" type="default" id="WZe-LG-maB"/>
+                            <constraint firstItem="IZY-dT-o5o" firstAttribute="centerY" secondItem="vAc-VX-BIc" secondAttribute="centerY" type="default" id="ZK0-Sx-6fM"/>
+                            <constraint firstItem="IZY-dT-o5o" firstAttribute="bottom" secondItem="Cev-z6-1ND" secondAttribute="bottom" type="default" id="ZSq-KP-12V"/>
+                            <constraint firstAttribute="bottom" secondItem="gNy-Jz-uGm" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="bTo-74-CAU"/>
+                            <constraint firstItem="IZY-dT-o5o" firstAttribute="leading" secondItem="Cev-z6-1ND" secondAttribute="leading" type="default" id="ba5-YE-RTc"/>
+                            <constraint firstItem="EuI-2y-2h0" firstAttribute="leading" secondItem="Cev-z6-1ND" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="bx1-K2-Wdk"/>
+                            <constraint firstItem="gNy-Jz-uGm" firstAttribute="leading" secondItem="Cev-z6-1ND" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="c1D-55-08z"/>
+                            <constraint firstItem="EuI-2y-2h0" firstAttribute="top" secondItem="Cev-z6-1ND" secondAttribute="top" type="default" id="dJh-6w-GQf"/>
+                            <constraint firstItem="IZY-dT-o5o" firstAttribute="top" secondItem="Cev-z6-1ND" secondAttribute="top" type="default" id="mPn-7I-lMA"/>
+                            <constraint firstAttribute="trailing" secondItem="Gmq-fY-lbY" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="szE-nd-6vX"/>
+                            <constraint firstItem="vAc-VX-BIc" firstAttribute="trailing" secondItem="Cev-z6-1ND" secondAttribute="trailing" type="default" id="xMS-u5-6JX"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="gradientImageView" destination="vAc-VX-BIc" id="U2H-4s-x3c"/>
+                        <outlet property="imageView" destination="IZY-dT-o5o" id="6MX-sP-EEm"/>
+                        <outlet property="label1" destination="EuI-2y-2h0" id="YtL-XB-Zdu"/>
+                        <outlet property="label2" destination="Gmq-fY-lbY" id="pk7-9z-UpY"/>
+                        <outlet property="label3" destination="gNy-Jz-uGm" id="rNH-hw-Lib"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTV-nW-xYe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1806" y="-517"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="bg.jpg" width="16" height="16"/>
+        <image name="gradient_overlay@2x.png" width="16" height="16"/>
+    </resources>
     <classes>
         <class className="ECSlidingViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
@@ -805,6 +881,14 @@
         </class>
         <class className="MHProfileViewController" superclassName="M6ParallaxController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addLabelActivity:"/>
+                <relationship kind="action" name="addTagActivity:"/>
+                <relationship kind="action" name="backToMenu:"/>
+                <relationship kind="outlet" name="addLabelButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="addTagButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="backMenuButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="MHRootViewController" superclassName="ECSlidingViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>
@@ -819,6 +903,16 @@
         </class>
         <class className="MyTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTableViewController.h"/>
+        </class>
+        <class className="MyTopViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTopViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="gradientImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="label1" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="label2" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="label3" candidateClass="UILabel"/>
+            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

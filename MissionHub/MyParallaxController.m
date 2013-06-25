@@ -1,22 +1,19 @@
 //
-//  MHProfileViewController.m
-//  MissionHub
+//  ViewController.m
+//  Sample Storyboard
 //
-//  Created by Amarisa Robison on 6/24/13.
-//  Copyright (c) 2013 Cru. All rights reserved.
+//  Created by Peter Paulis on 1.4.2013.
+//  Copyright (c) 2013 Min60 s.r.o. - http://min60.com. All rights reserved.
 //
 
-#import "MHProfileViewController.h"
+#import "MyParallaxController.h"
 #import "MyTopViewController.h"
 
-
-@interface MHProfileViewController ()
+@interface MyParallaxController ()
 
 @end
 
-@implementation MHProfileViewController
-
-@synthesize addLabelButton, addTagButton, backMenuButton;
+@implementation MyParallaxController
 
 - (void)viewDidLoad
 {
@@ -30,21 +27,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)backToMenu:(id)sender {
-	
-    [self dismissViewControllerAnimated:NO completion:Nil];
-	//[self.slidingViewController anchorTopViewTo:ECRight];
-	
-}
-- (IBAction)addTagActivity:(id)sender {
-NSLog(@"add Person Action");
-}
-- (IBAction)addLabelActivity:(id)sender {
-   NSLog(@"Label Action");
-}
-
-
-
 -(void) awakeFromNib
 {
     UIViewController * topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ParallaxedViewController"];
@@ -55,7 +37,7 @@ NSLog(@"add Person Action");
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:tapGestureRecognizer];
-    
+
 }
 
 - (void)handleTapGesture:(id)sender {

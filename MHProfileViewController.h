@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "M6ParallaxController.h"
 
-@interface MHProfileViewController : M6ParallaxController
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *addTagButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
+
+- (IBAction)backToMenu:(id)sender;
+- (IBAction)addTagActivity:(id)sender;
+- (IBAction)addLabelActivity:(id)sender;
 
 @end

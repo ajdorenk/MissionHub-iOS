@@ -86,8 +86,12 @@
 		AD010CCD17789CB800E6F0E6 /* MHGenderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CCC17789CB700E6F0E6 /* MHGenderListController.m */; };
 		AD010CD91778DD5400E6F0E6 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CD81778DD5400E6F0E6 /* MyTableViewController.m */; };
 		AD010CDC1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CDB1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.m */; };
-		AD010CDF1778DE1300E6F0E6 /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CDE1778DE1300E6F0E6 /* MHProfileViewController.m */; };
 		AD010CE51778E2F900E6F0E6 /* M6ParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CE41778E2F900E6F0E6 /* M6ParallaxController.m */; };
+		AD010D29177A422300E6F0E6 /* MyParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D24177A422300E6F0E6 /* MyParallaxController.m */; };
+		AD010D2A177A422300E6F0E6 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D26177A422300E6F0E6 /* MyTableViewController.m */; };
+		AD010D2B177A422300E6F0E6 /* MyTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D28177A422300E6F0E6 /* MyTopViewController.m */; };
+		AD010D2C177A428D00E6F0E6 /* MHGenderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CCC17789CB700E6F0E6 /* MHGenderListController.m */; };
+		AD010D2E177A48F000E6F0E6 /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CDE1778DE1300E6F0E6 /* MHProfileViewController.m */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301131176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301132176FE4D900D53E35 /* MHMenuToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */; };
@@ -228,6 +232,12 @@
 		AD010CDE1778DE1300E6F0E6 /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ../MHProfileViewController.m; sourceTree = "<group>"; };
 		AD010CE31778E2F900E6F0E6 /* M6ParallaxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = M6ParallaxController.h; path = "../../untitled folder/M6ParallaxController/M6ParallaxController.h"; sourceTree = "<group>"; };
 		AD010CE41778E2F900E6F0E6 /* M6ParallaxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = M6ParallaxController.m; path = "../../untitled folder/M6ParallaxController/M6ParallaxController.m"; sourceTree = "<group>"; };
+		AD010D23177A422300E6F0E6 /* MyParallaxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyParallaxController.h; sourceTree = "<group>"; };
+		AD010D24177A422300E6F0E6 /* MyParallaxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyParallaxController.m; sourceTree = "<group>"; };
+		AD010D25177A422300E6F0E6 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
+		AD010D26177A422300E6F0E6 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
+		AD010D27177A422300E6F0E6 /* MyTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTopViewController.h; sourceTree = "<group>"; };
+		AD010D28177A422300E6F0E6 /* MyTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTopViewController.m; sourceTree = "<group>"; };
 		AD30112A176FE4D900D53E35 /* MHCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCheckbox.h; path = "Custom UI/MHCheckbox.h"; sourceTree = "<group>"; };
 		AD30112B176FE4D900D53E35 /* MHCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCheckbox.m; path = "Custom UI/MHCheckbox.m"; sourceTree = "<group>"; };
 		AD30112C176FE4D900D53E35 /* MHMenuToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHMenuToolbar.h; path = "Custom UI/MHMenuToolbar.h"; sourceTree = "<group>"; };
@@ -405,6 +415,12 @@
 		683910D51761095000E01B46 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AD010D23177A422300E6F0E6 /* MyParallaxController.h */,
+				AD010D24177A422300E6F0E6 /* MyParallaxController.m */,
+				AD010D25177A422300E6F0E6 /* MyTableViewController.h */,
+				AD010D26177A422300E6F0E6 /* MyTableViewController.m */,
+				AD010D27177A422300E6F0E6 /* MyTopViewController.h */,
+				AD010D28177A422300E6F0E6 /* MyTopViewController.m */,
 				683910D11761087600E01B46 /* MHRootViewController.h */,
 				683910D21761087600E01B46 /* MHRootViewController.m */,
 				683910D61761356000E01B46 /* MHMenuViewController.h */,
@@ -712,8 +728,12 @@
 				68C0689C176EB832007C79D6 /* MHModel.m in Sources */,
 				AD010CD91778DD5400E6F0E6 /* MyTableViewController.m in Sources */,
 				AD010CDC1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.m in Sources */,
-				AD010CDF1778DE1300E6F0E6 /* MHProfileViewController.m in Sources */,
 				AD010CE51778E2F900E6F0E6 /* M6ParallaxController.m in Sources */,
+				AD010D29177A422300E6F0E6 /* MyParallaxController.m in Sources */,
+				AD010D2A177A422300E6F0E6 /* MyTableViewController.m in Sources */,
+				AD010D2B177A422300E6F0E6 /* MyTopViewController.m in Sources */,
+				AD010D2C177A428D00E6F0E6 /* MHGenderListController.m in Sources */,
+				AD010D2E177A48F000E6F0E6 /* MHProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

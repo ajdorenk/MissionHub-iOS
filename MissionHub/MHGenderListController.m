@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
+
 #import "MHGenderListController.h"
 #import "MHPeopleListViewController.h"  
 
@@ -86,15 +87,15 @@
     }
     
     //Display person in the table cell
-
-    cell.textLabel.text = self.genders;
+    NSString *tempString = [self.genders objectAtIndex:indexPath.row];
+    cell.textLabel.text = tempString;
     
     return cell;
     
 }
 
 
-/*#pragma mark - Table view delegate
+#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -103,7 +104,8 @@
     }
     
     
-}*/
+
+}
 
 
 - (void)didReceiveMemoryWarning
