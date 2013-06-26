@@ -10,6 +10,7 @@
 #import "MHRequestOptions.h"
 #import "NSDictionary+UrlEncodedString.h"
 #import "MHErrorHandler.h"
+#import "MHModel.h"
 
 @class MHRequest;
 

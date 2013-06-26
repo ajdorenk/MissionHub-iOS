@@ -10,6 +10,10 @@
 
 @interface MHStorage : NSObject {
 	
+	NSManagedObjectContext			*_managedObjectContext;
+	NSManagedObjectModel			*_managedObjectModel;
+	NSPersistentStoreCoordinator	*_persistentStoreCoordinator;
+	
 }
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

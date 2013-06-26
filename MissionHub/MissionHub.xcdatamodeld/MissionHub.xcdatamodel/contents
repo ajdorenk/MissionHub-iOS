@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="MHInteraction" syncable="YES">
+    <entity name="MHInteraction" representedClassName="MHInteraction" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="deleted_at" optional="YES" attributeType="Date" syncable="YES"/>
@@ -12,7 +12,7 @@
         <relationship name="receiver" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="receivedInteractions" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="type" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHInteractionType" inverseName="interactions" inverseEntity="MHInteractionType" syncable="YES"/>
     </entity>
-    <entity name="MHInteractionType" syncable="YES">
+    <entity name="MHInteractionType" representedClassName="MHInteractionType" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="i18n" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,7 +46,7 @@
         <relationship name="permissionLevels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPermissionLevel" inverseName="organizations" inverseEntity="MHPermissionLevel" syncable="YES"/>
         <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="organization" inverseEntity="MHSurvey" syncable="YES"/>
     </entity>
-    <entity name="MHPermissionLevel" syncable="YES">
+    <entity name="MHPermissionLevel" representedClassName="MHPermissionLevel" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="i18n" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -81,7 +81,7 @@
         <relationship name="receivedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="receiver" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="people" inverseEntity="MHSurvey" syncable="YES"/>
     </entity>
-    <entity name="MHSurvey" syncable="YES">
+    <entity name="MHSurvey" representedClassName="MHSurvey" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="is_frozen" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="login_paragraph" optional="YES" attributeType="String" syncable="YES"/>

@@ -10,9 +10,60 @@
 
 @implementation MHModel
 
+@synthesize attributes		= _attributes;
+//@synthesize relationships	= _relationships;
+
+-(id)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context {
+	
+	self = [super initWithEntity:entity insertIntoManagedObjectContext:context];
+	
+	if (self) {
+		
+		//grab the entity or if it is nil grab the enitity description from the class name
+		NSEntityDescription *ent	= ( entity ? entity : [self entity] );
+		
+		self.attributes				= [ent attributesByName];
+		
+		[self.attributes enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+			
+			if ([key isEqualToString:@"remoteID"]) {
+				
+				[self.attributes setValue:@"id" forKey:key];
+				
+			} else {
+				
+				[self.attributes setValue:key forKey:key];
+				
+			}
+			
+		}];
+		
+		/*
+		self.relationships			= [ent relationshipsByName];
+		
+		[self.relationships enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+			
+			[self.relationships setValue:key forKey:key];
+			
+		}];
+		*/
+	}
+	
+	return self;
+	
+}
+
 +(NSEntityDescription *)entity {
 	
-	return [[[[MHStorage sharedInstance] managedObjectModel] entitiesByName] objectForKey:NSStringFromClass([self class])];
+	return [self entityFromName:nil];
+	
+}
+
++(NSEntityDescription *)entityFromName:(NSString *)name {
+	
+	NSString *entityName = name ? name : NSStringFromClass([self class]);
+	
+	return [[[[MHStorage sharedInstance] managedObjectModel] entitiesByName] objectForKey:entityName];
 	
 }
 
@@ -24,28 +75,50 @@
 	return fetchRequest;
 }
 
-+(id)newObject:(NSDictionary *)attributes {
++(id)newObjectForClass:(NSString *)className fromFields:(NSDictionary *)fields {
 	
-	return [self newObject:attributes inContext:nil];
+	return [self newObjectForEntityName:className fromFields:(NSDictionary *)fields inContext:nil];
 	
 }
 
-+(id)newObject:(NSDictionary *)attributes inContext:(NSManagedObjectContext *)context {
++(id)newObjectForEntityName:(NSString *)entityName fromFields:(NSDictionary *)fields inContext:(NSManagedObjectContext *)context {
 	
 	NSManagedObjectContext *contextForCreation = context ? context : [[MHStorage sharedInstance] managedObjectContext];
-	id newObject = [[self alloc] initWithEntity:[self entity] insertIntoManagedObjectContext:contextForCreation];
+	id newObject = [[self alloc] initWithEntity:[self entityFromName:entityName] insertIntoManagedObjectContext:contextForCreation];
 	
-	if (attributes != nil) {
+	[newObject setFields:fields];
+	
+	return newObject;
+}
+
+-(void)setFields:(NSDictionary *)fields {
+	
+	
+	
+	if (fields != nil) {
 		
-		for (id key in attributes) {
-		
-			[newObject setValue:[attributes valueForKey:key] forKey:key];
-		
+		for (NSString *fieldName in fields) {
+			
+			if ([self.attributes objectForKey:fieldName]) {
+				
+				[self setValue:[fields objectForKey:fieldName] forKey:[self.attributes objectForKey:fieldName]];
+				
+			} else {
+				
+				[self setRelationshipsObject:[fields objectForKey:fieldName] forFieldName:fieldName];
+				
+			}
+			
 		}
 		
 	}
 	
-	return newObject;
+}
+
+-(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
+	
+	//should be subclassed to deal with relationships
+	
 }
 
 @end

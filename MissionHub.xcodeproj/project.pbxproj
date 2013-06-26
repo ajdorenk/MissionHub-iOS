@@ -59,6 +59,19 @@
 		683AE3A1176D2DC20027EDE4 /* appicon-small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE396176D2DC20027EDE4 /* appicon-small-50.png */; };
 		683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE397176D2DC20027EDE4 /* appicon-72.png */; };
 		683AE3A3176D2DC20027EDE4 /* appicon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE397176D2DC20027EDE4 /* appicon-72.png */; };
+		68478D3B177A5AA20014501D /* MHInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D3A177A5AA20014501D /* MHInteraction.m */; };
+		68478D3E177A70200014501D /* MHInteractionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D3D177A70200014501D /* MHInteractionType.m */; };
+		68478D3F177A70200014501D /* MHInteractionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D3D177A70200014501D /* MHInteractionType.m */; };
+		68478D4A177A72420014501D /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D49177A72420014501D /* MHOrganization.m */; };
+		68478D4B177A72420014501D /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D49177A72420014501D /* MHOrganization.m */; };
+		68478D4E177A77BF0014501D /* MHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D4D177A77BF0014501D /* MHLabel.m */; };
+		68478D4F177A77BF0014501D /* MHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D4D177A77BF0014501D /* MHLabel.m */; };
+		68478D52177A784A0014501D /* MHPermissionLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D51177A784A0014501D /* MHPermissionLevel.m */; };
+		68478D53177A784A0014501D /* MHPermissionLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D51177A784A0014501D /* MHPermissionLevel.m */; };
+		68478D56177A78AC0014501D /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D55177A78AC0014501D /* MHPerson.m */; };
+		68478D57177A78AC0014501D /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D55177A78AC0014501D /* MHPerson.m */; };
+		68478D5A177A7F420014501D /* MHSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D59177A7F410014501D /* MHSurvey.m */; };
+		68478D5B177A7F420014501D /* MHSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D59177A7F410014501D /* MHSurvey.m */; };
 		68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C0689C176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
@@ -170,6 +183,20 @@
 		683AE395176D2DC20027EDE4 /* appicon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-small.png"; sourceTree = "<group>"; };
 		683AE396176D2DC20027EDE4 /* appicon-small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-small-50.png"; sourceTree = "<group>"; };
 		683AE397176D2DC20027EDE4 /* appicon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-72.png"; sourceTree = "<group>"; };
+		68478D39177A5AA20014501D /* MHInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInteraction.h; path = Models/MHInteraction.h; sourceTree = "<group>"; };
+		68478D3A177A5AA20014501D /* MHInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteraction.m; path = Models/MHInteraction.m; sourceTree = "<group>"; };
+		68478D3C177A70200014501D /* MHInteractionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInteractionType.h; path = Models/MHInteractionType.h; sourceTree = "<group>"; };
+		68478D3D177A70200014501D /* MHInteractionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionType.m; path = Models/MHInteractionType.m; sourceTree = "<group>"; };
+		68478D48177A72420014501D /* MHOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHOrganization.h; sourceTree = "<group>"; };
+		68478D49177A72420014501D /* MHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHOrganization.m; sourceTree = "<group>"; };
+		68478D4C177A77BF0014501D /* MHLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHLabel.h; sourceTree = "<group>"; };
+		68478D4D177A77BF0014501D /* MHLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHLabel.m; sourceTree = "<group>"; };
+		68478D50177A784A0014501D /* MHPermissionLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPermissionLevel.h; path = Models/MHPermissionLevel.h; sourceTree = "<group>"; };
+		68478D51177A784A0014501D /* MHPermissionLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPermissionLevel.m; path = Models/MHPermissionLevel.m; sourceTree = "<group>"; };
+		68478D54177A78AC0014501D /* MHPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPerson.h; sourceTree = "<group>"; };
+		68478D55177A78AC0014501D /* MHPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPerson.m; sourceTree = "<group>"; };
+		68478D58177A7F410014501D /* MHSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSurvey.h; path = Models/MHSurvey.h; sourceTree = "<group>"; };
+		68478D59177A7F410014501D /* MHSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurvey.m; path = Models/MHSurvey.m; sourceTree = "<group>"; };
 		68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncodedString.h"; sourceTree = "<group>"; };
 		68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncodedString.m"; sourceTree = "<group>"; };
 		68C06899176EB832007C79D6 /* MHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHModel.h; path = Models/MHModel.h; sourceTree = "<group>"; };
@@ -436,6 +463,20 @@
 				68C0689A176EB832007C79D6 /* MHModel.m */,
 				68C068A61770EFBE007C79D6 /* MHStorage.h */,
 				68C068A71770EFBE007C79D6 /* MHStorage.m */,
+				68478D39177A5AA20014501D /* MHInteraction.h */,
+				68478D3A177A5AA20014501D /* MHInteraction.m */,
+				68478D3C177A70200014501D /* MHInteractionType.h */,
+				68478D3D177A70200014501D /* MHInteractionType.m */,
+				68478D48177A72420014501D /* MHOrganization.h */,
+				68478D49177A72420014501D /* MHOrganization.m */,
+				68478D4C177A77BF0014501D /* MHLabel.h */,
+				68478D4D177A77BF0014501D /* MHLabel.m */,
+				68478D50177A784A0014501D /* MHPermissionLevel.h */,
+				68478D51177A784A0014501D /* MHPermissionLevel.m */,
+				68478D54177A78AC0014501D /* MHPerson.h */,
+				68478D55177A78AC0014501D /* MHPerson.m */,
+				68478D58177A7F410014501D /* MHSurvey.h */,
+				68478D59177A7F410014501D /* MHSurvey.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -765,6 +806,13 @@
 				68C069691772252C007C79D6 /* MHRequestOptions.m in Sources */,
 				68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */,
 				68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */,
+				68478D3B177A5AA20014501D /* MHInteraction.m in Sources */,
+				68478D3E177A70200014501D /* MHInteractionType.m in Sources */,
+				68478D4A177A72420014501D /* MHOrganization.m in Sources */,
+				68478D4E177A77BF0014501D /* MHLabel.m in Sources */,
+				68478D52177A784A0014501D /* MHPermissionLevel.m in Sources */,
+				68478D56177A78AC0014501D /* MHPerson.m in Sources */,
+				68478D5A177A7F420014501D /* MHSurvey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,6 +847,12 @@
 				68C0696617710E60007C79D6 /* MHRequest.m in Sources */,
 				68C0696A1772252C007C79D6 /* MHRequestOptions.m in Sources */,
 				68EB33CE17792D8F003958A0 /* MHErrorHandler.m in Sources */,
+				68478D3F177A70200014501D /* MHInteractionType.m in Sources */,
+				68478D4B177A72420014501D /* MHOrganization.m in Sources */,
+				68478D4F177A77BF0014501D /* MHLabel.m in Sources */,
+				68478D53177A784A0014501D /* MHPermissionLevel.m in Sources */,
+				68478D57177A78AC0014501D /* MHPerson.m in Sources */,
+				68478D5B177A7F420014501D /* MHSurvey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

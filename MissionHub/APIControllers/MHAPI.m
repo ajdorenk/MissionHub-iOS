@@ -9,6 +9,15 @@
 #import "MHAPI.h"
 #import "MHRequest.h"
 
+static NSString *MHAPIErrorDomain = @"com.MissionHub.API";
+
+typedef enum {
+	MHAPIErrorMissingUrl,
+	MHAPIErrorMissingEndpoint,
+	MHAPIErrorMissionAccessToken,
+	MHAPIErrorMalformedResponse
+} MHAPIErrors;
+
 @interface MHAPI (PrivateMethods)
 
 -(NSString *)stringForBaseUrlWith:(MHRequestOptions *)options error:(NSError **)error;
@@ -262,13 +271,90 @@
 	
 #warning Need to implement general request finished selector
 	
-	NSMutableArray *resultArray = [NSMutableArray array];
+	NSError *error;
+	__block NSMutableArray *modelArray = [NSMutableArray array];
+	__block NSString *nameOfClassForEndpoint = [NSString stringWithFormat:@"MH%@", [[request.options stringInSingluarFormatForEndpoint] capitalizedString]];
 	
-	//parse response and put into result array
+	//parse response and put into result dictionary
+	NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
+	
+	//if there was a parsing error stop updating model and notify calling method of the error through the fail block
+	if (error) {
+		
+		if (request.failBlock) {
+			request.failBlock(error, request.options);
+		} else {
+			//if no fail block show the error anyway
+			[MHErrorHandler presentError:error];
+		}
+		
+	}
+	
+	//try creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
+	@try {
+	
+		
+		
+		//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
+		if ([[[result allKeys] objectAtIndex:0] isEqualToString:[request.options stringInSingluarFormatForEndpoint]]) {
+			
+			NSDictionary *responseObject = [result objectForKey:[request.options stringInSingluarFormatForEndpoint]];
+			
+			id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromAttributes:responseObject];
+			
+			[modelArray addObject:modelObject];
+			
+		} else if ([[[result allKeys] objectAtIndex:0] isEqualToString:[request.options stringForEndpoint]]) {
+			
+			__block NSArray *arrayOfResponseObjects = [result objectForKey:[request.options stringForEndpoint]];
+			
+			[arrayOfResponseObjects enumerateObjectsUsingBlock:^(id responseObject, NSUInteger index, BOOL *stop) {
+				
+				id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromAttributes:responseObject];
+				
+				[modelArray addObject:modelObject];
+				
+			}];
+			
+		} else {
+			
+			error = [NSError errorWithDomain:MHAPIErrorDomain
+										code:MHAPIErrorMalformedResponse
+									userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has incorrect name for root element. It should match the name of the endpoint. Please contact support@missionhub.com", @"Response JSON object has incorrect name for root element. It should match the name of the endpoint. Please contact support@missionhub.com")}];
+			
+			if (request.failBlock) {
+				request.failBlock(error, request.options);
+			} else {
+				//if no fail block show the error anyway
+				[MHErrorHandler presentError:error];
+			}
+			
+		}
+		
+		
+		
+	}
+	@catch (NSException *exception) {
+		
+		error = [NSError errorWithDomain:MHAPIErrorDomain
+									code:MHAPIErrorMalformedResponse
+								userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com", @"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com")}];
+		
+		if (request.failBlock) {
+			request.failBlock(error, request.options);
+		} else {
+			//if no fail block show the error anyway
+			[MHErrorHandler presentError:error];
+		}
+		
+	}
+	@finally {
+		//nothing to clean up with ARC. YAY!
+	}
 	
 	//call success block if it exists so that the calling method can access the result
 	if (request.successBlock) {
-		request.successBlock(resultArray, request.options);
+		request.successBlock(modelArray, request.options);
 	}
 	
 }
@@ -297,8 +383,8 @@
 	if (urlString == nil || [urlString length] <= 0 ) {
 		
 		if (error) {
-			*error = [NSError errorWithDomain:@"com.MissionHub.API"
-										 code:1
+			*error = [NSError errorWithDomain:MHAPIErrorDomain
+										 code:MHAPIErrorMissingUrl
 									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"API URL Missing", @"API URL Missing")}];
 		}
 		
@@ -312,8 +398,8 @@
 	} else {
 		
 		if (error) {
-			*error = [NSError errorWithDomain:@"com.MissionHub.API"
-										 code:2
+			*error = [NSError errorWithDomain:MHAPIErrorDomain
+										 code:MHAPIErrorMissingEndpoint
 									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"API Endpoint Missing", @"API Endpoint Missing")}];
 		}
 		
@@ -333,9 +419,9 @@
 	} else {
 		
 		if (error) {
-			*error = [NSError errorWithDomain:@"com.MissionHub.API"
-										 code:3
-									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"API token Missing. You must login to facebook first.", @"API token Missing. You must login to facebook first.")}];
+			*error = [NSError errorWithDomain:MHAPIErrorDomain
+										 code:MHAPIErrorMissionAccessToken
+									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"API token Missing. You must login first.", @"API token Missing. You must login first.")}];
 		}
 	
 	}
