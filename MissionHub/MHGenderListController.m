@@ -41,13 +41,16 @@
     self.genderListCells.layer.borderColor = [UIColor colorWithRed:214.0/255.0 green:214.0/255.0 blue:214.0/255.0 alpha:1].CGColor;
     
 }
-
+- (void)awakeFromNib
+{
+        self.genders = [NSArray arrayWithObjects:@"Male", @"Female", nil];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view
-    self.genders = [NSArray arrayWithObjects:@"Male", @"Female", nil];
+
 
 }
 - (IBAction)donePressed:(id)sender {
@@ -63,22 +66,23 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
-}
+}*/
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return self.genders.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier = @"genderCell";
+    //static
+    NSString *CellIdentifier = @"genderCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
@@ -87,8 +91,8 @@
     }
     
     //Display person in the table cell
-    NSString *tempString = [self.genders objectAtIndex:indexPath.row];
-    cell.textLabel.text = tempString;
+    //NSString *tempString = [self.genders objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.genders objectAtIndex:indexPath.row];
     
     return cell;
     

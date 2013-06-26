@@ -13,17 +13,20 @@
 /*
 @class MHSublabel;
 */
-@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate> {
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate> {
 
     NSArray *_persons;
 }
 
 
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
+/*@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addPersonButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
-@property (nonatomic, strong) IBOutlet UIToolbar *peopleListToolbar;
+
+@property (nonatomic, strong) IBOutlet UIToolbar *peopleListToolbar;*/
+
 @property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
+
 
 @property(nonatomic, strong) NSArray *persons;
 

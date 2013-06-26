@@ -8,6 +8,7 @@
 
 #import "MHProfileViewController.h"
 #import "MyTopViewController.h"
+#import "MHCustomNavigationBar.h"   
 
 
 @interface MHProfileViewController ()
@@ -17,6 +18,8 @@
 @implementation MHProfileViewController
 
 @synthesize addLabelButton, addTagButton, backMenuButton;
+
+
 
 - (void)viewDidLoad
 {

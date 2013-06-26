@@ -60,14 +60,14 @@
 @synthesize persons = _persons;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
     return self;
-}
+}*/
 
 -(void)viewWillAppear:(BOOL)animated {
 	
@@ -79,7 +79,7 @@
 	self.view.layer.shadowRadius = 10.0f;
 	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
 	
-	if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
+	/*if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
 		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
 	}
 	
@@ -92,7 +92,7 @@
     
     self.peopleListToolbar.layer.shadowOpacity = 0.3f;
     self.peopleListToolbar.layer.shadowRadius = 1.0f;
-    self.peopleListToolbar.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.peopleListToolbar.layer.shadowColor = [UIColor blackColor].CGColor;*/
     
     
 
@@ -105,7 +105,10 @@
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
     
-    
+    //self.navigationController.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:uibarbuttonInstance1, uibarbuttonInstance2, nil];
+    //[[self.navigationController.navigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
+
+
 	
 }
 
@@ -168,6 +171,8 @@
     person10.profilePicturePath = @"anderson-ann.jpg";
     
     self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
+    
+    
     
     
 
@@ -269,6 +274,8 @@
     
 }
 
+
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
@@ -324,6 +331,10 @@
 {
     return 32.0;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 61.0f;
+}
  
 #pragma mark - Table view delegate
 
@@ -337,7 +348,7 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
     if(indexPath.row==0){
-            [self performSegueWithIdentifier:@"MHSublabel" sender:self];
+            //[self performSegueWithIdentifier:@"MHSublabel" sender:self];
         }
 
     

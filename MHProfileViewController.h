@@ -14,6 +14,7 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addTagButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
+//@property (nonatomic, strong) IBOutlet UINavigationBar *custnavbar;
 
 - (IBAction)backToMenu:(id)sender;
 - (IBAction)addTagActivity:(id)sender;
