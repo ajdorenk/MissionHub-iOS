@@ -39,5 +39,8 @@
 @dynamic permissionLevel;
 @dynamic receivedInteractions;
 @dynamic surveys;
+@dynamic createdInteractions;
+@dynamic updatedInteractions;
+@dynamic leaderInOrganization;
 
 @end

@@ -24,10 +24,9 @@
 @dynamic status;
 @dynamic terminology;
 @dynamic updated_at;
-@dynamic interactionType;
 @dynamic labels;
 @dynamic people;
-@dynamic permissionLevels;
+@dynamic leaders;
 @dynamic surveys;
 
 @end

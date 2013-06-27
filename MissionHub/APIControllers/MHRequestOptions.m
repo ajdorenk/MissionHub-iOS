@@ -67,6 +67,33 @@
 	
 }
 
+-(void)addIncludesForProfileRequest {
+	
+	
+	//TODO: finish this
+	[self addInclude:MHRequestOptionsIncludePeopleOrganizationalPermissions];
+	[self addInclude:MHRequestOptionsIncludeOrganizationalPermissionsPermission];
+	[self addInclude:MHRequestOptionsIncludePeopleOrganizationalLabels];
+	[self addInclude:MHRequestOptionsIncludeOrganizationalLabelsLabel];
+	[self addInclude:MHRequestOptionsIncludePeopleEmailAddresses];
+	[self addInclude:MHRequestOptionsIncludePeoplePhoneNumbers];
+	[self addInclude:MHRequestOptionsIncludePeopleCurrentAddress];
+	
+	
+}
+
+-(void)addIncludesForOrganizationRequest {
+	
+	
+	
+}
+
+-(void)addIncludesForMeRequest {
+	
+	
+	
+}
+
 -(void)clearIncludes {
 	
 	[self.includes removeAllIndexes];
@@ -277,6 +304,12 @@
 		case MHRequestOptionsFilterPeopleSurveys:
 			filterString = @"surveys";
 			break;
+		case MHRequestOptionsFilterPeopleLabels:
+			filterString = @"labels";
+			break;
+		case MHRequestOptionsFilterPeoplePermissions:
+			filterString = @"permissions";
+			break;
 			
 		default:
 			break;
@@ -336,10 +369,10 @@
 		case MHRequestOptionsIncludePeopleOrganizationalPermissions:
 			includeString = @"organizational_permissions";
 			break;
-		case MHRequestOptionsIncludePeoplePeopleAnswerSheets:
+		case MHRequestOptionsIncludePeopleAnswerSheets:
 			includeString = @"answer_sheets";
 			break;
-		case MHRequestOptionsIncludePeoplePeopleOrganizationalLabels:
+		case MHRequestOptionsIncludePeopleOrganizationalLabels:
 			includeString = @"organizational_labels";
 			break;
 		case MHRequestOptionsIncludePeoplePhoneNumbers:
@@ -349,10 +382,22 @@
 			includeString = @"person_transfers";
 			break;
 		case MHRequestOptionsIncludeSurveysKeywords:
-			includeString = @"assigned_to";
+			includeString = @"keywords";
 			break;
 		case MHRequestOptionsIncludeSurveysQuestions:
-			includeString = @"assigned_to";
+			includeString = @"questions";
+			break;
+		case MHRequestOptionsIncludePeopleAllQuestions:
+			includeString = @"all_questions";
+			break;
+		case MHRequestOptionsIncludeOrganizationalLabelsLabel:
+			includeString = @"label";
+			break;
+		case MHRequestOptionsIncludeOrganizationalPermissionsPermission:
+			includeString = @"permission";
+			break;
+		case MHRequestOptionsIncludePeopleCurrentAddress:
+			includeString = @"current_address";
 			break;
 		default:
 			break;

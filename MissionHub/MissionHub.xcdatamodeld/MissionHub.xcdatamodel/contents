@@ -8,9 +8,11 @@
         <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="creator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="createdInteractions" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="initiators" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="initiatedInteractions" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="receiver" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="receivedInteractions" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="type" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHInteractionType" inverseName="interactions" inverseEntity="MHInteractionType" syncable="YES"/>
+        <relationship name="updater" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="updatedInteractions" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
     <entity name="MHInteractionType" representedClassName="MHInteractionType" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
@@ -20,7 +22,6 @@
         <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="interactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="type" inverseEntity="MHInteraction" syncable="YES"/>
-        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="interactionType" inverseEntity="MHOrganization" syncable="YES"/>
     </entity>
     <entity name="MHLabel" representedClassName="" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
@@ -40,10 +41,9 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="terminology" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="interactionType" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteractionType" inverseName="organization" inverseEntity="MHInteractionType" syncable="YES"/>
         <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHLabel" inverseName="organizations" inverseEntity="MHLabel" syncable="YES"/>
+        <relationship name="leaders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="leaderInOrganization" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="organization" inverseEntity="MHPerson" syncable="YES"/>
-        <relationship name="permissionLevels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPermissionLevel" inverseName="organizations" inverseEntity="MHPermissionLevel" syncable="YES"/>
         <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="organization" inverseEntity="MHSurvey" syncable="YES"/>
     </entity>
     <entity name="MHPermissionLevel" representedClassName="MHPermissionLevel" syncable="YES">
@@ -52,7 +52,6 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="organizations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="permissionLevels" inverseEntity="MHOrganization" syncable="YES"/>
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="permissionLevel" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
     <entity name="MHPerson" representedClassName="" syncable="YES">
@@ -74,12 +73,15 @@
         <attribute name="year_in_school" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="assignedConacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="assignedLeader" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="assignedLeader" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="assignedConacts" inverseEntity="MHPerson" syncable="YES"/>
+        <relationship name="createdInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="creator" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="initiatedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="initiators" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHLabel" inverseName="people" inverseEntity="MHLabel" syncable="YES"/>
+        <relationship name="leaderInOrganization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="leaders" inverseEntity="MHOrganization" syncable="YES"/>
         <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="people" inverseEntity="MHOrganization" syncable="YES"/>
         <relationship name="permissionLevel" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPermissionLevel" inverseName="people" inverseEntity="MHPermissionLevel" syncable="YES"/>
         <relationship name="receivedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="receiver" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="people" inverseEntity="MHSurvey" syncable="YES"/>
+        <relationship name="updatedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="updater" inverseEntity="MHInteraction" syncable="YES"/>
     </entity>
     <entity name="MHSurvey" representedClassName="MHSurvey" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
@@ -93,12 +95,12 @@
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="surveys" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MHInteraction" positionX="-18" positionY="3281" width="128" height="193"/>
-        <element name="MHInteractionType" positionX="313" positionY="3321" width="128" height="163"/>
+        <element name="MHInteraction" positionX="-18" positionY="3281" width="128" height="225"/>
+        <element name="MHInteractionType" positionX="313" positionY="3321" width="128" height="148"/>
         <element name="MHLabel" positionX="259" positionY="3137" width="128" height="148"/>
-        <element name="MHOrganization" positionX="493" positionY="2574" width="128" height="238"/>
-        <element name="MHPermissionLevel" positionX="207" positionY="2921" width="128" height="148"/>
-        <element name="MHPerson" positionX="232" positionY="2453" width="128" height="403"/>
+        <element name="MHOrganization" positionX="493" positionY="2574" width="128" height="223"/>
+        <element name="MHPermissionLevel" positionX="207" positionY="2921" width="128" height="133"/>
+        <element name="MHPerson" positionX="232" positionY="2453" width="128" height="448"/>
         <element name="MHSurvey" positionX="387" positionY="3492" width="128" height="178"/>
     </elements>
 </model>

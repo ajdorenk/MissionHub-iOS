@@ -22,10 +22,9 @@
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * terminology;
 @property (nonatomic, retain) NSDate * updated_at;
-@property (nonatomic, retain) NSSet *interactionType;
 @property (nonatomic, retain) NSSet *labels;
 @property (nonatomic, retain) NSSet *people;
-@property (nonatomic, retain) NSSet *permissionLevels;
+@property (nonatomic, retain) NSSet *leaders;
 @property (nonatomic, retain) NSSet *surveys;
 @end
 
@@ -46,10 +45,10 @@
 - (void)addPeople:(NSSet *)values;
 - (void)removePeople:(NSSet *)values;
 
-- (void)addPermissionLevelsObject:(MHPermissionLevel *)value;
-- (void)removePermissionLevelsObject:(MHPermissionLevel *)value;
-- (void)addPermissionLevels:(NSSet *)values;
-- (void)removePermissionLevels:(NSSet *)values;
+- (void)addLeadersObject:(MHPermissionLevel *)value;
+- (void)removeLeadersObject:(MHPermissionLevel *)value;
+- (void)addLeaders:(NSSet *)values;
+- (void)removeLeaders:(NSSet *)values;
 
 - (void)addSurveysObject:(MHSurvey *)value;
 - (void)removeSurveysObject:(MHSurvey *)value;

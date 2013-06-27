@@ -12,7 +12,7 @@
 #import "MHErrorHandler.h"
 #import "MHModel.h"
 
-@class MHRequest;
+@class MHRequest, MHPerson, MHOrganization;
 
 @interface MHAPI : NSObject {
 	
@@ -21,6 +21,9 @@
 	NSString *_apiUrl;
 	NSString *_accessToken;
 	
+	MHPerson *_currentUser;
+	MHOrganization *_currentOrganization;
+	
 }
 
 @property (nonatomic, strong) NSOperationQueue *queue;
@@ -28,9 +31,12 @@
 @property (nonatomic, strong) NSString *apiUrl;
 @property (nonatomic, strong) NSString *accessToken;
 
+@property (nonatomic, strong) MHPerson *currentUser;
+@property (nonatomic, strong) MHOrganization *currentOrganization;
+
 +(MHAPI *)sharedInstance;
 
--(void)fetchMeWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
+-(void)getMeWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
 
 -(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error;
 -(NSString *)stringForIndexRequestWith:(MHRequestOptions *)options error:(NSError **)error;

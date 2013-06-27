@@ -8,6 +8,7 @@
 
 #import <CoreData/CoreData.h>
 #import "MHStorage.h"
+#import "NSSet+MHSearchForRemoteID.h"
 
 @interface MHModel : NSManagedObject {
 	
@@ -24,6 +25,7 @@
 
 +(NSFetchRequest *)fetchRequestForEntity;
 
++(id)newObjectFromFields:(NSDictionary *)fields;
 +(id)newObjectForClass:(NSString *)className fromFields:(NSDictionary *)fields;
 +(id)newObjectForEntityName:(NSString *)entityName fromFields:(NSDictionary *)fields inContext:(NSManagedObjectContext *)context;
 

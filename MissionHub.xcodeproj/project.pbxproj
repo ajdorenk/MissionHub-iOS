@@ -72,6 +72,8 @@
 		68478D57177A78AC0014501D /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D55177A78AC0014501D /* MHPerson.m */; };
 		68478D5A177A7F420014501D /* MHSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D59177A7F410014501D /* MHSurvey.m */; };
 		68478D5B177A7F420014501D /* MHSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D59177A7F410014501D /* MHSurvey.m */; };
+		68478D5E177BA8E00014501D /* NSSet+MHSearchForRemoteID.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */; };
+		68478D5F177BA8E00014501D /* NSSet+MHSearchForRemoteID.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */; };
 		68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C0689C176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
@@ -197,6 +199,8 @@
 		68478D55177A78AC0014501D /* MHPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPerson.m; sourceTree = "<group>"; };
 		68478D58177A7F410014501D /* MHSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSurvey.h; path = Models/MHSurvey.h; sourceTree = "<group>"; };
 		68478D59177A7F410014501D /* MHSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurvey.m; path = Models/MHSurvey.m; sourceTree = "<group>"; };
+		68478D5C177BA8DF0014501D /* NSSet+MHSearchForRemoteID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+MHSearchForRemoteID.h"; sourceTree = "<group>"; };
+		68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+MHSearchForRemoteID.m"; sourceTree = "<group>"; };
 		68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncodedString.h"; sourceTree = "<group>"; };
 		68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncodedString.m"; sourceTree = "<group>"; };
 		68C06899176EB832007C79D6 /* MHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHModel.h; path = Models/MHModel.h; sourceTree = "<group>"; };
@@ -486,6 +490,8 @@
 			children = (
 				68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */,
 				68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */,
+				68478D5C177BA8DF0014501D /* NSSet+MHSearchForRemoteID.h */,
+				68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -813,6 +819,7 @@
 				68478D52177A784A0014501D /* MHPermissionLevel.m in Sources */,
 				68478D56177A78AC0014501D /* MHPerson.m in Sources */,
 				68478D5A177A7F420014501D /* MHSurvey.m in Sources */,
+				68478D5E177BA8E00014501D /* NSSet+MHSearchForRemoteID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,6 +860,7 @@
 				68478D53177A784A0014501D /* MHPermissionLevel.m in Sources */,
 				68478D57177A78AC0014501D /* MHPerson.m in Sources */,
 				68478D5B177A7F420014501D /* MHSurvey.m in Sources */,
+				68478D5F177BA8E00014501D /* NSSet+MHSearchForRemoteID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

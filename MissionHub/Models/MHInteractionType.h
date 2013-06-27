@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHOrganization, MHInteraction;
+@class MHInteraction;
 
 @interface MHInteractionType : MHModel
 
@@ -21,7 +21,6 @@
 @property (nonatomic, retain) NSNumber * remoteID;
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) NSSet *interactions;
-@property (nonatomic, retain) MHOrganization *organization;
 @end
 
 @interface MHInteractionType (CoreDataGeneratedAccessors)

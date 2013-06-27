@@ -50,7 +50,7 @@
 		
 	} else {
 		
-		[[MHAPI sharedInstance] fetchMeWithOptions:nil
+		[[MHAPI sharedInstance] getMeWithOptions:nil
 									  successBlock:^(NSArray *result, MHRequestOptions *options) {
 										  
 										  NSLog(@"SUCCESS");

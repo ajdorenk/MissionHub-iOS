@@ -33,21 +33,27 @@ typedef enum {
 	MHRequestOptionsIncludePeopleContactAssignments,
 	MHRequestOptionsIncludePeopleAssignTos,
 	MHRequestOptionsIncludePeopleOrganizationalPermissions,
-	MHRequestOptionsIncludePeoplePeopleOrganizationalLabels,
-	MHRequestOptionsIncludePeoplePeopleAnswerSheets,
+	MHRequestOptionsIncludePeopleOrganizationalLabels,
+	MHRequestOptionsIncludePeopleAnswerSheets,
 	MHRequestOptionsIncludePeopleEmailAddresses,
 	MHRequestOptionsIncludePeoplePhoneNumbers,
+	MHRequestOptionsIncludePeopleCurrentAddress,
 	MHRequestOptionsIncludePeopleInteractions,
 	MHRequestOptionsIncludePeopleAllOrganizationalPermissions,
 	MHRequestOptionsIncludePeopleAllOrganizationsAndChildren,
 	MHRequestOptionsIncludePeoplePersonTransfers,
+	MHRequestOptionsIncludePeopleAllQuestions,
 	MHRequestOptionsIncludeConactAssignmentsAssignedTo,
 	MHRequestOptionsIncludeConactAssignmentsPerson,
 	MHRequestOptionsIncludeSurveysQuestions,
-	MHRequestOptionsIncludeSurveysKeywords
+	MHRequestOptionsIncludeSurveysKeywords,
+	MHRequestOptionsIncludeOrganizationalLabelsLabel,
+	MHRequestOptionsIncludeOrganizationalPermissionsPermission
 } MHRequestOptionsIncludes;
 
 typedef enum {
+	MHRequestOptionsFilterPeopleLabels,
+	MHRequestOptionsFilterPeoplePermissions,
 	MHRequestOptionsFilterPeopleRoles,
 	MHRequestOptionsFilterPeopleSurveys,
 	MHRequestOptionsFilterPeopleFirstNameLike,
@@ -94,6 +100,9 @@ typedef enum {
 -(BOOL)hasOrder;
 
 -(void)addInclude:(MHRequestOptionsIncludes)include;
+-(void)addIncludesForProfileRequest;
+-(void)addIncludesForOrganizationRequest;
+-(void)addIncludesForMeRequest;
 -(void)clearIncludes;
 -(void)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
 -(void)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;

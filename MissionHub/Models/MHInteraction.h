@@ -24,6 +24,8 @@
 @property (nonatomic, retain) NSSet *initiators;
 @property (nonatomic, retain) MHPerson *receiver;
 @property (nonatomic, retain) MHInteractionType *type;
+@property (nonatomic, retain) MHPerson *creator;
+@property (nonatomic, retain) MHPerson *updater;
 @end
 
 @interface MHInteraction (CoreDataGeneratedAccessors)

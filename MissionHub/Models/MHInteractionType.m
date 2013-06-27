@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
+#import "MHAPI.h"
 #import "MHInteractionType.h"
 #import "MHOrganization.h"
 #import "MHInteraction.h"
@@ -20,6 +21,15 @@
 @dynamic remoteID;
 @dynamic updated_at;
 @dynamic interactions;
-@dynamic organization;
+
+-(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
+	
+	if ([fieldName isEqualToString:@"organization_id"]) {
+		
+		self.organization = [[MHAPI sharedInstance] currentOrganization];
+		
+	}
+	
+}
 
 @end

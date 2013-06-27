@@ -23,5 +23,49 @@
 @dynamic initiators;
 @dynamic receiver;
 @dynamic type;
+@dynamic creator;
+@dynamic updater;
+
+-(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
+	
+	if ([fieldName isEqualToString:@"initiators"]) {
+		
+		NSArray *arrayOfObjects = relationshipObject;
+		
+		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+			
+			MHPerson *newObject = [MHPerson newObjectFromFields:object];
+			
+			[self addInitiatorsObject:newObject];
+			
+		}];
+		
+	} else if ([fieldName isEqualToString:@"interaction_type"]) {
+		
+		MHInteractionType *newObject = [MHInteractionType newObjectFromFields:relationshipObject];
+		
+		self.type = newObject;
+		
+	} else if ([fieldName isEqualToString:@"receiver"]) {
+		
+		MHPerson *newObject = [MHPerson newObjectFromFields:relationshipObject];
+		
+		self.receiver = newObject;
+		
+	} else if ([fieldName isEqualToString:@"creator"]) {
+		
+		MHPerson *newObject = [MHPerson newObjectFromFields:relationshipObject];
+		
+		self.creator = newObject;
+		
+	} else if ([fieldName isEqualToString:@"last_updater"]) {
+		
+		MHPerson *newObject = [MHPerson newObjectFromFields:relationshipObject];
+		
+		self.updater = newObject;
+		
+	}
+	
+}
 
 @end

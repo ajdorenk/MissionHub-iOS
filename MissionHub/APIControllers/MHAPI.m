@@ -32,6 +32,9 @@ typedef enum {
 @synthesize baseUrl		= _baseUrl;
 @synthesize accessToken	= _accessToken;
 
+@synthesize currentUser	= _currentUser;
+@synthesize currentOrganization	= _currentOrganization;
+
 + (MHAPI *)sharedInstance
 {
 	static MHAPI *sharedInstance;
@@ -76,7 +79,7 @@ typedef enum {
     return self;
 }
 
--(void)fetchMeWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+-(void)getMeWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions = (options ? options : [[MHRequestOptions alloc] init]);
 	
@@ -300,7 +303,7 @@ typedef enum {
 			
 			NSDictionary *responseObject = [result objectForKey:[request.options stringInSingluarFormatForEndpoint]];
 			
-			id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromAttributes:responseObject];
+			id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromFields:responseObject];
 			
 			[modelArray addObject:modelObject];
 			
@@ -310,7 +313,7 @@ typedef enum {
 			
 			[arrayOfResponseObjects enumerateObjectsUsingBlock:^(id responseObject, NSUInteger index, BOOL *stop) {
 				
-				id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromAttributes:responseObject];
+				id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromFields:responseObject];
 				
 				[modelArray addObject:modelObject];
 				

@@ -75,6 +75,12 @@
 	return fetchRequest;
 }
 
++(id)newObjectFromFields:(NSDictionary *)fields {
+	
+	return [self newObjectForEntityName:nil fromFields:(NSDictionary *)fields inContext:nil];
+	
+}
+
 +(id)newObjectForClass:(NSString *)className fromFields:(NSDictionary *)fields {
 	
 	return [self newObjectForEntityName:className fromFields:(NSDictionary *)fields inContext:nil];
@@ -112,6 +118,62 @@
 		}
 		
 	}
+	
+}
+
+-(void)setValue:(id)value forKey:(NSString *)key {
+	
+	id formattedValue = value;
+	
+	if ([key isEqualToString:@"created_at"] ||
+		[key isEqualToString:@"updated_at"] ||
+		[key isEqualToString:@"deleted_at"] ||
+		[key isEqualToString:@"timestamp"]) {
+		
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+		formattedValue = [dateFormatter dateFromString:value];
+		
+	} else if ([key isEqualToString:@"birth_date"] ||
+			   [key isEqualToString:@"date_became_christian"] ||
+			   [key isEqualToString:@"graduation_date"]) {
+		
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+		formattedValue = [dateFormatter dateFromString:value];
+		
+	}
+	
+	[super setValue:formattedValue forKey:key];
+	
+}
+
+-(id)valueForKey:(NSString *)key {
+	
+	id value = [super valueForKey:key];
+	
+	if ([key isEqualToString:@"created_at"] ||
+		[key isEqualToString:@"updated_at"] ||
+		[key isEqualToString:@"deleted_at"] ||
+		[key isEqualToString:@"timestamp"]) {
+		
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+		value = [dateFormatter stringFromDate:value];
+		
+	} else if ([key isEqualToString:@"birth_date"] ||
+			   [key isEqualToString:@"date_became_christian"] ||
+			   [key isEqualToString:@"graduation_date"]) {
+		
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+		value = [dateFormatter stringFromDate:value];
+		
+	}
+	
+	return value;
 	
 }
 

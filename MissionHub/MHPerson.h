@@ -38,6 +38,9 @@
 @property (nonatomic, retain) MHPermissionLevel *permissionLevel;
 @property (nonatomic, retain) NSSet *receivedInteractions;
 @property (nonatomic, retain) NSSet *surveys;
+@property (nonatomic, retain) NSSet *createdInteractions;
+@property (nonatomic, retain) NSSet *updatedInteractions;
+@property (nonatomic, retain) MHOrganization *leaderInOrganization;
 @end
 
 @interface MHPerson (CoreDataGeneratedAccessors)
@@ -66,5 +69,15 @@
 - (void)removeSurveysObject:(MHSurvey *)value;
 - (void)addSurveys:(NSSet *)values;
 - (void)removeSurveys:(NSSet *)values;
+
+- (void)addCreatedInteractionsObject:(MHInteraction *)value;
+- (void)removeCreatedInteractionsObject:(MHInteraction *)value;
+- (void)addCreatedInteractions:(NSSet *)values;
+- (void)removeCreatedInteractions:(NSSet *)values;
+
+- (void)addUpdatedInteractionsObject:(MHInteraction *)value;
+- (void)removeUpdatedInteractionsObject:(MHInteraction *)value;
+- (void)addUpdatedInteractions:(NSSet *)values;
+- (void)removeUpdatedInteractions:(NSSet *)values;
 
 @end
