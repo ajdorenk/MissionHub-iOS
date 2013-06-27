@@ -87,13 +87,9 @@
 		AD010CD91778DD5400E6F0E6 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CD81778DD5400E6F0E6 /* MyTableViewController.m */; };
 		AD010CDC1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CDB1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.m */; };
 		AD010CE51778E2F900E6F0E6 /* M6ParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CE41778E2F900E6F0E6 /* M6ParallaxController.m */; };
-		AD010D29177A422300E6F0E6 /* MyParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D24177A422300E6F0E6 /* MyParallaxController.m */; };
 		AD010D2A177A422300E6F0E6 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D26177A422300E6F0E6 /* MyTableViewController.m */; };
-		AD010D2B177A422300E6F0E6 /* MyTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D28177A422300E6F0E6 /* MyTopViewController.m */; };
 		AD010D2C177A428D00E6F0E6 /* MHGenderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CCC17789CB700E6F0E6 /* MHGenderListController.m */; };
-		AD010D2E177A48F000E6F0E6 /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CDE1778DE1300E6F0E6 /* MHProfileViewController.m */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
-		AD010D34177B64C000E6F0E6 /* MHCustomNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D33177B64BF00E6F0E6 /* MHCustomNavigationItem.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301131176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
@@ -103,6 +99,18 @@
 		AD301135176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301139176FEEB800D53E35 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */; };
 		AD30114C17710D2F00D53E35 /* MHPeopleSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30114B17710D2F00D53E35 /* MHPeopleSearchBar.m */; };
+		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
+		AD982791177C96F500A0276A /* M6ParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CE41778E2F900E6F0E6 /* M6ParallaxController.m */; };
+		AD982794177C9D6700A0276A /* MHParallaxTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */; };
+		AD982797177C9FDC00A0276A /* sunflower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD982796177C9FDC00A0276A /* sunflower.jpg */; };
+		AD98279A177CA1E400A0276A /* gradient_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD982798177CA1E400A0276A /* gradient_overlay@2x.png */; };
+		AD98279B177CA1E400A0276A /* gradient-over-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD982799177CA1E400A0276A /* gradient-over-image@2x.png */; };
+		AD98279C177CACE600A0276A /* UIViewController+M6ParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010CDB1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.m */; };
+		AD98279D177CAD6600A0276A /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D26177A422300E6F0E6 /* MyTableViewController.m */; };
+		AD98279F177CB81200A0276A /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD98279E177CB81200A0276A /* bg.jpg */; };
+		AD9827A2177CEE9800A0276A /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9827A1177CEE9800A0276A /* SDSegmentedControl.m */; };
+		AD9827A3177CEE9800A0276A /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9827A1177CEE9800A0276A /* SDSegmentedControl.m */; };
+		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,20 +239,12 @@
 		AD010CD81778DD5400E6F0E6 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyTableViewController.m; path = "../../untitled folder/M6ParallaxController/Sample Storyboard/Sample Storyboard/MyTableViewController.m"; sourceTree = "<group>"; };
 		AD010CDA1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+M6ParallaxController.h"; path = "../../untitled folder/M6ParallaxController/UIViewController+M6ParallaxController.h"; sourceTree = "<group>"; };
 		AD010CDB1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+M6ParallaxController.m"; path = "../../untitled folder/M6ParallaxController/UIViewController+M6ParallaxController.m"; sourceTree = "<group>"; };
-		AD010CDD1778DE1300E6F0E6 /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ../MHProfileViewController.h; sourceTree = "<group>"; };
-		AD010CDE1778DE1300E6F0E6 /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ../MHProfileViewController.m; sourceTree = "<group>"; };
 		AD010CE31778E2F900E6F0E6 /* M6ParallaxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = M6ParallaxController.h; path = "../../untitled folder/M6ParallaxController/M6ParallaxController.h"; sourceTree = "<group>"; };
 		AD010CE41778E2F900E6F0E6 /* M6ParallaxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = M6ParallaxController.m; path = "../../untitled folder/M6ParallaxController/M6ParallaxController.m"; sourceTree = "<group>"; };
-		AD010D23177A422300E6F0E6 /* MyParallaxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyParallaxController.h; sourceTree = "<group>"; };
-		AD010D24177A422300E6F0E6 /* MyParallaxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyParallaxController.m; sourceTree = "<group>"; };
 		AD010D25177A422300E6F0E6 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
 		AD010D26177A422300E6F0E6 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
-		AD010D27177A422300E6F0E6 /* MyTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTopViewController.h; sourceTree = "<group>"; };
-		AD010D28177A422300E6F0E6 /* MyTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTopViewController.m; sourceTree = "<group>"; };
 		AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationBar.h; path = "Custom UI/MHCustomNavigationBar.h"; sourceTree = "<group>"; };
 		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
-		AD010D32177B64BF00E6F0E6 /* MHCustomNavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationItem.h; path = "Custom UI/MHCustomNavigationItem.h"; sourceTree = "<group>"; };
-		AD010D33177B64BF00E6F0E6 /* MHCustomNavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationItem.m; path = "Custom UI/MHCustomNavigationItem.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
 		AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationViewController.m; path = ViewControllers/MHNavigationViewController.m; sourceTree = "<group>"; };
 		AD30112A176FE4D900D53E35 /* MHCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCheckbox.h; path = "Custom UI/MHCheckbox.h"; sourceTree = "<group>"; };
@@ -256,6 +256,17 @@
 		AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		AD30114A17710D2F00D53E35 /* MHPeopleSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHPeopleSearchBar.h; sourceTree = "<group>"; };
 		AD30114B17710D2F00D53E35 /* MHPeopleSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPeopleSearchBar.m; sourceTree = "<group>"; };
+		AD98278B177C93B400A0276A /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ViewControllers/MHProfileViewController.h; sourceTree = "<group>"; };
+		AD98278C177C93B400A0276A /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ViewControllers/MHProfileViewController.m; sourceTree = "<group>"; };
+		AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHParallaxTopViewController.h; path = ViewControllers/MHParallaxTopViewController.h; sourceTree = "<group>"; };
+		AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHParallaxTopViewController.m; path = ViewControllers/MHParallaxTopViewController.m; sourceTree = "<group>"; };
+		AD982796177C9FDC00A0276A /* sunflower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sunflower.jpg; sourceTree = "<group>"; };
+		AD982798177CA1E400A0276A /* gradient_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient_overlay@2x.png"; sourceTree = "<group>"; };
+		AD982799177CA1E400A0276A /* gradient-over-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient-over-image@2x.png"; sourceTree = "<group>"; };
+		AD98279E177CB81200A0276A /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
+		AD9827A0177CEE9800A0276A /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSegmentedControl.h; sourceTree = "<group>"; };
+		AD9827A1177CEE9800A0276A /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
+		AD9827A4177CF04200A0276A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +274,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */,
 				681225711767B75500D8C238 /* AdSupport.framework in Frameworks */,
 				681225721767B75500D8C238 /* libsqlite3.dylib in Frameworks */,
 				68D7AA4B1766CEF200B9B0B1 /* Accounts.framework in Frameworks */,
@@ -293,6 +305,7 @@
 		6839107A1760FD3100E01B46 = {
 			isa = PBXGroup;
 			children = (
+				AD9827A4177CF04200A0276A /* QuartzCore.framework */,
 				6839108E1760FD3100E01B46 /* MissionHub */,
 				683910B01760FD3100E01B46 /* MissionHubTests */,
 				683910851760FD3100E01B46 /* Frameworks */,
@@ -350,6 +363,10 @@
 		6839108F1760FD3100E01B46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AD98279E177CB81200A0276A /* bg.jpg */,
+				AD982798177CA1E400A0276A /* gradient_overlay@2x.png */,
+				AD982799177CA1E400A0276A /* gradient-over-image@2x.png */,
+				AD982796177C9FDC00A0276A /* sunflower.jpg */,
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
 				AD010CC01773920C00E6F0E6 /* sectionHeaderAll.png */,
 				AD010CB21772051600E6F0E6 /* NewContact_Icon.png */,
@@ -414,6 +431,8 @@
 		683910CA1760FE5B00E01B46 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				AD9827A0177CEE9800A0276A /* SDSegmentedControl.h */,
+				AD9827A1177CEE9800A0276A /* SDSegmentedControl.m */,
 				68C0689D176F7E5E007C79D6 /* MMReachabilityViewController */,
 				68D7AA371766777800B9B0B1 /* SMWebRequest */,
 				683910C11760FE4600E01B46 /* ECSlidingViewController */,
@@ -424,12 +443,6 @@
 		683910D51761095000E01B46 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AD010D23177A422300E6F0E6 /* MyParallaxController.h */,
-				AD010D24177A422300E6F0E6 /* MyParallaxController.m */,
-				AD010D25177A422300E6F0E6 /* MyTableViewController.h */,
-				AD010D26177A422300E6F0E6 /* MyTableViewController.m */,
-				AD010D27177A422300E6F0E6 /* MyTopViewController.h */,
-				AD010D28177A422300E6F0E6 /* MyTopViewController.m */,
 				683910D11761087600E01B46 /* MHRootViewController.h */,
 				683910D21761087600E01B46 /* MHRootViewController.m */,
 				683910D61761356000E01B46 /* MHMenuViewController.h */,
@@ -440,10 +453,14 @@
 				AD010CCC17789CB700E6F0E6 /* MHGenderListController.m */,
 				683910E21761548600E01B46 /* MHSurveyViewController.h */,
 				683910E31761548600E01B46 /* MHSurveyViewController.m */,
-				AD010CDD1778DE1300E6F0E6 /* MHProfileViewController.h */,
-				AD010CDE1778DE1300E6F0E6 /* MHProfileViewController.m */,
 				AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */,
 				AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */,
+				AD98278B177C93B400A0276A /* MHProfileViewController.h */,
+				AD98278C177C93B400A0276A /* MHProfileViewController.m */,
+				AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */,
+				AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */,
+				AD010D25177A422300E6F0E6 /* MyTableViewController.h */,
+				AD010D26177A422300E6F0E6 /* MyTableViewController.m */,
 				AD010CE31778E2F900E6F0E6 /* M6ParallaxController.h */,
 				AD010CE41778E2F900E6F0E6 /* M6ParallaxController.m */,
 			);
@@ -538,8 +555,6 @@
 		AD301125176FE41F00D53E35 /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
-				AD010D32177B64BF00E6F0E6 /* MHCustomNavigationItem.h */,
-				AD010D33177B64BF00E6F0E6 /* MHCustomNavigationItem.m */,
 				AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */,
 				AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */,
 				AD010CD71778DD5300E6F0E6 /* MyTableViewController.h */,
@@ -656,6 +671,10 @@
 				AD010CBD17738F6B00E6F0E6 /* sectionHeaderGender.png in Resources */,
 				AD010CBF1773913000E6F0E6 /* sectionHeaderSort.png in Resources */,
 				AD010CC11773920C00E6F0E6 /* sectionHeaderAll.png in Resources */,
+				AD982797177C9FDC00A0276A /* sunflower.jpg in Resources */,
+				AD98279A177CA1E400A0276A /* gradient_overlay@2x.png in Resources */,
+				AD98279B177CA1E400A0276A /* gradient-over-image@2x.png in Resources */,
+				AD98279F177CB81200A0276A /* bg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +721,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD98279D177CAD6600A0276A /* MyTableViewController.m in Sources */,
+				AD98279C177CACE600A0276A /* UIViewController+M6ParallaxController.m in Sources */,
 				683910951760FD3100E01B46 /* main.m in Sources */,
 				683910991760FD3100E01B46 /* MHAppDelegate.m in Sources */,
 				683910A21760FD3100E01B46 /* MissionHub.xcdatamodeld in Sources */,
@@ -720,8 +741,11 @@
 				68C0689B176EB832007C79D6 /* MHModel.m in Sources */,
 				AD30114C17710D2F00D53E35 /* MHPeopleSearchBar.m in Sources */,
 				AD010CCD17789CB800E6F0E6 /* MHGenderListController.m in Sources */,
-				AD010D34177B64C000E6F0E6 /* MHCustomNavigationItem.m in Sources */,
 				AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */,
+				AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */,
+				AD982791177C96F500A0276A /* M6ParallaxController.m in Sources */,
+				AD982794177C9D6700A0276A /* MHParallaxTopViewController.m in Sources */,
+				AD9827A2177CEE9800A0276A /* SDSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,12 +770,10 @@
 				AD010CD91778DD5400E6F0E6 /* MyTableViewController.m in Sources */,
 				AD010CDC1778DD6B00E6F0E6 /* UIViewController+M6ParallaxController.m in Sources */,
 				AD010CE51778E2F900E6F0E6 /* M6ParallaxController.m in Sources */,
-				AD010D29177A422300E6F0E6 /* MyParallaxController.m in Sources */,
 				AD010D2A177A422300E6F0E6 /* MyTableViewController.m in Sources */,
-				AD010D2B177A422300E6F0E6 /* MyTopViewController.m in Sources */,
 				AD010D2C177A428D00E6F0E6 /* MHGenderListController.m in Sources */,
-				AD010D2E177A48F000E6F0E6 /* MHProfileViewController.m in Sources */,
 				AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */,
+				AD9827A3177CEE9800A0276A /* SDSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

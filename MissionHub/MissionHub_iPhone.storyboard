@@ -17,7 +17,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdd-6m-e05" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="62" y="67"/>
+            <point key="canvasLocation" x="73" y="78"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="j3s-TL-461">
@@ -61,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHz-p3-ci1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="477" y="67"/>
+            <point key="canvasLocation" x="517" y="78"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="mef-o3-o50">
@@ -75,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNI-ba-RDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="73" y="-656"/>
+            <point key="canvasLocation" x="73" y="-641"/>
         </scene>
         <!--Survey View Controller-->
         <scene sceneID="r1p-Qm-zhG">
@@ -118,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cns-fn-cbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="953" y="-701"/>
+            <point key="canvasLocation" x="949" y="-641"/>
         </scene>
         <!--Gender List Controller-->
         <scene sceneID="DO8-Yx-Dp8">
@@ -196,83 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqQ-iR-K8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1367" y="-701"/>
-        </scene>
-        <!--My Top View Controller-->
-        <scene sceneID="eF7-fT-yhz">
-            <objects>
-                <viewController storyboardIdentifier="ParallaxedViewController" id="DHq-4H-U64" customClass="MyTopViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Cev-z6-1ND">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="IZY-dT-o5o"/>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gradient_overlay@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="vAc-VX-BIc"/>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This is some nice car" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNy-Jz-uGm">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="QSA-cd-W6b"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="shadowOffset" width="1" height="1"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="MINI COOPER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuI-2y-2h0">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="ifN-Id-U9l"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="30"/>
-                                <color key="textColor" red="0.93947014760000003" green="1" blue="0.99826180679999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="shadowOffset" width="1" height="1"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Model 16" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gmq-fY-lbY">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="XVo-Fk-nbD"/>
-                                    <constraint firstAttribute="height" constant="21" id="jgT-WQ-8UB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="shadowOffset" width="1" height="1"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="vAc-VX-BIc" firstAttribute="top" secondItem="Cev-z6-1ND" secondAttribute="top" type="default" id="99n-LA-94g"/>
-                            <constraint firstAttribute="trailing" secondItem="EuI-2y-2h0" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="BQ3-b6-Hwb"/>
-                            <constraint firstItem="Gmq-fY-lbY" firstAttribute="top" secondItem="Cev-z6-1ND" secondAttribute="top" constant="89" id="G8N-Bx-4Gm"/>
-                            <constraint firstAttribute="trailing" secondItem="gNy-Jz-uGm" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="R4k-es-7Py"/>
-                            <constraint firstItem="vAc-VX-BIc" firstAttribute="leading" secondItem="Cev-z6-1ND" secondAttribute="leading" type="default" id="VdW-xn-j5x"/>
-                            <constraint firstItem="IZY-dT-o5o" firstAttribute="trailing" secondItem="Cev-z6-1ND" secondAttribute="trailing" type="default" id="WZe-LG-maB"/>
-                            <constraint firstItem="IZY-dT-o5o" firstAttribute="centerY" secondItem="vAc-VX-BIc" secondAttribute="centerY" type="default" id="ZK0-Sx-6fM"/>
-                            <constraint firstItem="IZY-dT-o5o" firstAttribute="bottom" secondItem="Cev-z6-1ND" secondAttribute="bottom" type="default" id="ZSq-KP-12V"/>
-                            <constraint firstAttribute="bottom" secondItem="gNy-Jz-uGm" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="bTo-74-CAU"/>
-                            <constraint firstItem="IZY-dT-o5o" firstAttribute="leading" secondItem="Cev-z6-1ND" secondAttribute="leading" type="default" id="ba5-YE-RTc"/>
-                            <constraint firstItem="EuI-2y-2h0" firstAttribute="leading" secondItem="Cev-z6-1ND" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="bx1-K2-Wdk"/>
-                            <constraint firstItem="gNy-Jz-uGm" firstAttribute="leading" secondItem="Cev-z6-1ND" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="c1D-55-08z"/>
-                            <constraint firstItem="EuI-2y-2h0" firstAttribute="top" secondItem="Cev-z6-1ND" secondAttribute="top" type="default" id="dJh-6w-GQf"/>
-                            <constraint firstItem="IZY-dT-o5o" firstAttribute="top" secondItem="Cev-z6-1ND" secondAttribute="top" type="default" id="mPn-7I-lMA"/>
-                            <constraint firstAttribute="trailing" secondItem="Gmq-fY-lbY" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="szE-nd-6vX"/>
-                            <constraint firstItem="vAc-VX-BIc" firstAttribute="trailing" secondItem="Cev-z6-1ND" secondAttribute="trailing" type="default" id="xMS-u5-6JX"/>
-                        </constraints>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="gradientImageView" destination="vAc-VX-BIc" id="U2H-4s-x3c"/>
-                        <outlet property="imageView" destination="IZY-dT-o5o" id="6MX-sP-EEm"/>
-                        <outlet property="label1" destination="EuI-2y-2h0" id="YtL-XB-Zdu"/>
-                        <outlet property="label2" destination="Gmq-fY-lbY" id="pk7-9z-UpY"/>
-                        <outlet property="label3" destination="gNy-Jz-uGm" id="rNH-hw-Lib"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTV-nW-xYe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1806" y="-517"/>
+            <point key="canvasLocation" x="1394" y="-641"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="eF9-LA-ZbS">
@@ -287,7 +211,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZa-Wa-YvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944" y="-1454"/>
+            <point key="canvasLocation" x="960" y="78"/>
         </scene>
         <!--People List View Controller - Navigation-->
         <scene sceneID="flo-MN-bmG">
@@ -411,43 +335,88 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1406" y="-1454"/>
+            <point key="canvasLocation" x="1394" y="78"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="4dX-vL-b0e">
             <objects>
-                <viewController id="Ouj-qm-W5z" sceneMemberID="viewController">
+                <viewController id="Ouj-qm-W5z" customClass="MHProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SAh-gX-uak">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LqJ-dZ-YOd" customClass="MHMenuToolbar">
-                                <items>
-                                    <barButtonItem title="Item" id="kNB-Jh-D7o"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="y37-gk-Gr0"/>
-                                    <barButtonItem title="Item" id="UbC-Te-dYw"/>
-                                    <barButtonItem title="Item" id="vaw-G5-dWn"/>
-                                </items>
-                            </toolbar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="LqJ-dZ-YOd" firstAttribute="trailing" secondItem="SAh-gX-uak" secondAttribute="trailing" type="default" id="O7O-47-xgT"/>
-                            <constraint firstItem="LqJ-dZ-YOd" firstAttribute="top" secondItem="SAh-gX-uak" secondAttribute="top" type="default" id="QIV-lH-7s2"/>
-                            <constraint firstItem="LqJ-dZ-YOd" firstAttribute="leading" secondItem="SAh-gX-uak" secondAttribute="leading" type="default" id="nXE-WW-sSp"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="g1e-B6-jXk"/>
+                    <navigationItem key="navigationItem" id="g1e-B6-jXk">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="rX9-vh-4pU"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpk-oS-AU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1878" y="-1454"/>
+            <point key="canvasLocation" x="1838" y="78"/>
+        </scene>
+        <!--My Table View Controller-->
+        <scene sceneID="heb-P2-t11">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FTS-py-wMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="MyTableViewController" id="WO2-6D-Eg9" customClass="MyTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yCY-PS-we8">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="mDQ-NW-4Bq">
+                                <cells/>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="WO2-6D-Eg9" id="d8D-kw-RKt"/>
+                            <outlet property="delegate" destination="WO2-6D-Eg9" id="QLd-gP-aVw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="2284" y="78"/>
+        </scene>
+        <!--Parallax Top View Controller-->
+        <scene sceneID="QDV-h9-D5P">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0EV-wD-eEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="ParallaxedViewController" id="885-DX-ygV" customClass="MHParallaxTopViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d7L-4O-FHc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLB-CR-NGz"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="U3B-sE-SUE" customClass="SDSegmentedControl">
+                                <segments>
+                                    <segment title="Info"/>
+                                    <segment title="Interactions"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="U3B-sE-SUE" firstAttribute="bottom" secondItem="d7L-4O-FHc" secondAttribute="bottom" type="default" id="1P2-qo-oe6"/>
+                            <constraint firstItem="LLB-CR-NGz" firstAttribute="bottom" secondItem="d7L-4O-FHc" secondAttribute="bottom" constant="-49" type="user" id="1uE-Nj-fgq"/>
+                            <constraint firstItem="U3B-sE-SUE" firstAttribute="leading" secondItem="d7L-4O-FHc" secondAttribute="leading" type="default" id="5ZV-2a-BnM"/>
+                            <constraint firstItem="LLB-CR-NGz" firstAttribute="top" secondItem="d7L-4O-FHc" secondAttribute="top" constant="1" type="user" id="KTx-xc-qdN"/>
+                            <constraint firstItem="LLB-CR-NGz" firstAttribute="trailing" secondItem="d7L-4O-FHc" secondAttribute="trailing" type="default" id="Y8Z-Va-S99"/>
+                            <constraint firstItem="LLB-CR-NGz" firstAttribute="leading" secondItem="d7L-4O-FHc" secondAttribute="leading" type="default" id="aG5-Ux-TnN"/>
+                            <constraint firstItem="U3B-sE-SUE" firstAttribute="trailing" secondItem="d7L-4O-FHc" secondAttribute="trailing" type="default" id="zi5-Ys-HcK"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="LLB-CR-NGz" id="g4Z-H3-MkR"/>
+                        <outlet property="menu" destination="U3B-sE-SUE" id="rJ5-LU-Oyi"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2284" y="-273"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="bg.jpg" width="16" height="16"/>
-        <image name="gradient_overlay@2x.png" width="16" height="16"/>
-    </resources>
     <classes>
         <class className="ECSlidingViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
@@ -458,9 +427,14 @@
                 <relationship kind="outlet" name="delegate"/>
             </relationships>
         </class>
+        <class className="M6ParallaxController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/M6ParallaxController.h"/>
+        </class>
         <class className="MHGenderListController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelPressed:"/>
+                <relationship kind="action" name="donePressed:"/>
                 <relationship kind="outlet" name="cancel" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="done" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="genderListCells" candidateClass="UITableView"/>
@@ -482,6 +456,13 @@
         <class className="MHNavigationViewController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNavigationViewController.h"/>
         </class>
+        <class className="MHParallaxTopViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHParallaxTopViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="menu" candidateClass="SDSegmentedControl"/>
+            </relationships>
+        </class>
         <class className="MHPeopleListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
@@ -502,6 +483,9 @@
                 <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
             </relationships>
         </class>
+        <class className="MHProfileViewController" superclassName="M6ParallaxController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
+        </class>
         <class className="MHRootViewController" superclassName="ECSlidingViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>
         </class>
@@ -513,18 +497,14 @@
                 <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
             </relationships>
         </class>
-        <class className="MyTopViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTopViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="gradientImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="label1" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="label2" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="label3" candidateClass="UILabel"/>
-            </relationships>
+        <class className="MyTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTableViewController.h"/>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SDSegmentedControl" superclassName="UISegmentedControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SDSegmentedControl.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

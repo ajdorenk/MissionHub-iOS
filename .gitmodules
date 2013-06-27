@@ -7,3 +7,6 @@
 [submodule "MMReachabilityViewController"]
 	path = MMReachabilityViewController
 	url = https://github.com/michaelharro/MMReachabilityViewController.git
+[submodule "SDSegmentedControl"]
+	path = SDSegmentedControl
+	url = https://github.com/rs/SDSegmentedControl.git
