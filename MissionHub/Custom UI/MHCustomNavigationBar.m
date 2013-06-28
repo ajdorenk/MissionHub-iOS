@@ -36,7 +36,6 @@
     [super drawRect:rect];
     UIImage *backgroundImage = [UIImage imageNamed:@"topbar_background.png"];
     [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    
 }
 
 

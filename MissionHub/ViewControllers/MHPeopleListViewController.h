@@ -23,7 +23,7 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addPersonButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
 
-@property (nonatomic, strong) IBOutlet UIToolbar *peopleListToolbar;*/
+*/
 
 @property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
 

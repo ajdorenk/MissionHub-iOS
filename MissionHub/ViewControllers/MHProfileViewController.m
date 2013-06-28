@@ -6,14 +6,6 @@
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
-//
-//  MHProfileViewController.m
-//  MissionHub
-//
-//  Created by Amarisa Robison on 6/24/13.
-//  Copyright (c) 2013 Cru. All rights reserved.
-//
-
 #import "MHProfileViewController.h"
 #import "MHParallaxTopViewController.h"
 //#import "MHCustomNavigationBar.h"
@@ -33,6 +25,37 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    
+    UIImage* labelImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
+    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, labelImage.size.width, labelImage.size.height)];
+    [newLabel setImage:labelImage forState:UIControlStateNormal];
+    [newLabel addTarget:self action:@selector(addLabelActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addLabelButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
+    
+    UIImage* tagImage = [UIImage imageNamed:@"topbarTag_button.png"];
+    UIButton *newTag = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, tagImage.size.width, tagImage.size.height)];
+    [newTag setImage:tagImage forState:UIControlStateNormal];
+    [newTag addTarget:self action:@selector(addTagActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addTagButton = [[UIBarButtonItem alloc] initWithCustomView:newTag];
+    
+    UIImage* otherOptionImage = [UIImage imageNamed:@"topbarOtherOptions_button.png"];
+    UIButton *otherOptions = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, otherOptionImage.size.width, otherOptionImage.size.height)];
+    [otherOptions setImage:otherOptionImage forState:UIControlStateNormal];
+    [otherOptions addTarget:self action:@selector(addTagActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *otherOptionsButton = [[UIBarButtonItem alloc] initWithCustomView:otherOptions];
+    
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:otherOptionsButton, addTagButton, addLabelButton, nil]];
+    
+    
+    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
+    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, menuImage.size.width, menuImage.size.height)];
+    [backMenu setImage:menuImage forState:UIControlStateNormal];
+    [backMenu addTarget:self action:@selector(backToMenu:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
+    
+    self.navigationItem.leftBarButtonItem = backMenuButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +64,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*- (IBAction)backToMenu:(id)sender {
+- (IBAction)backToMenu:(id)sender {
  
  [self dismissViewControllerAnimated:NO completion:Nil];
  //[self.slidingViewController anchorTopViewTo:ECRight];
@@ -54,7 +77,7 @@
  NSLog(@"Label Action");
  }
  
- */
+ 
 
 -(void) awakeFromNib
 {
@@ -63,14 +86,22 @@
     
     [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController];
     
-    [((MHParallaxTopViewController *)self.topViewController).menu setUserInteractionEnabled:YES];
     
+     [((MHParallaxTopViewController *)self.topViewController).menu setUserInteractionEnabled:YES];
     
-    /*UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:tapGestureRecognizer];*/
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
 }
+
+- (void)handleTapGesture:(id)sender {
+    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Yup" message:@"You pressed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
+    
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -85,7 +116,6 @@
     }
     return NO;
 }
-
 
 
 @end

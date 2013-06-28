@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SDSegmentedControl.h"
 
-@interface MHParallaxTopViewController : UIViewController<UIGestureRecognizerDelegate>
+@interface MHParallaxTopViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet SDSegmentedControl *menu;
+@property (nonatomic, strong) IBOutlet SDSegmentedControl *menu;
 
 - (void)willChangeHeightFromHeight:(CGFloat)oldHeight toHeight:(CGFloat)newHeight;
-
+//- (IBAction)segmentSwitch:(id)sender;
 
 @end

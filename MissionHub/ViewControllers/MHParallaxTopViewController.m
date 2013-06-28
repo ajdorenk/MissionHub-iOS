@@ -13,10 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 //@property (strong, nonatomic) IBOutlet UIImageView *gradientImageView;
-
-
-
 @end
+
 
 @implementation MHParallaxTopViewController
 
@@ -31,25 +29,53 @@
     return self;
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-    if ([touch.view isKindOfClass:[SDSegmentedControl class]]) {
-        return YES;
-    }
-    return NO;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.imageView.image = [UIImage imageNamed:@"bg.jpg"];
-    //self.gradientImageView.image =[UIImage imageNamed:@"gradient_overlay@2x.png"];
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecognizer:)]];
+
+//    NSArray *itemArray = [NSArray arrayWithObjects: @"Info", @"Interactions", nil];
+//    SDSegmentedControl *segmentedControl = [[SDSegmentedControl alloc] initWithItems:itemArray];
+//    segmentedControl.frame = CGRectMake(0, 100, 320, 50);
+//    segmentedControl.segmentedControlStyle = UISegmentedControlStylePlain;
+//    segmentedControl.selectedSegmentIndex = 1;
+//    
+//    [self.view addSubview:segmentedControl];
+    
 }
+
+
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return true;
+    NSLog(@"Works");
+}
+
+/*- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if ([touch.view isKindOfClass:[SDSegmentedControl class]]) {
+        return YES;
+    }
+    return NO;
+}
+*/
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)segmentSwitch:(id)sender {
+    
+    if (self.menu.selectedSegmentIndex == 0) {
+        NSLog(@"Clicked");
+    }
+    else{
+        
+    }
 }
 
 

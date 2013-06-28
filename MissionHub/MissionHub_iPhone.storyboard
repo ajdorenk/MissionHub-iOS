@@ -213,7 +213,7 @@
             </objects>
             <point key="canvasLocation" x="960" y="78"/>
         </scene>
-        <!--People List View Controller - Navigation-->
+        <!--People List View Controller-->
         <scene sceneID="flo-MN-bmG">
             <objects>
                 <tableViewController id="jKu-P9-w4S" customClass="MHPeopleListViewController" sceneMemberID="viewController">
@@ -312,7 +312,7 @@
                             <outlet property="delegate" destination="jKu-P9-w4S" id="tnT-U9-Owz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Navigation" id="vaN-eV-ebr">
+                    <navigationItem key="navigationItem" id="vaN-eV-ebr">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="gLu-d2-WEn">
                             <connections>
                                 <action selector="revealMenu:" destination="jKu-P9-w4S" id="2Nb-1k-lDW"/>
@@ -357,7 +357,6 @@
         <!--My Table View Controller-->
         <scene sceneID="heb-P2-t11">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FTS-py-wMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="MyTableViewController" id="WO2-6D-Eg9" customClass="MyTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yCY-PS-we8">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
@@ -375,13 +374,13 @@
                         </connections>
                     </tableView>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FTS-py-wMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2284" y="78"/>
         </scene>
         <!--Parallax Top View Controller-->
         <scene sceneID="QDV-h9-D5P">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0EV-wD-eEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ParallaxedViewController" id="885-DX-ygV" customClass="MHParallaxTopViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d7L-4O-FHc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
@@ -396,9 +395,10 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="U3B-sE-SUE" firstAttribute="bottom" secondItem="d7L-4O-FHc" secondAttribute="bottom" type="default" id="1P2-qo-oe6"/>
-                            <constraint firstItem="LLB-CR-NGz" firstAttribute="bottom" secondItem="d7L-4O-FHc" secondAttribute="bottom" constant="-49" type="user" id="1uE-Nj-fgq"/>
+                            <constraint firstItem="LLB-CR-NGz" firstAttribute="bottom" secondItem="d7L-4O-FHc" secondAttribute="bottom" constant="-43" type="user" id="1uE-Nj-fgq"/>
                             <constraint firstItem="U3B-sE-SUE" firstAttribute="leading" secondItem="d7L-4O-FHc" secondAttribute="leading" type="default" id="5ZV-2a-BnM"/>
                             <constraint firstItem="LLB-CR-NGz" firstAttribute="top" secondItem="d7L-4O-FHc" secondAttribute="top" constant="1" type="user" id="KTx-xc-qdN"/>
                             <constraint firstItem="LLB-CR-NGz" firstAttribute="trailing" secondItem="d7L-4O-FHc" secondAttribute="trailing" type="default" id="Y8Z-Va-S99"/>
@@ -413,6 +413,7 @@
                         <outlet property="menu" destination="U3B-sE-SUE" id="rJ5-LU-Oyi"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0EV-wD-eEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2284" y="-273"/>
         </scene>
@@ -433,8 +434,6 @@
         <class className="MHGenderListController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelPressed:"/>
-                <relationship kind="action" name="donePressed:"/>
                 <relationship kind="outlet" name="cancel" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="done" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="genderListCells" candidateClass="UITableView"/>
@@ -459,6 +458,7 @@
         <class className="MHParallaxTopViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHParallaxTopViewController.h"/>
             <relationships>
+                <relationship kind="action" name="segmentSwitch:"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="menu" candidateClass="SDSegmentedControl"/>
             </relationships>
@@ -466,7 +466,12 @@
         <class className="MHPeopleListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addLabelActivity:"/>
+                <relationship kind="action" name="addPersonActivity:"/>
+                <relationship kind="action" name="checkAllContacts:"/>
+                <relationship kind="action" name="chooseGender:"/>
                 <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="action" name="sortOnOff:"/>
                 <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>

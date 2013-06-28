@@ -26,7 +26,10 @@
     
     [self.view addGestureRecognizer:self.slidingViewController.panGesture];
     [self.slidingViewController setAnchorRightRevealAmount:280.0f];
-    
+    UIImage *navBackground =[[UIImage imageNamed:@"topbar_background.png"]
+                             resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [[UINavigationBar appearance] setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
 }
+
 
 @end

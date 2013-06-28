@@ -85,14 +85,18 @@
 	
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
+    */
+ 
     
-    [self.backMenuButton setBackgroundImage:[UIImage imageNamed:@"BackMenu_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.addPersonButton setBackgroundImage:[UIImage imageNamed:@"NewContact_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.addLabelButton setBackgroundImage:[UIImage imageNamed:@"NewInteraction_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
+
+    
+    //[self.backMenuButton setBackgroundImage:[UIImage imageNamed:@"BackMenu_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    /*
     self.peopleListToolbar.layer.shadowOpacity = 0.3f;
     self.peopleListToolbar.layer.shadowRadius = 1.0f;
-    self.peopleListToolbar.layer.shadowColor = [UIColor blackColor].CGColor;*/
+    self.peopleListToolbar.layer.shadowColor = [UIColor blackColor].CGColor;
+    */
     
     
 
@@ -105,7 +109,8 @@
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
     
-    //self.navigationController.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:uibarbuttonInstance1, uibarbuttonInstance2, nil];
+    
+
     //[[self.navigationController.navigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
 
 
@@ -118,6 +123,32 @@
     [self setTextFieldLeftView];
     
     [super viewDidLoad];
+
+    UIImage* contactImage = [UIImage imageNamed:@"NewContact_Icon.png"];
+    UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, contactImage.size.width, contactImage.size.height)];
+    [newPerson setImage:contactImage forState:UIControlStateNormal];
+    [newPerson addTarget:self action:@selector(addPersonActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
+    
+    UIImage* labelImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
+    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, labelImage.size.width, labelImage.size.height)];
+    [newLabel setImage:labelImage forState:UIControlStateNormal];
+    [newLabel addTarget:self action:@selector(addLabelActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addLabelButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
+    
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addLabelButton, addPersonButton, nil]];
+    
+
+    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
+    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, menuImage.size.width, menuImage.size.height)];
+    [backMenu setImage:menuImage forState:UIControlStateNormal];
+    [backMenu addTarget:self action:@selector(revealMenu:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
+    
+    self.navigationItem.leftBarButtonItem = backMenuButton;
+
+    
 	// Do any additional setup after loading the view.
     Person *person1 = [Person new];
     person1.name = @"Ann Anderson";
