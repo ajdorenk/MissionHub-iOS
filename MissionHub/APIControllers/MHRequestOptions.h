@@ -25,10 +25,12 @@ typedef enum {
 
 typedef enum {
 	MHRequestOptionsIncludeOrganizationsAdmins,
-	MHRequestOptionsIncludeOrganizationsUsers,
+	MHRequestOptionsIncludeOrganizationsLeaders,
 	MHRequestOptionsIncludeOrganizationsNoPermissions,
 	MHRequestOptionsIncludeOrganizationsPeople,
+	MHRequestOptionsIncludeOrganizationsLabels,
 	MHRequestOptionsIncludeOrganizationsSurveys,
+	MHRequestOptionsIncludeOrganizationsAllQuestions,
 	MHRequestOptionsIncludeOrganizationsKeywords,
 	MHRequestOptionsIncludePeopleContactAssignments,
 	MHRequestOptionsIncludePeopleAssignTos,
@@ -42,7 +44,7 @@ typedef enum {
 	MHRequestOptionsIncludePeopleAllOrganizationalPermissions,
 	MHRequestOptionsIncludePeopleAllOrganizationsAndChildren,
 	MHRequestOptionsIncludePeoplePersonTransfers,
-	MHRequestOptionsIncludePeopleAllQuestions,
+	MHRequestOptionsIncludePeopleUser,
 	MHRequestOptionsIncludeConactAssignmentsAssignedTo,
 	MHRequestOptionsIncludeConactAssignmentsPerson,
 	MHRequestOptionsIncludeSurveysQuestions,

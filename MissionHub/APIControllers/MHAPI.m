@@ -15,7 +15,10 @@ typedef enum {
 	MHAPIErrorMissingUrl,
 	MHAPIErrorMissingEndpoint,
 	MHAPIErrorMissionAccessToken,
-	MHAPIErrorMalformedResponse
+	MHAPIErrorMalformedResponse,
+	MHAPIErrorServerError,
+	MHAPIErrorAccessTokenError,
+	MHAPIErrorAccessDenied
 } MHAPIErrors;
 
 @interface MHAPI (PrivateMethods)
@@ -79,11 +82,12 @@ typedef enum {
     return self;
 }
 
--(void)getMeWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+-(void)getMeWithSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	MHRequestOptions *requestOptions = (options ? options : [[MHRequestOptions alloc] init]);
+	MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
 	
 	requestOptions.endpoint = MHRequestOptionsEndpointPeople;
+	[requestOptions addIncludesForMeRequest];
 	
 	NSError *error;
 	NSString *urlString = [self stringForMeRequestWith:requestOptions error:&error];
@@ -100,6 +104,82 @@ typedef enum {
 	request.failBlock			= failBlock;
 	
 	[self.queue addOperation:request];
+}
+
+-(void)getOrganizationWithRemoteID:(NSNumber *)remoteID successBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock {
+	
+	MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+	
+	requestOptions.endpoint = MHRequestOptionsEndpointOrganizations;
+	requestOptions.remoteID = [remoteID integerValue];
+	[requestOptions addIncludesForOrganizationRequest];
+	
+	NSError *error;
+	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
+	NSLog(@"%@", urlString);
+	if (error) {
+		[MHErrorHandler presentError:error];
+		return;
+	}
+	
+	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	request.delegate			= self;
+	request.options				= requestOptions;
+	request.successBlock		= successBlock;
+	request.failBlock			= failBlock;
+	
+	[self.queue addOperation:request];
+	
+}
+
+-(void)getLabelsForCurrentOrganizationWithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock {
+	
+	MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+	
+	requestOptions.endpoint = MHRequestOptionsEndpointLabels;
+	
+	NSError *error;
+	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
+	NSLog(@"%@", urlString);
+	if (error) {
+		[MHErrorHandler presentError:error];
+		return;
+	}
+	
+	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	request.delegate			= self;
+	request.options				= requestOptions;
+	request.successBlock		= successBlock;
+	request.failBlock			= failBlock;
+	
+	[self.queue addOperation:request];
+	
+}
+
+-(void)getProfileForRemoteID:(NSNumber *)remoteID WithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock {
+	
+	MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+	
+	requestOptions.endpoint = MHRequestOptionsEndpointPeople;
+	requestOptions.remoteID = [remoteID integerValue];
+	[requestOptions addIncludesForProfileRequest];
+	
+	NSError *error;
+	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
+	NSLog(@"%@", urlString);
+	if (error) {
+		[MHErrorHandler presentError:error];
+		return;
+	}
+	
+	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	request.delegate			= self;
+	request.options				= requestOptions;
+	request.successBlock		= successBlock;
+	request.failBlock			= failBlock;
+	
+	[self.queue addOperation:request];
+	
 }
 
 -(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error {
@@ -272,8 +352,6 @@ typedef enum {
 
 -(void)requestDidFinish:(MHRequest *)request {
 	
-#warning Need to implement general request finished selector
-	
 	NSError *error;
 	__block NSMutableArray *modelArray = [NSMutableArray array];
 	__block NSString *nameOfClassForEndpoint = [NSString stringWithFormat:@"MH%@", [[request.options stringInSingluarFormatForEndpoint] capitalizedString]];
@@ -339,6 +417,7 @@ typedef enum {
 	}
 	@catch (NSException *exception) {
 		
+		
 		error = [NSError errorWithDomain:MHAPIErrorDomain
 									code:MHAPIErrorMalformedResponse
 								userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com", @"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com")}];
@@ -350,6 +429,7 @@ typedef enum {
 			[MHErrorHandler presentError:error];
 		}
 		
+		
 	}
 	@finally {
 		//nothing to clean up with ARC. YAY!
@@ -358,21 +438,107 @@ typedef enum {
 	//call success block if it exists so that the calling method can access the result
 	if (request.successBlock) {
 		request.successBlock(modelArray, request.options);
+	} else {
+		//if no fail block show the error anyway
+		[MHErrorHandler presentError:error];
 	}
 	
 }
 
 -(void)requestDidFail:(MHRequest *)request {
 	
-#warning Need to implement general request failed selector
+	NSError *error, *responseError;
 	
-	NSError *error;
+	//parse response and put into result dictionary
+	NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
+	
+	//if there was a parsing error stop updating model and notify calling method of the error through the fail block
+	if (error) {
+		
+		if (request.failBlock) {
+			request.failBlock(error, request.options);
+		} else {
+			//if no fail block show the error anyway
+			[MHErrorHandler presentError:error];
+		}
+		
+	}
 	
 	//parse errors and put into NSError object
+	@try {
+		
+		
+		
+		//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
+		if ([[[result allKeys] objectAtIndex:0] isEqualToString:@"errors"]) {
+			
+			NSInteger errorCode = MHAPIErrorServerError;
+			id errorMessage		= [[result objectForKey:@"errors"] objectAtIndex:0];
+			
+			if ([[[result allKeys] objectAtIndex:1] isEqualToString:@"code"]) {
+				
+				id code = [[result objectForKey:@"code"] objectAtIndex:1];
+				
+				if ([code isEqualToString:@"invalid_facebook_token"]) {
+					
+					errorCode = MHAPIErrorAccessTokenError;
+					
+				} else if ([code isEqualToString:@"access_denied"]) {
+					
+					errorCode = MHAPIErrorAccessTokenError;
+					
+				}
+				
+				responseError = [NSError errorWithDomain:MHAPIErrorDomain
+													code:errorCode
+												userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+				
+			}
+			
+		} else {
+			
+			error = [NSError errorWithDomain:MHAPIErrorDomain
+										code:MHAPIErrorMalformedResponse
+									userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response did not contain a valid error. Please contact support@missionhub.com", @"Response did not contain a valid error. Please contact support@missionhub.com")}];
+			
+			if (request.failBlock) {
+				request.failBlock(error, request.options);
+			} else {
+				//if no fail block show the error anyway
+				[MHErrorHandler presentError:error];
+			}
+			
+		}
+		
+		
+		
+	}
+	@catch (NSException *exception) {
+		
+		
+		error = [NSError errorWithDomain:MHAPIErrorDomain
+									code:MHAPIErrorMalformedResponse
+								userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com", @"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com")}];
+		
+		if (request.failBlock) {
+			request.failBlock(error, request.options);
+		} else {
+			//if no fail block show the error anyway
+			[MHErrorHandler presentError:error];
+		}
+		
+		
+	}
+	@finally {
+		//nothing to clean up with ARC. YAY!
+	}
 	
 	//call fail block if it exists so that the calling method can access the result
 	if (request.failBlock) {
-		request.failBlock(error, request.options);
+		request.failBlock(responseError, request.options);
+	} else {
+		//if no fail block show the error anyway
+		[MHErrorHandler presentError:responseError];
 	}
 	
 }

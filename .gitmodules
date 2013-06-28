@@ -10,3 +10,6 @@
 [submodule "Libraries/ODRefreshControl"]
 	path = Libraries/ODRefreshControl
 	url = https://github.com/Sephiroth87/ODRefreshControl.git
+[submodule "Libraries/AFNetworking"]
+	path = Libraries/AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
