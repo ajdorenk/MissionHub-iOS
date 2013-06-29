@@ -1,6 +1,6 @@
 [submodule "Libraries/asi-http-request"]
 	path = Libraries/asi-http-request
-	url = https://github.com/pokeb/asi-http-request.git
+	url = https://github.com/michaelharro/asi-http-request.git
 [submodule "Libraries/ECSlidingViewController"]
 	path = Libraries/ECSlidingViewController
 	url = https://github.com/edgecase/ECSlidingViewController.git
@@ -13,3 +13,9 @@
 [submodule "Libraries/AFNetworking"]
 	path = Libraries/AFNetworking
 	url = https://github.com/AFNetworking/AFNetworking.git
+[submodule "Libraries/SDSegmentedControl"]
+	path = Libraries/SDSegmentedControl
+	url = https://github.com/rs/SDSegmentedControl
+[submodule "Libraries/M6ParallaxController"]
+	path = Libraries/M6ParallaxController
+	url = https://github.com/michaelharro/M6ParallaxController.git

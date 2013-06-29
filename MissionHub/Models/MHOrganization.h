@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * terminology;
 @property (nonatomic, retain) NSDate * updated_at;
+@property (nonatomic, retain) NSSet *admins;
 @property (nonatomic, retain) NSSet *labels;
 @property (nonatomic, retain) NSSet *people;
 @property (nonatomic, retain) NSSet *leaders;
@@ -29,11 +30,6 @@
 @end
 
 @interface MHOrganization (CoreDataGeneratedAccessors)
-
-- (void)addInteractionTypeObject:(MHInteractionType *)value;
-- (void)removeInteractionTypeObject:(MHInteractionType *)value;
-- (void)addInteractionType:(NSSet *)values;
-- (void)removeInteractionType:(NSSet *)values;
 
 - (void)addLabelsObject:(MHLabel *)value;
 - (void)removeLabelsObject:(MHLabel *)value;
@@ -45,8 +41,13 @@
 - (void)addPeople:(NSSet *)values;
 - (void)removePeople:(NSSet *)values;
 
-- (void)addLeadersObject:(MHPermissionLevel *)value;
-- (void)removeLeadersObject:(MHPermissionLevel *)value;
+- (void)addAdminsObject:(MHPerson *)value;
+- (void)removeAdminsObject:(MHPerson *)value;
+- (void)addAdmins:(NSSet *)values;
+- (void)removeAdmins:(NSSet *)values;
+
+- (void)addLeadersObject:(MHPerson *)value;
+- (void)removeLeadersObject:(MHPerson *)value;
 - (void)addLeaders:(NSSet *)values;
 - (void)removeLeaders:(NSSet *)values;
 

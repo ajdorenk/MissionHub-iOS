@@ -41,6 +41,7 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="terminology" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="admins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="adminInOrganization" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHLabel" inverseName="organizations" inverseEntity="MHLabel" syncable="YES"/>
         <relationship name="leaders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="leaderInOrganization" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="organization" inverseEntity="MHPerson" syncable="YES"/>
@@ -71,6 +72,7 @@
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="year_in_school" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="adminInOrganization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="admins" inverseEntity="MHOrganization" syncable="YES"/>
         <relationship name="assignedConacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="assignedLeader" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="assignedLeader" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="assignedConacts" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="createdInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="creator" inverseEntity="MHInteraction" syncable="YES"/>
@@ -83,6 +85,22 @@
         <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="people" inverseEntity="MHSurvey" syncable="YES"/>
         <relationship name="updatedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="updater" inverseEntity="MHInteraction" syncable="YES"/>
     </entity>
+    <entity name="MHQuestion" representedClassName="MHQuestion" syncable="YES">
+        <attribute name="attribute_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="kind" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notify_via" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="object_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="style" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trigger_words" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="web_only" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="survey" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="questions" inverseEntity="MHSurvey" syncable="YES"/>
+    </entity>
     <entity name="MHSurvey" representedClassName="MHSurvey" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="is_frozen" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -93,14 +111,16 @@
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="surveys" inverseEntity="MHOrganization" syncable="YES"/>
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="surveys" inverseEntity="MHPerson" syncable="YES"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHQuestion" inverseName="survey" inverseEntity="MHQuestion" syncable="YES"/>
     </entity>
     <elements>
         <element name="MHInteraction" positionX="-18" positionY="3281" width="128" height="225"/>
         <element name="MHInteractionType" positionX="313" positionY="3321" width="128" height="148"/>
         <element name="MHLabel" positionX="259" positionY="3137" width="128" height="148"/>
-        <element name="MHOrganization" positionX="493" positionY="2574" width="128" height="223"/>
+        <element name="MHOrganization" positionX="493" positionY="2574" width="128" height="240"/>
         <element name="MHPermissionLevel" positionX="207" positionY="2921" width="128" height="133"/>
-        <element name="MHPerson" positionX="232" positionY="2453" width="128" height="448"/>
-        <element name="MHSurvey" positionX="387" positionY="3492" width="128" height="178"/>
+        <element name="MHPerson" positionX="232" positionY="2453" width="128" height="465"/>
+        <element name="MHSurvey" positionX="387" positionY="3492" width="128" height="195"/>
+        <element name="MHQuestion" positionX="160" positionY="192" width="128" height="255"/>
     </elements>
 </model>

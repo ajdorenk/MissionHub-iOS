@@ -9,6 +9,7 @@
 #import "MHSurvey.h"
 #import "MHOrganization.h"
 #import "MHPerson.h"
+#import "MHQuestion.h"
 
 
 @implementation MHSurvey
@@ -22,5 +23,24 @@
 @dynamic updated_at;
 @dynamic organization;
 @dynamic people;
+@dynamic questions;
+
+-(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
+	
+	if ([fieldName isEqualToString:@"all_questions"]) {
+		
+		NSArray *arrayOfObjects = relationshipObject;
+		
+		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+			
+			MHQuestion *newObject = [MHQuestion newObjectFromFields:object];
+			
+			[self addQuestionsObject:newObject];
+			
+		}];
+		
+	}
+	
+}
 
 @end

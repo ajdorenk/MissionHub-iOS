@@ -13,24 +13,28 @@
 /*
 @class MHSublabel;
 */
-@interface MHPeopleListViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate> {
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate> {
 
     NSArray *_persons;
-    
 }
 
 
+/*@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *addPersonButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
 
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *menu;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *addPerson;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *write;
+*/
+
+@property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
+
+
 @property(nonatomic, strong) NSArray *persons;
 
 - (IBAction)revealMenu:(id)sender;
-
-
 /*
 @property(nonatomic, retain) MHSublabel *Sublabel;
 */
 @end
+
+
 

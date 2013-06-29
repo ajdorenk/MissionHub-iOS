@@ -11,6 +11,8 @@
 #import <Foundation/Foundation.h>
 #import "MHPersonCell.h"
 #import "MHMenuToolbar.h"   
+#import "MHPeopleSearchBar.h" 
+#import "MHGenderListController.h"  
 
 @interface Person : NSObject
 
@@ -31,16 +33,11 @@
 
 
 
-
-
-
-@interface MHPeopleListViewController ()
+/*@interface MHgenderListController ()
 
 @end
 
-@implementation MHPeopleListViewController
-
-@synthesize persons = _persons;
+@implementation MHgenderListController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,6 +47,27 @@
     }
     return self;
 }
+
+@end
+
+*/
+@interface MHPeopleListViewController (Private)
+-(void)setTextFieldLeftView;
+@end
+
+@implementation MHPeopleListViewController
+
+@synthesize persons = _persons;
+
+
+/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}*/
 
 -(void)viewWillAppear:(BOOL)animated {
 	
@@ -61,22 +79,76 @@
 	self.view.layer.shadowRadius = 10.0f;
 	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
 	
-	if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
+	/*if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
 		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
 	}
 	
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
+    */
+ 
     
-    [self.menu setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.addPerson setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.write setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+
+    
+    //[self.backMenuButton setBackgroundImage:[UIImage imageNamed:@"BackMenu_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    /*
+    self.peopleListToolbar.layer.shadowOpacity = 0.3f;
+    self.peopleListToolbar.layer.shadowRadius = 1.0f;
+    self.peopleListToolbar.layer.shadowColor = [UIColor blackColor].CGColor;
+    */
+    
+    
+
+    self.peopleSearchBar.layer.shadowOpacity = 0.3f;
+    self.peopleSearchBar.layer.shadowRadius = 2.0f;
+    self.peopleSearchBar.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.peopleSearchBar.placeholder = @"Search";
+    UITextField *text = [[self.peopleSearchBar subviews] objectAtIndex:1];
+    [text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
+    
+    [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
+    
+    
+
+    //[[self.navigationController.navigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
+
+
 	
 }
 
 - (void)viewDidLoad
 {
+    
+    [self setTextFieldLeftView];
+    
     [super viewDidLoad];
+
+    UIImage* contactImage = [UIImage imageNamed:@"NewContact_Icon.png"];
+    UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, contactImage.size.width, contactImage.size.height)];
+    [newPerson setImage:contactImage forState:UIControlStateNormal];
+    [newPerson addTarget:self action:@selector(addPersonActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
+    
+    UIImage* labelImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
+    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, labelImage.size.width, labelImage.size.height)];
+    [newLabel setImage:labelImage forState:UIControlStateNormal];
+    [newLabel addTarget:self action:@selector(addLabelActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addLabelButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
+    
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addLabelButton, addPersonButton, nil]];
+    
+
+    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
+    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, menuImage.size.width, menuImage.size.height)];
+    [backMenu setImage:menuImage forState:UIControlStateNormal];
+    [backMenu addTarget:self action:@selector(revealMenu:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
+    
+    self.navigationItem.leftBarButtonItem = backMenuButton;
+
+    
 	// Do any additional setup after loading the view.
     Person *person1 = [Person new];
     person1.name = @"Ann Anderson";
@@ -131,15 +203,66 @@
     
     self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
     
+    
+    
+    
 
 
 }
+
+- (void)setTextFieldLeftView
+{
+    UITextField *searchField = nil;
+    for (UIView *subview in self.peopleSearchBar.subviews)
+    {
+        if ([subview isKindOfClass:[UITextField class]])
+        {
+            searchField = (UITextField *)subview;
+            break;
+        }
+    }
+    
+    if (searchField)
+    {
+        UIImage *image = [UIImage imageNamed:@"searchbar_image.png"];
+        UIImageView *view = [[UIImageView alloc] initWithImage:image];
+        searchField.leftView = view;
+    }
+    
+}
+
 
 - (IBAction)revealMenu:(id)sender {
 	
 	[self.slidingViewController anchorTopViewTo:ECRight];
 	
 }
+
+-(IBAction)addPersonActivity:(id)sender{
+    NSLog(@"add Person Action");
+}
+
+-(IBAction)addLabelActivity:(id)sender {
+    NSLog(@"Label Action");
+}
+
+-(IBAction)checkAllContacts:(id)sender {
+    NSLog(@"Check all");
+}
+
+-(IBAction)chooseGender:(id)sender {
+    NSLog(@"chooseGender");
+
+    UIStoryboard *storyboard = self.storyboard;
+    UIViewController *genders = [storyboard
+                  instantiateViewControllerWithIdentifier:@"genderList"];
+    [self presentViewController:genders animated:YES completion:Nil];
+}
+
+-(IBAction)sortOnOff:(id)sender {
+    NSLog(@"Toggle sort");
+}
+
 
 /*@synthesize Sublabel;
 */
@@ -163,45 +286,110 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MyCell";
-    MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+        static NSString *CellIdentifier = @"MyCell";
+        MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    
-    // Configure the cell...
-    if (cell == nil) {
-        cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    
-    
-    //Display person in the table cell
-    Person *person = [self.persons objectAtIndex:indexPath.row];
-    cell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
-    cell.gender.text = person.gender;
-    cell.name.text = person.name;
-    
-    return cell;
+        if (cell == nil) {
+            cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        //Display person in the table cell
+        Person *person = [self.persons objectAtIndex:indexPath.row];
+        cell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
+        cell.gender.text = person.gender;
+        cell.name.text = person.name;
+        
+        return cell;
     
 }
 
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
+    sectionHeader.backgroundColor = [UIColor grayColor];
+ 
+ UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(37, 6.5, 20, 20.0)];
+    headerLabel.textColor = [UIColor whiteColor];
+ headerLabel.backgroundColor = [UIColor clearColor];
+ headerLabel.textAlignment = NSTextAlignmentLeft;
+ [sectionHeader addSubview:headerLabel];
+ 
+ headerLabel.text = @"All";
+    
+    //Add genderButton
+    UIButton *genderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [genderButton setFrame:CGRectMake(94, 5.0, 154.0, 22.0)];
+    //[button setTitle:@"Gender" forState:UIControlStateNormal];
+    [genderButton setTintColor:[UIColor clearColor]];
+    [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderGender.png"] forState:UIControlStateNormal];
+
+    [genderButton setBackgroundColor:[UIColor clearColor]];
+    [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:genderButton];
+    
+    UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sortButton setFrame:CGRectMake(266, 5.0, 50.0, 22.0)];
+    //[button setTitle:@"Sort" forState:UIControlStateNormal];
+    [sortButton setTintColor:[UIColor clearColor]];
+    [sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
+    
+    [sortButton setBackgroundColor:[UIColor clearColor]];
+    [sortButton addTarget:self action:@selector(sortOnOff:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:sortButton];
+    
+    
+    UIButton *allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [allButton setFrame:CGRectMake(13.0, 9.0, 14.0, 14.0)];
+    //[button setTitle:@"Sort" forState:UIControlStateNormal];
+    [allButton setTintColor:[UIColor clearColor]];
+    [allButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderAll.png"] forState:UIControlStateNormal];
+    
+    [allButton setBackgroundColor:[UIColor clearColor]];
+    [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:allButton];
+    
+    return sectionHeader;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 32.0;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 61.0f;
+}
+ 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
     /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+       *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
     if(indexPath.row==0){
-            [self performSegueWithIdentifier:@"MHSublabel" sender:self];
+            //[self performSegueWithIdentifier:@"MHSublabel" sender:self];
         }
 
     
 }
+
+
+
+//-(void)addPersonPressed:(id)sender
+//{
+//}
 
 - (void)didReceiveMemoryWarning
 {

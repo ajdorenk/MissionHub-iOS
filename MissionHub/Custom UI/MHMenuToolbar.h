@@ -10,7 +10,5 @@
 
 @interface MHMenuToolbar : UIToolbar
 
-@property (nonatomic, strong) NSArray *buttons;
-
 
 @end

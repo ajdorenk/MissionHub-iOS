@@ -22,14 +22,4 @@
 @dynamic updated_at;
 @dynamic interactions;
 
--(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
-	
-	if ([fieldName isEqualToString:@"organization_id"]) {
-		
-		self.organization = [[MHAPI sharedInstance] currentOrganization];
-		
-	}
-	
-}
-
 @end

@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHOrganization, MHPerson;
+@class MHOrganization, MHPerson, MHQuestion;
 
 @interface MHSurvey : MHModel
 
@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) MHOrganization *organization;
 @property (nonatomic, retain) NSSet *people;
+@property (nonatomic, retain) NSSet *questions;
 @end
 
 @interface MHSurvey (CoreDataGeneratedAccessors)
@@ -31,5 +32,10 @@
 - (void)removePeopleObject:(MHPerson *)value;
 - (void)addPeople:(NSSet *)values;
 - (void)removePeople:(NSSet *)values;
+
+- (void)addQuestionsObject:(MHQuestion *)value;
+- (void)removeQuestionsObject:(MHQuestion *)value;
+- (void)addQuestions:(NSSet *)values;
+- (void)removeQuestions:(NSSet *)values;
 
 @end

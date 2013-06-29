@@ -43,8 +43,9 @@
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
 	
-    [self.backMenu setBackgroundImage:[UIImage imageNamed:@"sunflower.jpg"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.backMenu setBackgroundImage:[UIImage imageNamed:@"BackMenu_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 
+    
 }
 
 - (void)viewDidLoad
@@ -52,6 +53,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+
 
 - (IBAction)revealMenu:(id)sender {
 	
@@ -67,6 +69,7 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
 	
 }
+
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	

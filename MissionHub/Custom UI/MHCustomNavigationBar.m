@@ -1,19 +1,14 @@
 //
-//  MHMenuToolbar.m
+//  MHCustomNavigationBar.m
 //  MissionHub
 //
-//  Created by Amarisa Robison on 6/17/13.
+//  Created by Amarisa Robison on 6/26/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
-#import "MHMenuToolbar.h"
+#import "MHCustomNavigationBar.h"
 
-@interface MHMenuToolbar()
-@end
-
-
-@implementation MHMenuToolbar
-
+@implementation MHCustomNavigationBar
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -24,24 +19,23 @@
     
     return self;
 }
-    
-    
-    
+
+
+
 
 
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-*/
- - (void)drawRect:(CGRect)rect
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ */
+- (void)drawRect:(CGRect)rect
 {
     // Drawing code
     [super drawRect:rect];
     UIImage *backgroundImage = [UIImage imageNamed:@"topbar_background.png"];
     [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    
 }
 
 
