@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHOrganization, MHPerson;
+@class MHOrganizationalPermission;
 
 @interface MHPermissionLevel : MHModel
 
@@ -19,20 +19,14 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * remoteID;
 @property (nonatomic, retain) NSDate * updated_at;
-@property (nonatomic, retain) NSSet *organizations;
-@property (nonatomic, retain) NSSet *people;
+@property (nonatomic, retain) NSSet *appliedPermissions;
 @end
 
 @interface MHPermissionLevel (CoreDataGeneratedAccessors)
 
-- (void)addOrganizationsObject:(MHOrganization *)value;
-- (void)removeOrganizationsObject:(MHOrganization *)value;
-- (void)addOrganizations:(NSSet *)values;
-- (void)removeOrganizations:(NSSet *)values;
-
-- (void)addPeopleObject:(MHPerson *)value;
-- (void)removePeopleObject:(MHPerson *)value;
-- (void)addPeople:(NSSet *)values;
-- (void)removePeople:(NSSet *)values;
+- (void)addAppliedPermissionsObject:(MHOrganizationalPermission *)value;
+- (void)removeAppliedPermissionsObject:(MHOrganizationalPermission *)value;
+- (void)addAppliedPermissions:(NSSet *)values;
+- (void)removeAppliedPermissions:(NSSet *)values;
 
 @end

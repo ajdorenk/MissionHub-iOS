@@ -29,6 +29,14 @@
 		6823A7C9177EB00100DBDF3F /* sectionHeaderGender.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7C0177EB00100DBDF3F /* sectionHeaderGender.png */; };
 		6823A7CA177EB00100DBDF3F /* sectionHeaderSort.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7C1177EB00100DBDF3F /* sectionHeaderSort.png */; };
 		6823A7CB177EB00100DBDF3F /* sectionHeaderSort.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7C1177EB00100DBDF3F /* sectionHeaderSort.png */; };
+		6823A7CE177EC34C00DBDF3F /* MHEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */; };
+		6823A7CF177EC34C00DBDF3F /* MHEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */; };
+		6823A7D2177EC34C00DBDF3F /* MHPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D1177EC34C00DBDF3F /* MHPhoneNumber.m */; };
+		6823A7D3177EC34C00DBDF3F /* MHPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D1177EC34C00DBDF3F /* MHPhoneNumber.m */; };
+		6823A7D6177EC34D00DBDF3F /* MHAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D5177EC34D00DBDF3F /* MHAddress.m */; };
+		6823A7D7177EC34D00DBDF3F /* MHAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D5177EC34D00DBDF3F /* MHAddress.m */; };
+		6823A7DA177EC34D00DBDF3F /* MHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D9177EC34D00DBDF3F /* MHUser.m */; };
+		6823A7DB177EC34D00DBDF3F /* MHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D9177EC34D00DBDF3F /* MHUser.m */; };
 		683910871760FD3100E01B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910861760FD3100E01B46 /* UIKit.framework */; };
 		683910891760FD3100E01B46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910881760FD3100E01B46 /* Foundation.framework */; };
 		6839108B1760FD3100E01B46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108A1760FD3100E01B46 /* CoreGraphics.framework */; };
@@ -173,6 +181,10 @@
 		68D7AA471766CDF300B9B0B1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA461766CDF300B9B0B1 /* Social.framework */; };
 		68D7AA491766CE4100B9B0B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA481766CE4100B9B0B1 /* Security.framework */; };
 		68D7AA4B1766CEF200B9B0B1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */; };
+		68D7B8C3177F804200A2E231 /* MHOrganizationalPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */; };
+		68D7B8C4177F804200A2E231 /* MHOrganizationalPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */; };
+		68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */; };
+		68D7B8C8177F804300A2E231 /* MHOrganizationalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */; };
 		68EB33C017791295003958A0 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068B617710357007C79D6 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		68EB33C217791306003958A0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0695317710517007C79D6 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		68EB33C317791306003958A0 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068B617710357007C79D6 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -224,6 +236,14 @@
 		6823A7BF177EB00100DBDF3F /* sectionHeaderAll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderAll.png; sourceTree = "<group>"; };
 		6823A7C0177EB00100DBDF3F /* sectionHeaderGender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderGender.png; sourceTree = "<group>"; };
 		6823A7C1177EB00100DBDF3F /* sectionHeaderSort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderSort.png; sourceTree = "<group>"; };
+		6823A7CC177EC34C00DBDF3F /* MHEmailAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHEmailAddress.h; path = Models/MHEmailAddress.h; sourceTree = "<group>"; };
+		6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHEmailAddress.m; path = Models/MHEmailAddress.m; sourceTree = "<group>"; };
+		6823A7D0177EC34C00DBDF3F /* MHPhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPhoneNumber.h; path = Models/MHPhoneNumber.h; sourceTree = "<group>"; };
+		6823A7D1177EC34C00DBDF3F /* MHPhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPhoneNumber.m; path = Models/MHPhoneNumber.m; sourceTree = "<group>"; };
+		6823A7D4177EC34C00DBDF3F /* MHAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAddress.h; path = Models/MHAddress.h; sourceTree = "<group>"; };
+		6823A7D5177EC34D00DBDF3F /* MHAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAddress.m; path = Models/MHAddress.m; sourceTree = "<group>"; };
+		6823A7D8177EC34D00DBDF3F /* MHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHUser.h; path = Models/MHUser.h; sourceTree = "<group>"; };
+		6823A7D9177EC34D00DBDF3F /* MHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHUser.m; path = Models/MHUser.m; sourceTree = "<group>"; };
 		683910831760FD3100E01B46 /* MissionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683910861760FD3100E01B46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		683910881760FD3100E01B46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -412,6 +432,10 @@
 		68D7AA7317679B0000B9B0B1 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		68D7AA7417679B0000B9B0B1 /* FBWebDialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBWebDialogs.h; sourceTree = "<group>"; };
 		68D7AA7517679B0000B9B0B1 /* NSError+FBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+FBError.h"; sourceTree = "<group>"; };
+		68D7B8C1177F804100A2E231 /* MHOrganizationalPermission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHOrganizationalPermission.h; path = Models/MHOrganizationalPermission.h; sourceTree = "<group>"; };
+		68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalPermission.m; path = Models/MHOrganizationalPermission.m; sourceTree = "<group>"; };
+		68D7B8C5177F804300A2E231 /* MHOrganizationalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHOrganizationalLabel.h; path = Models/MHOrganizationalLabel.h; sourceTree = "<group>"; };
+		68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalLabel.m; path = Models/MHOrganizationalLabel.m; sourceTree = "<group>"; };
 		68EB33CB17792D8F003958A0 /* MHErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHErrorHandler.h; path = APIControllers/MHErrorHandler.h; sourceTree = "<group>"; };
 		68EB33CC17792D8F003958A0 /* MHErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHErrorHandler.m; path = APIControllers/MHErrorHandler.m; sourceTree = "<group>"; };
 		AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationBar.h; path = "Custom UI/MHCustomNavigationBar.h"; sourceTree = "<group>"; };
@@ -628,6 +652,18 @@
 				68478D59177A7F410014501D /* MHSurvey.m */,
 				6823A7B9177EA4C900DBDF3F /* MHQuestion.h */,
 				6823A7BA177EA4C900DBDF3F /* MHQuestion.m */,
+				6823A7D8177EC34D00DBDF3F /* MHUser.h */,
+				6823A7D9177EC34D00DBDF3F /* MHUser.m */,
+				6823A7D4177EC34C00DBDF3F /* MHAddress.h */,
+				6823A7D5177EC34D00DBDF3F /* MHAddress.m */,
+				6823A7D0177EC34C00DBDF3F /* MHPhoneNumber.h */,
+				6823A7D1177EC34C00DBDF3F /* MHPhoneNumber.m */,
+				6823A7CC177EC34C00DBDF3F /* MHEmailAddress.h */,
+				6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */,
+				68D7B8C5177F804300A2E231 /* MHOrganizationalLabel.h */,
+				68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */,
+				68D7B8C1177F804100A2E231 /* MHOrganizationalPermission.h */,
+				68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1093,6 +1129,12 @@
 				68478DA8177E8B580014501D /* UIViewController+M6ParallaxController.m in Sources */,
 				68478DAE177E8C9F0014501D /* MHPeopleSearchBar.m in Sources */,
 				6823A7BB177EA4C900DBDF3F /* MHQuestion.m in Sources */,
+				6823A7CE177EC34C00DBDF3F /* MHEmailAddress.m in Sources */,
+				6823A7D2177EC34C00DBDF3F /* MHPhoneNumber.m in Sources */,
+				6823A7D6177EC34D00DBDF3F /* MHAddress.m in Sources */,
+				6823A7DA177EC34D00DBDF3F /* MHUser.m in Sources */,
+				68D7B8C3177F804200A2E231 /* MHOrganizationalPermission.m in Sources */,
+				68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1153,6 +1195,12 @@
 				68478DA9177E8B580014501D /* UIViewController+M6ParallaxController.m in Sources */,
 				68478DAF177E8C9F0014501D /* MHPeopleSearchBar.m in Sources */,
 				6823A7BC177EA4C900DBDF3F /* MHQuestion.m in Sources */,
+				6823A7CF177EC34C00DBDF3F /* MHEmailAddress.m in Sources */,
+				6823A7D3177EC34C00DBDF3F /* MHPhoneNumber.m in Sources */,
+				6823A7D7177EC34D00DBDF3F /* MHAddress.m in Sources */,
+				6823A7DB177EC34D00DBDF3F /* MHUser.m in Sources */,
+				68D7B8C4177F804200A2E231 /* MHOrganizationalPermission.m in Sources */,
+				68D7B8C8177F804300A2E231 /* MHOrganizationalLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1343,7 +1391,7 @@
 		68478DD0177E93490014501D /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1363,6 +1411,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",

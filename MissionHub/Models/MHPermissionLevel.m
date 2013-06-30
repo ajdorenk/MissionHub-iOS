@@ -7,8 +7,7 @@
 //
 
 #import "MHPermissionLevel.h"
-#import "MHOrganization.h"
-#import "MHPerson.h"
+#import "MHOrganizationalPermission.h"
 
 @implementation MHPermissionLevel
 
@@ -17,7 +16,6 @@
 @dynamic name;
 @dynamic remoteID;
 @dynamic updated_at;
-@dynamic organizations;
-@dynamic people;
+@dynamic appliedPermissions;
 
 @end

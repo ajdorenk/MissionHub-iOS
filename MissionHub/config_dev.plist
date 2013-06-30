@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>base_url</key>
-	<string>https://local.missionhub.com</string>
+	<string>http://local.missionhub.com</string>
 	<key>api_url</key>
-	<string>https://local.missionhub.com/apis/v3</string>
+	<string>http://local.missionhub.com/apis/v3</string>
 </dict>
 </plist>

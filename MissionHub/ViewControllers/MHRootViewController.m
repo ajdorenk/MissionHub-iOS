@@ -54,11 +54,7 @@
 										  
 										  NSLog(@"SUCCESS");
 										  
-									  } failBlock:^(NSError *error, MHRequestOptions *options) {
-										  
-										  NSLog(@"FAIL");
-										  
-									  }
+									  } failBlock:nil
 		 ];
 		
 		self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"PeopleList"];

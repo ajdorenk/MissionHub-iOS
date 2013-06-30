@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHOrganization, MHPerson;
+@class MHOrganization, MHOrganizationalLabel;
 
 @interface MHLabel : MHModel
 
@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSNumber * remoteID;
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) NSSet *organizations;
-@property (nonatomic, retain) NSSet *people;
+@property (nonatomic, retain) NSSet *appliedLabels;
 @end
 
 @interface MHLabel (CoreDataGeneratedAccessors)
@@ -30,9 +30,9 @@
 - (void)addOrganizations:(NSSet *)values;
 - (void)removeOrganizations:(NSSet *)values;
 
-- (void)addPeopleObject:(MHPerson *)value;
-- (void)removePeopleObject:(MHPerson *)value;
-- (void)addPeople:(NSSet *)values;
-- (void)removePeople:(NSSet *)values;
+- (void)addAppliedLabelsObject:(MHOrganizationalLabel *)value;
+- (void)removeAppliedLabelsObject:(MHOrganizationalLabel *)value;
+- (void)addAppliedLabels:(NSSet *)values;
+- (void)removeAppliedLabels:(NSSet *)values;
 
 @end

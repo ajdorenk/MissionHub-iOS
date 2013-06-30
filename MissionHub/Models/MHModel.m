@@ -89,8 +89,9 @@
 
 +(id)newObjectForEntityName:(NSString *)entityName fromFields:(NSDictionary *)fields inContext:(NSManagedObjectContext *)context {
 	
+	NSString *nameForEntity = entityName ? entityName : NSStringFromClass([self class]);
 	NSManagedObjectContext *contextForCreation = context ? context : [[MHStorage sharedInstance] managedObjectContext];
-	id newObject = [[self alloc] initWithEntity:[self entityFromName:entityName] insertIntoManagedObjectContext:contextForCreation];
+	id newObject = [NSEntityDescription insertNewObjectForEntityForName:nameForEntity inManagedObjectContext:contextForCreation];
 	
 	[newObject setFields:fields];
 	
@@ -107,11 +108,29 @@
 			
 			if ([self.attributes objectForKey:fieldName]) {
 				
-				[self setValue:[fields objectForKey:fieldName] forKey:[self.attributes objectForKey:fieldName]];
+				if ([[fields objectForKey:fieldName] class] != [NSNull class]) {
+					
+					[self setValue:[fields objectForKey:fieldName] forKey:[self.attributes objectForKey:fieldName]];
+					
+				}
+				
+				
 				
 			} else {
 				
-				[self setRelationshipsObject:[fields objectForKey:fieldName] forFieldName:fieldName];
+				if ([fieldName isEqualToString:@"id"]) {
+					
+					if ([[fields objectForKey:fieldName] class] != [NSNull class]) {
+						
+						[self setValue:[fields objectForKey:fieldName] forKey:@"remoteID"];
+						
+					}
+					
+				} else {
+				
+					[self setRelationshipsObject:[fields objectForKey:fieldName] forFieldName:fieldName];
+					
+				}
 				
 			}
 			
@@ -130,10 +149,12 @@
 		[key isEqualToString:@"deleted_at"] ||
 		[key isEqualToString:@"timestamp"]) {
 		
+		formattedValue = [[formattedValue substringToIndex:22] stringByAppendingString:[formattedValue substringFromIndex:23]];
+		
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-		formattedValue = [dateFormatter dateFromString:value];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+		NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
+		formattedValue = [dateFormatter dateFromString:formattedValue];
 		
 	} else if ([key isEqualToString:@"birth_date"] ||
 			   [key isEqualToString:@"date_became_christian"] ||
@@ -146,7 +167,6 @@
 	}
 	
 	[super setValue:formattedValue forKey:key];
-	
 }
 
 -(id)valueForKey:(NSString *)key {
@@ -156,16 +176,20 @@
 	if ([key isEqualToString:@"created_at"] ||
 		[key isEqualToString:@"updated_at"] ||
 		[key isEqualToString:@"deleted_at"] ||
-		[key isEqualToString:@"timestamp"]) {
+		[key isEqualToString:@"timestamp"] ||
+		[key isEqualToString:@"email_updated_at"]) {
 		
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-		value = [dateFormatter stringFromDate:value];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+		NSString *dateString = [dateFormatter stringFromDate:value];
+		value = [NSString stringWithFormat:@"%@:%@", [dateString substringToIndex:22], [dateString substringFromIndex:22]];
 		
 	} else if ([key isEqualToString:@"birth_date"] ||
 			   [key isEqualToString:@"date_became_christian"] ||
-			   [key isEqualToString:@"graduation_date"]) {
+			   [key isEqualToString:@"graduation_date"] ||
+			   [key isEqualToString:@"start_date"] ||
+			   [key isEqualToString:@"removed_date"] ||
+			   [key isEqualToString:@"archive_date"]) {
 		
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];

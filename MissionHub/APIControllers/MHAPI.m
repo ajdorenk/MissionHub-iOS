@@ -356,24 +356,24 @@ typedef enum {
 	__block NSMutableArray *modelArray = [NSMutableArray array];
 	__block NSString *nameOfClassForEndpoint = [NSString stringWithFormat:@"MH%@", [[request.options stringInSingluarFormatForEndpoint] capitalizedString]];
 	
-	//parse response and put into result dictionary
-	NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
-	
-	//if there was a parsing error stop updating model and notify calling method of the error through the fail block
-	if (error) {
+	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
+	//@try {
 		
-		if (request.failBlock) {
-			request.failBlock(error, request.options);
-		} else {
-			//if no fail block show the error anyway
-			[MHErrorHandler presentError:error];
+		
+		//parse response and put into result dictionary
+		NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
+		
+		//if there was a parsing error stop updating model and notify calling method of the error through the fail block
+		if (error) {
+			
+			if (request.failBlock) {
+				request.failBlock(error, request.options);
+			} else {
+				//if no fail block show the error anyway
+				[MHErrorHandler presentError:error];
+			}
+			
 		}
-		
-	}
-	
-	//try creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
-	@try {
-	
 		
 		
 		//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
@@ -413,7 +413,7 @@ typedef enum {
 		}
 		
 		
-		
+	/*
 	}
 	@catch (NSException *exception) {
 		
@@ -434,7 +434,7 @@ typedef enum {
 	@finally {
 		//nothing to clean up with ARC. YAY!
 	}
-	
+	*/
 	//call success block if it exists so that the calling method can access the result
 	if (request.successBlock) {
 		request.successBlock(modelArray, request.options);
@@ -449,63 +449,71 @@ typedef enum {
 	
 	NSError *error, *responseError;
 	
-	//parse response and put into result dictionary
-	NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
-	
-	//if there was a parsing error stop updating model and notify calling method of the error through the fail block
-	if (error) {
-		
-		if (request.failBlock) {
-			request.failBlock(error, request.options);
-		} else {
-			//if no fail block show the error anyway
-			[MHErrorHandler presentError:error];
-		}
-		
-	}
-	
 	//parse errors and put into NSError object
 	@try {
-		
-		
-		
-		//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
-		if ([[[result allKeys] objectAtIndex:0] isEqualToString:@"errors"]) {
+	
+		//if there is a connection error and the request has dealt with the error then return that error
+		if (request.error) {
 			
-			NSInteger errorCode = MHAPIErrorServerError;
-			id errorMessage		= [[result objectForKey:@"errors"] objectAtIndex:0];
+			responseError = request.error;
+		
+		//otherwise parse the error
+		} else {
+		
+			//parse response and put into result dictionary
+			NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
 			
-			if ([[[result allKeys] objectAtIndex:1] isEqualToString:@"code"]) {
+			//if there was a parsing error stop updating model and notify calling method of the error through the fail block
+			if (error) {
 				
-				id code = [[result objectForKey:@"code"] objectAtIndex:1];
-				
-				if ([code isEqualToString:@"invalid_facebook_token"]) {
-					
-					errorCode = MHAPIErrorAccessTokenError;
-					
-				} else if ([code isEqualToString:@"access_denied"]) {
-					
-					errorCode = MHAPIErrorAccessTokenError;
-					
+				if (request.failBlock) {
+					request.failBlock(error, request.options);
+				} else {
+					//if no fail block show the error anyway
+					[MHErrorHandler presentError:error];
 				}
-				
-				responseError = [NSError errorWithDomain:MHAPIErrorDomain
-													code:errorCode
-												userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
 				
 			}
 			
-		} else {
-			
-			error = [NSError errorWithDomain:MHAPIErrorDomain
-										code:MHAPIErrorMalformedResponse
-									userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response did not contain a valid error. Please contact support@missionhub.com", @"Response did not contain a valid error. Please contact support@missionhub.com")}];
-			
-			if (request.failBlock) {
-				request.failBlock(error, request.options);
+			//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
+			if ([[[result allKeys] objectAtIndex:0] isEqualToString:@"errors"]) {
+				
+				NSInteger errorCode = MHAPIErrorServerError;
+				id errorMessage		= [[result objectForKey:@"errors"] objectAtIndex:0];
+				
+				if ([[[result allKeys] objectAtIndex:1] isEqualToString:@"code"]) {
+					
+					id code = [[result objectForKey:@"code"] objectAtIndex:1];
+					
+					if ([code isEqualToString:@"invalid_facebook_token"]) {
+						
+						errorCode = MHAPIErrorAccessTokenError;
+						
+					} else if ([code isEqualToString:@"access_denied"]) {
+						
+						errorCode = MHAPIErrorAccessTokenError;
+						
+					}
+					
+					responseError = [NSError errorWithDomain:MHAPIErrorDomain
+														code:errorCode
+													userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+					
+				}
+				
 			} else {
-				//if no fail block show the error anyway
-				[MHErrorHandler presentError:error];
+				
+				error = [NSError errorWithDomain:MHAPIErrorDomain
+											code:MHAPIErrorMalformedResponse
+										userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response did not contain a valid error. Please contact support@missionhub.com", @"Response did not contain a valid error. Please contact support@missionhub.com")}];
+				
+				if (request.failBlock) {
+					request.failBlock(error, request.options);
+				} else {
+					//if no fail block show the error anyway
+					[MHErrorHandler presentError:error];
+				}
+				
 			}
 			
 		}

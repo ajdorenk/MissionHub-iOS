@@ -70,14 +70,18 @@
 -(void)addIncludesForProfileRequest {
 	
 	
-	[self addInclude:MHRequestOptionsIncludePeopleInteractions];
+	//[self addInclude:MHRequestOptionsIncludePeopleInteractions];
 	[self addInclude:MHRequestOptionsIncludePeopleOrganizationalPermissions];
 	[self addInclude:MHRequestOptionsIncludeOrganizationalPermissionsPermission];
 	[self addInclude:MHRequestOptionsIncludePeopleOrganizationalLabels];
 	[self addInclude:MHRequestOptionsIncludeOrganizationalLabelsLabel];
 	[self addInclude:MHRequestOptionsIncludePeopleEmailAddresses];
 	[self addInclude:MHRequestOptionsIncludePeoplePhoneNumbers];
-	[self addInclude:MHRequestOptionsIncludePeopleCurrentAddress];
+	[self addInclude:MHRequestOptionsIncludePeopleAddresses];
+	//[self addInclude:MHRequestOptionsIncludeInteractionsCreator];
+	//[self addInclude:MHRequestOptionsIncludeInteractionsInitiators];
+	//[self addInclude:MHRequestOptionsIncludeInteractionsInteractionType];
+	//[self addInclude:MHRequestOptionsIncludeInteractionsLastUpdater];
 	
 	
 }
@@ -391,8 +395,8 @@
 		case MHRequestOptionsIncludePeoplePersonTransfers:
 			includeString = @"person_transfers";
 			break;
-		case MHRequestOptionsIncludePeopleCurrentAddress:
-			includeString = @"current_address";
+		case MHRequestOptionsIncludePeopleAddresses:
+			includeString = @"addresses";
 			break;
 		case MHRequestOptionsIncludePeopleUser:
 			includeString = @"user";
@@ -412,6 +416,22 @@
 		case MHRequestOptionsIncludeOrganizationalPermissionsPermission:
 			includeString = @"permission";
 			break;
+		case MHRequestOptionsIncludeInteractionsCreator:
+			includeString = @"creator";
+			break;
+		case MHRequestOptionsIncludeInteractionsInitiators:
+			includeString = @"initiators";
+			break;
+		case MHRequestOptionsIncludeInteractionsInteractionType:
+			includeString = @"interaction_type";
+			break;
+		case MHRequestOptionsIncludeInteractionsLastUpdater:
+			includeString = @"last_updater";
+			break;
+		case MHRequestOptionsIncludeInteractionsReceiver:
+			includeString = @"receiver";
+			break;
+			
 		default:
 			break;
 	}

@@ -8,7 +8,7 @@
 
 #import "MHLabel.h"
 #import "MHOrganization.h"
-#import "MHPerson.h"
+#import "MHOrganizationalLabel.h"
 
 @implementation MHLabel
 
@@ -18,6 +18,6 @@
 @dynamic remoteID;
 @dynamic updated_at;
 @dynamic organizations;
-@dynamic people;
+@dynamic appliedLabels;
 
 @end

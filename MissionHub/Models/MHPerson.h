@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHOrganization, MHLabel, MHInteraction, MHPermissionLevel, MHSurvey;
+@class MHOrganization, MHOrganizationalLabel, MHInteraction, MHOrganizationalPermission, MHSurvey, MHAddress, MHEmailAddress, MHPhoneNumber, MHUser;
 
 @interface MHPerson : MHModel
 
@@ -35,12 +35,16 @@
 @property (nonatomic, retain) NSSet *initiatedInteractions;
 @property (nonatomic, retain) NSSet *labels;
 @property (nonatomic, retain) MHOrganization *organization;
-@property (nonatomic, retain) MHPermissionLevel *permissionLevel;
+@property (nonatomic, retain) MHOrganizationalPermission *permissionLevel;
 @property (nonatomic, retain) NSSet *receivedInteractions;
 @property (nonatomic, retain) NSSet *surveys;
 @property (nonatomic, retain) NSSet *createdInteractions;
 @property (nonatomic, retain) NSSet *updatedInteractions;
 @property (nonatomic, retain) MHOrganization *leaderInOrganization;
+@property (nonatomic, retain) NSSet *phoneNumbers;
+@property (nonatomic, retain) NSSet *addresses;
+@property (nonatomic, retain) NSSet *emailAddresses;
+@property (nonatomic, retain) MHUser *user;
 @end
 
 @interface MHPerson (CoreDataGeneratedAccessors)
@@ -55,8 +59,8 @@
 - (void)addInitiatedInteractions:(NSSet *)values;
 - (void)removeInitiatedInteractions:(NSSet *)values;
 
-- (void)addLabelsObject:(MHLabel *)value;
-- (void)removeLabelsObject:(MHLabel *)value;
+- (void)addLabelsObject:(MHOrganizationalLabel *)value;
+- (void)removeLabelsObject:(MHOrganizationalLabel *)value;
 - (void)addLabels:(NSSet *)values;
 - (void)removeLabels:(NSSet *)values;
 
@@ -79,5 +83,20 @@
 - (void)removeUpdatedInteractionsObject:(MHInteraction *)value;
 - (void)addUpdatedInteractions:(NSSet *)values;
 - (void)removeUpdatedInteractions:(NSSet *)values;
+
+- (void)addAddressesObject:(MHAddress *)value;
+- (void)removeAddressesObject:(MHAddress *)value;
+- (void)addAddresses:(NSSet *)values;
+- (void)removeAddresses:(NSSet *)values;
+
+- (void)addEmailAddressesObject:(MHEmailAddress *)value;
+- (void)removeEmailAddressesObject:(MHEmailAddress *)value;
+- (void)addEmailAddresses:(NSSet *)values;
+- (void)removeEmailAddresses:(NSSet *)values;
+
+- (void)addPhoneNumbersObject:(MHPhoneNumber *)value;
+- (void)removePhoneNumbersObject:(MHPhoneNumber *)value;
+- (void)addPhoneNumbers:(NSSet *)values;
+- (void)removePhoneNumbers:(NSSet *)values;
 
 @end

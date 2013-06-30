@@ -12,7 +12,7 @@
 
 +(void)presentError:(NSError *)error {
 	
-	NSLog(@"Error %d in Domain (%@): %@", [error code], [error domain], [error localizedDescription]);
+	NSLog(@"Error (%d) in Domain (%@): %@", [error code], [error domain], [error localizedDescription]);
 	
 }
 
