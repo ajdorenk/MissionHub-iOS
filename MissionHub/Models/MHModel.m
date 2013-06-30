@@ -142,31 +142,38 @@
 
 -(void)setValue:(id)value forKey:(NSString *)key {
 	
-	id formattedValue = value;
-	
 	if ([key isEqualToString:@"created_at"] ||
 		[key isEqualToString:@"updated_at"] ||
 		[key isEqualToString:@"deleted_at"] ||
-		[key isEqualToString:@"timestamp"]) {
+		[key isEqualToString:@"timestamp"] ||
+		[key isEqualToString:@"email_updated_at"]) {
 		
-		formattedValue = [[formattedValue substringToIndex:22] stringByAppendingString:[formattedValue substringFromIndex:23]];
+		NSString *formattedValue = [[value substringToIndex:22] stringByAppendingString:[value substringFromIndex:23]];
 		
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-		NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
-		formattedValue = [dateFormatter dateFromString:formattedValue];
+		NSDate *dateValue = [dateFormatter dateFromString:formattedValue];
+		
+		[super setValue:dateValue forKey:key];
+		return;
 		
 	} else if ([key isEqualToString:@"birth_date"] ||
 			   [key isEqualToString:@"date_became_christian"] ||
-			   [key isEqualToString:@"graduation_date"]) {
+			   [key isEqualToString:@"graduation_date"] ||
+			   [key isEqualToString:@"start_date"] ||
+			   [key isEqualToString:@"removed_date"] ||
+			   [key isEqualToString:@"archive_date"]) {
 		
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-		formattedValue = [dateFormatter dateFromString:value];
+		NSDate *dateValue = [dateFormatter dateFromString:value];
+		
+		[super setValue:dateValue forKey:key];
+		return;
 		
 	}
 	
-	[super setValue:formattedValue forKey:key];
+	[super setValue:value forKey:key];
 }
 
 -(id)valueForKey:(NSString *)key {

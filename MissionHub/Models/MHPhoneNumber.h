@@ -14,7 +14,7 @@
 
 @interface MHPhoneNumber : MHModel
 
-@property (nonatomic, retain) NSNumber * created_at;
+@property (nonatomic, retain) NSDate * created_at;
 @property (nonatomic, retain) NSNumber * remoteID;
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) NSString * number;

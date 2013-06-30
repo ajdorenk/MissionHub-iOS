@@ -131,7 +131,7 @@
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHUser" inverseName="person" inverseEntity="MHUser" syncable="YES"/>
     </entity>
     <entity name="MHPhoneNumber" representedClassName="MHPhoneNumber" syncable="YES">
-        <attribute name="created_at" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="email_updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
@@ -183,13 +183,13 @@
         <element name="MHInteractionType" positionX="313" positionY="3321" width="128" height="148"/>
         <element name="MHLabel" positionX="259" positionY="3137" width="128" height="150"/>
         <element name="MHOrganization" positionX="493" positionY="2574" width="128" height="240"/>
+        <element name="MHOrganizationalLabel" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="MHOrganizationalPermission" positionX="160" positionY="192" width="128" height="180"/>
         <element name="MHPermissionLevel" positionX="207" positionY="2921" width="128" height="135"/>
         <element name="MHPerson" positionX="232" positionY="2453" width="128" height="525"/>
         <element name="MHPhoneNumber" positionX="160" positionY="192" width="128" height="180"/>
         <element name="MHQuestion" positionX="160" positionY="192" width="128" height="255"/>
         <element name="MHSurvey" positionX="387" positionY="3492" width="128" height="195"/>
         <element name="MHUser" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="MHOrganizationalPermission" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="MHOrganizationalLabel" positionX="160" positionY="192" width="128" height="180"/>
     </elements>
 </model>

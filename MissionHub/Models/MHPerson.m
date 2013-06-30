@@ -113,9 +113,9 @@
 		
 		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 			
-			MHSurvey *newObject = [MHSurvey newObjectFromFields:object];
+			MHAddress *newObject = [MHAddress newObjectFromFields:object];
 			
-			[self addSurveysObject:newObject];
+			[self addAddressesObject:newObject];
 			
 		}];
 		
