@@ -8,8 +8,12 @@
 
 #import "MHAPI.h"
 #import "MHRequest.h"
+#import "MHPerson.h"
+#import "MHUser.h"
 
-static NSString *MHAPIErrorDomain = @"com.MissionHub.API";
+static NSString *MHAPIErrorDomain = @"com.MissionHub.API.errorDomain";
+static NSString *MHAPIRequestNameMe = @"com.MissionHub.API.requestName.me";
+static NSString *MHAPIRequestNameCurrentOrganization = @"com.MissionHub.API.requestName.org";
 
 typedef enum {
 	MHAPIErrorMissingUrl,
@@ -57,7 +61,7 @@ typedef enum {
     if (self) {
         // Custom initialization
 		
-		NSString *pathToConfigFile		= [[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"];
+		NSString *pathToConfigFile		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:pathToConfigFile];
 		
 		self.baseUrl					= [configDictionary valueForKey:@"base_url"];
@@ -98,6 +102,7 @@ typedef enum {
 	}
 	
 	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	request.requestName			= MHAPIRequestNameMe;
 	request.delegate			= self;
 	request.options				= requestOptions;
 	request.successBlock		= successBlock;
@@ -127,6 +132,42 @@ typedef enum {
 	request.options				= requestOptions;
 	request.successBlock		= successBlock;
 	request.failBlock			= failBlock;
+	
+	[self.queue addOperation:request];
+	
+}
+
+-(void)getCurrentOrganizationWith:(NSArray *)modelArray rawData:(NSDictionary *)dataDictionary request:(MHRequest *)request {
+	
+	
+	MHRequestOptions *requestOptions	= [[MHRequestOptions alloc] init];
+	self.currentUser					= [modelArray objectAtIndex:0];
+	
+	//grab list of organizational permissions and organizational ro
+	NSDictionary *currentPerson			= [dataDictionary valueForKey:[request.options stringInSingluarFormatFromEndpoint:MHRequestOptionsEndpointPeople]];
+	NSArray *arrayOfOrganizationalPermissions = [currentPerson objectForKey:[request.options stringFromInclude:MHRequestOptionsIncludePeopleAllOrganizationalPermissions]];
+	NSArray *arrayOfOrganizations = [currentPerson objectForKey:[request.options stringFromInclude:MHRequestOptionsIncludePeopleAllOrganizationsAndChildren]];
+	
+	//TODO: put organizational permissions and organizations in instance variables using enumeration blocks.
+	
+	requestOptions.endpoint = MHRequestOptionsEndpointOrganizations;
+	requestOptions.remoteID = [self.currentUser.user.primary_organization_id integerValue];
+	[requestOptions addIncludesForOrganizationRequest];
+	
+	NSError *error;
+	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
+	NSLog(@"%@", urlString);
+	if (error) {
+		[MHErrorHandler presentError:error];
+		return;
+	}
+	
+	MHRequest *orgRequest			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	orgRequest.requestName			= MHAPIRequestNameCurrentOrganization;
+	orgRequest.delegate				= self;
+	orgRequest.options				= requestOptions;
+	orgRequest.successBlock			= request.options.successBlock;
+	orgRequest.failBlock			= request.options.failBlock;
 	
 	[self.queue addOperation:request];
 	
@@ -355,13 +396,14 @@ typedef enum {
 	NSError *error;
 	__block NSMutableArray *modelArray = [NSMutableArray array];
 	__block NSString *nameOfClassForEndpoint = [NSString stringWithFormat:@"MH%@", [[request.options stringInSingluarFormatForEndpoint] capitalizedString]];
+	NSDictionary *result = nil;
 	
 	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
 	//@try {
 		
 		
 		//parse response and put into result dictionary
-		NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
+		result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
 		
 		//if there was a parsing error stop updating model and notify calling method of the error through the fail block
 		if (error) {
@@ -372,6 +414,8 @@ typedef enum {
 				//if no fail block show the error anyway
 				[MHErrorHandler presentError:error];
 			}
+			
+			return;
 			
 		}
 		
@@ -410,6 +454,8 @@ typedef enum {
 				[MHErrorHandler presentError:error];
 			}
 			
+			return;
+			
 		}
 		
 		
@@ -433,14 +479,30 @@ typedef enum {
 	}
 	@finally {
 		//nothing to clean up with ARC. YAY!
+		return;
 	}
 	*/
-	//call success block if it exists so that the calling method can access the result
-	if (request.successBlock) {
-		request.successBlock(modelArray, request.options);
+	
+	if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
+		
+		[self getCurrentOrganizationWith:modelArray rawData:result request:request];
+		
+	} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
+	
+		[modelArray insertObject:self.currentUser atIndex:0];
+		
+		//call success block if it exists so that the calling method can access the result
+		if (request.successBlock) {
+			request.successBlock(modelArray, request.options);
+		}
+		
 	} else {
-		//if no fail block show the error anyway
-		[MHErrorHandler presentError:error];
+	
+		//call success block if it exists so that the calling method can access the result
+		if (request.successBlock) {
+			request.successBlock(modelArray, request.options);
+		}
+		
 	}
 	
 }

@@ -12,12 +12,14 @@
 
 @interface MHRequest : ASIFormDataRequest {
 	
+	NSString			*_requestName;
 	MHRequestOptions	*_options;
 	void (^_successBlock)(NSArray *results, MHRequestOptions *options);
 	void (^_failBlock)(NSError *error, MHRequestOptions *options);
 	
 }
 
+@property (nonatomic, strong) NSString *requestName;
 @property (nonatomic, strong) MHRequestOptions *options;
 @property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
 @property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);

@@ -89,6 +89,9 @@ typedef enum {
 	NSUInteger					_offset;
 	MHRequestOptionsOrders		_order;
 	
+	void (^_successBlock)(NSArray *results, MHRequestOptions *options);
+	void (^_failBlock)(NSError *error, MHRequestOptions *options);
+	
 }
 
 @property (nonatomic, assign) MHRequestOptionsEndpoints	endpoint;
@@ -98,6 +101,9 @@ typedef enum {
 @property (nonatomic, assign) NSUInteger				limit;
 @property (nonatomic, assign) NSUInteger				offset;
 @property (nonatomic, assign) MHRequestOptionsOrders	order;
+
+@property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
+@property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);
 
 -(BOOL)hasRemoteID;
 -(BOOL)hasFilters;
