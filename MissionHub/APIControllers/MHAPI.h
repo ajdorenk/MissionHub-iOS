@@ -22,7 +22,6 @@
 	NSString *_accessToken;
 	
 	MHPerson *_currentUser;
-	MHOrganization *_currentOrganization;
 	
 }
 
@@ -32,7 +31,6 @@
 @property (nonatomic, strong) NSString *accessToken;
 
 @property (nonatomic, strong) MHPerson *currentUser;
-@property (nonatomic, strong) MHOrganization *currentOrganization;
 
 +(MHAPI *)sharedInstance;
 

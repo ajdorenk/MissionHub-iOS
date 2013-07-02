@@ -8,12 +8,11 @@
 
 #import "MHAPI.h"
 #import "MHRequest.h"
-#import "MHPerson.h"
-#import "MHUser.h"
+#import "MHPerson+Helper.h"
 
-static NSString *MHAPIErrorDomain = @"com.MissionHub.API.errorDomain";
-static NSString *MHAPIRequestNameMe = @"com.MissionHub.API.requestName.me";
-static NSString *MHAPIRequestNameCurrentOrganization = @"com.MissionHub.API.requestName.org";
+static NSString *MHAPIErrorDomain = @"com.missionhub.errorDomain.API";
+static NSString *MHAPIRequestNameMe = @"com.missionhub.API.requestName.me";
+static NSString *MHAPIRequestNameCurrentOrganization = @"com.missionhub.API.requestName.org";
 
 typedef enum {
 	MHAPIErrorMissingUrl,
@@ -40,7 +39,6 @@ typedef enum {
 @synthesize accessToken	= _accessToken;
 
 @synthesize currentUser	= _currentUser;
-@synthesize currentOrganization	= _currentOrganization;
 
 + (MHAPI *)sharedInstance
 {
@@ -61,7 +59,7 @@ typedef enum {
     if (self) {
         // Custom initialization
 		
-		NSString *pathToConfigFile		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
+		NSString *pathToConfigFile		= [[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:pathToConfigFile];
 		
 		self.baseUrl					= [configDictionary valueForKey:@"base_url"];
@@ -134,21 +132,13 @@ typedef enum {
 	request.failBlock			= failBlock;
 	
 	[self.queue addOperation:request];
-	
 }
 
--(void)getCurrentOrganizationWith:(NSArray *)modelArray rawData:(NSDictionary *)dataDictionary request:(MHRequest *)request {
+-(void)getCurrentOrganizationWith:(NSArray *)modelArray request:(MHRequest *)request {
 	
 	
 	MHRequestOptions *requestOptions	= [[MHRequestOptions alloc] init];
 	self.currentUser					= [modelArray objectAtIndex:0];
-	
-	//grab list of organizational permissions and organizational ro
-	NSDictionary *currentPerson			= [dataDictionary valueForKey:[request.options stringInSingluarFormatFromEndpoint:MHRequestOptionsEndpointPeople]];
-	NSArray *arrayOfOrganizationalPermissions = [currentPerson objectForKey:[request.options stringFromInclude:MHRequestOptionsIncludePeopleAllOrganizationalPermissions]];
-	NSArray *arrayOfOrganizations = [currentPerson objectForKey:[request.options stringFromInclude:MHRequestOptionsIncludePeopleAllOrganizationsAndChildren]];
-	
-	//TODO: put organizational permissions and organizations in instance variables using enumeration blocks.
 	
 	requestOptions.endpoint = MHRequestOptionsEndpointOrganizations;
 	requestOptions.remoteID = [self.currentUser.user.primary_organization_id integerValue];
@@ -166,10 +156,10 @@ typedef enum {
 	orgRequest.requestName			= MHAPIRequestNameCurrentOrganization;
 	orgRequest.delegate				= self;
 	orgRequest.options				= requestOptions;
-	orgRequest.successBlock			= request.options.successBlock;
-	orgRequest.failBlock			= request.options.failBlock;
+	orgRequest.successBlock			= request.successBlock;
+	orgRequest.failBlock			= request.failBlock;
 	
-	[self.queue addOperation:request];
+	[self.queue addOperation:orgRequest];
 	
 }
 
@@ -399,7 +389,7 @@ typedef enum {
 	NSDictionary *result = nil;
 	
 	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
-	//@try {
+	@try {
 		
 		
 		//parse response and put into result dictionary
@@ -459,7 +449,7 @@ typedef enum {
 		}
 		
 		
-	/*
+	
 	}
 	@catch (NSException *exception) {
 		
@@ -481,14 +471,15 @@ typedef enum {
 		//nothing to clean up with ARC. YAY!
 		return;
 	}
-	*/
+	
 	
 	if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
 		
-		[self getCurrentOrganizationWith:modelArray rawData:result request:request];
+		[self getCurrentOrganizationWith:modelArray request:request];
 		
 	} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
 	
+		self.currentUser.currentOrganization = [modelArray objectAtIndex:0];
 		[modelArray insertObject:self.currentUser atIndex:0];
 		
 		//call success block if it exists so that the calling method can access the result
@@ -630,7 +621,7 @@ typedef enum {
 		return nil;
 	}
 	
-	if (options.endpoint) {
+	if ([options stringForEndpoint]) {
 		
 		urlString = [urlString stringByAppendingFormat:@"/%@", [options stringForEndpoint]];
 		
