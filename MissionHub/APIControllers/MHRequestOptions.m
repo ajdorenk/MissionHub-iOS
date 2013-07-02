@@ -18,6 +18,9 @@
 @synthesize offset		= _offset;
 @synthesize order		= _order;
 
+@synthesize successBlock	= _successBlock;
+@synthesize failBlock		= _failBlock;
+
 -(id)init {
 	
 	self = [super init];
@@ -31,6 +34,9 @@
 		self.limit		= 0;
 		self.offset		= 0;
 		self.order		= MHRequestOptionsOrderNone;
+		
+		self.successBlock		= nil;
+		self.failBlock			= nil;
 		
 	}
 	

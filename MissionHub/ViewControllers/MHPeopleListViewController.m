@@ -279,7 +279,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
         static NSString *CellIdentifier = @"MyCell";
         MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     

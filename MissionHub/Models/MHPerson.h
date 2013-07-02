@@ -2,7 +2,7 @@
 //  MHPerson.h
 //  MissionHub
 //
-//  Created by Michael Harrison on 6/25/13.
+//  Created by Michael Harrison on 7/1/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHOrganization, MHOrganizationalLabel, MHInteraction, MHOrganizationalPermission, MHSurvey, MHAddress, MHEmailAddress, MHPhoneNumber, MHUser;
+@class MHAddress, MHEmailAddress, MHInteraction, MHOrganization, MHOrganizationalLabel, MHOrganizationalPermission, MHPerson, MHPhoneNumber, MHSurvey, MHUser;
 
 @interface MHPerson : MHModel
 
@@ -30,29 +30,52 @@
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) NSNumber * user_id;
 @property (nonatomic, retain) NSString * year_in_school;
+@property (nonatomic, retain) NSSet *addresses;
+@property (nonatomic, retain) MHOrganization *adminInOrganization;
+@property (nonatomic, retain) NSSet *allOrganizations;
 @property (nonatomic, retain) NSSet *assignedConacts;
 @property (nonatomic, retain) MHPerson *assignedLeader;
+@property (nonatomic, retain) NSSet *createdInteractions;
+@property (nonatomic, retain) MHOrganization *currentOrganization;
+@property (nonatomic, retain) NSSet *emailAddresses;
 @property (nonatomic, retain) NSSet *initiatedInteractions;
 @property (nonatomic, retain) NSSet *labels;
-@property (nonatomic, retain) MHOrganization *organization;
+@property (nonatomic, retain) MHOrganization *leaderInOrganization;
 @property (nonatomic, retain) MHOrganizationalPermission *permissionLevel;
+@property (nonatomic, retain) NSSet *phoneNumbers;
 @property (nonatomic, retain) NSSet *receivedInteractions;
 @property (nonatomic, retain) NSSet *surveys;
-@property (nonatomic, retain) NSSet *createdInteractions;
 @property (nonatomic, retain) NSSet *updatedInteractions;
-@property (nonatomic, retain) MHOrganization *leaderInOrganization;
-@property (nonatomic, retain) NSSet *phoneNumbers;
-@property (nonatomic, retain) NSSet *addresses;
-@property (nonatomic, retain) NSSet *emailAddresses;
 @property (nonatomic, retain) MHUser *user;
+@property (nonatomic, retain) NSSet *allOrganizationalPermissions;
 @end
 
 @interface MHPerson (CoreDataGeneratedAccessors)
+
+- (void)addAddressesObject:(MHAddress *)value;
+- (void)removeAddressesObject:(MHAddress *)value;
+- (void)addAddresses:(NSSet *)values;
+- (void)removeAddresses:(NSSet *)values;
+
+- (void)addAllOrganizationsObject:(MHOrganization *)value;
+- (void)removeAllOrganizationsObject:(MHOrganization *)value;
+- (void)addAllOrganizations:(NSSet *)values;
+- (void)removeAllOrganizations:(NSSet *)values;
 
 - (void)addAssignedConactsObject:(MHPerson *)value;
 - (void)removeAssignedConactsObject:(MHPerson *)value;
 - (void)addAssignedConacts:(NSSet *)values;
 - (void)removeAssignedConacts:(NSSet *)values;
+
+- (void)addCreatedInteractionsObject:(MHInteraction *)value;
+- (void)removeCreatedInteractionsObject:(MHInteraction *)value;
+- (void)addCreatedInteractions:(NSSet *)values;
+- (void)removeCreatedInteractions:(NSSet *)values;
+
+- (void)addEmailAddressesObject:(MHEmailAddress *)value;
+- (void)removeEmailAddressesObject:(MHEmailAddress *)value;
+- (void)addEmailAddresses:(NSSet *)values;
+- (void)removeEmailAddresses:(NSSet *)values;
 
 - (void)addInitiatedInteractionsObject:(MHInteraction *)value;
 - (void)removeInitiatedInteractionsObject:(MHInteraction *)value;
@@ -64,6 +87,11 @@
 - (void)addLabels:(NSSet *)values;
 - (void)removeLabels:(NSSet *)values;
 
+- (void)addPhoneNumbersObject:(MHPhoneNumber *)value;
+- (void)removePhoneNumbersObject:(MHPhoneNumber *)value;
+- (void)addPhoneNumbers:(NSSet *)values;
+- (void)removePhoneNumbers:(NSSet *)values;
+
 - (void)addReceivedInteractionsObject:(MHInteraction *)value;
 - (void)removeReceivedInteractionsObject:(MHInteraction *)value;
 - (void)addReceivedInteractions:(NSSet *)values;
@@ -74,29 +102,14 @@
 - (void)addSurveys:(NSSet *)values;
 - (void)removeSurveys:(NSSet *)values;
 
-- (void)addCreatedInteractionsObject:(MHInteraction *)value;
-- (void)removeCreatedInteractionsObject:(MHInteraction *)value;
-- (void)addCreatedInteractions:(NSSet *)values;
-- (void)removeCreatedInteractions:(NSSet *)values;
-
 - (void)addUpdatedInteractionsObject:(MHInteraction *)value;
 - (void)removeUpdatedInteractionsObject:(MHInteraction *)value;
 - (void)addUpdatedInteractions:(NSSet *)values;
 - (void)removeUpdatedInteractions:(NSSet *)values;
 
-- (void)addAddressesObject:(MHAddress *)value;
-- (void)removeAddressesObject:(MHAddress *)value;
-- (void)addAddresses:(NSSet *)values;
-- (void)removeAddresses:(NSSet *)values;
-
-- (void)addEmailAddressesObject:(MHEmailAddress *)value;
-- (void)removeEmailAddressesObject:(MHEmailAddress *)value;
-- (void)addEmailAddresses:(NSSet *)values;
-- (void)removeEmailAddresses:(NSSet *)values;
-
-- (void)addPhoneNumbersObject:(MHPhoneNumber *)value;
-- (void)removePhoneNumbersObject:(MHPhoneNumber *)value;
-- (void)addPhoneNumbers:(NSSet *)values;
-- (void)removePhoneNumbers:(NSSet *)values;
+- (void)addAllOrganizationalPermissionsObject:(MHOrganizationalPermission *)value;
+- (void)removeAllOrganizationalPermissionsObject:(MHOrganizationalPermission *)value;
+- (void)addAllOrganizationalPermissions:(NSSet *)values;
+- (void)removeAllOrganizationalPermissions:(NSSet *)values;
 
 @end

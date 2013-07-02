@@ -8,8 +8,11 @@
 
 #import "MHAPI.h"
 #import "MHRequest.h"
+#import "MHPerson+Helper.h"
 
-static NSString *MHAPIErrorDomain = @"com.MissionHub.API";
+static NSString *MHAPIErrorDomain = @"com.missionhub.errorDomain.API";
+static NSString *MHAPIRequestNameMe = @"com.missionhub.API.requestName.me";
+static NSString *MHAPIRequestNameCurrentOrganization = @"com.missionhub.API.requestName.org";
 
 typedef enum {
 	MHAPIErrorMissingUrl,
@@ -36,7 +39,6 @@ typedef enum {
 @synthesize accessToken	= _accessToken;
 
 @synthesize currentUser	= _currentUser;
-@synthesize currentOrganization	= _currentOrganization;
 
 + (MHAPI *)sharedInstance
 {
@@ -98,6 +100,7 @@ typedef enum {
 	}
 	
 	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	request.requestName			= MHAPIRequestNameMe;
 	request.delegate			= self;
 	request.options				= requestOptions;
 	request.successBlock		= successBlock;
@@ -129,6 +132,34 @@ typedef enum {
 	request.failBlock			= failBlock;
 	
 	[self.queue addOperation:request];
+}
+
+-(void)getCurrentOrganizationWith:(NSArray *)modelArray request:(MHRequest *)request {
+	
+	
+	MHRequestOptions *requestOptions	= [[MHRequestOptions alloc] init];
+	self.currentUser					= [modelArray objectAtIndex:0];
+	
+	requestOptions.endpoint = MHRequestOptionsEndpointOrganizations;
+	requestOptions.remoteID = [self.currentUser.user.primary_organization_id integerValue];
+	[requestOptions addIncludesForOrganizationRequest];
+	
+	NSError *error;
+	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
+	NSLog(@"%@", urlString);
+	if (error) {
+		[MHErrorHandler presentError:error];
+		return;
+	}
+	
+	MHRequest *orgRequest			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	orgRequest.requestName			= MHAPIRequestNameCurrentOrganization;
+	orgRequest.delegate				= self;
+	orgRequest.options				= requestOptions;
+	orgRequest.successBlock			= request.successBlock;
+	orgRequest.failBlock			= request.failBlock;
+	
+	[self.queue addOperation:orgRequest];
 	
 }
 
@@ -355,13 +386,14 @@ typedef enum {
 	NSError *error;
 	__block NSMutableArray *modelArray = [NSMutableArray array];
 	__block NSString *nameOfClassForEndpoint = [NSString stringWithFormat:@"MH%@", [[request.options stringInSingluarFormatForEndpoint] capitalizedString]];
+	NSDictionary *result = nil;
 	
 	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
-	//@try {
+	@try {
 		
 		
 		//parse response and put into result dictionary
-		NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
+		result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
 		
 		//if there was a parsing error stop updating model and notify calling method of the error through the fail block
 		if (error) {
@@ -372,6 +404,8 @@ typedef enum {
 				//if no fail block show the error anyway
 				[MHErrorHandler presentError:error];
 			}
+			
+			return;
 			
 		}
 		
@@ -410,10 +444,12 @@ typedef enum {
 				[MHErrorHandler presentError:error];
 			}
 			
+			return;
+			
 		}
 		
 		
-	/*
+	
 	}
 	@catch (NSException *exception) {
 		
@@ -433,14 +469,31 @@ typedef enum {
 	}
 	@finally {
 		//nothing to clean up with ARC. YAY!
+		return;
 	}
-	*/
-	//call success block if it exists so that the calling method can access the result
-	if (request.successBlock) {
-		request.successBlock(modelArray, request.options);
+	
+	
+	if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
+		
+		[self getCurrentOrganizationWith:modelArray request:request];
+		
+	} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
+	
+		self.currentUser.currentOrganization = [modelArray objectAtIndex:0];
+		[modelArray insertObject:self.currentUser atIndex:0];
+		
+		//call success block if it exists so that the calling method can access the result
+		if (request.successBlock) {
+			request.successBlock(modelArray, request.options);
+		}
+		
 	} else {
-		//if no fail block show the error anyway
-		[MHErrorHandler presentError:error];
+	
+		//call success block if it exists so that the calling method can access the result
+		if (request.successBlock) {
+			request.successBlock(modelArray, request.options);
+		}
+		
 	}
 	
 }
@@ -568,7 +621,7 @@ typedef enum {
 		return nil;
 	}
 	
-	if (options.endpoint) {
+	if ([options stringForEndpoint]) {
 		
 		urlString = [urlString stringByAppendingFormat:@"/%@", [options stringForEndpoint]];
 		

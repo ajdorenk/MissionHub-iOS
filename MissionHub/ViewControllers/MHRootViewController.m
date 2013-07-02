@@ -7,6 +7,7 @@
 //
 
 #import "MHRootViewController.h"
+#import "MHPeopleListViewController.h"
 
 @interface MHRootViewController ()
 
@@ -15,6 +16,7 @@
 @implementation MHRootViewController
 
 @synthesize realStoryboard;
+@synthesize loginViewController;
 @synthesize userInitiatedLogout;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,23 +45,16 @@
 		
 	}
 	
-	if ([[MHAPI sharedInstance] accessToken] == nil) {
-		
-		self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"Login"];
-		((MHLoginViewController *)self.topViewController).delegate = self;
-		
-	} else {
-		
-		[[MHAPI sharedInstance] getMeWithSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
-										  
-										  NSLog(@"SUCCESS");
-										  
-									  } failBlock:nil
-		 ];
-		
-		self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"PeopleList"];
-		
-	}
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	
+	self.loginViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"Login"];
+	self.loginViewController.loginDelegate = self;
+	self.loginViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+	self.loginViewController.modalTransitionStyle	= UIModalTransitionStyleCoverVertical;
+	
+	[self presentViewController:self.loginViewController animated:NO completion:nil];
 	
 }
 
@@ -76,23 +71,32 @@
 
 #pragma mark - MHLoginDelegate methods
 
--(void)loggedInWithToken:(NSString *)token {
-	NSLog(@"LOGGED IN WITH TOKEN: %@", token);
-	[MHAPI sharedInstance].accessToken = token;
+-(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser {
 	
-	self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"PeopleList"];
-	[self.slidingViewController resetTopView];
+	__block MHPeopleListViewController *peopleList = [self.realStoryboard instantiateViewControllerWithIdentifier:@"PeopleList"];
+	__block MHMenuViewController *menuList = [self.realStoryboard instantiateViewControllerWithIdentifier:@"Menu"];
+	
+	//[peopleList setCurrentUser:currentUser];
+	[menuList setCurrentUser:currentUser];
+	
+	[self dismissViewControllerAnimated:YES completion:^{
+		
+		self.topViewController = peopleList;
+		[self.slidingViewController resetTopView];
+		
+	}];
 	
 }
 
--(void)loggedOut {
-	
-	[MHAPI sharedInstance].accessToken = nil;
+-(void)finishedLogout {
 	
 	if (self.userInitiatedLogout) {
 		
-		self.topViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"Login"];
-		[self.slidingViewController resetTopView];
+		[self dismissViewControllerAnimated:YES completion:^{
+			
+			[self presentViewController:self.loginViewController animated:YES completion:nil];
+			
+		}];
 		
 	}
 	

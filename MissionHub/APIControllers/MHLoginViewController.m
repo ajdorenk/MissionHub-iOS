@@ -7,18 +7,36 @@
 //
 
 #import "MHLoginViewController.h"
+#import "MHAPI.h"
+#import "MHErrorHandler.h"
 
 #define LOGIN_BUTTON_WIDTH 180.0f
 #define LOGIN_BUTTON_HEIGHT 60.0f
 
 
-NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessionStateChangedNotification";
+NSString *const FBSessionStateChangedNotification = @"com.missionhub:FBSessionStateChangedNotification";
+NSString *const MHLoginErrorDomain = @"com.missionhub.errorDomain.Login";
+
+typedef enum {
+	MHLoginErrorUnknownError,
+	MHLoginErrorFBError,
+	MHLoginErrorUserCancelledLoginError,
+	MHLoginErrorSessionError
+} MHLoginErrors;
 
 @interface MHLoginViewController ()
+
+-(void)beginLoading;
+-(void)endLoading;
 
 @end
 
 @implementation MHLoginViewController
+
+@synthesize loginDelegate		= _loginDelegate;
+@synthesize loginButtonView		= _loginButtonView;
+@synthesize loadingIndicator	= _loadingIndicator;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,29 +52,36 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
 
 -(void)awakeFromNib {
 	
-	FBLoginView *fbLoginView = [[FBLoginView alloc] initWithReadPermissions:@[@"user_birthday",@"email",@"user_interests",@"user_location",@"user_education_history"]];
+	self.loginButtonView = [[FBLoginView alloc] initWithReadPermissions:@[@"user_birthday",@"email",@"user_interests",@"user_location",@"user_education_history"]];
 	
 	//NSLog(@"%f, %f, %f, %f", CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
 	//	  CGRectGetMidY(self.view.frame) - (LOGIN_BUTTON_HEIGHT / 2),
 	//	  LOGIN_BUTTON_WIDTH,
 	//	  LOGIN_BUTTON_HEIGHT);
 	
-	fbLoginView.delegate	= self;
-	fbLoginView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
+	self.loginButtonView.delegate	= self;
+	self.loginButtonView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
 											 CGRectGetMidY(self.view.frame) - (LOGIN_BUTTON_HEIGHT / 2),
 											 LOGIN_BUTTON_WIDTH,
 											 LOGIN_BUTTON_HEIGHT);
 	
-	[self.view addSubview:fbLoginView];
+	[self.view addSubview:self.loginButtonView];
 	
-	[fbLoginView sizeToFit];
+	[self.loginButtonView sizeToFit];
 	
-	fbLoginView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (fbLoginView.frame.size.width / 2),
-										 CGRectGetMidY(self.view.frame) - (fbLoginView.frame.size.height / 2),
-										 fbLoginView.frame.size.width,
-										 fbLoginView.frame.size.height);
+	self.loginButtonView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (self.loginButtonView.frame.size.width / 2),
+										 CGRectGetMidY(self.view.frame) - (self.loginButtonView.frame.size.height / 2),
+										 self.loginButtonView.frame.size.width,
+										 self.loginButtonView.frame.size.height);
 	
-	fbLoginView.alpha = 0.5;
+	self.loadingIndicator	= [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	
+	self.loadingIndicator.frame = CGRectOffset(self.loginButtonView.frame, self.loginButtonView.center.x - (self.loadingIndicator.frame.size.width * 0.5), CGRectGetMaxY(self.loginButtonView.frame) + 50);
+	self.loadingIndicator.hidesWhenStopped = YES;
+	
+	[self.view addSubview:self.loadingIndicator];
+	
+	//fbLoginView.alpha = 0.5;
 	
 }
 
@@ -64,6 +89,12 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	
+	if ([[MHAPI sharedInstance] accessToken]) {
+		
+		[self loggedInWithToken:[[MHAPI sharedInstance] accessToken]];
+		
+	}
 	
 }
 
@@ -76,6 +107,22 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Loading Methods methods
+
+-(void)beginLoading {
+	
+	self.loginButtonView.userInteractionEnabled = NO;
+	[self.loadingIndicator startAnimating];
+	
+}
+
+-(void)endLoading {
+	
+	self.loginButtonView.userInteractionEnabled = YES;
+	[self.loadingIndicator stopAnimating];
+	
 }
 
 #pragma mark - FB App switching methods
@@ -94,6 +141,9 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
         if (call.accessTokenData) {
             if ([FBSession activeSession].isOpen) {
                 NSLog(@"INFO: Ignoring app link because current session is open.");
+				
+				[self loggedInWithToken:call.accessTokenData.accessToken];
+				
             }
             else {
                 [self handleAppLink:call.accessTokenData];
@@ -132,7 +182,9 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
                               // Forward any errors to the FBLoginView delegate.
                               if (error) {
                                   [self loginView:nil handleError:error];
-                              }
+                              } else {
+								  [self loggedInWithToken:session.accessTokenData.accessToken];
+							  }
                           }];
 	
 }
@@ -141,11 +193,7 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
     
-	if ([self.delegate respondsToSelector:@selector(loggedInWithToken:)]) {
-		
-		[self.delegate loggedInWithToken:[FBSession activeSession].accessTokenData.accessToken];
-		
-	}
+	[self loggedInWithToken:[FBSession activeSession].accessTokenData.accessToken];
 	
 }
 
@@ -174,19 +222,14 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
      object:session];
 	
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Error"
-                                  message:error.localizedDescription
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
+        [MHErrorHandler presentError:error];
     }
 }
 
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
 	
     NSString *alertMessage, *alertTitle;
+	MHLoginErrors code;
     
     // Facebook SDK * error handling *
     // Error handling is an important part of providing a good user experience.
@@ -199,40 +242,88 @@ NSString *const FBSessionStateChangedNotification = @"org.cru.missionhub:FBSessi
     if (error.fberrorShouldNotifyUser) {
         // If the SDK has a message for the user, surface it. This conveniently
         // handles cases like password change or iOS6 app slider state.
+		code = MHLoginErrorFBError;
         alertTitle = @"Something Went Wrong";
         alertMessage = error.fberrorUserMessage;
     } else if (error.fberrorCategory == FBErrorCategoryAuthenticationReopenSession) {
         // It is important to handle session closures as mentioned. You can inspect
         // the error for more context but this sample generically notifies the user.
+		code = MHLoginErrorSessionError;
         alertTitle = @"Session Error";
         alertMessage = @"Your current session is no longer valid. Please log in again.";
     } else if (error.fberrorCategory == FBErrorCategoryUserCancelled) {
         // The user has cancelled a login. You can inspect the error
         // for more context. For this sample, we will simply ignore it.
-        NSLog(@"user cancelled login");
+		code = MHLoginErrorUserCancelledLoginError;
+		//alertMessage = @"Login Cancelled.";
     } else {
         // For simplicity, this sample treats other errors blindly, but you should
         // refer to https://developers.facebook.com/docs/technical-guides/iossdk/errors/ for more information.
+		code = MHLoginErrorUnknownError;
         alertTitle  = @"Unknown Error";
         alertMessage = @"Error. Please try again later.";
         NSLog(@"Unexpected error:%@", error);
     }
     
     if (alertMessage) {
-        [[[UIAlertView alloc] initWithTitle:alertTitle
-                                    message:alertMessage
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
+		
+		NSError *error = [NSError errorWithDomain:MHLoginErrorDomain
+											 code:code
+										 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(alertMessage, nil)}];
+		
+		[MHErrorHandler presentError:error];
     }
 	
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+	
+	[self endLoading];
     
-	if ([self.delegate respondsToSelector:@selector(loggedInWithToken:)]) {
+	if ([self.loginDelegate respondsToSelector:@selector(finishedLogout)]) {
 		
-		[self.delegate loggedOut];
+		[self.loginDelegate finishedLogout];
+		
+	}
+	
+}
+
+-(void)loggedInWithToken:(NSString *)token {
+	
+	[self beginLoading];
+	
+	NSLog(@"LOGGED IN WITH TOKEN: %@", token);
+	[MHAPI sharedInstance].accessToken = token;
+	
+	if ([MHAPI sharedInstance].currentUser) {
+		
+		[self endLoading];
+		
+		if ([self.loginDelegate respondsToSelector:@selector(finishedLogin)]) {
+			
+			[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser];
+			
+		}
+		
+	} else {
+	
+		[[MHAPI sharedInstance] getMeWithSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+			
+			[self endLoading];
+			
+			if ([self.loginDelegate respondsToSelector:@selector(finishedLogin)]) {
+				
+				[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser];
+				
+			}
+			
+		} failBlock:^(NSError *error, MHRequestOptions *options) {
+			
+			[self endLoading];
+			
+			[MHErrorHandler presentError:error];
+			
+		}];
 		
 	}
 	

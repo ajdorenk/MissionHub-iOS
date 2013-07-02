@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
+#import "MHPerson+Helper.h"
 
 @interface MHMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+-(id)setCurrentUser:(MHPerson *)currentUser;
 
 @end
