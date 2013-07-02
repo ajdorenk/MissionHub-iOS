@@ -9,6 +9,8 @@
 
 #import "MyTableViewController.h"
 #import "M6ParallaxController.h"
+#import "MHInteractionCell.h"
+
 
 @interface MyTableViewController ()
 
@@ -21,5 +23,39 @@
     [self.parallaxController tableViewControllerDidScroll:self];
     
 }
+
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *CellIdentifier = @"InteractionCell";
+    MHInteractionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // Configure the cell...
+    if (cell == nil) {
+        cell = [[MHInteractionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    
+    return cell;
+    
+}
+
+
+
+
 
 @end

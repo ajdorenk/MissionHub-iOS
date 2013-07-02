@@ -12,6 +12,15 @@
 
 /*
 @class MHSublabel;
+
+
+@interface MHPerson : NSObject
+
+@property (nonatomic, strong) NSString *name; // name of Person
+@property (nonatomic, strong) NSString *gender; // Person gender
+@property (nonatomic, strong) NSString *profilePicturePath; // image filename of Person
+
+@end
 */
 @interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate> {
 

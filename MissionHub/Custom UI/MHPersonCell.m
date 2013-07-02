@@ -10,6 +10,14 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+@implementation MHPerson
+
+@synthesize name;
+@synthesize gender;
+@synthesize profilePicturePath;
+
+@end
+
 
 @implementation MHPersonCell
 
@@ -46,5 +54,20 @@
     // Configure the view for the selected state
 }
 
+-(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person{
+//    person *person = [self.persons objectAtIndex:indexPath.row];
+    
+    if (personCell.profilePicture.image == nil)
+    {
+        personCell.profilePicture.image = [UIImage imageNamed:@"fb_blank_profile_square.png"];
+        
+    }
+    else{
+        personCell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
+    }
+    
+    personCell.gender.text = person.gender;
+    personCell.name.text = person.name;
+}
 
 @end
