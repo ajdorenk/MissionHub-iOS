@@ -156,10 +156,6 @@
 		68C0689C176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A71770EFBE007C79D6 /* MHStorage.m */; };
 		68C068A91770EFBE007C79D6 /* MHStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A71770EFBE007C79D6 /* MHStorage.m */; };
-		68C068B0177102C9007C79D6 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AD177102C9007C79D6 /* ECSlidingViewController.m */; };
-		68C068B1177102C9007C79D6 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AD177102C9007C79D6 /* ECSlidingViewController.m */; };
-		68C068B2177102C9007C79D6 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AF177102C9007C79D6 /* UIImage+ImageWithUIView.m */; };
-		68C068B3177102C9007C79D6 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AF177102C9007C79D6 /* UIImage+ImageWithUIView.m */; };
 		68C0690917710357007C79D6 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068B917710357007C79D6 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		68C0690B17710357007C79D6 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068BB17710357007C79D6 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		68C0690D17710357007C79D6 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068BD17710357007C79D6 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -211,9 +207,11 @@
 		AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301135176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301139176FEEB800D53E35 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */; };
+		AD3C60CE1781E9AE00744167 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AD177102C9007C79D6 /* ECSlidingViewController.m */; };
+		AD3C60CF1781E9AE00744167 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AF177102C9007C79D6 /* UIImage+ImageWithUIView.m */; };
+		AD3C60D2178216DD00744167 /* MHSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */; };
 		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
 		AD982794177C9D6700A0276A /* MHParallaxTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */; };
-		AD9827A3177CEE9800A0276A /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9827A1177CEE9800A0276A /* SDSegmentedControl.m */; };
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -459,11 +457,12 @@
 		AD30112E176FE4D900D53E35 /* MHPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPersonCell.h; path = "Custom UI/MHPersonCell.h"; sourceTree = "<group>"; };
 		AD30112F176FE4D900D53E35 /* MHPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPersonCell.m; path = "Custom UI/MHPersonCell.m"; sourceTree = "<group>"; };
 		AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		AD3C60D0178216DD00744167 /* MHSegmentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSegmentedViewController.h; path = ViewControllers/MHSegmentedViewController.h; sourceTree = "<group>"; };
+		AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSegmentedViewController.m; path = ViewControllers/MHSegmentedViewController.m; sourceTree = "<group>"; };
 		AD98278B177C93B400A0276A /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ViewControllers/MHProfileViewController.h; sourceTree = "<group>"; };
 		AD98278C177C93B400A0276A /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ViewControllers/MHProfileViewController.m; sourceTree = "<group>"; };
 		AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHParallaxTopViewController.h; path = ViewControllers/MHParallaxTopViewController.h; sourceTree = "<group>"; };
 		AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHParallaxTopViewController.m; path = ViewControllers/MHParallaxTopViewController.m; sourceTree = "<group>"; };
-		AD9827A1177CEE9800A0276A /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
 		AD9827A4177CF04200A0276A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -646,6 +645,8 @@
 				AD98278C177C93B400A0276A /* MHProfileViewController.m */,
 				AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */,
 				AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */,
+				AD3C60D0178216DD00744167 /* MHSegmentedViewController.h */,
+				AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1096,6 +1097,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD3C60CE1781E9AE00744167 /* ECSlidingViewController.m in Sources */,
+				AD3C60CF1781E9AE00744167 /* UIImage+ImageWithUIView.m in Sources */,
 				683910951760FD3100E01B46 /* main.m in Sources */,
 				683910991760FD3100E01B46 /* MHAppDelegate.m in Sources */,
 				683910A21760FD3100E01B46 /* MissionHub.xcdatamodeld in Sources */,
@@ -1110,8 +1113,6 @@
 				AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */,
 				68C0689B176EB832007C79D6 /* MHModel.m in Sources */,
 				68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */,
-				68C068B0177102C9007C79D6 /* ECSlidingViewController.m in Sources */,
-				68C068B2177102C9007C79D6 /* UIImage+ImageWithUIView.m in Sources */,
 				68EB33C017791295003958A0 /* ASIAuthenticationDialog.m in Sources */,
 				68C0690917710357007C79D6 /* ASIDataCompressor.m in Sources */,
 				68C0690B17710357007C79D6 /* ASIDataDecompressor.m in Sources */,
@@ -1162,6 +1163,7 @@
 				680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */,
 				680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */,
 				6821C470178244970063AA3D /* MHPerson.m in Sources */,
+				AD3C60D2178216DD00744167 /* MHSegmentedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1181,8 +1183,6 @@
 				AD301135176FE4D900D53E35 /* MHPersonCell.m in Sources */,
 				68C0689C176EB832007C79D6 /* MHModel.m in Sources */,
 				68C068A91770EFBE007C79D6 /* MHStorage.m in Sources */,
-				68C068B1177102C9007C79D6 /* ECSlidingViewController.m in Sources */,
-				68C068B3177102C9007C79D6 /* UIImage+ImageWithUIView.m in Sources */,
 				68EB33C317791306003958A0 /* ASIAuthenticationDialog.m in Sources */,
 				68EB33C417791306003958A0 /* ASIDataCompressor.m in Sources */,
 				68EB33C517791306003958A0 /* ASIDataDecompressor.m in Sources */,
@@ -1211,6 +1211,7 @@
 				68478D85177E3F000014501D /* UIImageView+AFNetworking.m in Sources */,
 				AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */,
 				AD9827A3177CEE9800A0276A /* SDSegmentedControl.m in Sources */,
+				68478D8D177E8AE20014501D /* MHPerson.m in Sources */,
 				68478D8F177E8AE20014501D /* MHOrganization.m in Sources */,
 				68478D91177E8AE20014501D /* MHLabel.m in Sources */,
 				68478D99177E8B140014501D /* MHGenderListController.m in Sources */,

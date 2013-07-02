@@ -83,11 +83,12 @@
 {
     MHParallaxTopViewController * topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ParallaxedViewController"];
     UITableViewController * tableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController"];
+    UITableViewController * segmentedViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"segmentedViewController"];
     
-    [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController];
     
+    [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController segmentedViewController:segmentedViewController];
     
-     [((MHParallaxTopViewController *)self.topViewController).menu setUserInteractionEnabled:YES];
+    [((MHParallaxTopViewController *)self.topViewController).menu setUserInteractionEnabled:YES];
     
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
