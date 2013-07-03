@@ -36,6 +36,8 @@ typedef enum {
 @synthesize loginDelegate		= _loginDelegate;
 @synthesize loginButtonView		= _loginButtonView;
 @synthesize loadingIndicator	= _loadingIndicator;
+@synthesize loggedIn			= _loggedIn;
+@synthesize hasRequestedMe		= _hasRequestedMe;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,7 +54,10 @@ typedef enum {
 
 -(void)awakeFromNib {
 	
-	self.loginButtonView = [[FBLoginView alloc] initWithReadPermissions:@[@"user_birthday",@"email",@"user_interests",@"user_location",@"user_education_history"]];
+	self.loggedIn			= NO;
+	self.hasRequestedMe		= NO;
+	
+	self.loginButtonView	= [[FBLoginView alloc] initWithReadPermissions:@[@"user_birthday",@"email",@"user_interests",@"user_location",@"user_education_history"]];
 	
 	//NSLog(@"%f, %f, %f, %f", CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
 	//	  CGRectGetMidY(self.view.frame) - (LOGIN_BUTTON_HEIGHT / 2),
@@ -85,9 +90,9 @@ typedef enum {
 	
 }
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewDidAppear:animated];
 	// Do any additional setup after loading the view.
 	
 	if ([[MHAPI sharedInstance] accessToken]) {
@@ -114,6 +119,8 @@ typedef enum {
 -(void)beginLoading {
 	
 	self.loginButtonView.userInteractionEnabled = NO;
+	self.loginButtonView.hidden = YES;
+	self.loadingIndicator.hidden = NO;
 	[self.loadingIndicator startAnimating];
 	
 }
@@ -121,6 +128,7 @@ typedef enum {
 -(void)endLoading {
 	
 	self.loginButtonView.userInteractionEnabled = YES;
+	self.loginButtonView.hidden = NO;
 	[self.loadingIndicator stopAnimating];
 	
 }
@@ -286,44 +294,63 @@ typedef enum {
 		
 	}
 	
+	self.loggedIn = NO;
+	
 }
 
 -(void)loggedInWithToken:(NSString *)token {
 	
-	[self beginLoading];
-	
-	NSLog(@"LOGGED IN WITH TOKEN: %@", token);
-	[MHAPI sharedInstance].accessToken = token;
-	
-	if ([MHAPI sharedInstance].currentUser) {
+	if (self.loggedIn == NO) {
 		
-		[self endLoading];
 		
-		if ([self.loginDelegate respondsToSelector:@selector(finishedLogin)]) {
-			
-			[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser];
-			
-		}
+		[self beginLoading];
 		
-	} else {
-	
-		[[MHAPI sharedInstance] getMeWithSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
-			
-			[self endLoading];
-			
-			if ([self.loginDelegate respondsToSelector:@selector(finishedLogin)]) {
+		NSLog(@"LOGGED IN WITH TOKEN: %@", token);
+		[MHAPI sharedInstance].accessToken = token;
+		
+		if (self.hasRequestedMe == NO) {
+		
+			if ([MHAPI sharedInstance].currentUser) {
 				
-				[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser];
+				[self endLoading];
+				
+				if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:)]) {
+					
+					[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser];
+					
+				}
+				
+			} else {
+				
+				self.hasRequestedMe = YES;
+			
+				[[MHAPI sharedInstance] getMeWithSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+					
+					[self endLoading];
+					
+					if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:)]) {
+						
+						[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser];
+						
+					}
+					
+					self.hasRequestedMe = NO;
+					self.loggedIn		= YES;
+					
+				} failBlock:^(NSError *error, MHRequestOptions *options) {
+					
+					[self endLoading];
+					
+					[MHErrorHandler presentError:error];
+					
+					self.hasRequestedMe = NO;
+					
+				}];
 				
 			}
 			
-		} failBlock:^(NSError *error, MHRequestOptions *options) {
-			
-			[self endLoading];
-			
-			[MHErrorHandler presentError:error];
-			
-		}];
+		}
+		
 		
 	}
 	

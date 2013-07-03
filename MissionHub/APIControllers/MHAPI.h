@@ -19,6 +19,7 @@
 	NSOperationQueue *_queue;
 	NSString *_baseUrl;
 	NSString *_apiUrl;
+	NSString *_surveyUrl;
 	NSString *_accessToken;
 	
 	MHPerson *_currentUser;
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) NSOperationQueue *queue;
 @property (nonatomic, strong) NSString *baseUrl;
 @property (nonatomic, strong) NSString *apiUrl;
+@property (nonatomic, strong) NSString *surveyUrl;
 @property (nonatomic, strong) NSString *accessToken;
 
 @property (nonatomic, strong) MHPerson *currentUser;

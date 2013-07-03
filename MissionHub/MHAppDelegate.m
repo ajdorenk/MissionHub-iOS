@@ -16,20 +16,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	
-	UIStoryboard *storyboard;
-	
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-		
-		storyboard = [UIStoryboard storyboardWithName:@"MissionHub_iPhone" bundle:nil];
-		
-	} else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		
-		storyboard = [UIStoryboard storyboardWithName:@"MissionHub_iPad" bundle:nil];
-		
-	}
-	
-	self.loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"Login"];
-	
     return YES;
 }
 
@@ -38,9 +24,18 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
 	
-    // Facebook SDK * login flow *
-    // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
-    return [self.loginViewController application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+	if (self.loginViewController) {
+		
+		// Facebook SDK * login flow *
+		// Attempt to handle URLs to complete any auth (e.g., SSO) flow.
+		return [self.loginViewController application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+		
+	} else {
+		
+		return NO;
+		
+	}
+	
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -62,15 +57,24 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-	// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-	[self.loginViewController handleDidBecomeActive];
+	if (self.loginViewController) {
+		
+		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+		[self.loginViewController handleDidBecomeActive];
+			
+	}
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-	// Saves changes in the application's managed object context before the application terminates.
-	[[MHStorage sharedInstance] saveContext];
-	[self.loginViewController handleWillTerminate];
+	
+	if (self.loginViewController) {
+	
+		// Saves changes in the application's managed object context before the application terminates.
+		[[MHStorage sharedInstance] saveContext];
+		[self.loginViewController handleWillTerminate];
+			
+	}
 }
 
 @end

@@ -12,8 +12,8 @@
 
 @interface MHRootViewController : ECSlidingViewController <MHLoginDelegate>
 
-@property (nonatomic, strong) UIStoryboard			*realStoryboard;
 @property (nonatomic, strong) MHLoginViewController *loginViewController;
 @property (nonatomic, assign) BOOL					userInitiatedLogout;
+@property (nonatomic, assign) BOOL					showLoginOnViewDidAppear;
 
 @end

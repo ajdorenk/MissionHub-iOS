@@ -15,9 +15,9 @@
 
 @implementation MHRootViewController
 
-@synthesize realStoryboard;
 @synthesize loginViewController;
 @synthesize userInitiatedLogout;
+@synthesize showLoginOnViewDidAppear;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,32 +29,37 @@
     return self;
 }
 
+-(void)awakeFromNib {
+	
+	self.userInitiatedLogout = NO;
+	
+	self.loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
+	self.loginViewController.loginDelegate = self;
+	self.loginViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+	self.loginViewController.modalTransitionStyle	= UIModalTransitionStyleCoverVertical;
+	
+	MHAppDelegate *appdelegate		= (MHAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appdelegate.loginViewController	= self.loginViewController;
+	
+	self.showLoginOnViewDidAppear = YES;
+	
+}
+
 - (void)viewDidLoad {
 	
 	[super viewDidLoad];
 	
-	self.userInitiatedLogout = NO;
-	
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-		
-		self.realStoryboard = [UIStoryboard storyboardWithName:@"MissionHub_iPhone" bundle:nil];
-		
-	} else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		
-		self.realStoryboard = [UIStoryboard storyboardWithName:@"MissionHub_iPad" bundle:nil];
-		
-	}
 	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	
-	self.loginViewController = [self.realStoryboard instantiateViewControllerWithIdentifier:@"Login"];
-	self.loginViewController.loginDelegate = self;
-	self.loginViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-	self.loginViewController.modalTransitionStyle	= UIModalTransitionStyleCoverVertical;
-	
-	[self presentViewController:self.loginViewController animated:NO completion:nil];
+	if (self.showLoginOnViewDidAppear) {
+		
+		[self presentViewController:self.loginViewController animated:NO completion:nil];
+		self.showLoginOnViewDidAppear = NO;
+		
+	}
 	
 }
 
@@ -73,18 +78,12 @@
 
 -(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser {
 	
-	__block MHPeopleListViewController *peopleList = [self.realStoryboard instantiateViewControllerWithIdentifier:@"PeopleList"];
-	__block MHMenuViewController *menuList = [self.realStoryboard instantiateViewControllerWithIdentifier:@"Menu"];
+	MHPeopleListViewController *peopleList = [self.storyboard instantiateViewControllerWithIdentifier:@"PeopleList"];
 	
-	//[peopleList setCurrentUser:currentUser];
-	[menuList setCurrentUser:currentUser];
+	self.topViewController = peopleList;
+	[self.slidingViewController resetTopView];
 	
-	[self dismissViewControllerAnimated:YES completion:^{
-		
-		self.topViewController = peopleList;
-		[self.slidingViewController resetTopView];
-		
-	}];
+	[self dismissViewControllerAnimated:YES completion:nil];
 	
 }
 

@@ -6,5 +6,7 @@
 	<string>https://stage.missionhub.com</string>
 	<key>api_url</key>
 	<string>https://stage.missionhub.com/apis/v3</string>
+	<key>survey_url</key>
+	<string>http://stage.mhub.cc/s</string>
 </dict>
 </plist>
