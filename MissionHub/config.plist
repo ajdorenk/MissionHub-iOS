@@ -6,5 +6,7 @@
 	<string>https://www.missionhub.com</string>
 	<key>api_url</key>
 	<string>https://www.missionhub.com/apis/v3</string>
+	<key>survey_url</key>
+	<string>http://mhub.cc/s</string>
 </dict>
 </plist>

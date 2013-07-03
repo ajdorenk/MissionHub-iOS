@@ -68,6 +68,7 @@
         <!--Login View Controller-->
         <scene sceneID="O2G-AU-s7Z">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tcs-4r-aUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Login" id="TOw-D5-oKo" customClass="MHLoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zZG-hh-pzI">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -76,7 +77,6 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tcs-4r-aUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1437" y="-481"/>
         </scene>
@@ -426,7 +426,6 @@
         <!--Segmented View Controller-->
         <scene sceneID="gau-4g-wAR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="daX-sm-oSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="segmentedViewController" id="4xY-td-d7E" customClass="MHSegmentedViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ah3-bR-wE0">
                         <rect key="frame" x="0.0" y="20" width="320" height="43"/>
@@ -448,6 +447,7 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="daX-sm-oSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7440" y="603"/>
         </scene>

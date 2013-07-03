@@ -141,7 +141,7 @@
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
 
-    
+    /*
 	// Do any additional setup after loading the view.
     MHPerson *person1 = [MHPerson new];
     person1.first_name = @"Ann Anderson";
@@ -195,7 +195,8 @@
     person10.picture = @"anderson-ann.jpg";
     
     self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
-    
+    */
+	self.persons = @[];
     
     
     

@@ -7,6 +7,7 @@
 //
 
 #import "MHMenuViewController.h"
+#import "MHAPI.h"
 #import "MHLabel.h"
 #import "MHPerson+Helper.h"
 #import "MHSurvey.h"
@@ -32,7 +33,13 @@
 - (void)awakeFromNib
 {
 	self.menuHeaders	= @[@"", @"LABELS", @"LEADERS", @"SURVEYS", @"SETTINGS"];
-	self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"All Contacts"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"Change Organization", @"Log Out"]]];
+	self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"ALL CONTACTS"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"CHANGE ORGANIZATION", @"LOG OUT"]]];
+	
+	if ([MHAPI sharedInstance].currentUser) {
+		
+		[self setCurrentUser:[MHAPI sharedInstance].currentUser];
+		
+	}
 	
 }
 
@@ -51,7 +58,12 @@
 	
 	if (currentUser.currentOrganization.labels) {
 		
-		[self.menuItems replaceObjectAtIndex:1 withObject:[currentUser.currentOrganization.labels allObjects]];
+		NSArray *labelArray = [[currentUser.currentOrganization.labels allObjects]
+							   sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name"
+																						   ascending:YES
+																							selector:@selector(caseInsensitiveCompare:)]]];
+		
+		[self.menuItems replaceObjectAtIndex:1 withObject:labelArray];
 		
 	} else {
 		
@@ -61,21 +73,25 @@
 	
 	if (currentUser.currentOrganization.leaders) {
 		
-		[self.menuItems replaceObjectAtIndex:1 withObject:[currentUser.currentOrganization.leaders allObjects]];
+		NSArray *leaderArray = [[currentUser.currentOrganization.leaders allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+		
+		[self.menuItems replaceObjectAtIndex:2 withObject:leaderArray];
 		
 	} else {
 		
-		[self.menuItems replaceObjectAtIndex:1 withObject:@[]];
+		[self.menuItems replaceObjectAtIndex:2 withObject:@[]];
 		
 	}
 	
 	if (currentUser.currentOrganization.surveys) {
 		
-		[self.menuItems replaceObjectAtIndex:1 withObject:[currentUser.currentOrganization.surveys allObjects]];
+		NSArray *surveyArray = [[currentUser.currentOrganization.surveys allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+		
+		[self.menuItems replaceObjectAtIndex:3 withObject:surveyArray];
 		
 	} else {
 		
-		[self.menuItems replaceObjectAtIndex:1 withObject:@[]];
+		[self.menuItems replaceObjectAtIndex:3 withObject:@[]];
 		
 	}
 	
@@ -93,10 +109,6 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	
 	UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-	
-	if (section == 0) {
-		header.frame = CGRectMake(0, 0, self.view.frame.size.width, 0);
-	}
 	
 	header.backgroundColor	= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
 	header.text				= [self.menuHeaders objectAtIndex:section];
@@ -118,9 +130,7 @@
 	//create cell
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    MHLabel *label;
-	MHPerson *leader;
-	MHSurvey *survey;
+	
     if (cell == nil) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 	}
@@ -130,28 +140,25 @@
 	cell.textLabel.font         = [UIFont fontWithName:@"ArialRoundedMTBold" size:14.0];
 	
 	//set cell value
-	switch (indexPath.section) {
-		case 0:
-			cell.textLabel.text = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-			break;
-		case 1:
-			label = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-			cell.textLabel.text = label.name;
-			break;
-		case 2:
-			leader = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-			cell.textLabel.text = [leader fullName];
-			break;
-		case 3:
-			survey = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-			cell.textLabel.text = survey.title;
-			break;
-		case 4:
-			cell.textLabel.text = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-			break;
-			
-		default:
-			break;
+	id objectForCell = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	
+	//grab the cell's text value based on the type of the object that was retreived
+	if ([objectForCell isKindOfClass:[NSString class]]) {
+		
+		cell.textLabel.text = objectForCell;
+		
+	} else if ([objectForCell isKindOfClass:[MHLabel class]]) {
+		
+		cell.textLabel.text = ((MHLabel *)objectForCell).name;
+		
+	} else if ([objectForCell isKindOfClass:[MHPerson class]]) {
+		
+		cell.textLabel.text = [((MHPerson *)objectForCell) fullName];
+		
+	} else if ([objectForCell isKindOfClass:[MHSurvey class]]) {
+		
+		cell.textLabel.text = ((MHSurvey *)objectForCell).title;
+		
 	}
 	
     return cell;

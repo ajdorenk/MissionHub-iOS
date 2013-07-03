@@ -7,8 +7,7 @@
 //
 
 #import "MHPersonCell.h"
-#import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
+#import "UIImageView+AFNetworking.h"
 
 
 @implementation MHPersonCell
@@ -53,13 +52,13 @@
     {
         personCell.profilePicture.image = [UIImage imageNamed:@"fb_blank_profile_square.png"];
         
-    }
-    else{
-        personCell.profilePicture.image = [UIImage imageNamed:person.picture];
+    } else {
+        [personCell.profilePicture setImageWithURL:[NSURL URLWithString:person.picture]
+													  placeholderImage:[UIImage imageNamed:@"fb_blank_profile_square.png"]];
     }
     
     personCell.gender.text = person.gender;
-    personCell.name.text = person.first_name;
+    personCell.name.text = [person fullName];
 }
 
 @end

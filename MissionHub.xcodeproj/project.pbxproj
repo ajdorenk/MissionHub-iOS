@@ -22,6 +22,10 @@
 		6812258B17681CD200D8C238 /* config_stage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258517681CD200D8C238 /* config_stage.plist */; };
 		68134F951782748300227C2A /* MHPersonCell_Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68134F941782748300227C2A /* MHPersonCell_Placeholder.png */; };
 		68134F961782748300227C2A /* MHPersonCell_Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68134F941782748300227C2A /* MHPersonCell_Placeholder.png */; };
+		68134F9B17837E6500227C2A /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68134F9817837E6500227C2A /* SIAlertView.bundle */; };
+		68134F9C17837E6500227C2A /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68134F9817837E6500227C2A /* SIAlertView.bundle */; };
+		68134F9D17837E6600227C2A /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68134F9A17837E6500227C2A /* SIAlertView.m */; };
+		68134F9E17837E6600227C2A /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68134F9A17837E6500227C2A /* SIAlertView.m */; };
 		6821C470178244970063AA3D /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6821C46F178244970063AA3D /* MHPerson.m */; };
 		6821C471178244970063AA3D /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6821C46F178244970063AA3D /* MHPerson.m */; };
 		6823A7BB177EA4C900DBDF3F /* MHQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7BA177EA4C900DBDF3F /* MHQuestion.m */; };
@@ -239,6 +243,9 @@
 		6812258417681CD200D8C238 /* config_lwi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_lwi.plist; sourceTree = "<group>"; };
 		6812258517681CD200D8C238 /* config_stage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_stage.plist; sourceTree = "<group>"; };
 		68134F941782748300227C2A /* MHPersonCell_Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MHPersonCell_Placeholder.png; sourceTree = "<group>"; };
+		68134F9817837E6500227C2A /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
+		68134F9917837E6500227C2A /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
+		68134F9A17837E6500227C2A /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
 		6821C46E178244970063AA3D /* MHPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPerson.h; path = Models/MHPerson.h; sourceTree = "<group>"; };
 		6821C46F178244970063AA3D /* MHPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPerson.m; path = Models/MHPerson.m; sourceTree = "<group>"; };
 		6823A7B9177EA4C900DBDF3F /* MHQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHQuestion.h; path = Models/MHQuestion.h; sourceTree = "<group>"; };
@@ -518,6 +525,17 @@
 			name = CoreDataGeneratedClasses;
 			sourceTree = "<group>";
 		};
+		68134F9717837E6500227C2A /* SIAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				68134F9817837E6500227C2A /* SIAlertView.bundle */,
+				68134F9917837E6500227C2A /* SIAlertView.h */,
+				68134F9A17837E6500227C2A /* SIAlertView.m */,
+			);
+			name = SIAlertView;
+			path = Libraries/SIAlertView/SIAlertView;
+			sourceTree = "<group>";
+		};
 		6839107A1760FD3100E01B46 = {
 			isa = PBXGroup;
 			children = (
@@ -779,6 +797,7 @@
 		68C068AA17710298007C79D6 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				68134F9717837E6500227C2A /* SIAlertView */,
 				68478DAB177E8B740014501D /* SDSegmentedControl */,
 				68478DAA177E8B600014501D /* M6ParallaxController */,
 				68478D60177E3F000014501D /* AFNetworking */,
@@ -1041,6 +1060,7 @@
 				6823A7C8177EB00100DBDF3F /* sectionHeaderGender.png in Resources */,
 				6823A7CA177EB00100DBDF3F /* sectionHeaderSort.png in Resources */,
 				68134F951782748300227C2A /* MHPersonCell_Placeholder.png in Resources */,
+				68134F9B17837E6500227C2A /* SIAlertView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1077,6 +1097,7 @@
 				6823A7C9177EB00100DBDF3F /* sectionHeaderGender.png in Resources */,
 				6823A7CB177EB00100DBDF3F /* sectionHeaderSort.png in Resources */,
 				68134F961782748300227C2A /* MHPersonCell_Placeholder.png in Resources */,
+				68134F9C17837E6500227C2A /* SIAlertView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1170,6 +1191,7 @@
 				680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */,
 				6821C470178244970063AA3D /* MHPerson.m in Sources */,
 				AD3C60D2178216DD00744167 /* MHSegmentedViewController.m in Sources */,
+				68134F9D17837E6600227C2A /* SIAlertView.m in Sources */,
 				AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1217,8 +1239,6 @@
 				68478D83177E3F000014501D /* AFXMLRequestOperation.m in Sources */,
 				68478D85177E3F000014501D /* UIImageView+AFNetworking.m in Sources */,
 				AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */,
-				AD9827A3177CEE9800A0276A /* SDSegmentedControl.m in Sources */,
-				68478D8D177E8AE20014501D /* MHPerson.m in Sources */,
 				68478D8F177E8AE20014501D /* MHOrganization.m in Sources */,
 				68478D91177E8AE20014501D /* MHLabel.m in Sources */,
 				68478D99177E8B140014501D /* MHGenderListController.m in Sources */,
@@ -1238,7 +1258,7 @@
 				AD3C60D917838A3C00744167 /* MHInteractionCell.m in Sources */,
 				680CD8FE1782403600E6E742 /* MHPerson+Helper.m in Sources */,
 				6821C471178244970063AA3D /* MHPerson.m in Sources */,
- 66a2c1f408f1761df100fd10adb202590b25b225
+				68134F9E17837E6600227C2A /* SIAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1429,7 +1449,6 @@
 		68478DD0177E93490014501D /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

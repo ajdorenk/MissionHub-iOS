@@ -36,6 +36,7 @@ typedef enum {
 @synthesize queue		= _queue;
 @synthesize apiUrl		= _apiUrl;
 @synthesize baseUrl		= _baseUrl;
+@synthesize surveyUrl	= _surveyUrl;
 @synthesize accessToken	= _accessToken;
 
 @synthesize currentUser	= _currentUser;
@@ -64,6 +65,7 @@ typedef enum {
 		
 		self.baseUrl					= [configDictionary valueForKey:@"base_url"];
 		self.apiUrl						= [configDictionary valueForKey:@"api_url"];
+		self.surveyUrl					= [configDictionary valueForKey:@"survey_url"];
 		self.accessToken				= @"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD";
 		
 		if (self.baseUrl == nil) {
@@ -211,6 +213,26 @@ typedef enum {
 	
 	[self.queue addOperation:request];
 	
+}
+
+-(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error {
+	
+	NSString *urlString = [self apiUrl];
+	
+	if (urlString == nil || [urlString length] <= 0 ) {
+		
+		if (error) {
+			*error = [NSError errorWithDomain:MHAPIErrorDomain
+										 code:MHAPIErrorMissingUrl
+									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Survey URL Missing", @"Survey URL Missing")}];
+		}
+		
+		return nil;
+	}
+	
+	urlString = [urlString stringByAppendingFormat:@"/%@", remoteID];
+	
+	return urlString;
 }
 
 -(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error {
@@ -389,7 +411,7 @@ typedef enum {
 	NSDictionary *result = nil;
 	
 	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
-	@try {
+	//@try {
 		
 		
 		//parse response and put into result dictionary
@@ -449,7 +471,7 @@ typedef enum {
 		}
 		
 		
-	
+	/*
 	}
 	@catch (NSException *exception) {
 		
@@ -471,7 +493,7 @@ typedef enum {
 		//nothing to clean up with ARC. YAY!
 		return;
 	}
-	
+	*/
 	
 	if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
 		

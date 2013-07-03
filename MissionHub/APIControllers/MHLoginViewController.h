@@ -25,13 +25,16 @@ extern NSString *const FBSessionStateChangedNotification;
 	
 	id<MHLoginDelegate>		_loginDelegate;
 	FBLoginView				*_loginButtonView;
-	UIActivityIndicatorView	*_loadingIndicator;
+	BOOL					_loggedIn;
+	BOOL					_hasRequestedMe;
 	
 }
 
-@property (nonatomic, retain)				id<MHLoginDelegate>		loginDelegate;
-@property (nonatomic, retain)				FBLoginView				*loginButtonView;
-@property (nonatomic, retain)				UIActivityIndicatorView	*loadingIndicator;
+@property (nonatomic, strong)				id<MHLoginDelegate>					loginDelegate;
+@property (nonatomic, strong)				FBLoginView							*loginButtonView;
+@property (nonatomic, strong)				IBOutlet UIActivityIndicatorView	*loadingIndicator;
+@property (nonatomic, assign)				BOOL								loggedIn;
+@property (nonatomic, assign)				BOOL								hasRequestedMe;
 
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;

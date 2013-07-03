@@ -6,5 +6,7 @@
 	<string>http://local.missionhub.com:7888</string>
 	<key>api_url</key>
 	<string>http://local.missionhub.com:7888/apis/v3</string>
+	<key>survey_url</key>
+	<string>http://local.mhub.cc:7888/s</string>
 </dict>
 </plist>

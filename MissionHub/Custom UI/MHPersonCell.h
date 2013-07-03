@@ -7,7 +7,8 @@
 //
 
 
-#import "MHPerson.h"
+#import "MHPerson+Helper.h"
+
 
 @interface MHPersonCell : UITableViewCell
 /*
