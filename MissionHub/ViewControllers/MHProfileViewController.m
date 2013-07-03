@@ -123,12 +123,13 @@
 
 -(void)cycleFromViewController:(UIViewController *)oldVC
              toViewController:(UIViewController*)newVC{
-    NSLog(@"Is this happening?");
     if (newVC == oldVC) return;
     
     if (newVC) {
         newVC.view.frame = CGRectMake(CGRectGetMinX(self.view.bounds), CGRectGetMinY(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
         
+
+            
         if (oldVC) {
             
             // Start both the view controller transitions
@@ -148,7 +149,8 @@
                                         // Store a reference to the current controller
                                         self.currentViewController = newVC;
                                     }];
-            
+        
+        
         } else {
             
             [self addChildViewController:newVC];
