@@ -10,14 +10,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@implementation MHPerson
-
-@synthesize name;
-@synthesize gender;
-@synthesize profilePicturePath;
-
-@end
-
 
 @implementation MHPersonCell
 
@@ -63,11 +55,11 @@
         
     }
     else{
-        personCell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
+        personCell.profilePicture.image = [UIImage imageNamed:person.picture];
     }
     
     personCell.gender.text = person.gender;
-    personCell.name.text = person.name;
+    personCell.name.text = person.first_name;
 }
 
 @end

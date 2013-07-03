@@ -17,7 +17,7 @@
 /*
 @implementation MHPerson
 
-@synthesize name;
+@synthesize first_name;
 @synthesize gender;
 @synthesize profilePicturePath;
 
@@ -144,55 +144,55 @@
     
 	// Do any additional setup after loading the view.
     MHPerson *person1 = [MHPerson new];
-    person1.name = @"Ann Anderson";
+    person1.first_name = @"Ann Anderson";
     person1.gender = @"Female";
-    person1.profilePicturePath = @"anderson-ann.jpg";
+    person1.picture = @"anderson-ann.jpg";
 
     MHPerson *person2 = [MHPerson new];
-    person2.name = @"George Frank";
+    person2.first_name = @"George Frank";
     person2.gender = @"Male";
-    person2.profilePicturePath = @"anderson-ann.jpg";
+    person2.picture = @"anderson-ann.jpg";
 
     
     MHPerson *person3 = [MHPerson new];
-    person3.name = @"Lola Gates";
+    person3.first_name = @"Lola Gates";
     person3.gender = @"Female";
-    person3.profilePicturePath = @"anderson-ann.jpg";
+    person3.picture = @"anderson-ann.jpg";
     
     MHPerson *person4 = [MHPerson new];
-    person4.name = @"Michael Mason";
+    person4.first_name = @"Michael Mason";
     person4.gender = @"Male";
-    person4.profilePicturePath = @"anderson-ann.jpg";
+    person4.picture = @"anderson-ann.jpg";
     
     MHPerson *person5 = [MHPerson new];
-    person5.name = @"Amy Leslie";
+    person5.first_name = @"Amy Leslie";
     person5.gender = @"Female";
-    person5.profilePicturePath = @"anderson-ann.jpg";
+    person5.picture = @"anderson-ann.jpg";
     
     MHPerson *person6 = [MHPerson new];
-    person6.name = @"Jessica Davis";
+    person6.first_name = @"Jessica Davis";
     person6.gender = @"Male";
-    person6.profilePicturePath = @"anderson-ann.jpg";
+    person6.picture = @"anderson-ann.jpg";
     
     MHPerson *person7 = [MHPerson new];
-    person7.name = @"Sally Fields";
+    person7.first_name = @"Sally Fields";
     person7.gender = @"Female";
-    person7.profilePicturePath = @"anderson-ann.jpg";
+    person7.picture = @"anderson-ann.jpg";
     
     MHPerson *person8 = [MHPerson new];
-    person8.name = @"Katherine Budincich";
+    person8.first_name = @"Katherine Budincich";
     person8.gender = @"Male";
-    person8.profilePicturePath = @"anderson-ann.jpg";
+    person8.picture = @"anderson-ann.jpg";
     
     MHPerson *person9 = [MHPerson new];
-    person9.name = @"Leslie Marks";
+    person9.first_name = @"Leslie Marks";
     person9.gender = @"Female";
-    person9.profilePicturePath = @"anderson-ann.jpg";
+    person9.picture = @"anderson-ann.jpg";
     
     MHPerson *person10 = [MHPerson new];
-    person10.name = @"Kate Middleton";
+    person10.first_name = @"Kate Middleton";
     person10.gender = @"Male";
-    person10.profilePicturePath = @"anderson-ann.jpg";
+    person10.picture = @"anderson-ann.jpg";
     
     self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
     
@@ -291,7 +291,7 @@
         //Display person in the table cell
     [self populateCell:cell withPerson:person];
         /*Person *person = [self.persons objectAtIndex:indexPath.row];
-        cell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
+        cell.profilePicture.image = [UIImage imageNamed:person.picture];
         cell.gender.text = person.gender;
         cell.name.text = person.name;*/
     
