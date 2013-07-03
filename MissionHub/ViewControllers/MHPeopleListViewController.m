@@ -14,16 +14,8 @@
 #import "MHPeopleSearchBar.h" 
 #import "MHGenderListController.h"  
 
-@interface Person : NSObject
-
-@property (nonatomic, strong) NSString *name; // name of Person
-@property (nonatomic, strong) NSString *gender; // Person gender
-@property (nonatomic, strong) NSString *profilePicturePath; // image filename of Person
-
-@end
-
-
-@implementation Person
+/*
+@implementation MHPerson
 
 @synthesize name;
 @synthesize gender;
@@ -31,7 +23,7 @@
 
 @end
 
-
+*/
 
 /*@interface MHgenderListController ()
 
@@ -53,6 +45,7 @@
 */
 @interface MHPeopleListViewController (Private)
 -(void)setTextFieldLeftView;
+-(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
 @end
 
 @implementation MHPeopleListViewController
@@ -148,61 +141,62 @@
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
 
-    
+    /*
 	// Do any additional setup after loading the view.
-    Person *person1 = [Person new];
+    MHPerson *person1 = [MHPerson new];
     person1.name = @"Ann Anderson";
     person1.gender = @"Female";
     person1.profilePicturePath = @"anderson-ann.jpg";
 
-    Person *person2 = [Person new];
+    MHPerson *person2 = [MHPerson new];
     person2.name = @"George Frank";
     person2.gender = @"Male";
     person2.profilePicturePath = @"anderson-ann.jpg";
 
     
-    Person *person3 = [Person new];
+    MHPerson *person3 = [MHPerson new];
     person3.name = @"Lola Gates";
     person3.gender = @"Female";
     person3.profilePicturePath = @"anderson-ann.jpg";
     
-    Person *person4 = [Person new];
+    MHPerson *person4 = [MHPerson new];
     person4.name = @"Michael Mason";
     person4.gender = @"Male";
     person4.profilePicturePath = @"anderson-ann.jpg";
     
-    Person *person5 = [Person new];
+    MHPerson *person5 = [MHPerson new];
     person5.name = @"Amy Leslie";
     person5.gender = @"Female";
     person5.profilePicturePath = @"anderson-ann.jpg";
     
-    Person *person6 = [Person new];
+    MHPerson *person6 = [MHPerson new];
     person6.name = @"Jessica Davis";
     person6.gender = @"Male";
     person6.profilePicturePath = @"anderson-ann.jpg";
     
-    Person *person7 = [Person new];
+    MHPerson *person7 = [MHPerson new];
     person7.name = @"Sally Fields";
     person7.gender = @"Female";
     person7.profilePicturePath = @"anderson-ann.jpg";
     
-    Person *person8 = [Person new];
+    MHPerson *person8 = [MHPerson new];
     person8.name = @"Katherine Budincich";
     person8.gender = @"Male";
     person8.profilePicturePath = @"anderson-ann.jpg";
     
-    Person *person9 = [Person new];
+    MHPerson *person9 = [MHPerson new];
     person9.name = @"Leslie Marks";
     person9.gender = @"Female";
     person9.profilePicturePath = @"anderson-ann.jpg";
     
-    Person *person10 = [Person new];
+    MHPerson *person10 = [MHPerson new];
     person10.name = @"Kate Middleton";
     person10.gender = @"Male";
     person10.profilePicturePath = @"anderson-ann.jpg";
     
     self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
-    
+    */
+	self.persons = @[];
     
     
     
@@ -293,13 +287,15 @@
         if (cell == nil) {
             cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        
+    
+    MHPerson *person = [self.persons objectAtIndex:indexPath.row];
         //Display person in the table cell
-        Person *person = [self.persons objectAtIndex:indexPath.row];
+    [self populateCell:cell withPerson:person];
+        /*Person *person = [self.persons objectAtIndex:indexPath.row];
         cell.profilePicture.image = [UIImage imageNamed:person.profilePicturePath];
         cell.gender.text = person.gender;
-        cell.name.text = person.name;
-        
+        cell.name.text = person.name;*/
+    
         return cell;
     
 }
@@ -419,3 +415,4 @@
 
 
 @end
+    

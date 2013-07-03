@@ -35,7 +35,7 @@ typedef enum {
 
 @synthesize loginDelegate		= _loginDelegate;
 @synthesize loginButtonView		= _loginButtonView;
-@synthesize loadingIndicator	= _loadingIndicator;
+@synthesize loadingIndicator;
 @synthesize loggedIn			= _loggedIn;
 @synthesize hasRequestedMe		= _hasRequestedMe;
 
@@ -79,15 +79,6 @@ typedef enum {
 										 self.loginButtonView.frame.size.width,
 										 self.loginButtonView.frame.size.height);
 	
-	self.loadingIndicator	= [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	
-	self.loadingIndicator.frame = CGRectOffset(self.loginButtonView.frame, self.loginButtonView.center.x - (self.loadingIndicator.frame.size.width * 0.5), CGRectGetMaxY(self.loginButtonView.frame) + 50);
-	self.loadingIndicator.hidesWhenStopped = YES;
-	
-	[self.view addSubview:self.loadingIndicator];
-	
-	//fbLoginView.alpha = 0.5;
-	
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -120,7 +111,6 @@ typedef enum {
 	
 	self.loginButtonView.userInteractionEnabled = NO;
 	self.loginButtonView.hidden = YES;
-	self.loadingIndicator.hidden = NO;
 	[self.loadingIndicator startAnimating];
 	
 }

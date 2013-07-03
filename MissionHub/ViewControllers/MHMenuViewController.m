@@ -58,7 +58,10 @@
 	
 	if (currentUser.currentOrganization.labels) {
 		
-		NSArray *labelArray = [[currentUser.currentOrganization.labels allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+		NSArray *labelArray = [[currentUser.currentOrganization.labels allObjects]
+							   sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name"
+																						   ascending:YES
+																							selector:@selector(caseInsensitiveCompare:)]]];
 		
 		[self.menuItems replaceObjectAtIndex:1 withObject:labelArray];
 		

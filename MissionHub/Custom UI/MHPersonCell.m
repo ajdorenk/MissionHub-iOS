@@ -7,8 +7,7 @@
 //
 
 #import "MHPersonCell.h"
-#import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
+#import "UIImageView+AFNetworking.h"
 
 
 @implementation MHPersonCell
@@ -46,5 +45,21 @@
     // Configure the view for the selected state
 }
 
+-(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person{
+//    person *person = [self.persons objectAtIndex:indexPath.row];
+    
+    if (personCell.profilePicture.image == nil)
+    {
+        personCell.profilePicture.image = [UIImage imageNamed:@"fb_blank_profile_square.png"];
+        
+    }
+    else{
+        [personCell.profilePicture setImageWithURL:[NSURL URLWithString:person.picture]
+													  placeholderImage:[UIImage imageNamed:@"fb_blank_profile_square.png"]];
+    }
+    
+    personCell.gender.text = person.gender;
+    personCell.name.text = [person fullName];
+}
 
 @end

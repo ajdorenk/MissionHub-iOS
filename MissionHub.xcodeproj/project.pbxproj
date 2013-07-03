@@ -214,6 +214,8 @@
 		AD3C60CE1781E9AE00744167 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AD177102C9007C79D6 /* ECSlidingViewController.m */; };
 		AD3C60CF1781E9AE00744167 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AF177102C9007C79D6 /* UIImage+ImageWithUIView.m */; };
 		AD3C60D2178216DD00744167 /* MHSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */; };
+		AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D717838A3C00744167 /* MHInteractionCell.m */; };
+		AD3C60D917838A3C00744167 /* MHInteractionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D717838A3C00744167 /* MHInteractionCell.m */; };
 		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
 		AD982794177C9D6700A0276A /* MHParallaxTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */; };
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
@@ -244,7 +246,6 @@
 		68134F9817837E6500227C2A /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
 		68134F9917837E6500227C2A /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
 		68134F9A17837E6500227C2A /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
-		68134F9F1783942800227C2A /* MissionHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MissionHub.entitlements; sourceTree = "<group>"; };
 		6821C46E178244970063AA3D /* MHPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPerson.h; path = Models/MHPerson.h; sourceTree = "<group>"; };
 		6821C46F178244970063AA3D /* MHPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPerson.m; path = Models/MHPerson.m; sourceTree = "<group>"; };
 		6823A7B9177EA4C900DBDF3F /* MHQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHQuestion.h; path = Models/MHQuestion.h; sourceTree = "<group>"; };
@@ -467,6 +468,8 @@
 		AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		AD3C60D0178216DD00744167 /* MHSegmentedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSegmentedViewController.h; path = ViewControllers/MHSegmentedViewController.h; sourceTree = "<group>"; };
 		AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSegmentedViewController.m; path = ViewControllers/MHSegmentedViewController.m; sourceTree = "<group>"; };
+		AD3C60D617838A3B00744167 /* MHInteractionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInteractionCell.h; path = "Custom UI/MHInteractionCell.h"; sourceTree = "<group>"; };
+		AD3C60D717838A3C00744167 /* MHInteractionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionCell.m; path = "Custom UI/MHInteractionCell.m"; sourceTree = "<group>"; };
 		AD98278B177C93B400A0276A /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ViewControllers/MHProfileViewController.h; sourceTree = "<group>"; };
 		AD98278C177C93B400A0276A /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ViewControllers/MHProfileViewController.m; sourceTree = "<group>"; };
 		AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHParallaxTopViewController.h; path = ViewControllers/MHParallaxTopViewController.h; sourceTree = "<group>"; };
@@ -580,7 +583,6 @@
 		6839108E1760FD3100E01B46 /* MissionHub */ = {
 			isa = PBXGroup;
 			children = (
-				68134F9F1783942800227C2A /* MissionHub.entitlements */,
 				683AE38F176D2A030027EDE4 /* Models */,
 				68D7AA3B176677DA00B9B0B1 /* API Controllers */,
 				683910D51761095000E01B46 /* View Controllers */,
@@ -946,6 +948,8 @@
 				AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */,
 				AD30112E176FE4D900D53E35 /* MHPersonCell.h */,
 				AD30112F176FE4D900D53E35 /* MHPersonCell.m */,
+				AD3C60D617838A3B00744167 /* MHInteractionCell.h */,
+				AD3C60D717838A3C00744167 /* MHInteractionCell.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1188,6 +1192,7 @@
 				6821C470178244970063AA3D /* MHPerson.m in Sources */,
 				AD3C60D2178216DD00744167 /* MHSegmentedViewController.m in Sources */,
 				68134F9D17837E6600227C2A /* SIAlertView.m in Sources */,
+				AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1250,6 +1255,7 @@
 				6823A7DB177EC34D00DBDF3F /* MHUser.m in Sources */,
 				68D7B8C4177F804200A2E231 /* MHOrganizationalPermission.m in Sources */,
 				68D7B8C8177F804300A2E231 /* MHOrganizationalLabel.m in Sources */,
+				AD3C60D917838A3C00744167 /* MHInteractionCell.m in Sources */,
 				680CD8FE1782403600E6E742 /* MHPerson+Helper.m in Sources */,
 				6821C471178244970063AA3D /* MHPerson.m in Sources */,
 				68134F9E17837E6600227C2A /* SIAlertView.m in Sources */,

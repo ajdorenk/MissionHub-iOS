@@ -5,6 +5,8 @@
 //  Created by Amarisa Robison on 6/13/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
+#import "MHPerson+Helper.h"
+
 
 @interface MHPersonCell : UITableViewCell
 /*
@@ -21,13 +23,14 @@
 
 }
 */
+
 @property (nonatomic, strong) IBOutlet UILabel *name;
 @property (nonatomic, strong) IBOutlet UILabel *gender;
-@property
-(nonatomic, strong) IBOutlet UIImageView *profilePicture;
+@property (nonatomic, strong) IBOutlet UIImageView *profilePicture;
 @property (nonatomic, strong) IBOutlet UIButton *checkbox;
 @property (nonatomic, strong) IBOutlet UIView *nameBackgroundView;
 
+-(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
 
 
 
