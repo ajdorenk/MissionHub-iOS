@@ -14,35 +14,7 @@
 #import "MHPeopleSearchBar.h" 
 #import "MHGenderListController.h"  
 
-/*
-@implementation MHPerson
 
-@synthesize first_name;
-@synthesize gender;
-@synthesize profilePicturePath;
-
-@end
-
-*/
-
-/*@interface MHgenderListController ()
-
-@end
-
-@implementation MHgenderListController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-@end
-
-*/
 @interface MHPeopleListViewController (Private)
 -(void)setTextFieldLeftView;
 -(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
@@ -53,15 +25,6 @@
 @synthesize persons = _persons;
 
 
-/*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}*/
-
 -(void)viewWillAppear:(BOOL)animated {
 	
 	[super viewWillAppear:animated];
@@ -71,28 +34,8 @@
 	self.view.layer.shadowOpacity = 0.75f;
 	self.view.layer.shadowRadius = 10.0f;
 	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
-	
-	/*if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
-		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
-	}
-	
-	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
-	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
-    */
- 
-    
-    
 
     
-    //[self.backMenuButton setBackgroundImage:[UIImage imageNamed:@"BackMenu_Icon.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    /*
-    self.peopleListToolbar.layer.shadowOpacity = 0.3f;
-    self.peopleListToolbar.layer.shadowRadius = 1.0f;
-    self.peopleListToolbar.layer.shadowColor = [UIColor blackColor].CGColor;
-    */
-    
-    
-
     self.peopleSearchBar.layer.shadowOpacity = 0.3f;
     self.peopleSearchBar.layer.shadowRadius = 2.0f;
     self.peopleSearchBar.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -101,11 +44,6 @@
     [text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
-    
-    
-
-    //[[self.navigationController.navigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
-
 
 	
 }
@@ -141,10 +79,29 @@
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
 
-    /*
+    
+    
+    
+    
 	// Do any additional setup after loading the view.
-    MHPerson *person1 = [MHPerson new];
-    person1.first_name = @"Ann Anderson";
+    MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
+                        @"last_name":@"Doe",
+                        @"gender":@"Male",
+                        @"year_in_school":@"Second Year",
+                        @"major":@"Philosophy",
+                        @"minor":@"Computer Science",
+                        @"birth_date":@"1982-07-07",
+                        @"date_became_christian":@"2000-01-01",
+                        @"graduation_date":@"2010-01-07",
+                        @"user_id":@12345,
+                        @"fb_uid":@123456,
+                        @"updated_at":@"2012-11-19T19:29:30-06:00",
+                        @"created_at":@"2002-11-28T00:00:00-06:00"
+                        }];
+    
+    
+    /*person1.first_name = @"Ann";
+    person1.last_name = @"Anderson";
     person1.gender = @"Female";
     person1.picture = @"anderson-ann.jpg";
 
@@ -195,11 +152,11 @@
     person10.picture = @"anderson-ann.jpg";
     
     self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
-    */
+    
 	self.persons = @[];
+    */
     
-    
-    
+    self.persons = [NSArray arrayWithObjects:person1, nil];
 
 
 }
@@ -290,11 +247,8 @@
     
     MHPerson *person = [self.persons objectAtIndex:indexPath.row];
         //Display person in the table cell
-    [self populateCell:cell withPerson:person];
-        /*Person *person = [self.persons objectAtIndex:indexPath.row];
-        cell.profilePicture.image = [UIImage imageNamed:person.picture];
-        cell.gender.text = person.gender;
-        cell.name.text = person.name;*/
+    
+    [cell populateWithPerson:person];
     
         return cell;
     
@@ -305,7 +259,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
-    sectionHeader.backgroundColor = [UIColor grayColor];
+    sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
  
  UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(37, 6.5, 20, 20.0)];
     headerLabel.textColor = [UIColor whiteColor];

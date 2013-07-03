@@ -29,6 +29,16 @@
     UIImage *navBackground =[[UIImage imageNamed:@"topbar_background.png"]
                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     [[UINavigationBar appearance] setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
+    
+    
+    /*self.navigationBar.layer.shadowOpacity = 0.3f;
+    self.navigationBar.layer.shadowRadius = 1.0f;
+    self.navigationBar.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    self.navigationBar.layer.shadowColor = [UIColor blackColor].CGColor;*/
+    self.navigationBar.shadowImage = [[UIImage alloc] init];
+    self.navigationBar.clipsToBounds = NO;
+
+    
 }
 
 

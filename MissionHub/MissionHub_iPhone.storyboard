@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -237,32 +237,41 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHPersonCell" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MyCell" rowHeight="61" id="fno-xF-ChY" customClass="MHPersonCell">
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHPersonCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MyCell" rowHeight="61" id="fno-xF-ChY" customClass="MHPersonCell">
                                 <rect key="frame" x="0.0" y="66" width="320" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSY-Po-gSd">
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="PersonName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3By-9J-vUT">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="222" id="D7d-Nh-049"/>
+                                                        <constraint firstAttribute="height" constant="26" id="cCF-i5-6aU"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                                    <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="3By-9J-vUT" firstAttribute="leading" secondItem="nSY-Po-gSd" secondAttribute="leading" constant="9" id="7lZ-Kt-gOM"/>
+                                                <constraint firstItem="3By-9J-vUT" firstAttribute="centerY" secondItem="nSY-Po-gSd" secondAttribute="centerY" type="default" id="dKC-3c-UMx"/>
+                                            </constraints>
+                                        </view>
                                         <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K8Z-XT-I5E">
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="45" id="IcY-vA-uAc"/>
                                                 <constraint firstAttribute="width" constant="45" id="gvE-Li-sBk"/>
-                                                <constraint firstAttribute="height" constant="45" id="xi5-Yc-MzS"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="PersonName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3By-9J-vUT">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="MPY-yB-hDZ"/>
-                                                <constraint firstAttribute="width" constant="200" id="jsN-wA-dI6"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
-                                            <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="102" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAs-wm-Nme">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="26" id="4QE-g7-y9v"/>
                                                 <constraint firstAttribute="width" constant="223" id="GuM-c3-v7f"/>
+                                                <constraint firstAttribute="height" constant="26" id="HcQ-NI-ZXI"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                             <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -287,19 +296,22 @@
                                 </view>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="K8Z-XT-I5E" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" constant="7" id="2Tp-SW-Wb0"/>
                                     <constraint firstItem="K8Z-XT-I5E" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" constant="40" id="2Vt-j3-ZxH"/>
                                     <constraint firstItem="iy1-tX-ioN" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" constant="12" id="8ni-TM-9sB"/>
-                                    <constraint firstItem="mAs-wm-Nme" firstAttribute="top" secondItem="3By-9J-vUT" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="LWC-1n-aNS"/>
-                                    <constraint firstAttribute="trailing" secondItem="3By-9J-vUT" secondAttribute="trailing" constant="20" type="default" id="NOL-iR-gWu"/>
+                                    <constraint firstAttribute="bottom" secondItem="nSY-Po-gSd" secondAttribute="bottom" constant="30" id="CO6-qq-vc2"/>
+                                    <constraint firstItem="nSY-Po-gSd" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" constant="95" id="Ktx-W8-JIo"/>
+                                    <constraint firstItem="nSY-Po-gSd" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" constant="-1" id="Mjs-59-jxW"/>
                                     <constraint firstItem="iy1-tX-ioN" firstAttribute="centerY" secondItem="K8Z-XT-I5E" secondAttribute="centerY" type="default" id="UaE-bh-QUd"/>
-                                    <constraint firstItem="K8Z-XT-I5E" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" constant="7" id="g9T-bB-NRR"/>
-                                    <constraint firstItem="mAs-wm-Nme" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" constant="113" id="ksT-sR-SVC"/>
-                                    <constraint firstItem="3By-9J-vUT" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" constant="5" id="q1W-ab-w38"/>
+                                    <constraint firstItem="nSY-Po-gSd" firstAttribute="trailing" secondItem="fno-xF-ChY" secondAttribute="trailing" type="default" id="eDS-1x-HlI"/>
+                                    <constraint firstItem="mAs-wm-Nme" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" constant="32" id="fXe-IP-NJf"/>
+                                    <constraint firstItem="mAs-wm-Nme" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" constant="118" id="oEo-4b-obT"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="checkbox" destination="iy1-tX-ioN" id="pUq-0Z-kvn"/>
                                     <outlet property="gender" destination="mAs-wm-Nme" id="NSF-ZR-n7G"/>
                                     <outlet property="name" destination="3By-9J-vUT" id="cGg-Ie-2Qu"/>
+                                    <outlet property="nameBackgroundView" destination="nSY-Po-gSd" id="AzC-f4-GDa"/>
                                     <outlet property="profilePicture" destination="K8Z-XT-I5E" id="iOp-zO-8HX"/>
                                     <segue destination="Ouj-qm-W5z" kind="push" id="syz-c3-Kuo"/>
                                 </connections>
@@ -476,7 +488,12 @@
         <class className="MHPeopleListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addLabelActivity:"/>
+                <relationship kind="action" name="addPersonActivity:"/>
+                <relationship kind="action" name="checkAllContacts:"/>
+                <relationship kind="action" name="chooseGender:"/>
                 <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="action" name="sortOnOff:"/>
                 <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>

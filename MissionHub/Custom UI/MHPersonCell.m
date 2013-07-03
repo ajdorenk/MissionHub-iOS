@@ -25,7 +25,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-
+        self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
+        self.nameBackgroundView.layer.borderWidth = 1.0;
 
     }
     return self;
@@ -33,7 +34,7 @@
 
 -(void)awakeFromNib {
     
-    self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0].CGColor;
+    self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
     self.nameBackgroundView.layer.borderWidth = 1.0;
     
 }
@@ -45,20 +46,20 @@
     // Configure the view for the selected state
 }
 
--(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person{
+-(void)populateWithPerson:(MHPerson *)person{
 //    person *person = [self.persons objectAtIndex:indexPath.row];
     
-    if (personCell.profilePicture.image == nil)
+    if (self.profilePicture.image == nil)
     {
-        personCell.profilePicture.image = [UIImage imageNamed:@"fb_blank_profile_square.png"];
+        self.profilePicture.image = [UIImage imageNamed:@"MHPersonCell_Placeholder.png"];
         
     } else {
-        [personCell.profilePicture setImageWithURL:[NSURL URLWithString:person.picture]
-													  placeholderImage:[UIImage imageNamed:@"fb_blank_profile_square.png"]];
+        [self.profilePicture setImageWithURL:[NSURL URLWithString:person.picture]
+													  placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
     }
     
-    personCell.gender.text = person.gender;
-    personCell.name.text = [person fullName];
+    self.gender.text = person.gender;
+    self.name.text = [person fullName];
 }
 
 @end

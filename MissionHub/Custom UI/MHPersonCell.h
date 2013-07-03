@@ -32,7 +32,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *checkbox;
 @property (nonatomic, strong) IBOutlet UIView *nameBackgroundView;
 
--(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
+-(void)populateWithPerson:(MHPerson *)person;
 
 
 
