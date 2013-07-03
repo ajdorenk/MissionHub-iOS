@@ -11,4 +11,7 @@
 
 @interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate>
 
+-(void)cycleFromViewController:(UIViewController *)oldVC
+             toViewController:(UIViewController*)newVC;
+
 @end

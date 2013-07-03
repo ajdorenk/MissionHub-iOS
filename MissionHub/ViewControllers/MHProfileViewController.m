@@ -8,25 +8,43 @@
 
 #import "MHProfileViewController.h"
 #import "MHParallaxTopViewController.h"
+#import "SDSegmentedControl.h"
 //#import "MHCustomNavigationBar.h"
 
 
 @interface MHProfileViewController ()
 
+@property (nonatomic, strong) NSArray *allViewControllers;
+@property (nonatomic, strong) UIViewController *currentViewController;
+@property (nonatomic, strong) SDSegmentedControl *switchViewControllers;
+
+//-(void)cycleFromViewController:(UIViewController *)oldVC toViewController:(UIViewController*)newVC;
 @end
+
 
 @implementation MHProfileViewController
 
 //@synthesize addLabelButton, addTagButton, backMenuButton;
-
-
+@synthesize switchViewControllers;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
+    UITableViewController *vc1 = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController1"];
     
+    // Create the penalty view controller
+    UITableViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController2"];
+    
+    // Add A and B view controllers to the array
+    self.allViewControllers = [[NSArray alloc] initWithObjects:vc1, vc2, nil];
+    
+    // Ensure a view controller is loaded
+    self.switchViewControllers.selectedSegmentIndex = 0;
+    [self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.switchViewControllers.selectedSegmentIndex]];
+    
+   
     UIImage* labelImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
     UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, labelImage.size.width, labelImage.size.height)];
     [newLabel setImage:labelImage forState:UIControlStateNormal];
@@ -82,11 +100,18 @@
 -(void) awakeFromNib
 {
     MHParallaxTopViewController * topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ParallaxedViewController"];
-    UITableViewController * tableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController"];
+    UITableViewController * tableViewController1 = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController1"];
+    UITableViewController * tableViewController2 = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController2"];
     UITableViewController * segmentedViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"segmentedViewController"];
     
-    
-    [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController segmentedViewController:segmentedViewController];
+    if (self.switchViewControllers.selectedSegmentIndex == 0) {
+        
+        [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController1 segmentedViewController:segmentedViewController];
+    }
+    else{
+        
+        [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController2 segmentedViewController:segmentedViewController];
+    }
     
     [((MHParallaxTopViewController *)self.topViewController).menu setUserInteractionEnabled:YES];
     
@@ -95,6 +120,64 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
 }
+
+-(void)cycleFromViewController:(UIViewController *)oldVC
+             toViewController:(UIViewController*)newVC{
+    if (newVC == oldVC) return;
+    
+    if (newVC) {
+        newVC.view.frame = CGRectMake(CGRectGetMinX(self.view.bounds), CGRectGetMinY(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
+        
+
+            
+        if (oldVC) {
+            
+            // Start both the view controller transitions
+            [oldVC willMoveToParentViewController:nil];
+            [self addChildViewController:newVC];
+            
+            // Swap the view controllers
+            [self transitionFromViewController:oldVC
+                              toViewController:newVC
+                                      duration:0.25
+                                       options:UIViewAnimationOptionLayoutSubviews
+                                    animations:^{}
+                                    completion:^(BOOL finished) {
+                                        // Finish both the view controller transitions
+                                        [oldVC removeFromParentViewController];
+                                        [newVC didMoveToParentViewController:self];
+                                        // Store a reference to the current controller
+                                        self.currentViewController = newVC;
+                                    }];
+        
+        
+        } else {
+            
+            [self addChildViewController:newVC];
+            
+            // Add the new view controller view to the ciew hierarchy
+            [self.view addSubview:newVC.view];
+            
+            // End the view controller transition
+            [newVC didMoveToParentViewController:self];
+            
+            // Store a reference to the current controller
+            self.currentViewController = newVC;
+        }
+    }
+}
+
+- (IBAction)indexDidChangeForSegmentedControl:(UISegmentedControl *)sender {
+    
+    NSUInteger index = sender.selectedSegmentIndex;
+    
+    if (UISegmentedControlNoSegment != index) {
+        UIViewController *incomingViewController = [self.allViewControllers objectAtIndex:index];
+        [self cycleFromViewController:self.currentViewController toViewController:incomingViewController];
+    }
+    
+}
+
 
 - (void)handleTapGesture:(id)sender {
     
