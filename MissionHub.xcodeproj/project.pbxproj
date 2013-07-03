@@ -155,6 +155,8 @@
 		68478DCC177E8CDC0014501D /* topbarOtherOptions_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */; };
 		68478DCD177E8CDC0014501D /* topbarTag_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DBA177E8CDC0014501D /* topbarTag_button.png */; };
 		68478DCE177E8CDC0014501D /* topbarTag_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DBA177E8CDC0014501D /* topbarTag_button.png */; };
+		68953EC21784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
+		68953EC31784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
 		68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C0689C176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
@@ -358,6 +360,7 @@
 		68478DB8177E8CDC0014501D /* topbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar_background.png; sourceTree = "<group>"; };
 		68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarOtherOptions_button.png; sourceTree = "<group>"; };
 		68478DBA177E8CDC0014501D /* topbarTag_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarTag_button.png; sourceTree = "<group>"; };
+		68953EC11784CD0100F0796C /* MH_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Logo.png; sourceTree = "<group>"; };
 		68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncodedString.h"; sourceTree = "<group>"; };
 		68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncodedString.m"; sourceTree = "<group>"; };
 		68C06899176EB832007C79D6 /* MHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHModel.h; path = Models/MHModel.h; sourceTree = "<group>"; };
@@ -763,6 +766,7 @@
 		68478DB0177E8CDC0014501D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				68953EC11784CD0100F0796C /* MH_Logo.png */,
 				68134F941782748300227C2A /* MHPersonCell_Placeholder.png */,
 				6823A7BD177EB00100DBDF3F /* Searchbar_background.png */,
 				6823A7BE177EB00100DBDF3F /* searchbar_image.png */,
@@ -1061,6 +1065,7 @@
 				6823A7CA177EB00100DBDF3F /* sectionHeaderSort.png in Resources */,
 				68134F951782748300227C2A /* MHPersonCell_Placeholder.png in Resources */,
 				68134F9B17837E6500227C2A /* SIAlertView.bundle in Resources */,
+				68953EC21784CD0100F0796C /* MH_Logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,6 +1103,7 @@
 				6823A7CB177EB00100DBDF3F /* sectionHeaderSort.png in Resources */,
 				68134F961782748300227C2A /* MHPersonCell_Placeholder.png in Resources */,
 				68134F9C17837E6500227C2A /* SIAlertView.bundle in Resources */,
+				68953EC31784CD0100F0796C /* MH_Logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

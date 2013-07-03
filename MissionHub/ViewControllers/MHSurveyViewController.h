@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 #import "MHMenuViewController.h"
+#import "MHSurvey.h"
 
 
 @interface MHSurveyViewController : UIViewController <UIWebViewDelegate>
@@ -17,5 +18,6 @@
 @property (nonatomic, strong) IBOutlet UIWebView *surveyWebView;
 
 - (IBAction)revealMenu:(id)sender;
+-(id)displaySurvey:(MHSurvey *)surveyToDisplay;
 
 @end

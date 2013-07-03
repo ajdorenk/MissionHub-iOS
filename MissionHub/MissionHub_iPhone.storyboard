@@ -69,14 +69,22 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="MH_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="DOQ-Dp-rpz">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" type="user" id="giB-lo-uWK"/>
+                                    <constraint firstAttribute="height" constant="67" type="user" id="nCE-Ah-nyb"/>
+                                </constraints>
+                            </imageView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="RNJ-Aa-RMZ">
                                 <color key="color" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.83163265310000001" blue="0.68719590809999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="RNJ-Aa-RMZ" secondAttribute="bottom" constant="185" id="3pD-SZ-GCn"/>
-                            <constraint firstItem="RNJ-Aa-RMZ" firstAttribute="centerX" secondItem="N3p-io-RJ3" secondAttribute="centerX" type="default" id="PSn-6H-UtW"/>
+                            <constraint firstItem="DOQ-Dp-rpz" firstAttribute="centerX" secondItem="RNJ-Aa-RMZ" secondAttribute="centerX" type="user" id="HvU-E7-76d"/>
+                            <constraint firstItem="RNJ-Aa-RMZ" firstAttribute="centerX" secondItem="N3p-io-RJ3" secondAttribute="centerX" type="user" id="PSn-6H-UtW"/>
+                            <constraint firstItem="RNJ-Aa-RMZ" firstAttribute="top" secondItem="N3p-io-RJ3" secondAttribute="top" constant="326" type="user" id="UnH-av-POS"/>
+                            <constraint firstItem="DOQ-Dp-rpz" firstAttribute="top" secondItem="N3p-io-RJ3" secondAttribute="top" constant="99" type="user" id="drM-Ny-STd"/>
                         </constraints>
                     </view>
                     <connections>
@@ -96,6 +104,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwi-SU-ImP" customClass="MHMenuToolbar">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="6fu-OV-6aD"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem id="4GW-d4-6JW">
                                         <connections>
@@ -106,24 +117,68 @@
                             </toolbar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7D-vC-vLx">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="505" id="Tag-bM-2Qq"/>
-                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="aPX-5J-ogf" id="KlA-gS-ZJ4"/>
+                                </connections>
                             </webView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIp-cw-0ua">
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bF6-d3-W7E">
+                                        <color key="color" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="MH_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="rCR-jh-jVW">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="67" id="9lp-av-H5H"/>
+                                            <constraint firstAttribute="width" constant="240" id="k1h-gp-8Nk"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="Xmz-2q-J0e">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="83" id="5dy-dT-Zy2"/>
+                                        </constraints>
+                                        <string key="text">Survey could not be loaded.
+
+Please try again or
+select another survey.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Xmz-2q-J0e" firstAttribute="top" secondItem="tIp-cw-0ua" secondAttribute="top" constant="198" id="8Pl-bB-4Jw"/>
+                                    <constraint firstItem="Xmz-2q-J0e" firstAttribute="trailing" secondItem="tIp-cw-0ua" secondAttribute="trailing" type="default" id="N7T-Bf-Ylu"/>
+                                    <constraint firstItem="bF6-d3-W7E" firstAttribute="centerX" secondItem="Xmz-2q-J0e" secondAttribute="centerX" type="default" id="WhH-i2-GzI"/>
+                                    <constraint firstAttribute="bottom" secondItem="bF6-d3-W7E" secondAttribute="bottom" constant="159" id="iiY-ap-5hN"/>
+                                    <constraint firstItem="rCR-jh-jVW" firstAttribute="top" secondItem="tIp-cw-0ua" secondAttribute="top" constant="70" id="piR-a2-lvu"/>
+                                    <constraint firstItem="rCR-jh-jVW" firstAttribute="centerX" secondItem="Xmz-2q-J0e" secondAttribute="centerX" type="default" id="v0S-Mq-CyF"/>
+                                    <constraint firstItem="Xmz-2q-J0e" firstAttribute="leading" secondItem="tIp-cw-0ua" secondAttribute="leading" type="default" id="wPR-rY-1C0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="S7D-vC-vLx" firstAttribute="top" secondItem="cwi-SU-ImP" secondAttribute="bottom" type="default" id="CRn-YS-Anc"/>
+                            <constraint firstAttribute="trailing" secondItem="tIp-cw-0ua" secondAttribute="trailing" type="user" id="2q2-gK-crN"/>
+                            <constraint firstItem="tIp-cw-0ua" firstAttribute="top" secondItem="S7D-vC-vLx" secondAttribute="top" type="default" id="9IB-sh-R7r"/>
+                            <constraint firstItem="S7D-vC-vLx" firstAttribute="top" secondItem="cwi-SU-ImP" secondAttribute="bottom" type="user" id="CRn-YS-Anc"/>
                             <constraint firstItem="cwi-SU-ImP" firstAttribute="leading" secondItem="s9e-Y9-AhE" secondAttribute="leading" type="default" id="Hsn-e2-mu6"/>
-                            <constraint firstItem="cwi-SU-ImP" firstAttribute="top" secondItem="s9e-Y9-AhE" secondAttribute="top" type="default" id="IjT-aK-Wza"/>
+                            <constraint firstItem="cwi-SU-ImP" firstAttribute="top" secondItem="s9e-Y9-AhE" secondAttribute="top" type="user" id="IjT-aK-Wza"/>
                             <constraint firstItem="cwi-SU-ImP" firstAttribute="trailing" secondItem="s9e-Y9-AhE" secondAttribute="trailing" type="default" id="OIH-67-HXo"/>
+                            <constraint firstItem="tIp-cw-0ua" firstAttribute="leading" secondItem="s9e-Y9-AhE" secondAttribute="leading" type="default" id="OKf-tx-npz"/>
                             <constraint firstItem="S7D-vC-vLx" firstAttribute="leading" secondItem="s9e-Y9-AhE" secondAttribute="leading" type="default" id="ZXr-wY-nFa"/>
+                            <constraint firstAttribute="bottom" secondItem="tIp-cw-0ua" secondAttribute="bottom" type="user" id="ced-xq-CaG"/>
+                            <constraint firstAttribute="bottom" secondItem="S7D-vC-vLx" secondAttribute="bottom" type="user" id="qJt-bl-4Vc"/>
                             <constraint firstItem="S7D-vC-vLx" firstAttribute="trailing" secondItem="s9e-Y9-AhE" secondAttribute="trailing" type="default" id="sTR-wF-6zq"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backMenu" destination="4GW-d4-6JW" id="u99-Zs-O4U"/>
+                        <outlet property="loadingIndicator" destination="bF6-d3-W7E" id="yIm-pF-czI"/>
+                        <outlet property="messageLabel" destination="Xmz-2q-J0e" id="rRF-Qu-zZT"/>
+                        <outlet property="messageView" destination="tIp-cw-0ua" id="Dqh-5u-FKn"/>
                         <outlet property="surveyWebView" destination="S7D-vC-vLx" id="ME4-Fg-Tar"/>
+                        <outlet property="topToolbar" destination="cwi-SU-ImP" id="pLE-Tc-QiE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cns-fn-cbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -435,6 +490,9 @@
             <point key="canvasLocation" x="2728" y="-136"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MH_Logo.png" width="144" height="144"/>
+    </resources>
     <classes>
         <class className="ECSlidingViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
@@ -507,7 +565,11 @@
             <relationships>
                 <relationship kind="action" name="revealMenu:"/>
                 <relationship kind="outlet" name="backMenu" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="topToolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="MyTableViewController" superclassName="UITableViewController">

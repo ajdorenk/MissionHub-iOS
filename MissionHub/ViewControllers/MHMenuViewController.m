@@ -7,19 +7,50 @@
 //
 
 #import "MHMenuViewController.h"
+#import "MHPeopleListViewController.h"
+#import "MHSurveyViewController.h"
 #import "MHAPI.h"
 #import "MHLabel.h"
 #import "MHPerson+Helper.h"
 #import "MHSurvey.h"
 
 @interface MHMenuViewController ()
+
+@property (nonatomic, strong) MHPeopleListViewController *_peopleListViewController;
+@property (nonatomic, strong) MHSurveyViewController *_surveyViewController;
 @property (nonatomic, strong) MHPerson *user;
 @property (nonatomic, strong) NSArray *menuHeaders;
 @property (nonatomic, strong) NSMutableArray *menuItems;
+
+-(MHPeopleListViewController *)peopleListViewController;
+-(MHSurveyViewController *)surveyViewController;
+
 @end
 
 @implementation MHMenuViewController
 
+-(MHPeopleListViewController *)peopleListViewController {
+	
+	if (self._peopleListViewController == nil) {
+		
+		self._peopleListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PeopleList"];
+		
+	}
+	
+	return self._peopleListViewController;
+	
+}
+-(MHSurveyViewController *)surveyViewController {
+	
+	if (self._surveyViewController == nil) {
+		
+		self._surveyViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Survey"];
+		
+	}
+	
+	return self._surveyViewController;
+	
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +63,7 @@
 
 - (void)awakeFromNib
 {
+	
 	self.menuHeaders	= @[@"", @"LABELS", @"LEADERS", @"SURVEYS", @"SETTINGS"];
 	self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"ALL CONTACTS"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"CHANGE ORGANIZATION", @"LOG OUT"]]];
 	
@@ -177,32 +209,38 @@
 	
 	if (indexPath.section >= 0 && indexPath.section < 4) {
 		
-		NSString *identifier = @"PeopleList";
+		UIViewController *newTopViewController;
+		id objectForIndex = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 		
 		if (indexPath.section == 3) {
-			identifier = @"Survey";
+			
+			if ([objectForIndex isKindOfClass:[MHSurvey class]]) {
+				
+				newTopViewController = [self surveyViewController];
+				[(MHSurveyViewController *)newTopViewController displaySurvey:objectForIndex];
+				
+			}
+			
+		} else {
+			
+			newTopViewController = [self peopleListViewController];
+			
 		}
 		
-		UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
-		
-		[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-			CGRect frame = self.slidingViewController.topViewController.view.frame;
-			self.slidingViewController.topViewController = newTopViewController;
-			self.slidingViewController.topViewController.view.frame = frame;
-			[self.slidingViewController resetTopView];
-		}];
+		if (newTopViewController) {
+			
+			[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+				CGRect frame = self.slidingViewController.topViewController.view.frame;
+				self.slidingViewController.topViewController = newTopViewController;
+				self.slidingViewController.topViewController.view.frame = frame;
+				[self.slidingViewController resetTopView];
+			}];
+			
+		}
 		
 	}
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 

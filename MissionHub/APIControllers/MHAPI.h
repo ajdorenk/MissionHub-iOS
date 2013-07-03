@@ -44,8 +44,14 @@
 
 -(void)getProfileForRemoteID:(NSNumber *)remoteID WithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock;
 
+-(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error;
 -(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error;
+-(NSString *)stringForShowRequestWith:(MHRequestOptions *)options error:(NSError **)error;
 -(NSString *)stringForIndexRequestWith:(MHRequestOptions *)options error:(NSError **)error;
+-(NSString *)stringForCreateRequestWith:(MHRequestOptions *)options error:(NSError **)error;
+-(NSString *)stringForUpdateRequestWith:(MHRequestOptions *)options error:(NSError **)error;
+-(NSString *)stringForDeleteRequestWith:(MHRequestOptions *)options error:(NSError **)error;
+-(NSString *)stringForUpdateOrDeleteRequestWith:(MHRequestOptions *)options error:(NSError **)error;
 
 -(void)requestDidFinish:(MHRequest *)request;
 -(void)requestDidFail:(MHRequest *)request;

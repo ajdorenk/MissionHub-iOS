@@ -217,7 +217,7 @@ typedef enum {
 
 -(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error {
 	
-	NSString *urlString = [self apiUrl];
+	NSString *urlString = [self surveyUrl];
 	
 	if (urlString == nil || [urlString length] <= 0 ) {
 		

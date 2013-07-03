@@ -8,14 +8,35 @@
 
 #import "MHSurveyViewController.h"
 #import "MHMenuToolbar.h"
+#import "MHAPI.h"
 
-@interface MHSurveyViewController ()
+@interface MHSurveyViewController () {
+	
+	MHSurvey *_survey;
+	
+}
+
+@property (nonatomic, strong) MHSurvey *survey;
+@property (nonatomic, strong) IBOutlet UIToolbar *topToolbar;
+@property (nonatomic, strong) UILabel *toolbarTitle;
+@property (nonatomic, strong) IBOutlet UIView *messageView;
+@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
+@property (nonatomic, assign) NSInteger numberOfAssetsLoading;
 
 @end
 
 @implementation MHSurveyViewController
 
+@synthesize survey = _survey;
+@synthesize numberOfAssetsLoading;
+@synthesize topToolbar;
+@synthesize toolbarTitle;
+@synthesize backMenu;
 @synthesize surveyWebView;
+@synthesize messageView;
+@synthesize messageLabel;
+@synthesize loadingIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,10 +47,17 @@
     return self;
 }
 
+-(void)awakeFromNib {
+
+	[super awakeFromNib];
+	
+}
+
 -(void)viewWillAppear:(BOOL)animated {
 	
 	[super viewWillAppear:animated];
 	
+
 	// shadowPath, shadowOffset, and rotation is handled by ECSlidingViewController.
 	// You just need to set the opacity, radius, and color.
 	self.view.layer.shadowOpacity = 0.75f;
@@ -54,6 +82,38 @@
 	// Do any additional setup after loading the view.
 }
 
+-(void)viewDidAppear:(BOOL)animated	{
+	
+	if (self.survey.title) {
+		
+		UILabel *labelForTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 230, 25)];
+		labelForTitle.textAlignment = NSTextAlignmentCenter;
+		labelForTitle.font = [UIFont systemFontOfSize:14.0];
+		labelForTitle.textColor = [UIColor blackColor];
+		labelForTitle.backgroundColor = [UIColor clearColor];
+		labelForTitle.adjustsFontSizeToFitWidth = NO;
+		labelForTitle.text = self.survey.title;
+		self.toolbarTitle = labelForTitle;
+		
+		UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView: labelForTitle];
+		//UIBarButtonItem *flexibleSpace1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+		
+		if ([self.topToolbar.items count] == 2) {
+			
+			NSMutableArray *itemArray = [NSMutableArray arrayWithArray:self.topToolbar.items];
+			[itemArray replaceObjectAtIndex:1 withObject:titleItem];
+			[self.topToolbar setItems:itemArray animated:NO];
+			
+			
+		} else {
+			
+			[self.topToolbar setItems:[self.topToolbar.items arrayByAddingObjectsFromArray:@[titleItem]] animated:NO];
+			
+		}
+		
+	}
+	
+}
 
 - (IBAction)revealMenu:(id)sender {
 	
@@ -62,17 +122,83 @@
 	
 }
 
+-(id)displaySurvey:(MHSurvey *)surveyToDisplay {
+	
+	self.survey = surveyToDisplay;
+	
+	if (self.survey.remoteID > 0) {
+		
+		NSError *error;
+		NSString *surveyUrlString = [[MHAPI sharedInstance] stringForSurveyWith:self.survey.remoteID error:&error];
+		
+		if (error) {
+			[MHErrorHandler presentError:error];
+			return self;
+		}
+		NSLog(@"%@", surveyUrlString);
+		NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:surveyUrlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+		
+		[self.surveyWebView loadRequest:surveyRequest];
+		
+	}
+	
+	return self;
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+
+	if (self.numberOfAssetsLoading == 0) {
+		
+		self.messageLabel.hidden = NO;
+		self.messageLabel.hidden = YES;
+		[self.loadingIndicator startAnimating];
+		[self.view bringSubviewToFront:self.messageView];
+		
+	}
+	
+	self.numberOfAssetsLoading++;
+	
+	return YES;
+}
+
 -(void)webViewDidStartLoad:(UIWebView *)webView {
+	
+	NSLog(@"%@", webView.request);
 	
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
+	
+	self.numberOfAssetsLoading--;
+	
+	if (self.numberOfAssetsLoading && self.messageView.hidden == NO) {
+	
+		self.messageView.hidden = YES;
+		self.messageLabel.hidden = YES;
+		[self.loadingIndicator stopAnimating];
+		[self.view bringSubviewToFront:self.surveyWebView];
+		
+	}
 	
 }
 
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	
+	self.numberOfAssetsLoading--;
+	
+	if (self.numberOfAssetsLoading) {
+		
+		if (self.messageView.hidden) {
+			self.messageView.hidden = NO;
+		}
+		
+		self.messageLabel.hidden = NO;
+		[self.loadingIndicator stopAnimating];
+		[self.view bringSubviewToFront:self.messageView];
+	
+	}
+
 }
 
 - (void)didReceiveMemoryWarning

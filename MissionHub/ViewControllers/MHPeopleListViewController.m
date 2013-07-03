@@ -141,22 +141,6 @@
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
 	
-	MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
-	 @"last_name":@"Doe",
-	 @"gender":@"Male",
-	 @"campus":nil,
-	 @"year_in_school":@"Second Year",
-	 @"major":@" Philosophy",
-	 @"minor":@"Computer Science",
-	 @"birth_date":@"1982-07-07",
-	 @"date_became_christian":@"2000-01-01",
-	 @"graduation_date":@"2010-01-07",
-	 @"user_id":@12345,
-	 @"fb_uid":@123456,
-	 @"updated_at":@"2012-11-19T19:29:30Z",
-	 @"created_at":@"2002-11-28T00:00:00Z"
-	 }];
-	
     /*
 	// Do any additional setup after loading the view.
     MHPerson *person1 = [MHPerson new];
