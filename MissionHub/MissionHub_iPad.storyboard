@@ -68,7 +68,6 @@
         <!--Login View Controller-->
         <scene sceneID="O2G-AU-s7Z">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tcs-4r-aUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Login" id="TOw-D5-oKo" customClass="MHLoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zZG-hh-pzI">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -77,6 +76,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tcs-4r-aUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1437" y="-481"/>
         </scene>
@@ -348,40 +348,28 @@
         <!--My Table View Controller-->
         <scene sceneID="Qgw-oz-8bD">
             <objects>
-                <tableViewController storyboardIdentifier="MyTableViewController" id="Ltd-cn-gyS" customClass="MyTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gxm-h2-27S">
+                <tableViewController storyboardIdentifier="MyTableViewController1" id="Ltd-cn-gyS" customClass="MyTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gxm-h2-27S">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHInteractionCell" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="InteractionCell" rowHeight="61" id="cfk-8p-mB3" customClass="MHInteractionCell">
-                                <rect key="frame" x="0.0" y="22" width="768" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="748" height="60"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfh-Jk-kgP">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="45" id="0h0-H6-pXJ"/>
-                                                <constraint firstAttribute="width" constant="45" id="H6p-rc-qPe"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="bfh-Jk-kgP" firstAttribute="leading" secondItem="cfk-8p-mB3" secondAttribute="leading" constant="23" id="2K9-pV-wPx"/>
-                                    <constraint firstItem="bfh-Jk-kgP" firstAttribute="top" secondItem="cfk-8p-mB3" secondAttribute="top" constant="7" id="PCE-Fl-eRl"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="profilePicture" destination="bfh-Jk-kgP" id="ZEH-5A-zMM"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
+                        <sections>
+                            <tableViewSection id="3a7-pd-r1C">
+                                <cells>
+                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHInteractionCell" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="InteractionCell" rowHeight="61" id="cfk-8p-mB3" customClass="MHInteractionCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="61"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="748" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="Ltd-cn-gyS" id="ObE-FJ-cTP"/>
                             <outlet property="delegate" destination="Ltd-cn-gyS" id="JtG-Rs-pmb"/>
@@ -392,6 +380,68 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="67K-c7-DTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7048" y="962"/>
+        </scene>
+        <!--My Table View Controller-->
+        <scene sceneID="Fjm-Es-kMp">
+            <objects>
+                <tableViewController storyboardIdentifier="MyTableViewController2" id="h53-WH-0T4" customClass="MyTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fEa-bi-AIE">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="ii8-ii-DOt">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="NmP-Sc-XFZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TEST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j12-V4-tTR">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="j12-V4-tTR" firstAttribute="leading" secondItem="NmP-Sc-XFZ" secondAttribute="leading" constant="304" id="HJp-1T-OUu"/>
+                                            <constraint firstItem="j12-V4-tTR" firstAttribute="top" secondItem="NmP-Sc-XFZ" secondAttribute="top" constant="11" id="rgd-5I-ZuH"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2hr-ZM-gc8">
+                                        <rect key="frame" x="0.0" y="44" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UUp-WJ-Z5u">
+                                        <rect key="frame" x="0.0" y="88" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="h53-WH-0T4" id="q0x-Jl-rqn"/>
+                            <outlet property="delegate" destination="h53-WH-0T4" id="jR4-Vp-TAU"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EI3-rD-iRc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8158" y="962"/>
         </scene>
         <!--Parallax Top View Controller-->
         <scene sceneID="ayO-CJ-abD">
@@ -431,7 +481,7 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uM1-mN-5kj" customClass="SDSegmentedControl">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" restorationIdentifier="Menu" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uM1-mN-5kj" customClass="SDSegmentedControl">
                                 <segments>
                                     <segment title="Info"/>
                                     <segment title="Interactions"/>
@@ -452,6 +502,100 @@
             <point key="canvasLocation" x="7440" y="603"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="ECSlidingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
+        </class>
+        <class className="M6ParallaxController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/M6ParallaxController.h"/>
+        </class>
+        <class className="MHGenderListController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="cancel" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="done" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="genderListCells" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="genderToolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MHInteractionCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInteractionCell.h"/>
+        </class>
+        <class className="MHLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoginViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
+        </class>
+        <class className="MHMenuToolbar" superclassName="UIToolbar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuToolbar.h"/>
+        </class>
+        <class className="MHMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuViewController.h"/>
+        </class>
+        <class className="MHNavigationViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNavigationViewController.h"/>
+        </class>
+        <class className="MHParallaxTopViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHParallaxTopViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="menu" candidateClass="SDSegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="MHPeopleListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="MHPeopleSearchBar" superclassName="UISearchBar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleSearchBar.h"/>
+        </class>
+        <class className="MHPersonCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPersonCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkbox" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="gender" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameBackgroundView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MHProfileViewController" superclassName="M6ParallaxController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addLabelActivity:"/>
+                <relationship kind="action" name="addTagActivity:"/>
+                <relationship kind="action" name="backToMenu:"/>
+                <relationship kind="action" name="indexDidChangeForSegmentedControl:" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="MHRootViewController" superclassName="ECSlidingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>
+        </class>
+        <class className="MHSegmentedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSegmentedViewController.h"/>
+        </class>
+        <class className="MHSurveyViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="backMenu" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="MyTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTableViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SDSegmentedControl" superclassName="UISegmentedControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SDSegmentedControl.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
