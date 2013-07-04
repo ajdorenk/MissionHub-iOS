@@ -7,6 +7,6 @@
 	<key>api_url</key>
 	<string>http://lwi.missionhub.com/apis/v3</string>
 	<key>survey_url</key>
-	<string>http://mhub.cc/s</string>
+	<string>http://stage.mhub.cc/s</string>
 </dict>
 </plist>

@@ -13,9 +13,11 @@
 @interface MHSurveyViewController () {
 	
 	MHSurvey *_survey;
+	BOOL		_isVisible;
 	
 }
 
+@property (nonatomic, assign) BOOL isVisible;
 @property (nonatomic, strong) MHSurvey *survey;
 @property (nonatomic, strong) IBOutlet UIToolbar *topToolbar;
 @property (nonatomic, strong) UILabel *toolbarTitle;
@@ -28,6 +30,7 @@
 
 @implementation MHSurveyViewController
 
+@synthesize isVisible = _isVisible;
 @synthesize survey = _survey;
 @synthesize numberOfAssetsLoading;
 @synthesize topToolbar;
@@ -84,6 +87,10 @@
 
 -(void)viewDidAppear:(BOOL)animated	{
 	
+	[super viewDidAppear:animated];
+	
+	self.isVisible = YES;
+	
 	if (self.survey.title) {
 		
 		UILabel *labelForTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 230, 25)];
@@ -113,6 +120,31 @@
 		
 	}
 	
+	if (self.survey.remoteID > 0) {
+		
+		NSError *error;
+		NSString *surveyUrlString = [[MHAPI sharedInstance] stringForSurveyWith:self.survey.remoteID error:&error];
+		
+		if (error) {
+			[MHErrorHandler presentError:error];
+			return;
+		}
+		
+		NSLog(@"%@", surveyUrlString);
+		NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:surveyUrlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+		
+		[self.surveyWebView loadRequest:surveyRequest];
+		
+	}
+	
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+	
+	[super viewDidDisappear:animated];
+	
+	self.isVisible = NO;
+	
 }
 
 - (IBAction)revealMenu:(id)sender {
@@ -126,7 +158,7 @@
 	
 	self.survey = surveyToDisplay;
 	
-	if (self.survey.remoteID > 0) {
+	if (self.survey.remoteID > 0 && self.isVisible) {
 		
 		NSError *error;
 		NSString *surveyUrlString = [[MHAPI sharedInstance] stringForSurveyWith:self.survey.remoteID error:&error];
@@ -135,6 +167,7 @@
 			[MHErrorHandler presentError:error];
 			return self;
 		}
+		
 		NSLog(@"%@", surveyUrlString);
 		NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:surveyUrlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
 		
