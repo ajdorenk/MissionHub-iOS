@@ -11,6 +11,8 @@
 
 @interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
+
 -(void)cycleFromViewController:(UIViewController *)oldVC
              toViewController:(UIViewController*)newVC;
 

@@ -73,6 +73,9 @@
     UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
+    
+    [self.toolbar setTranslucent:YES];
+
 }
 
 - (void)didReceiveMemoryWarning

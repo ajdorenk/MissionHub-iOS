@@ -37,6 +37,7 @@
     self.navigationBar.layer.shadowColor = [UIColor blackColor].CGColor;*/
     self.navigationBar.shadowImage = [[UIImage alloc] init];
     self.navigationBar.clipsToBounds = NO;
+    [self.navigationController setToolbarHidden:NO];
 
     
 }
