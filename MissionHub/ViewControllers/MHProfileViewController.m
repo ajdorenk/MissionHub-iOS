@@ -8,7 +8,6 @@
 
 #import "MHProfileViewController.h"
 #import "MHParallaxTopViewController.h"
-#import "SDSegmentedControl.h"
 //#import "MHCustomNavigationBar.h"
 
 
@@ -16,9 +15,8 @@
 
 @property (nonatomic, strong) NSArray *allViewControllers;
 @property (nonatomic, strong) UIViewController *currentViewController;
-@property (nonatomic, strong) SDSegmentedControl *switchViewControllers;
+@property (nonatomic, strong) IBOutlet SDSegmentedControl *switchViewControllers;
 
-//-(void)cycleFromViewController:(UIViewController *)oldVC toViewController:(UIViewController*)newVC;
 @end
 
 
@@ -26,6 +24,7 @@
 
 //@synthesize addLabelButton, addTagButton, backMenuButton;
 @synthesize switchViewControllers;
+//@synthesize menu;
 
 - (void)viewDidLoad
 {
@@ -45,17 +44,17 @@
     [self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.switchViewControllers.selectedSegmentIndex]];
     
    
-    UIImage* labelImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
+    UIImage* newInteractionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
+    UIButton *newInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, newInteractionImage.size.width, newInteractionImage.size.height)];
+    [newInteraction setImage:newInteractionImage forState:UIControlStateNormal];
+    [newInteraction addTarget:self action:@selector(newInteractionActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *newInteractionButton = [[UIBarButtonItem alloc] initWithCustomView:newInteraction];
+    
+    UIImage* labelImage = [UIImage imageNamed:@"topbarLabel_button.png"];
     UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, labelImage.size.width, labelImage.size.height)];
     [newLabel setImage:labelImage forState:UIControlStateNormal];
     [newLabel addTarget:self action:@selector(addLabelActivity:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addLabelButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
-    
-    UIImage* tagImage = [UIImage imageNamed:@"topbarTag_button.png"];
-    UIButton *newTag = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, tagImage.size.width, tagImage.size.height)];
-    [newTag setImage:tagImage forState:UIControlStateNormal];
-    [newTag addTarget:self action:@selector(addTagActivity:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addTagButton = [[UIBarButtonItem alloc] initWithCustomView:newTag];
+    UIBarButtonItem *addTagButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
     
     UIImage* otherOptionImage = [UIImage imageNamed:@"topbarOtherOptions_button.png"];
     UIButton *otherOptions = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, otherOptionImage.size.width, otherOptionImage.size.height)];
@@ -64,7 +63,7 @@
     UIBarButtonItem *otherOptionsButton = [[UIBarButtonItem alloc] initWithCustomView:otherOptions];
     
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:otherOptionsButton, addTagButton, addLabelButton, nil]];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:otherOptionsButton, addTagButton, newInteractionButton, nil]];
     
     
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
@@ -88,10 +87,10 @@
  //[self.slidingViewController anchorTopViewTo:ECRight];
  
  }
- - (IBAction)addTagActivity:(id)sender {
+ - (IBAction)addLabelActivity:(id)sender {
  NSLog(@"add Person Action");
  }
- - (IBAction)addLabelActivity:(id)sender {
+ - (IBAction)newInteractionActivity:(id)sender {
  NSLog(@"Label Action");
  }
  
@@ -105,7 +104,7 @@
     UITableViewController * segmentedViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"segmentedViewController"];
     
     if (self.switchViewControllers.selectedSegmentIndex == 0) {
-        
+        NSLog(@"works");
         [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController1 segmentedViewController:segmentedViewController];
     }
     else{
@@ -170,7 +169,7 @@
 - (IBAction)indexDidChangeForSegmentedControl:(UISegmentedControl *)sender {
     
     NSUInteger index = sender.selectedSegmentIndex;
-    
+    NSLog(@"This is changing");
     if (UISegmentedControlNoSegment != index) {
         UIViewController *incomingViewController = [self.allViewControllers objectAtIndex:index];
         [self cycleFromViewController:self.currentViewController toViewController:incomingViewController];

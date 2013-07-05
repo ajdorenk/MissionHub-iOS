@@ -34,10 +34,6 @@
 		6823A7C3177EB00100DBDF3F /* Searchbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7BD177EB00100DBDF3F /* Searchbar_background.png */; };
 		6823A7C4177EB00100DBDF3F /* searchbar_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7BE177EB00100DBDF3F /* searchbar_image.png */; };
 		6823A7C5177EB00100DBDF3F /* searchbar_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7BE177EB00100DBDF3F /* searchbar_image.png */; };
-		6823A7C6177EB00100DBDF3F /* sectionHeaderAll.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7BF177EB00100DBDF3F /* sectionHeaderAll.png */; };
-		6823A7C7177EB00100DBDF3F /* sectionHeaderAll.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7BF177EB00100DBDF3F /* sectionHeaderAll.png */; };
-		6823A7C8177EB00100DBDF3F /* sectionHeaderGender.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7C0177EB00100DBDF3F /* sectionHeaderGender.png */; };
-		6823A7C9177EB00100DBDF3F /* sectionHeaderGender.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7C0177EB00100DBDF3F /* sectionHeaderGender.png */; };
 		6823A7CA177EB00100DBDF3F /* sectionHeaderSort.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7C1177EB00100DBDF3F /* sectionHeaderSort.png */; };
 		6823A7CB177EB00100DBDF3F /* sectionHeaderSort.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7C1177EB00100DBDF3F /* sectionHeaderSort.png */; };
 		6823A7CE177EC34C00DBDF3F /* MHEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */; };
@@ -254,8 +250,6 @@
 		6823A7BA177EA4C900DBDF3F /* MHQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHQuestion.m; path = Models/MHQuestion.m; sourceTree = "<group>"; };
 		6823A7BD177EB00100DBDF3F /* Searchbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Searchbar_background.png; sourceTree = "<group>"; };
 		6823A7BE177EB00100DBDF3F /* searchbar_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar_image.png; sourceTree = "<group>"; };
-		6823A7BF177EB00100DBDF3F /* sectionHeaderAll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderAll.png; sourceTree = "<group>"; };
-		6823A7C0177EB00100DBDF3F /* sectionHeaderGender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderGender.png; sourceTree = "<group>"; };
 		6823A7C1177EB00100DBDF3F /* sectionHeaderSort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderSort.png; sourceTree = "<group>"; };
 		6823A7CC177EC34C00DBDF3F /* MHEmailAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHEmailAddress.h; path = Models/MHEmailAddress.h; sourceTree = "<group>"; };
 		6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHEmailAddress.m; path = Models/MHEmailAddress.m; sourceTree = "<group>"; };
@@ -770,8 +764,6 @@
 				68134F941782748300227C2A /* MHPersonCell_Placeholder.png */,
 				6823A7BD177EB00100DBDF3F /* Searchbar_background.png */,
 				6823A7BE177EB00100DBDF3F /* searchbar_image.png */,
-				6823A7BF177EB00100DBDF3F /* sectionHeaderAll.png */,
-				6823A7C0177EB00100DBDF3F /* sectionHeaderGender.png */,
 				6823A7C1177EB00100DBDF3F /* sectionHeaderSort.png */,
 				68478DB1177E8CDC0014501D /* BackMenu_Icon.png */,
 				68478DB2177E8CDC0014501D /* bg.jpg */,
@@ -1060,8 +1052,6 @@
 				68478DCD177E8CDC0014501D /* topbarTag_button.png in Resources */,
 				6823A7C2177EB00100DBDF3F /* Searchbar_background.png in Resources */,
 				6823A7C4177EB00100DBDF3F /* searchbar_image.png in Resources */,
-				6823A7C6177EB00100DBDF3F /* sectionHeaderAll.png in Resources */,
-				6823A7C8177EB00100DBDF3F /* sectionHeaderGender.png in Resources */,
 				6823A7CA177EB00100DBDF3F /* sectionHeaderSort.png in Resources */,
 				68134F951782748300227C2A /* MHPersonCell_Placeholder.png in Resources */,
 				68134F9B17837E6500227C2A /* SIAlertView.bundle in Resources */,
@@ -1098,8 +1088,6 @@
 				68478DCE177E8CDC0014501D /* topbarTag_button.png in Resources */,
 				6823A7C3177EB00100DBDF3F /* Searchbar_background.png in Resources */,
 				6823A7C5177EB00100DBDF3F /* searchbar_image.png in Resources */,
-				6823A7C7177EB00100DBDF3F /* sectionHeaderAll.png in Resources */,
-				6823A7C9177EB00100DBDF3F /* sectionHeaderGender.png in Resources */,
 				6823A7CB177EB00100DBDF3F /* sectionHeaderSort.png in Resources */,
 				68134F961782748300227C2A /* MHPersonCell_Placeholder.png in Resources */,
 				68134F9C17837E6500227C2A /* SIAlertView.bundle in Resources */,
