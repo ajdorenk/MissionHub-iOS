@@ -23,6 +23,10 @@
 	NSString *_accessToken;
 	
 	MHPerson *_currentUser;
+	NSMutableArray *_initialPeopleList;
+	BOOL _currentOrganizationIsFinished;
+	BOOL _initialPeopleListIsFinished;
+	NSError *_errorForInitialRequests;
 	
 }
 
@@ -33,12 +37,20 @@
 @property (nonatomic, strong) NSString *accessToken;
 
 @property (nonatomic, strong) MHPerson *currentUser;
+@property (nonatomic, strong) NSMutableArray *initialPeopleList;
+@property (nonatomic, assign) BOOL currentOrganizationIsFinished;
+@property (nonatomic, assign) BOOL initialPeopleListIsFinished;
+@property (nonatomic, strong) NSError *errorForInitialRequests;
+
 
 +(MHAPI *)sharedInstance;
 
 
 //initial calls after login
 -(void)getMeWithSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
+-(void)getCurrentOrganizationWith:(MHUser *)user successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
+-(void)getPeopleListWith:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
+
 -(void)getOrganizationWithRemoteID:(NSNumber *)remoteID successBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock;
 -(void)getLabelsForCurrentOrganizationWithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock;
 
@@ -55,5 +67,7 @@
 
 -(void)requestDidFinish:(MHRequest *)request;
 -(void)requestDidFail:(MHRequest *)request;
+
+-(void)handleError:(NSError *)error forRequest:(MHRequest *)request;
 
 @end

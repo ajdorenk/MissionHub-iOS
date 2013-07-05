@@ -105,6 +105,7 @@ typedef enum {
 @property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
 @property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);
 
+
 -(BOOL)hasRemoteID;
 -(BOOL)hasFilters;
 -(BOOL)hasIncludes;
@@ -112,15 +113,25 @@ typedef enum {
 -(BOOL)hasOffset;
 -(BOOL)hasOrder;
 
--(void)addInclude:(MHRequestOptionsIncludes)include;
--(void)addIncludesForProfileRequest;
--(void)addIncludesForOrganizationRequest;
--(void)addIncludesForMeRequest;
--(void)clearIncludes;
--(void)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
--(void)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
--(void)removeFilter:(MHRequestOptionsFilters)filter;
--(void)clearFilters;
+-(id)configureForInitialPeoplePageRequest;
+-(id)configureForMeRequest;
+-(id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID;
+-(id)configureForNextPageRequest;
+-(id)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
+
+-(id)addInclude:(MHRequestOptionsIncludes)include;
+-(id)addIncludesForProfileRequest;
+-(id)addIncludesForOrganizationRequest;
+-(id)addIncludesForMeRequest;
+-(id)addIncludesForPeoplePageRequest;
+-(id)setLimitAndOffsetForFirstPage;
+-(id)setLimitAndOffsetForNextPage;
+-(id)clearIncludes;
+-(id)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
+-(id)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
+-(id)removeFilter:(MHRequestOptionsFilters)filter;
+-(id)clearFilters;
+-(id)reset;
 
 -(NSString *)stringForEndpoint;
 -(NSString *)stringInSingluarFormatForEndpoint;

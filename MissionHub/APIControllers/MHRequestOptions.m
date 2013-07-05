@@ -8,6 +8,21 @@
 
 #import "MHRequestOptions.h"
 
+//orientation macros
+#define UIDeviceOrientationIsPortrait(orientation)  ((orientation) == UIDeviceOrientationPortrait || (orientation) == UIDeviceOrientationPortraitUpsideDown)
+#define UIDeviceOrientationIsLandscape(orientation) ((orientation) == UIDeviceOrientationLandscapeLeft || (orientation) == UIDeviceOrientationLandscapeRight)
+
+// check device orientation
+#define dDeviceOrientation [[UIDevice currentDevice] orientation]
+#define isPortrait  UIDeviceOrientationIsPortrait(dDeviceOrientation)
+#define isLandscape UIDeviceOrientationIsLandscape(dDeviceOrientation)
+#define isFaceUp    dDeviceOrientation == UIDeviceOrientationFaceUp   ? YES : NO
+#define isFaceDown  dDeviceOrientation == UIDeviceOrientationFaceDown ? YES : NO
+
+//check device type
+#define isPad    UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? YES : NO
+#define isPhone    UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? YES : NO
+
 @implementation MHRequestOptions
 
 @synthesize endpoint	= _endpoint;
@@ -27,18 +42,25 @@
 	
 	if (self) {
 		
-		self.endpoint	= MHRequestOptionsEndpointPeople;
-		self.remoteID	= 0;
-		self.filters	= [NSDictionary dictionary];
-		self.includes	= [NSMutableIndexSet indexSet];
-		self.limit		= 0;
-		self.offset		= 0;
-		self.order		= MHRequestOptionsOrderNone;
-		
-		self.successBlock		= nil;
-		self.failBlock			= nil;
+		[self reset];
 		
 	}
+	
+	return self;
+}
+
+-(id)reset {
+	
+	self.endpoint	= MHRequestOptionsEndpointPeople;
+	self.remoteID	= 0;
+	self.filters	= [NSDictionary dictionary];
+	self.includes	= [NSMutableIndexSet indexSet];
+	self.limit		= 0;
+	self.offset		= 0;
+	self.order		= MHRequestOptionsOrderNone;
+	
+	self.successBlock		= nil;
+	self.failBlock			= nil;
 	
 	return self;
 }
@@ -67,13 +89,53 @@
 	return (self.order != MHRequestOptionsOrderNone);
 }
 
--(void)addInclude:(MHRequestOptionsIncludes)include {
+-(id)configureForInitialPeoplePage {
+	
+	[[[self reset] addIncludesForProfileRequest] setLimitAndOffsetForFirstPage];
+	
+	return self;
+}
+
+-(id)configureForMeRequest {
+	
+	[[self reset] addIncludesForMeRequest];
+	
+	return self;
+}
+
+-(id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID {
+	
+	[[self reset] addIncludesForOrganizationRequest];
+	self.endpoint = MHRequestOptionsEndpointOrganizations;
+	self.remoteID = [remoteID integerValue];
+	
+	return self;
+}
+
+-(id)configureForProfileRequestWithRemoteID:(NSNumber *)remoteID {
+	
+	[[self reset] addIncludesForProfileRequest];
+	self.remoteID = [remoteID integerValue];
+	
+	return self;
+}
+
+-(id)configureForNextPageRequest {
+	
+	[self setLimitAndOffsetForNextPage];
+	
+	return self;
+}
+
+-(id)addInclude:(MHRequestOptionsIncludes)include {
 	
 	[self.includes addIndex:include];
 	
+	return self;
+	
 }
 
--(void)addIncludesForProfileRequest {
+-(id)addIncludesForProfileRequest {
 	
 	
 	//[self addInclude:MHRequestOptionsIncludePeopleInteractions];
@@ -90,9 +152,22 @@
 	//[self addInclude:MHRequestOptionsIncludeInteractionsLastUpdater];
 	
 	
+	return self;
 }
 
--(void)addIncludesForOrganizationRequest {
+-(id)addIncludesForPeoplePageRequest {
+	
+	
+	[self addInclude:MHRequestOptionsIncludePeopleOrganizationalPermissions];
+	[self addInclude:MHRequestOptionsIncludePeopleOrganizationalLabels];
+	[self addInclude:MHRequestOptionsIncludePeopleEmailAddresses];
+	[self addInclude:MHRequestOptionsIncludePeoplePhoneNumbers];
+	
+	
+	return self;
+}
+
+-(id)addIncludesForOrganizationRequest {
 	
 	[self addInclude:MHRequestOptionsIncludeOrganizationsAdmins];
 	[self addInclude:MHRequestOptionsIncludeOrganizationsLeaders];
@@ -100,45 +175,118 @@
 	[self addInclude:MHRequestOptionsIncludeOrganizationsLabels];
 	[self addInclude:MHRequestOptionsIncludeOrganizationsAllQuestions];
 	
+	return self;
 }
 
--(void)addIncludesForMeRequest {
+-(id)addIncludesForMeRequest {
 	
 	[self addIncludesForProfileRequest];
 	[self addInclude:MHRequestOptionsIncludePeopleAllOrganizationsAndChildren];
 	[self addInclude:MHRequestOptionsIncludePeopleAllOrganizationalPermissions];
 	[self addInclude:MHRequestOptionsIncludePeopleUser];
 	
+	return self;
 }
 
--(void)clearIncludes {
+-(id)setLimitAndOffsetForFirstPage {
+	
+	self.offset = 0;
+	
+	if (isPad) {
+		
+		if (isPortrait) {
+			
+			self.limit = 30;
+			
+		} else {
+			
+			self.limit = 20;
+			
+		}
+		
+	} else {
+		
+		if (isPortrait) {
+			
+			self.limit = 20;
+			
+		} else {
+			
+			self.limit = 10;
+			
+		}
+		
+	}
+	
+	return self;
+}
+
+-(id)setLimitAndOffsetForNextPage {
+	
+	self.offset += self.limit;
+	
+	if (isPad) {
+		
+		if (isPortrait) {
+			
+			self.limit = 30;
+			
+		} else {
+			
+			self.limit = 20;
+			
+		}
+		
+	} else {
+		
+		if (isPortrait) {
+			
+			self.limit = 20;
+			
+		} else {
+			
+			self.limit = 10;
+			
+		}
+		
+	}
+	
+	return self;
+}
+
+-(id)clearIncludes {
 	
 	[self.includes removeAllIndexes];
 	
+	return self;
 }
 
--(void)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
+-(id)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
 	
 	[self.filters setValue:value forKey:[self stringFromFilter:filter]];
 	
+	return self;
 }
 
--(void)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
+-(id)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
 	
 	[self.filters setValue:value forKey:[self stringFromFilter:filter]];
 	
+	return self;
 }
 
--(void)removeFilter:(MHRequestOptionsFilters)filter {
+-(id)removeFilter:(MHRequestOptionsFilters)filter {
 	
 	[self.filters removeObjectForKey:[self stringFromFilter:filter]];
 	
+	return self;
 }
 
--(void)clearFilters {
+-(id)clearFilters {
 	
 	[self.filters removeAllObjects];
 	
+	return self;
 }
 
 -(NSString *)stringForEndpoint {

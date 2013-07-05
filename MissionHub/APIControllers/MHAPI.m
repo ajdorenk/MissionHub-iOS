@@ -12,9 +12,11 @@
 
 static NSString *MHAPIErrorDomain = @"com.missionhub.errorDomain.API";
 static NSString *MHAPIRequestNameMe = @"com.missionhub.API.requestName.me";
-static NSString *MHAPIRequestNameCurrentOrganization = @"com.missionhub.API.requestName.org";
+static NSString *MHAPIRequestNameCurrentOrganization = @"com.missionhub.API.requestName.currentOrganization";
+static NSString *MHAPIRequestNameInitialPeopleList = @"com.missionhub.API.requestName.initialPeopleList";
 
 typedef enum {
+	MHAPIErrorCouldNotRetrieveCurrentUser,
 	MHAPIErrorMissingUrl,
 	MHAPIErrorMissingEndpoint,
 	MHAPIErrorMissionAccessToken,
@@ -39,7 +41,11 @@ typedef enum {
 @synthesize surveyUrl	= _surveyUrl;
 @synthesize accessToken	= _accessToken;
 
-@synthesize currentUser	= _currentUser;
+@synthesize currentUser						= _currentUser;
+@synthesize initialPeopleList				= _initialPeopleList;
+@synthesize currentOrganizationIsFinished	= _currentOrganizationIsFinished;
+@synthesize initialPeopleListIsFinished		= _initialPeopleListIsFinished;
+@synthesize errorForInitialRequests			= _errorForInitialRequests;
 
 + (MHAPI *)sharedInstance
 {
@@ -88,10 +94,7 @@ typedef enum {
 
 -(void)getMeWithSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
-	
-	requestOptions.endpoint = MHRequestOptionsEndpointPeople;
-	[requestOptions addIncludesForMeRequest];
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForMeRequest];
 	
 	NSError *error;
 	NSString *urlString = [self stringForMeRequestWith:requestOptions error:&error];
@@ -113,11 +116,7 @@ typedef enum {
 
 -(void)getOrganizationWithRemoteID:(NSNumber *)remoteID successBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock {
 	
-	MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
-	
-	requestOptions.endpoint = MHRequestOptionsEndpointOrganizations;
-	requestOptions.remoteID = [remoteID integerValue];
-	[requestOptions addIncludesForOrganizationRequest];
+	MHRequestOptions *requestOptions	= [[[MHRequestOptions alloc] init] configureForOrganizationRequestWithRemoteID:remoteID];
 	
 	NSError *error;
 	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
@@ -136,15 +135,10 @@ typedef enum {
 	[self.queue addOperation:request];
 }
 
--(void)getCurrentOrganizationWith:(NSArray *)modelArray request:(MHRequest *)request {
+-(void)getCurrentOrganizationWith:(MHUser *)user successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	
-	MHRequestOptions *requestOptions	= [[MHRequestOptions alloc] init];
-	self.currentUser					= [modelArray objectAtIndex:0];
-	
-	requestOptions.endpoint = MHRequestOptionsEndpointOrganizations;
-	requestOptions.remoteID = [self.currentUser.user.primary_organization_id integerValue];
-	[requestOptions addIncludesForOrganizationRequest];
+	MHRequestOptions *requestOptions	= [[[MHRequestOptions alloc] init] configureForOrganizationRequestWithRemoteID:user.primary_organization_id];
+	self.currentOrganizationIsFinished = NO;
 	
 	NSError *error;
 	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
@@ -154,14 +148,50 @@ typedef enum {
 		return;
 	}
 	
-	MHRequest *orgRequest			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
-	orgRequest.requestName			= MHAPIRequestNameCurrentOrganization;
-	orgRequest.delegate				= self;
-	orgRequest.options				= requestOptions;
-	orgRequest.successBlock			= request.successBlock;
-	orgRequest.failBlock			= request.failBlock;
+	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	request.requestName			= MHAPIRequestNameCurrentOrganization;
+	request.delegate			= self;
+	request.options				= requestOptions;
+	request.successBlock		= successBlock;
+	request.failBlock			= failBlock;
 	
-	[self.queue addOperation:orgRequest];
+	[self.queue addOperation:request];
+	
+}
+
+-(void)getPeopleListWith:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	MHRequestOptions *requestOptions;
+	NSString *requestName;
+	
+	if (options) {
+		requestOptions = options;
+	} else {
+		requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
+		requestName = MHAPIRequestNameInitialPeopleList;
+		self.initialPeopleListIsFinished = NO;
+	}
+	
+	NSError *error;
+	NSString *urlString = [self stringForIndexRequestWith:requestOptions error:&error];
+	NSLog(@"%@", urlString);
+	if (error) {
+		[MHErrorHandler presentError:error];
+		return;
+	}
+	
+	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	
+	if (requestName) {
+		request.requestName			= requestName;
+	}
+	
+	request.delegate			= self;
+	request.options				= requestOptions;
+	request.successBlock		= successBlock;
+	request.failBlock			= failBlock;
+	
+	[self.queue addOperation:request];
 	
 }
 
@@ -469,6 +499,73 @@ typedef enum {
 			return;
 			
 		}
+	
+		//deal with result
+		if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
+			
+			self.currentUser = [modelArray objectAtIndex:0];
+			self.errorForInitialRequests = nil;
+			
+			[self getCurrentOrganizationWith:self.currentUser.user successBlock:request.successBlock failBlock:request.failBlock];
+			[self getPeopleListWith:nil successBlock:request.successBlock failBlock:request.failBlock];
+			
+		} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
+			
+			self.currentUser.currentOrganization = [modelArray objectAtIndex:0];
+			self.currentOrganizationIsFinished = YES;
+			
+			if (self.initialPeopleListIsFinished) {
+				
+				if (self.errorForInitialRequests) {
+					
+					NSArray *returnArray = @[self.currentUser, self.errorForInitialRequests];
+					
+					//call success block if it exists so that the calling method can access the result
+					if (request.successBlock) {
+						request.successBlock(returnArray, request.options);
+					}
+					
+				} else {
+					
+					NSArray *returnArray = @[self.currentUser, self.initialPeopleList];
+					
+					//call success block if it exists so that the calling method can access the result
+					if (request.successBlock) {
+						request.successBlock(returnArray, request.options);
+					}
+					
+				}
+				
+			}
+			
+		} else if ([request.requestName isEqualToString:MHAPIRequestNameInitialPeopleList]) {
+			
+			self.initialPeopleList = modelArray;
+			self.initialPeopleListIsFinished = YES;
+			
+			if (self.currentOrganizationIsFinished) {
+				
+				if (!self.errorForInitialRequests) {
+				
+					NSArray *returnArray = @[self.currentUser, self.initialPeopleList];
+					
+					//call success block if it exists so that the calling method can access the result
+					if (request.successBlock) {
+						request.successBlock(returnArray, request.options);
+					}
+					
+				}
+				
+			}
+			
+		} else {
+			
+			//call success block if it exists so that the calling method can access the result
+			if (request.successBlock) {
+				request.successBlock(modelArray, request.options);
+			}
+			
+		}
 		
 		
 	/*
@@ -480,12 +577,8 @@ typedef enum {
 									code:MHAPIErrorMalformedResponse
 								userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com", @"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com")}];
 		
-		if (request.failBlock) {
-			request.failBlock(error, request.options);
-		} else {
-			//if no fail block show the error anyway
-			[MHErrorHandler presentError:error];
-		}
+	 [self handleError:error forRequest:request];
+	 return;
 		
 		
 	}
@@ -495,100 +588,108 @@ typedef enum {
 	}
 	*/
 	
-	if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
-		
-		[self getCurrentOrganizationWith:modelArray request:request];
-		
-	} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
-	
-		self.currentUser.currentOrganization = [modelArray objectAtIndex:0];
-		[modelArray insertObject:self.currentUser atIndex:0];
-		
-		//call success block if it exists so that the calling method can access the result
-		if (request.successBlock) {
-			request.successBlock(modelArray, request.options);
-		}
-		
-	} else {
-	
-		//call success block if it exists so that the calling method can access the result
-		if (request.successBlock) {
-			request.successBlock(modelArray, request.options);
-		}
-		
-	}
-	
 }
 
 -(void)requestDidFail:(MHRequest *)request {
 	
 	NSError *error, *responseError;
+	NSInteger errorCode	= request.responseStatusCode;
+	NSString *errorMessage = @"";
 	
 	//parse errors and put into NSError object
 	@try {
-	
-		//if there is a connection error and the request has dealt with the error then return that error
-		if (request.error) {
-			
-			responseError = request.error;
 		
-		//otherwise parse the error
-		} else {
+		if (request.responseStatusCode == 400 || request.responseStatusCode == 401 || request.responseStatusCode == 404 || request.responseStatusCode == 422 || request.responseStatusCode == 500) {
 		
-			//parse response and put into result dictionary
-			NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
+			switch (request.responseStatusCode) {
+				case 400:
+					errorMessage = [errorMessage stringByAppendingString:@"Bad Request: "];
+				case 401:
+					errorMessage = [errorMessage stringByAppendingString:@"Unauthorized Request: "];
+				case 404:
+					errorMessage = [errorMessage stringByAppendingString:@"The requested resource could not be found."];
+					break;
+				case 422:
+					errorMessage = [errorMessage stringByAppendingString:@"Unprocessable Entity: "];
+					break;
+				case 500:
+					errorMessage = [errorMessage stringByAppendingString:@"Server Error: The server encountered an unexpected condition which prevented it from fulfilling the request. Please report what happened to support@missionhub.com"];
+					break;
+					
+				default:
+					break;
+			}
 			
-			//if there was a parsing error stop updating model and notify calling method of the error through the fail block
-			if (error) {
+			if (request.responseStatusCode == 400 || request.responseStatusCode == 401 || request.responseStatusCode == 422) {
 				
-				if (request.failBlock) {
-					request.failBlock(error, request.options);
-				} else {
-					//if no fail block show the error anyway
-					[MHErrorHandler presentError:error];
+				NSString *responseErrorString;
+				
+				//parse response and put into result dictionary
+				NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
+				
+				//if there was a parsing error stop updating model and notify calling method of the error through the fail block
+				if (error) {
+					
+					responseError = [NSError errorWithDomain:MHAPIErrorDomain
+												code:MHAPIErrorMalformedResponse
+											userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response did not contain a readable error message. Please contact support@missionhub.com", nil)}];
+					
+					[self handleError:responseError forRequest:request];
+					return;
+					
+				}
+				
+				//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
+				if ([[[result allKeys] objectAtIndex:0] isEqualToString:@"errors"]) {
+					
+					responseErrorString	= [[result objectForKey:@"errors"] objectAtIndex:0];
+					
+					if ([[[result allKeys] objectAtIndex:1] isEqualToString:@"code"]) {
+						
+						id code = [[result objectForKey:@"code"] objectAtIndex:1];
+						
+						if ([code isEqualToString:@"invalid_facebook_token"]) {
+							
+							errorCode = MHAPIErrorAccessTokenError;
+							
+						}
+						
+					}
+				
+				}
+				
+				if (responseErrorString) {
+					
+					errorMessage = [errorMessage stringByAppendingFormat:@" %@", responseErrorString];
+					
 				}
 				
 			}
 			
-			//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
-			if ([[[result allKeys] objectAtIndex:0] isEqualToString:@"errors"]) {
+			responseError = [NSError errorWithDomain:MHAPIErrorDomain
+												code:errorCode
+											userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+			
+			[self handleError:responseError forRequest:request];
+			return;
+			
+		} else {
+	
+			//if there is a connection error and the request has dealt with the error then return that error
+			if (request.error) {
 				
-				NSInteger errorCode = MHAPIErrorServerError;
-				id errorMessage		= [[result objectForKey:@"errors"] objectAtIndex:0];
-				
-				if ([[[result allKeys] objectAtIndex:1] isEqualToString:@"code"]) {
-					
-					id code = [[result objectForKey:@"code"] objectAtIndex:1];
-					
-					if ([code isEqualToString:@"invalid_facebook_token"]) {
-						
-						errorCode = MHAPIErrorAccessTokenError;
-						
-					} else if ([code isEqualToString:@"access_denied"]) {
-						
-						errorCode = MHAPIErrorAccessTokenError;
-						
-					}
-					
-					responseError = [NSError errorWithDomain:MHAPIErrorDomain
-														code:errorCode
-													userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
-					
-				}
-				
+				responseError = request.error;
+			
+			//otherwise parse the error
 			} else {
-				
-				error = [NSError errorWithDomain:MHAPIErrorDomain
+					
+				responseError = [NSError errorWithDomain:MHAPIErrorDomain
 											code:MHAPIErrorMalformedResponse
 										userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response did not contain a valid error. Please contact support@missionhub.com", @"Response did not contain a valid error. Please contact support@missionhub.com")}];
 				
-				if (request.failBlock) {
-					request.failBlock(error, request.options);
-				} else {
-					//if no fail block show the error anyway
-					[MHErrorHandler presentError:error];
-				}
-				
+				[self handleError:responseError forRequest:request];
+				return;
+					
 			}
 			
 		}
@@ -602,13 +703,9 @@ typedef enum {
 		error = [NSError errorWithDomain:MHAPIErrorDomain
 									code:MHAPIErrorMalformedResponse
 								userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com", @"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com")}];
-		
-		if (request.failBlock) {
-			request.failBlock(error, request.options);
-		} else {
-			//if no fail block show the error anyway
-			[MHErrorHandler presentError:error];
-		}
+
+		[self handleError:responseError forRequest:request];
+		return;
 		
 		
 	}
@@ -616,13 +713,104 @@ typedef enum {
 		//nothing to clean up with ARC. YAY!
 	}
 	
-	//call fail block if it exists so that the calling method can access the result
-	if (request.failBlock) {
-		request.failBlock(responseError, request.options);
+	[self handleError:responseError forRequest:request];
+	return;
+	
+}
+
+-(void)handleError:(NSError *)error forRequest:(MHRequest *)request {
+	
+	if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
+		
+		NSString *errorMessage = [NSString stringWithFormat:@"Initial Load Failed due to error: %@ Please try reloading the initial data. Please contact support@missionhub.com if the problem continues.", [error localizedDescription]];
+		
+		error = [NSError errorWithDomain:MHAPIErrorDomain
+									code:MHAPIErrorCouldNotRetrieveCurrentUser
+								userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage,nil)}];
+		
+		//call fail block if it exists so that the calling method can access the result
+		if (request.failBlock) {
+			request.failBlock(error, request.options);
+		} else {
+			//if no fail block show the error anyway
+			[MHErrorHandler presentError:self.errorForInitialRequests];
+		}
+		
+	} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
+		
+		NSString *errorMessage = [NSString stringWithFormat:@"Initial Load Failed due to error: %@ Please try reloading the initial data. Please contact support@missionhub.com if the problem continues.", [error localizedDescription]];
+		
+		self.currentOrganizationIsFinished = YES;
+		
+		self.errorForInitialRequests = [NSError errorWithDomain:MHAPIErrorDomain
+														   code:MHAPIErrorCouldNotRetrieveCurrentUser
+													   userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage,nil)}];
+		
+		//call fail block if it exists so that the calling method can access the result
+		if (request.failBlock) {
+			request.failBlock(self.errorForInitialRequests, request.options);
+		} else {
+			//if no fail block show the error anyway
+			[MHErrorHandler presentError:self.errorForInitialRequests];
+		}
+		
+		if (self.initialPeopleListIsFinished) {
+			
+			self.errorForInitialRequests = nil;
+			
+		}
+		
+		
+	} else if ([request.requestName isEqualToString:MHAPIRequestNameInitialPeopleList]) {
+		
+		self.initialPeopleListIsFinished = YES;
+		
+		if (self.currentOrganizationIsFinished) {
+			
+			if (self.errorForInitialRequests) {
+				
+				self.errorForInitialRequests = nil;
+				
+			} else {
+			
+				NSString *errorMessage = [NSString stringWithFormat:@"Initial Load could not retreive your contacts due to error: %@ Please try reloading the contact list but pulling down on the list. Please contact support@missionhub.com if the problem continues.", [error localizedDescription]];
+				
+				self.errorForInitialRequests = [NSError errorWithDomain:MHAPIErrorDomain
+																   code:MHAPIErrorCouldNotRetrieveCurrentUser
+															   userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage,nil)}];
+				
+				NSArray *returnArray = @[self.currentUser, self.errorForInitialRequests];
+					
+				//call success block if it exists so that the calling method can access the result
+				if (request.successBlock) {
+					request.successBlock(returnArray, request.options);
+				}
+				
+			}
+			
+		} else {
+			
+			NSString *errorMessage = [NSString stringWithFormat:@"Initial Load could not retreive your contacts due to error: %@ Please try reloading the contact list but pulling down on the list. Please contact support@missionhub.com if the problem continues.", [error localizedDescription]];
+			
+			self.errorForInitialRequests = [NSError errorWithDomain:MHAPIErrorDomain
+															   code:MHAPIErrorCouldNotRetrieveCurrentUser
+														   userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage,nil)}];
+			
+		}
+		
 	} else {
-		//if no fail block show the error anyway
-		[MHErrorHandler presentError:responseError];
+		
+		//call fail block if it exists so that the calling method can access the result
+		if (request.failBlock) {
+			request.failBlock(error, request.options);
+		} else {
+			//if no fail block show the error anyway
+			[MHErrorHandler presentError:error];
+		}
+		
 	}
+	
+	
 	
 }
 
