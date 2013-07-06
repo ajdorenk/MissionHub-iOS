@@ -68,7 +68,7 @@
 	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
 	
 	if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
-		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"MHMenuViewController"];
 	}
 	
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];

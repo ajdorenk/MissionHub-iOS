@@ -7,7 +7,7 @@
         <!--Root View Controller-->
         <scene sceneID="et2-8H-eSU">
             <objects>
-                <viewController storyboardIdentifier="Root" id="rU8-t6-f3q" customClass="MHRootViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MHRootViewController" id="rU8-t6-f3q" customClass="MHRootViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="Root" id="C3G-zZ-xK1">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -22,7 +22,7 @@
         <!--Menu View Controller-->
         <scene sceneID="j3s-TL-461">
             <objects>
-                <viewController storyboardIdentifier="Menu" id="wb7-7U-euA" customClass="MHMenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MHMenuViewController" id="wb7-7U-euA" customClass="MHMenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oeO-rO-MqP">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -64,7 +64,7 @@
         <!--Login View Controller-->
         <scene sceneID="mef-o3-o50">
             <objects>
-                <viewController storyboardIdentifier="Login" id="Ptk-Eg-M12" customClass="MHLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MHLoginViewController" id="Ptk-Eg-M12" customClass="MHLoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N3p-io-RJ3">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -98,7 +98,7 @@
         <!--Survey View Controller-->
         <scene sceneID="r1p-Qm-zhG">
             <objects>
-                <viewController storyboardIdentifier="Survey" id="aPX-5J-ogf" customClass="MHSurveyViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MHSurveyViewController" id="aPX-5J-ogf" customClass="MHSurveyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s9e-Y9-AhE">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -263,7 +263,7 @@ select another survey.</string>
         <!--Navigation View Controller-->
         <scene sceneID="eF9-LA-ZbS">
             <objects>
-                <navigationController storyboardIdentifier="PeopleList" definesPresentationContext="YES" id="fXB-nB-CIT" customClass="MHNavigationViewController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MHNavigationViewController" definesPresentationContext="YES" id="fXB-nB-CIT" customClass="MHNavigationViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="jMf-Ef-WLR">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -278,7 +278,7 @@ select another survey.</string>
         <!--People List View Controller-->
         <scene sceneID="flo-MN-bmG">
             <objects>
-                <tableViewController id="jKu-P9-w4S" customClass="MHPeopleListViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MHPeopleListViewController" id="jKu-P9-w4S" customClass="MHPeopleListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="pTm-4q-EEk">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -368,7 +368,7 @@ select another survey.</string>
                                     <outlet property="name" destination="3By-9J-vUT" id="cGg-Ie-2Qu"/>
                                     <outlet property="nameBackgroundView" destination="nSY-Po-gSd" id="AzC-f4-GDa"/>
                                     <outlet property="profilePicture" destination="K8Z-XT-I5E" id="iOp-zO-8HX"/>
-                                    <segue destination="Ouj-qm-W5z" kind="push" id="syz-c3-Kuo"/>
+                                    <segue destination="Ouj-qm-W5z" kind="push" identifier="profileSegue" id="syz-c3-Kuo"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -570,7 +570,12 @@ select another survey.</string>
         <class className="MHPeopleListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addLabelActivity:"/>
+                <relationship kind="action" name="addPersonActivity:"/>
+                <relationship kind="action" name="checkAllContacts:"/>
+                <relationship kind="action" name="chooseGender:"/>
                 <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="action" name="sortOnOff:"/>
                 <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>

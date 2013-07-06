@@ -8,11 +8,14 @@
 
 #import "ECSlidingViewController.h"
 #import "MHLoginViewController.h"
+#import "MHNavigationViewController.h"
+#import "MHPeopleListViewController.h"
 #import "MHAPI.h"
 
 @interface MHRootViewController : ECSlidingViewController <MHLoginDelegate>
 
 @property (nonatomic, strong) MHLoginViewController *loginViewController;
+@property (nonatomic, strong) MHNavigationViewController *peopleNavigationViewController;
 @property (nonatomic, assign) BOOL					userInitiatedLogout;
 @property (nonatomic, assign) BOOL					showLoginOnViewDidAppear;
 

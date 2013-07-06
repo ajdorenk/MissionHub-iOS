@@ -300,13 +300,13 @@ typedef enum {
 		
 		if (self.hasRequestedMe == NO) {
 		
-			if ([MHAPI sharedInstance].currentUser) {
+			if ([MHAPI sharedInstance].currentUser && [MHAPI sharedInstance].initialPeopleList) {
 				
 				[self endLoading];
 				
-				if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:)]) {
+				if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:peopleList:)]) {
 					
-					[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser];
+					[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser  peopleList:[MHAPI sharedInstance].initialPeopleList];
 					
 				}
 				
@@ -318,9 +318,22 @@ typedef enum {
 					
 					[self endLoading];
 					
-					if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:)]) {
+					NSArray *peopleList = nil;
+					id  resultObject = [result objectAtIndex:1];
+					
+					if ([resultObject isKindOfClass:[NSError class]]) {
 						
-						[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser];
+						[self handleError:resultObject];
+						
+					} else if ([resultObject isKindOfClass:[NSArray class]]) {
+						
+						peopleList = resultObject;
+						
+					}
+					
+					if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:peopleList:)]) {
+						
+						[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser  peopleList:peopleList];
 						
 					}
 					
@@ -331,7 +344,7 @@ typedef enum {
 					
 					[self endLoading];
 					
-					[MHErrorHandler presentError:error];
+					[self handleError:error];
 					
 					self.hasRequestedMe = NO;
 					
@@ -343,6 +356,14 @@ typedef enum {
 		
 		
 	}
+	
+}
+
+-(void)handleError:(NSError *)error {
+	
+	//do stuff to configure the UI when an error happens i.e. fb error clears fb session and shows fb button, mh error shows mh reload button
+	
+	[MHErrorHandler presentError:error];
 	
 }
 

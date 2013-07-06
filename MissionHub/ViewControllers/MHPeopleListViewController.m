@@ -8,7 +8,7 @@
 
 #import "MHPeopleListViewController.h"
 
-#import <Foundation/Foundation.h>
+#import "MHAPI.h"
 #import "MHPersonCell.h"
 #import "MHMenuToolbar.h"   
 #import "MHPeopleSearchBar.h" 
@@ -16,14 +16,24 @@
 
 
 @interface MHPeopleListViewController (Private)
+
 -(void)setTextFieldLeftView;
 -(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
 @end
 
 @implementation MHPeopleListViewController
 
+@synthesize peopleSearchBar;
 @synthesize persons = _persons;
+@synthesize peopleArray = _peopleArray;
 
+-(void)awakeFromNib {
+	
+	[super awakeFromNib];
+	
+	self.peopleArray = [NSMutableArray array];
+	
+}
 
 -(void)viewWillAppear:(BOOL)animated {
 	
@@ -174,6 +184,13 @@
 
 }
 
+-(void)setDataArray:(NSArray *)dataArray {
+	
+	self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
+	[self.tableView reloadData];
+	
+}
+
 - (void)setTextFieldLeftView
 {
     UITextField *searchField = nil;
@@ -245,25 +262,46 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.persons.count;
+    return [self.peopleArray count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	
+	if (indexPath.row <= [self.peopleArray count]) {
+		
         static NSString *CellIdentifier = @"MyCell";
         MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
-        if (cell == nil) {
-            cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-    
-    MHPerson *person = [self.persons objectAtIndex:indexPath.row];
-        //Display person in the table cell
-    
-    [cell populateWithPerson:person];
+		// Configure the cell...
+			if (cell == nil) {
+				cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+			}
+		
+		MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
+			//Display person in the table cell
+		
+		[cell populateWithPerson:person];
     
         return cell;
+		
+	} else {
+		
+		static NSString *CellIdentifier = @"MyCell";
+        MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		
+		// Configure the cell...
+		if (cell == nil) {
+			cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		}
+		
+		MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
+		//Display person in the table cell
+		
+		[cell populateWithPerson:person];
+		
+        return cell;
+	}
     
 }
 

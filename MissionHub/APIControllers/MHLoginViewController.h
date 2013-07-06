@@ -16,7 +16,7 @@ extern NSString *const FBSessionStateChangedNotification;
 @protocol MHLoginDelegate <NSObject>
 @optional
 
--(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser;
+-(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList;
 -(void)finishedLogout;
 
 @end

@@ -22,9 +22,12 @@
 
 @end
 */
+
 @interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate> {
 
     NSArray *_persons;
+	NSMutableArray *_peopleArray;
+	
 }
 
 
@@ -35,11 +38,12 @@
 */
 
 @property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
-
+@property (nonatomic, strong) NSMutableArray *peopleArray;
 
 @property(nonatomic, strong) NSArray *persons;
 
 - (IBAction)revealMenu:(id)sender;
+-(void)setDataArray:(NSArray *)dataArray;
 /*
 @property(nonatomic, retain) MHSublabel *Sublabel;
 */

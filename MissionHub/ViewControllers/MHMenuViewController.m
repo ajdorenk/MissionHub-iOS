@@ -7,6 +7,7 @@
 //
 
 #import "MHMenuViewController.h"
+#import "MHNavigationViewController.h"
 #import "MHPeopleListViewController.h"
 #import "MHSurveyViewController.h"
 #import "MHAPI.h"
@@ -16,35 +17,36 @@
 
 @interface MHMenuViewController ()
 
-@property (nonatomic, strong) MHPeopleListViewController *_peopleListViewController;
+@property (nonatomic, strong) MHNavigationViewController *_peopleNavigationViewController;
 @property (nonatomic, strong) MHSurveyViewController *_surveyViewController;
 @property (nonatomic, strong) MHPerson *user;
 @property (nonatomic, strong) NSArray *menuHeaders;
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
--(MHPeopleListViewController *)peopleListViewController;
+-(MHNavigationViewController *)peopleNavigationViewController;
 -(MHSurveyViewController *)surveyViewController;
 
 @end
 
 @implementation MHMenuViewController
 
--(MHPeopleListViewController *)peopleListViewController {
+-(MHNavigationViewController *)peopleNavigationViewController {
 	
-	if (self._peopleListViewController == nil) {
+	if (self._peopleNavigationViewController == nil) {
 		
-		self._peopleListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PeopleList"];
+		self._peopleNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNavigationViewController"];
 		
 	}
 	
-	return self._peopleListViewController;
+	return self._peopleNavigationViewController;
 	
 }
+
 -(MHSurveyViewController *)surveyViewController {
 	
 	if (self._surveyViewController == nil) {
 		
-		self._surveyViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Survey"];
+		self._surveyViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHSurveyViewController"];
 		
 	}
 	
@@ -170,6 +172,7 @@
 	//configure cell
 	cell.textLabel.textColor    = [UIColor colorWithRed:(192.0/255.0) green:(192.0/255.0) blue:(192.0/255.0) alpha:1.0];
 	cell.textLabel.font         = [UIFont fontWithName:@"ArialRoundedMTBold" size:14.0];
+	cell.selectionStyle			= UITableViewCellSelectionStyleGray;
 	
 	//set cell value
 	id objectForCell = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -223,7 +226,7 @@
 			
 		} else {
 			
-			newTopViewController = [self peopleListViewController];
+			newTopViewController = [self peopleNavigationViewController];
 			
 		}
 		
