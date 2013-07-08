@@ -29,6 +29,8 @@
 
 @synthesize peopleSearchBar;
 @synthesize peopleArray = _peopleArray;
+@synthesize numberOfCellsToDisplay = _numberOfCellsToDisplay;
+@synthesize loadingRequestDictionary = _loadingRequestDictionary;
 @synthesize requestOptions = _requestOptions;
 @synthesize refreshController = _refreshController;
 @synthesize isLoading = _isLoading;
@@ -40,6 +42,8 @@
 	[super awakeFromNib];
 	
 	self.peopleArray = [NSMutableArray array];
+	self.numberOfCellsToDisplay = 0;
+	self.loadingRequestDictionary = [NSMutableDictionary dictionary];
 	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	
 	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
@@ -164,16 +168,21 @@
 
 }
 
+-(void)refresh {
+	
+	[self.refreshController beginRefreshing];
+	[self dropViewDidBeginRefreshing:self.refreshController];
+	
+}
+
 - (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
 {
-	self.isLoading = NO;
 	[self.tableView reloadData];
 	
     [[MHAPI sharedInstance] getPeopleListWith:self.requestOptions
 								 successBlock:^(NSArray *result, MHRequestOptions *options) {
 		
 									 self.peopleArray =  [NSMutableArray arrayWithArray:result];
-									 self.isLoading = NO;
 									 [self.tableView reloadData];
 									 [self.refreshController endRefreshing];
 									 
@@ -182,18 +191,31 @@
 									failBlock:^(NSError *error, MHRequestOptions *options) {
 										
 										[MHErrorHandler presentError:error];
-										self.isLoading = NO;
 										[self.tableView reloadData];
 										[self.refreshController endRefreshing];
 		
 	}];
 }
 
+-(void)setDataFromRequestOptions:(MHRequestOptions *)options {
+	
+	[self setDataArray:nil forRequestOptions:options];
+	
+}
+
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
 	
 	self.requestOptions = (options ? options : [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]);
-	self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
 	self.isLoading = NO;
+	
+	if (dataArray == nil) {
+		
+		[self refresh];
+		
+	}
+	
+	self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
+	self.numberOfCellsToDisplay = [self.peopleArray count];
 	self.hasLoadedAllPages = ( [dataArray count] < options.limit ? YES : NO );
 	[self.tableView reloadData];
 	
@@ -263,16 +285,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	NSInteger loadingCellCount = 0;
-	
-	if (self.isLoading && ( (self.tableView.frame.size.height - self.searchDisplayController.searchBar.frame.size.height - HEADER_HEIGHT) < ([self.peopleArray count] * ROW_HEIGHT) )) {
-		
-		loadingCellCount = 1;
-		
-	}
-	
     // Return the number of rows in the section.
-    return [self.peopleArray count] + loadingCellCount;
+    return self.numberOfCellsToDisplay;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -336,26 +350,68 @@
 	
 	if (!self.hasLoadedAllPages && !self.isLoading) {
 		
-		if (indexPath.row + 5 >= [self.peopleArray count]) {
+		if (indexPath.row + 3 >= self.numberOfCellsToDisplay) {
 			
 			[self.requestOptions configureForNextPageRequest];
+			NSInteger loadingRow = self.numberOfCellsToDisplay;
+			NSIndexPath *loadingIndexPath = [NSIndexPath indexPathForRow:loadingRow inSection:indexPath.section];
+			
+			[self.tableView beginUpdates];
+			[self.tableView insertRowsAtIndexPaths:@[loadingIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 			self.isLoading = YES;
-			[self.tableView reloadData];
+			self.numberOfCellsToDisplay++;
+			[self.tableView endUpdates];
 			
 			[[MHAPI sharedInstance] getPeopleListWith:self.requestOptions
 										 successBlock:^(NSArray *result, MHRequestOptions *options) {
 											 
-											 [self.peopleArray addObjectsFromArray:result];
-											 self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+											 //remove loading cell if it has been displayed
+											 [self.tableView beginUpdates];
+											 [self.tableView deleteRowsAtIndexPaths:@[loadingIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 											 self.isLoading = NO;
-											 [self.tableView reloadData];
+											 self.numberOfCellsToDisplay--;
+											 [self.tableView endUpdates];
+											 /*
+											 NSLog(@"%d", loadingIndexPath.row);
+											 NSLog(@"%@", [self.tableView cellForRowAtIndexPath:loadingIndexPath]);
+											 if ([[self.tableView cellForRowAtIndexPath:loadingIndexPath] isKindOfClass:[MHLoadingCell class]]) {
+												 
+												 [self.tableView deleteRowsAtIndexPaths:@[loadingIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+												 
+											 }
+											  */
+											 
+											 //create array of indexPaths to add for new results
+											 __block NSMutableArray *paths = [[NSMutableArray alloc] init];
+											 __block NSIndexPath *newResultPath;
+											 [result enumerateObjectsUsingBlock:^(id resultObject, NSUInteger indexOfResult, BOOL *stop) {
+												 newResultPath = [NSIndexPath indexPathForRow:[self.peopleArray count] + indexOfResult inSection:indexPath.section];
+												 [paths addObject:newResultPath];
+											 }];
+											 self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+											 
+											 //update array with results
+											 [self.tableView beginUpdates];
+											 [self.peopleArray addObjectsFromArray:result];
+											 self.numberOfCellsToDisplay += [result count];
+											 [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+											 [self.tableView endUpdates];
 											 
 										 }
 											failBlock:^(NSError *error, MHRequestOptions *options) {
 												
-												[MHErrorHandler presentError:error];
+												NSString *errorMessage = [NSString stringWithFormat:@"Failed to retreive more results due to: \"%@\". Try again by scrolling up at least 5 cells and then scrolling down to the bottom again. You can also reload the list by scrolling to the top and pulling down on the list. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+												NSError *presentingError = [NSError errorWithDomain:error.domain
+																							   code:error.code
+																						   userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+												
+												[MHErrorHandler presentError:presentingError];
+												
+												[self.tableView beginUpdates]; 
+												[self.tableView deleteRowsAtIndexPaths:@[loadingIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 												self.isLoading = NO;
-												[self.tableView reloadData];
+												self.numberOfCellsToDisplay--;
+												[self.tableView endUpdates];
 												
 											}];
 			

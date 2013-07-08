@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) MHPeopleListViewController *peopleListViewController;
 
+-(void)setDataFromRequestOptions:(MHRequestOptions *)options;
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
 
 @end
