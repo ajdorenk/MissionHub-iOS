@@ -10,6 +10,8 @@
 
 @implementation MHLoadingCell
 
+@synthesize loadingIndicator = _loadingIndicator;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -24,6 +26,20 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(id)startLoading {
+	
+	[self.loadingIndicator startAnimating];
+	
+	return self;
+}
+
+-(id)stopLoading {
+	
+	[self.loadingIndicator stopAnimating];
+	
+	return self;
 }
 
 @end

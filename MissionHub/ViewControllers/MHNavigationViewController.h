@@ -10,6 +10,7 @@
 #import "ECSlidingViewController.h"
 #import "MHMenuViewController.h"
 #import "MHPeopleListViewController.h"
+#import "MHRequestOptions.h"
 
 
 @interface MHNavigationViewController : UINavigationController {
@@ -20,6 +21,6 @@
 
 @property (nonatomic, strong) MHPeopleListViewController *peopleListViewController;
 
--(void)setDataArray:(NSArray *)dataArray;
+-(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
 
 @end

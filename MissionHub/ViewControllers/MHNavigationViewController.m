@@ -68,11 +68,11 @@
     
 }
 
--(void)setDataArray:(NSArray *)dataArray {
+-(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
 	
-	if ([self.peopleListViewController respondsToSelector:@selector(setDataArray:)]) {
+	if ([self.peopleListViewController respondsToSelector:@selector(setDataArray:forRequestOptions:)]) {
 		
-		[self.peopleListViewController setDataArray:dataArray];
+		[self.peopleListViewController setDataArray:dataArray forRequestOptions:options];
 		
 	}
 	

@@ -304,9 +304,9 @@ typedef enum {
 				
 				[self endLoading];
 				
-				if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:peopleList:)]) {
+				if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:peopleList:requestOptions:)]) {
 					
-					[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser  peopleList:[MHAPI sharedInstance].initialPeopleList];
+					[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser  peopleList:[MHAPI sharedInstance].initialPeopleList requestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
 					
 				}
 				
@@ -331,9 +331,9 @@ typedef enum {
 						
 					}
 					
-					if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:peopleList:)]) {
+					if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:peopleList:requestOptions:)]) {
 						
-						[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser  peopleList:peopleList];
+						[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser  peopleList:peopleList requestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
 						
 					}
 					

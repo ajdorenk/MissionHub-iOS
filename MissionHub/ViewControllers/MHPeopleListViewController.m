@@ -10,9 +10,13 @@
 
 #import "MHAPI.h"
 #import "MHPersonCell.h"
+#import "MHLoadingCell.h"
 #import "MHMenuToolbar.h"   
 #import "MHPeopleSearchBar.h" 
-#import "MHGenderListController.h"  
+#import "MHGenderListController.h"
+
+#define HEADER_HEIGHT 32.0f
+#define ROW_HEIGHT 61.0f
 
 
 @interface MHPeopleListViewController (Private)
@@ -24,14 +28,67 @@
 @implementation MHPeopleListViewController
 
 @synthesize peopleSearchBar;
-@synthesize persons = _persons;
 @synthesize peopleArray = _peopleArray;
+@synthesize requestOptions = _requestOptions;
+@synthesize refreshController = _refreshController;
+@synthesize isLoading = _isLoading;
+@synthesize hasLoadedAllPages = _hasLoadedAllPages;
+@synthesize header = _header;
 
 -(void)awakeFromNib {
 	
 	[super awakeFromNib];
 	
 	self.peopleArray = [NSMutableArray array];
+	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
+	
+	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
+    sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
+	
+	UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(37, 6.5, 20, 20.0)];
+    headerLabel.textColor = [UIColor whiteColor];
+	headerLabel.backgroundColor = [UIColor clearColor];
+	headerLabel.textAlignment = NSTextAlignmentLeft;
+	[sectionHeader addSubview:headerLabel];
+	
+	headerLabel.text = @"All";
+    
+    //Add genderButton
+    UIButton *genderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [genderButton setFrame:CGRectMake(94, 5.0, 154.0, 22.0)];
+    //[button setTitle:@"Gender" forState:UIControlStateNormal];
+    [genderButton setTintColor:[UIColor clearColor]];
+    [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderGender.png"] forState:UIControlStateNormal];
+	
+    [genderButton setBackgroundColor:[UIColor clearColor]];
+    [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:genderButton];
+    
+    UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sortButton setFrame:CGRectMake(266, 5.0, 50.0, 22.0)];
+    //[button setTitle:@"Sort" forState:UIControlStateNormal];
+    [sortButton setTintColor:[UIColor clearColor]];
+    [sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
+    
+    [sortButton setBackgroundColor:[UIColor clearColor]];
+    [sortButton addTarget:self action:@selector(sortOnOff:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:sortButton];
+    
+    
+    UIButton *allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [allButton setFrame:CGRectMake(13.0, 9.0, 14.0, 14.0)];
+    //[button setTitle:@"Sort" forState:UIControlStateNormal];
+    [allButton setTintColor:[UIColor clearColor]];
+    [allButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderAll.png"] forState:UIControlStateNormal];
+    
+    [allButton setBackgroundColor:[UIColor clearColor]];
+    [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchDown];
+    
+    [sectionHeader addSubview:allButton];
+	
+	self.header = sectionHeader;
 	
 }
 
@@ -64,6 +121,9 @@
     [self setTextFieldLeftView];
     
     [super viewDidLoad];
+	
+	self.refreshController = [[ODRefreshControl alloc] initInScrollView:self.tableView];
+    [self.refreshController addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
 
     UIImage* contactImage = [UIImage imageNamed:@"NewContact_Icon.png"];
     UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, contactImage.size.width, contactImage.size.height)];
@@ -88,105 +148,53 @@
     UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
-
 	
-	MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
-	 @"last_name":@"Doe",
-	 @"gender":@"Male",
-	 @"year_in_school":@"Second Year",
-	 @"major":@" Philosophy",
-	 @"minor":@"Computer Science",
-	 @"birth_date":@"1982-07-07",
-	 @"date_became_christian":@"2000-01-01",
-	 @"graduation_date":@"2010-01-07",
-	 @"user_id":@12345,
-	 @"fb_uid":@123456,
-	 @"updated_at":@"2012-11-19T19:29:30:06:00",
-	 @"created_at":@"2002-11-28T00:00:00:06:00"
-	 }];
-	
-    /*
-	// Do any additional setup after loading the view.
-    MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
-                        @"last_name":@"Doe",
-                        @"gender":@"Male",
-                        @"year_in_school":@"Second Year",
-                        @"major":@"Philosophy",
-                        @"minor":@"Computer Science",
-                        @"birth_date":@"1982-07-07",
-                        @"date_became_christian":@"2000-01-01",
-                        @"graduation_date":@"2010-01-07",
-                        @"user_id":@12345,
-                        @"fb_uid":@123456,
-                        @"updated_at":@"2012-11-19T19:29:30-06:00",
-                        @"created_at":@"2002-11-28T00:00:00-06:00"
-                        }];
-    
-    
-    person1.first_name = @"Ann";
-    person1.last_name = @"Anderson";
-    person1.gender = @"Female";
-    person1.picture = @"anderson-ann.jpg";
-
-    MHPerson *person2 = [MHPerson new];
-    person2.first_name = @"George Frank";
-    person2.gender = @"Male";
-    person2.picture = @"anderson-ann.jpg";
-
-    
-    MHPerson *person3 = [MHPerson new];
-    person3.first_name = @"Lola Gates";
-    person3.gender = @"Female";
-    person3.picture = @"anderson-ann.jpg";
-    
-    MHPerson *person4 = [MHPerson new];
-    person4.first_name = @"Michael Mason";
-    person4.gender = @"Male";
-    person4.picture = @"anderson-ann.jpg";
-    
-    MHPerson *person5 = [MHPerson new];
-    person5.first_name = @"Amy Leslie";
-    person5.gender = @"Female";
-    person5.picture = @"anderson-ann.jpg";
-    
-    MHPerson *person6 = [MHPerson new];
-    person6.first_name = @"Jessica Davis";
-    person6.gender = @"Male";
-    person6.picture = @"anderson-ann.jpg";
-    
-    MHPerson *person7 = [MHPerson new];
-    person7.first_name = @"Sally Fields";
-    person7.gender = @"Female";
-    person7.picture = @"anderson-ann.jpg";
-    
-    MHPerson *person8 = [MHPerson new];
-    person8.first_name = @"Katherine Budincich";
-    person8.gender = @"Male";
-    person8.picture = @"anderson-ann.jpg";
-    
-    MHPerson *person9 = [MHPerson new];
-    person9.first_name = @"Leslie Marks";
-    person9.gender = @"Female";
-    person9.picture = @"anderson-ann.jpg";
-    
-    MHPerson *person10 = [MHPerson new];
-    person10.first_name = @"Kate Middleton";
-    person10.gender = @"Male";
-    person10.picture = @"anderson-ann.jpg";
-    
-    self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
-    
-	self.persons = @[];
-    */
-    
-    self.persons = [NSArray arrayWithObjects:person1, nil];
+	/*
+	[[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+																								  [UIColor blueColor],
+																								  UITextAttributeTextColor,
+																								  [UIColor darkGrayColor],
+																								  UITextAttributeTextShadowColor,
+																								  [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+																								  UITextAttributeTextShadowOffset,
+																								  nil]
+																						forState:UIControlStateNormal];
+	 */
 
 
 }
 
--(void)setDataArray:(NSArray *)dataArray {
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+{
+	self.isLoading = NO;
+	[self.tableView reloadData];
 	
+    [[MHAPI sharedInstance] getPeopleListWith:self.requestOptions
+								 successBlock:^(NSArray *result, MHRequestOptions *options) {
+		
+									 self.peopleArray =  [NSMutableArray arrayWithArray:result];
+									 self.isLoading = NO;
+									 [self.tableView reloadData];
+									 [self.refreshController endRefreshing];
+									 
+									 
+	}
+									failBlock:^(NSError *error, MHRequestOptions *options) {
+										
+										[MHErrorHandler presentError:error];
+										self.isLoading = NO;
+										[self.tableView reloadData];
+										[self.refreshController endRefreshing];
+		
+	}];
+}
+
+-(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
+	
+	self.requestOptions = (options ? options : [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]);
 	self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
+	self.isLoading = NO;
+	self.hasLoadedAllPages = ( [dataArray count] < options.limit ? YES : NO );
 	[self.tableView reloadData];
 	
 }
@@ -261,16 +269,28 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+	NSInteger loadingCellCount = 0;
+	
+	if (self.isLoading && ( (self.tableView.frame.size.height - self.searchDisplayController.searchBar.frame.size.height - HEADER_HEIGHT) < ([self.peopleArray count] * ROW_HEIGHT) )) {
+		
+		loadingCellCount = 1;
+		
+	}
+	
     // Return the number of rows in the section.
-    return [self.peopleArray count] + 1;
+    return [self.peopleArray count] + loadingCellCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	//NSLog(@"%f : %f", self.tableView.contentSize.width, self.tableView.contentSize.height);
+	//NSLog(@"%f : %f", self.tableView.contentOffset.x, self.tableView.contentOffset.y);
+	//NSLog(@"%f : %f", self.tableView.frame.size.width, self.tableView.frame.size.height);
+	//NSLog(@"%f, %f, %f, %f, %f", self.searchDisplayController.searchBar.frame.size.height, ROW_HEIGHT, HEADER_HEIGHT,  self.tableView.frame.size.height, self.tableView.contentSize.height);
 	
-	if (indexPath.row <= [self.peopleArray count]) {
+	if (indexPath.row < [self.peopleArray count]) {
 		
-        static NSString *CellIdentifier = @"MyCell";
+        static NSString *CellIdentifier = @"MHPersonCell";
         MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
 		// Configure the cell...
@@ -287,18 +307,15 @@
 		
 	} else {
 		
-		static NSString *CellIdentifier = @"MyCell";
-        MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		static NSString *CellIdentifier = @"MHLoadingCell";
+        MHLoadingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		
 		// Configure the cell...
 		if (cell == nil) {
-			cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+			cell = [[MHLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		}
 		
-		MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
-		//Display person in the table cell
-		
-		[cell populateWithPerson:person];
+		[cell startLoading];
 		
         return cell;
 	}
@@ -309,62 +326,51 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
-    sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
- 
- UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(37, 6.5, 20, 20.0)];
-    headerLabel.textColor = [UIColor whiteColor];
- headerLabel.backgroundColor = [UIColor clearColor];
- headerLabel.textAlignment = NSTextAlignmentLeft;
- [sectionHeader addSubview:headerLabel];
- 
- headerLabel.text = @"All";
-    
-    //Add genderButton
-    UIButton *genderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [genderButton setFrame:CGRectMake(94, 5.0, 154.0, 22.0)];
-    //[button setTitle:@"Gender" forState:UIControlStateNormal];
-    [genderButton setTintColor:[UIColor clearColor]];
-    [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderGender.png"] forState:UIControlStateNormal];
-
-    [genderButton setBackgroundColor:[UIColor clearColor]];
-    [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
-    
-    [sectionHeader addSubview:genderButton];
-    
-    UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [sortButton setFrame:CGRectMake(266, 5.0, 50.0, 22.0)];
-    //[button setTitle:@"Sort" forState:UIControlStateNormal];
-    [sortButton setTintColor:[UIColor clearColor]];
-    [sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
-    
-    [sortButton setBackgroundColor:[UIColor clearColor]];
-    [sortButton addTarget:self action:@selector(sortOnOff:) forControlEvents:UIControlEventTouchDown];
-    
-    [sectionHeader addSubview:sortButton];
-    
-    
-    UIButton *allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [allButton setFrame:CGRectMake(13.0, 9.0, 14.0, 14.0)];
-    //[button setTitle:@"Sort" forState:UIControlStateNormal];
-    [allButton setTintColor:[UIColor clearColor]];
-    [allButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderAll.png"] forState:UIControlStateNormal];
-    
-    [allButton setBackgroundColor:[UIColor clearColor]];
-    [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchDown];
-    
-    [sectionHeader addSubview:allButton];
-    
-    return sectionHeader;
+    return self.header;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 32.0;
+    return HEADER_HEIGHT;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 61.0f;
+    return ROW_HEIGHT;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	if (!self.hasLoadedAllPages && !self.isLoading) {
+		
+		if (indexPath.row + 5 >= [self.peopleArray count]) {
+			
+			[self.requestOptions configureForNextPageRequest];
+			self.isLoading = YES;
+			[self.tableView reloadData];
+			
+			[[MHAPI sharedInstance] getPeopleListWith:self.requestOptions
+										 successBlock:^(NSArray *result, MHRequestOptions *options) {
+											 
+											 [self.peopleArray addObjectsFromArray:result];
+											 self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+											 self.isLoading = NO;
+											 [self.tableView reloadData];
+											 
+										 }
+											failBlock:^(NSError *error, MHRequestOptions *options) {
+												
+												[MHErrorHandler presentError:error];
+												self.isLoading = NO;
+												[self.tableView reloadData];
+												
+											}];
+			
+		}
+		
+	}
+	
+	
+	
 }
  
 #pragma mark - Table view delegate

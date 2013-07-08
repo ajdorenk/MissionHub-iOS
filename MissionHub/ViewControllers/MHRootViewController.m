@@ -80,9 +80,9 @@
 
 #pragma mark - MHLoginDelegate methods
 
--(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList {
+-(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList requestOptions:(MHRequestOptions *)options {
 	
-	[[self peopleNavigationViewController] setDataArray:peopleList];
+	[[self peopleNavigationViewController] setDataArray:peopleList forRequestOptions:options];
 	self.topViewController = self.peopleNavigationViewController;
 	[self.slidingViewController resetTopView];
 	

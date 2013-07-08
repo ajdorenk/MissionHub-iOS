@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MHLoadingCell : UITableViewCell
+@interface MHLoadingCell : UITableViewCell {
+	
+	UIActivityIndicatorView *_loadingIndicator;
+	
+}
+
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
+
+-(id)startLoading;
+-(id)stopLoading;
 
 @end
