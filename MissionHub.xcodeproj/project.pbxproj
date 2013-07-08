@@ -121,8 +121,6 @@
 		68478D99177E8B140014501D /* MHGenderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D93177E8B140014501D /* MHGenderListController.m */; };
 		68478D9A177E8B140014501D /* MHGenericListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D95177E8B140014501D /* MHGenericListViewController.m */; };
 		68478D9B177E8B140014501D /* MHGenericListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D95177E8B140014501D /* MHGenericListViewController.m */; };
-		68478D9C177E8B140014501D /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D97177E8B140014501D /* MyTableViewController.m */; };
-		68478D9D177E8B140014501D /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D97177E8B140014501D /* MyTableViewController.m */; };
 		68478DA0177E8B400014501D /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D9F177E8B400014501D /* SDSegmentedControl.m */; };
 		68478DA1177E8B400014501D /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D9F177E8B400014501D /* SDSegmentedControl.m */; };
 		68478DA6177E8B580014501D /* M6ParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478DA3177E8B580014501D /* M6ParallaxController.m */; };
@@ -218,6 +216,7 @@
 		AD3C60D2178216DD00744167 /* MHSegmentedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */; };
 		AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D717838A3C00744167 /* MHInteractionCell.m */; };
 		AD3C60D917838A3C00744167 /* MHInteractionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D717838A3C00744167 /* MHInteractionCell.m */; };
+		AD3C60DC178761E200744167 /* MHInteractionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60DB178761E100744167 /* MHInteractionInfoViewController.m */; };
 		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
 		AD982794177C9D6700A0276A /* MHParallaxTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */; };
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
@@ -338,8 +337,6 @@
 		68478D93177E8B140014501D /* MHGenderListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHGenderListController.m; path = ViewControllers/MHGenderListController.m; sourceTree = "<group>"; };
 		68478D94177E8B140014501D /* MHGenericListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHGenericListViewController.h; path = ViewControllers/MHGenericListViewController.h; sourceTree = "<group>"; };
 		68478D95177E8B140014501D /* MHGenericListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHGenericListViewController.m; path = ViewControllers/MHGenericListViewController.m; sourceTree = "<group>"; };
-		68478D96177E8B140014501D /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyTableViewController.h; path = ViewControllers/MyTableViewController.h; sourceTree = "<group>"; };
-		68478D97177E8B140014501D /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyTableViewController.m; path = ViewControllers/MyTableViewController.m; sourceTree = "<group>"; };
 		68478D9E177E8B400014501D /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDSegmentedControl.h; path = Libraries/SDSegmentedControl/SDSegmentedControl.h; sourceTree = "<group>"; };
 		68478D9F177E8B400014501D /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDSegmentedControl.m; path = Libraries/SDSegmentedControl/SDSegmentedControl.m; sourceTree = "<group>"; };
 		68478DA2177E8B580014501D /* M6ParallaxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = M6ParallaxController.h; path = Libraries/M6ParallaxController/M6ParallaxController.h; sourceTree = "<group>"; };
@@ -475,6 +472,8 @@
 		AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSegmentedViewController.m; path = ViewControllers/MHSegmentedViewController.m; sourceTree = "<group>"; };
 		AD3C60D617838A3B00744167 /* MHInteractionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInteractionCell.h; path = "Custom UI/MHInteractionCell.h"; sourceTree = "<group>"; };
 		AD3C60D717838A3C00744167 /* MHInteractionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionCell.m; path = "Custom UI/MHInteractionCell.m"; sourceTree = "<group>"; };
+		AD3C60DA178761DE00744167 /* MHInteractionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInteractionInfoViewController.h; path = ViewControllers/MHInteractionInfoViewController.h; sourceTree = "<group>"; };
+		AD3C60DB178761E100744167 /* MHInteractionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionInfoViewController.m; path = ViewControllers/MHInteractionInfoViewController.m; sourceTree = "<group>"; };
 		AD98278B177C93B400A0276A /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ViewControllers/MHProfileViewController.h; sourceTree = "<group>"; };
 		AD98278C177C93B400A0276A /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ViewControllers/MHProfileViewController.m; sourceTree = "<group>"; };
 		AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHParallaxTopViewController.h; path = ViewControllers/MHParallaxTopViewController.h; sourceTree = "<group>"; };
@@ -656,8 +655,8 @@
 				68478D93177E8B140014501D /* MHGenderListController.m */,
 				68478D94177E8B140014501D /* MHGenericListViewController.h */,
 				68478D95177E8B140014501D /* MHGenericListViewController.m */,
-				68478D96177E8B140014501D /* MyTableViewController.h */,
-				68478D97177E8B140014501D /* MyTableViewController.m */,
+				AD3C60DA178761DE00744167 /* MHInteractionInfoViewController.h */,
+				AD3C60DB178761E100744167 /* MHInteractionInfoViewController.m */,
 				683910D11761087600E01B46 /* MHRootViewController.h */,
 				683910D21761087600E01B46 /* MHRootViewController.m */,
 				683910D61761356000E01B46 /* MHMenuViewController.h */,
@@ -1190,7 +1189,6 @@
 				68478D90177E8AE20014501D /* MHLabel.m in Sources */,
 				68478D98177E8B140014501D /* MHGenderListController.m in Sources */,
 				68478D9A177E8B140014501D /* MHGenericListViewController.m in Sources */,
-				68478D9C177E8B140014501D /* MyTableViewController.m in Sources */,
 				68478DA0177E8B400014501D /* SDSegmentedControl.m in Sources */,
 				68478DA6177E8B580014501D /* M6ParallaxController.m in Sources */,
 				68478DA8177E8B580014501D /* UIViewController+M6ParallaxController.m in Sources */,
@@ -1208,6 +1206,7 @@
 				AD3C60D2178216DD00744167 /* MHSegmentedViewController.m in Sources */,
 				68134F9D17837E6600227C2A /* SIAlertView.m in Sources */,
 				AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */,
+				AD3C60DC178761E200744167 /* MHInteractionInfoViewController.m in Sources */,
 				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */,
 			);
@@ -1260,7 +1259,6 @@
 				68478D91177E8AE20014501D /* MHLabel.m in Sources */,
 				68478D99177E8B140014501D /* MHGenderListController.m in Sources */,
 				68478D9B177E8B140014501D /* MHGenericListViewController.m in Sources */,
-				68478D9D177E8B140014501D /* MyTableViewController.m in Sources */,
 				68478DA1177E8B400014501D /* SDSegmentedControl.m in Sources */,
 				68478DA7177E8B580014501D /* M6ParallaxController.m in Sources */,
 				68478DA9177E8B580014501D /* UIViewController+M6ParallaxController.m in Sources */,

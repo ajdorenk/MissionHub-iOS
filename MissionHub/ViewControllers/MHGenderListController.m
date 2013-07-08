@@ -51,6 +51,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view
 
+    
+    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
+    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, menuImage.size.width, menuImage.size.height)];
+    [backMenu setImage:menuImage forState:UIControlStateNormal];
+    [backMenu addTarget:self action:@selector(cancelPressed:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
+    
+    self.navigationItem.leftBarButtonItem = backMenuButton;
 
 }
 - (IBAction)donePressed:(id)sender {
@@ -58,10 +66,10 @@
     [self dismissViewControllerAnimated:NO completion:Nil];
 
 }
-- (IBAction)cancelPressed:(id)sender {
+/*- (IBAction)cancelPressed:(id)sender {
  [self dismissViewControllerAnimated:NO completion:Nil];
 }
-
+*/
 
 
 #pragma mark - Table view data source

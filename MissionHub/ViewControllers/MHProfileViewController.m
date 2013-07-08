@@ -45,34 +45,37 @@
     
    
     UIImage* newInteractionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
-    UIButton *newInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, newInteractionImage.size.width, newInteractionImage.size.height)];
+    UIButton *newInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
     [newInteraction setImage:newInteractionImage forState:UIControlStateNormal];
     [newInteraction addTarget:self action:@selector(newInteractionActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *newInteractionButton = [[UIBarButtonItem alloc] initWithCustomView:newInteraction];
     
-    UIImage* labelImage = [UIImage imageNamed:@"topbarLabel_button.png"];
-    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, labelImage.size.width, labelImage.size.height)];
+    UIImage* labelImage = [UIImage imageNamed:@"topbarTag_button.png"];
+    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
     [newLabel setImage:labelImage forState:UIControlStateNormal];
     [newLabel addTarget:self action:@selector(addLabelActivity:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addTagButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
+    UIBarButtonItem *addLabelButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
     
     UIImage* otherOptionImage = [UIImage imageNamed:@"topbarOtherOptions_button.png"];
-    UIButton *otherOptions = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, otherOptionImage.size.width, otherOptionImage.size.height)];
+    UIButton *otherOptions = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
     [otherOptions setImage:otherOptionImage forState:UIControlStateNormal];
     [otherOptions addTarget:self action:@selector(addTagActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *otherOptionsButton = [[UIBarButtonItem alloc] initWithCustomView:otherOptions];
     
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:otherOptionsButton, addTagButton, newInteractionButton, nil]];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:otherOptionsButton, addLabelButton, newInteractionButton, nil]];
     
     
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
-    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, menuImage.size.width, menuImage.size.height)];
+    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
     [backMenu setImage:menuImage forState:UIControlStateNormal];
     [backMenu addTarget:self action:@selector(backToMenu:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
+    
+    [self.toolbar setTranslucent:YES];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,7 +107,6 @@
     UITableViewController * segmentedViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"segmentedViewController"];
     
     if (self.switchViewControllers.selectedSegmentIndex == 0) {
-        NSLog(@"works");
         [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController1 segmentedViewController:segmentedViewController];
     }
     else{

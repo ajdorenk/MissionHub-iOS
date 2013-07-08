@@ -128,13 +128,13 @@
     [self.refreshController addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
 
     UIImage* contactImage = [UIImage imageNamed:@"NewContact_Icon.png"];
-    UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, contactImage.size.width, contactImage.size.height)];
+    UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 40)];
     [newPerson setImage:contactImage forState:UIControlStateNormal];
     [newPerson addTarget:self action:@selector(addPersonActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
     
     UIImage* labelImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
-    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, labelImage.size.width, labelImage.size.height)];
+    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 40)];
     [newLabel setImage:labelImage forState:UIControlStateNormal];
     [newLabel addTarget:self action:@selector(addLabelActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addLabelButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
@@ -144,7 +144,7 @@
     
 
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
-    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, menuImage.size.width, menuImage.size.height)];
+    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [backMenu setImage:menuImage forState:UIControlStateNormal];
     [backMenu addTarget:self action:@selector(revealMenu:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
@@ -241,6 +241,7 @@
     UITextField *searchField = nil;
     for (UIView *subview in self.peopleSearchBar.subviews)
     {
+        
         if ([subview isKindOfClass:[UITextField class]])
         {
             searchField = (UITextField *)subview;

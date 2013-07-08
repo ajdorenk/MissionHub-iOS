@@ -36,6 +36,9 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (nonatomic, strong)				IBOutlet UIActivityIndicatorView	*loadingIndicator;
 @property (nonatomic, assign)				BOOL								loggedIn;
 @property (nonatomic, assign)				BOOL								hasRequestedMe;
+@property (nonatomic, strong) IBOutlet UIToolbar * toolbar;
+
+
 
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
