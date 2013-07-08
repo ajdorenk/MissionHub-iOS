@@ -9,22 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 #import "MHMenuViewController.h"
+#import "ODRefreshControl.h"
+#import "MHRequestOptions.h"
 
-/*
-@class MHSublabel;
-
-
-@interface MHPerson : NSObject
-
-@property (nonatomic, strong) NSString *name; // name of Person
-@property (nonatomic, strong) NSString *gender; // Person gender
-@property (nonatomic, strong) NSString *profilePicturePath; // image filename of Person
-
-@end
-*/
 @interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate> {
 
-    NSArray *_persons;
+	NSMutableArray *_peopleArray;
+	MHRequestOptions *_requestOptions;
+	ODRefreshControl *_refreshController;
+	BOOL _isLoading;
+	BOOL _hasLoadedAllPages;
+	UIView *_header;
+	
 }
 
 
@@ -35,14 +31,15 @@
 */
 
 @property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
-
-
-@property(nonatomic, strong) NSArray *persons;
+@property (nonatomic, strong) NSMutableArray *peopleArray;
+@property (nonatomic, strong) MHRequestOptions *requestOptions;
+@property (nonatomic, strong) ODRefreshControl *refreshController;
+@property (nonatomic, assign) BOOL isLoading;
+@property (nonatomic, assign) BOOL hasLoadedAllPages;
+@property (nonatomic, strong) UIView *header;
 
 - (IBAction)revealMenu:(id)sender;
-/*
-@property(nonatomic, retain) MHSublabel *Sublabel;
-*/
+-(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
 
 @end
 

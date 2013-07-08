@@ -151,6 +151,10 @@
 		68478DCE177E8CDC0014501D /* topbarTag_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DBA177E8CDC0014501D /* topbarTag_button.png */; };
 		68953EC21784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
 		68953EC31784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
+		68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */; };
+		68A68BD01787B2BF00927DF8 /* MHLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */; };
+		68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BD3178A192100927DF8 /* ODRefreshControl.m */; };
+		68A68BD5178A192100927DF8 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BD3178A192100927DF8 /* ODRefreshControl.m */; };
 		68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C0689C176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
@@ -352,6 +356,10 @@
 		68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarOtherOptions_button.png; sourceTree = "<group>"; };
 		68478DBA177E8CDC0014501D /* topbarTag_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarTag_button.png; sourceTree = "<group>"; };
 		68953EC11784CD0100F0796C /* MH_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Logo.png; sourceTree = "<group>"; };
+		68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLoadingCell.h; path = "Custom UI/MHLoadingCell.h"; sourceTree = "<group>"; };
+		68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHLoadingCell.m; path = "Custom UI/MHLoadingCell.m"; sourceTree = "<group>"; };
+		68A68BD2178A192100927DF8 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
+		68A68BD3178A192100927DF8 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncodedString.h"; sourceTree = "<group>"; };
 		68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncodedString.m"; sourceTree = "<group>"; };
 		68C06899176EB832007C79D6 /* MHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHModel.h; path = Models/MHModel.h; sourceTree = "<group>"; };
@@ -778,6 +786,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		68A68BD1178A192100927DF8 /* ODRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				68A68BD2178A192100927DF8 /* ODRefreshControl.h */,
+				68A68BD3178A192100927DF8 /* ODRefreshControl.m */,
+			);
+			name = ODRefreshControl;
+			path = Libraries/ODRefreshControl/ODRefreshControl;
+			sourceTree = "<group>";
+		};
 		68AB5AAD177398BC00FA1558 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,6 +810,7 @@
 		68C068AA17710298007C79D6 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				68A68BD1178A192100927DF8 /* ODRefreshControl */,
 				68134F9717837E6500227C2A /* SIAlertView */,
 				68478DAB177E8B740014501D /* SDSegmentedControl */,
 				68478DAA177E8B600014501D /* M6ParallaxController */,
@@ -945,6 +964,8 @@
 				AD30112F176FE4D900D53E35 /* MHPersonCell.m */,
 				AD3C60D617838A3B00744167 /* MHInteractionCell.h */,
 				AD3C60D717838A3C00744167 /* MHInteractionCell.m */,
+				68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */,
+				68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1186,6 +1207,8 @@
 				68134F9D17837E6600227C2A /* SIAlertView.m in Sources */,
 				AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */,
 				AD3C60DC178761E200744167 /* MHInteractionInfoViewController.m in Sources */,
+				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
+				68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1251,6 +1274,8 @@
 				680CD8FE1782403600E6E742 /* MHPerson+Helper.m in Sources */,
 				6821C471178244970063AA3D /* MHPerson.m in Sources */,
 				68134F9E17837E6600227C2A /* SIAlertView.m in Sources */,
+				68A68BD01787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
+				68A68BD5178A192100927DF8 /* ODRefreshControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@
 @implementation MHRootViewController
 
 @synthesize loginViewController;
+@synthesize peopleNavigationViewController;
 @synthesize userInitiatedLogout;
 @synthesize showLoginOnViewDidAppear;
 
@@ -33,7 +34,10 @@
 	
 	self.userInitiatedLogout = NO;
 	
-	self.loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
+	
+	self.peopleNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNavigationViewController"];
+	
+	self.loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHLoginViewController"];
 	self.loginViewController.loginDelegate = self;
 	self.loginViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 	self.loginViewController.modalTransitionStyle	= UIModalTransitionStyleCoverVertical;
@@ -76,14 +80,14 @@
 
 #pragma mark - MHLoginDelegate methods
 
--(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser {
+-(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList requestOptions:(MHRequestOptions *)options {
 	
-	MHPeopleListViewController *peopleList = [self.storyboard instantiateViewControllerWithIdentifier:@"PeopleList"];
-	
-	self.topViewController = peopleList;
+	[[self peopleNavigationViewController] setDataArray:peopleList forRequestOptions:options];
+	self.topViewController = self.peopleNavigationViewController;
 	[self.slidingViewController resetTopView];
 	
 	[self dismissViewControllerAnimated:YES completion:nil];
+	
 	
 }
 

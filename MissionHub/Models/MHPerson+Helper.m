@@ -11,7 +11,13 @@
 @implementation MHPerson (Helper)
 
 -(NSString *)fullName {
-	return [self.first_name stringByAppendingFormat:@" %@", self.last_name];
+	
+	if (self.last_name) {
+		return [self.first_name stringByAppendingFormat:@" %@", self.last_name];
+	} else {
+		return self.first_name;
+	}
+	
 }
 
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {

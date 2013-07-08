@@ -10,13 +10,14 @@
 #import "Facebook.h"
 #import "FBLoginView.h"
 #import "MHPerson+Helper.h"
+#import	"MHRequestOptions.h"
 
 extern NSString *const FBSessionStateChangedNotification;
 
 @protocol MHLoginDelegate <NSObject>
 @optional
 
--(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser;
+-(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList requestOptions:(MHRequestOptions *)options;
 -(void)finishedLogout;
 
 @end

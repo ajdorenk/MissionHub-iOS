@@ -14,13 +14,40 @@
 
 @implementation MHNavigationViewController
 
+@synthesize peopleListViewController = _peopleListViewController;
+
+-(id)initWithRootViewController:(UIViewController *)rootViewController {
+	
+	self = [super initWithRootViewController:rootViewController];
+	
+	if (self) {
+		
+		if ([rootViewController isKindOfClass:[MHPeopleListViewController class]]) {
+			self.peopleListViewController = (MHPeopleListViewController *)rootViewController;
+		}
+		
+	}
+	
+	return self;
+}
+
+-(void)awakeFromNib {
+	
+	[super awakeFromNib];
+	
+	if ([self.topViewController isKindOfClass:[MHPeopleListViewController class]]) {
+		self.peopleListViewController = (MHPeopleListViewController *)self.topViewController;
+	}
+	
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     
 	if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
-		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"MHMenuViewController"];
 	}
 	
     
@@ -40,6 +67,16 @@
     [self.navigationController setToolbarHidden:NO];
 
     
+}
+
+-(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
+	
+	if ([self.peopleListViewController respondsToSelector:@selector(setDataArray:forRequestOptions:)]) {
+		
+		[self.peopleListViewController setDataArray:dataArray forRequestOptions:options];
+		
+	}
+	
 }
 
 

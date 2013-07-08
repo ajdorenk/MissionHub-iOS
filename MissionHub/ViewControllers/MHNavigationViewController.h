@@ -9,11 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 #import "MHMenuViewController.h"
+#import "MHPeopleListViewController.h"
+#import "MHRequestOptions.h"
 
 
-@interface MHNavigationViewController : UINavigationController
+@interface MHNavigationViewController : UINavigationController {
+	
+	MHPeopleListViewController *_peopleListViewController;
+	
+}
 
+@property (nonatomic, strong) MHPeopleListViewController *peopleListViewController;
 
-
+-(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
 
 @end
