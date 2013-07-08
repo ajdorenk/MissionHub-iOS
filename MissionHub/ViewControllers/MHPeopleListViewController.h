@@ -15,7 +15,6 @@
 @interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate> {
 
 	NSMutableArray *_peopleArray;
-	NSInteger _numberOfCellsToDisplay;
 	NSMutableDictionary *_loadingRequestDictionary;
 	MHRequestOptions *_requestOptions;
 	ODRefreshControl *_refreshController;
@@ -34,7 +33,6 @@
 
 @property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
 @property (nonatomic, strong) NSMutableArray *peopleArray;
-@property (nonatomic, assign) NSInteger numberOfCellsToDisplay;
 @property (nonatomic, strong) NSMutableDictionary *loadingRequestDictionary;
 @property (nonatomic, strong) MHRequestOptions *requestOptions;
 @property (nonatomic, strong) ODRefreshControl *refreshController;

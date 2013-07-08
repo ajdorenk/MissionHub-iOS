@@ -10,7 +10,8 @@
 
 @implementation MHLoadingCell
 
-@synthesize loadingIndicator = _loadingIndicator;
+@synthesize loadingIndicator	= _loadingIndicator;
+@synthesize messageView			= _messageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -28,7 +29,25 @@
     // Configure the view for the selected state
 }
 
+-(id)showFinishedMessage {
+	
+	self.messageView.hidden = NO;
+	self.loadingIndicator.hidden = YES;
+	
+	return self;
+}
+
+-(id)hideFinishedMessage {
+
+	self.messageView.hidden = YES;
+	
+	return self;
+}
+
 -(id)startLoading {
+	
+	self.messageView.hidden = YES;
+	self.loadingIndicator.hidden = NO;
 	
 	[self.loadingIndicator startAnimating];
 	
@@ -37,6 +56,7 @@
 
 -(id)stopLoading {
 	
+	self.loadingIndicator.hidden = NO;
 	[self.loadingIndicator stopAnimating];
 	
 	return self;

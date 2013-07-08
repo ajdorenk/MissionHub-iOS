@@ -53,7 +53,7 @@
 	
 	self.endpoint	= MHRequestOptionsEndpointPeople;
 	self.remoteID	= 0;
-	self.filters	= [NSDictionary dictionary];
+	self.filters	= [NSMutableDictionary dictionary];
 	self.includes	= [NSMutableIndexSet indexSet];
 	self.limit		= 0;
 	self.offset		= 0;
@@ -263,7 +263,7 @@
 
 -(id)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
 	
-	[self.filters setValue:value forKey:[self stringFromFilter:filter]];
+	[self.filters setObject:value forKey:[self stringFromFilter:filter]];
 	
 	return self;
 }

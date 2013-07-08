@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -381,15 +381,24 @@ select another survey.</string>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="whe-Fd-VHP">
                                             <color key="color" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="all results have been loaded" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIR-Ke-UAk">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="whe-Fd-VHP" firstAttribute="top" secondItem="BxJ-9T-xEG" secondAttribute="top" constant="11" id="4Dw-o2-p7Q"/>
-                                    <constraint firstItem="whe-Fd-VHP" firstAttribute="centerX" secondItem="BxJ-9T-xEG" secondAttribute="centerX" type="default" id="Hnc-nV-hUF"/>
+                                    <constraint firstItem="BIR-Ke-UAk" firstAttribute="leading" secondItem="BxJ-9T-xEG" secondAttribute="leading" type="default" id="Ami-vg-c1m"/>
+                                    <constraint firstItem="BIR-Ke-UAk" firstAttribute="centerY" secondItem="whe-Fd-VHP" secondAttribute="centerY" type="default" id="GwO-JF-JpP"/>
+                                    <constraint firstItem="BIR-Ke-UAk" firstAttribute="centerX" secondItem="whe-Fd-VHP" secondAttribute="centerX" type="default" id="aid-kf-Nvr"/>
+                                    <constraint firstItem="BIR-Ke-UAk" firstAttribute="trailing" secondItem="BxJ-9T-xEG" secondAttribute="trailing" type="default" id="of4-cM-qqr"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="loadingIndicator" destination="whe-Fd-VHP" id="dX3-mU-R4X"/>
+                                    <outlet property="messageView" destination="BIR-Ke-UAk" id="ydn-GD-C7R"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -570,6 +579,7 @@ select another survey.</string>
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoadingCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="MHLoginViewController" superclassName="UIViewController">
@@ -590,7 +600,6 @@ select another survey.</string>
         <class className="MHParallaxTopViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHParallaxTopViewController.h"/>
             <relationships>
-                <relationship kind="action" name="segmentSwitch:"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="menu" candidateClass="SDSegmentedControl"/>
             </relationships>
@@ -598,7 +607,12 @@ select another survey.</string>
         <class className="MHPeopleListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addLabelActivity:"/>
+                <relationship kind="action" name="addPersonActivity:"/>
+                <relationship kind="action" name="checkAllContacts:"/>
+                <relationship kind="action" name="chooseGender:"/>
                 <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="action" name="sortOnOff:"/>
                 <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>
@@ -618,10 +632,7 @@ select another survey.</string>
         <class className="MHProfileViewController" superclassName="M6ParallaxController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addLabelActivity:"/>
-                <relationship kind="action" name="addTagActivity:"/>
-                <relationship kind="action" name="backToMenu:"/>
-                <relationship kind="action" name="indexDidChangeForSegmentedControl:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="switchViewControllers" candidateClass="SDSegmentedControl"/>
             </relationships>
         </class>
         <class className="MHRootViewController" superclassName="ECSlidingViewController">
