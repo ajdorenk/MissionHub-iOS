@@ -13,7 +13,7 @@
 }
 
 //@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancel;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *done;
+@property (strong, nonatomic) IBOutlet UIButton *done;
 @property (strong, nonatomic) IBOutlet UIToolbar *genderToolbar;
 @property (strong, nonatomic) IBOutlet UITableView *genderListCells;
 

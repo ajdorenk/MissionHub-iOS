@@ -33,9 +33,9 @@
 	
 	[super viewWillAppear:animated];
     
-    self.genderToolbar.layer.borderWidth = 2.0f;
+   /* self.genderToolbar.layer.borderWidth = 2.0f;
     self.genderToolbar.layer.borderColor= [UIColor colorWithRed:155.0/255.0 green:155.0/255.0 blue:155.0/255.0 alpha:1].CGColor;
-    
+    */
     
     self.genderListCells.layer.borderWidth = 1.0f;
     self.genderListCells.layer.borderColor = [UIColor colorWithRed:214.0/255.0 green:214.0/255.0 blue:214.0/255.0 alpha:1].CGColor;
@@ -51,16 +51,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view
 
-    
-    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
-    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, menuImage.size.width, menuImage.size.height)];
-    [backMenu setImage:menuImage forState:UIControlStateNormal];
-    [backMenu addTarget:self action:@selector(cancelPressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
-    
-    self.navigationItem.leftBarButtonItem = backMenuButton;
 
-}
+
+   }
 - (IBAction)donePressed:(id)sender {
  // configure the new view controller explicitly here.
     [self dismissViewControllerAnimated:NO completion:Nil];
