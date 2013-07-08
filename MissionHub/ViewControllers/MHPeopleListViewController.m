@@ -175,11 +175,18 @@
 
 - (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
 {
+	self.hasLoadedAllPages = NO;
+	self.isLoading = YES;
 	[self.tableView reloadData];
+	
+	[self.requestOptions resetPaging];
 	
     [[MHAPI sharedInstance] getPeopleListWith:self.requestOptions
 								 successBlock:^(NSArray *result, MHRequestOptions *options) {
 		
+									 self.isLoading = NO;
+									 self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+									 
 									 self.peopleArray =  [NSMutableArray arrayWithArray:result];
 									 [self.tableView reloadData];
 									 [self.refreshController endRefreshing];
@@ -188,7 +195,13 @@
 	}
 									failBlock:^(NSError *error, MHRequestOptions *options) {
 										
-										[MHErrorHandler presentError:error];
+										NSString *errorMessage = [NSString stringWithFormat:@"Failed to refresh results due to: \"%@\". Try again by pulling down on the list. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+										NSError *presentingError = [NSError errorWithDomain:error.domain
+																					   code:error.code
+																				   userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+										
+										[MHErrorHandler presentError:presentingError];
+										self.isLoading = NO;
 										[self.tableView reloadData];
 										[self.refreshController endRefreshing];
 		
@@ -332,7 +345,16 @@
 			
 		} else {
 			
-			[cell startLoading];
+			if (self.refreshController.refreshing) {
+				
+				[cell hideFinishedMessage];
+				[cell stopLoading];
+				
+			} else {
+				
+				[cell startLoading];
+				
+			}
 			
 		}
 		

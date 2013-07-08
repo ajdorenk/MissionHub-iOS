@@ -131,6 +131,7 @@ typedef enum {
 -(id)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
 -(id)removeFilter:(MHRequestOptionsFilters)filter;
 -(id)clearFilters;
+-(id)resetPaging;
 -(id)reset;
 
 -(NSString *)stringForEndpoint;

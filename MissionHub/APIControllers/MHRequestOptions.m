@@ -188,6 +188,12 @@
 	return self;
 }
 
+-(id)resetPaging {
+	
+	return [self setLimitAndOffsetForFirstPage];
+	
+}
+
 -(id)setLimitAndOffsetForFirstPage {
 	
 	self.offset = 0;
@@ -322,9 +328,6 @@
 		filterString = [filterString stringByAppendingFormat:@"&filters[%@]=%@", filter, value];
 		
 	}];
-	
-	//remove first & from the start of the string
-	filterString = [filterString substringFromIndex:1];
 	
 	return filterString;
 	
