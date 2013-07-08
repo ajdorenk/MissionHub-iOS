@@ -58,7 +58,7 @@
     [genderButton setFrame:CGRectMake(94, 5.0, 154.0, 22.0)];
     //[button setTitle:@"Gender" forState:UIControlStateNormal];
     [genderButton setTintColor:[UIColor clearColor]];
-    [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderGender.png"] forState:UIControlStateNormal];
+    [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
 	
     [genderButton setBackgroundColor:[UIColor clearColor]];
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
@@ -81,7 +81,7 @@
     [allButton setFrame:CGRectMake(13.0, 9.0, 14.0, 14.0)];
     //[button setTitle:@"Sort" forState:UIControlStateNormal];
     [allButton setTintColor:[UIColor clearColor]];
-    [allButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderAll.png"] forState:UIControlStateNormal];
+    [allButton setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"] forState:UIControlStateNormal];
     
     [allButton setBackgroundColor:[UIColor clearColor]];
     [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchDown];
@@ -251,12 +251,6 @@
 -(IBAction)sortOnOff:(id)sender {
     NSLog(@"Toggle sort");
 }
-
-
-/*@synthesize Sublabel;
-*/
-
-
 
 
 #pragma mark - Table view data source
