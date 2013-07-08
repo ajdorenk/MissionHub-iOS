@@ -41,7 +41,7 @@
     
     // Ensure a view controller is loaded
     self.switchViewControllers.selectedSegmentIndex = 0;
-    [self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.switchViewControllers.selectedSegmentIndex]];
+    //[self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.switchViewControllers.selectedSegmentIndex]];
     
    
     UIImage* newInteractionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
@@ -75,6 +75,8 @@
     self.navigationItem.leftBarButtonItem = backMenuButton;
     
     [self.toolbar setTranslucent:YES];
+    
+    [self.switchViewControllers addTarget:self action:@selector(controlSegmentSwitch:) forControlEvents:UIControlEventValueChanged];
 
 }
 
@@ -85,10 +87,8 @@
 }
 
 - (IBAction)backToMenu:(id)sender {
- 
- [self dismissViewControllerAnimated:NO completion:Nil];
- //[self.slidingViewController anchorTopViewTo:ECRight];
- 
+    NSLog(@"works");
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
  }
  - (IBAction)addLabelActivity:(id)sender {
  NSLog(@"add Person Action");
@@ -114,7 +114,7 @@
         [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController2 segmentedViewController:segmentedViewController];
     }
     
-    [((MHParallaxTopViewController *)self.topViewController).menu setUserInteractionEnabled:YES];
+    [self.switchViewControllers setUserInteractionEnabled:YES];
     
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
@@ -122,7 +122,7 @@
     
 }
 
--(void)cycleFromViewController:(UIViewController *)oldVC
+/*-(void)cycleFromViewController:(UIViewController *)oldVC
              toViewController:(UIViewController*)newVC{
     if (newVC == oldVC) return;
     
@@ -178,7 +178,19 @@
     }
     
 }
+*/
 
+
+- (IBAction)controlSegmentSwitch:(SDSegmentedControl *)segmentedControl{
+    NSLog(@"Clicked");
+
+    if (segmentedControl.selectedSegmentIndex == 0) {
+        NSLog(@"switched");
+    }
+    else{
+    
+    }
+}
 
 - (void)handleTapGesture:(id)sender {
     

@@ -29,7 +29,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *name;
 @property (nonatomic, strong) IBOutlet UILabel *gender;
 @property (nonatomic, strong) IBOutlet UIImageView *profilePicture;
-@property (nonatomic, strong) IBOutlet UIButton *checkButton;
+@property (nonatomic, strong) IBOutlet UIButton *checkbox;
 @property (nonatomic, strong) IBOutlet UIView *nameBackgroundView;
 
 -(void)populateWithPerson:(MHPerson *)person;

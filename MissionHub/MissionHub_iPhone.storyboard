@@ -381,15 +381,24 @@ select another survey.</string>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="whe-Fd-VHP">
                                             <color key="color" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="all results have been loaded" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIR-Ke-UAk">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="whe-Fd-VHP" firstAttribute="top" secondItem="BxJ-9T-xEG" secondAttribute="top" constant="11" id="4Dw-o2-p7Q"/>
-                                    <constraint firstItem="whe-Fd-VHP" firstAttribute="centerX" secondItem="BxJ-9T-xEG" secondAttribute="centerX" type="default" id="Hnc-nV-hUF"/>
+                                    <constraint firstItem="BIR-Ke-UAk" firstAttribute="leading" secondItem="BxJ-9T-xEG" secondAttribute="leading" type="default" id="Ami-vg-c1m"/>
+                                    <constraint firstItem="BIR-Ke-UAk" firstAttribute="centerY" secondItem="whe-Fd-VHP" secondAttribute="centerY" type="default" id="GwO-JF-JpP"/>
+                                    <constraint firstItem="BIR-Ke-UAk" firstAttribute="centerX" secondItem="whe-Fd-VHP" secondAttribute="centerX" type="default" id="aid-kf-Nvr"/>
+                                    <constraint firstItem="BIR-Ke-UAk" firstAttribute="trailing" secondItem="BxJ-9T-xEG" secondAttribute="trailing" type="default" id="of4-cM-qqr"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="loadingIndicator" destination="whe-Fd-VHP" id="dX3-mU-R4X"/>
+                                    <outlet property="messageView" destination="BIR-Ke-UAk" id="ydn-GD-C7R"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -440,10 +449,10 @@ select another survey.</string>
             </objects>
             <point key="canvasLocation" x="1838" y="78"/>
         </scene>
-        <!--My Table View Controller-->
+        <!--Interaction Info View Controller-->
         <scene sceneID="heb-P2-t11">
             <objects>
-                <tableViewController storyboardIdentifier="MyTableViewController1" id="WO2-6D-Eg9" customClass="MyTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MyTableViewController1" id="WO2-6D-Eg9" customClass="MHInteractionInfoViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yCY-PS-we8">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -506,6 +515,9 @@ select another survey.</string>
                                     <segment title="Info"/>
                                     <segment title="Interactions"/>
                                 </segments>
+                                <connections>
+                                    <action selector="controlSegmentSwitch:" destination="M06-4X-qeR" eventType="valueChanged" id="4TI-th-P3T"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -522,10 +534,10 @@ select another survey.</string>
             </objects>
             <point key="canvasLocation" x="2728" y="-136"/>
         </scene>
-        <!--My Table View Controller-->
+        <!--Interaction Info View Controller-->
         <scene sceneID="Jl4-jg-SEQ">
             <objects>
-                <tableViewController storyboardIdentifier="MyTableViewController2" id="R0y-5R-HkQ" customClass="MyTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MyTableViewController2" id="R0y-5R-HkQ" customClass="MHInteractionInfoViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JET-KU-uh3">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -560,22 +572,26 @@ select another survey.</string>
         <class className="MHGenderListController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
             <relationships>
-                <relationship kind="outlet" name="cancel" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="done" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="done" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="genderListCells" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="genderToolbar" candidateClass="UIToolbar"/>
             </relationships>
+        </class>
+        <class className="MHInteractionInfoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInteractionInfoViewController.h"/>
         </class>
         <class className="MHLoadingCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoadingCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="MHLoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoginViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="MHMenuToolbar" superclassName="UIToolbar">
@@ -590,7 +606,6 @@ select another survey.</string>
         <class className="MHParallaxTopViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHParallaxTopViewController.h"/>
             <relationships>
-                <relationship kind="action" name="segmentSwitch:"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="menu" candidateClass="SDSegmentedControl"/>
             </relationships>
@@ -618,10 +633,9 @@ select another survey.</string>
         <class className="MHProfileViewController" superclassName="M6ParallaxController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addLabelActivity:"/>
-                <relationship kind="action" name="addTagActivity:"/>
-                <relationship kind="action" name="backToMenu:"/>
-                <relationship kind="action" name="indexDidChangeForSegmentedControl:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="controlSegmentSwitch:" candidateClass="SDSegmentedControl"/>
+                <relationship kind="outlet" name="switchViewControllers" candidateClass="SDSegmentedControl"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="MHRootViewController" superclassName="ECSlidingViewController">
@@ -641,9 +655,6 @@ select another survey.</string>
                 <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
                 <relationship kind="outlet" name="topToolbar" candidateClass="UIToolbar"/>
             </relationships>
-        </class>
-        <class className="MyTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTableViewController.h"/>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

@@ -374,6 +374,12 @@ typedef enum {
 	
 	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
 	
+	if ([options hasFilters]) {
+		
+		urlString = [urlString stringByAppendingString:[options stringForFilters]];
+		
+	}
+	
 	return urlString;
 }
 

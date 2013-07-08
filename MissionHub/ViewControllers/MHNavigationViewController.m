@@ -69,6 +69,16 @@
     
 }
 
+-(void)setDataFromRequestOptions:(MHRequestOptions *)options {
+	
+	if ([self.peopleListViewController respondsToSelector:@selector(setDataFromRequestOptions:)]) {
+		
+		[self.peopleListViewController setDataFromRequestOptions:options];
+		
+	}
+	
+}
+
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
 	
 	if ([self.peopleListViewController respondsToSelector:@selector(setDataArray:forRequestOptions:)]) {

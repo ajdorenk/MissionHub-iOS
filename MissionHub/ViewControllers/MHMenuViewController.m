@@ -227,6 +227,26 @@
 		} else {
 			
 			newTopViewController = [self peopleNavigationViewController];
+			MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+			
+			if (indexPath.section == 0) {
+				
+				[requestOptions configureForInitialPeoplePageRequest];
+				
+			} else if (indexPath.section == 1) {
+				
+				[requestOptions configureForInitialPeoplePageRequest];
+				if ([objectForIndex isKindOfClass:[MHLabel class]]) {
+					[requestOptions addFilter:MHRequestOptionsFilterPeopleLabels withValue:[((MHLabel *)objectForIndex).remoteID stringValue]];
+				}
+				
+			} else if (indexPath.section == 1) {
+				
+				//TODO: configure for contact assignment with remotePersonID
+				
+			}
+			
+			[(MHNavigationViewController *)newTopViewController setDataFromRequestOptions:requestOptions];
 			
 		}
 		

@@ -17,6 +17,7 @@
 
 - (void)willChangeHeightFromHeight:(CGFloat)oldHeight toHeight:(CGFloat)newHeight;
 
-- (void)segmentSwitch:(id)sender forEvent:(UIEvent *)event;
+
+
 
 @end

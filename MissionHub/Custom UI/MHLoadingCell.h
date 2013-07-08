@@ -10,12 +10,16 @@
 
 @interface MHLoadingCell : UITableViewCell {
 	
-	UIActivityIndicatorView *_loadingIndicator;
+	UIActivityIndicatorView	*_loadingIndicator;
+	UILabel					*_messageView;
 	
 }
 
+@property (nonatomic, strong) IBOutlet UILabel *messageView;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
+-(id)showFinishedMessage;
+-(id)hideFinishedMessage;
 -(id)startLoading;
 -(id)stopLoading;
 

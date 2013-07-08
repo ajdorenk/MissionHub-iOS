@@ -12,7 +12,7 @@
 
 @implementation MHPersonCell
 
-@synthesize name, gender, profilePicture, checkButton, nameBackgroundView;
+@synthesize name, gender, profilePicture, checkbox, nameBackgroundView;
 
 //@synthesize delegate;
 //@synthesize allRoles, selectedRoles, originallySelectedRoles;
@@ -40,11 +40,11 @@
     
    // UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
-    [checkButton setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
-    [checkButton setTintColor:[UIColor clearColor]];
-    [checkButton setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
-    [checkButton setBackgroundColor:[UIColor clearColor]];
-    [checkButton addTarget:self action:@selector(checkContact:) forControlEvents:UIControlEventTouchDown];
+    [checkbox setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
+    [checkbox setTintColor:[UIColor clearColor]];
+    [checkbox setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
+    [checkbox setBackgroundColor:[UIColor clearColor]];
+    [checkbox addTarget:self action:@selector(checkContact:) forControlEvents:UIControlEventTouchDown];
     
     
 }
