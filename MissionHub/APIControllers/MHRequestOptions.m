@@ -89,7 +89,7 @@
 	return (self.order != MHRequestOptionsOrderNone);
 }
 
--(id)configureForInitialPeoplePage {
+-(id)configureForInitialPeoplePageRequest {
 	
 	[[[self reset] addIncludesForProfileRequest] setLimitAndOffsetForFirstPage];
 	

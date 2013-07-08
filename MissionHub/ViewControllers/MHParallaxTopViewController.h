@@ -14,6 +14,6 @@
 @property (nonatomic, strong) IBOutlet SDSegmentedControl *menu;
 
 - (void)willChangeHeightFromHeight:(CGFloat)oldHeight toHeight:(CGFloat)newHeight;
-//- (IBAction)segmentSwitch:(id)sender;
+- (IBAction)segmentSwitch:(id)sender;
 
 @end
