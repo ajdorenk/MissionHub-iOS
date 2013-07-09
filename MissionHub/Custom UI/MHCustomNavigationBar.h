@@ -10,4 +10,6 @@
 
 @interface MHCustomNavigationBar : UINavigationBar
 
+-(void) applyDefaultStyle;
+
 @end

@@ -19,4 +19,6 @@
 
 @property(nonatomic, strong) NSArray *genders;
 
+- (IBAction)donePressed:(id)sender;
+
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "M6ParallaxController.h"
 #import "SDSegmentedControl.h"
+#import "MHNewInteractionViewController.h"
 
 @interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate>
 

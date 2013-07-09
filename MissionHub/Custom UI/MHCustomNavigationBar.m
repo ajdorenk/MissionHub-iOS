@@ -14,6 +14,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self applyDefaultStyle];
+
         // Initialization code
     }
     
@@ -38,5 +40,19 @@
     [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 }
 
+-(void)willMoveToWindow:(UIWindow *)newWindow{
+    [super willMoveToWindow:newWindow];
+    [self applyDefaultStyle];
+}
+
+
+- (void)applyDefaultStyle {
+    // add the drop shadow
+    self.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.layer.shadowOffset = CGSizeMake(0.0, 3);
+    self.layer.shadowOpacity = 0.25;
+    self.layer.masksToBounds = NO;
+    self.layer.shouldRasterize = YES;
+}
 
 @end

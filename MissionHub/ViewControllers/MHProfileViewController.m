@@ -8,6 +8,7 @@
 
 #import "MHProfileViewController.h"
 #import "MHParallaxTopViewController.h"
+//#import "MHNewInteractionViewController.h"
 //#import "MHCustomNavigationBar.h"
 
 
@@ -88,15 +89,20 @@
 
 - (IBAction)backToMenu:(id)sender {
     NSLog(@"works");
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
  }
+
  - (IBAction)addLabelActivity:(id)sender {
  NSLog(@"add Person Action");
  }
+
  - (IBAction)newInteractionActivity:(id)sender {
- NSLog(@"Label Action");
+ NSLog(@"Interaction Action");
+     MHNewInteractionViewController *newInteraction = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+     [self.navigationController pushViewController:newInteraction animated:YES];
+     
  }
- 
+
  
 
 -(void) awakeFromNib
@@ -192,12 +198,6 @@
     }
 }
 
-- (void)handleTapGesture:(id)sender {
-    
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Yup" message:@"You pressed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
-    
-}
 
 
 

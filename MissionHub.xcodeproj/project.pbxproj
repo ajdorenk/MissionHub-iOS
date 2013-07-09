@@ -205,6 +205,8 @@
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
 		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */; };
+		AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */; };
+		AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301131176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301132176FE4D900D53E35 /* MHMenuToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */; };
@@ -467,6 +469,8 @@
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
 		AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationViewController.m; path = ViewControllers/MHNavigationViewController.m; sourceTree = "<group>"; };
 		AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Checked_24.png; sourceTree = "<group>"; };
+		AD2434F2178C9CDA00FA16F2 /* MHNewInteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNewInteractionViewController.h; path = ViewControllers/MHNewInteractionViewController.h; sourceTree = "<group>"; };
+		AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNewInteractionViewController.m; path = ViewControllers/MHNewInteractionViewController.m; sourceTree = "<group>"; };
 		AD30112A176FE4D900D53E35 /* MHCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCheckbox.h; path = "Custom UI/MHCheckbox.h"; sourceTree = "<group>"; };
 		AD30112B176FE4D900D53E35 /* MHCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCheckbox.m; path = "Custom UI/MHCheckbox.m"; sourceTree = "<group>"; };
 		AD30112C176FE4D900D53E35 /* MHMenuToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHMenuToolbar.h; path = "Custom UI/MHMenuToolbar.h"; sourceTree = "<group>"; };
@@ -681,6 +685,8 @@
 				AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */,
 				AD3C60D0178216DD00744167 /* MHSegmentedViewController.h */,
 				AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */,
+				AD2434F2178C9CDA00FA16F2 /* MHNewInteractionViewController.h */,
+				AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1225,6 +1231,7 @@
 				AD3C60DC178761E200744167 /* MHInteractionInfoViewController.m in Sources */,
 				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */,
+				AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,6 +1299,7 @@
 				68134F9E17837E6600227C2A /* SIAlertView.m in Sources */,
 				68A68BD01787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD5178A192100927DF8 /* ODRefreshControl.m in Sources */,
+				AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
