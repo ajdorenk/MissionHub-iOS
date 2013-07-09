@@ -8,6 +8,7 @@
 
 #import "MHProfileViewController.h"
 #import "MHParallaxTopViewController.h"
+//#import "MHNewInteractionViewController.h"
 //#import "MHCustomNavigationBar.h"
 
 
@@ -41,7 +42,7 @@
     
     // Ensure a view controller is loaded
     self.switchViewControllers.selectedSegmentIndex = 0;
-    [self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.switchViewControllers.selectedSegmentIndex]];
+    //[self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.switchViewControllers.selectedSegmentIndex]];
     
    
     UIImage* newInteractionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
@@ -75,6 +76,8 @@
     self.navigationItem.leftBarButtonItem = backMenuButton;
     
     [self.toolbar setTranslucent:YES];
+    
+    [self.switchViewControllers addTarget:self action:@selector(controlSegmentSwitch:) forControlEvents:UIControlEventValueChanged];
 
 }
 
@@ -85,18 +88,21 @@
 }
 
 - (IBAction)backToMenu:(id)sender {
- 
- [self dismissViewControllerAnimated:NO completion:Nil];
- //[self.slidingViewController anchorTopViewTo:ECRight];
- 
+    NSLog(@"works");
+    [self.navigationController popViewControllerAnimated:YES];
  }
+
  - (IBAction)addLabelActivity:(id)sender {
  NSLog(@"add Person Action");
  }
+
  - (IBAction)newInteractionActivity:(id)sender {
- NSLog(@"Label Action");
+ NSLog(@"Interaction Action");
+     MHNewInteractionViewController *newInteraction = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+     [self.navigationController pushViewController:newInteraction animated:YES];
+     
  }
- 
+
  
 
 -(void) awakeFromNib
@@ -114,7 +120,7 @@
         [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController2 segmentedViewController:segmentedViewController];
     }
     
-    [((MHParallaxTopViewController *)self.topViewController).menu setUserInteractionEnabled:YES];
+    [self.switchViewControllers setUserInteractionEnabled:YES];
     
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
@@ -122,7 +128,7 @@
     
 }
 
--(void)cycleFromViewController:(UIViewController *)oldVC
+/*-(void)cycleFromViewController:(UIViewController *)oldVC
              toViewController:(UIViewController*)newVC{
     if (newVC == oldVC) return;
     
@@ -178,14 +184,20 @@
     }
     
 }
+*/
 
 
-- (void)handleTapGesture:(id)sender {
+- (IBAction)controlSegmentSwitch:(SDSegmentedControl *)segmentedControl{
+    NSLog(@"Clicked");
+
+    if (segmentedControl.selectedSegmentIndex == 0) {
+        NSLog(@"switched");
+    }
+    else{
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Yup" message:@"You pressed" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
-    
+    }
 }
+
 
 
 

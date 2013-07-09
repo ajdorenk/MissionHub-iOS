@@ -8,12 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "M6ParallaxController.h"
+#import "SDSegmentedControl.h"
+#import "MHNewInteractionViewController.h"
 
 @interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 
--(void)cycleFromViewController:(UIViewController *)oldVC
-             toViewController:(UIViewController*)newVC;
+
+//@property (nonatomic, strong) IBOutlet SDSegmentedControl *menu;
+
+//-(void)cycleFromViewController:(UIViewController *)oldVC toViewController:(UIViewController*)newVC;
+
+- (IBAction)controlSegmentSwitch:(SDSegmentedControl *)segmentedControl;
+
+
 
 @end

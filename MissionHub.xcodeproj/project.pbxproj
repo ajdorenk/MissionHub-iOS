@@ -205,6 +205,9 @@
 		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
+		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */; };
+		AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */; };
+		AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301131176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301132176FE4D900D53E35 /* MHMenuToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */; };
@@ -218,6 +221,10 @@
 		AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D717838A3C00744167 /* MHInteractionCell.m */; };
 		AD3C60D917838A3C00744167 /* MHInteractionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60D717838A3C00744167 /* MHInteractionCell.m */; };
 		AD3C60DC178761E200744167 /* MHInteractionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60DB178761E100744167 /* MHInteractionInfoViewController.m */; };
+		AD3C60E2178B0F2A00744167 /* sectionHeaderLabels.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */; };
+		AD3C60E3178B0F2A00744167 /* sectionHeaderLabels.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */; };
+		AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
+		AD3C60E6178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
 		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
 		AD982794177C9D6700A0276A /* MHParallaxTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */; };
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
@@ -462,6 +469,9 @@
 		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
 		AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationViewController.m; path = ViewControllers/MHNavigationViewController.m; sourceTree = "<group>"; };
+		AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Checked_24.png; sourceTree = "<group>"; };
+		AD2434F2178C9CDA00FA16F2 /* MHNewInteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNewInteractionViewController.h; path = ViewControllers/MHNewInteractionViewController.h; sourceTree = "<group>"; };
+		AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNewInteractionViewController.m; path = ViewControllers/MHNewInteractionViewController.m; sourceTree = "<group>"; };
 		AD30112A176FE4D900D53E35 /* MHCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCheckbox.h; path = "Custom UI/MHCheckbox.h"; sourceTree = "<group>"; };
 		AD30112B176FE4D900D53E35 /* MHCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCheckbox.m; path = "Custom UI/MHCheckbox.m"; sourceTree = "<group>"; };
 		AD30112C176FE4D900D53E35 /* MHMenuToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHMenuToolbar.h; path = "Custom UI/MHMenuToolbar.h"; sourceTree = "<group>"; };
@@ -475,6 +485,8 @@
 		AD3C60D717838A3C00744167 /* MHInteractionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionCell.m; path = "Custom UI/MHInteractionCell.m"; sourceTree = "<group>"; };
 		AD3C60DA178761DE00744167 /* MHInteractionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInteractionInfoViewController.h; path = ViewControllers/MHInteractionInfoViewController.h; sourceTree = "<group>"; };
 		AD3C60DB178761E100744167 /* MHInteractionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionInfoViewController.m; path = ViewControllers/MHInteractionInfoViewController.m; sourceTree = "<group>"; };
+		AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderLabels.png; sourceTree = "<group>"; };
+		AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
 		AD98278B177C93B400A0276A /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ViewControllers/MHProfileViewController.h; sourceTree = "<group>"; };
 		AD98278C177C93B400A0276A /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ViewControllers/MHProfileViewController.m; sourceTree = "<group>"; };
 		AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHParallaxTopViewController.h; path = ViewControllers/MHParallaxTopViewController.h; sourceTree = "<group>"; };
@@ -674,6 +686,8 @@
 				AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */,
 				AD3C60D0178216DD00744167 /* MHSegmentedViewController.h */,
 				AD3C60D1178216DD00744167 /* MHSegmentedViewController.m */,
+				AD2434F2178C9CDA00FA16F2 /* MHNewInteractionViewController.h */,
+				AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -768,6 +782,9 @@
 		68478DB0177E8CDC0014501D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */,
+				AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */,
+				AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */,
 				68953EC11784CD0100F0796C /* MH_Logo.png */,
 				68134F941782748300227C2A /* MHPersonCell_Placeholder.png */,
 				6823A7BD177EB00100DBDF3F /* Searchbar_background.png */,
@@ -1077,6 +1094,9 @@
 				68134F951782748300227C2A /* MHPersonCell_Placeholder.png in Resources */,
 				68134F9B17837E6500227C2A /* SIAlertView.bundle in Resources */,
 				68953EC21784CD0100F0796C /* MH_Logo.png in Resources */,
+				AD3C60E2178B0F2A00744167 /* sectionHeaderLabels.png in Resources */,
+				AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
+				AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1114,6 +1134,8 @@
 				68134F961782748300227C2A /* MHPersonCell_Placeholder.png in Resources */,
 				68134F9C17837E6500227C2A /* SIAlertView.bundle in Resources */,
 				68953EC31784CD0100F0796C /* MH_Logo.png in Resources */,
+				AD3C60E3178B0F2A00744167 /* sectionHeaderLabels.png in Resources */,
+				AD3C60E6178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1211,6 +1233,7 @@
 				AD3C60DC178761E200744167 /* MHInteractionInfoViewController.m in Sources */,
 				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */,
+				AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1278,6 +1301,7 @@
 				68134F9E17837E6600227C2A /* SIAlertView.m in Sources */,
 				68A68BD01787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD5178A192100927DF8 /* ODRefreshControl.m in Sources */,
+				AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

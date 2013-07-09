@@ -36,7 +36,6 @@
 	// Do any additional setup after loading the view.
     self.imageView.image = [UIImage imageNamed:@"bg.jpg"];
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureRecognizer:)]];
-
 //    NSArray *itemArray = [NSArray arrayWithObjects: @"Info", @"Interactions", nil];
 //    SDSegmentedControl *segmentedControl = [[SDSegmentedControl alloc] initWithItems:itemArray];
 //    segmentedControl.frame = CGRectMake(0, 100, 320, 50);
@@ -68,15 +67,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)segmentSwitch:(id)sender {
-    
-    if (self.menu.selectedSegmentIndex == 0) {
-        NSLog(@"Clicked");
-    }
-    else{
-        
-    }
-}
+
 
 
 - (void)willChangeHeightFromHeight:(CGFloat)oldHeight toHeight:(CGFloat)newHeight {
