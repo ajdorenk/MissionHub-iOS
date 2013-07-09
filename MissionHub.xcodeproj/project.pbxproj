@@ -24,7 +24,7 @@
 		68134F961782748300227C2A /* MHPersonCell_Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68134F941782748300227C2A /* MHPersonCell_Placeholder.png */; };
 		68134F9B17837E6500227C2A /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68134F9817837E6500227C2A /* SIAlertView.bundle */; };
 		68134F9C17837E6500227C2A /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68134F9817837E6500227C2A /* SIAlertView.bundle */; };
-		68134F9D17837E6600227C2A /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68134F9A17837E6500227C2A /* SIAlertView.m */; };
+		68134F9D17837E6600227C2A /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68134F9A17837E6500227C2A /* SIAlertView.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		68134F9E17837E6600227C2A /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68134F9A17837E6500227C2A /* SIAlertView.m */; };
 		6821C470178244970063AA3D /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6821C46F178244970063AA3D /* MHPerson.m */; };
 		6821C471178244970063AA3D /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6821C46F178244970063AA3D /* MHPerson.m */; };
@@ -202,6 +202,7 @@
 		68EB33CA17791306003958A0 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068C717710357007C79D6 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68EB33CE17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
+		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
@@ -1083,6 +1084,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */,
 				683910B51760FD3100E01B46 /* InfoPlist.strings in Resources */,
 				683910CD1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
 				683910D01760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
@@ -1485,7 +1487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",

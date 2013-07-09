@@ -24,4 +24,6 @@
 @property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
 @property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);
 
+-(id)addPostParamsFromDictionary:(NSDictionary *)paramsDictionary;
+
 @end

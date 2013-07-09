@@ -25,6 +25,8 @@
 
 -(MHNavigationViewController *)peopleNavigationViewController;
 -(MHSurveyViewController *)surveyViewController;
+-(void)changeOrganization;
+-(void)logout;
 
 @end
 
@@ -51,6 +53,18 @@
 	}
 	
 	return self._surveyViewController;
+	
+}
+
+-(void)changeOrganization {
+	
+	NSLog(@"change org");
+	
+}
+
+-(void)logout {
+	
+	NSLog(@"logout");
 	
 }
 
@@ -204,17 +218,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
-	if (indexPath.section == 4) {
-		
-		//call setting action
-		
-	}
-	
+	//filters
 	if (indexPath.section >= 0 && indexPath.section < 4) {
 		
 		UIViewController *newTopViewController;
 		id objectForIndex = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 		
+		//surveys
 		if (indexPath.section == 3) {
 			
 			if ([objectForIndex isKindOfClass:[MHSurvey class]]) {
@@ -229,10 +239,12 @@
 			newTopViewController = [self peopleNavigationViewController];
 			MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
 			
+			//All Contacts
 			if (indexPath.section == 0) {
 				
 				[requestOptions configureForInitialPeoplePageRequest];
 				
+			//Labels
 			} else if (indexPath.section == 1) {
 				
 				[requestOptions configureForInitialPeoplePageRequest];
@@ -240,9 +252,14 @@
 					[requestOptions addFilter:MHRequestOptionsFilterPeopleLabels withValue:[((MHLabel *)objectForIndex).remoteID stringValue]];
 				}
 				
-			} else if (indexPath.section == 1) {
+			//contact assignments
+			} else if (indexPath.section == 2) {
 				
-				//TODO: configure for contact assignment with remotePersonID
+				[requestOptions configureForInitialPeoplePageRequest];
+				if ([objectForIndex isKindOfClass:[MHPerson class]]) {
+					[requestOptions configureForInitialContactAssignmentsPageRequestWithAssignedToID:
+					 ((MHPerson *)objectForIndex).remoteID];
+				}
 				
 			}
 			
@@ -258,6 +275,21 @@
 				self.slidingViewController.topViewController.view.frame = frame;
 				[self.slidingViewController resetTopView];
 			}];
+			
+		}
+		
+	}
+	
+	//settings
+	if (indexPath.section == 4) {
+		
+		if (indexPath.row == 0) {
+			
+			[self changeOrganization];
+			
+		} else if (indexPath.row == 1) {
+			
+			[self logout];
 			
 		}
 		

@@ -25,6 +25,8 @@
 
 @implementation MHRequestOptions
 
+@synthesize requestName	= _requestName;
+@synthesize type		= _type;
 @synthesize endpoint	= _endpoint;
 @synthesize remoteID	= _remoteID;
 @synthesize filters		= _filters;
@@ -35,6 +37,9 @@
 
 @synthesize successBlock	= _successBlock;
 @synthesize failBlock		= _failBlock;
+
+//TODO: implement postParams initialization and accessor functions
+@synthesize postParams	= _postParams;
 
 -(id)init {
 	
@@ -51,16 +56,35 @@
 
 -(id)reset {
 	
+	self.requestName= @"";
+	self.type		= MHRequestOptionsTypeIndex;
 	self.endpoint	= MHRequestOptionsEndpointPeople;
 	self.remoteID	= 0;
-	self.filters	= [NSMutableDictionary dictionary];
-	self.includes	= [NSMutableIndexSet indexSet];
+	
+	if (self.filters) {
+		[self.filters removeAllObjects];
+	} else {
+		self.filters	= [NSMutableDictionary dictionary];
+	}
+	
+	if (self.includes) {
+		[self.includes removeAllIndexes];
+	} else {
+		self.includes	= [NSMutableIndexSet indexSet];
+	}
+	
 	self.limit		= 0;
 	self.offset		= 0;
 	self.order		= MHRequestOptionsOrderNone;
 	
 	self.successBlock		= nil;
 	self.failBlock			= nil;
+	
+	if (self.postParams) {
+		[self.postParams removeAllObjects];
+	} else {
+		self.postParams	= [NSMutableDictionary dictionary];
+	}
 	
 	return self;
 }
@@ -96,9 +120,25 @@
 	return self;
 }
 
+-(id)configureForInitialContactAssignmentsPageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID {
+	
+	[[[[[self reset]
+		addIncludesForContactAssignmentsPageRequest]
+	   addIncludesForPeoplePageRequest]
+	  addFilter:MHRequestOptionsFilterContactAssignmentsAssignedToId withValue:[remoteAssignedToID stringValue]]
+	 setLimitAndOffsetForFirstPage];
+	
+	//if changed you need to also change in the parser in MHAPI requestDidFinish
+	self.requestName = @"contactAssignmentFilter";
+	self.endpoint = MHRequestOptionsEndpointContactAssignments;
+	
+	return self;
+}
+
 -(id)configureForMeRequest {
 	
 	[[self reset] addIncludesForMeRequest];
+	self.type = MHRequestOptionsTypeShow;
 	
 	return self;
 }
@@ -106,8 +146,9 @@
 -(id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID {
 	
 	[[self reset] addIncludesForOrganizationRequest];
-	self.endpoint = MHRequestOptionsEndpointOrganizations;
-	self.remoteID = [remoteID integerValue];
+	self.endpoint	= MHRequestOptionsEndpointOrganizations;
+	self.remoteID	= [remoteID integerValue];
+	self.type		= MHRequestOptionsTypeShow;
 	
 	return self;
 }
@@ -115,7 +156,8 @@
 -(id)configureForProfileRequestWithRemoteID:(NSNumber *)remoteID {
 	
 	[[self reset] addIncludesForProfileRequest];
-	self.remoteID = [remoteID integerValue];
+	self.remoteID	= [remoteID integerValue];
+	self.type		= MHRequestOptionsTypeShow;
 	
 	return self;
 }
@@ -162,9 +204,18 @@
 	[self addInclude:MHRequestOptionsIncludePeopleOrganizationalLabels];
 	[self addInclude:MHRequestOptionsIncludePeopleEmailAddresses];
 	[self addInclude:MHRequestOptionsIncludePeoplePhoneNumbers];
+	[self addInclude:MHRequestOptionsIncludePeopleAddresses];
 	
 	
 	return self;
+}
+
+-(id)addIncludesForContactAssignmentsPageRequest {
+	
+	[self addInclude:MHRequestOptionsIncludeConactAssignmentsPerson];
+	
+	return self;
+	
 }
 
 -(id)addIncludesForOrganizationRequest {
@@ -263,6 +314,34 @@
 -(id)clearIncludes {
 	
 	[self.includes removeAllIndexes];
+	
+	return self;
+}
+
+-(id)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value {
+	
+	[self.postParams setObject:value forKey:paramName];
+	
+	return self;
+}
+
+-(id)updatePostParam:(NSString *)paramName withValue:(id <NSObject>)value {
+	
+	[self.postParams setObject:value forKey:paramName];
+	
+	return self;
+}
+
+-(id)removePostParam:(NSString *)paramName {
+	
+	[self.postParams removeObjectForKey:paramName];
+	
+	return self;
+}
+
+-(id)clearPostParams {
+	
+	[self.postParams removeAllObjects];
 	
 	return self;
 }
@@ -395,6 +474,63 @@
 	
 }
 
+-(NSString *)classNameForEndpoint {
+	
+	return [self classNameFromEndpoint:self.endpoint];
+	
+}
+
+-(NSString *)classNameFromEndpoint:(MHRequestOptionsEndpoints)endpoint {
+	
+	NSString *endpointString;
+	
+	switch (endpoint) {
+		case MHRequestOptionsEndpointAnswers:
+			endpointString = @"MHAnswer";
+			break;
+		//case MHRequestOptionsEndpointContactAssignments:
+		//	endpointString = @"MHContactAssignment";
+		//	break;
+		case MHRequestOptionsEndpointInteractions:
+			endpointString = @"MHInteraction";
+			break;
+		case MHRequestOptionsEndpointInteractionTypes:
+			endpointString = @"MHInteractionType";
+			break;
+		case MHRequestOptionsEndpointLabels:
+			endpointString = @"MHLabel";
+			break;
+		case MHRequestOptionsEndpointOrganizationalLabels:
+			endpointString = @"MHOrganizationalLabel";
+			break;
+		case MHRequestOptionsEndpointOrganizationalPermissions:
+			endpointString = @"MHOrganizationalPermission";
+			break;
+		case MHRequestOptionsEndpointOrganizations:
+			endpointString = @"MHOrganization";
+			break;
+		case MHRequestOptionsEndpointPeople:
+			endpointString = @"MHPerson";
+			break;
+		case MHRequestOptionsEndpointPermissions:
+			endpointString = @"MHPermission";
+			break;
+		case MHRequestOptionsEndpointQuestions:
+			endpointString = @"MHQuestion";
+			break;
+		case MHRequestOptionsEndpointSurveys:
+			endpointString = @"MHSurvey";
+			break;
+			
+		default:
+			endpointString = @"MHModel";
+			break;
+	}
+	
+	return endpointString;
+	
+}
+
 -(NSString *)stringInSingluarFormatFromEndpoint:(MHRequestOptionsEndpoints)endpoint {
 	
 	NSString *endpointString;
@@ -477,6 +613,9 @@
 			break;
 		case MHRequestOptionsFilterPeoplePermissions:
 			filterString = @"permissions";
+			break;
+		case MHRequestOptionsFilterContactAssignmentsAssignedToId:
+			filterString = @"assigned_to_id";
 			break;
 			
 		default:

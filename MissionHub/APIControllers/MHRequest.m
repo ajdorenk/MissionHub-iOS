@@ -36,4 +36,15 @@
 	
 }
 
+-(id)addPostParamsFromDictionary:(NSDictionary *)paramsDictionary {
+	
+	[paramsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+		
+		[self addPostValue:value forKey:key];
+		
+	}];
+	
+	return self;
+}
+
 @end

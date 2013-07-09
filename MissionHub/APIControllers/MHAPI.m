@@ -92,6 +92,60 @@ typedef enum {
     return self;
 }
 
+-(void)getResultWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+
+	MHRequestOptions *requestOptions = (options ? options : [[MHRequestOptions alloc] init]);
+	
+	NSError *error;
+	NSString *urlString = @"GET";
+	NSString *methodString = nil;
+	
+	switch (requestOptions.type) {
+		case MHRequestOptionsTypeShow:
+			urlString = [self stringForShowRequestWith:requestOptions error:&error];
+			methodString = @"GET";
+			break;
+		case MHRequestOptionsTypeIndex:
+			urlString = [self stringForIndexRequestWith:requestOptions error:&error];
+			methodString = @"GET";
+			break;
+		case MHRequestOptionsTypeCreate:
+			urlString = [self stringForCreateRequestWith:requestOptions error:&error];
+			methodString = @"POST";
+			break;
+		case MHRequestOptionsTypeUpdate:
+			urlString = [self stringForUpdateOrDeleteRequestWith:requestOptions error:&error];
+			methodString = @"PUT";
+			break;
+		case MHRequestOptionsTypeDelete:
+			urlString = [self stringForUpdateOrDeleteRequestWith:requestOptions error:&error];
+			methodString = @"DELETE";
+			break;
+			
+		default:
+			break;
+	}
+	
+	NSLog(@"%@", urlString);
+	
+	if (error) {
+		[MHErrorHandler presentError:error];
+		return;
+	}
+	
+	__block MHRequest *request	= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	request.requestName			= (requestOptions.requestName ? requestOptions.requestName : nil);
+	request.delegate			= self;
+	request.options				= requestOptions;
+	request.successBlock		= successBlock;
+	request.failBlock			= failBlock;
+	request.requestMethod		= methodString;
+	[request addPostParamsFromDictionary:requestOptions.postParams];
+	
+	[self.queue addOperation:request];
+	
+}
+
 -(void)getMeWithSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForMeRequest];
@@ -221,11 +275,7 @@ typedef enum {
 
 -(void)getProfileForRemoteID:(NSNumber *)remoteID WithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock {
 	
-	MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
-	
-	requestOptions.endpoint = MHRequestOptionsEndpointPeople;
-	requestOptions.remoteID = [remoteID integerValue];
-	[requestOptions addIncludesForProfileRequest];
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForProfileRequestWithRemoteID:remoteID];
 	
 	NSError *error;
 	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
@@ -443,7 +493,7 @@ typedef enum {
 	
 	NSError *error;
 	__block NSMutableArray *modelArray = [NSMutableArray array];
-	__block NSString *nameOfClassForEndpoint = [NSString stringWithFormat:@"MH%@", [[request.options stringInSingluarFormatForEndpoint] capitalizedString]];
+	__block NSString *nameOfClassForEndpoint = [request.options classNameForEndpoint];
 	NSDictionary *result = nil;
 	
 	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
@@ -470,7 +520,7 @@ typedef enum {
 		
 		//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
 		if ([[[result allKeys] objectAtIndex:0] isEqualToString:[request.options stringInSingluarFormatForEndpoint]]) {
-			
+
 			NSDictionary *responseObject = [result objectForKey:[request.options stringInSingluarFormatForEndpoint]];
 			
 			id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromFields:responseObject];
@@ -481,13 +531,29 @@ typedef enum {
 			
 			__block NSArray *arrayOfResponseObjects = [result objectForKey:[request.options stringForEndpoint]];
 			
-			[arrayOfResponseObjects enumerateObjectsUsingBlock:^(id responseObject, NSUInteger index, BOOL *stop) {
+			//if changed you need to also change in the request options MHRequestOptions configureForInitialContactAssignmentsPageRequestWithAssignedToID:
+			if ([request.options.requestName isEqualToString:@"contactAssignmentFilter"]) {
 				
-				id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromFields:responseObject];
+				[arrayOfResponseObjects enumerateObjectsUsingBlock:^(id responseObject, NSUInteger index, BOOL *stop) {
+					
+					id modelObject = [MHModel newObjectForClass:[request.options classNameFromEndpoint:MHRequestOptionsEndpointPeople]
+													 fromFields:[responseObject objectForKey:[request.options stringFromInclude:MHRequestOptionsIncludeConactAssignmentsPerson]]];
+					
+					[modelArray addObject:modelObject];
+					
+				}];
 				
-				[modelArray addObject:modelObject];
+			} else {
+			
+				[arrayOfResponseObjects enumerateObjectsUsingBlock:^(id responseObject, NSUInteger index, BOOL *stop) {
+					
+					id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromFields:responseObject];
+					
+					[modelArray addObject:modelObject];
+					
+				}];
 				
-			}];
+			}
 			
 		} else {
 			
