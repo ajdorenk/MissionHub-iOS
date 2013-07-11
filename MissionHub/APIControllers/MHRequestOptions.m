@@ -89,6 +89,30 @@
 	return self;
 }
 
+-(id)copy {
+	
+	MHRequestOptions *returnObject = [[MHRequestOptions alloc] init];
+	
+	returnObject.requestName	= self.requestName;
+	returnObject.type			= self.type;
+	returnObject.endpoint		= self.endpoint;
+	returnObject.remoteID		= self.remoteID;
+	
+	returnObject.filters		= [NSMutableDictionary dictionaryWithDictionary:self.filters];
+	returnObject.includes		= [[NSMutableIndexSet alloc] initWithIndexSet:self.includes];
+	
+	returnObject.limit			= self.limit;
+	returnObject.offset			= self.offset;
+	returnObject.order			= self.order;
+	
+	returnObject.successBlock	= self.successBlock;
+	returnObject.failBlock		= self.failBlock;
+	
+	returnObject.postParams		= [NSMutableDictionary dictionaryWithDictionary:self.postParams];
+	
+	return returnObject;
+}
+
 -(BOOL)hasRemoteID {
 	return (self.remoteID > 0);
 }
@@ -404,7 +428,7 @@
 	
 	[self.filters enumerateKeysAndObjectsUsingBlock:^(NSString *filter, NSString *value, BOOL *stop) {
 		
-		filterString = [filterString stringByAppendingFormat:@"&filters[%@]=%@", filter, value];
+		filterString = [filterString stringByAppendingFormat:@"&filters[%@]=%@", filter, [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 		
 	}];
 	

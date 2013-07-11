@@ -12,7 +12,9 @@
 #import "MHInteraction.h"
 #import "MHOrganization.h"
 #import "MHOrganizationalLabel.h"
+#import "MHLabel.h"
 #import "MHOrganizationalPermission.h"
+#import "MHPermissionLevel.h"
 #import "MHPerson.h"
 #import "MHPhoneNumber.h"
 #import "MHSurvey.h"
@@ -21,5 +23,9 @@
 @interface MHPerson (Helper)
 
 -(NSString *)fullName;
+-(NSString *)primaryEmail;
+-(NSString *)primaryPhone;
+-(NSString *)followupStatus;
+-(NSString *)permissionName;
 
 @end

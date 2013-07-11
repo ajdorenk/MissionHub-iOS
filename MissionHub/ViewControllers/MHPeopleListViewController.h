@@ -12,14 +12,19 @@
 #import "ODRefreshControl.h"
 #import "MHRequestOptions.h"
 
-@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate> {
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate> {
 
 	NSMutableArray *_peopleArray;
-	NSMutableDictionary *_loadingRequestDictionary;
+	NSMutableArray *_searchResultArray;
 	MHRequestOptions *_requestOptions;
+	MHRequestOptions *_searchRequestOptions;
 	ODRefreshControl *_refreshController;
 	BOOL _isLoading;
+	BOOL _refreshIsLoading;
+	BOOL _pagingIsLoading;
 	BOOL _hasLoadedAllPages;
+	BOOL _searchIsLoading;
+	BOOL _searchHasLoadedAllPages;
 	UIView *_header;
 	
 }
@@ -33,11 +38,17 @@
 
 @property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
 @property (nonatomic, strong) NSMutableArray *peopleArray;
-@property (nonatomic, strong) NSMutableDictionary *loadingRequestDictionary;
+@property (nonatomic, strong) NSMutableArray *searchResultArray;
 @property (nonatomic, strong) MHRequestOptions *requestOptions;
+@property (nonatomic, strong) MHRequestOptions *searchRequestOptions;
 @property (nonatomic, strong) ODRefreshControl *refreshController;
 @property (nonatomic, assign) BOOL isLoading;
+@property (nonatomic, assign) BOOL refreshIsLoading;
+@property (nonatomic, assign) BOOL pagingIsLoading;
 @property (nonatomic, assign) BOOL hasLoadedAllPages;
+@property (nonatomic, assign) BOOL searchIsLoading;
+@property (nonatomic, assign) BOOL searchPagingIsLoading;
+@property (nonatomic, assign) BOOL searchHasLoadedAllPages;
 @property (nonatomic, strong) UIView *header;
 
 - (IBAction)revealMenu:(id)sender;

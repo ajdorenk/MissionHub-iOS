@@ -28,21 +28,28 @@
 @implementation MHPeopleListViewController
 
 @synthesize peopleSearchBar;
-@synthesize peopleArray = _peopleArray;
-@synthesize loadingRequestDictionary = _loadingRequestDictionary;
-@synthesize requestOptions = _requestOptions;
-@synthesize refreshController = _refreshController;
-@synthesize isLoading = _isLoading;
-@synthesize hasLoadedAllPages = _hasLoadedAllPages;
-@synthesize header = _header;
+@synthesize peopleArray				= _peopleArray;
+@synthesize searchResultArray		= _searchResultArray;
+@synthesize requestOptions			= _requestOptions;
+@synthesize searchRequestOptions	= _searchRequestOptions;
+@synthesize refreshController		= _refreshController;
+@synthesize isLoading				= _isLoading;
+@synthesize refreshIsLoading		= _refreshIsLoading;
+@synthesize pagingIsLoading			= _pagingIsLoading;
+@synthesize hasLoadedAllPages		= _hasLoadedAllPages;
+@synthesize searchIsLoading			= _searchIsLoading;
+@synthesize searchPagingIsLoading	= _searchPagingIsLoading;
+@synthesize searchHasLoadedAllPages	= _searchHasLoadedAllPages;
+@synthesize header					= _header;
 
 -(void)awakeFromNib {
 	
 	[super awakeFromNib];
 	
 	self.peopleArray = [NSMutableArray array];
-	self.loadingRequestDictionary = [NSMutableDictionary dictionary];
+	self.searchResultArray = [NSMutableArray array];
 	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
+	self.searchRequestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	
 	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
     sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
@@ -180,6 +187,69 @@
 
 }
 
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+	
+	if ([searchString length] > 2) {
+		
+		[self.searchRequestOptions updateFilter:MHRequestOptionsFilterPeopleNameOrEmailLike withValue:searchString];
+		self.searchHasLoadedAllPages = NO;
+		self.searchIsLoading = YES;
+		
+		[[MHAPI sharedInstance] getResultWithOptions:self.searchRequestOptions
+										successBlock:^(NSArray *result, MHRequestOptions *options) {
+											
+											self.searchIsLoading = NO;
+											if (options.limit > 0) {
+												self.searchHasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+											} else {
+												self.searchHasLoadedAllPages = YES;
+											}
+											
+											
+											if ([result count] == 0) {
+												[self.searchResultArray removeAllObjects];
+											} else {
+												self.searchResultArray =  [NSMutableArray arrayWithArray:result];
+											}
+											
+											[self.searchDisplayController.searchResultsTableView reloadData];
+											
+											
+										}
+										   failBlock:^(NSError *error, MHRequestOptions *options) {
+											   
+											   NSString *errorMessage = [NSString stringWithFormat:@"Failed to refresh results due to: \"%@\". Try again by pulling down on the list. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+											   NSError *presentingError = [NSError errorWithDomain:error.domain
+																							  code:error.code
+																						  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+											   
+											   [MHErrorHandler presentError:presentingError];
+											   self.searchIsLoading = NO;
+											   [self.searchDisplayController.searchResultsTableView reloadData];
+											   
+										   }];
+	}
+
+	return NO;
+}
+
+-(void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller {
+	
+	[self.searchResultArray removeAllObjects];
+	self.searchRequestOptions		= [self.requestOptions copy];
+	self.searchIsLoading			= NO;
+	self.searchHasLoadedAllPages	= NO;
+	self.searchRequestOptions.offset = 0;
+	self.searchRequestOptions.limit = 0;
+	
+}
+
+-(void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
+	
+	[self.tableView reloadData];
+	
+}
+
 -(void)refresh {
 	
 	[self.refreshController beginRefreshing];
@@ -190,7 +260,7 @@
 - (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
 {
 	self.hasLoadedAllPages = NO;
-	self.isLoading = YES;
+	self.refreshIsLoading = YES;
 	[self.tableView reloadData];
 	
 	[self.requestOptions resetPaging];
@@ -198,12 +268,17 @@
     [[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
 									successBlock:^(NSArray *result, MHRequestOptions *options) {
 		
-									 self.isLoading = NO;
-									 self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+										self.refreshIsLoading = NO;
+										if (options.limit > 0) {
+											self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+										} else {
+											self.hasLoadedAllPages = YES;
+										}
 									 
-									 self.peopleArray =  [NSMutableArray arrayWithArray:result];
-									 [self.tableView reloadData];
-									 [self.refreshController endRefreshing];
+									 
+										self.peopleArray =  [NSMutableArray arrayWithArray:result];
+										[self.tableView reloadData];
+										[self.refreshController endRefreshing];
 									 
 									 
 	}
@@ -215,7 +290,7 @@
 																					   userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
 											
 											[MHErrorHandler presentError:presentingError];
-											self.isLoading = NO;
+											self.refreshIsLoading = NO;
 											[self.tableView reloadData];
 											[self.refreshController endRefreshing];
 		
@@ -232,6 +307,12 @@
 	
 	self.requestOptions = (options ? options : [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]);
 	self.isLoading = NO;
+	self.refreshIsLoading = NO;
+	self.searchIsLoading = NO;
+	self.pagingIsLoading = NO;
+	self.searchPagingIsLoading = NO;
+	self.searchHasLoadedAllPages = NO;
+	[self.searchResultArray removeAllObjects];
 	
 	if (dataArray == nil) {
 		
@@ -337,8 +418,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+	
 	// Return the number of rows in the section.
-	return [self.peopleArray count] + 1;
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+		
+		return [self.searchResultArray count] + 1;
+		
+	} else {
+		
+		return [self.peopleArray count] + 1;
+		
+	}
 
 }
 
@@ -349,53 +439,103 @@
 	//NSLog(@"%f : %f", self.tableView.frame.size.width, self.tableView.frame.size.height);
 	//NSLog(@"%f, %f, %f, %f, %f", self.searchDisplayController.searchBar.frame.size.height, ROW_HEIGHT, HEADER_HEIGHT,  self.tableView.frame.size.height, self.tableView.contentSize.height);
 	
-	if (indexPath.row < [self.peopleArray count]) {
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
 		
-        static NSString *CellIdentifier = @"MHPersonCell";
-        MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-		// Configure the cell...
-			if (cell == nil) {
-				cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-			}
-		
-		MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
-			//Display person in the table cell
-		
-		[cell populateWithPerson:person];
-    
-        return cell;
-		
-	} else {
-		
-		static NSString *CellIdentifier = @"MHLoadingCell";
-        MHLoadingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		static NSString *CellIdentifier = @"MHCell";
+		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		
 		// Configure the cell...
 		if (cell == nil) {
-			cell = [[MHLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		}
 		
-		if (self.hasLoadedAllPages) {
+		if (indexPath.row < [self.searchResultArray count]) {
+		
+			MHPerson *person = [self.searchResultArray objectAtIndex:indexPath.row];
+			//Display person in the table cell
 			
-			[cell showFinishedMessage];
+			cell.textLabel.text = [person fullName];
+			cell.detailTextLabel.text = [person primaryEmail];
 			
 		} else {
 			
-			if (self.refreshController.refreshing) {
+			
+			cell.textLabel.textAlignment = NSTextAlignmentCenter;
+			cell.detailTextLabel.text = @"";
+			
+			if (self.searchHasLoadedAllPages) {
 				
-				[cell hideFinishedMessage];
-				[cell stopLoading];
+				cell.textLabel.text = @"All results have been loaded";
 				
 			} else {
 				
-				[cell startLoading];
+				if (self.refreshController.refreshing) {
+					
+					cell.textLabel.text = @"";
+					
+				} else {
+					
+					cell.textLabel.text = @"Loading...";
+					
+				}
 				
 			}
 			
 		}
 		
-        return cell;
+		return cell;
+		
+	} else {
+	
+		if (indexPath.row < [self.peopleArray count]) {
+			
+			static NSString *CellIdentifier = @"MHPersonCell";
+			MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		
+			// Configure the cell...
+				if (cell == nil) {
+					cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+				}
+			
+			MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
+				//Display person in the table cell
+			
+			[cell populateWithPerson:person];
+		
+			return cell;
+			
+		} else {
+			
+			static NSString *CellIdentifier = @"MHLoadingCell";
+			MHLoadingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			
+			// Configure the cell...
+			if (cell == nil) {
+				cell = [[MHLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+			}
+			
+			if (self.hasLoadedAllPages) {
+				
+				[cell showFinishedMessage];
+				
+			} else {
+				
+				if (self.refreshController.refreshing) {
+					
+					[cell hideFinishedMessage];
+					[cell stopLoading];
+					
+				} else {
+					
+					[cell startLoading];
+					
+				}
+				
+			}
+			
+			return cell;
+		}
+		
 	}
     
 }
@@ -404,34 +544,139 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return self.header;
+	
+	if (tableView == self.searchDisplayController.searchResultsTableView) {
+		return nil;
+	} else {
+		return self.header;
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return HEADER_HEIGHT;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+		return 0;
+	} else {
+		return HEADER_HEIGHT;
+	}
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return ROW_HEIGHT;
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	
+	// UITableView only moves in one direction, y axis
+	NSInteger currentOffset = scrollView.contentOffset.y;
+	NSInteger maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+	
+	// Change 10.0 to adjust the distance from bottom
+	if (maximumOffset - currentOffset > 0.0 && maximumOffset - currentOffset <= 5.0f * ROW_HEIGHT) {
+		
+		if ([scrollView isEqual:self.tableView] && !self.hasLoadedAllPages && !self.pagingIsLoading) {
+				
+			[self.requestOptions configureForNextPageRequest];
+			
+			self.pagingIsLoading = YES;
+			
+			[[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
+											successBlock:^(NSArray *result, MHRequestOptions *options) {
+												
+												//remove loading cell if it has been displayed
+												self.pagingIsLoading = NO;
+												
+												if (options.limit > 0) {
+													self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+												} else {
+													self.hasLoadedAllPages = YES;
+												}
+												
+												
+												//update array with results
+												[self.peopleArray addObjectsFromArray:result];
+												[self.tableView reloadData];
+												
+											}
+											   failBlock:^(NSError *error, MHRequestOptions *options) {
+												   
+												   NSString *errorMessage = [NSString stringWithFormat:@"Failed to retreive more results due to: \"%@\". Try again by scrolling up and scrolling back down. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+												   NSError *presentingError = [NSError errorWithDomain:error.domain
+																								  code:error.code
+																							  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+												   
+												   [MHErrorHandler presentError:presentingError];
+												   
+												   self.pagingIsLoading = NO;
+												   [self.tableView reloadData];
+												   
+											   }];
+				
+		}
+		
+		if ([scrollView isEqual:self.searchDisplayController.searchResultsTableView] && !self.searchHasLoadedAllPages && !self.searchPagingIsLoading) {
+			
+			[self.searchRequestOptions configureForNextPageRequest];
+			
+			self.searchPagingIsLoading = YES;
+			
+			[[MHAPI sharedInstance] getResultWithOptions:self.searchRequestOptions
+											successBlock:^(NSArray *result, MHRequestOptions *options) {
+												
+												//remove loading cell if it has been displayed
+												self.searchPagingIsLoading = NO;
+												
+												if (options.limit > 0) {
+													self.searchHasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+												} else {
+													self.searchHasLoadedAllPages = YES;
+												}
+												
+												
+												//update array with results
+												if ([result count] == 0) {
+													[self.searchResultArray removeAllObjects];
+												} else {
+													self.searchResultArray =  [NSMutableArray arrayWithArray:result];
+												}
+												[self.searchDisplayController.searchResultsTableView reloadData];
+												
+											}
+											   failBlock:^(NSError *error, MHRequestOptions *options) {
+												   
+												   NSString *errorMessage = [NSString stringWithFormat:@"Failed to retreive more results due to: \"%@\". Try again by scrolling up and scrolling back down. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+												   NSError *presentingError = [NSError errorWithDomain:error.domain
+																								  code:error.code
+																							  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+												   
+												   [MHErrorHandler presentError:presentingError];
+												   
+												   self.searchPagingIsLoading = NO;
+												   [self.searchDisplayController.searchResultsTableView reloadData];
+												   
+											   }];
+			
+		}
+		
+	}
+	
+}
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	if (!self.hasLoadedAllPages && !self.isLoading) {
+	/*
+	if (tableView == self.tableView && !self.hasLoadedAllPages && !self.pagingIsLoading) {
 		
 		if (indexPath.row + 5 >= [self.peopleArray count]) {
 			
 			[self.requestOptions configureForNextPageRequest];
 
-			self.isLoading = YES;
+			self.pagingIsLoading = YES;
 			
 			[[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
 											successBlock:^(NSArray *result, MHRequestOptions *options) {
 											 
 											 //remove loading cell if it has been displayed
-											 self.isLoading = NO;
+											 self.pagingIsLoading = NO;
 											 
 											 self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
 											 
@@ -449,7 +694,7 @@
 													
 													[MHErrorHandler presentError:presentingError];
 													
-													self.isLoading = NO;
+													self.pagingIsLoading = NO;
 													[self.tableView reloadData];
 												
 											}];
@@ -458,6 +703,49 @@
 		
 	}
 	
+	if (tableView == self.searchDisplayController.searchResultsTableView && !self.searchHasLoadedAllPages && !self.searchPagingIsLoading) {
+		
+		if (indexPath.row + 5 >= [self.searchResultArray count]) {
+			
+			[self.searchRequestOptions configureForNextPageRequest];
+			
+			self.searchPagingIsLoading = YES;
+			
+			[[MHAPI sharedInstance] getResultWithOptions:self.searchRequestOptions
+											successBlock:^(NSArray *result, MHRequestOptions *options) {
+												
+												//remove loading cell if it has been displayed
+												self.searchPagingIsLoading = NO;
+												
+												self.searchHasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+												
+												//update array with results
+												if ([result count] == 0) {
+													[self.searchResultArray removeAllObjects];
+												} else {
+													self.searchResultArray =  [NSMutableArray arrayWithArray:result];
+												}
+												[self.searchDisplayController.searchResultsTableView reloadData];
+												
+											}
+											   failBlock:^(NSError *error, MHRequestOptions *options) {
+												   
+												   NSString *errorMessage = [NSString stringWithFormat:@"Failed to retreive more results due to: \"%@\". Try again by scrolling up and scrolling back down. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+												   NSError *presentingError = [NSError errorWithDomain:error.domain
+																								  code:error.code
+																							  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+												   
+												   [MHErrorHandler presentError:presentingError];
+												   
+												   self.searchPagingIsLoading = NO;
+												   [self.searchDisplayController.searchResultsTableView reloadData];
+												   
+											   }];
+			
+		}
+		
+	}
+	*/ 
 	
 }
  

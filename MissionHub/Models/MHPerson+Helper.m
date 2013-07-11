@@ -20,6 +20,59 @@
 	
 }
 
+-(NSString *)primaryEmail {
+	
+	__block NSString *returnString = @"";
+	
+	[self.emailAddresses enumerateObjectsUsingBlock:^(MHEmailAddress *emailAddress, BOOL *stop) {
+		
+		if ([[emailAddress primary] isEqualToNumber:[NSNumber numberWithInteger:1]]) {
+			returnString = [emailAddress email];
+		}
+		
+	}];
+	
+	return returnString;
+}
+
+-(NSString *)primaryPhone {
+	
+	__block NSString *returnString = @"";
+	
+	[self.phoneNumbers enumerateObjectsUsingBlock:^(MHPhoneNumber *phoneNumber, BOOL *stop) {
+		
+		if ([[phoneNumber primary] isEqualToNumber:[NSNumber numberWithInteger:1]]) {
+			returnString = [phoneNumber number];
+		}
+		
+	}];
+	
+	return returnString;
+}
+
+-(NSString *)followupStatus {
+	
+	return ( [self.permissionLevel followup_status] ? [self.permissionLevel followup_status] : @"");
+	
+}
+
+-(NSString *)permissionName {
+	
+	return ( [[self.permissionLevel permission] name] ? [[self.permissionLevel permission] name] : @"");
+	
+}
+
+-(NSArray *)fieldsForSorting {
+
+	return @[
+		  //@{@"local": @"first_name", @"filter": @"first_name", @"order": @"first_name"},
+		  //@{@"local": @"last_name", @"remote": @"last_name"},
+	@{@"local": @"gender", @"filter": @"gender", @"order": @"gender"},
+	@{@"local": @"followup_status", @"remote": @"followup_status"}
+		  ];
+	
+}
+
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
 	
 	if ([fieldName isEqualToString:@"interactions"]) {
