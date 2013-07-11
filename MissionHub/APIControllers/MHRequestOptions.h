@@ -67,16 +67,23 @@ typedef enum {
 } MHRequestOptionsIncludes;
 
 typedef enum {
+	MHRequestOptionsFilterPeopleIds,
 	MHRequestOptionsFilterPeopleLabels,
 	MHRequestOptionsFilterPeoplePermissions,
 	MHRequestOptionsFilterPeopleRoles,
+	MHRequestOptionsFilterPeopleInteractions,
 	MHRequestOptionsFilterPeopleSurveys,
 	MHRequestOptionsFilterPeopleFirstNameLike,
 	MHRequestOptionsFilterPeopleLastNameLike,
 	MHRequestOptionsFilterPeopleNameLike,
 	MHRequestOptionsFilterPeopleEmailLike,
 	MHRequestOptionsFilterPeopleNameOrEmailLike,
-	MHRequestOptionsFilterContactAssignmentsAssignedToId
+	MHRequestOptionsFilterPeopleGender,
+	MHRequestOptionsFilterPeopleFollowupStatus,
+	MHRequestOptionsFilterPeopleAssignedTo,
+	MHRequestOptionsFilterContactAssignmentsIds,
+	MHRequestOptionsFilterContactAssignmentsAssignedToId,
+	MHRequestOptionsFilterContactAssignmentsPersonId
 } MHRequestOptionsFilters;
 
 typedef enum {
@@ -131,7 +138,8 @@ typedef enum {
 -(BOOL)hasOrder;
 
 -(id)configureForInitialPeoplePageRequest;
--(id)configureForInitialContactAssignmentsPageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
+-(id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
+//-(id)configureForInitialContactAssignmentsPageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
 -(id)configureForMeRequest;
 -(id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID;
 -(id)configureForNextPageRequest;

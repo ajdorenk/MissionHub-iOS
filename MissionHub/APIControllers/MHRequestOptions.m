@@ -139,11 +139,19 @@
 
 -(id)configureForInitialPeoplePageRequest {
 	
-	[[[self reset] addIncludesForProfileRequest] setLimitAndOffsetForFirstPage];
+	[[[self reset] addIncludesForPeoplePageRequest] setLimitAndOffsetForFirstPage];
 	
 	return self;
 }
 
+-(id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID {
+	
+	[[[[self reset] addIncludesForPeoplePageRequest] setLimitAndOffsetForFirstPage] addFilter:MHRequestOptionsFilterPeopleAssignedTo withValue:[remoteAssignedToID stringValue]];
+	
+	return self;
+}
+
+/*
 -(id)configureForInitialContactAssignmentsPageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID {
 	
 	[[[[[self reset]
@@ -158,6 +166,7 @@
 	
 	return self;
 }
+ */
 
 -(id)configureForMeRequest {
 	
@@ -640,6 +649,27 @@
 			break;
 		case MHRequestOptionsFilterContactAssignmentsAssignedToId:
 			filterString = @"assigned_to_id";
+			break;
+		case MHRequestOptionsFilterContactAssignmentsIds:
+			filterString = @"ids";
+			break;
+		case MHRequestOptionsFilterContactAssignmentsPersonId:
+			filterString = @"person_id";
+			break;
+		case MHRequestOptionsFilterPeopleAssignedTo:
+			filterString = @"assigned_to";
+			break;
+		case MHRequestOptionsFilterPeopleFollowupStatus:
+			filterString = @"followup_status";
+			break;
+		case MHRequestOptionsFilterPeopleGender:
+			filterString = @"gender";
+			break;
+		case MHRequestOptionsFilterPeopleIds:
+			filterString = @"ids";
+			break;
+		case MHRequestOptionsFilterPeopleInteractions:
+			filterString = @"interactions";
 			break;
 			
 		default:

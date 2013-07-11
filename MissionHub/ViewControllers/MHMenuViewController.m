@@ -257,7 +257,7 @@
 				
 				[requestOptions configureForInitialPeoplePageRequest];
 				if ([objectForIndex isKindOfClass:[MHPerson class]]) {
-					[requestOptions configureForInitialContactAssignmentsPageRequestWithAssignedToID:
+					[requestOptions configureForInitialPeoplePageRequestWithAssignedToID:
 					 ((MHPerson *)objectForIndex).remoteID];
 				}
 				
