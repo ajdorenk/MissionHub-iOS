@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -432,6 +432,7 @@ select another survey.</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="peopleNavigationBar" destination="vaN-eV-ebr" id="mFZ-mj-2Ty"/>
                         <outlet property="peopleSearchBar" destination="PDp-cb-J1E" id="Dgp-aJ-J3F"/>
                         <outlet property="searchDisplayController" destination="60Z-WT-oZD" id="QhM-WT-rj6"/>
                     </connections>
@@ -832,6 +833,119 @@ select another survey.</string>
         <image name="BackMenu_Icon.png" width="72" height="72"/>
         <image name="MH_Logo.png" width="144" height="144"/>
     </resources>
+    <classes>
+        <class className="ECSlidingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
+        </class>
+        <class className="M6ParallaxController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/M6ParallaxController.h"/>
+        </class>
+        <class className="MHGenderListController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
+            <relationships>
+                <relationship kind="action" name="donePressed:"/>
+                <relationship kind="outlet" name="done" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="genderListCells" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="genderToolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MHInteractionInfoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInteractionInfoViewController.h"/>
+        </class>
+        <class className="MHLoadingCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoadingCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MHLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoginViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MHMenuToolbar" superclassName="UIToolbar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuToolbar.h"/>
+        </class>
+        <class className="MHMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuViewController.h"/>
+        </class>
+        <class className="MHNavigationViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNavigationViewController.h"/>
+        </class>
+        <class className="MHNewInteractionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNewInteractionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="comment" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="dateTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="initiator" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="interaction" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="receiver" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="visibility" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="MHParallaxTopViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHParallaxTopViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="menu" candidateClass="SDSegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="MHPeopleListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="peopleNavigationBar" candidateClass="UINavigationItem"/>
+                <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="MHPeopleSearchBar" superclassName="UISearchBar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleSearchBar.h"/>
+        </class>
+        <class className="MHPersonCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPersonCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkbox" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="gender" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameBackgroundView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MHProfileViewController" superclassName="M6ParallaxController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="controlSegmentSwitch:" candidateClass="SDSegmentedControl"/>
+                <relationship kind="outlet" name="switchViewControllers" candidateClass="SDSegmentedControl"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MHRootViewController" superclassName="ECSlidingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>
+        </class>
+        <class className="MHSegmentedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSegmentedViewController.h"/>
+        </class>
+        <class className="MHSurveyViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="topToolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SDSegmentedControl" superclassName="UISegmentedControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SDSegmentedControl.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -164,63 +164,6 @@
     UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
-
-	
-	MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
-	 @"last_name":@"Doe",
-	 @"gender":@"Male",
-	 @"year_in_school":@"Second Year",
-	 @"major":@" Philosophy",
-	 @"minor":@"Computer Science",
-	 @"birth_date":@"1982-07-07",
-	 @"date_became_christian":@"2000-01-01",
-	 @"graduation_date":@"2010-01-07",
-	 @"user_id":@12345,
-	 @"fb_uid":@123456,
-	 @"updated_at":@"2012-11-19T19:29:30:06:00",
-	 @"created_at":@"2002-11-28T00:00:00:06:00"
-	 }];
-
-	
-    MHPerson *person2 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"Bessie",
-                        @"last_name":@"Steinberg",
-                        @"gender":@"Female",
-                        @"year_in_school":@"Fourth Year",
-                        @"major":@" Philosophy",
-                        @"minor":@"Computer Engineering",
-                        @"birth_date":@"1992-06-07",
-                        @"date_became_christian":@"2000-01-01",
-                        @"graduation_date":@"2010-01-07",
-                        @"user_id":@12345,
-                        @"fb_uid":@123456,
-                        @"updated_at":@"2012-11-19T19:29:30:06:00",
-                        @"created_at":@"2002-11-28T00:00:00:06:00"
-                        }];
-    
-    
-    MHPerson *person3 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"Meagan",
-                        @"last_name":@"Moran",
-                        @"gender":@"Female",
-                        @"year_in_school":@"Fourth Year",
-                        @"major":@" Mechanical Engineering",
-                        @"minor":@"Innovation",
-                        @"birth_date":@"1992-06-07",
-                        @"date_became_christian":@"2000-01-01",
-                        @"graduation_date":@"2010-01-07",
-                        @"user_id":@12345,
-                        @"fb_uid":@123456,
-                        @"updated_at":@"2012-11-19T19:29:30:06:00",
-                        @"created_at":@"2002-11-28T00:00:00:06:00"
-                        }];
-    
-    
-  /*
-    self.persons = [NSArray arrayWithObjects:person1, person2, person3, person4, person5, person6, person7, person8, person9, person10, nil];
-    
-	self.persons = @[];
-    */
-    
-    self.peopleArray = [NSArray arrayWithObjects:person1, person2, person3, nil];
 	
 	/*
 	[[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -476,12 +419,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-
-	/*if (!self.hasLoadedAllPages && !self.isLoading) {
-=======
-	
 	if (!self.hasLoadedAllPages && !self.isLoading) {
->>>>>>> 5dc546d0a236924ef450e686922392183c41d260
 		
 		if (indexPath.row + 5 >= [self.peopleArray count]) {
 			
@@ -519,7 +457,6 @@
 		}
 		
 	}
-	*/
 	
 	
 }
