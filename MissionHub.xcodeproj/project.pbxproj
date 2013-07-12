@@ -151,6 +151,8 @@
 		68478DCE177E8CDC0014501D /* topbarTag_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DBA177E8CDC0014501D /* topbarTag_button.png */; };
 		68953EC21784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
 		68953EC31784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
+		6896649F17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
+		689664A017907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
 		68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */; };
 		68A68BD01787B2BF00927DF8 /* MHLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */; };
 		68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BD3178A192100927DF8 /* ODRefreshControl.m */; };
@@ -203,9 +205,7 @@
 		68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68EB33CE17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
-		68F310CB178F7B800036EA42 /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F310CA178F7B800036EA42 /* MHOrganization.m */; };
 		68F310CC178F7B800036EA42 /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F310CA178F7B800036EA42 /* MHOrganization.m */; };
-		68F310CF178F7B810036EA42 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F310CE178F7B810036EA42 /* MHPerson.m */; };
 		68F310D0178F7B810036EA42 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F310CE178F7B810036EA42 /* MHPerson.m */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
@@ -368,6 +368,8 @@
 		68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarOtherOptions_button.png; sourceTree = "<group>"; };
 		68478DBA177E8CDC0014501D /* topbarTag_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarTag_button.png; sourceTree = "<group>"; };
 		68953EC11784CD0100F0796C /* MH_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Logo.png; sourceTree = "<group>"; };
+		6896649D17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+removeDuplicatesForKey.h"; sourceTree = "<group>"; };
+		6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+removeDuplicatesForKey.m"; sourceTree = "<group>"; };
 		68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLoadingCell.h; path = "Custom UI/MHLoadingCell.h"; sourceTree = "<group>"; };
 		68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHLoadingCell.m; path = "Custom UI/MHLoadingCell.m"; sourceTree = "<group>"; };
 		68A68BD2178A192100927DF8 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
@@ -833,6 +835,8 @@
 				68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */,
 				68478D5C177BA8DF0014501D /* NSSet+MHSearchForRemoteID.h */,
 				68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */,
+				6896649D17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.h */,
+				6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1246,8 +1250,7 @@
 				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */,
 				AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
-				68F310CB178F7B800036EA42 /* MHOrganization.m in Sources */,
-				68F310CF178F7B810036EA42 /* MHPerson.m in Sources */,
+				6896649F17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1318,6 +1321,7 @@
 				AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
 				68F310CC178F7B800036EA42 /* MHOrganization.m in Sources */,
 				68F310D0178F7B810036EA42 /* MHPerson.m in Sources */,
+				689664A017907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

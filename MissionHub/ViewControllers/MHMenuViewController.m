@@ -14,6 +14,7 @@
 #import "MHLabel.h"
 #import "MHPerson+Helper.h"
 #import "MHSurvey.h"
+#import "NSMutableArray+removeDuplicatesForKey.h"
 
 @interface MHMenuViewController ()
 
@@ -138,6 +139,7 @@
 	
 	NSMutableArray *contactAssignmentsArray = [NSMutableArray arrayWithArray:adminArray];
 	[contactAssignmentsArray addObjectsFromArray:userArray];
+	contactAssignmentsArray = [contactAssignmentsArray arrayWithDuplicatesRemovedForKey:@"remoteID"];
 	
 	[self.menuItems replaceObjectAtIndex:2 withObject:[contactAssignmentsArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]]];
 	
