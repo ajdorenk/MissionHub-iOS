@@ -17,6 +17,12 @@
 @property (nonatomic, strong) IBOutlet UIButton *visibility;
 @property (nonatomic, strong) IBOutlet UIButton *dateTime;
 @property (nonatomic, strong) IBOutlet UITextField *comment;
+@property (nonatomic, strong) IBOutlet UIDatePicker *datePicker;
+@property (nonatomic, strong) IBOutlet UITextField *activeField;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIImagePickerController* imagePickerController;
+@property (nonatomic, strong) UIToolbar* pickerToolbar;
+@property (nonatomic, strong) UIActionSheet* pickerViewDate;
 
 
 @end

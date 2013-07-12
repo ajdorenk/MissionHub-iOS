@@ -225,6 +225,8 @@
 		AD3C60E3178B0F2A00744167 /* sectionHeaderLabels.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */; };
 		AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
 		AD3C60E6178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
+		AD75F7AA178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png in Resources */ = {isa = PBXBuildFile; fileRef = AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */; };
+		AD75F7AC178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png in Resources */ = {isa = PBXBuildFile; fileRef = AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */; };
 		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
 		AD982794177C9D6700A0276A /* MHParallaxTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHParallaxTopViewController.m */; };
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
@@ -487,6 +489,8 @@
 		AD3C60DB178761E100744167 /* MHInteractionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionInfoViewController.m; path = ViewControllers/MHInteractionInfoViewController.m; sourceTree = "<group>"; };
 		AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderLabels.png; sourceTree = "<group>"; };
 		AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
+		AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MH_Mobile_Button_Save_72.png; path = Resources/MH_Mobile_Button_Save_72.png; sourceTree = "<group>"; };
+		AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MH_Mobile_Button_Done_72.png; path = Resources/MH_Mobile_Button_Done_72.png; sourceTree = "<group>"; };
 		AD98278B177C93B400A0276A /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ViewControllers/MHProfileViewController.h; sourceTree = "<group>"; };
 		AD98278C177C93B400A0276A /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ViewControllers/MHProfileViewController.m; sourceTree = "<group>"; };
 		AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHParallaxTopViewController.h; path = ViewControllers/MHParallaxTopViewController.h; sourceTree = "<group>"; };
@@ -620,9 +624,11 @@
 		6839108F1760FD3100E01B46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
 				683AE393176D2DC20027EDE4 /* appicon.png */,
 				683AE394176D2DC20027EDE4 /* appicon-small@2x.png */,
+				AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */,
 				683AE395176D2DC20027EDE4 /* appicon-small.png */,
 				683AE396176D2DC20027EDE4 /* appicon-small-50.png */,
 				683AE397176D2DC20027EDE4 /* appicon-72.png */,
@@ -1097,6 +1103,8 @@
 				AD3C60E2178B0F2A00744167 /* sectionHeaderLabels.png in Resources */,
 				AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
 				AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png in Resources */,
+				AD75F7AA178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png in Resources */,
+				AD75F7AC178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

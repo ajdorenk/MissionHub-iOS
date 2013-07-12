@@ -10,4 +10,6 @@
 
 @interface MHGenericListViewController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UITableView* tableViewList;
+
 @end

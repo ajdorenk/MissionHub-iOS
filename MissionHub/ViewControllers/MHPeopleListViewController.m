@@ -135,7 +135,14 @@
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
 
-	
+    id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    
+    [barButtonAppearanceInSearchBar setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Button_Save_72.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+   /* [barButtonAppearanceInSearchBar setTitleTextAttributes:@{
+                                      UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20],
+                                 UITextAttributeTextColor : [UIColor blackColor]
+     } forState:UIControlStateNormal];*/
+    [barButtonAppearanceInSearchBar setTitle:@""];
 }
 
 - (void)viewDidLoad
