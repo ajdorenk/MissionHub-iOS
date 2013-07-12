@@ -57,6 +57,7 @@
 -(void)getLabelsForCurrentOrganizationWithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock;
 
 -(void)getProfileForRemoteID:(NSNumber *)remoteID WithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock;
+-(void)getInteractionsForPersonWithRemoteID:(NSNumber *)remoteID WithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock;
 
 -(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error;
 -(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error;

@@ -295,6 +295,14 @@ typedef enum {
 	
 }
 
+-(void)getInteractionsForPersonWithRemoteID:(NSNumber *)remoteID WithSuccessBlock:(void (^)(NSArray *, MHRequestOptions *))successBlock failBlock:(void (^)(NSError *, MHRequestOptions *))failBlock {
+	
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForInteractionRequestForPersonWithRemoteID:remoteID];
+	
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
 -(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error {
 	
 	NSString *urlString = [self surveyUrl];

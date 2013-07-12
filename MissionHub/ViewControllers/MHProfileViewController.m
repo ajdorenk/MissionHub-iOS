@@ -23,6 +23,8 @@
 
 @implementation MHProfileViewController
 
+@synthesize toolbar, table;
+@synthesize _person;
 //@synthesize addLabelButton, addTagButton, backMenuButton;
 @synthesize switchViewControllers;
 //@synthesize menu;
@@ -80,6 +82,18 @@
 
 }
 
+-(void)setPerson:(MHPerson *)person {
+	
+	if (person) {
+		
+		self._person = person;
+		
+		
+		
+	}
+	
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -124,6 +138,8 @@
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
     tapGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+	
+	self.person = [MHAPI sharedInstance].currentUser;
     
 }
 

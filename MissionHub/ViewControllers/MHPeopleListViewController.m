@@ -41,6 +41,7 @@
 @synthesize searchPagingIsLoading	= _searchPagingIsLoading;
 @synthesize searchHasLoadedAllPages	= _searchHasLoadedAllPages;
 @synthesize header					= _header;
+@synthesize _profileViewController;
 
 -(void)awakeFromNib {
 	
@@ -112,6 +113,18 @@
     [sectionHeader addSubview:allButton];
 	
 	self.header = sectionHeader;
+	
+}
+
+-(MHProfileViewController *)profileViewController {
+	
+	if (self._profileViewController == nil) {
+		
+		self._profileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileViewController"];
+		
+	}
+	
+	return self._profileViewController;
 	
 }
 
@@ -760,20 +773,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-       *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-    if(indexPath.row==0){
-            //[self performSegueWithIdentifier:@"MHSublabel" sender:self];
-        }
-
+    MHPerson *person;
+	
+	if (self.searchDisplayController.searchResultsTableView == tableView) {
+		
+		person = [self.searchResultArray objectAtIndex:indexPath.row];
+		
+	} else {
+		
+		person = [self.peopleArray objectAtIndex:indexPath.row];
+		
+	}
+	
+	[self profileViewController];
+	
+	[self.navigationController pushViewController:[self profileViewController] animated:YES];
     
 }
-
 
 
 //-(void)addPersonPressed:(id)sender

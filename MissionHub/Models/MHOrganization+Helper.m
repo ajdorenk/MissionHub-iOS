@@ -37,7 +37,7 @@
 			
 		}];
 		
-	} else if ([fieldName isEqualToString:@"leaders"]) {
+	} else if ([fieldName isEqualToString:@"users"]) {
 		
 		NSArray *arrayOfObjects = relationshipObject;
 		
@@ -45,7 +45,7 @@
 			
 			MHPerson *newObject = [MHPerson newObjectFromFields:object];
 			
-			[self addLeadersObject:newObject];
+			[self addUsersObject:newObject];
 			[self addPeopleObject:newObject];
 			
 		}];

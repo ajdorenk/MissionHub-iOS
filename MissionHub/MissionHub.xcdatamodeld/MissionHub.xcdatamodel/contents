@@ -63,9 +63,9 @@
         <relationship name="admins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="adminInOrganization" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="currentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="currentOrganization" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHLabel" inverseName="organizations" inverseEntity="MHLabel" syncable="YES"/>
-        <relationship name="leaders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="leaderInOrganization" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="allOrganizations" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="organization" inverseEntity="MHSurvey" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="userInOrganization" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
     <entity name="MHOrganizationalLabel" representedClassName="MHOrganizationalLabel" syncable="YES">
         <attribute name="added_by_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -125,13 +125,13 @@
         <relationship name="emailAddresses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHEmailAddress" inverseName="person" inverseEntity="MHEmailAddress" syncable="YES"/>
         <relationship name="initiatedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="initiators" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHOrganizationalLabel" inverseName="person" inverseEntity="MHOrganizationalLabel" syncable="YES"/>
-        <relationship name="leaderInOrganization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="leaders" inverseEntity="MHOrganization" syncable="YES"/>
         <relationship name="permissionLevel" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganizationalPermission" inverseName="person" inverseEntity="MHOrganizationalPermission" syncable="YES"/>
         <relationship name="phoneNumbers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPhoneNumber" inverseName="person" inverseEntity="MHPhoneNumber" syncable="YES"/>
         <relationship name="receivedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="receiver" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="people" inverseEntity="MHSurvey" syncable="YES"/>
         <relationship name="updatedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="updater" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHUser" inverseName="person" inverseEntity="MHUser" syncable="YES"/>
+        <relationship name="userInOrganization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="users" inverseEntity="MHOrganization" syncable="YES"/>
     </entity>
     <entity name="MHPhoneNumber" representedClassName="MHPhoneNumber" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
