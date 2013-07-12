@@ -13,15 +13,15 @@
 #import "MHAPI.h"
 #import "MHPerson+Helper.h"
 
-@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate>
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate,UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
+@property (retain, nonatomic) IBOutlet UITableView *table;
 @property (nonatomic, strong) MHPerson *_person;
 
 
 //@property (nonatomic, strong) IBOutlet SDSegmentedControl *menu;
 
-//-(void)cycleFromViewController:(UIViewController *)oldVC toViewController:(UIViewController*)newVC;
 
 - (IBAction)controlSegmentSwitch:(SDSegmentedControl *)segmentedControl;
 

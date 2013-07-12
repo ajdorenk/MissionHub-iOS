@@ -148,7 +148,14 @@
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
 
-	
+    id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    
+    [barButtonAppearanceInSearchBar setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Button_Save_72.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+   /* [barButtonAppearanceInSearchBar setTitleTextAttributes:@{
+                                      UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20],
+                                 UITextAttributeTextColor : [UIColor blackColor]
+     } forState:UIControlStateNormal];*/
+    [barButtonAppearanceInSearchBar setTitle:@""];
 }
 
 - (void)viewDidLoad
@@ -184,19 +191,6 @@
     UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
-	
-	/*
-	[[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-																								  [UIColor blueColor],
-																								  UITextAttributeTextColor,
-																								  [UIColor darkGrayColor],
-																								  UITextAttributeTextShadowColor,
-																								  [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-																								  UITextAttributeTextShadowOffset,
-																								  nil]
-																						forState:UIControlStateNormal];
-	 */
-
 
 }
 

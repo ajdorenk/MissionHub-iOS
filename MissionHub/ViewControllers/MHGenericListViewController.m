@@ -33,7 +33,22 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
+    
+    
+    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
+    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+    [backMenu setImage:menuImage forState:UIControlStateNormal];
+    [backMenu addTarget:self action:@selector(backToMenu:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
+    
+    self.navigationItem.leftBarButtonItem = backMenuButton;
+    self.tableViewList.layer.borderWidth = 1.0;
+    self.tableViewList.layer.borderColor = [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
+    
+    self.tableViewList.separatorColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -65,6 +80,11 @@
     // Configure the cell...
     
     return cell;
+}
+
+- (IBAction)backToMenu:(id)sender {
+    NSLog(@"works");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

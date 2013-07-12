@@ -23,6 +23,7 @@
 
 @implementation MHProfileViewController
 
+@synthesize toolbar, table;
 @synthesize _person;
 //@synthesize addLabelButton, addTagButton, backMenuButton;
 @synthesize switchViewControllers;
@@ -43,8 +44,7 @@
     
     // Ensure a view controller is loaded
     self.switchViewControllers.selectedSegmentIndex = 0;
-    //[self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.switchViewControllers.selectedSegmentIndex]];
-    
+     
    
     UIImage* newInteractionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
     UIButton *newInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
@@ -143,70 +143,14 @@
     
 }
 
-/*-(void)cycleFromViewController:(UIViewController *)oldVC
-             toViewController:(UIViewController*)newVC{
-    if (newVC == oldVC) return;
-    
-    if (newVC) {
-        newVC.view.frame = CGRectMake(CGRectGetMinX(self.view.bounds), CGRectGetMinY(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
-        
-
-            
-        if (oldVC) {
-            
-            // Start both the view controller transitions
-            [oldVC willMoveToParentViewController:nil];
-            [self addChildViewController:newVC];
-            
-            // Swap the view controllers
-            [self transitionFromViewController:oldVC
-                              toViewController:newVC
-                                      duration:0.25
-                                       options:UIViewAnimationOptionLayoutSubviews
-                                    animations:^{}
-                                    completion:^(BOOL finished) {
-                                        // Finish both the view controller transitions
-                                        [oldVC removeFromParentViewController];
-                                        [newVC didMoveToParentViewController:self];
-                                        // Store a reference to the current controller
-                                        self.currentViewController = newVC;
-                                    }];
-        
-        
-        } else {
-            
-            [self addChildViewController:newVC];
-            
-            // Add the new view controller view to the ciew hierarchy
-            [self.view addSubview:newVC.view];
-            
-            // End the view controller transition
-            [newVC didMoveToParentViewController:self];
-            
-            // Store a reference to the current controller
-            self.currentViewController = newVC;
-        }
-    }
-}
-
-- (IBAction)indexDidChangeForSegmentedControl:(UISegmentedControl *)sender {
-    
-    NSUInteger index = sender.selectedSegmentIndex;
-    NSLog(@"This is changing");
-    if (UISegmentedControlNoSegment != index) {
-        UIViewController *incomingViewController = [self.allViewControllers objectAtIndex:index];
-        [self cycleFromViewController:self.currentViewController toViewController:incomingViewController];
-    }
-    
-}
-*/
-
 
 - (IBAction)controlSegmentSwitch:(SDSegmentedControl *)segmentedControl{
     NSLog(@"Clicked");
 
     if (segmentedControl.selectedSegmentIndex == 0) {
         NSLog(@"switched");
+
+        
     }
     else{
     
