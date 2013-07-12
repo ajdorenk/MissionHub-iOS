@@ -2,7 +2,7 @@
 //  MHPerson.m
 //  MissionHub
 //
-//  Created by Michael Harrison on 7/1/13.
+//  Created by Michael Harrison on 7/11/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
@@ -39,6 +39,7 @@
 @dynamic year_in_school;
 @dynamic addresses;
 @dynamic adminInOrganization;
+@dynamic allOrganizationalPermissions;
 @dynamic allOrganizations;
 @dynamic assignedConacts;
 @dynamic assignedLeader;
@@ -47,13 +48,12 @@
 @dynamic emailAddresses;
 @dynamic initiatedInteractions;
 @dynamic labels;
-@dynamic leaderInOrganization;
+@dynamic userInOrganization;
 @dynamic permissionLevel;
 @dynamic phoneNumbers;
 @dynamic receivedInteractions;
 @dynamic surveys;
 @dynamic updatedInteractions;
 @dynamic user;
-@dynamic allOrganizationalPermissions;
 
 @end

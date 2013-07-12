@@ -33,7 +33,7 @@ typedef enum {
 
 typedef enum {
 	MHRequestOptionsIncludeOrganizationsAdmins,
-	MHRequestOptionsIncludeOrganizationsLeaders,
+	MHRequestOptionsIncludeOrganizationsUsers,
 	MHRequestOptionsIncludeOrganizationsNoPermissions,
 	MHRequestOptionsIncludeOrganizationsPeople,
 	MHRequestOptionsIncludeOrganizationsLabels,
@@ -81,6 +81,7 @@ typedef enum {
 	MHRequestOptionsFilterPeopleGender,
 	MHRequestOptionsFilterPeopleFollowupStatus,
 	MHRequestOptionsFilterPeopleAssignedTo,
+	MHRequestOptionsFilterInteractionsPeopleIds,
 	MHRequestOptionsFilterContactAssignmentsIds,
 	MHRequestOptionsFilterContactAssignmentsAssignedToId,
 	MHRequestOptionsFilterContactAssignmentsPersonId
@@ -144,6 +145,7 @@ typedef enum {
 -(id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID;
 -(id)configureForNextPageRequest;
 -(id)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
+-(id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID;
 
 -(id)addInclude:(MHRequestOptionsIncludes)include;
 -(id)addIncludesForProfileRequest;

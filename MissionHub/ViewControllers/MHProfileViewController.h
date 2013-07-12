@@ -10,10 +10,13 @@
 #import "M6ParallaxController.h"
 #import "SDSegmentedControl.h"
 #import "MHNewInteractionViewController.h"
+#import "MHAPI.h"
+#import "MHPerson+Helper.h"
 
 @interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
+@property (nonatomic, strong) MHPerson *_person;
 
 
 //@property (nonatomic, strong) IBOutlet SDSegmentedControl *menu;

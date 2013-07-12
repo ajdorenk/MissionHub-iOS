@@ -80,7 +80,7 @@
 - (void)awakeFromNib
 {
 	
-	self.menuHeaders	= @[@"", @"LABELS", @"LEADERS", @"SURVEYS", @"SETTINGS"];
+	self.menuHeaders	= @[@"", @"LABELS", @"CONTACT ASSIGNMENTS", @"SURVEYS", @"SETTINGS"];
 	self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"ALL CONTACTS"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"CHANGE ORGANIZATION", @"LOG OUT"]]];
 	
 	if ([MHAPI sharedInstance].currentUser) {
@@ -104,6 +104,7 @@
 	
 	self.user = currentUser;
 	
+	//setup labels array
 	if (currentUser.currentOrganization.labels) {
 		
 		NSArray *labelArray = [[currentUser.currentOrganization.labels allObjects]
@@ -119,18 +120,28 @@
 		
 	}
 	
-	if (currentUser.currentOrganization.leaders) {
+	//setup contact assignments array
+	NSArray *adminArray = @[];
+	NSArray *userArray = @[];
+	
+	if (currentUser.currentOrganization.admins) {
 		
-		NSArray *leaderArray = [[currentUser.currentOrganization.leaders allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
-		
-		[self.menuItems replaceObjectAtIndex:2 withObject:leaderArray];
-		
-	} else {
-		
-		[self.menuItems replaceObjectAtIndex:2 withObject:@[]];
+		adminArray = [currentUser.currentOrganization.admins allObjects];
 		
 	}
 	
+	if (currentUser.currentOrganization.users) {
+		
+		userArray = [currentUser.currentOrganization.users allObjects];
+		
+	}
+	
+	NSMutableArray *contactAssignmentsArray = [NSMutableArray arrayWithArray:adminArray];
+	[contactAssignmentsArray addObjectsFromArray:userArray];
+	
+	[self.menuItems replaceObjectAtIndex:2 withObject:[contactAssignmentsArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]]];
+	
+	//setup survey array
 	if (currentUser.currentOrganization.surveys) {
 		
 		NSArray *surveyArray = [[currentUser.currentOrganization.surveys allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];

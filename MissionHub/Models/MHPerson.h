@@ -2,7 +2,7 @@
 //  MHPerson.h
 //  MissionHub
 //
-//  Created by Michael Harrison on 7/1/13.
+//  Created by Michael Harrison on 7/11/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSString * year_in_school;
 @property (nonatomic, retain) NSSet *addresses;
 @property (nonatomic, retain) MHOrganization *adminInOrganization;
+@property (nonatomic, retain) NSSet *allOrganizationalPermissions;
 @property (nonatomic, retain) NSSet *allOrganizations;
 @property (nonatomic, retain) NSSet *assignedConacts;
 @property (nonatomic, retain) MHPerson *assignedLeader;
@@ -40,14 +41,13 @@
 @property (nonatomic, retain) NSSet *emailAddresses;
 @property (nonatomic, retain) NSSet *initiatedInteractions;
 @property (nonatomic, retain) NSSet *labels;
-@property (nonatomic, retain) MHOrganization *leaderInOrganization;
+@property (nonatomic, retain) MHOrganization *userInOrganization;
 @property (nonatomic, retain) MHOrganizationalPermission *permissionLevel;
 @property (nonatomic, retain) NSSet *phoneNumbers;
 @property (nonatomic, retain) NSSet *receivedInteractions;
 @property (nonatomic, retain) NSSet *surveys;
 @property (nonatomic, retain) NSSet *updatedInteractions;
 @property (nonatomic, retain) MHUser *user;
-@property (nonatomic, retain) NSSet *allOrganizationalPermissions;
 @end
 
 @interface MHPerson (CoreDataGeneratedAccessors)
@@ -56,6 +56,11 @@
 - (void)removeAddressesObject:(MHAddress *)value;
 - (void)addAddresses:(NSSet *)values;
 - (void)removeAddresses:(NSSet *)values;
+
+- (void)addAllOrganizationalPermissionsObject:(MHOrganizationalPermission *)value;
+- (void)removeAllOrganizationalPermissionsObject:(MHOrganizationalPermission *)value;
+- (void)addAllOrganizationalPermissions:(NSSet *)values;
+- (void)removeAllOrganizationalPermissions:(NSSet *)values;
 
 - (void)addAllOrganizationsObject:(MHOrganization *)value;
 - (void)removeAllOrganizationsObject:(MHOrganization *)value;
@@ -106,10 +111,5 @@
 - (void)removeUpdatedInteractionsObject:(MHInteraction *)value;
 - (void)addUpdatedInteractions:(NSSet *)values;
 - (void)removeUpdatedInteractions:(NSSet *)values;
-
-- (void)addAllOrganizationalPermissionsObject:(MHOrganizationalPermission *)value;
-- (void)removeAllOrganizationalPermissionsObject:(MHOrganizationalPermission *)value;
-- (void)addAllOrganizationalPermissions:(NSSet *)values;
-- (void)removeAllOrganizationalPermissions:(NSSet *)values;
 
 @end

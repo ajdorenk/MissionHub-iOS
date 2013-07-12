@@ -195,6 +195,13 @@
 	return self;
 }
 
+-(id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID {
+	
+	[[[self reset] addIncludesForInteractionsRequest] addFilter:MHRequestOptionsFilterInteractionsPeopleIds withValue:[personID stringValue]];
+	
+	return self;
+}
+
 -(id)configureForNextPageRequest {
 	
 	[self setLimitAndOffsetForNextPage];
@@ -210,6 +217,16 @@
 	
 }
 
+-(id)addIncludesForInteractionsRequest {
+	
+	[self addInclude:MHRequestOptionsIncludeInteractionsCreator];
+	[self addInclude:MHRequestOptionsIncludeInteractionsInitiators];
+	[self addInclude:MHRequestOptionsIncludeInteractionsInteractionType];
+	[self addInclude:MHRequestOptionsIncludeInteractionsLastUpdater];
+	
+	return self;
+}
+
 -(id)addIncludesForProfileRequest {
 	
 	
@@ -221,10 +238,6 @@
 	[self addInclude:MHRequestOptionsIncludePeopleEmailAddresses];
 	[self addInclude:MHRequestOptionsIncludePeoplePhoneNumbers];
 	[self addInclude:MHRequestOptionsIncludePeopleAddresses];
-	//[self addInclude:MHRequestOptionsIncludeInteractionsCreator];
-	//[self addInclude:MHRequestOptionsIncludeInteractionsInitiators];
-	//[self addInclude:MHRequestOptionsIncludeInteractionsInteractionType];
-	//[self addInclude:MHRequestOptionsIncludeInteractionsLastUpdater];
 	
 	
 	return self;
@@ -254,7 +267,7 @@
 -(id)addIncludesForOrganizationRequest {
 	
 	[self addInclude:MHRequestOptionsIncludeOrganizationsAdmins];
-	[self addInclude:MHRequestOptionsIncludeOrganizationsLeaders];
+	[self addInclude:MHRequestOptionsIncludeOrganizationsUsers];
 	[self addInclude:MHRequestOptionsIncludeOrganizationsSurveys];
 	[self addInclude:MHRequestOptionsIncludeOrganizationsLabels];
 	[self addInclude:MHRequestOptionsIncludeOrganizationsAllQuestions];
@@ -671,6 +684,9 @@
 		case MHRequestOptionsFilterPeopleInteractions:
 			filterString = @"interactions";
 			break;
+		case MHRequestOptionsFilterInteractionsPeopleIds:
+			filterString = @"people_ids";
+			break;
 			
 		default:
 			break;
@@ -706,8 +722,8 @@
 		case MHRequestOptionsIncludeOrganizationsSurveys:
 			includeString = @"surveys";
 			break;
-		case MHRequestOptionsIncludeOrganizationsLeaders:
-			includeString = @"leaders";
+		case MHRequestOptionsIncludeOrganizationsUsers:
+			includeString = @"users";
 			break;
 		case MHRequestOptionsIncludeOrganizationsLabels:
 			includeString = @"labels";

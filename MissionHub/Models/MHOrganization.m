@@ -2,7 +2,7 @@
 //  MHOrganization.m
 //  MissionHub
 //
-//  Created by Michael Harrison on 7/1/13.
+//  Created by Michael Harrison on 7/11/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
@@ -23,10 +23,10 @@
 @dynamic terminology;
 @dynamic updated_at;
 @dynamic admins;
-@dynamic labels;
-@dynamic leaders;
 @dynamic currentUser;
-@dynamic surveys;
+@dynamic labels;
+@dynamic users;
 @dynamic people;
+@dynamic surveys;
 
 @end

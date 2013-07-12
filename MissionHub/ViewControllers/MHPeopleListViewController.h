@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 #import "MHMenuViewController.h"
+#import "MHProfileViewController.h"
 #import "ODRefreshControl.h"
 #import "MHRequestOptions.h"
 
@@ -25,7 +26,10 @@
 	BOOL _hasLoadedAllPages;
 	BOOL _searchIsLoading;
 	BOOL _searchHasLoadedAllPages;
+	
+	//caching ui
 	UIView *_header;
+	
 	
 }
 
@@ -50,11 +54,13 @@
 @property (nonatomic, assign) BOOL searchPagingIsLoading;
 @property (nonatomic, assign) BOOL searchHasLoadedAllPages;
 @property (nonatomic, strong) UIView *header;
+@property (nonatomic, strong) MHProfileViewController *_profileViewController;
 
-- (IBAction)revealMenu:(id)sender;
+-(IBAction)revealMenu:(id)sender;
 -(void)refresh;
 -(void)setDataFromRequestOptions:(MHRequestOptions *)options;
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
+-(MHProfileViewController *)profileViewController;
 
 @end
 

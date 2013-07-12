@@ -203,6 +203,10 @@
 		68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68EB33CE17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
+		68F310CB178F7B800036EA42 /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F310CA178F7B800036EA42 /* MHOrganization.m */; };
+		68F310CC178F7B800036EA42 /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F310CA178F7B800036EA42 /* MHOrganization.m */; };
+		68F310CF178F7B810036EA42 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F310CE178F7B810036EA42 /* MHPerson.m */; };
+		68F310D0178F7B810036EA42 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F310CE178F7B810036EA42 /* MHPerson.m */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
 		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */; };
@@ -465,6 +469,10 @@
 		68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalLabel.m; path = Models/MHOrganizationalLabel.m; sourceTree = "<group>"; };
 		68EB33CB17792D8F003958A0 /* MHErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHErrorHandler.h; path = APIControllers/MHErrorHandler.h; sourceTree = "<group>"; };
 		68EB33CC17792D8F003958A0 /* MHErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHErrorHandler.m; path = APIControllers/MHErrorHandler.m; sourceTree = "<group>"; };
+		68F310C9178F7B7F0036EA42 /* MHOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHOrganization.h; path = MissionHub/Models/MHOrganization.h; sourceTree = "<group>"; };
+		68F310CA178F7B800036EA42 /* MHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganization.m; path = MissionHub/Models/MHOrganization.m; sourceTree = "<group>"; };
+		68F310CD178F7B810036EA42 /* MHPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPerson.h; path = MissionHub/Models/MHPerson.h; sourceTree = "<group>"; };
+		68F310CE178F7B810036EA42 /* MHPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPerson.m; path = MissionHub/Models/MHPerson.m; sourceTree = "<group>"; };
 		AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationBar.h; path = "Custom UI/MHCustomNavigationBar.h"; sourceTree = "<group>"; };
 		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
@@ -557,6 +565,10 @@
 			isa = PBXGroup;
 			children = (
 				6839108E1760FD3100E01B46 /* MissionHub */,
+				68F310CD178F7B810036EA42 /* MHPerson.h */,
+				68F310CE178F7B810036EA42 /* MHPerson.m */,
+				68F310C9178F7B7F0036EA42 /* MHOrganization.h */,
+				68F310CA178F7B800036EA42 /* MHOrganization.m */,
 				683910B01760FD3100E01B46 /* MissionHubTests */,
 				683910851760FD3100E01B46 /* Frameworks */,
 				683910841760FD3100E01B46 /* Products */,
@@ -1234,6 +1246,8 @@
 				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */,
 				AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
+				68F310CB178F7B800036EA42 /* MHOrganization.m in Sources */,
+				68F310CF178F7B810036EA42 /* MHPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1302,6 +1316,8 @@
 				68A68BD01787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD5178A192100927DF8 /* ODRefreshControl.m in Sources */,
 				AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
+				68F310CC178F7B800036EA42 /* MHOrganization.m in Sources */,
+				68F310D0178F7B810036EA42 /* MHPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -385,7 +385,6 @@ select another survey.</string>
                                     <outlet property="name" destination="3By-9J-vUT" id="cGg-Ie-2Qu"/>
                                     <outlet property="nameBackgroundView" destination="nSY-Po-gSd" id="AzC-f4-GDa"/>
                                     <outlet property="profilePicture" destination="K8Z-XT-I5E" id="iOp-zO-8HX"/>
-                                    <segue destination="Ouj-qm-W5z" kind="push" identifier="profileSegue" id="syz-c3-Kuo"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHLoadingCell" id="BxJ-9T-xEG" customClass="MHLoadingCell">
@@ -452,9 +451,9 @@ select another survey.</string>
         <!--Profile View Controller-->
         <scene sceneID="4dX-vL-b0e">
             <objects>
-                <viewController id="Ouj-qm-W5z" customClass="MHProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MHProfileViewController" id="Ouj-qm-W5z" customClass="MHProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SAh-gX-uak">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -895,12 +894,7 @@ select another survey.</string>
         <class className="MHPeopleListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
-                <relationship kind="action" name="addLabelActivity:"/>
-                <relationship kind="action" name="addPersonActivity:"/>
-                <relationship kind="action" name="checkAllContacts:" candidateClass="UIButton"/>
-                <relationship kind="action" name="chooseGender:"/>
                 <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="action" name="sortOnOff:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>
