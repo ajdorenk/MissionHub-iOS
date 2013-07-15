@@ -8,8 +8,10 @@
 
 #import "MHGenericListViewController.h"
 #import "MHPeopleListViewController.h"
-#import "MHPersonCell.h"
+#import "MHInitiatorCell.h"
 #import "MHPerson+Helper.h"
+
+#define ROW_HEIGHT 36.0f
 
 
 @interface MHGenericListViewController ()
@@ -20,16 +22,11 @@
 
 
 
+@synthesize selectionDelegate       = _selectionDelegate;
 @synthesize peopleArray				= _peopleArray;
+@synthesize initiatorPerson;
 
-/*- (void)handleChosenInitiator:(UIGestureRecognizer*)recognizer{
-    // Our delegate method is optional, so we should
-    // check that the delegate implements it
-    if ([self.delegate respondsToSelector:@selector(MHGenericListViewController:tableCellPressed:)]) {
-        [self.delegate MHGenericListViewController:self tableCellPressed:recognizer];
-    }
 
-}*/
 
 
 - (void)awakeFromNib {
@@ -41,8 +38,8 @@
 {
     [super viewDidLoad];
     
-	MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
-                        @"last_name":@"Doe",
+	MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"Shelby",
+                        @"last_name":@"Clarke",
                         @"gender":@"Male",
                         @"year_in_school":@"Second Year",
                         @"major":@" Philosophy",
@@ -97,7 +94,7 @@
     self.tableViewList.layer.borderWidth = 1.0;
     self.tableViewList.layer.borderColor = [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
     
-    self.tableViewList.separatorColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+    //self.tableViewList.separatorColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
 
 }
 
@@ -105,11 +102,9 @@
 -(void)setDataArray:(NSArray *)dataArray {
     
 	self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
-	[self.tableViewList reloadData];
+	//[self.tableViewList reloadData];
     
 }
-
-
 
 #pragma mark - Table view data source
 
@@ -123,43 +118,31 @@
 {
 	
     // Return the number of rows in the section.
-    return 2;
+    return [self.peopleArray count];
 }
 
-- (MHPersonCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (MHInitiatorCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"initiatorCell";
-    MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"MHInitiatorCell";
+    MHInitiatorCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     // Configure the cell...
 
     if (cell == nil) {
         
-        cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[MHInitiatorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
     }
-    
-    //UIGestureRecognizer *pressRecognizer = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(tableCellPressed:)];
-    //[cell addGestureRecognizer:pressRecognizer];
-    
+
     
     MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
-    [cell populateWithPerson:person];
+    [cell populateWithInitiator:person];
+
 
     
     return cell;
 }
 
-
-
-
-- (void)tableCellPressed:(UIGestureRecognizer *)recognizer{
-    
-    UITableViewCell *cell = (UITableViewCell *)[recognizer view];
-    text = cell.textLabel.text;
-    NSLog(@"pressed");
-
-}
 
 
 - (IBAction)backToMenu:(id)sender {
@@ -216,13 +199,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    self.initiatorPerson = [self.peopleArray objectAtIndex:indexPath.row];
+    
+    if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectPerson:)]) {
+        [self.selectionDelegate list:self didSelectPerson:initiatorPerson];
+    }
+    
 }
+
 
 @end

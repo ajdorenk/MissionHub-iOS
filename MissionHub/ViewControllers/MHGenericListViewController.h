@@ -9,19 +9,18 @@
 #import <UIKit/UIKit.h>
 @protocol MHGenericListViewControllerDelegate;
 
-@interface MHGenericListViewController : UIViewController
+@interface MHGenericListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
+    id<MHGenericListViewControllerDelegate> _selectionDelegate;
     NSString *text;
     NSMutableArray *_peopleArray;
 }
 
 @property (nonatomic, strong) IBOutlet UILabel *name;
-@property (nonatomic, weak) id<MHGenericListViewControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UITableView* tableViewList;
-//@property (nonatomic, strong) IBOutlet UITableViewCell* initiatorCell;
+@property (nonatomic, strong) id<MHGenericListViewControllerDelegate> selectionDelegate;
 @property (nonatomic, strong) NSMutableArray *peopleArray;
-
-- (IBAction)handleChosenInitiator:(id)sender;
+@property (nonatomic, strong) MHPerson *initiatorPerson;
 
 
 @end
@@ -29,7 +28,8 @@
 
 @protocol MHGenericListViewControllerDelegate <NSObject>
 
-- (void)MHGenericListViewController:(MHGenericListViewController*)viewController
-                    tableCellPressed:(UIGestureRecognizer*)recognizer;
+
+- (void)list:(MHGenericListViewController*)viewController didSelectPerson:(MHPerson *)person;
+
 
 @end

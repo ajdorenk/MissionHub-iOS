@@ -75,13 +75,13 @@
 
 
 -(void)populateWithPerson:(MHPerson *)person{
-//    person *person = [self.persons objectAtIndex:indexPath.row];
     
-    if (self.profilePicture.image == nil)
-    {
+    if (person.picture == nil) {
+		
         self.profilePicture.image = [UIImage imageNamed:@"MHPersonCell_Placeholder.png"];
         
     } else {
+		
         [self.profilePicture setImageWithURL:[NSURL URLWithString:person.picture]
 													  placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
     }

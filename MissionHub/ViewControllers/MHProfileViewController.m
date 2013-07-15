@@ -7,16 +7,28 @@
 //
 
 #import "MHProfileViewController.h"
-#import "MHParallaxTopViewController.h"
 //#import "MHNewInteractionViewController.h"
 //#import "MHCustomNavigationBar.h"
 
 
 @interface MHProfileViewController ()
 
-@property (nonatomic, strong) NSArray *allViewControllers;
-@property (nonatomic, strong) UIViewController *currentViewController;
-@property (nonatomic, strong) IBOutlet SDSegmentedControl *switchViewControllers;
+@property (nonatomic, strong) NSArray								*allViewControllers;
+@property (nonatomic, strong) UIViewController						*currentViewController;
+@property (nonatomic, strong) MHPerson								*_person;
+@property (nonatomic, strong) NSMutableArray						*_interactionArray;
+
+@property (nonatomic, strong) MHNewInteractionViewController		*_createInteractionViewController;
+@property (nonatomic, strong) MHProfileHeaderViewController			*_headerViewController;
+@property (nonatomic, strong) MHProfileMenuViewController			*_menuViewController;
+@property (nonatomic, strong) MHProfileInfoViewController			*_infoViewController;
+@property (nonatomic, strong) MHProfileInteractionsViewController	*_interactionsViewController;
+
+-(MHNewInteractionViewController *)createInteractionViewController;
+-(MHProfileHeaderViewController *)headerViewController;
+-(MHProfileMenuViewController *)menuViewController;
+-(MHProfileInfoViewController *)infoViewController;
+-(MHProfileInteractionsViewController *)interactionsViewController;
 
 @end
 
@@ -26,25 +38,31 @@
 @synthesize toolbar, table;
 @synthesize _person;
 //@synthesize addLabelButton, addTagButton, backMenuButton;
-@synthesize switchViewControllers;
 //@synthesize menu;
+@synthesize _interactionArray;
+
+-(void) awakeFromNib
+{
+	// Add A and B view controllers to the array
+    self.allViewControllers = @[[self infoViewController], [self interactionsViewController]];
+	
+    [[self menuViewController] setMenuSelection:0];
+	[[self menuViewController] setMenuDelegate:self];
+	
+	[self setupWithTopViewController:[self headerViewController]
+							  height:150
+				 tableViewController:[self infoViewController]
+			 segmentedViewController:[self menuViewController]];
+	
+	self._person = [MHAPI sharedInstance].currentUser;
+	self._interactionArray = [NSMutableArray array];
+    
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-
-    UITableViewController *vc1 = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController1"];
-    
-    // Create the penalty view controller
-    UITableViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController2"];
-    
-    // Add A and B view controllers to the array
-    self.allViewControllers = [[NSArray alloc] initWithObjects:vc1, vc2, nil];
-    
-    // Ensure a view controller is loaded
-    self.switchViewControllers.selectedSegmentIndex = 0;
-     
    
     UIImage* newInteractionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
     UIButton *newInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
@@ -77,9 +95,67 @@
     self.navigationItem.leftBarButtonItem = backMenuButton;
     
     [self.toolbar setTranslucent:YES];
-    
-    [self.switchViewControllers addTarget:self action:@selector(controlSegmentSwitch:) forControlEvents:UIControlEventValueChanged];
 
+}
+
+-(MHNewInteractionViewController *)createInteractionViewController {
+	
+	if (self._createInteractionViewController == nil) {
+		
+		self._createInteractionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+		
+	}
+	
+	return self._createInteractionViewController;
+	
+}
+
+-(MHProfileHeaderViewController *)headerViewController {
+	
+	if (self._headerViewController == nil) {
+		
+		self._headerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileHeaderViewController"];
+		
+	}
+	
+	return self._headerViewController;
+	
+}
+
+-(MHProfileMenuViewController *)menuViewController {
+	
+	if (self._menuViewController == nil) {
+		
+		self._menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileMenuViewController"];
+		
+	}
+	
+	return self._menuViewController;
+	
+}
+
+-(MHProfileInfoViewController *)infoViewController {
+	
+	if (self._infoViewController == nil) {
+		
+		self._infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileInfoViewController"];
+		
+	}
+	
+	return self._infoViewController;
+	
+}
+
+-(MHProfileInteractionsViewController *)interactionsViewController {
+	
+	if (self._interactionsViewController == nil) {
+		
+		self._interactionsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileInteractionsViewController"];
+		
+	}
+	
+	return self._interactionsViewController;
+	
 }
 
 -(void)setPerson:(MHPerson *)person {
@@ -87,90 +163,106 @@
 	if (person) {
 		
 		self._person = person;
+		[self refreshProfile];
 		
-		
+		[[MHAPI sharedInstance] getInteractionsForPersonWithRemoteID:person.remoteID
+													withSuccessBlock:^(NSArray *resultArray, MHRequestOptions *options) {
+														
+														[self._interactionArray removeAllObjects];
+														[[self._person mutableSetValueForKey:@"createdInteractions"] removeAllObjects];
+														[[self._person mutableSetValueForKey:@"initiatedInteractions"] removeAllObjects];
+														[[self._person mutableSetValueForKey:@"receivedInteractions"] removeAllObjects];
+														[[self._person mutableSetValueForKey:@"updatedInteractions"] removeAllObjects];
+														
+														[resultArray enumerateObjectsUsingBlock:^(id resultObject, NSUInteger index, BOOL *stop) {
+															
+															if ([resultObject isKindOfClass:[MHInteraction class]]) {
+																
+																MHInteraction *interactionObject = (MHInteraction *)resultObject;
+																
+																if (interactionObject.receiver && [[interactionObject.receiver remoteID] isEqualToNumber:[self._person remoteID]]) {
+																	
+																	[self._person addReceivedInteractionsObject:interactionObject];
+																	
+																}
+																
+																if (interactionObject.creator && [[interactionObject.creator remoteID] isEqualToNumber:[self._person remoteID]]) {
+																	
+																	[self._person addCreatedInteractionsObject:interactionObject];
+																	
+																}
+																
+																if (interactionObject.initiators && [interactionObject.initiators findWithRemoteID:[self._person remoteID]]) {
+																	
+																	[self._person addInitiatedInteractionsObject:interactionObject];
+																	
+																}
+																
+																if (interactionObject.updater && [[interactionObject.updater remoteID] isEqualToNumber:[self._person remoteID]]) {
+																	
+																	[self._person addUpdatedInteractionsObject:interactionObject];
+																	
+																}
+																
+																[self._interactionArray addObject:interactionObject];
+																
+															}
+															
+														}];
+														
+														[self refreshProfile];
+			
+		}
+														   failBlock:^(NSError *error, MHRequestOptions *options) {
+															   
+															   [MHErrorHandler presentError:error];
+			
+		}];
 		
 	}
 	
+}
+
+-(void)refreshProfile {
+	
+	[[self headerViewController] setProfileImageWithUrl:self._person.picture];
+	[[self headerViewController] setName:[self._person fullName]];
+	[[self headerViewController] setLabelListWithSetOfOrganizationalLabels:self._person.labels];
+	
+}
+
+-(void)willChangeHeightOfTopViewControllerFromHeight:(CGFloat)oldHeight toHeight:(CGFloat)newHeight {
+	
+	[[self headerViewController] resetLabelListSize];
+	
+}
+
+-(void)menuDidChangeSelection:(NSInteger)selection {
+	
+	[self switchTableViewController:[self.allViewControllers objectAtIndex:selection]];
+	
+}
+
+- (IBAction)backToMenu:(id)sender {
+	
+    [self.navigationController popViewControllerAnimated:YES];
+	
+ }
+
+- (IBAction)addLabelActivity:(id)sender {
+NSLog(@"add Person Action");
+}
+
+- (IBAction)newInteractionActivity:(id)sender {
+NSLog(@"Interaction Action");
+	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
+ 
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)backToMenu:(id)sender {
-    NSLog(@"works");
-    [self.navigationController popViewControllerAnimated:YES];
- }
-
- - (IBAction)addLabelActivity:(id)sender {
- NSLog(@"add Person Action");
- }
-
- - (IBAction)newInteractionActivity:(id)sender {
- NSLog(@"Interaction Action");
-     MHNewInteractionViewController *newInteraction = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
-     [self.navigationController pushViewController:newInteraction animated:YES];
-     
- }
-
- 
-
--(void) awakeFromNib
-{
-    MHParallaxTopViewController * topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ParallaxedViewController"];
-    UITableViewController * tableViewController1 = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController1"];
-    UITableViewController * tableViewController2 = [self.storyboard instantiateViewControllerWithIdentifier:@"MyTableViewController2"];
-    UITableViewController * segmentedViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"segmentedViewController"];
-    
-    if (self.switchViewControllers.selectedSegmentIndex == 0) {
-        [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController1 segmentedViewController:segmentedViewController];
-    }
-    else{
-        
-        [self setupWithTopViewController:topViewController height:150 tableViewController:tableViewController2 segmentedViewController:segmentedViewController];
-    }
-    
-    [self.switchViewControllers setUserInteractionEnabled:YES];
-    
-    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
-    tapGestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:tapGestureRecognizer];
-	
-	self.person = [MHAPI sharedInstance].currentUser;
-    
-}
-
-
-- (IBAction)controlSegmentSwitch:(SDSegmentedControl *)segmentedControl{
-    NSLog(@"Clicked");
-
-    if (segmentedControl.selectedSegmentIndex == 0) {
-        NSLog(@"switched");
-
-        
-    }
-    else{
-    
-    }
-}
-
-
-
-
-////////////////////////////////////////////////////////////////////////
-#pragma mark - TapGesture Delegate
-////////////////////////////////////////////////////////////////////////
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    CGPoint tapPoint = [touch locationInView:self.view];
-    if ([((MHParallaxTopViewController *)self.topViewController).menu hitTest:tapPoint withEvent:nil]) {
-        return YES;
-    }
-    return NO;
 }
 
 

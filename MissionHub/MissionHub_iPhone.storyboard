@@ -465,10 +465,10 @@ select another survey.</string>
             </objects>
             <point key="canvasLocation" x="1838" y="78"/>
         </scene>
-        <!--Interaction Info View Controller-->
+        <!--Profile Info View Controller-->
         <scene sceneID="heb-P2-t11">
             <objects>
-                <tableViewController storyboardIdentifier="MyTableViewController1" id="WO2-6D-Eg9" customClass="MHInteractionInfoViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MHProfileInfoViewController" id="WO2-6D-Eg9" customClass="MHProfileInfoViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yCY-PS-we8">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -514,10 +514,10 @@ select another survey.</string>
             </objects>
             <point key="canvasLocation" x="2284" y="78"/>
         </scene>
-        <!--Parallax Top View Controller-->
+        <!--Profile Header View Controller-->
         <scene sceneID="QDV-h9-D5P">
             <objects>
-                <viewController storyboardIdentifier="ParallaxedViewController" id="885-DX-ygV" customClass="MHParallaxTopViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MHProfileHeaderViewController" id="885-DX-ygV" customClass="MHProfileHeaderViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d7L-4O-FHc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -552,10 +552,10 @@ select another survey.</string>
             </objects>
             <point key="canvasLocation" x="2284" y="-273"/>
         </scene>
-        <!--Segmented View Controller-->
+        <!--Profile Menu View Controller-->
         <scene sceneID="WLs-va-hGv">
             <objects>
-                <viewController storyboardIdentifier="segmentedViewController" id="C9V-uh-Ef1" customClass="MHSegmentedViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MHProfileMenuViewController" id="C9V-uh-Ef1" customClass="MHProfileMenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="31a-Qu-Rtj">
                         <rect key="frame" x="0.0" y="20" width="320" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -600,7 +600,7 @@ select another survey.</string>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hvE-ds-j50">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hvE-ds-j50">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="93" type="user" id="4yf-xF-rWh"/>
                                 </constraints>
@@ -616,7 +616,7 @@ select another survey.</string>
                                 <color key="textColor" red="0.50196078431372548" green="0.50980392156862742" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkf-c5-mUi">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkf-c5-mUi">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="ihe-GK-4gP"/>
                                     <constraint firstAttribute="width" constant="266" id="lWx-gn-x5k"/>
@@ -629,9 +629,6 @@ select another survey.</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="qBe-dC-p5X" kind="push" id="UYZ-ZW-mP8"/>
-                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Interaction" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bf4-mB-TYI">
                                 <constraints>
@@ -649,7 +646,7 @@ select another survey.</string>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-rB-pPR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-rB-pPR">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="2BQ-uF-7p3"/>
                                 </constraints>
@@ -662,7 +659,7 @@ select another survey.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cd-FV-V8e">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cd-FV-V8e">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="QbN-mL-lcM"/>
                                 </constraints>
@@ -683,7 +680,7 @@ select another survey.</string>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zic-QC-ExT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zic-QC-ExT">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="hKf-G6-Ao5"/>
                                 </constraints>
@@ -814,7 +811,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="26" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qPu-Kw-IxY">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="36" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qPu-Kw-IxY">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="270" id="S0W-6X-3wM"/>
@@ -822,18 +819,38 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </constraints>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="UITableViewCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="genderCell" rowHeight="26" id="VW0-76-mIy">
-                                        <rect key="frame" x="0.0" y="22" width="270" height="26"/>
+                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHInitiatorCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHInitiatorCell" rowHeight="36" id="zYY-E1-ovd" customClass="MHInitiatorCell">
+                                        <rect key="frame" x="0.0" y="22" width="270" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="270" height="25"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="270" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="PersonName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ym-iE-aJw">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="26" id="YbZ-gD-P89"/>
+                                                        <constraint firstAttribute="width" constant="222" id="d6E-Hl-h11"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                                    <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="7ym-iE-aJw" firstAttribute="leading" secondItem="zYY-E1-ovd" secondAttribute="leading" constant="13" id="ASo-7C-OST"/>
+                                            <constraint firstItem="7ym-iE-aJw" firstAttribute="centerY" secondItem="zYY-E1-ovd" secondAttribute="centerY" type="default" id="gqe-bE-7Vz"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="name" destination="7ym-iE-aJw" id="r70-Rm-9xn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="delegate" destination="WwU-Jc-Wsx" id="qg8-j2-EhC"/>
+                                    <outlet property="dataSource" destination="qBe-dC-p5X" id="Hmb-5K-trB"/>
+                                    <outlet property="delegate" destination="qBe-dC-p5X" id="5wN-Cp-EH9"/>
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Initiator(s)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqa-GC-ZsQ">
@@ -863,10 +880,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3811" y="78"/>
         </scene>
-        <!--Interaction Info View Controller-->
+        <!--Profile Interactions View Controller-->
         <scene sceneID="Jl4-jg-SEQ">
             <objects>
-                <tableViewController storyboardIdentifier="MyTableViewController2" id="R0y-5R-HkQ" customClass="MHInteractionInfoViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MHProfileInteractionsViewController" id="R0y-5R-HkQ" customClass="MHProfileInteractionsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JET-KU-uh3">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -935,13 +952,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="MHGenericListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenericListViewController.h"/>
             <relationships>
-                <relationship kind="action" name="handleChosenInitiator:"/>
                 <relationship kind="outlet" name="name" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tableViewList" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="MHInteractionInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInteractionInfoViewController.h"/>
+        <class className="MHInitiatorCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInitiatorCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
         </class>
         <class className="MHLoadingCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoadingCell.h"/>
@@ -979,13 +998,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="visibility" candidateClass="UIButton"/>
             </relationships>
         </class>
-        <class className="MHParallaxTopViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHParallaxTopViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="menu" candidateClass="SDSegmentedControl"/>
-            </relationships>
-        </class>
         <class className="MHPeopleListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
@@ -1006,11 +1018,35 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
             </relationships>
         </class>
+        <class className="MHProfileHeaderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileHeaderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pageChanged:" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="headerPageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="headerScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="labelsListLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelsTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MHProfileInfoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileInfoViewController.h"/>
+        </class>
+        <class className="MHProfileInteractionsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileInteractionsViewController.h"/>
+        </class>
+        <class className="MHProfileMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileMenuViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="menuDidChangeSelection:"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="MHSegmentedControl"/>
+            </relationships>
+        </class>
         <class className="MHProfileViewController" superclassName="M6ParallaxController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="controlSegmentSwitch:" candidateClass="SDSegmentedControl"/>
-                <relationship kind="outlet" name="switchViewControllers" candidateClass="SDSegmentedControl"/>
                 <relationship kind="outlet" name="table" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
@@ -1018,8 +1054,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="MHRootViewController" superclassName="ECSlidingViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>
         </class>
-        <class className="MHSegmentedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSegmentedViewController.h"/>
+        <class className="MHSegmentedControl" superclassName="SDSegmentedControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSegmentedControl.h"/>
         </class>
         <class className="MHSurveyViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyViewController.h"/>

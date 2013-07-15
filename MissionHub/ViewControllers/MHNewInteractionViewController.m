@@ -114,7 +114,10 @@
     comment.layer.backgroundColor = [[UIColor whiteColor]CGColor];
     comment.layer.borderColor=[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor];
     comment.layer.borderWidth= 1.0f;
-        
+    //self.comment.textAlignment = UIEdgeInsetsMake(5, 5, 5, 5);
+
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -144,17 +147,17 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MHGenericListViewController *initiatorsViewController = [[MHGenericListViewController alloc] init];
-    // Assign self as the delegate for the child view controller
-    initiatorsViewController.delegate = self;
-    [self.navigationController pushViewController:initiatorsViewController animated:YES];
-}
 
+- (void) list:(MHGenericListViewController *)viewController didSelectPerson:(MHPerson *)person {
 
-- (void)MHGenericListViewController:(MHGenericListViewController *)viewController tableCellPressed:(UIGestureRecognizer *)recognizer{
     // Do something with value...
+
+    NSString *name = [person fullName];
     
+    [self.initiator setTitle:name forState:UIControlStateNormal];
+    self.initiator.titleLabel.font = [UIFont fontWithName:@"Arial-ItalicMT" size:14.0];
+    [self.initiator setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 0.0f)];
+    [self.initiator setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     // ...then dismiss the child view controller
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -208,6 +211,10 @@
 
 - (IBAction)chooseInitiator:(id)sender{
     
+    MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+    // Assign self as the delegate for the child view controller
+    initiatorsViewController.selectionDelegate = self;
+    [self.navigationController pushViewController:initiatorsViewController animated:YES];
     
 }
 

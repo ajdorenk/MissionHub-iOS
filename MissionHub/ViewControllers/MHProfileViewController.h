@@ -8,23 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "M6ParallaxController.h"
-#import "SDSegmentedControl.h"
+#import "MHProfileHeaderViewController.h"
+#import "MHProfileInfoViewController.h"
+#import "MHProfileInteractionsViewController.h"
+#import "MHProfileMenuViewController.h"
 #import "MHNewInteractionViewController.h"
 #import "MHAPI.h"
 #import "MHPerson+Helper.h"
 
-@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate,UITableViewDelegate, UITableViewDataSource>
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate,UITableViewDelegate, UITableViewDataSource, MHProfileMenuDelegate>
 
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 @property (retain, nonatomic) IBOutlet UITableView *table;
-@property (nonatomic, strong) MHPerson *_person;
 
-
-//@property (nonatomic, strong) IBOutlet SDSegmentedControl *menu;
-
-
-- (IBAction)controlSegmentSwitch:(SDSegmentedControl *)segmentedControl;
-
-
+-(void)setPerson:(MHPerson *)person;
+-(void)refreshProfile;
 
 @end

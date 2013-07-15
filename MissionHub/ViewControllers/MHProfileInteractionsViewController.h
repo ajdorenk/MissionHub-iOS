@@ -1,5 +1,5 @@
 //
-//  MHInteractionInfoViewController.h
+//  MHInteractionViewController.h
 //  MissionHub
 //
 //  Created by Amarisa Robison on 7/5/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MHInteractionInfoViewController : UITableViewController
+@interface MHProfileInteractionsViewController : UITableViewController
 
 @end
