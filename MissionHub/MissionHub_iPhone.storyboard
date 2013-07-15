@@ -533,14 +533,6 @@ select another survey.</string>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="None" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="WbA-kj-IUK">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" type="user" id="qEw-gu-Ven"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LABELS:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQz-Ig-NWc">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="88" id="fCo-hF-8cY"/>
@@ -550,17 +542,23 @@ select another survey.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwe-nM-s4X" customClass="DWTagList">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="81" type="user" id="pjy-KB-tY0"/>
+                                        </constraints>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="WbA-kj-IUK" firstAttribute="top" secondItem="CQz-Ig-NWc" secondAttribute="bottom" constant="5" type="user" id="2Bb-Ri-HC9"/>
-                                    <constraint firstItem="WbA-kj-IUK" firstAttribute="centerX" secondItem="CQz-Ig-NWc" secondAttribute="centerX" type="default" id="6de-jO-Ziy"/>
-                                    <constraint firstItem="WbA-kj-IUK" firstAttribute="leading" secondItem="Lt1-bG-LKp" secondAttribute="leading" type="user" id="78N-nc-Q89"/>
+                                    <constraint firstAttribute="bottom" secondItem="lwe-nM-s4X" secondAttribute="bottom" constant="4" type="user" id="KZO-Mm-JtS"/>
+                                    <constraint firstItem="lwe-nM-s4X" firstAttribute="leading" secondItem="HPf-dx-4kx" secondAttribute="leading" constant="10" type="user" id="PTG-wO-4KV"/>
                                     <constraint firstItem="Lt1-bG-LKp" firstAttribute="leading" secondItem="HPf-dx-4kx" secondAttribute="leading" type="user" id="ThQ-14-BfP"/>
-                                    <constraint firstItem="WbA-kj-IUK" firstAttribute="trailing" secondItem="Lt1-bG-LKp" secondAttribute="trailing" type="user" id="Ysk-jw-plh"/>
-                                    <constraint firstAttribute="centerY" secondItem="WbA-kj-IUK" secondAttribute="centerY" type="user" id="bT9-Ta-eCm"/>
+                                    <constraint firstItem="Lt1-bG-LKp" firstAttribute="centerX" secondItem="CQz-Ig-NWc" secondAttribute="centerX" type="user" id="YmR-fb-Xej"/>
+                                    <constraint firstItem="lwe-nM-s4X" firstAttribute="centerX" secondItem="CQz-Ig-NWc" secondAttribute="centerX" type="user" id="aAZ-vz-W3P"/>
                                     <constraint firstAttribute="trailing" secondItem="Lt1-bG-LKp" secondAttribute="trailing" type="user" id="hck-EY-PLK"/>
-                                    <constraint firstItem="Lt1-bG-LKp" firstAttribute="top" secondItem="WbA-kj-IUK" secondAttribute="bottom" constant="15" type="user" id="zEe-ej-rIb"/>
+                                    <constraint firstItem="lwe-nM-s4X" firstAttribute="top" secondItem="CQz-Ig-NWc" secondAttribute="bottom" constant="5" type="user" id="i75-DD-pD0"/>
+                                    <constraint firstAttribute="trailing" secondItem="lwe-nM-s4X" secondAttribute="trailing" constant="10" type="user" id="prV-VE-Y5Z"/>
+                                    <constraint firstItem="CQz-Ig-NWc" firstAttribute="top" secondItem="Lt1-bG-LKp" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="wzn-eF-KPe"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -582,7 +580,7 @@ select another survey.</string>
                     <connections>
                         <outlet property="contentView" destination="HPf-dx-4kx" id="Cd9-w7-c9O"/>
                         <outlet property="imageView" destination="LLB-CR-NGz" id="pZS-Z0-Yvh"/>
-                        <outlet property="labelsListLabel" destination="WbA-kj-IUK" id="S8L-oY-gay"/>
+                        <outlet property="labelList" destination="lwe-nM-s4X" id="8zJ-OQ-dsB"/>
                         <outlet property="labelsTitleLabel" destination="CQz-Ig-NWc" id="CW5-Gf-19R"/>
                         <outlet property="nameLabel" destination="Lt1-bG-LKp" id="0lM-iR-Pq6"/>
                     </connections>
@@ -603,6 +601,7 @@ select another survey.</string>
                                 <segments>
                                     <segment title="Info"/>
                                     <segment title="Interactions"/>
+                                    <segment title="Surveys"/>
                                 </segments>
                                 <connections>
                                     <action selector="menuDidChangeSelection:" destination="C9V-uh-Ef1" eventType="valueChanged" id="bQg-bw-Ewx"/>
@@ -613,7 +612,7 @@ select another survey.</string>
                         <constraints>
                             <constraint firstItem="za8-Bg-Sdf" firstAttribute="trailing" secondItem="31a-Qu-Rtj" secondAttribute="trailing" type="default" id="167-Da-peq"/>
                             <constraint firstItem="za8-Bg-Sdf" firstAttribute="leading" secondItem="31a-Qu-Rtj" secondAttribute="leading" type="default" id="T36-A4-pA4"/>
-                            <constraint firstItem="za8-Bg-Sdf" firstAttribute="top" secondItem="31a-Qu-Rtj" secondAttribute="top" type="default" id="zLv-rH-wLp"/>
+                            <constraint firstItem="za8-Bg-Sdf" firstAttribute="top" secondItem="31a-Qu-Rtj" secondAttribute="top" constant="-1" id="bFE-Ai-goN"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -875,7 +874,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="delegate" destination="WwU-Jc-Wsx" id="qg8-j2-EhC"/>
+                                    <outlet property="dataSource" destination="qBe-dC-p5X" id="ubM-w1-kYh"/>
+                                    <outlet property="delegate" destination="qBe-dC-p5X" id="QPd-Kg-8Xv"/>
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Initiator(s)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqa-GC-ZsQ">
@@ -958,141 +958,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="BackMenu_Icon.png" width="72" height="72"/>
         <image name="MH_Logo.png" width="144" height="144"/>
     </resources>
-    <classes>
-        <class className="ECSlidingViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
-        </class>
-        <class className="M6ParallaxController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/M6ParallaxController.h"/>
-        </class>
-        <class className="MHGenderListController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
-            <relationships>
-                <relationship kind="action" name="donePressed:"/>
-                <relationship kind="outlet" name="done" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="genderListCells" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="genderToolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="MHGenericListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenericListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableViewList" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MHLoadingCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoadingCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="messageView" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MHLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoginViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="MHMenuToolbar" superclassName="UIToolbar">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuToolbar.h"/>
-        </class>
-        <class className="MHMenuViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuViewController.h"/>
-        </class>
-        <class className="MHNavigationViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNavigationViewController.h"/>
-        </class>
-        <class className="MHNewInteractionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNewInteractionViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activeField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="comment" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="dateTime" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="initiator" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="interaction" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="receiver" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="visibility" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="MHPeopleListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="MHPeopleSearchBar" superclassName="UISearchBar">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleSearchBar.h"/>
-        </class>
-        <class className="MHPersonCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPersonCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="checkbox" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="gender" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameBackgroundView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="MHProfileHeaderViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileHeaderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pageChanged:" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="headerPageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="headerScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="labelsListLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelsTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MHProfileInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileInfoViewController.h"/>
-        </class>
-        <class className="MHProfileInteractionsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileInteractionsViewController.h"/>
-        </class>
-        <class className="MHProfileMenuViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileMenuViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="menuDidChangeSelection:"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="MHSegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="MHProfileViewController" superclassName="M6ParallaxController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="MHRootViewController" superclassName="ECSlidingViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>
-        </class>
-        <class className="MHSegmentedControl" superclassName="SDSegmentedControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSegmentedControl.h"/>
-        </class>
-        <class className="MHSurveyViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="messageView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="topToolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SDSegmentedControl" superclassName="UISegmentedControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SDSegmentedControl.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

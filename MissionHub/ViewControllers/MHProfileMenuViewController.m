@@ -48,6 +48,12 @@
 	
 }
 
+-(NSInteger)menuSelection {
+	
+	return self.segmentedControl.selectedSegmentIndex;
+	
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

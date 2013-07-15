@@ -37,8 +37,8 @@
     self.genderToolbar.layer.borderColor= [UIColor colorWithRed:155.0/255.0 green:155.0/255.0 blue:155.0/255.0 alpha:1].CGColor;
     */
     
-    self.genderListCells.layer.borderWidth = 1.0f;
-    self.genderListCells.layer.borderColor = [UIColor colorWithRed:214.0/255.0 green:214.0/255.0 blue:214.0/255.0 alpha:1].CGColor;
+    //self.genderListCells.layer.borderWidth = 1.0f;
+    //self.genderListCells.layer.borderColor = [UIColor colorWithRed:214.0/255.0 green:214.0/255.0 blue:214.0/255.0 alpha:1].CGColor;
     
 }
 - (void)awakeFromNib
@@ -106,7 +106,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row==0){
-        [self performSegueWithIdentifier:@"MHSublabel" sender:self];
+        //[self performSegueWithIdentifier:@"MHSublabel" sender:self];
     }
     
     

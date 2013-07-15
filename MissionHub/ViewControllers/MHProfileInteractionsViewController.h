@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHProfileProtocol.h"
 
-@interface MHProfileInteractionsViewController : UITableViewController
+@interface MHProfileInteractionsViewController : UITableViewController <MHProfileProtocol>
 
 @end

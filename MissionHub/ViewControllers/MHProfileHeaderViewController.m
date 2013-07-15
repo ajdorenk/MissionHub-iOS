@@ -9,12 +9,14 @@
 #import "MHProfileHeaderViewController.h"
 #import "MHProfileViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "DWTagList.h"
 
 #define GAP_BETWEEN_NAME_AND_LABEL_LIST 20.0f
 #define GAP_BETWEEN_LABEL_LIST_AND_LABEL_TITLE 10.0f
 
 @interface MHProfileHeaderViewController ()
 
+@property (strong, nonatomic) IBOutlet DWTagList *labelList;
 @property (strong, nonatomic) IBOutlet UIScrollView *headerScrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl *headerPageControl;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
@@ -65,6 +67,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)setPerson:(MHPerson *)person {
+	
+	[self setProfileImageWithUrl:person.picture];
+	[self setName:[person fullName]];
+	[self setLabelListWithSetOfOrganizationalLabels:person.labels];
+	
+}
+
 -(void)setProfileImageWithUrl:(NSString *)urlString {
 	
 	if (urlString == nil) {
@@ -89,7 +99,8 @@
 
 -(void)setLabelListWithSetOfOrganizationalLabels:(NSSet *)organizationalLabels {
 	
-	__block NSString *labelsString = @"";
+	//__block NSString *labelsString = @"";
+	__block NSMutableArray *labelArray = [NSMutableArray array];
 	
 	[organizationalLabels enumerateObjectsUsingBlock:^(id setObject, BOOL *stop) {
 		
@@ -99,13 +110,14 @@
 			MHLabel *labelFromOrganizationalLabel = [[MHAPI sharedInstance].currentUser.currentOrganization.labels findWithRemoteID:organizationalLabel.label_id];
 			
 			if (labelFromOrganizationalLabel != nil) {
-				labelsString = [labelsString stringByAppendingFormat:@"%@  •  ", labelFromOrganizationalLabel.name];
+				//labelsString = [labelsString stringByAppendingFormat:@"%@  •  ", labelFromOrganizationalLabel.name];
+				[labelArray addObject:labelFromOrganizationalLabel.name];
 			}
 			
 		}
 		
 	}];
-	
+	/*
 	if ([labelsString length] > 0) {
 		
 		labelsString = [labelsString substringToIndex:[labelsString rangeOfString:@"  •  " options:NSBackwardsSearch].location];
@@ -115,12 +127,30 @@
 		labelsString = @"None";
 		
 	}
+	*/
 	
-	self.labelsListLabel.text = labelsString;
+	 
+	//self.labelsListLabel.text = labelsString;
 	
-	[self resetLabelListSize];
+	//[self resetLabelListSize];
 	
+	if ([labelArray count] == 0) {
+		
+		[labelArray addObject:@"No Labels for Person"];
+		
+	}
+	/*
+	if (self.labelList != nil) {
+		
+		[self.labelList removeFromSuperview];
+		
+	}
 	
+	self.labelList = [[DWTagList alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.labelsTitleLabel.frame) + 5, CGRectGetWidth(self.view.frame) - 20, CGRectGetHeight(self.view.frame) - CGRectGetMaxY(self.labelsTitleLabel.frame) - 10)];
+	*/
+	[self.labelList setTags:labelArray];
+	
+	//[self.view addSubview:self.labelList];
 	
 }
 

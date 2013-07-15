@@ -22,3 +22,6 @@
 [submodule "Libraries/SIAlertView"]
 	path = Libraries/SIAlertView
 	url = https://github.com/Sumi-Interactive/SIAlertView.git
+[submodule "Libraries/DWTagList"]
+	path = Libraries/DWTagList
+	url = https://github.com/domness/DWTagList.git

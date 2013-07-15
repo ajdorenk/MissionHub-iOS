@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MHGenderListController : UIViewController <UITableViewDelegate>
+@interface MHGenderListController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 {
 }
 
 //@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancel;
-@property (strong, nonatomic) IBOutlet UIButton *done;
-@property (strong, nonatomic) IBOutlet UIToolbar *genderToolbar;
-@property (strong, nonatomic) IBOutlet UITableView *genderListCells;
+//@property (strong, nonatomic) IBOutlet UIButton *done;
+//@property (strong, nonatomic) IBOutlet UIToolbar *genderToolbar;
+//@property (strong, nonatomic) IBOutlet UITableView *genderListCells;
 
 @property(nonatomic, strong) NSArray *genders;
 
-- (IBAction)donePressed:(id)sender;
+//- (IBAction)donePressed:(id)sender;
 
 @end

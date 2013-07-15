@@ -44,7 +44,7 @@
 -(void) awakeFromNib
 {
 	// Add A and B view controllers to the array
-    self.allViewControllers = @[[self infoViewController], [self interactionsViewController]];
+    self.allViewControllers = @[[self infoViewController], [self interactionsViewController], [self interactionsViewController]];
 	
     [[self menuViewController] setMenuSelection:0];
 	[[self menuViewController] setMenuDelegate:self];
@@ -96,6 +96,11 @@
     
     [self.toolbar setTranslucent:YES];
 
+}
+
+-(id<MHProfileProtocol>)currentTableViewContoller {
+	
+	return [self.allViewControllers objectAtIndex:[[self menuViewController] menuSelection]];
 }
 
 -(MHNewInteractionViewController *)createInteractionViewController {
@@ -225,9 +230,8 @@
 
 -(void)refreshProfile {
 	
-	[[self headerViewController] setProfileImageWithUrl:self._person.picture];
-	[[self headerViewController] setName:[self._person fullName]];
-	[[self headerViewController] setLabelListWithSetOfOrganizationalLabels:self._person.labels];
+	[[self headerViewController] setPerson:self._person];
+	//[[self currentTableViewContoller] setPerson:self._person];
 	
 }
 

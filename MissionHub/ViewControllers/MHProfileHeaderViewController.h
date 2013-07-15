@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MHSegmentedControl.h"
 #import "MHPerson+Helper.h"
+#import "MHProfileProtocol.h"
 
-@interface MHProfileHeaderViewController : UIViewController <UIScrollViewDelegate> {
+@interface MHProfileHeaderViewController : UIViewController <UIScrollViewDelegate, MHProfileProtocol> {
 
 }
 

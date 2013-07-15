@@ -15,13 +15,13 @@
 #import "MHNewInteractionViewController.h"
 #import "MHAPI.h"
 #import "MHPerson+Helper.h"
+#import "MHProfileProtocol.h"
 
-@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate,UITableViewDelegate, UITableViewDataSource, MHProfileMenuDelegate>
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate,UITableViewDelegate, UITableViewDataSource, MHProfileMenuDelegate, MHProfileProtocol>
 
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 @property (retain, nonatomic) IBOutlet UITableView *table;
 
--(void)setPerson:(MHPerson *)person;
 -(void)refreshProfile;
 
 @end

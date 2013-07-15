@@ -22,5 +22,6 @@
 
 -(IBAction)menuDidChangeSelection:(id)sender;
 -(void)setMenuSelection:(NSInteger)selection;
+-(NSInteger)menuSelection;
 
 @end
