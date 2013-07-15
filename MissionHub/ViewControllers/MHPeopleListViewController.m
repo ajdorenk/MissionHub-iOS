@@ -14,6 +14,7 @@
 #import "MHMenuToolbar.h"   
 #import "MHPeopleSearchBar.h" 
 #import "MHGenderListController.h"
+#import "UIImageView+AFNetworking.h"
 
 #define HEADER_HEIGHT 32.0f
 #define ROW_HEIGHT 61.0f
@@ -461,12 +462,22 @@
 			MHPerson *person = [self.searchResultArray objectAtIndex:indexPath.row];
 			//Display person in the table cell
 			
+			if (person.picture == nil) {
+				
+				cell.imageView.image = [UIImage imageNamed:@"MHPersonCell_Placeholder.png"];
+				
+			} else {
+				
+				[cell.imageView setImageWithURL:[NSURL URLWithString:person.picture]
+									placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
+			}
+			
 			cell.textLabel.text = [person fullName];
 			cell.detailTextLabel.text = [person primaryEmail];
 			
 		} else {
 			
-			
+			cell.imageView.image = nil;
 			cell.textLabel.textAlignment = NSTextAlignmentCenter;
 			cell.detailTextLabel.text = @"";
 			
@@ -772,7 +783,7 @@
 		
 	}
 	
-	[self profileViewController];
+	[[self profileViewController] setPerson:person];
 	
 	[self.navigationController pushViewController:[self profileViewController] animated:YES];
     
