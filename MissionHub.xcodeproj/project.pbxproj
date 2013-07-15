@@ -151,6 +151,8 @@
 		68478DCE177E8CDC0014501D /* topbarTag_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DBA177E8CDC0014501D /* topbarTag_button.png */; };
 		68953EC21784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
 		68953EC31784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
+		6896649F17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
+		689664A017907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
 		68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */; };
 		68A68BD01787B2BF00927DF8 /* MHLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */; };
 		68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BD3178A192100927DF8 /* ODRefreshControl.m */; };
@@ -366,6 +368,8 @@
 		68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarOtherOptions_button.png; sourceTree = "<group>"; };
 		68478DBA177E8CDC0014501D /* topbarTag_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarTag_button.png; sourceTree = "<group>"; };
 		68953EC11784CD0100F0796C /* MH_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Logo.png; sourceTree = "<group>"; };
+		6896649D17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+removeDuplicatesForKey.h"; sourceTree = "<group>"; };
+		6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+removeDuplicatesForKey.m"; sourceTree = "<group>"; };
 		68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLoadingCell.h; path = "Custom UI/MHLoadingCell.h"; sourceTree = "<group>"; };
 		68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHLoadingCell.m; path = "Custom UI/MHLoadingCell.m"; sourceTree = "<group>"; };
 		68A68BD2178A192100927DF8 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
@@ -467,10 +471,6 @@
 		68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalLabel.m; path = Models/MHOrganizationalLabel.m; sourceTree = "<group>"; };
 		68EB33CB17792D8F003958A0 /* MHErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHErrorHandler.h; path = APIControllers/MHErrorHandler.h; sourceTree = "<group>"; };
 		68EB33CC17792D8F003958A0 /* MHErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHErrorHandler.m; path = APIControllers/MHErrorHandler.m; sourceTree = "<group>"; };
-		68F310C9178F7B7F0036EA42 /* MHOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHOrganization.h; path = MissionHub/Models/MHOrganization.h; sourceTree = "<group>"; };
-		68F310CA178F7B800036EA42 /* MHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganization.m; path = MissionHub/Models/MHOrganization.m; sourceTree = "<group>"; };
-		68F310CD178F7B810036EA42 /* MHPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPerson.h; path = MissionHub/Models/MHPerson.h; sourceTree = "<group>"; };
-		68F310CE178F7B810036EA42 /* MHPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPerson.m; path = MissionHub/Models/MHPerson.m; sourceTree = "<group>"; };
 		AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationBar.h; path = "Custom UI/MHCustomNavigationBar.h"; sourceTree = "<group>"; };
 		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
@@ -493,8 +493,8 @@
 		AD3C60DB178761E100744167 /* MHInteractionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionInfoViewController.m; path = ViewControllers/MHInteractionInfoViewController.m; sourceTree = "<group>"; };
 		AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderLabels.png; sourceTree = "<group>"; };
 		AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
-		AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MH_Mobile_Button_Save_72.png; path = Resources/MH_Mobile_Button_Save_72.png; sourceTree = "<group>"; };
-		AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MH_Mobile_Button_Done_72.png; path = Resources/MH_Mobile_Button_Done_72.png; sourceTree = "<group>"; };
+		AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Save_72.png; sourceTree = "<group>"; };
+		AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Done_72.png; sourceTree = "<group>"; };
 		AD98278B177C93B400A0276A /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ViewControllers/MHProfileViewController.h; sourceTree = "<group>"; };
 		AD98278C177C93B400A0276A /* MHProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileViewController.m; path = ViewControllers/MHProfileViewController.m; sourceTree = "<group>"; };
 		AD982792177C9D6700A0276A /* MHParallaxTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHParallaxTopViewController.h; path = ViewControllers/MHParallaxTopViewController.h; sourceTree = "<group>"; };
@@ -565,10 +565,6 @@
 			isa = PBXGroup;
 			children = (
 				6839108E1760FD3100E01B46 /* MissionHub */,
-				68F310CD178F7B810036EA42 /* MHPerson.h */,
-				68F310CE178F7B810036EA42 /* MHPerson.m */,
-				68F310C9178F7B7F0036EA42 /* MHOrganization.h */,
-				68F310CA178F7B800036EA42 /* MHOrganization.m */,
 				683910B01760FD3100E01B46 /* MissionHubTests */,
 				683910851760FD3100E01B46 /* Frameworks */,
 				683910841760FD3100E01B46 /* Products */,
@@ -632,11 +628,9 @@
 		6839108F1760FD3100E01B46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
 				683AE393176D2DC20027EDE4 /* appicon.png */,
 				683AE394176D2DC20027EDE4 /* appicon-small@2x.png */,
-				AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */,
 				683AE395176D2DC20027EDE4 /* appicon-small.png */,
 				683AE396176D2DC20027EDE4 /* appicon-small-50.png */,
 				683AE397176D2DC20027EDE4 /* appicon-72.png */,
@@ -796,6 +790,8 @@
 		68478DB0177E8CDC0014501D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
+				AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */,
 				AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */,
 				AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */,
 				AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */,
@@ -835,6 +831,8 @@
 				68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */,
 				68478D5C177BA8DF0014501D /* NSSet+MHSearchForRemoteID.h */,
 				68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */,
+				6896649D17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.h */,
+				6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1250,6 +1248,7 @@
 				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */,
 				AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
+				6896649F17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1318,6 +1317,7 @@
 				68A68BD01787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68A68BD5178A192100927DF8 /* ODRefreshControl.m in Sources */,
 				AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
+				689664A017907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

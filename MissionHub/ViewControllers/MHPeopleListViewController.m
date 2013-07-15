@@ -191,19 +191,6 @@
     UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
-	
-	/*
-	[[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-																								  [UIColor blueColor],
-																								  UITextAttributeTextColor,
-																								  [UIColor darkGrayColor],
-																								  UITextAttributeTextShadowColor,
-																								  [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-																								  UITextAttributeTextShadowOffset,
-																								  nil]
-																						forState:UIControlStateNormal];
-	 */
-
 
 }
 
@@ -238,7 +225,7 @@
 										}
 										   failBlock:^(NSError *error, MHRequestOptions *options) {
 											   
-											   NSString *errorMessage = [NSString stringWithFormat:@"Failed to refresh results due to: \"%@\". Try again by pulling down on the list. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+											   NSString *errorMessage = [NSString stringWithFormat:@"Failed to get search results due to: \"%@\". Try again by tapping cancel and starting again. If the problem continues please contact support@missionhub.com", error.localizedDescription];
 											   NSError *presentingError = [NSError errorWithDomain:error.domain
 																							  code:error.code
 																						  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
