@@ -7,6 +7,10 @@
 //
 
 #import "MHGenericListViewController.h"
+#import "MHPeopleListViewController.h"
+#import "MHPersonCell.h"
+#import "MHPerson+Helper.h"
+
 
 @interface MHGenericListViewController ()
 
@@ -14,19 +18,67 @@
 
 @implementation MHGenericListViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+
+
+@synthesize peopleArray				= _peopleArray;
+
+/*- (void)handleChosenInitiator:(UIGestureRecognizer*)recognizer{
+    // Our delegate method is optional, so we should
+    // check that the delegate implements it
+    if ([self.delegate respondsToSelector:@selector(MHGenericListViewController:tableCellPressed:)]) {
+        [self.delegate MHGenericListViewController:self tableCellPressed:recognizer];
     }
-    return self;
+
+}*/
+
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.peopleArray = [NSMutableArray array];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+	MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
+                        @"last_name":@"Doe",
+                        @"gender":@"Male",
+                        @"year_in_school":@"Second Year",
+                        @"major":@" Philosophy",
+                        @"minor":@"Computer Science",
+                        @"birth_date":@"1982-07-07",
+                        @"date_became_christian":@"2000-01-01",
+                        @"graduation_date":@"2010-01-07",
+                        @"user_id":@12345,
+                        @"fb_uid":@123456,
+                        @"updated_at":@"2012-11-19T19:29:30:06:00",
+                        @"created_at":@"2002-11-28T00:00:00:06:00"
+                        }];
+
+    
+	MHPerson *person2 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
+                        @"last_name":@"Doe",
+                        @"gender":@"Male",
+                        @"year_in_school":@"Second Year",
+                        @"major":@" Philosophy",
+                        @"minor":@"Computer Science",
+                        @"birth_date":@"1982-07-07",
+                        @"date_became_christian":@"2000-01-01",
+                        @"graduation_date":@"2010-01-07",
+                        @"user_id":@12345,
+                        @"fb_uid":@123456,
+                        @"updated_at":@"2012-11-19T19:29:30:06:00",
+                        @"created_at":@"2002-11-28T00:00:00:06:00"
+                        }];
+
+    
+    
+       
+    self.peopleArray = [NSArray arrayWithObjects:person1, person2, nil];
+    
+    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -50,40 +102,67 @@
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)setDataArray:(NSArray *)dataArray {
+    
+	self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
+	[self.tableViewList reloadData];
+    
 }
+
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	
-    // Return the number of sections.
-    return 0;
+	// Return the number of sections.
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	
     // Return the number of rows in the section.
-    return 0;
+    return 2;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (MHPersonCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    static NSString *CellIdentifier = @"initiatorCell";
+    MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
     // Configure the cell...
+
+    if (cell == nil) {
+        
+        cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+
+    }
+    
+    //UIGestureRecognizer *pressRecognizer = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(tableCellPressed:)];
+    //[cell addGestureRecognizer:pressRecognizer];
+    
+    
+    MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
+    [cell populateWithPerson:person];
+
     
     return cell;
 }
 
+
+
+
+- (void)tableCellPressed:(UIGestureRecognizer *)recognizer{
+    
+    UITableViewCell *cell = (UITableViewCell *)[recognizer view];
+    text = cell.textLabel.text;
+    NSLog(@"pressed");
+
+}
+
+
 - (IBAction)backToMenu:(id)sender {
-    NSLog(@"works");
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -125,6 +204,13 @@
  return YES;
  }
  */
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 #pragma mark - Table view delegate
 
