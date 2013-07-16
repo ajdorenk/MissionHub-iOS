@@ -958,6 +958,140 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="BackMenu_Icon.png" width="72" height="72"/>
         <image name="MH_Logo.png" width="144" height="144"/>
     </resources>
+    <classes>
+        <class className="DWTagList" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DWTagList.h"/>
+        </class>
+        <class className="ECSlidingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
+        </class>
+        <class className="M6ParallaxController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/M6ParallaxController.h"/>
+        </class>
+        <class className="MHGenderListController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
+        </class>
+        <class className="MHGenericListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenericListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tableViewList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MHLoadingCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoadingCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MHLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoginViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MHMenuToolbar" superclassName="UIToolbar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuToolbar.h"/>
+        </class>
+        <class className="MHMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuViewController.h"/>
+        </class>
+        <class className="MHNavigationViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNavigationViewController.h"/>
+        </class>
+        <class className="MHNewInteractionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNewInteractionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activeField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="comment" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="dateTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="initiator" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="interaction" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="receiver" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="visibility" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="MHPeopleListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="MHPeopleSearchBar" superclassName="UISearchBar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleSearchBar.h"/>
+        </class>
+        <class className="MHPersonCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPersonCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkbox" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="gender" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameBackgroundView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MHProfileHeaderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileHeaderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pageChanged:" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="headerPageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="headerScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="labelList" candidateClass="DWTagList"/>
+                <relationship kind="outlet" name="labelsListLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelsTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MHProfileInfoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileInfoViewController.h"/>
+        </class>
+        <class className="MHProfileInteractionsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileInteractionsViewController.h"/>
+        </class>
+        <class className="MHProfileMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileMenuViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="menuDidChangeSelection:"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="MHSegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="MHProfileViewController" superclassName="M6ParallaxController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MHRootViewController" superclassName="ECSlidingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>
+        </class>
+        <class className="MHSegmentedControl" superclassName="SDSegmentedControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSegmentedControl.h"/>
+        </class>
+        <class className="MHSurveyViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="topToolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SDSegmentedControl" superclassName="UISegmentedControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SDSegmentedControl.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -243,6 +243,8 @@
 		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
 		AD982794177C9D6700A0276A /* MHProfileHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHProfileHeaderViewController.m */; };
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
+		ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */; };
+		ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -521,6 +523,8 @@
 		AD982792177C9D6700A0276A /* MHProfileHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileHeaderViewController.h; path = ViewControllers/MHProfileHeaderViewController.h; sourceTree = "<group>"; };
 		AD982793177C9D6700A0276A /* MHProfileHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileHeaderViewController.m; path = ViewControllers/MHProfileHeaderViewController.m; sourceTree = "<group>"; };
 		AD9827A4177CF04200A0276A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		ADCCBA1A17948E0500A613F3 /* MHInitiatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInitiatorCell.h; path = "Custom UI/MHInitiatorCell.h"; sourceTree = "<group>"; };
+		ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInitiatorCell.m; path = "Custom UI/MHInitiatorCell.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1031,6 +1035,8 @@
 				AD30112F176FE4D900D53E35 /* MHPersonCell.m */,
 				AD3C60D617838A3B00744167 /* MHInteractionCell.h */,
 				AD3C60D717838A3C00744167 /* MHInteractionCell.m */,
+				ADCCBA1A17948E0500A613F3 /* MHInitiatorCell.h */,
+				ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */,
 				68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */,
 				68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */,
 				68145B9217910867008145EA /* MHSegmentedControl.h */,
@@ -1294,6 +1300,7 @@
 				68145B9817910984008145EA /* MHProfileMenuViewController.m in Sources */,
 				6855EDD81793B81D00769B71 /* DWTagList.m in Sources */,
 				6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
+				ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,6 +1375,7 @@
 				68145B9917910984008145EA /* MHProfileMenuViewController.m in Sources */,
 				6855EDD91793B81D00769B71 /* DWTagList.m in Sources */,
 				6855EDDE17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
+				ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

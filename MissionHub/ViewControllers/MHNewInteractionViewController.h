@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHGenericListViewController.h"
 
-@interface MHNewInteractionViewController : UIViewController
+@interface MHNewInteractionViewController : UIViewController <UITextFieldDelegate, MHGenericListViewControllerDelegate >
+{
+    CGRect originalCommentFrame;
+}
 
 
 @property (nonatomic, strong) IBOutlet UIButton *initiator;
@@ -23,6 +27,6 @@
 @property (nonatomic, strong) UIImagePickerController* imagePickerController;
 @property (nonatomic, strong) UIToolbar* pickerToolbar;
 @property (nonatomic, strong) UIActionSheet* pickerViewDate;
-
+@property (nonatomic, strong) MHInteraction* interactionObject;
 
 @end

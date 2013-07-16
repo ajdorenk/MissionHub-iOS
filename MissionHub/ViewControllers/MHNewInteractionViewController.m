@@ -10,6 +10,7 @@
 #import "MHNewInteractionViewController.h"
 #import "MHInteraction.h"
 
+
 @interface MHNewInteractionViewController ()
 
 @end
@@ -17,6 +18,7 @@
 @implementation MHNewInteractionViewController
 
 @synthesize initiator, interaction, receiver, visibility, dateTime, comment;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,6 +43,9 @@
 	// Do any additional setup after loading the view.
     
     [self.datePicker setHidden:YES];
+    [self.comment setDelegate:self];
+
+    self.interactionObject = nil;
     
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
     UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
@@ -68,7 +73,7 @@
     [initiator setBackgroundColor:[UIColor clearColor]];    
     [initiator.layer setBorderWidth:1.0];
     [initiator.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1] CGColor]];
-    
+    [initiator addTarget:self action:@selector(chooseInitiator:) forControlEvents:UIControlEventTouchUpInside];
 
     
     [interaction setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
@@ -109,8 +114,21 @@
     comment.layer.backgroundColor = [[UIColor whiteColor]CGColor];
     comment.layer.borderColor=[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor];
     comment.layer.borderWidth= 1.0f;
+    //self.comment.textAlignment = UIEdgeInsetsMake(5, 5, 5, 5);
+
     
-    [self.comment addTarget:self action:@selector(registerForKeyboardNotifications) forControlEvents:UIControlEventAllEditingEvents];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+
+
+    //[originalComment setFrame:CGRectMake(self.comment.frame.origin.x, self.comment.frame.origin.y, self.comment.frame.size.width, self.comment.frame.size.height)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,8 +138,30 @@
 }
 
 -(IBAction)saveInteractionActivity:(id)sender {
-    NSLog(@"Save Interaction"); 
+    NSLog(@"Save Interaction");
+    self.interactionObject.comment = self.comment.text;
+    self.interactionObject.timestamp = self.datePicker.date;
+    //interactionObject.receiver = ;
+    //interactionObject.initiator = ;
+    NSLog(@"\n%@", self.interactionObject.comment);
+    
 }
+
+
+- (void) list:(MHGenericListViewController *)viewController didSelectPerson:(MHPerson *)person {
+
+    // Do something with value...
+
+    NSString *name = [person fullName];
+    
+    [self.initiator setTitle:name forState:UIControlStateNormal];
+    self.initiator.titleLabel.font = [UIFont fontWithName:@"Arial-ItalicMT" size:14.0];
+    [self.initiator setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 0.0f)];
+    [self.initiator setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
+    // ...then dismiss the child view controller
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 -(IBAction)showDatePicker:(UIButton *)saveButton{
     [self.datePicker setHidden:NO];
@@ -169,49 +209,46 @@
 
 }
 
-
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
+- (IBAction)chooseInitiator:(id)sender{
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
+    MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+    // Assign self as the delegate for the child view controller
+    initiatorsViewController.selectionDelegate = self;
+    [self.navigationController pushViewController:initiatorsViewController animated:YES];
     
 }
 
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)aNotification
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    NSLog(@"return");
+    [textField resignFirstResponder];
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your application might not need or want this behavior.
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
-    CGPoint origin = self.activeField.frame.origin;
-    origin.y -= self.scrollView.contentOffset.y;
-    if (!CGRectContainsPoint(aRect, origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, self.activeField.frame.origin.y-(aRect.size.height));
-        [self.scrollView setContentOffset:scrollPoint animated:YES];
-    }
+    return YES;
 }
 
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+
+- (void)keyboardWillShow:(NSNotification *)notification
 {
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
+    [UIView beginAnimations:nil context:nil];
+    originalCommentFrame = self.comment.frame;
+    CGRect newRect = self.comment.frame;
+    CGRect navframe = [[self.navigationController navigationBar] frame];
+    //Down size your text view
+    newRect.size.height -= (self.view.frame.size.height-(navframe.size.height)/2);
+    self.comment.frame = newRect;
+    [UIView commitAnimations];
 }
 
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    
+    // Resize your textview when keyboard is going to hide
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    self.comment.frame = originalCommentFrame;
+    [UIView commitAnimations];
+    
+}
 
 
 - (IBAction)backToMenu:(id)sender {
