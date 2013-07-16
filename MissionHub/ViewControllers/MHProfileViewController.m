@@ -24,12 +24,15 @@
 @property (nonatomic, strong) MHProfileInfoViewController			*_infoViewController;
 @property (nonatomic, strong) MHProfileInteractionsViewController	*_interactionsViewController;
 @property (nonatomic, strong) MHGenericListViewController			*_labelViewController;
+@property (nonatomic, strong) MHProfileSurveysViewController		*_surveysViewController;
 
 -(MHNewInteractionViewController *)createInteractionViewController;
 -(MHProfileHeaderViewController *)headerViewController;
 -(MHProfileMenuViewController *)menuViewController;
 -(MHProfileInfoViewController *)infoViewController;
 -(MHProfileInteractionsViewController *)interactionsViewController;
+-(MHProfileSurveysViewController *)surveysViewController;
+
 
 @end
 
@@ -45,7 +48,7 @@
 -(void) awakeFromNib
 {
 	// Add A and B view controllers to the array
-    self.allViewControllers = @[[self infoViewController], [self interactionsViewController], [self interactionsViewController]];
+    self.allViewControllers = @[[self infoViewController], [self interactionsViewController], [self surveysViewController]];
 	
     [[self menuViewController] setMenuSelection:0];
 	[[self menuViewController] setMenuDelegate:self];
@@ -173,6 +176,18 @@
 	}
 	
 	return self._labelViewController;
+	
+}
+
+-(MHProfileSurveysViewController *)surveysViewController {
+	
+	if (self._surveysViewController == nil) {
+		
+		self._surveysViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileSurveysViewController"];
+		
+	}
+	
+	return self._surveysViewController;
 	
 }
 

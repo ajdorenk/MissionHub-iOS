@@ -31,4 +31,6 @@
 @property (nonatomic, strong) NSMutableArray *sectionTitles;
 @property (nonatomic, strong) NSMutableArray *sections;
 
+//@property (nonatomic,strong) UIImage *infoDemoImage;
+
 @end

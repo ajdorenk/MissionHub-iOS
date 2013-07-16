@@ -16,14 +16,23 @@
 #import "MHGenderListController.h"
 #import "UIImageView+AFNetworking.h"
 
+
 #define HEADER_HEIGHT 32.0f
 #define ROW_HEIGHT 61.0f
 
 
-@interface MHPeopleListViewController (Private)
+@interface MHPeopleListViewController ()
 
 -(void)setTextFieldLeftView;
+-(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
+@property (nonatomic, strong) MHNewInteractionViewController		*_createInteractionViewController;
+@property (nonatomic, strong) MHCreatePersonViewController          *_createPersonViewController;
+
+-(MHNewInteractionViewController *)createInteractionViewController;
+-(MHCreatePersonViewController *)createPersonViewController;
+
 @end
+
 
 @implementation MHPeopleListViewController
 
@@ -203,14 +212,14 @@
     [newPerson addTarget:self action:@selector(addPersonActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
     
-    UIImage* labelImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
-    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
-    [newLabel setImage:labelImage forState:UIControlStateNormal];
-    [newLabel addTarget:self action:@selector(addLabelActivity:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addLabelButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
+    UIImage* interactionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
+    UIButton *addInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
+    [addInteraction setImage:interactionImage forState:UIControlStateNormal];
+    [addInteraction addTarget:self action:@selector(addInteractionActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addInteractionButton = [[UIBarButtonItem alloc] initWithCustomView:addInteraction];
     
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addLabelButton, addPersonButton, nil]];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addInteractionButton, addPersonButton, nil]];
     
 
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
@@ -254,6 +263,31 @@
 	[self.fieldButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
 	[self dismissViewControllerAnimated:YES completion:nil];
 	[self.tableView reloadData];
+	
+}
+
+-(MHNewInteractionViewController *)createInteractionViewController {
+	
+	if (self._createInteractionViewController == nil) {
+		
+		self._createInteractionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+		
+	}
+	
+	return self._createInteractionViewController;
+	
+}
+
+
+-(MHCreatePersonViewController *)createPersonViewController {
+	
+	if (self._createPersonViewController == nil) {
+		
+		self._createPersonViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHCreatePersonViewController"];
+		
+	}
+	
+	return self._createPersonViewController;
 	
 }
 
@@ -432,10 +466,13 @@
 
 -(IBAction)addPersonActivity:(id)sender{
     NSLog(@"add Person Action");
+    [self.navigationController pushViewController:[self createPersonViewController] animated:YES];
+
 }
 
--(IBAction)addLabelActivity:(id)sender {
+-(IBAction)addInteractionActivity:(id)sender {
     NSLog(@"Label Action");
+    	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
 }
 
 -(IBAction)checkAllContacts:(UIButton*)button {

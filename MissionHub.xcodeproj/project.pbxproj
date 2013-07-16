@@ -263,6 +263,16 @@
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
 		ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */; };
 		ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */; };
+		ADCCBA201794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */; };
+		ADCCBA211794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */; };
+		ADCCBA2A17950D5800A613F3 /* InteractionDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCCBA2917950D5800A613F3 /* InteractionDemo.png */; };
+		ADCCBA2B17950D5800A613F3 /* InteractionDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCCBA2917950D5800A613F3 /* InteractionDemo.png */; };
+		ADCCBA2D17950EC700A613F3 /* InfoDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCCBA2C17950EC700A613F3 /* InfoDemo.png */; };
+		ADCCBA2E17950EC700A613F3 /* InfoDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCCBA2C17950EC700A613F3 /* InfoDemo.png */; };
+		ADCCBA311795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */; };
+		ADCCBA321795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */; };
+		ADCCBA34179513DD00A613F3 /* SurveysDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCCBA33179513DD00A613F3 /* SurveysDemo.png */; };
+		ADCCBA35179513DD00A613F3 /* SurveysDemo.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCCBA33179513DD00A613F3 /* SurveysDemo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -554,6 +564,13 @@
 		AD9827A4177CF04200A0276A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ADCCBA1A17948E0500A613F3 /* MHInitiatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInitiatorCell.h; path = "Custom UI/MHInitiatorCell.h"; sourceTree = "<group>"; };
 		ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInitiatorCell.m; path = "Custom UI/MHInitiatorCell.m"; sourceTree = "<group>"; };
+		ADCCBA1E1794DDA000A613F3 /* MHCreatePersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCreatePersonViewController.h; path = ViewControllers/MHCreatePersonViewController.h; sourceTree = "<group>"; };
+		ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCreatePersonViewController.m; path = ViewControllers/MHCreatePersonViewController.m; sourceTree = "<group>"; };
+		ADCCBA2917950D5800A613F3 /* InteractionDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InteractionDemo.png; path = Resources/InteractionDemo.png; sourceTree = "<group>"; };
+		ADCCBA2C17950EC700A613F3 /* InfoDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoDemo.png; path = Resources/InfoDemo.png; sourceTree = "<group>"; };
+		ADCCBA2F1795101800A613F3 /* MHProfileSurveysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileSurveysViewController.h; path = ViewControllers/MHProfileSurveysViewController.h; sourceTree = "<group>"; };
+		ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileSurveysViewController.m; path = ViewControllers/MHProfileSurveysViewController.m; sourceTree = "<group>"; };
+		ADCCBA33179513DD00A613F3 /* SurveysDemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SurveysDemo.png; path = Resources/SurveysDemo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -686,6 +703,9 @@
 		6839108F1760FD3100E01B46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ADCCBA33179513DD00A613F3 /* SurveysDemo.png */,
+				ADCCBA2917950D5800A613F3 /* InteractionDemo.png */,
+				ADCCBA2C17950EC700A613F3 /* InfoDemo.png */,
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
 				683AE393176D2DC20027EDE4 /* appicon.png */,
 				683AE394176D2DC20027EDE4 /* appicon-small@2x.png */,
@@ -751,12 +771,16 @@
 				AD982793177C9D6700A0276A /* MHProfileHeaderViewController.m */,
 				68145B8E1790FFA6008145EA /* MHProfileInfoViewController.h */,
 				68145B8F1790FFA6008145EA /* MHProfileInfoViewController.m */,
+				ADCCBA2F1795101800A613F3 /* MHProfileSurveysViewController.h */,
+				ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */,
 				AD3C60DA178761DE00744167 /* MHProfileInteractionsViewController.h */,
 				AD3C60DB178761E100744167 /* MHProfileInteractionsViewController.m */,
 				AD2434F2178C9CDA00FA16F2 /* MHNewInteractionViewController.h */,
 				AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */,
 				68145B9617910984008145EA /* MHProfileMenuViewController.h */,
 				68145B9717910984008145EA /* MHProfileMenuViewController.m */,
+				ADCCBA1E1794DDA000A613F3 /* MHCreatePersonViewController.h */,
+				ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1197,6 +1221,9 @@
 				AD75F7AA178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png in Resources */,
 				AD75F7AC178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png in Resources */,
 				68145B9B17911052008145EA /* MHProfileHeader_Placeholder.png in Resources */,
+				ADCCBA2A17950D5800A613F3 /* InteractionDemo.png in Resources */,
+				ADCCBA2D17950EC700A613F3 /* InfoDemo.png in Resources */,
+				ADCCBA34179513DD00A613F3 /* SurveysDemo.png in Resources */,
 				68839F451794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */,
 				68839F471794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */,
 				68839F491794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png in Resources */,
@@ -1244,6 +1271,9 @@
 				AD3C60E3178B0F2A00744167 /* sectionHeaderLabels.png in Resources */,
 				AD3C60E6178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
 				68145B9C17911052008145EA /* MHProfileHeader_Placeholder.png in Resources */,
+				ADCCBA2B17950D5800A613F3 /* InteractionDemo.png in Resources */,
+				ADCCBA2E17950EC700A613F3 /* InfoDemo.png in Resources */,
+				ADCCBA35179513DD00A613F3 /* SurveysDemo.png in Resources */,
 				68839F461794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */,
 				68839F481794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */,
 				68839F4A1794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png in Resources */,
@@ -1357,6 +1387,8 @@
 				ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
 				68839F551794FE3000B32934 /* MHLabel+Helper.m in Sources */,
 				68839F591795000500B32934 /* MHGenericCell.m in Sources */,
+				ADCCBA201794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */,
+				ADCCBA311795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1434,6 +1466,8 @@
 				ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
 				68839F561794FE3000B32934 /* MHLabel+Helper.m in Sources */,
 				68839F5A1795000500B32934 /* MHGenericCell.m in Sources */,
+				ADCCBA211794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */,
+				ADCCBA321795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

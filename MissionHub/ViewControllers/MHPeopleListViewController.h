@@ -12,6 +12,8 @@
 #import "MHProfileViewController.h"
 #import "ODRefreshControl.h"
 #import "MHRequestOptions.h"
+#import "MHNewInteractionViewController.h"
+#import "MHCreatePersonViewController.h"
 #import "MHPersonCell.h"
 #import "MHGenericListViewController.h"
 
@@ -73,6 +75,7 @@
 -(void)setDataFromRequestOptions:(MHRequestOptions *)options;
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
 -(MHProfileViewController *)profileViewController;
+
 
 @end
 
