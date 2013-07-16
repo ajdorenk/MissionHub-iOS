@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHProfileProtocol.h"
 
-@interface MHProfileSurveysViewController : UITableViewController
+@interface MHProfileSurveysViewController : UITableViewController <MHProfileProtocol>
 
 @end

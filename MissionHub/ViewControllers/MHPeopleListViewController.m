@@ -24,7 +24,6 @@
 @interface MHPeopleListViewController ()
 
 -(void)setTextFieldLeftView;
--(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
 @property (nonatomic, strong) MHNewInteractionViewController		*_createInteractionViewController;
 @property (nonatomic, strong) MHCreatePersonViewController          *_createPersonViewController;
 
