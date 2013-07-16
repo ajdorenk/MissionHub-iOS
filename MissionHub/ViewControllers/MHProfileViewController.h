@@ -24,6 +24,8 @@
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 @property (retain, nonatomic) IBOutlet UITableView *table;
 
+@property (nonatomic, strong) UIImageView *actionBar;
+
 -(void)refreshProfile;
 
 @end

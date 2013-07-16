@@ -70,6 +70,8 @@
 @property (nonatomic, strong) MHProfileViewController *_profileViewController;
 @property (nonatomic, strong) MHGenericListViewController *_fieldSelectorViewController;
 
+@property (nonatomic, strong) UIImageView *actionBar;
+
 -(IBAction)revealMenu:(id)sender;
 -(void)refresh;
 -(void)setDataFromRequestOptions:(MHRequestOptions *)options;

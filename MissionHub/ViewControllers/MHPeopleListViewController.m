@@ -55,6 +55,8 @@
 @synthesize _profileViewController;
 @synthesize _fieldSelectorViewController;
 
+@synthesize actionBar;
+
 -(void)awakeFromNib {
 	
 	[super awakeFromNib];
@@ -64,7 +66,7 @@
 	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	self.searchRequestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	
-	self.secondaryFieldName = MHPersonSortFieldPermission;
+	self.secondaryFieldName = MHPersonSortFieldFollowupStatus;
 	
 	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
     sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
@@ -130,6 +132,8 @@
     [sectionHeader addSubview:allButton];
 	
 	self.header = sectionHeader;
+	
+	self.actionBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"actionbar.png"]];
 	
 }
 
@@ -886,7 +890,36 @@
 
 -(void)cell:(MHPersonCell *)cell didSelectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath {
 	
-#warning implement cell selection
+	if (cell.checkbox.isChecked) {
+		
+		self.actionBar.frame = CGRectMake(0, CGRectGetMaxY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), 118);
+		[self.tableView addSubview:self.actionBar];
+		
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(showNavToolbarDidStop)];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+		[UIView setAnimationDuration:UINavigationControllerHideShowBarDuration];
+		
+		self.actionBar.frame		= CGRectMake(0, CGRectGetMaxY(self.tableView.frame) - 118, CGRectGetWidth(self.tableView.frame), 118);
+		
+		[UIView commitAnimations];
+		
+	} else {
+		
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(showNavToolbarDidStop)];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+		[UIView setAnimationDuration:UINavigationControllerHideShowBarDuration];
+		
+		self.actionBar.frame		= CGRectMake(0, CGRectGetMaxY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), 118);
+		
+		[UIView commitAnimations];
+		
+		[self.actionBar removeFromSuperview];
+		
+	}
 	
 }
 

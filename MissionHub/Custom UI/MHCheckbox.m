@@ -22,8 +22,25 @@
         [self setImage:[UIImage imageNamed:@"CheckboxEmpty.png"]forState:UIControlStateNormal];
         
         [self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
+		
+		self.isChecked = NO;
+		
     }
     return self;
+}
+
+-(void)awakeFromNib {
+	
+	[super awakeFromNib];
+	
+	self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+	
+	[self setImage:[UIImage imageNamed:@"CheckboxEmpty.png"]forState:UIControlStateNormal];
+	
+	[self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
+	
+	self.isChecked = NO;
+	
 }
 
 - (void)checkBoxClicked {
