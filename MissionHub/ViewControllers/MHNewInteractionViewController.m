@@ -148,8 +148,10 @@
 }
 
 
-- (void) list:(MHGenericListViewController *)viewController didSelectPerson:(MHPerson *)person {
+- (void) list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
 
+	MHPerson *person = (MHPerson *)object;
+	
     // Do something with value...
 
     NSString *name = [person fullName];

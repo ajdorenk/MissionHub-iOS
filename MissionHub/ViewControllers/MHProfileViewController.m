@@ -23,6 +23,7 @@
 @property (nonatomic, strong) MHProfileMenuViewController			*_menuViewController;
 @property (nonatomic, strong) MHProfileInfoViewController			*_infoViewController;
 @property (nonatomic, strong) MHProfileInteractionsViewController	*_interactionsViewController;
+@property (nonatomic, strong) MHGenericListViewController			*_labelViewController;
 
 -(MHNewInteractionViewController *)createInteractionViewController;
 -(MHProfileHeaderViewController *)headerViewController;
@@ -163,6 +164,18 @@
 	
 }
 
+-(MHGenericListViewController *)labelViewController {
+	
+	if (self._labelViewController == nil) {
+		
+		self._labelViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		
+	}
+	
+	return self._labelViewController;
+	
+}
+
 -(void)setPerson:(MHPerson *)person {
 	
 	if (person) {
@@ -254,7 +267,17 @@
  }
 
 - (IBAction)addLabelActivity:(id)sender {
-NSLog(@"add Person Action");
+
+	[self labelViewController].selectionDelegate = self;
+	[self labelViewController].objectArray = [NSMutableArray arrayWithArray:[[MHAPI sharedInstance].currentUser.currentOrganization.labels allObjects]];
+	[self presentViewController:[self labelViewController] animated:YES completion:nil];
+	
+}
+
+-(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+	
+	[self dismissViewControllerAnimated:YES completion:nil];
+	
 }
 
 - (IBAction)newInteractionActivity:(id)sender {

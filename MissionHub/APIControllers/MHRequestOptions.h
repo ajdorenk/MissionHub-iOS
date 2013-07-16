@@ -93,7 +93,12 @@ typedef enum {
 	MHRequestOptionsOrderAsc,
 	MHRequestOptionsOrderDesc,
 	MHRequestOptionsOrderPeopleFirstName,
-	MHRequestOptionsOrderPeopleLastName
+	MHRequestOptionsOrderPeopleLastName,
+	MHRequestOptionsOrderPeopleGender,
+	MHRequestOptionsOrderPeopleFollowupStatus,
+	MHRequestOptionsOrderPeoplePermission,
+	MHRequestOptionsOrderPeoplePrimaryPhone,
+	MHRequestOptionsOrderPeoplePrimaryEmail
 } MHRequestOptionsOrders;
 
 @interface MHRequestOptions : NSObject {

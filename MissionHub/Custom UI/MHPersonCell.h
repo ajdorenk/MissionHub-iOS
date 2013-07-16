@@ -32,7 +32,7 @@
 @property (nonatomic, strong) IBOutlet MHCheckbox *checkbox;
 @property (nonatomic, strong) IBOutlet UIView *nameBackgroundView;
 
--(void)populateWithPerson:(MHPerson *)person forField:(NSString *)field atIndexPath:(NSIndexPath *)indexPath;
+-(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

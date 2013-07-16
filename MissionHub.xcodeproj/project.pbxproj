@@ -175,6 +175,10 @@
 		68839F501794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */; };
 		68839F511794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */; };
 		68839F521794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */; };
+		68839F551794FE3000B32934 /* MHLabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68839F541794FE3000B32934 /* MHLabel+Helper.m */; };
+		68839F561794FE3000B32934 /* MHLabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68839F541794FE3000B32934 /* MHLabel+Helper.m */; };
+		68839F591795000500B32934 /* MHGenericCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68839F581795000500B32934 /* MHGenericCell.m */; };
+		68839F5A1795000500B32934 /* MHGenericCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68839F581795000500B32934 /* MHGenericCell.m */; };
 		68953EC21784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
 		68953EC31784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
 		6896649F17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
@@ -413,6 +417,10 @@
 		68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Email_48.png; sourceTree = "<group>"; };
 		68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Assign_48.png; sourceTree = "<group>"; };
 		68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Archive_48.png; sourceTree = "<group>"; };
+		68839F531794FE3000B32934 /* MHLabel+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHLabel+Helper.h"; path = "Models/MHLabel+Helper.h"; sourceTree = "<group>"; };
+		68839F541794FE3000B32934 /* MHLabel+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHLabel+Helper.m"; path = "Models/MHLabel+Helper.m"; sourceTree = "<group>"; };
+		68839F571795000500B32934 /* MHGenericCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHGenericCell.h; path = "Custom UI/MHGenericCell.h"; sourceTree = "<group>"; };
+		68839F581795000500B32934 /* MHGenericCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHGenericCell.m; path = "Custom UI/MHGenericCell.m"; sourceTree = "<group>"; };
 		68953EC11784CD0100F0796C /* MH_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Logo.png; sourceTree = "<group>"; };
 		6896649D17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+removeDuplicatesForKey.h"; sourceTree = "<group>"; };
 		6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+removeDuplicatesForKey.m"; sourceTree = "<group>"; };
@@ -594,6 +602,8 @@
 				6821C46F178244970063AA3D /* MHPerson.m */,
 				6823A7D4177EC34C00DBDF3F /* MHAddress.h */,
 				6823A7D5177EC34D00DBDF3F /* MHAddress.m */,
+				68478D8A177E8AE20014501D /* MHLabel.h */,
+				68478D8B177E8AE20014501D /* MHLabel.m */,
 			);
 			name = CoreDataGeneratedClasses;
 			sourceTree = "<group>";
@@ -763,8 +773,6 @@
 				680CD8FC1782403600E6E742 /* MHPerson+Helper.m */,
 				680CD8F417823E4600E6E742 /* MHOrganization+Helper.h */,
 				680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */,
-				68478D8A177E8AE20014501D /* MHLabel.h */,
-				68478D8B177E8AE20014501D /* MHLabel.m */,
 				68478D39177A5AA20014501D /* MHInteraction.h */,
 				68478D3A177A5AA20014501D /* MHInteraction.m */,
 				68478D3C177A70200014501D /* MHInteractionType.h */,
@@ -787,6 +795,8 @@
 				68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */,
 				6855EDDB17948EC900769B71 /* MHAddress+Helper.h */,
 				6855EDDC17948EC900769B71 /* MHAddress+Helper.m */,
+				68839F531794FE3000B32934 /* MHLabel+Helper.h */,
+				68839F541794FE3000B32934 /* MHLabel+Helper.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1069,6 +1079,8 @@
 				68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */,
 				68145B9217910867008145EA /* MHSegmentedControl.h */,
 				68145B9317910867008145EA /* MHSegmentedControl.m */,
+				68839F571795000500B32934 /* MHGenericCell.h */,
+				68839F581795000500B32934 /* MHGenericCell.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1343,6 +1355,8 @@
 				6855EDD81793B81D00769B71 /* DWTagList.m in Sources */,
 				6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
 				ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
+				68839F551794FE3000B32934 /* MHLabel+Helper.m in Sources */,
+				68839F591795000500B32934 /* MHGenericCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1418,6 +1432,8 @@
 				6855EDD91793B81D00769B71 /* DWTagList.m in Sources */,
 				6855EDDE17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
 				ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
+				68839F561794FE3000B32934 /* MHLabel+Helper.m in Sources */,
+				68839F5A1795000500B32934 /* MHGenericCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

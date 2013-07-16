@@ -13,8 +13,9 @@
 #import "ODRefreshControl.h"
 #import "MHRequestOptions.h"
 #import "MHPersonCell.h"
+#import "MHGenericListViewController.h"
 
-@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate> {
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate> {
 
 	NSMutableArray *_peopleArray;
 	NSMutableArray *_searchResultArray;
@@ -29,7 +30,8 @@
 	BOOL _searchIsLoading;
 	BOOL _searchHasLoadedAllPages;
 	
-	NSString *_secondaryFieldName;
+	MHPersonSortFields _secondaryFieldName;
+	MHRequestOptionsOrders _sortField;
 	
 	//caching ui
 	UIView *_header;
@@ -58,10 +60,13 @@
 @property (nonatomic, assign) BOOL searchIsLoading;
 @property (nonatomic, assign) BOOL searchPagingIsLoading;
 @property (nonatomic, assign) BOOL searchHasLoadedAllPages;
-@property (nonatomic, strong) NSString *secondaryFieldName;
+@property (nonatomic, assign) MHPersonSortFields secondaryFieldName;
+@property (nonatomic, assign) MHRequestOptionsOrders sortField;
+@property (nonatomic, strong) UIButton *fieldButton;
 @property (nonatomic, strong) UIView *header;
 @property (nonatomic, strong) IBOutlet UIView *activityBar;
 @property (nonatomic, strong) MHProfileViewController *_profileViewController;
+@property (nonatomic, strong) MHGenericListViewController *_fieldSelectorViewController;
 
 -(IBAction)revealMenu:(id)sender;
 -(void)refresh;

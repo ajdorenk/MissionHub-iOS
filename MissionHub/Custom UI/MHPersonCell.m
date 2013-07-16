@@ -61,7 +61,7 @@
 }
 
 
--(void)populateWithPerson:(MHPerson *)person forField:(NSString *)field atIndexPath:(NSIndexPath *)indexPath {
+-(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField atIndexPath:(NSIndexPath *)indexPath {
     
 	self.indexPath = indexPath;
 	
@@ -75,7 +75,8 @@
 													  placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
     }
     
-    self.gender.text = person.gender;
+	self.gender.text = [person valueForSortField:sortField];
+
     self.name.text = [person fullName];
 	
 }

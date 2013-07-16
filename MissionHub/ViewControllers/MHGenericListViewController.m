@@ -8,7 +8,7 @@
 
 #import "MHGenericListViewController.h"
 #import "MHPeopleListViewController.h"
-#import "MHInitiatorCell.h"
+#import "MHGenericCell.h"
 #import "MHPerson+Helper.h"
 
 #define ROW_HEIGHT 36.0f
@@ -21,23 +21,19 @@
 @implementation MHGenericListViewController
 
 
-
 @synthesize selectionDelegate       = _selectionDelegate;
-@synthesize peopleArray				= _peopleArray;
-@synthesize initiatorPerson;
-
-
+@synthesize objectArray				= _objectArray;
 
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.peopleArray = [NSMutableArray array];
+    self.objectArray = [NSMutableArray array];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    /*
 	MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"Shelby",
                         @"last_name":@"Clarke",
                         @"gender":@"Male",
@@ -72,8 +68,8 @@
     
     
        
-    self.peopleArray = [NSArray arrayWithObjects:person1, person2, nil];
-    
+    self.objectArray = [NSArray arrayWithObjects:person1, person2, nil];
+    */
     
 
     // Uncomment the following line to preserve selection between presentations.
@@ -101,7 +97,7 @@
 
 -(void)setDataArray:(NSArray *)dataArray {
     
-	self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
+	self.objectArray = [NSMutableArray arrayWithArray:dataArray];
 	//[self.tableViewList reloadData];
     
 }
@@ -118,28 +114,31 @@
 {
 	
     // Return the number of rows in the section.
-    return [self.peopleArray count];
+    return [self.objectArray count];
 }
 
-- (MHInitiatorCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MHInitiatorCell";
-    MHInitiatorCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"MHGenericCell";
+    MHGenericCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     // Configure the cell...
 
     if (cell == nil) {
         
-        cell = [[MHInitiatorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[MHGenericCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
     }
 
     
-    MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
-    [cell populateWithInitiator:person];
-
-
-    
+    id object = [self.objectArray objectAtIndex:indexPath.row];
+	
+	if ([object isKindOfClass:[NSString class]]) {
+		[cell populateWithString:object];
+	} else if ([object isKindOfClass:[MHModel class]]) {
+		[cell populateWithString:[(MHModel *)object displayString]];
+	}
+	
     return cell;
 }
 
@@ -199,11 +198,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.initiatorPerson = [self.peopleArray objectAtIndex:indexPath.row];
+    id object = [self.objectArray objectAtIndex:indexPath.row];
     
-    if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectPerson:)]) {
-        [self.selectionDelegate list:self didSelectPerson:initiatorPerson];
+    if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectObject:atIndexPath:)]) {
+        [self.selectionDelegate list:self didSelectObject:object atIndexPath:indexPath];
     }
+	
+	[self.tableViewList deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 

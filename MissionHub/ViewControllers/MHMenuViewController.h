@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 #import "MHPerson+Helper.h"
+#import "MHGenericListViewController.h"
 
-@interface MHMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MHMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MHGenericListViewControllerDelegate>
 
 -(id)setCurrentUser:(MHPerson *)currentUser;
 

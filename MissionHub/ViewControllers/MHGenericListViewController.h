@@ -13,14 +13,13 @@
 {
     id<MHGenericListViewControllerDelegate> _selectionDelegate;
     NSString *text;
-    NSMutableArray *_peopleArray;
+    NSMutableArray *_objectArray;
 }
 
 @property (nonatomic, strong) IBOutlet UILabel *name;
 @property (nonatomic, strong) IBOutlet UITableView* tableViewList;
 @property (nonatomic, strong) id<MHGenericListViewControllerDelegate> selectionDelegate;
-@property (nonatomic, strong) NSMutableArray *peopleArray;
-@property (nonatomic, strong) MHPerson *initiatorPerson;
+@property (nonatomic, strong) NSMutableArray *objectArray;
 
 
 @end
@@ -29,7 +28,7 @@
 @protocol MHGenericListViewControllerDelegate <NSObject>
 
 
-- (void)list:(MHGenericListViewController*)viewController didSelectPerson:(MHPerson *)person;
+- (void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
 
 
 @end

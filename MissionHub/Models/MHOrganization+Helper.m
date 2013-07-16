@@ -10,6 +10,16 @@
 
 @implementation MHOrganization (Helper)
 
+-(NSString *)displayString {
+	
+	if (self.name) {
+		return self.name;
+	} else {
+		return @"";
+	}
+	
+}
+
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
 	
 	if ([fieldName isEqualToString:@"labels"]) {

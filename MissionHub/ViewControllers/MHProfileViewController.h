@@ -16,8 +16,9 @@
 #import "MHAPI.h"
 #import "MHPerson+Helper.h"
 #import "MHProfileProtocol.h"
+#import "MHGenericListViewController.h"
 
-@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate,UITableViewDelegate, UITableViewDataSource, MHProfileMenuDelegate, MHProfileProtocol>
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate,UITableViewDelegate, UITableViewDataSource, MHProfileMenuDelegate, MHProfileProtocol, MHGenericListViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 @property (retain, nonatomic) IBOutlet UITableView *table;

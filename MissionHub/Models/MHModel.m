@@ -53,6 +53,11 @@
 	
 }
 
+
+-(NSString *)displayString {
+	return @"";
+}
+
 +(NSEntityDescription *)entity {
 	
 	return [self entityFromName:nil];

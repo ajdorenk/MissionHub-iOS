@@ -23,7 +23,6 @@
 @interface MHPeopleListViewController (Private)
 
 -(void)setTextFieldLeftView;
--(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
 @end
 
 @implementation MHPeopleListViewController
@@ -42,8 +41,11 @@
 @synthesize searchPagingIsLoading	= _searchPagingIsLoading;
 @synthesize searchHasLoadedAllPages	= _searchHasLoadedAllPages;
 @synthesize secondaryFieldName		= _secondaryFieldName;
+@synthesize fieldButton;
+@synthesize sortField				= _sortField;
 @synthesize header					= _header;
 @synthesize _profileViewController;
+@synthesize _fieldSelectorViewController;
 
 -(void)awakeFromNib {
 	
@@ -54,7 +56,7 @@
 	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	self.searchRequestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	
-	self.secondaryFieldName = @"gender";
+	self.secondaryFieldName = MHPersonSortFieldPermission;
 	
 	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
     sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
@@ -80,9 +82,12 @@
     [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
 	
     [genderButton setBackgroundColor:[UIColor clearColor]];
+	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:genderButton];
+	
+	self.fieldButton = genderButton;
     
     UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
@@ -129,6 +134,26 @@
 	}
 	
 	return self._profileViewController;
+	
+}
+
+-(MHGenericListViewController *)fieldSelectorViewController {
+	
+	if (self._fieldSelectorViewController == nil) {
+		
+		self._fieldSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		self._fieldSelectorViewController.selectionDelegate = self;
+		self._fieldSelectorViewController.objectArray = [NSMutableArray arrayWithArray:@[
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldGender],
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldFollowupStatus],
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldPermission],
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldPrimaryPhone],
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldPrimaryEmail]
+														 ]];
+		
+	}
+	
+	return self._fieldSelectorViewController;
 	
 }
 
@@ -196,6 +221,40 @@
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
 
+}
+
+-(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+	
+	switch (indexPath.row) {
+		case 0:
+			self.sortField = MHRequestOptionsOrderPeopleGender;
+			self.secondaryFieldName = MHPersonSortFieldGender;
+			break;
+		case 1:
+			self.sortField = MHRequestOptionsOrderPeopleFollowupStatus;
+			self.secondaryFieldName = MHPersonSortFieldFollowupStatus;
+			break;
+		case 2:
+			self.sortField = MHRequestOptionsOrderPeoplePermission;
+			self.secondaryFieldName = MHPersonSortFieldPermission;
+			break;
+		case 3:
+			self.sortField = MHRequestOptionsOrderPeoplePrimaryPhone;
+			self.secondaryFieldName = MHPersonSortFieldPrimaryPhone;
+			break;
+		case 4:
+			self.sortField = MHRequestOptionsOrderPeoplePrimaryEmail;
+			self.secondaryFieldName = MHPersonSortFieldPrimaryEmail;
+			break;
+			
+		default:
+			break;
+	}
+	
+	[self.fieldButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+	[self dismissViewControllerAnimated:YES completion:nil];
+	[self.tableView reloadData];
+	
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
@@ -398,11 +457,7 @@
 
 -(IBAction)chooseGender:(id)sender {
     NSLog(@"chooseGender");
-
-    UIStoryboard *storyboard = self.storyboard;
-    UIViewController *genders = [storyboard
-                  instantiateViewControllerWithIdentifier:@"genderList"];
-    [self presentViewController:genders animated:YES completion:Nil];
+    [self presentViewController:[self fieldSelectorViewController] animated:YES completion:Nil];
 }
 
 -(IBAction)sortOnOff:(UIButton *)button {
