@@ -11,4 +11,6 @@
 
 @interface MHProfileInteractionsViewController : UITableViewController <MHProfileProtocol>
 
+//@property (nonatomic,strong) UIImage *interactionsDemoImage;
+
 @end

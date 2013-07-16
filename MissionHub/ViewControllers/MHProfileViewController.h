@@ -16,6 +16,7 @@
 #import "MHAPI.h"
 #import "MHPerson+Helper.h"
 #import "MHProfileProtocol.h"
+#import "MHProfileSurveysViewController.h"
 
 @interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate,UITableViewDelegate, UITableViewDataSource, MHProfileMenuDelegate, MHProfileProtocol>
 

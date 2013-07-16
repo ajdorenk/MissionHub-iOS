@@ -13,6 +13,7 @@
 #import "ODRefreshControl.h"
 #import "MHRequestOptions.h"
 #import "MHNewInteractionViewController.h"
+#import "MHCreatePersonViewController.h"
 
 
 @interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate> {
