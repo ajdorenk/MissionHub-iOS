@@ -8,33 +8,37 @@
 
 
 #import "MHPerson+Helper.h"
+#import "MHCheckbox.h"
 
+@protocol MHPersonCellDelegate;
 
-@interface MHPersonCell : UITableViewCell
-/*
-{
+@interface MHPersonCell : UITableViewCell <MHCheckboxDelegate> {
 
-    IBOutlet UILabel *name;// name of Person
-    IBOutlet UILabel *gender;// Person gender
-    IBOutlet UIImageView *imageFile; // image filename of Person
-
-    UIImageView *nameBackgroundView = (UIImageView *)[cell viewWithTag:103];
-    nameBackgroundView.layer.borderColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0].CGColor;
-    nameBackgroundView.layer.borderWidth = 1.0;
+	id<MHPersonCellDelegate> cellDelegate;
+	MHPerson *_person;
+	NSIndexPath *_indexPath;
+	NSString *_fieldName;
     
-
 }
-*/
+
+@property (nonatomic, strong) id<MHPersonCellDelegate> cellDelegate;
+@property (nonatomic, strong) MHPerson *person;
+@property (nonatomic, strong) NSIndexPath *indexPath;
+@property (nonatomic, strong) NSString *fieldName;
 
 @property (nonatomic, strong) IBOutlet UILabel *name;
 @property (nonatomic, strong) IBOutlet UILabel *gender;
 @property (nonatomic, strong) IBOutlet UIImageView *profilePicture;
-@property (nonatomic, strong) IBOutlet UIButton *checkbox;
+@property (nonatomic, strong) IBOutlet MHCheckbox *checkbox;
 @property (nonatomic, strong) IBOutlet UIView *nameBackgroundView;
 
--(void)populateWithPerson:(MHPerson *)person;
+-(void)populateWithPerson:(MHPerson *)person forField:(NSString *)field atIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 
-
+@protocol MHPersonCellDelegate <NSObject>
+@optional
+-(void)cell:(MHPersonCell *)cell didSelectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath;
 
 @end

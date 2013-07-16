@@ -49,6 +49,7 @@
 @synthesize searchIsLoading			= _searchIsLoading;
 @synthesize searchPagingIsLoading	= _searchPagingIsLoading;
 @synthesize searchHasLoadedAllPages	= _searchHasLoadedAllPages;
+@synthesize secondaryFieldName		= _secondaryFieldName;
 @synthesize header					= _header;
 @synthesize _profileViewController;
 
@@ -60,6 +61,8 @@
 	self.searchResultArray = [NSMutableArray array];
 	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	self.searchRequestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
+	
+	self.secondaryFieldName = @"gender";
 	
 	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
     sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
@@ -555,7 +558,8 @@
 			MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
 				//Display person in the table cell
 			
-			[cell populateWithPerson:person];
+			cell.cellDelegate = self;
+			[cell populateWithPerson:person forField:self.secondaryFieldName atIndexPath:indexPath];
 		
 			return cell;
 			
@@ -826,6 +830,11 @@
     
 }
 
+-(void)cell:(MHPersonCell *)cell didSelectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath {
+	
+#warning implement cell selection
+	
+}
 
 //-(void)addPersonPressed:(id)sender
 //{

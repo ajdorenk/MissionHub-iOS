@@ -9,6 +9,8 @@
 #import "MHCheckbox.h"
 
 @implementation MHCheckbox
+
+@synthesize checkboxDelegate = _checkboxDelegate;
 @synthesize isChecked;
 
 
@@ -24,15 +26,26 @@
     return self;
 }
 
-- (IBAction)checkBoxClicked{
-    if(self.isChecked==NO){
-        self.isChecked =YES;
-        [self setImage:[UIImage imageNamed:@"checkbox.png" ] forState:UIControlStateNormal];
-    }
-    else{
+- (void)checkBoxClicked {
+	
+    if (self.isChecked){
+		
         self.isChecked = NO;
-        [self setImage:[UIImage imageNamed:@"CheckboxEmpty.png"]forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"CheckboxEmpty.png" ] forState:UIControlStateNormal];
+		
+    } else {
+		
+        self.isChecked = YES;
+        [self setImage:[UIImage imageNamed:@"checkbox.png"]forState:UIControlStateNormal];
+		
     }
+	
+	if ([self.checkboxDelegate respondsToSelector:@selector(checkbox:didChangeValue:)]) {
+		
+		[self.checkboxDelegate checkbox:self didChangeValue:self.isChecked];
+		
+	}
+	
 }
 
 /*-(void)dealloc{

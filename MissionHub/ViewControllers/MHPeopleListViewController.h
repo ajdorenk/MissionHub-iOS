@@ -14,15 +14,16 @@
 #import "MHRequestOptions.h"
 #import "MHNewInteractionViewController.h"
 #import "MHCreatePersonViewController.h"
+#import "MHPersonCell.h"
 
-
-@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate> {
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate> {
 
 	NSMutableArray *_peopleArray;
 	NSMutableArray *_searchResultArray;
 	MHRequestOptions *_requestOptions;
 	MHRequestOptions *_searchRequestOptions;
 	ODRefreshControl *_refreshController;
+	
 	BOOL _isLoading;
 	BOOL _refreshIsLoading;
 	BOOL _pagingIsLoading;
@@ -30,8 +31,11 @@
 	BOOL _searchIsLoading;
 	BOOL _searchHasLoadedAllPages;
 	
+	NSString *_secondaryFieldName;
+	
 	//caching ui
 	UIView *_header;
+	UIView *_activityBar;
 	
 	
 }
@@ -56,7 +60,9 @@
 @property (nonatomic, assign) BOOL searchIsLoading;
 @property (nonatomic, assign) BOOL searchPagingIsLoading;
 @property (nonatomic, assign) BOOL searchHasLoadedAllPages;
+@property (nonatomic, strong) NSString *secondaryFieldName;
 @property (nonatomic, strong) UIView *header;
+@property (nonatomic, strong) IBOutlet UIView *activityBar;
 @property (nonatomic, strong) MHProfileViewController *_profileViewController;
 
 -(IBAction)revealMenu:(id)sender;

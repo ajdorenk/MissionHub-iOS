@@ -590,7 +590,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BackMenu_Icon.png" width="72" height="72"/>
+        <image name="BackMenu_Icon.png" width="16" height="16"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>

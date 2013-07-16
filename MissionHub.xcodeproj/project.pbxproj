@@ -161,6 +161,20 @@
 		6855EDD91793B81D00769B71 /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDD71793B81D00769B71 /* DWTagList.m */; };
 		6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDC17948EC900769B71 /* MHAddress+Helper.m */; };
 		6855EDDE17948ECA00769B71 /* MHAddress+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDC17948EC900769B71 /* MHAddress+Helper.m */; };
+		68839F451794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */; };
+		68839F461794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */; };
+		68839F471794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */; };
+		68839F481794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */; };
+		68839F491794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F401794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png */; };
+		68839F4A1794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F401794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png */; };
+		68839F4B1794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F411794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png */; };
+		68839F4C1794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F411794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png */; };
+		68839F4D1794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */; };
+		68839F4E1794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */; };
+		68839F4F1794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */; };
+		68839F501794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */; };
+		68839F511794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */; };
+		68839F521794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */; };
 		68953EC21784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
 		68953EC31784CD0100F0796C /* MH_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 68953EC11784CD0100F0796C /* MH_Logo.png */; };
 		6896649F17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
@@ -402,6 +416,13 @@
 		6855EDDB17948EC900769B71 /* MHAddress+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHAddress+Helper.h"; path = "Models/MHAddress+Helper.h"; sourceTree = "<group>"; };
 		6855EDDC17948EC900769B71 /* MHAddress+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHAddress+Helper.m"; path = "Models/MHAddress+Helper.m"; sourceTree = "<group>"; };
 		6855EDDF17949ECB00769B71 /* MHProfileProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileProtocol.h; path = ViewControllers/MHProfileProtocol.h; sourceTree = "<group>"; };
+		68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Trash_48.png; sourceTree = "<group>"; };
+		68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Text_48.png; sourceTree = "<group>"; };
+		68839F401794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Permissions_48.png; sourceTree = "<group>"; };
+		68839F411794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Label_48.png; sourceTree = "<group>"; };
+		68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Email_48.png; sourceTree = "<group>"; };
+		68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Assign_48.png; sourceTree = "<group>"; };
+		68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Archive_48.png; sourceTree = "<group>"; };
 		68953EC11784CD0100F0796C /* MH_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Logo.png; sourceTree = "<group>"; };
 		6896649D17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+removeDuplicatesForKey.h"; sourceTree = "<group>"; };
 		6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+removeDuplicatesForKey.m"; sourceTree = "<group>"; };
@@ -844,6 +865,13 @@
 		68478DB0177E8CDC0014501D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */,
+				68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */,
+				68839F401794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png */,
+				68839F411794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png */,
+				68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */,
+				68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */,
+				68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */,
 				68145B9A17911052008145EA /* MHProfileHeader_Placeholder.png */,
 				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
 				AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */,
@@ -1184,6 +1212,13 @@
 				ADCCBA2A17950D5800A613F3 /* InteractionDemo.png in Resources */,
 				ADCCBA2D17950EC700A613F3 /* InfoDemo.png in Resources */,
 				ADCCBA34179513DD00A613F3 /* SurveysDemo.png in Resources */,
+				68839F451794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */,
+				68839F471794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */,
+				68839F491794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png in Resources */,
+				68839F4B1794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png in Resources */,
+				68839F4D1794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png in Resources */,
+				68839F4F1794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */,
+				68839F511794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,6 +1262,13 @@
 				ADCCBA2B17950D5800A613F3 /* InteractionDemo.png in Resources */,
 				ADCCBA2E17950EC700A613F3 /* InfoDemo.png in Resources */,
 				ADCCBA35179513DD00A613F3 /* SurveysDemo.png in Resources */,
+				68839F461794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */,
+				68839F481794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */,
+				68839F4A1794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png in Resources */,
+				68839F4C1794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png in Resources */,
+				68839F4E1794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png in Resources */,
+				68839F501794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */,
+				68839F521794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
