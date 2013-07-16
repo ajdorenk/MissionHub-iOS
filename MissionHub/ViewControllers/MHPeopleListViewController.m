@@ -16,15 +16,21 @@
 #import "MHGenderListController.h"
 #import "UIImageView+AFNetworking.h"
 
+
 #define HEADER_HEIGHT 32.0f
 #define ROW_HEIGHT 61.0f
 
 
-@interface MHPeopleListViewController (Private)
+@interface MHPeopleListViewController ()
 
 -(void)setTextFieldLeftView;
 -(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
+@property (nonatomic, strong) MHNewInteractionViewController		*_createInteractionViewController;
+
+-(MHNewInteractionViewController *)createInteractionViewController;
+
 @end
+
 
 @implementation MHPeopleListViewController
 
@@ -194,6 +200,19 @@
     self.navigationItem.leftBarButtonItem = backMenuButton;
 
 }
+
+-(MHNewInteractionViewController *)createInteractionViewController {
+	
+	if (self._createInteractionViewController == nil) {
+		
+		self._createInteractionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+		
+	}
+	
+	return self._createInteractionViewController;
+	
+}
+
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
 	
@@ -374,6 +393,7 @@
 
 -(IBAction)addLabelActivity:(id)sender {
     NSLog(@"Label Action");
+    	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
 }
 
 -(IBAction)checkAllContacts:(UIButton*)button {

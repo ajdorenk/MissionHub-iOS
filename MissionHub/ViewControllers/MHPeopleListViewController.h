@@ -12,6 +12,8 @@
 #import "MHProfileViewController.h"
 #import "ODRefreshControl.h"
 #import "MHRequestOptions.h"
+#import "MHNewInteractionViewController.h"
+
 
 @interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate> {
 
@@ -61,6 +63,7 @@
 -(void)setDataFromRequestOptions:(MHRequestOptions *)options;
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
 -(MHProfileViewController *)profileViewController;
+
 
 @end
 

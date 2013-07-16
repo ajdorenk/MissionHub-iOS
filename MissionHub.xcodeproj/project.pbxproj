@@ -245,6 +245,8 @@
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
 		ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */; };
 		ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */; };
+		ADCCBA201794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */; };
+		ADCCBA211794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -525,6 +527,8 @@
 		AD9827A4177CF04200A0276A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ADCCBA1A17948E0500A613F3 /* MHInitiatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInitiatorCell.h; path = "Custom UI/MHInitiatorCell.h"; sourceTree = "<group>"; };
 		ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInitiatorCell.m; path = "Custom UI/MHInitiatorCell.m"; sourceTree = "<group>"; };
+		ADCCBA1E1794DDA000A613F3 /* MHCreatePersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCreatePersonViewController.h; path = ViewControllers/MHCreatePersonViewController.h; sourceTree = "<group>"; };
+		ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCreatePersonViewController.m; path = ViewControllers/MHCreatePersonViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -726,6 +730,8 @@
 				AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */,
 				68145B9617910984008145EA /* MHProfileMenuViewController.h */,
 				68145B9717910984008145EA /* MHProfileMenuViewController.m */,
+				ADCCBA1E1794DDA000A613F3 /* MHCreatePersonViewController.h */,
+				ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1301,6 +1307,7 @@
 				6855EDD81793B81D00769B71 /* DWTagList.m in Sources */,
 				6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
 				ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
+				ADCCBA201794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1376,6 +1383,7 @@
 				6855EDD91793B81D00769B71 /* DWTagList.m in Sources */,
 				6855EDDE17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
 				ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
+				ADCCBA211794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
