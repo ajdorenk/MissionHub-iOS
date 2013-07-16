@@ -465,6 +465,7 @@
 
 -(IBAction)addPersonActivity:(id)sender{
     NSLog(@"add Person Action");
+    
     [self.navigationController pushViewController:[self createPersonViewController] animated:YES];
 
 }
@@ -472,6 +473,8 @@
 -(IBAction)addInteractionActivity:(id)sender {
     NSLog(@"Label Action");
     	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
+ //   [self.createInteractionViewController removeToolbar];
+
 }
 
 -(IBAction)checkAllContacts:(UIButton*)button {

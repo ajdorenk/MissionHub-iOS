@@ -1251,8 +1251,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="BackMenu_Icon.png" width="16" height="16"/>
-        <image name="MH_Logo.png" width="16" height="16"/>
+        <image name="BackMenu_Icon.png" width="72" height="72"/>
+        <image name="MH_Logo.png" width="144" height="144"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

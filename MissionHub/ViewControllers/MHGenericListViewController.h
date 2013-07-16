@@ -20,6 +20,7 @@
 @property (nonatomic, strong) IBOutlet UITableView* tableViewList;
 @property (nonatomic, strong) id<MHGenericListViewControllerDelegate> selectionDelegate;
 @property (nonatomic, strong) NSMutableArray *objectArray;
+//@property (nonatomic, strong) UIToolbar *genericToolbar;
 
 
 @end
@@ -29,6 +30,6 @@
 
 
 - (void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
-
+//- (void)removeToolbar;
 
 @end
