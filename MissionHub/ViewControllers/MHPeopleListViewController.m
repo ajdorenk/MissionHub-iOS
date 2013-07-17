@@ -91,6 +91,9 @@
 	
     [genderButton setBackgroundColor:[UIColor clearColor]];
 	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+    [genderButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
+    genderButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    genderButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:genderButton];

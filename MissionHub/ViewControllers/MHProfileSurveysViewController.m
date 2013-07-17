@@ -34,12 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIImageView *infoDemoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SurveysDemo.png"]];
-    
-    // Your scroll view or table view would be a subview of this view
-    [self.tableView addSubview:infoDemoView];
-    [self.tableView bringSubviewToFront:infoDemoView];
+
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -83,7 +78,7 @@
 	}
     
     // Configure the cell...
-	cell.textLabel.text = @"interactions";
+	cell.textLabel.text = @"Surveys";
     
     
     return cell;
