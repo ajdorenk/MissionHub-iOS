@@ -33,7 +33,7 @@
 	BOOL _searchHasLoadedAllPages;
 	
 	MHPersonSortFields _secondaryFieldName;
-	MHRequestOptionsOrders _sortField;
+	MHRequestOptionsOrderFields _sortField;
 	
 	//caching ui
 	UIView *_header;
@@ -62,7 +62,7 @@
 @property (nonatomic, assign) BOOL searchPagingIsLoading;
 @property (nonatomic, assign) BOOL searchHasLoadedAllPages;
 @property (nonatomic, assign) MHPersonSortFields secondaryFieldName;
-@property (nonatomic, assign) MHRequestOptionsOrders sortField;
+@property (nonatomic, assign) MHRequestOptionsOrderFields sortField;
 @property (nonatomic, strong) UIButton *fieldButton;
 @property (nonatomic, strong) UIView *header;
 @property (nonatomic, strong) IBOutlet UIView *activityBar;

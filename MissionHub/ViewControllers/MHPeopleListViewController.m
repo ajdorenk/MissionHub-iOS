@@ -64,11 +64,12 @@
 	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	self.searchRequestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	
+	self.sortField			= MHRequestOptionsOrderFieldPeopleFollowupStatus;
 	self.secondaryFieldName = MHPersonSortFieldFollowupStatus;
 	
 	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
     sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
-	
+	/*
 	UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(41, 6.5, 20, 20.0)];
     headerLabel.textColor = [UIColor whiteColor];
 	headerLabel.backgroundColor = [UIColor clearColor];
@@ -76,7 +77,7 @@
 	[sectionHeader addSubview:headerLabel];
 	
 	headerLabel.text = @"All";
-    
+    */
     //Add genderButton
     UIButton *genderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -112,6 +113,7 @@
     [sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
     [sortButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [sortButton setTitle:@"Sort: off" forState:UIControlStateNormal];
+    [sortButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [sortButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
     
     
@@ -120,7 +122,7 @@
     
     [sectionHeader addSubview:sortButton];
     
-    
+    /*
     UIButton *allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
     [allButton setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
@@ -131,7 +133,7 @@
     [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:allButton];
-	
+	*/
 	self.header = sectionHeader;
 	
 }
@@ -238,23 +240,23 @@
 	
 	switch (indexPath.row) {
 		case 0:
-			self.sortField = MHRequestOptionsOrderPeopleGender;
+			self.sortField = MHRequestOptionsOrderFieldPeopleGender;
 			self.secondaryFieldName = MHPersonSortFieldGender;
 			break;
 		case 1:
-			self.sortField = MHRequestOptionsOrderPeopleFollowupStatus;
+			self.sortField = MHRequestOptionsOrderFieldPeopleFollowupStatus;
 			self.secondaryFieldName = MHPersonSortFieldFollowupStatus;
 			break;
 		case 2:
-			self.sortField = MHRequestOptionsOrderPeoplePermission;
+			self.sortField = MHRequestOptionsOrderFieldPeoplePermission;
 			self.secondaryFieldName = MHPersonSortFieldPermission;
 			break;
 		case 3:
-			self.sortField = MHRequestOptionsOrderPeoplePrimaryPhone;
+			self.sortField = MHRequestOptionsOrderFieldPeoplePrimaryPhone;
 			self.secondaryFieldName = MHPersonSortFieldPrimaryPhone;
 			break;
 		case 4:
-			self.sortField = MHRequestOptionsOrderPeoplePrimaryEmail;
+			self.sortField = MHRequestOptionsOrderFieldPeoplePrimaryEmail;
 			self.secondaryFieldName = MHPersonSortFieldPrimaryEmail;
 			break;
 			
@@ -263,8 +265,10 @@
 	}
 	
 	[self.fieldButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+	[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:self.requestOptions.orderDirection];
+	[self refresh];
 	[self dismissViewControllerAnimated:YES completion:nil];
-	[self.tableView reloadData];
+	//[self.tableView reloadData];
 	
 }
 
@@ -343,6 +347,7 @@
 	
 	[self.searchResultArray removeAllObjects];
 	self.searchRequestOptions		= [self.requestOptions copy];
+	[self.searchRequestOptions clearOrders];
 	self.searchIsLoading			= NO;
 	self.searchHasLoadedAllPages	= NO;
 	self.searchRequestOptions.offset = 0;
@@ -505,15 +510,19 @@
 }
 
 -(IBAction)sortOnOff:(UIButton *)button {
-    NSLog(@"Toggle sort");
-    button.selected = !button.selected;
     
-    if (button.selected) {
-        [button setTitle:@"Sort: on" forState:UIControlStateNormal];
-    }
-    else{
+    if ([button.titleLabel.text isEqualToString:@"Sort: off"]) {
+        [button setTitle:@"Sort: asc" forState:UIControlStateNormal];
+		[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:MHRequestOptionsOrderDirectionAsc];
+    } else if ([button.titleLabel.text isEqualToString:@"Sort: asc"]) {
+        [button setTitle:@"Sort: desc" forState:UIControlStateNormal];
+		[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:MHRequestOptionsOrderDirectionDesc];
+    } else if ([button.titleLabel.text isEqualToString:@"Sort: desc"]) {
         [button setTitle:@"Sort: off" forState:UIControlStateNormal];
+		[self.requestOptions clearOrders];
     }
+	
+	[self refresh];
         
 }
 

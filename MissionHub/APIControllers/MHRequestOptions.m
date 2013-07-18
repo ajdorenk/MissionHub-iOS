@@ -25,21 +25,22 @@
 
 @implementation MHRequestOptions
 
-@synthesize requestName	= _requestName;
-@synthesize type		= _type;
-@synthesize endpoint	= _endpoint;
-@synthesize remoteID	= _remoteID;
-@synthesize filters		= _filters;
-@synthesize includes	= _includes;
-@synthesize limit		= _limit;
-@synthesize offset		= _offset;
-@synthesize order		= _order;
+@synthesize requestName		= _requestName;
+@synthesize type			= _type;
+@synthesize endpoint		= _endpoint;
+@synthesize remoteID		= _remoteID;
+@synthesize filters			= _filters;
+@synthesize includes		= _includes;
+@synthesize limit			= _limit;
+@synthesize offset			= _offset;
+@synthesize orderField		= _orderField;
+@synthesize orderDirection	= _orderDirection;
 
 @synthesize successBlock	= _successBlock;
 @synthesize failBlock		= _failBlock;
 
 //TODO: implement postParams initialization and accessor functions
-@synthesize postParams	= _postParams;
+@synthesize postParams		= _postParams;
 
 -(id)init {
 	
@@ -56,10 +57,10 @@
 
 -(id)reset {
 	
-	self.requestName= @"";
-	self.type		= MHRequestOptionsTypeIndex;
-	self.endpoint	= MHRequestOptionsEndpointPeople;
-	self.remoteID	= 0;
+	self.requestName	= @"";
+	self.type			= MHRequestOptionsTypeIndex;
+	self.endpoint		= MHRequestOptionsEndpointPeople;
+	self.remoteID		= 0;
 	
 	if (self.filters) {
 		[self.filters removeAllObjects];
@@ -73,12 +74,13 @@
 		self.includes	= [NSMutableIndexSet indexSet];
 	}
 	
-	self.limit		= 0;
-	self.offset		= 0;
-	self.order		= MHRequestOptionsOrderNone;
+	self.limit			= 0;
+	self.offset			= 0;
+	self.orderField		= MHRequestOptionsOrderFieldNone;
+	self.orderDirection	= MHRequestOptionsOrderDirectionNone;
 	
-	self.successBlock		= nil;
-	self.failBlock			= nil;
+	self.successBlock	= nil;
+	self.failBlock		= nil;
 	
 	if (self.postParams) {
 		[self.postParams removeAllObjects];
@@ -103,7 +105,8 @@
 	
 	returnObject.limit			= self.limit;
 	returnObject.offset			= self.offset;
-	returnObject.order			= self.order;
+	returnObject.orderField		= self.orderField;
+	returnObject.orderDirection	= self.orderDirection;
 	
 	returnObject.successBlock	= self.successBlock;
 	returnObject.failBlock		= self.failBlock;
@@ -133,8 +136,12 @@
 	return (self.offset > 0);
 }
 
--(BOOL)hasOrder {
-	return (self.order != MHRequestOptionsOrderNone);
+-(BOOL)hasOrderField {
+	return (self.orderField != MHRequestOptionsOrderFieldNone);
+}
+
+-(BOOL)hasOrderDirection {
+	return (self.orderDirection != MHRequestOptionsOrderDirectionNone);
 }
 
 -(id)configureForInitialPeoplePageRequest {
@@ -364,6 +371,23 @@
 	return self;
 }
 
+-(id)setOrderField:(MHRequestOptionsOrderFields)orderField orderDirection:(MHRequestOptionsOrderDirections)orderDirection {
+	
+	self.orderField		= orderField;
+	self.orderDirection = orderDirection;
+	
+	return self;
+	
+}
+
+-(id)clearOrders {
+	
+	self.orderField		= MHRequestOptionsOrderFieldNone;
+	self.orderDirection = MHRequestOptionsOrderDirectionNone;
+	
+	return self;
+}
+
 -(id)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value {
 	
 	[self.postParams setObject:value forKey:paramName];
@@ -466,8 +490,11 @@
 	return [NSNumber numberWithInteger:self.offset].stringValue;
 }
 
--(NSString *)stringForOrder {
-	return [self stringFromOrder:self.order];
+-(NSString *)stringForOrders {
+	
+	__block NSString * orderString = [NSString stringWithFormat:@"%@ %@", [self stringFromOrderField:self.orderField], [self stringFromOrderDirection:self.orderDirection]];
+	
+	return orderString;
 }
 
 -(NSString *)stringFromEndpoint:(MHRequestOptionsEndpoints)endpoint {
@@ -806,40 +833,53 @@
 	
 }
 
--(NSString *)stringFromOrder:(MHRequestOptionsOrders)order {
+-(NSString *)stringFromOrderField:(MHRequestOptionsOrderFields)orderField {
 
 	NSString *orderString;
 	
-	switch (order) {
-		case MHRequestOptionsOrderAsc:
-			orderString = @"asc";
-			break;
-		case MHRequestOptionsOrderCreatedAt:
+	switch (orderField) {
+		case MHRequestOptionsOrderFieldCreatedAt:
 			orderString = @"created_at";
 			break;
-		case MHRequestOptionsOrderDesc:
-			orderString = @"desc";
-			break;
-		case MHRequestOptionsOrderPeopleFirstName:
+		case MHRequestOptionsOrderFieldPeopleFirstName:
 			orderString = @"first_name";
 			break;
-		case MHRequestOptionsOrderPeopleLastName:
-			orderString = @"last_name";
-			break;
-		case MHRequestOptionsOrderPeopleFollowupStatus:
+		case MHRequestOptionsOrderFieldPeopleFollowupStatus:
 			orderString = @"followup_status";
 			break;
-		case MHRequestOptionsOrderPeopleGender:
+		case MHRequestOptionsOrderFieldPeopleGender:
 			orderString = @"gender";
 			break;
-		case MHRequestOptionsOrderPeoplePermission:
+		case MHRequestOptionsOrderFieldPeopleLastName:
+			orderString = @"last_name";
+			break;
+		case MHRequestOptionsOrderFieldPeoplePermission:
 			orderString = @"permission";
 			break;
-		case MHRequestOptionsOrderPeoplePrimaryEmail:
+		case MHRequestOptionsOrderFieldPeoplePrimaryEmail:
 			orderString = @"primary_email";
 			break;
-		case MHRequestOptionsOrderPeoplePrimaryPhone:
+		case MHRequestOptionsOrderFieldPeoplePrimaryPhone:
 			orderString = @"primary_phone";
+			break;
+		default:
+			break;
+	}
+	
+	return orderString;
+	
+}
+
+-(NSString *)stringFromOrderDirection:(MHRequestOptionsOrderDirections)orderDirection {
+	
+	NSString *orderString;
+	
+	switch (orderDirection) {
+		case MHRequestOptionsOrderDirectionAsc:
+			orderString = @"asc";
+			break;
+		case MHRequestOptionsOrderDirectionDesc:
+			orderString = @"desc";
 			break;
 		default:
 			break;

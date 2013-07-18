@@ -418,9 +418,9 @@ typedef enum {
 		
 	}
 	
-	if ([options hasOrder]) {
+	if ([options hasOrderField] && [options hasOrderDirection]) {
 		
-		[params setValue:[options stringForOrder] forKey:@"order"];
+		[params setValue:[options stringForOrders] forKey:@"order"];
 		
 	}
 	
