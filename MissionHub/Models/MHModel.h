@@ -20,6 +20,9 @@
 @property (nonatomic, strong) NSDictionary *attributes;
 //@property (nonatomic, strong) NSDictionary *relationships;
 
+
+-(NSString *)displayString;
+
 +(NSEntityDescription *)entity;
 +(NSEntityDescription *)entityFromName:(NSString *)name;
 

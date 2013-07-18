@@ -16,15 +16,22 @@
 #import "MHGenderListController.h"
 #import "UIImageView+AFNetworking.h"
 
+
 #define HEADER_HEIGHT 32.0f
 #define ROW_HEIGHT 61.0f
 
 
-@interface MHPeopleListViewController (Private)
+@interface MHPeopleListViewController ()
 
 -(void)setTextFieldLeftView;
--(void)populateCell:(MHPersonCell *)personCell withPerson:(MHPerson *)person;
+@property (nonatomic, strong) MHNewInteractionViewController		*_createInteractionViewController;
+@property (nonatomic, strong) MHCreatePersonViewController          *_createPersonViewController;
+
+-(MHNewInteractionViewController *)createInteractionViewController;
+-(MHCreatePersonViewController *)createPersonViewController;
+
 @end
+
 
 @implementation MHPeopleListViewController
 
@@ -41,8 +48,12 @@
 @synthesize searchIsLoading			= _searchIsLoading;
 @synthesize searchPagingIsLoading	= _searchPagingIsLoading;
 @synthesize searchHasLoadedAllPages	= _searchHasLoadedAllPages;
+@synthesize secondaryFieldName		= _secondaryFieldName;
+@synthesize fieldButton;
+@synthesize sortField				= _sortField;
 @synthesize header					= _header;
 @synthesize _profileViewController;
+@synthesize _fieldSelectorViewController;
 
 -(void)awakeFromNib {
 	
@@ -52,6 +63,8 @@
 	self.searchResultArray = [NSMutableArray array];
 	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	self.searchRequestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
+	
+	self.secondaryFieldName = MHPersonSortFieldFollowupStatus;
 	
 	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
     sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
@@ -77,9 +90,16 @@
     [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
 	
     [genderButton setBackgroundColor:[UIColor clearColor]];
+	[genderButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
+	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+    [genderButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
+    genderButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    genderButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:genderButton];
+	
+	self.fieldButton = genderButton;
     
     UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
@@ -129,6 +149,26 @@
 	
 }
 
+-(MHGenericListViewController *)fieldSelectorViewController {
+	
+	if (self._fieldSelectorViewController == nil) {
+		
+		self._fieldSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		self._fieldSelectorViewController.selectionDelegate = self;
+		self._fieldSelectorViewController.objectArray = [NSMutableArray arrayWithArray:@[
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldGender],
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldFollowupStatus],
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldPermission],
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldPrimaryPhone],
+														 [MHPerson fieldNameForSortField:MHPersonSortFieldPrimaryEmail]
+														 ]];
+		
+	}
+	
+	return self._fieldSelectorViewController;
+	
+}
+
 -(void)viewWillAppear:(BOOL)animated {
 	
 	[super viewWillAppear:animated];
@@ -175,14 +215,14 @@
     [newPerson addTarget:self action:@selector(addPersonActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
     
-    UIImage* labelImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
-    UIButton *newLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
-    [newLabel setImage:labelImage forState:UIControlStateNormal];
-    [newLabel addTarget:self action:@selector(addLabelActivity:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addLabelButton = [[UIBarButtonItem alloc] initWithCustomView:newLabel];
+    UIImage* interactionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
+    UIButton *addInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
+    [addInteraction setImage:interactionImage forState:UIControlStateNormal];
+    [addInteraction addTarget:self action:@selector(addInteractionActivity:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addInteractionButton = [[UIBarButtonItem alloc] initWithCustomView:addInteraction];
     
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addLabelButton, addPersonButton, nil]];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addInteractionButton, addPersonButton, nil]];
     
 
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
@@ -193,6 +233,65 @@
     
     self.navigationItem.leftBarButtonItem = backMenuButton;
 
+}
+
+-(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+	
+	switch (indexPath.row) {
+		case 0:
+			self.sortField = MHRequestOptionsOrderPeopleGender;
+			self.secondaryFieldName = MHPersonSortFieldGender;
+			break;
+		case 1:
+			self.sortField = MHRequestOptionsOrderPeopleFollowupStatus;
+			self.secondaryFieldName = MHPersonSortFieldFollowupStatus;
+			break;
+		case 2:
+			self.sortField = MHRequestOptionsOrderPeoplePermission;
+			self.secondaryFieldName = MHPersonSortFieldPermission;
+			break;
+		case 3:
+			self.sortField = MHRequestOptionsOrderPeoplePrimaryPhone;
+			self.secondaryFieldName = MHPersonSortFieldPrimaryPhone;
+			break;
+		case 4:
+			self.sortField = MHRequestOptionsOrderPeoplePrimaryEmail;
+			self.secondaryFieldName = MHPersonSortFieldPrimaryEmail;
+			break;
+			
+		default:
+			break;
+	}
+	
+	[self.fieldButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+	[self dismissViewControllerAnimated:YES completion:nil];
+	[self.tableView reloadData];
+	
+}
+
+-(MHNewInteractionViewController *)createInteractionViewController {
+	
+	if (self._createInteractionViewController == nil) {
+		
+		self._createInteractionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+		
+	}
+	
+	return self._createInteractionViewController;
+	
+}
+
+
+-(MHCreatePersonViewController *)createPersonViewController {
+	
+	if (self._createPersonViewController == nil) {
+		
+		self._createPersonViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHCreatePersonViewController"];
+		
+	}
+	
+	return self._createPersonViewController;
+	
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
@@ -370,10 +469,16 @@
 
 -(IBAction)addPersonActivity:(id)sender{
     NSLog(@"add Person Action");
+    
+    [self.navigationController pushViewController:[self createPersonViewController] animated:YES];
+
 }
 
--(IBAction)addLabelActivity:(id)sender {
+-(IBAction)addInteractionActivity:(id)sender {
     NSLog(@"Label Action");
+    	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
+ //   [self.createInteractionViewController removeToolbar];
+
 }
 
 -(IBAction)checkAllContacts:(UIButton*)button {
@@ -395,11 +500,7 @@
 
 -(IBAction)chooseGender:(id)sender {
     NSLog(@"chooseGender");
-
-    UIStoryboard *storyboard = self.storyboard;
-    UIViewController *genders = [storyboard
-                  instantiateViewControllerWithIdentifier:@"genderList"];
-    [self presentViewController:genders animated:YES completion:Nil];
+    [self presentViewController:[self fieldSelectorViewController] animated:YES completion:Nil];
 }
 
 -(IBAction)sortOnOff:(UIButton *)button {
@@ -518,7 +619,8 @@
 			MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
 				//Display person in the table cell
 			
-			[cell populateWithPerson:person];
+			cell.cellDelegate = self;
+			[cell populateWithPerson:person forField:self.secondaryFieldName atIndexPath:indexPath];
 		
 			return cell;
 			
@@ -789,6 +891,9 @@
     
 }
 
+-(void)cell:(MHPersonCell *)cell didSelectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath {
+	
+}
 
 //-(void)addPersonPressed:(id)sender
 //{

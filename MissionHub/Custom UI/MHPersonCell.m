@@ -12,6 +12,10 @@
 
 @implementation MHPersonCell
 
+@synthesize cellDelegate	= _cellDelegate;
+@synthesize person			= _person;
+@synthesize indexPath		= _indexPath;
+@synthesize fieldName		= _fieldName;
 @synthesize name, gender, profilePicture, checkbox, nameBackgroundView;
 
 //@synthesize delegate;
@@ -40,11 +44,11 @@
     
    // UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
-    [checkbox setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
-    [checkbox setTintColor:[UIColor clearColor]];
-    [checkbox setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
-    [checkbox setBackgroundColor:[UIColor clearColor]];
-    [checkbox addTarget:self action:@selector(checkContact:) forControlEvents:UIControlEventTouchDown];
+    [self.checkbox setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
+    [self.checkbox setTintColor:[UIColor clearColor]];
+    [self.checkbox setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
+    [self.checkbox setBackgroundColor:[UIColor clearColor]];
+	self.checkbox.checkboxDelegate = self;
     
     
 }
@@ -56,26 +60,11 @@
     // Configure the view for the selected state
 }
 
--(IBAction)checkContact:(UIButton*)button {
-    NSLog(@"Check all");
-    button.selected = !button.selected;
-    
-    if (button.selected) {
-        UIImage *checkedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_24.png"];
-        [button setFrame:CGRectMake(13.0, 5.0, 18, 19)];
-        [button setBackgroundImage:checkedBox forState:UIControlStateNormal];
-    }
-    else{
-        UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
-        [button setFrame:CGRectMake(13.0, 9.0, 15, 15)];
-        [button setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
-        
-    }
-}
 
-
--(void)populateWithPerson:(MHPerson *)person{
+-(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField atIndexPath:(NSIndexPath *)indexPath {
     
+	self.indexPath = indexPath;
+	
     if (person.picture == nil) {
 		
         self.profilePicture.image = [UIImage imageNamed:@"MHPersonCell_Placeholder.png"];
@@ -86,8 +75,20 @@
 													  placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
     }
     
-    self.gender.text = person.gender;
+	self.gender.text = [person valueForSortField:sortField];
+
     self.name.text = [person fullName];
+	
+}
+
+-(void)checkbox:(MHCheckbox *)checkbox didChangeValue:(BOOL)checked {
+	
+	if ([self.cellDelegate respondsToSelector:@selector(cell:didSelectPerson:atIndexPath:)]) {
+		
+		[self.cellDelegate cell:self didSelectPerson:self.person atIndexPath:self.indexPath];
+		
+	}
+	
 }
 
 @end

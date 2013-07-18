@@ -23,12 +23,16 @@
 @property (nonatomic, strong) MHProfileMenuViewController			*_menuViewController;
 @property (nonatomic, strong) MHProfileInfoViewController			*_infoViewController;
 @property (nonatomic, strong) MHProfileInteractionsViewController	*_interactionsViewController;
+@property (nonatomic, strong) MHGenericListViewController			*_labelViewController;
+@property (nonatomic, strong) MHProfileSurveysViewController		*_surveysViewController;
 
 -(MHNewInteractionViewController *)createInteractionViewController;
 -(MHProfileHeaderViewController *)headerViewController;
 -(MHProfileMenuViewController *)menuViewController;
 -(MHProfileInfoViewController *)infoViewController;
 -(MHProfileInteractionsViewController *)interactionsViewController;
+-(MHProfileSurveysViewController *)surveysViewController;
+
 
 @end
 
@@ -44,7 +48,7 @@
 -(void) awakeFromNib
 {
 	// Add A and B view controllers to the array
-    self.allViewControllers = @[[self infoViewController], [self interactionsViewController], [self interactionsViewController]];
+    self.allViewControllers = @[[self infoViewController], [self interactionsViewController], [self surveysViewController]];
 	
     [[self menuViewController] setMenuSelection:0];
 	[[self menuViewController] setMenuDelegate:self];
@@ -56,7 +60,7 @@
 	
 	self._person = [MHAPI sharedInstance].currentUser;
 	self._interactionArray = [NSMutableArray array];
-    
+	
 }
 
 - (void)viewDidLoad
@@ -163,6 +167,30 @@
 	
 }
 
+-(MHGenericListViewController *)labelViewController {
+	
+	if (self._labelViewController == nil) {
+		
+		self._labelViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		
+	}
+	
+	return self._labelViewController;
+	
+}
+
+-(MHProfileSurveysViewController *)surveysViewController {
+	
+	if (self._surveysViewController == nil) {
+		
+		self._surveysViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileSurveysViewController"];
+		
+	}
+	
+	return self._surveysViewController;
+	
+}
+
 -(void)setPerson:(MHPerson *)person {
 	
 	if (person) {
@@ -254,12 +282,29 @@
  }
 
 - (IBAction)addLabelActivity:(id)sender {
-NSLog(@"add Person Action");
+
+	[self labelViewController].selectionDelegate = self;
+	[self labelViewController].objectArray = [NSMutableArray arrayWithArray:[[MHAPI sharedInstance].currentUser.currentOrganization.labels allObjects]];
+	[self presentViewController:[self labelViewController] animated:YES completion:nil];
+	
+}
+
+-(IBAction)addTagActivity:(id)sender {
+	
+	
+	
+}
+
+-(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+	
+	[self dismissViewControllerAnimated:YES completion:nil];
+	
 }
 
 - (IBAction)newInteractionActivity:(id)sender {
 NSLog(@"Interaction Action");
 	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
+    
  
 }
 

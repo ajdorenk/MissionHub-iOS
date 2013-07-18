@@ -747,7 +747,7 @@
 			includeString = @"interactions";
 			break;
 		case MHRequestOptionsIncludePeopleOrganizationalPermissions:
-			includeString = @"organizational_permissions";
+			includeString = @"organizational_permission";
 			break;
 		case MHRequestOptionsIncludePeopleAnswerSheets:
 			includeString = @"answer_sheets";
@@ -825,6 +825,21 @@
 			break;
 		case MHRequestOptionsOrderPeopleLastName:
 			orderString = @"last_name";
+			break;
+		case MHRequestOptionsOrderPeopleFollowupStatus:
+			orderString = @"followup_status";
+			break;
+		case MHRequestOptionsOrderPeopleGender:
+			orderString = @"gender";
+			break;
+		case MHRequestOptionsOrderPeoplePermission:
+			orderString = @"permission";
+			break;
+		case MHRequestOptionsOrderPeoplePrimaryEmail:
+			orderString = @"primary_email";
+			break;
+		case MHRequestOptionsOrderPeoplePrimaryPhone:
+			orderString = @"primary_phone";
 			break;
 		default:
 			break;

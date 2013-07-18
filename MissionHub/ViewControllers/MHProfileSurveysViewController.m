@@ -1,26 +1,26 @@
 //
-//  MHInteractionViewController.m
+//  MHProfileSurveysViewController.m
 //  MissionHub
 //
-//  Created by Amarisa Robison on 7/5/13.
+//  Created by Amarisa Robison on 7/15/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
-#import "MHProfileInteractionsViewController.h"
+#import "MHProfileSurveysViewController.h"
 #import "M6ParallaxController.h"
-#import "MHInteractionCell.h"
 
-@interface MHProfileInteractionsViewController ()
+@interface MHProfileSurveysViewController ()
 
 @end
 
-@implementation MHProfileInteractionsViewController
+@implementation MHProfileSurveysViewController
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
     [self.parallaxController tableViewControllerDidScroll:self];
 	
 }
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,15 +34,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-	
+
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-	
+ 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,7 +78,7 @@
 	}
     
     // Configure the cell...
-	cell.textLabel.text = @"interactions";
+	cell.textLabel.text = @"Surveys";
     
     
     return cell;

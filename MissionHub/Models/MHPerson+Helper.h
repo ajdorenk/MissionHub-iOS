@@ -20,7 +20,20 @@
 #import "MHSurvey.h"
 #import "MHUser.h"
 
+typedef enum {
+	MHPersonSortFieldFirstName,
+	MHPersonSortFieldLastName,
+	MHPersonSortFieldGender,
+	MHPersonSortFieldFollowupStatus,
+	MHPersonSortFieldPermission,
+	MHPersonSortFieldPrimaryPhone,
+	MHPersonSortFieldPrimaryEmail
+} MHPersonSortFields;
+
 @interface MHPerson (Helper)
+
+-(NSString *)valueForSortField:(MHPersonSortFields)sortField;
++(NSString *)fieldNameForSortField:(MHPersonSortFields)sortField;
 
 -(NSString *)fullName;
 -(NSString *)primaryEmail;

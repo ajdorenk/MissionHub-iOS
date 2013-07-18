@@ -143,13 +143,13 @@
     self.interactionObject.timestamp = self.datePicker.date;
     //interactionObject.receiver = ;
     //interactionObject.initiator = ;
-    NSLog(@"\n%@", self.interactionObject.comment);
     
 }
 
+- (void) list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
 
-- (void) list:(MHGenericListViewController *)viewController didSelectPerson:(MHPerson *)person {
-
+	MHPerson *person = (MHPerson *)object;
+	
     // Do something with value...
 
     NSString *name = [person fullName];
@@ -198,7 +198,6 @@
 }
 
 -(IBAction)doneWithDatePicker:(id)sender{
-    NSLog(@"remove");
     [self.datePicker setHidden:YES];
     UIImage* saveImage = [UIImage imageNamed:@"MH_Mobile_Button_Save_72.png"];
     UIButton *save = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
@@ -221,7 +220,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"return");
     [textField resignFirstResponder];
     
     return YES;
@@ -252,7 +250,6 @@
 
 
 - (IBAction)backToMenu:(id)sender {
-    NSLog(@"works");
     [self.navigationController popViewControllerAnimated:YES];
 }
 

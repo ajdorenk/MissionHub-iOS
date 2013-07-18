@@ -10,6 +10,82 @@
 
 @implementation MHPerson (Helper)
 
+-(NSString *)valueForSortField:(MHPersonSortFields)sortField {
+	
+	NSString *value = @"";
+	
+	switch (sortField) {
+		case MHPersonSortFieldFirstName:
+			value = self.first_name;
+			break;
+		case MHPersonSortFieldFollowupStatus:
+			value = [self followupStatus];
+			break;
+		case MHPersonSortFieldGender:
+			value = self.gender;
+			break;
+		case MHPersonSortFieldLastName:
+			value = self.last_name;
+			break;
+		case MHPersonSortFieldPermission:
+			value = [self permissionName];
+			break;
+		case MHPersonSortFieldPrimaryEmail:
+			value = [self primaryEmail];
+			break;
+		case MHPersonSortFieldPrimaryPhone:
+			value = [self primaryPhone];
+			break;
+			
+		default:
+			break;
+	}
+	
+	return value;
+	
+}
+
++(NSString *)fieldNameForSortField:(MHPersonSortFields)sortField {
+	
+	NSString *value = @"";
+	
+	switch (sortField) {
+		case MHPersonSortFieldFirstName:
+			value = @"First Name";
+			break;
+		case MHPersonSortFieldFollowupStatus:
+			value = @"Status";
+			break;
+		case MHPersonSortFieldGender:
+			value = @"Gender";
+			break;
+		case MHPersonSortFieldLastName:
+			value = @"Last Name";
+			break;
+		case MHPersonSortFieldPermission:
+			value = @"Permission";
+			break;
+		case MHPersonSortFieldPrimaryEmail:
+			value = @"Email";
+			break;
+		case MHPersonSortFieldPrimaryPhone:
+			value = @"Phone";
+			break;
+			
+		default:
+			break;
+	}
+	
+	return value;
+	
+}
+
+-(NSString *)displayString {
+	
+	return [self fullName];
+	
+}
+
 -(NSString *)fullName {
 	
 	if (self.last_name) {
@@ -58,18 +134,34 @@
 
 -(NSString *)permissionName {
 	
-	return ( [[self.permissionLevel permission] name] ? [[self.permissionLevel permission] name] : @"");
+	if (self.permissionLevel) {
+		
+		if (self.permissionLevel.permission) {
+			
+			return ( [[self.permissionLevel permission] name] ? [[self.permissionLevel permission] name] : @"");
+			
+		}
+		
+		if (self.permissionLevel.permission_id) {
+			
+			switch ([[self.permissionLevel permission_id] integerValue]) {
+				case 1:
+					return @"Admin";
+				case 2:
+					return @"No Permission";
+				case 4:
+					return @"User";
+					
+				default:
+					return @"";
+			}
+			
+		}
+		
+	}
 	
-}
-
--(NSArray *)fieldsForSorting {
-
-	return @[
-		  //@{@"local": @"first_name", @"filter": @"first_name", @"order": @"first_name"},
-		  //@{@"local": @"last_name", @"remote": @"last_name"},
-	@{@"local": @"gender", @"filter": @"gender", @"order": @"gender"},
-	@{@"local": @"followup_status", @"remote": @"followup_status"}
-		  ];
+	return @"";
+	//return ( [[self.permissionLevel permission] name] ? [[self.permissionLevel permission] name] : @"");
 	
 }
 

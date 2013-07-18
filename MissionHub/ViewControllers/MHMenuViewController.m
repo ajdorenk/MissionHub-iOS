@@ -15,11 +15,13 @@
 #import "MHPerson+Helper.h"
 #import "MHSurvey.h"
 #import "NSMutableArray+removeDuplicatesForKey.h"
+#import "MHGenericListViewController.h"
 
 @interface MHMenuViewController ()
 
 @property (nonatomic, strong) MHNavigationViewController *_peopleNavigationViewController;
 @property (nonatomic, strong) MHSurveyViewController *_surveyViewController;
+@property (nonatomic, strong) MHGenericListViewController *_organizationViewController;
 @property (nonatomic, strong) MHPerson *user;
 @property (nonatomic, strong) NSArray *menuHeaders;
 @property (nonatomic, strong) NSMutableArray *menuItems;
@@ -57,9 +59,30 @@
 	
 }
 
+-(MHGenericListViewController *)organizationViewController {
+	
+	if (self._organizationViewController == nil) {
+		
+		self._organizationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		
+	}
+	
+	return self._organizationViewController;
+	
+}
+
 -(void)changeOrganization {
 	
 	NSLog(@"change org");
+	[self organizationViewController].selectionDelegate = self;
+	[self organizationViewController].objectArray = [NSMutableArray arrayWithArray:[self.user.allOrganizations allObjects]];
+	[self presentViewController:[self organizationViewController] animated:YES completion:nil];
+	
+}
+
+-(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+	
+	[self dismissViewControllerAnimated:YES completion:nil];
 	
 }
 
