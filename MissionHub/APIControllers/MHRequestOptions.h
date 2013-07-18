@@ -88,49 +88,55 @@ typedef enum {
 } MHRequestOptionsFilters;
 
 typedef enum {
-	MHRequestOptionsOrderNone,
-	MHRequestOptionsOrderCreatedAt,
-	MHRequestOptionsOrderAsc,
-	MHRequestOptionsOrderDesc,
-	MHRequestOptionsOrderPeopleFirstName,
-	MHRequestOptionsOrderPeopleLastName,
-	MHRequestOptionsOrderPeopleGender,
-	MHRequestOptionsOrderPeopleFollowupStatus,
-	MHRequestOptionsOrderPeoplePermission,
-	MHRequestOptionsOrderPeoplePrimaryPhone,
-	MHRequestOptionsOrderPeoplePrimaryEmail
-} MHRequestOptionsOrders;
+	MHRequestOptionsOrderFieldNone,
+	MHRequestOptionsOrderFieldCreatedAt,
+	MHRequestOptionsOrderFieldPeopleFirstName,
+	MHRequestOptionsOrderFieldPeopleLastName,
+	MHRequestOptionsOrderFieldPeopleGender,
+	MHRequestOptionsOrderFieldPeopleFollowupStatus,
+	MHRequestOptionsOrderFieldPeoplePermission,
+	MHRequestOptionsOrderFieldPeoplePrimaryPhone,
+	MHRequestOptionsOrderFieldPeoplePrimaryEmail
+} MHRequestOptionsOrderFields;
+
+typedef enum {
+	MHRequestOptionsOrderDirectionNone,
+	MHRequestOptionsOrderDirectionAsc,
+	MHRequestOptionsOrderDirectionDesc
+} MHRequestOptionsOrderDirections;
 
 @interface MHRequestOptions : NSObject {
 	
-	NSString					*_requestName;
-	MHRequestOptionsTypes		_type;
-	MHRequestOptionsEndpoints	_endpoint;
-	NSUInteger					_remoteID;
-	NSMutableDictionary			*_filters;
-	NSMutableIndexSet			*_includes;
-	NSUInteger					_limit;
-	NSUInteger					_offset;
-	MHRequestOptionsOrders		_order;
+	NSString						*_requestName;
+	MHRequestOptionsTypes			_type;
+	MHRequestOptionsEndpoints		_endpoint;
+	NSUInteger						_remoteID;
+	NSMutableDictionary				*_filters;
+	NSMutableIndexSet				*_includes;
+	NSUInteger						_limit;
+	NSUInteger						_offset;
+	MHRequestOptionsOrderFields		_orderField;
+	MHRequestOptionsOrderDirections	_orderDirection;
 	
-	NSMutableDictionary			*_postParams;
+	NSMutableDictionary				*_postParams;
 	
 	void (^_successBlock)(NSArray *results, MHRequestOptions *options);
 	void (^_failBlock)(NSError *error, MHRequestOptions *options);
 	
 }
 
-@property (nonatomic, strong) NSString					*requestName;
-@property (nonatomic, assign) MHRequestOptionsTypes		type;
-@property (nonatomic, assign) MHRequestOptionsEndpoints	endpoint;
-@property (nonatomic, assign) NSUInteger				remoteID;
-@property (nonatomic, strong) NSMutableDictionary		*filters;
-@property (nonatomic, strong) NSMutableIndexSet			*includes;
-@property (nonatomic, assign) NSUInteger				limit;
-@property (nonatomic, assign) NSUInteger				offset;
-@property (nonatomic, assign) MHRequestOptionsOrders	order;
+@property (nonatomic, strong) NSString							*requestName;
+@property (nonatomic, assign) MHRequestOptionsTypes				type;
+@property (nonatomic, assign) MHRequestOptionsEndpoints			endpoint;
+@property (nonatomic, assign) NSUInteger						remoteID;
+@property (nonatomic, strong) NSMutableDictionary				*filters;
+@property (nonatomic, strong) NSMutableIndexSet					*includes;
+@property (nonatomic, assign) NSUInteger						limit;
+@property (nonatomic, assign) NSUInteger						offset;
+@property (nonatomic, assign) MHRequestOptionsOrderFields		orderField;
+@property (nonatomic, assign) MHRequestOptionsOrderDirections	orderDirection;
 
-@property (nonatomic, strong) NSMutableDictionary		*postParams;
+@property (nonatomic, strong) NSMutableDictionary				*postParams;
 
 @property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
 @property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);
@@ -141,7 +147,8 @@ typedef enum {
 -(BOOL)hasIncludes;
 -(BOOL)hasLimit;
 -(BOOL)hasOffset;
--(BOOL)hasOrder;
+-(BOOL)hasOrderField;
+-(BOOL)hasOrderDirection;
 
 -(id)configureForInitialPeoplePageRequest;
 -(id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
@@ -159,6 +166,9 @@ typedef enum {
 -(id)addIncludesForPeoplePageRequest;
 -(id)addIncludesForContactAssignmentsPageRequest;
 -(id)clearIncludes;
+
+-(id)setOrderField:(MHRequestOptionsOrderFields)orderField orderDirection:(MHRequestOptionsOrderDirections)orderDirection;
+-(id)clearOrders;
 
 -(id)setLimitAndOffsetForFirstPage;
 -(id)setLimitAndOffsetForNextPage;
@@ -182,7 +192,7 @@ typedef enum {
 -(NSString *)stringForIncludes;
 -(NSString *)stringForLimit;
 -(NSString *)stringForOffset;
--(NSString *)stringForOrder;
+-(NSString *)stringForOrders;
 -(NSString *)classNameForEndpoint;
 
 -(NSString *)classNameFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
@@ -190,6 +200,7 @@ typedef enum {
 -(NSString *)stringFromFilter:(MHRequestOptionsFilters)filter;
 -(NSString *)stringInSingluarFormatFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
 -(NSString *)stringFromInclude:(MHRequestOptionsIncludes)include;
--(NSString *)stringFromOrder:(MHRequestOptionsOrders)order;
+-(NSString *)stringFromOrderField:(MHRequestOptionsOrderFields)orderField;
+-(NSString *)stringFromOrderDirection:(MHRequestOptionsOrderDirections)orderDirection;
 
 @end
