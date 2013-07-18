@@ -37,7 +37,6 @@
 	
 	//caching ui
 	UIView *_header;
-	UIView *_activityBar;
 	
 	
 }

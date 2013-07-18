@@ -16,8 +16,6 @@
 
 @interface MHGenericListViewController ()
 
-- (void)removeToolbar;
-
 @end
 
 @implementation MHGenericListViewController
@@ -199,11 +197,6 @@
  return YES;
  }
  */
-
-/*- (void)removeToolbar{
-    [self.genericToolbar removeFromSuperview];
-}
-*/
 
 
 - (void)didReceiveMemoryWarning

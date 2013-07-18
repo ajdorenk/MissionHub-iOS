@@ -60,7 +60,7 @@
 	
 	self._person = [MHAPI sharedInstance].currentUser;
 	self._interactionArray = [NSMutableArray array];
-    
+	
 }
 
 - (void)viewDidLoad
@@ -286,6 +286,12 @@
 	[self labelViewController].selectionDelegate = self;
 	[self labelViewController].objectArray = [NSMutableArray arrayWithArray:[[MHAPI sharedInstance].currentUser.currentOrganization.labels allObjects]];
 	[self presentViewController:[self labelViewController] animated:YES completion:nil];
+	
+}
+
+-(IBAction)addTagActivity:(id)sender {
+	
+	
 	
 }
 

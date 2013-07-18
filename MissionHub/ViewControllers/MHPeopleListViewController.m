@@ -64,7 +64,7 @@
 	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	self.searchRequestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	
-	self.secondaryFieldName = MHPersonSortFieldPermission;
+	self.secondaryFieldName = MHPersonSortFieldFollowupStatus;
 	
 	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
     sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
@@ -90,6 +90,7 @@
     [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
 	
     [genderButton setBackgroundColor:[UIColor clearColor]];
+	[genderButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
 	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
@@ -889,8 +890,6 @@
 }
 
 -(void)cell:(MHPersonCell *)cell didSelectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath {
-	
-#warning implement cell selection
 	
 }
 
