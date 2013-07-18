@@ -82,6 +82,7 @@
     [interaction setBackgroundColor:[UIColor clearColor]];
     [interaction.layer setBorderWidth:1.0];
     [interaction.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor]];
+    [interaction addTarget:self action:@selector(chooseInteraction:) forControlEvents:UIControlEventTouchUpInside];
     
     [receiver setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [receiver setTintColor:[UIColor clearColor]];
@@ -89,14 +90,16 @@
     [receiver setBackgroundColor:[UIColor clearColor]];
     [receiver.layer setBorderWidth:1.0];
     [receiver.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor]];
-    
+    [receiver addTarget:self action:@selector(chooseReceiver:) forControlEvents:UIControlEventTouchUpInside];
+
     [visibility setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [visibility setTintColor:[UIColor clearColor]];
     [visibility setBackgroundImage:whiteButton forState:UIControlStateNormal];
     [visibility setBackgroundColor:[UIColor clearColor]];
     [visibility.layer setBorderWidth:1.0];
     [visibility.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor]];
-    
+    [visibility addTarget:self action:@selector(chooseVisibility:) forControlEvents:UIControlEventTouchUpInside];
+
     [dateTime setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [dateTime setTintColor:[UIColor clearColor]];
     [dateTime setBackgroundImage:whiteButton forState:UIControlStateNormal];
@@ -114,6 +117,7 @@
     comment.layer.backgroundColor = [[UIColor whiteColor]CGColor];
     comment.layer.borderColor=[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor];
     comment.layer.borderWidth= 1.0f;
+    
     //self.comment.textAlignment = UIEdgeInsetsMake(5, 5, 5, 5);
 
     
@@ -217,6 +221,35 @@
     
 }
 
+
+- (IBAction)chooseInteraction:(id)sender{
+    
+    MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+    // Assign self as the delegate for the child view controller
+    initiatorsViewController.selectionDelegate = self;
+    [self.navigationController pushViewController:initiatorsViewController animated:YES];
+
+}
+
+
+- (IBAction)chooseReceiver:(id)sender{
+    
+    MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+    // Assign self as the delegate for the child view controller
+    initiatorsViewController.selectionDelegate = self;
+    [self.navigationController pushViewController:initiatorsViewController animated:YES];
+
+}
+
+
+- (IBAction)chooseVisibility:(id)sender{
+
+    MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+    // Assign self as the delegate for the child view controller
+    initiatorsViewController.selectionDelegate = self;
+    [self.navigationController pushViewController:initiatorsViewController animated:YES];
+
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

@@ -91,9 +91,6 @@
 	
     [genderButton setBackgroundColor:[UIColor clearColor]];
 	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
-    [genderButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
-    genderButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    genderButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:genderButton];
@@ -111,6 +108,7 @@
     //[button setTitle:@"Sort" forState:UIControlStateNormal];
     [sortButton setTintColor:[UIColor clearColor]];
     [sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
+    [sortButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [sortButton setTitle:@"Sort: off" forState:UIControlStateNormal];
     [sortButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
     
