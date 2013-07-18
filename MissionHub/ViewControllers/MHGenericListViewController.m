@@ -91,7 +91,15 @@
     self.tableViewList.layer.borderColor = [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
     
     //self.tableViewList.separatorColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
-
+    
+    /*UIToolbar *toolbar = [[UIToolbar alloc] init];
+    self.genericToolbar = toolbar;
+    self.genericToolbar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
+    NSMutableArray *toolbarButtons = [[NSMutableArray alloc] init];
+    [toolbarButtons addObject:backMenuButton];
+    [self.genericToolbar setItems:toolbarButtons animated:NO];
+    [self.view addSubview:self.genericToolbar];
+*/
 }
 
 
@@ -145,7 +153,10 @@
 
 
 - (IBAction)backToMenu:(id)sender {
+    //[[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
+
+    
 }
 
 /*

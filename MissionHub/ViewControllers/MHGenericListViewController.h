@@ -30,5 +30,4 @@
 
 - (void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
 
-
 @end

@@ -42,12 +42,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    UIImageView *interactionsDemoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"InteractionDemo.png"]];
 
-    // Your scroll view or table view would be a subview of this view
-    [self.tableView addSubview:interactionsDemoView];
-    [self.tableView bringSubviewToFront:interactionsDemoView];
-    
 }
 
 - (void)didReceiveMemoryWarning

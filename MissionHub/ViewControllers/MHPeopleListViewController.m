@@ -92,6 +92,9 @@
     [genderButton setBackgroundColor:[UIColor clearColor]];
 	[genderButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
 	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+    [genderButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
+    genderButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    genderButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:genderButton];
@@ -466,6 +469,7 @@
 
 -(IBAction)addPersonActivity:(id)sender{
     NSLog(@"add Person Action");
+    
     [self.navigationController pushViewController:[self createPersonViewController] animated:YES];
 
 }
@@ -473,6 +477,8 @@
 -(IBAction)addInteractionActivity:(id)sender {
     NSLog(@"Label Action");
     	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
+ //   [self.createInteractionViewController removeToolbar];
+
 }
 
 -(IBAction)checkAllContacts:(UIButton*)button {

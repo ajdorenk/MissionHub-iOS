@@ -304,6 +304,7 @@
 - (IBAction)newInteractionActivity:(id)sender {
 NSLog(@"Interaction Action");
 	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
+    
  
 }
 
