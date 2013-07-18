@@ -92,6 +92,7 @@
     [genderButton setBackgroundColor:[UIColor clearColor]];
 	[genderButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
 	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+    [genderButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
     [sectionHeader addSubview:genderButton];
@@ -499,6 +500,8 @@
 -(IBAction)chooseGender:(id)sender {
     NSLog(@"chooseGender");
     [self presentViewController:[self fieldSelectorViewController] animated:YES completion:Nil];
+    NSString *title = @"";
+    [self.fieldSelectorViewController setListTitle:title];
 }
 
 -(IBAction)sortOnOff:(UIButton *)button {

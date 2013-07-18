@@ -11,7 +11,7 @@
 #import "MHGenericCell.h"
 #import "MHPerson+Helper.h"
 
-#define ROW_HEIGHT 36.0f
+#define ROW_HEIGHT 28.0f
 
 
 @interface MHGenericListViewController ()
@@ -23,7 +23,8 @@
 
 @synthesize selectionDelegate       = _selectionDelegate;
 @synthesize objectArray				= _objectArray;
-
+@synthesize listName;
+//@synthesize listTitle;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -34,21 +35,6 @@
 {
     [super viewDidLoad];
     /*
-	MHPerson *person1 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"Shelby",
-                        @"last_name":@"Clarke",
-                        @"gender":@"Male",
-                        @"year_in_school":@"Second Year",
-                        @"major":@" Philosophy",
-                        @"minor":@"Computer Science",
-                        @"birth_date":@"1982-07-07",
-                        @"date_became_christian":@"2000-01-01",
-                        @"graduation_date":@"2010-01-07",
-                        @"user_id":@12345,
-                        @"fb_uid":@123456,
-                        @"updated_at":@"2012-11-19T19:29:30:06:00",
-                        @"created_at":@"2002-11-28T00:00:00:06:00"
-                        }];
-
     
 	MHPerson *person2 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
                         @"last_name":@"Doe",
@@ -89,8 +75,10 @@
     self.navigationItem.leftBarButtonItem = backMenuButton;
     self.tableViewList.layer.borderWidth = 1.0;
     self.tableViewList.layer.borderColor = [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
-    
+   // self.listName.text = self.listTitle;
+
     //self.tableViewList.separatorColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+    
     
     /*UIToolbar *toolbar = [[UIToolbar alloc] init];
     self.genericToolbar = toolbar;
@@ -108,6 +96,12 @@
 	self.objectArray = [NSMutableArray arrayWithArray:dataArray];
 	//[self.tableViewList reloadData];
     
+}
+
+- (IBAction)setListTitle:(NSString *)title{
+//    self.listTitle = title;
+    self.listName.text = title;
+    NSLog(@"%@",title);
 }
 
 #pragma mark - Table view data source

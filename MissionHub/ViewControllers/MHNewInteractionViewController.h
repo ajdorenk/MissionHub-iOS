@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *comment;
 @property (nonatomic, strong) IBOutlet UIDatePicker *datePicker;
 @property (nonatomic, strong) IBOutlet UITextField *activeField;
+@property (nonatomic, strong) UILabel *listLabel;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImagePickerController* imagePickerController;
 @property (nonatomic, strong) UIToolbar* pickerToolbar;

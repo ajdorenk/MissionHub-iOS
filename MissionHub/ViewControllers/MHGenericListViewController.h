@@ -16,17 +16,21 @@
     NSMutableArray *_objectArray;
 }
 
-@property (nonatomic, strong) IBOutlet UILabel *name;
+
+@property (nonatomic, strong) IBOutlet UILabel *listName;
 @property (nonatomic, strong) IBOutlet UITableView* tableViewList;
+
 @property (nonatomic, strong) id<MHGenericListViewControllerDelegate> selectionDelegate;
 @property (nonatomic, strong) NSMutableArray *objectArray;
+//@property (nonatomic, strong) NSString *listTitle;
 
+- (IBAction)setListTitle:(NSString *)title;
 
 @end
 
 
-@protocol MHGenericListViewControllerDelegate <NSObject>
 
+@protocol MHGenericListViewControllerDelegate <NSObject>
 
 - (void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
 

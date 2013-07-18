@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -849,19 +849,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="38" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qPu-Kw-IxY">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qPu-Kw-IxY">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="270" id="S0W-6X-3wM"/>
                                     <constraint firstAttribute="height" constant="516" type="user" id="TWD-JA-f6R"/>
                                 </constraints>
-                                <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.79840116279069773" green="0.79840116279069773" blue="0.7987827034883721" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHInitiatorCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHInitiatorCell" rowHeight="36" id="a4u-Ll-tQs" customClass="MHInitiatorCell">
-                                        <rect key="frame" x="0.0" y="22" width="270" height="36"/>
+                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHInitiatorCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHInitiatorCell" rowHeight="28" id="a4u-Ll-tQs" customClass="MHInitiatorCell">
+                                        <rect key="frame" x="0.0" y="22" width="270" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="270" height="35"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="270" height="27"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" text="PersonName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpz-bU-I5a">
@@ -879,7 +879,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="qpz-bU-I5a" firstAttribute="leading" secondItem="a4u-Ll-tQs" secondAttribute="leading" constant="14" id="NHE-Zb-PNK"/>
-                                            <constraint firstItem="qpz-bU-I5a" firstAttribute="centerY" secondItem="a4u-Ll-tQs" secondAttribute="centerY" type="default" id="fHD-DN-myH"/>
+                                            <constraint firstItem="qpz-bU-I5a" firstAttribute="top" secondItem="a4u-Ll-tQs" secondAttribute="top" type="default" id="gbk-3O-6yY"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="name" destination="qpz-bU-I5a" id="nXJ-Ca-TL0"/>
@@ -903,14 +903,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="qPu-Kw-IxY" firstAttribute="leading" secondItem="VRg-1x-IVa" secondAttribute="leading" constant="27" id="6be-E8-0jQ"/>
-                            <constraint firstItem="uqa-GC-ZsQ" firstAttribute="top" secondItem="VRg-1x-IVa" secondAttribute="top" constant="20" symbolic="YES" type="default" id="HUV-DO-JeA"/>
+                            <constraint firstItem="uqa-GC-ZsQ" firstAttribute="leading" secondItem="VRg-1x-IVa" secondAttribute="leading" constant="27" id="857-lF-NLc"/>
+                            <constraint firstItem="uqa-GC-ZsQ" firstAttribute="top" secondItem="VRg-1x-IVa" secondAttribute="top" constant="14" id="bHs-QE-cT4"/>
                             <constraint firstItem="qPu-Kw-IxY" firstAttribute="top" secondItem="VRg-1x-IVa" secondAttribute="top" constant="39" id="e1c-Zi-0qn"/>
                             <constraint firstItem="qPu-Kw-IxY" firstAttribute="leading" secondItem="uqa-GC-ZsQ" secondAttribute="leading" type="default" id="f3V-mV-YPQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Pr4-yJ-iM2"/>
                     <connections>
+                        <outlet property="listName" destination="uqa-GC-ZsQ" id="ZSC-6K-gfT"/>
                         <outlet property="tableViewList" destination="qPu-Kw-IxY" id="lPB-MI-Qwz"/>
                     </connections>
                 </viewController>
@@ -1268,7 +1269,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="MHCreatePersonViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHCreatePersonViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backToMenu:"/>
                 <relationship kind="outlet" name="address1" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="address2" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="city" candidateClass="UITextField"/>
@@ -1286,7 +1286,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="MHGenericListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenericListViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="action" name="backToMenu:"/>
+                <relationship kind="action" name="setListTitle:" candidateClass="NSString"/>
+                <relationship kind="outlet" name="listName" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tableViewList" candidateClass="UITableView"/>
             </relationships>
         </class>

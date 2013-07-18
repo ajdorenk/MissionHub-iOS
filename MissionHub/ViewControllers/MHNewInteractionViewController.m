@@ -17,7 +17,7 @@
 
 @implementation MHNewInteractionViewController
 
-@synthesize initiator, interaction, receiver, visibility, dateTime, comment;
+@synthesize initiator, interaction, receiver, visibility, dateTime, comment, listLabel;
 
 
 
@@ -131,6 +131,11 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 
+    
+    
+    
+
+
 
     //[originalComment setFrame:CGRectMake(self.comment.frame.origin.x, self.comment.frame.origin.y, self.comment.frame.size.width, self.comment.frame.size.height)];
 }
@@ -217,7 +222,9 @@
     MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
     // Assign self as the delegate for the child view controller
     initiatorsViewController.selectionDelegate = self;
+    NSString *title = @"Initiator(s)";
     [self.navigationController pushViewController:initiatorsViewController animated:YES];
+    [initiatorsViewController setListTitle:title];
     
 }
 
@@ -227,8 +234,11 @@
     MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
     // Assign self as the delegate for the child view controller
     initiatorsViewController.selectionDelegate = self;
+    NSString *title = @"Interaction";
     [self.navigationController pushViewController:initiatorsViewController animated:YES];
+    [initiatorsViewController setListTitle:title];
 
+    
 }
 
 
@@ -237,7 +247,9 @@
     MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
     // Assign self as the delegate for the child view controller
     initiatorsViewController.selectionDelegate = self;
+    NSString *title = @"Receiver";
     [self.navigationController pushViewController:initiatorsViewController animated:YES];
+    [initiatorsViewController setListTitle:title];
 
 }
 
@@ -247,10 +259,20 @@
     MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
     // Assign self as the delegate for the child view controller
     initiatorsViewController.selectionDelegate = self;
+    NSString *title = @"Visibility";
     [self.navigationController pushViewController:initiatorsViewController animated:YES];
+    [initiatorsViewController setListTitle:title];
 
 }
+/*
+-(void)setName:(NSString *)nameString {
 
+    if (nameString != nil) {
+        self.receiver.titleLabel.text = nameString;
+    }
+    
+}
+*/
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
