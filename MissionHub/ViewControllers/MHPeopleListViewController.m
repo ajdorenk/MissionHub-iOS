@@ -55,8 +55,6 @@
 @synthesize _profileViewController;
 @synthesize _fieldSelectorViewController;
 
-@synthesize actionBar;
-
 -(void)awakeFromNib {
 	
 	[super awakeFromNib];
@@ -92,6 +90,7 @@
     [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
 	
     [genderButton setBackgroundColor:[UIColor clearColor]];
+	[genderButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
 	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
     [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
     
@@ -132,8 +131,6 @@
     [sectionHeader addSubview:allButton];
 	
 	self.header = sectionHeader;
-	
-	self.actionBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"actionbar.png"]];
 	
 }
 
@@ -889,37 +886,6 @@
 }
 
 -(void)cell:(MHPersonCell *)cell didSelectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath {
-	
-	if (cell.checkbox.isChecked) {
-		
-		self.actionBar.frame = CGRectMake(0, CGRectGetMaxY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), 118);
-		[self.tableView addSubview:self.actionBar];
-		
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(showNavToolbarDidStop)];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-		[UIView setAnimationDuration:UINavigationControllerHideShowBarDuration];
-		
-		self.actionBar.frame		= CGRectMake(0, CGRectGetMaxY(self.tableView.frame) - 118, CGRectGetWidth(self.tableView.frame), 118);
-		
-		[UIView commitAnimations];
-		
-	} else {
-		
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(showNavToolbarDidStop)];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-		[UIView setAnimationDuration:UINavigationControllerHideShowBarDuration];
-		
-		self.actionBar.frame		= CGRectMake(0, CGRectGetMaxY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), 118);
-		
-		[UIView commitAnimations];
-		
-		[self.actionBar removeFromSuperview];
-		
-	}
 	
 }
 

@@ -37,7 +37,6 @@
 	
 	//caching ui
 	UIView *_header;
-	UIView *_activityBar;
 	
 	
 }
@@ -69,8 +68,6 @@
 @property (nonatomic, strong) IBOutlet UIView *activityBar;
 @property (nonatomic, strong) MHProfileViewController *_profileViewController;
 @property (nonatomic, strong) MHGenericListViewController *_fieldSelectorViewController;
-
-@property (nonatomic, strong) UIImageView *actionBar;
 
 -(IBAction)revealMenu:(id)sender;
 -(void)refresh;

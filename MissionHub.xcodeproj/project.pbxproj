@@ -163,8 +163,6 @@
 		6855EDDE17948ECA00769B71 /* MHAddress+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDC17948EC900769B71 /* MHAddress+Helper.m */; };
 		687FC3211795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 687FC3201795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png */; };
 		687FC3221795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 687FC3201795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png */; };
-		687FC3261795C2E000E53F08 /* actionbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 687FC3251795C2E000E53F08 /* actionbar.png */; };
-		687FC3271795C2E000E53F08 /* actionbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 687FC3251795C2E000E53F08 /* actionbar.png */; };
 		68839F451794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */; };
 		68839F461794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */; };
 		68839F471794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */; };
@@ -426,7 +424,6 @@
 		6855EDDF17949ECB00769B71 /* MHProfileProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileProtocol.h; path = ViewControllers/MHProfileProtocol.h; sourceTree = "<group>"; };
 		687FC3201795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Default_Image_iPhone5.png; sourceTree = "<group>"; };
 		687FC3231795BD8F00E53F08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		687FC3251795C2E000E53F08 /* actionbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actionbar.png; sourceTree = "<group>"; };
 		68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Trash_48.png; sourceTree = "<group>"; };
 		68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Text_48.png; sourceTree = "<group>"; };
 		68839F401794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Permissions_48.png; sourceTree = "<group>"; };
@@ -883,7 +880,6 @@
 		68478DB0177E8CDC0014501D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				687FC3251795C2E000E53F08 /* actionbar.png */,
 				687FC3201795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png */,
 				68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */,
 				68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */,
@@ -1242,7 +1238,6 @@
 				68839F4F1794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */,
 				68839F511794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */,
 				687FC3211795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png in Resources */,
-				687FC3261795C2E000E53F08 /* actionbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,7 +1289,6 @@
 				68839F501794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */,
 				68839F521794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */,
 				687FC3221795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png in Resources */,
-				687FC3271795C2E000E53F08 /* actionbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

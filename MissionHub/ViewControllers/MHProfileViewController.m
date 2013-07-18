@@ -45,8 +45,6 @@
 //@synthesize menu;
 @synthesize _interactionArray;
 
-@synthesize actionBar;
-
 -(void) awakeFromNib
 {
 	// Add A and B view controllers to the array
@@ -62,8 +60,6 @@
 	
 	self._person = [MHAPI sharedInstance].currentUser;
 	self._interactionArray = [NSMutableArray array];
-    
-	self.actionBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"actionbar.png"]];
 	
 }
 
@@ -295,34 +291,7 @@
 
 -(IBAction)addTagActivity:(id)sender {
 	
-	if (![self.actionBar superview]) {
-		
-		self.actionBar.frame = CGRectMake(0, CGRectGetMinY(self.view.frame) - 118, CGRectGetWidth(self.view.frame), 118);
-		[self.view addSubview:self.actionBar];
-		
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-		[UIView setAnimationDuration:UINavigationControllerHideShowBarDuration];
-		
-		self.actionBar.frame		= CGRectMake(0, CGRectGetMinY(self.view.frame), CGRectGetWidth(self.view.frame), 118);
-		
-		[UIView commitAnimations];
-		
-	} else {
-		
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-		[UIView setAnimationDuration:UINavigationControllerHideShowBarDuration];
-		
-		self.actionBar.frame		= CGRectMake(0, CGRectGetMaxY(self.view.frame) - 118, CGRectGetWidth(self.view.frame), 118);
-		
-		[UIView commitAnimations];
-		
-		[self.actionBar removeFromSuperview];
-		
-	}
+	
 	
 }
 
