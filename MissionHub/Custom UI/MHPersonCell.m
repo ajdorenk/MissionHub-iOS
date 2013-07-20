@@ -41,6 +41,9 @@
     
     self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
     self.nameBackgroundView.layer.borderWidth = 1.0;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.nameBackgroundView.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    }
     
    // UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
