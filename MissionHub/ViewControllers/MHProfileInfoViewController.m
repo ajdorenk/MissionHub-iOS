@@ -16,13 +16,6 @@
 @end
 
 @implementation MHProfileInfoViewController
-
-@synthesize gender = _gender;
-@synthesize followupStatus = _followupStatus;
-@synthesize emailAddresses = _emailAddresses;
-@synthesize phoneNumbers = _phoneNumbers;
-@synthesize addresses = _addresses;
-
 @synthesize sectionTitles = _sectionTitles;
 @synthesize sections = _sections;
 
@@ -35,13 +28,6 @@
 -(void)awakeFromNib {
 	
 	[super awakeFromNib];
-	
-	self.gender = @"";
-	self.followupStatus = @"";
-	self.emailAddresses = [NSMutableArray array];
-	self.phoneNumbers = [NSMutableArray array];
-	self.addresses = [NSMutableArray array];
-	
 	self.sectionTitles = [NSMutableArray array];
 	self.sections = [NSMutableArray array];
 	
@@ -69,6 +55,14 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	
+	//[self.tableView setContentOffset:CGPointZero animated:NO];
+	
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -76,25 +70,27 @@
 }
 
 -(void)setPerson:(MHPerson *)person {
-	/*
+	
 	if (person) {
 		
-		NSMutableArray *sectionTitles = [NSMutableArray array];
-		NSMutableArray *sections = [NSMutableArray array];
-		NSMutableArray *emailAddresses = [NSMutableArray array];
-		NSMutableArray *phoneNumbers = [NSMutableArray array];
-		NSMutableArray *addresses = [NSMutableArray array];
+		NSString		*gender = @"";
+		NSString		*followupStatus = @"";
+		NSMutableArray	*sectionTitles = [NSMutableArray array];
+		NSMutableArray	*sections = [NSMutableArray array];
+		NSMutableArray	*emailAddresses = [NSMutableArray array];
+		NSMutableArray	*phoneNumbers = [NSMutableArray array];
+		NSMutableArray	*addresses = [NSMutableArray array];
 		
 		if (person.gender) {
-			self.gender = person.gender;
+			gender = person.gender;
 			[sectionTitles addObject:@"Gender"];
-			[sections addObject:@[self.gender]];
+			[sections addObject:@[gender]];
 		}
 		
 		if ([[person followupStatus] length] > 0) {
-			self.followupStatus = [person followupStatus];
+			followupStatus = [person followupStatus];
 			[sectionTitles addObject:@"Status"];
-			[sections addObject:@[self.followupStatus]];
+			[sections addObject:@[followupStatus]];
 		}
 		
 		if ([person.emailAddresses count] > 0) {
@@ -173,7 +169,7 @@
 		[self.tableView reloadData];
 		
 	}
-	*/
+	
 }
 
 #pragma mark - Table view data source
@@ -190,7 +186,7 @@
 	
     return [[self.sections objectAtIndex:section] count];
 }
-
+/*
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	
 	UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
@@ -201,6 +197,26 @@
 	header.font				= [UIFont fontWithName:@"HelveticaNeue" size:14.0];
 	
 	return header;
+	
+}
+*/
+-(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 0;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+	return 0.0f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	
+	return 0.0f;
+	
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	return 44.0f;
 	
 }
 

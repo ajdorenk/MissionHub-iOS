@@ -9,12 +9,16 @@
 #import "MHProfileInteractionsViewController.h"
 #import "M6ParallaxController.h"
 #import "MHInteractionCell.h"
+#import "MHInteractionType.h"
 
 @interface MHProfileInteractionsViewController ()
 
 @end
 
 @implementation MHProfileInteractionsViewController
+
+@synthesize _person;
+@synthesize _interactionArray;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
@@ -45,6 +49,14 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	
+	//[self.tableView setContentOffset:CGPointZero animated:NO];
+	
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -52,6 +64,31 @@
 }
 
 -(void)setPerson:(MHPerson *)person {
+	
+	if (person) {
+		
+		self._person = person;
+		[self._interactionArray removeAllObjects];
+		[self._interactionArray addObjectsFromArray:[self._person.initiatedInteractions allObjects]];
+		[self._interactionArray addObjectsFromArray:[self._person.receivedInteractions allObjects]];
+		[self._interactionArray addObjectsFromArray:[self._person.updatedInteractions allObjects]];
+		[self._interactionArray addObjectsFromArray:[self._person.createdInteractions allObjects]];
+		
+		[self.tableView reloadData];
+		
+	}
+	
+}
+
+-(void)setInteractionArray:(NSMutableArray *)interactionArray {
+	
+	if (interactionArray) {
+		
+		self._interactionArray = interactionArray;
+		
+		[self.tableView reloadData];
+		
+	}
 	
 }
 
@@ -66,7 +103,27 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    return [self._interactionArray count];
+}
+
+-(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 0;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+	return 0.0f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	
+	return 0.0f;
+	
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	return 44.0f;
+	
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,7 +137,8 @@
 	}
     
     // Configure the cell...
-	cell.textLabel.text = @"interactions";
+	MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:indexPath.row]);
+	cell.textLabel.text = interaction.type.name;
     
     
     return cell;

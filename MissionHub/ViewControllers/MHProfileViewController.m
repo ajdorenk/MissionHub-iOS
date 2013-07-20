@@ -48,14 +48,14 @@
 -(void) awakeFromNib
 {
 	// Add A and B view controllers to the array
-    self.allViewControllers = @[[self infoViewController], [self interactionsViewController], [self surveysViewController]];
+    self.allViewControllers = @[[self infoViewController],[self interactionsViewController], [self surveysViewController]];
 	
     [[self menuViewController] setMenuSelection:0];
 	[[self menuViewController] setMenuDelegate:self];
 	
 	[self setupWithTopViewController:[self headerViewController]
 							  height:150
-				 tableViewController:[self infoViewController]
+				 tableViewController:(UITableViewController *)[self currentTableViewContoller]
 			 segmentedViewController:[self menuViewController]];
 	
 	self._person = [MHAPI sharedInstance].currentUser;
@@ -100,6 +100,13 @@
     
     [self.toolbar setTranslucent:YES];
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	
+	[[self menuViewController] setMenuSelection:0];
 }
 
 -(id<MHProfileProtocol>)currentTableViewContoller {
@@ -243,6 +250,7 @@
 															
 														}];
 														
+														[[self interactionsViewController] setInteractionArray:self._interactionArray];
 														[self refreshProfile];
 			
 		}
@@ -259,7 +267,7 @@
 -(void)refreshProfile {
 	
 	[[self headerViewController] setPerson:self._person];
-	//[[self currentTableViewContoller] setPerson:self._person];
+	[[self currentTableViewContoller] setPerson:self._person];
 	
 }
 
@@ -272,6 +280,7 @@
 -(void)menuDidChangeSelection:(NSInteger)selection {
 	
 	[self switchTableViewController:[self.allViewControllers objectAtIndex:selection]];
+	[[self currentTableViewContoller] setPerson:self._person];
 	
 }
 

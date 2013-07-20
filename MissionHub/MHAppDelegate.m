@@ -13,9 +13,15 @@
 
 @synthesize loginViewController;
 
+void uncaughtExceptionHandler(NSException *exception) {
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    // Internal error reporting
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	
+	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     return YES;
 }
 

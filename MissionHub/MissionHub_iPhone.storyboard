@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rU8-t6-f3q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -474,7 +474,7 @@ select another survey.</string>
                         <sections>
                             <tableViewSection id="mDQ-NW-4Bq">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="aKB-Ci-Xl2">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MHInfoCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHInfoCell" id="aKB-Ci-Xl2" customClass="MHInfoCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -853,7 +853,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="270" id="S0W-6X-3wM"/>
-                                    <constraint firstAttribute="height" constant="516" type="user" id="TWD-JA-f6R"/>
                                 </constraints>
                                 <color key="separatorColor" red="0.79840116279069773" green="0.79840116279069773" blue="0.7987827034883721" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -894,7 +893,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Initiator(s)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqa-GC-ZsQ">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="116" id="TXY-ot-bIg"/>
-                                    <constraint firstAttribute="height" constant="21" id="Z4u-aR-IEz"/>
+                                    <constraint firstAttribute="height" constant="21" type="user" id="Z4u-aR-IEz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -903,9 +902,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="qPu-Kw-IxY" secondAttribute="bottom" type="user" id="3KT-aG-vwt"/>
                             <constraint firstItem="uqa-GC-ZsQ" firstAttribute="leading" secondItem="VRg-1x-IVa" secondAttribute="leading" constant="27" id="857-lF-NLc"/>
-                            <constraint firstItem="uqa-GC-ZsQ" firstAttribute="top" secondItem="VRg-1x-IVa" secondAttribute="top" constant="14" id="bHs-QE-cT4"/>
-                            <constraint firstItem="qPu-Kw-IxY" firstAttribute="top" secondItem="VRg-1x-IVa" secondAttribute="top" constant="39" id="e1c-Zi-0qn"/>
+                            <constraint firstItem="qPu-Kw-IxY" firstAttribute="top" secondItem="uqa-GC-ZsQ" secondAttribute="bottom" type="user" id="CYb-iI-tDS"/>
+                            <constraint firstItem="uqa-GC-ZsQ" firstAttribute="top" secondItem="VRg-1x-IVa" secondAttribute="top" constant="14" type="user" id="bHs-QE-cT4"/>
                             <constraint firstItem="qPu-Kw-IxY" firstAttribute="leading" secondItem="uqa-GC-ZsQ" secondAttribute="leading" type="default" id="f3V-mV-YPQ"/>
                         </constraints>
                     </view>
@@ -931,7 +931,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <sections>
                             <tableViewSection id="x7E-hw-dBO">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="tzL-Nz-AJT">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MHInteractionCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHInteractionCell" id="tzL-Nz-AJT" customClass="MHInteractionCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1210,7 +1210,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <sections>
                             <tableViewSection id="uge-wO-NAE">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="QhB-RI-4yH">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MHSurveyCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHSurveyCell" id="QhB-RI-4yH" customClass="MHSurveyCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1286,17 +1286,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="MHGenericListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenericListViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backToMenu:"/>
                 <relationship kind="action" name="setListTitle:" candidateClass="NSString"/>
                 <relationship kind="outlet" name="listName" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tableViewList" candidateClass="UITableView"/>
             </relationships>
+        </class>
+        <class className="MHInfoCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInfoCell.h"/>
         </class>
         <class className="MHInitiatorCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInitiatorCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="name" candidateClass="UILabel"/>
             </relationships>
+        </class>
+        <class className="MHInteractionCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInteractionCell.h"/>
         </class>
         <class className="MHLoadingCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoadingCell.h"/>
@@ -1397,6 +1402,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="MHSegmentedControl" superclassName="SDSegmentedControl">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSegmentedControl.h"/>
+        </class>
+        <class className="MHSurveyCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyCell.h"/>
         </class>
         <class className="MHSurveyViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyViewController.h"/>

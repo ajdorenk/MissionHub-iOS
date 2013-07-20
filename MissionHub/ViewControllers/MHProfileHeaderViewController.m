@@ -83,6 +83,7 @@
         
     } else {
 		
+		urlString = [urlString stringByAppendingString:@"?type=large"];
         [self.imageView setImageWithURL:[NSURL URLWithString:urlString]
 					   placeholderImage:[UIImage imageNamed:@"MHProfileHeader_Placeholder.png"]];
     }

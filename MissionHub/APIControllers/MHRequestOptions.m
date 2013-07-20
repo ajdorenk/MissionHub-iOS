@@ -205,6 +205,7 @@
 -(id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID {
 	
 	[[[self reset] addIncludesForInteractionsRequest] addFilter:MHRequestOptionsFilterInteractionsPeopleIds withValue:[personID stringValue]];
+	self.endpoint = MHRequestOptionsEndpointInteractions;
 	
 	return self;
 }
