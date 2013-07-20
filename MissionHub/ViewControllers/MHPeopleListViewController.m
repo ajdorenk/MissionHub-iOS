@@ -103,8 +103,9 @@
     UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [sortButton setFrame:CGRectMake(261, 5.0, 55.0, 22.0)];
+        [sortButton setFrame:CGRectMake(257, 5.0, 59.0, 22.0)];
     }
+    
     else{
         [sortButton setFrame:CGRectMake(700, 5.0, 55.0, 22.0)];
     }
@@ -213,17 +214,23 @@
     UIImage* contactImage = [UIImage imageNamed:@"NewContact_Icon.png"];
     UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
     [newPerson setImage:contactImage forState:UIControlStateNormal];
-    [newPerson addTarget:self action:@selector(addPersonActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
+   // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [newPerson addTarget:self action:@selector(addPersonActivityPhone:) forControlEvents:UIControlEventTouchUpInside];
+    /*}
+    
+    else{
+        [newPerson addTarget:self action:@selector(addPersonActivityPad:) forControlEvents:UIControlEventTouchUpInside];
+    }*/
+
     
     UIImage* interactionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
     UIButton *addInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
     [addInteraction setImage:interactionImage forState:UIControlStateNormal];
     [addInteraction addTarget:self action:@selector(addInteractionActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addInteractionButton = [[UIBarButtonItem alloc] initWithCustomView:addInteraction];
-    
-    
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addInteractionButton, addPersonButton, nil]];
+    
     
 
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
@@ -235,7 +242,7 @@
     self.navigationItem.leftBarButtonItem = backMenuButton;
 
 }
-
+//TODO: 
 -(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
 	
 	switch (indexPath.row) {
@@ -471,12 +478,26 @@
 	
 }
 
--(IBAction)addPersonActivity:(id)sender{
+-(IBAction)addPersonActivityPhone:(id)sender{
     NSLog(@"add Person Action");
     
     [self.navigationController pushViewController:[self createPersonViewController] animated:YES];
 
 }
+
+/*- (IBAction)addPersonActivityPad:(id)sender
+{
+    MHCreatePersonViewController *content = [[MHCreatePersonViewController alloc] init];
+    UIPopoverController* aPopover = [[UIPopoverController alloc]
+                                     initWithContentViewController:content];
+    aPopover.delegate = self;
+    
+    // Store the popover in a custom property for later use.
+    self.popoverController = aPopover;
+    
+    [self.popoverController presentPopoverFromBarButtonItem:sender
+                                   permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}*/
 
 -(IBAction)addInteractionActivity:(id)sender {
     NSLog(@"Label Action");

@@ -19,7 +19,7 @@
     if (self = [super initWithFrame:frame]){
         self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         
-        [self setImage:[UIImage imageNamed:@"CheckboxEmpty.png"]forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checkmark_24.png"]forState:UIControlStateNormal];
         
         [self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
 		
@@ -35,7 +35,7 @@
 	
 	self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 	
-	[self setImage:[UIImage imageNamed:@"CheckboxEmpty.png"]forState:UIControlStateNormal];
+	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checkmark_24.png"]forState:UIControlStateNormal];
 	
 	[self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
 	
@@ -48,7 +48,7 @@
     if (self.isChecked){
 		
         self.isChecked = NO;
-        [self setImage:[UIImage imageNamed:@"CheckboxEmpty.png" ] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checkmark_24.png" ] forState:UIControlStateNormal];
 		
     } else {
 		
