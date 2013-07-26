@@ -13,7 +13,6 @@
 #define LOGIN_BUTTON_WIDTH 180.0f
 #define LOGIN_BUTTON_HEIGHT 60.0f
 
-
 NSString *const FBSessionStateChangedNotification = @"com.missionhub:FBSessionStateChangedNotification";
 NSString *const MHLoginErrorDomain = @"com.missionhub.errorDomain.Login";
 
@@ -78,6 +77,15 @@ typedef enum {
 										 CGRectGetMidY(self.view.frame) - (self.loginButtonView.frame.size.height / 2),
 										 self.loginButtonView.frame.size.width,
 										 self.loginButtonView.frame.size.height);
+	
+	self.missionhubRefreshButton	= [UIButton buttonWithType:UIButtonTypeCustom];
+	self.missionhubRefreshButton.frame = self.loginButtonView.frame;
+	[self.missionhubRefreshButton setImage:[UIImage imageNamed:@"MH_Mobile_Button_Refresh_86.png"] forState:UIControlStateNormal];
+	[self.missionhubRefreshButton setImage:[UIImage imageNamed:@"MH_Mobile_Button_Refresh_Pressed_86.png"] forState:UIControlStateHighlighted];
+	[self.missionhubRefreshButton addTarget:self action:@selector(refreshMissionHubData:) forControlEvents:UIControlEventTouchUpInside];
+	self.missionhubRefreshButton.hidden = YES;
+	
+	[self.view addSubview:self.missionhubRefreshButton];
 	
 }
 
@@ -220,7 +228,7 @@ typedef enum {
      object:session];
 	
     if (error) {
-        [MHErrorHandler presentError:error];
+        [self handleError:error];
     }
 }
 
@@ -271,6 +279,12 @@ typedef enum {
 		
 		[MHErrorHandler presentError:error];
     }
+	
+}
+
+-(void)refreshMissionHubData:(id)sender {
+	
+	[self loggedInWithToken:[MHAPI sharedInstance].accessToken];
 	
 }
 
@@ -362,6 +376,18 @@ typedef enum {
 -(void)handleError:(NSError *)error {
 	
 	//do stuff to configure the UI when an error happens i.e. fb error clears fb session and shows fb button, mh error shows mh reload button
+	
+	if ([error.domain isEqualToString:MHAPIErrorDomain]) {
+		
+		self.missionhubRefreshButton.hidden = NO;
+		self.loginButtonView.hidden = YES;
+		
+	} else {
+		
+		self.missionhubRefreshButton.hidden = YES;
+		self.loginButtonView.hidden = NO;
+		
+	}
 	
 	[MHErrorHandler presentError:error];
 	

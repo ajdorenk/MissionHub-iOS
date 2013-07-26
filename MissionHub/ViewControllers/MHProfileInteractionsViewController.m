@@ -73,6 +73,7 @@
 		[self._interactionArray addObjectsFromArray:[self._person.receivedInteractions allObjects]];
 		[self._interactionArray addObjectsFromArray:[self._person.updatedInteractions allObjects]];
 		[self._interactionArray addObjectsFromArray:[self._person.createdInteractions allObjects]];
+		[self._interactionArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
 		
 		[self.tableView reloadData];
 		
@@ -138,8 +139,7 @@
     
     // Configure the cell...
 	MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:indexPath.row]);
-	cell.textLabel.text = interaction.type.name;
-    
+	cell.textLabel.text = [interaction valueForKey:@"timestamp"];
     
     return cell;
 }
@@ -148,8 +148,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:indexPath.row]);
 	
+	NSLog(@"%@", [interaction jsonObject]);
 	
 }
 

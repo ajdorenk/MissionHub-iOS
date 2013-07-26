@@ -23,16 +23,4 @@
 @dynamic label;
 @dynamic person;
 
--(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
-	
-	if ([fieldName isEqualToString:@"label"]) {
-		
-		MHLabel *newObject = [MHLabel newObjectFromFields:relationshipObject];
-		
-		self.label = newObject;
-		
-	}
-	
-}
-
 @end

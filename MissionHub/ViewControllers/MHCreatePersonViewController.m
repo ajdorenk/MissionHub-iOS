@@ -50,7 +50,13 @@
     
     CGRect frame = self.maleFemaleControl.frame;
     frame.size.height = 26;
+	
+//TODO:May need to customize and style the maleFemaleControl better, just to like nicer.
     [self.maleFemaleControl setFrame:frame];
+	
+//TODO:Need to add an option to choose both State and Country.
+	
+//TODO:The sizing for the controller needs to be adjusted for the iPad in the iPad storyboard. This is what should be a popover, but I don't know how that works in terms of using the storyboard
 
     self.firstName.layer.backgroundColor = [[UIColor whiteColor]CGColor];
     self.firstName.layer.borderColor=[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor];
@@ -86,7 +92,9 @@
 
 }
 
+//TODO:The keyboard pops up for each of the text fields, but there is currently no way to dismiss it and none of the text fields move up while editing so that anything below Address 1 is covered up. I think this problem could be solved similarly to the comment box problem in the new interaction page, by moving the text field up while editing.
 
+//TODO:Still need to save the new contact data. Currently this method just returns to the people list without saving anything.
 -(IBAction)saveInteractionActivity:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

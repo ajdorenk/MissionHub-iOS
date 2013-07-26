@@ -79,7 +79,8 @@
 
     //self.tableViewList.separatorColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
     
-    
+//TODO: need to uncomment to add a toolbar for when the navigator bar does not show, (i.e. when adding a label and when choosing what secondary information to show in contact list, for which there is currently no way to go back without making a selection). Also means there needs to be a method to hide the toolbar when the navigation bar does show, i.e. when creating a new interaction and choosing the initiator, interaction, receiver, and visibilty.
+	
     /*UIToolbar *toolbar = [[UIToolbar alloc] init];
     self.genericToolbar = toolbar;
     self.genericToolbar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);

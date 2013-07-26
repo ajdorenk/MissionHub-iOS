@@ -11,6 +11,8 @@
 #import "MHInteraction.h"
 
 
+//TODO:The sizing for this view controller needs to be adjusted on the storyboard for the iPad. This might be another place in which a popover would be better for the iPad.
+
 @interface MHNewInteractionViewController ()
 
 @end
@@ -36,6 +38,7 @@
     
     
 }
+
 
 - (void)viewDidLoad
 {
@@ -66,6 +69,8 @@
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:saveButton, nil]];
     
     
+//TODO:The initiator button label needs to be preset to the current user's name and the receiver needs to be preset if the interaction button is pressed from a profile, (as opposed to being pressed from the contact list). 
+	
     UIImage *whiteButton = [UIImage imageNamed:@"Searchbar_background.png"];
     [initiator setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [initiator setTintColor:[UIColor clearColor]];
@@ -146,6 +151,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+//TODO:Still need to save the interaction when the saveInteraction button is pressed. It currently does not save anything.
 -(IBAction)saveInteractionActivity:(id)sender {
     NSLog(@"Save Interaction");
     self.interactionObject.comment = self.comment.text;
@@ -217,6 +224,10 @@
 
 }
 
+
+//TODO:The lists for choosing the initiator(s), interaction, receiver, and visibility are currently all empty. I wasn't quite sure where to put this, but somehow the options need to be loaded when the generic list is pushed onto the view.
+
+
 - (IBAction)chooseInitiator:(id)sender{
     
     MHGenericListViewController *initiatorsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
@@ -280,6 +291,7 @@
     return YES;
 }
 
+//TODO:When the comment box moves up for the iPad, it actually moves to far up so that the top is not visible and it's not sized properly so it's also too short. I think this should be easy to fix if you just change the height differently based on whether it's an iPad or iPhone.
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {

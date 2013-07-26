@@ -26,6 +26,7 @@ extern NSString *const FBSessionStateChangedNotification;
 	
 	id<MHLoginDelegate>		_loginDelegate;
 	FBLoginView				*_loginButtonView;
+	UIButton				*_missionhubRefreshButton;
 	BOOL					_loggedIn;
 	BOOL					_hasRequestedMe;
 	
@@ -33,6 +34,7 @@ extern NSString *const FBSessionStateChangedNotification;
 
 @property (nonatomic, strong)				id<MHLoginDelegate>					loginDelegate;
 @property (nonatomic, strong)				FBLoginView							*loginButtonView;
+@property (nonatomic, strong)				UIButton							*missionhubRefreshButton;
 @property (nonatomic, strong)				IBOutlet UIActivityIndicatorView	*loadingIndicator;
 @property (nonatomic, assign)				BOOL								loggedIn;
 @property (nonatomic, assign)				BOOL								hasRequestedMe;
@@ -47,5 +49,6 @@ extern NSString *const FBSessionStateChangedNotification;
 - (void)handleAppLink:(FBAccessTokenData *)appLinkToken;
 
 -(void)loggedInWithToken:(NSString *)token;
+-(void)refreshMissionHubData:(id)sender;
 
 @end

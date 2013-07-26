@@ -46,6 +46,8 @@
     }
     
    // UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	
+//TODO:The checkbox image needs to be adjusted. The button should be large, but the checkbox image needs to be smaller.
     UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
     [self.checkbox setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [self.checkbox setTintColor:[UIColor clearColor]];

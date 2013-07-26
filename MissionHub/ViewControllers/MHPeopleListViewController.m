@@ -94,7 +94,7 @@
 	[genderButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
 	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
     [genderButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchDown];
+    [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchUpInside];
     
     [sectionHeader addSubview:genderButton];
 	
@@ -119,10 +119,12 @@
     
     
     [sortButton setBackgroundColor:[UIColor clearColor]];
-    [sortButton addTarget:self action:@selector(sortOnOff:) forControlEvents:UIControlEventTouchDown];
+    [sortButton addTarget:self action:@selector(sortOnOff:) forControlEvents:UIControlEventTouchUpInside];
     
     [sectionHeader addSubview:sortButton];
     
+	
+//TODO:Needs a checkbox and label "All" to check all contacts, (see "to do" comment above the checkAllContacts method)
     /*
     UIButton *allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
@@ -131,7 +133,7 @@
     [allButton setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
     
     [allButton setBackgroundColor:[UIColor clearColor]];
-    [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchDown];
+    [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchUpInside];
     
     [sectionHeader addSubview:allButton];
 	*/
@@ -190,7 +192,9 @@
     [text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
-
+	
+//TODO:The search bar cancel button is NOT currently customized. Not absolutely necessary but it would look nice for it to have a red or grey background instead of the blue, though I do not know how to implement that
+	
     /*id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     
     [barButtonAppearanceInSearchBar setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Button_Save_72.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -215,6 +219,8 @@
     UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
     [newPerson setImage:contactImage forState:UIControlStateNormal];
     UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
+	
+//TODO: need to make a popover for the iPad. The code below adds a target for the newPerson button based on whether it is the iPad or the iPhone
    // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [newPerson addTarget:self action:@selector(addPersonActivityPhone:) forControlEvents:UIControlEventTouchUpInside];
     /*}
@@ -242,7 +248,7 @@
     self.navigationItem.leftBarButtonItem = backMenuButton;
 
 }
-//TODO: 
+
 -(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
 	
 	switch (indexPath.row) {
@@ -485,6 +491,8 @@
 
 }
 
+//TODO:The code below is meant for displaying the popover window to add a new contact on the iPad. There still needs to be a popover controller created however. I do not know all the details of how to go about creating the popover.
+
 /*- (IBAction)addPersonActivityPad:(id)sender
 {
     MHCreatePersonViewController *content = [[MHCreatePersonViewController alloc] init];
@@ -506,6 +514,8 @@
 
 }
 
+
+//TODO:Need to add functionality to check all contacts. Currently the function only changes the image of the checkbox in the secton header, though it should check all the contacts.
 -(IBAction)checkAllContacts:(UIButton*)button {
     NSLog(@"Check all");
     button.selected = !button.selected;

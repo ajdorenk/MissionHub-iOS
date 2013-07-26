@@ -12,6 +12,8 @@
 #import "MHErrorHandler.h"
 #import "MHModel.h"
 
+extern NSString *const MHAPIErrorDomain;
+
 @class MHRequest, MHPerson, MHOrganization;
 
 @interface MHAPI : NSObject {
@@ -44,6 +46,7 @@
 
 
 +(MHAPI *)sharedInstance;
+-(id)initWithConfigFile:(NSString *)configFilePath;
 
 //general request call
 -(void)getResultWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;

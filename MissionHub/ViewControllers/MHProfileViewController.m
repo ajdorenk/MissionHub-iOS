@@ -83,7 +83,7 @@
     UIImage* otherOptionImage = [UIImage imageNamed:@"topbarOtherOptions_button.png"];
     UIButton *otherOptions = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
     [otherOptions setImage:otherOptionImage forState:UIControlStateNormal];
-    [otherOptions addTarget:self action:@selector(addTagActivity:) forControlEvents:UIControlEventTouchUpInside];
+    [otherOptions addTarget:self action:@selector(otherOptionsActivity:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *otherOptionsButton = [[UIBarButtonItem alloc] initWithCustomView:otherOptions];
     
     
@@ -298,7 +298,10 @@
 	
 }
 
--(IBAction)addTagActivity:(id)sender {
+
+//TODO:Need to add action bar when the otherOptions button is pressed
+
+-(IBAction)otherOptionsActivity:(id)sender {
 	
 	
 	

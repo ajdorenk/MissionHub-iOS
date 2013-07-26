@@ -19,7 +19,9 @@
     if (self = [super initWithFrame:frame]){
         self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         
-        [self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checkmark_24.png"]forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"]forState:UIControlStateNormal];
+		[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_24.png"]forState:UIControlStateSelected];
+		//[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_24.png"]forState:UIControlStateHighlighted];
         
         [self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
 		
@@ -35,7 +37,9 @@
 	
 	self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 	
-	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checkmark_24.png"]forState:UIControlStateNormal];
+	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"]forState:UIControlStateNormal];
+	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_24.png"]forState:UIControlStateSelected];
+	//[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_24.png"]forState:UIControlStateHighlighted];
 	
 	[self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
 	
@@ -43,17 +47,18 @@
 	
 }
 
+//TODO:The action bar still needs to be created and popup when the checkbox is clicked, (though I'm not entirely sure where to do that)
 - (void)checkBoxClicked {
 	
     if (self.isChecked){
 		
         self.isChecked = NO;
-        [self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checkmark_24.png" ] forState:UIControlStateNormal];
+		[self setSelected:NO];
 		
     } else {
 		
         self.isChecked = YES;
-        [self setImage:[UIImage imageNamed:@"checkbox.png"]forState:UIControlStateNormal];
+		[self setSelected:YES];
 		
     }
 	

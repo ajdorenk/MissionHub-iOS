@@ -10,10 +10,10 @@
 #import "MHRequest.h"
 #import "MHPerson+Helper.h"
 
-static NSString *MHAPIErrorDomain = @"com.missionhub.errorDomain.API";
-static NSString *MHAPIRequestNameMe = @"com.missionhub.API.requestName.me";
-static NSString *MHAPIRequestNameCurrentOrganization = @"com.missionhub.API.requestName.currentOrganization";
-static NSString *MHAPIRequestNameInitialPeopleList = @"com.missionhub.API.requestName.initialPeopleList";
+NSString *const MHAPIErrorDomain = @"com.missionhub.errorDomain.API";
+NSString *const MHAPIRequestNameMe = @"com.missionhub.API.requestName.me";
+NSString *const MHAPIRequestNameCurrentOrganization = @"com.missionhub.API.requestName.currentOrganization";
+NSString *const MHAPIRequestNameInitialPeopleList = @"com.missionhub.API.requestName.initialPeopleList";
 
 typedef enum {
 	MHAPIErrorCouldNotRetrieveCurrentUser,
@@ -54,25 +54,24 @@ typedef enum {
 	@synchronized(self)
 	{
 		if (!sharedInstance)
-			sharedInstance = [[MHAPI alloc] init];
+			sharedInstance = [[MHAPI alloc] initWithConfigFile:[[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"]];
 		
 		return sharedInstance;
 	}
 }
 
-- (id)init
+-(id)initWithConfigFile:(NSString *)configFilePath
 {
     self = [super init];
     if (self) {
         // Custom initialization
 		
-		NSString *pathToConfigFile		= [[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"];
-		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:pathToConfigFile];
+		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
 		
 		self.baseUrl					= [configDictionary valueForKey:@"base_url"];
 		self.apiUrl						= [configDictionary valueForKey:@"api_url"];
 		self.surveyUrl					= [configDictionary valueForKey:@"survey_url"];
-		//self.accessToken				= @"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD";
+		self.accessToken				= @"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD";
 		
 		if (self.baseUrl == nil) {
 				

@@ -184,7 +184,7 @@
 {
     // Return the number of rows in the section.
 	
-    return [[self.sections objectAtIndex:section] count];
+    return [[self.sections objectAtIndex:section] count] + 1;
 }
 /*
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -216,7 +216,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	return 44.0f;
+	if (indexPath.row == 0) {
+		return 21.0f;
+	} else {
+		return 44.0f;
+	}
 	
 }
 
@@ -230,20 +234,37 @@
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
 	
-	id objectForCell = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	NSString *cellText = @"";
-	
-	if ([objectForCell isKindOfClass:[NSString class]]) {
-		cellText = objectForCell;
-	} else if ([objectForCell isKindOfClass:[MHEmailAddress class]]) {
-		cellText = [(MHEmailAddress *)objectForCell email];
-	} else if ([objectForCell isKindOfClass:[MHPhoneNumber class]]) {
-		cellText = [(MHPhoneNumber *)objectForCell number];
-	} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
-		cellText = [(MHAddress *)objectForCell displayString];
+	if (indexPath.row == 0) {
+		
+		id objectForCell = [self.sectionTitles objectAtIndex:indexPath.section];
+		NSString *cellText = @"";
+		
+		if ([objectForCell isKindOfClass:[NSString class]]) {
+			cellText = objectForCell;
+		}
+		
+		cell.textLabel.text = cellText;
+		cell.textLabel.font = [UIFont systemFontOfSize:14.f];
+		
+	} else {
+		
+		id objectForCell = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+		NSString *cellText = @"";
+		
+		if ([objectForCell isKindOfClass:[NSString class]]) {
+			cellText = objectForCell;
+		} else if ([objectForCell isKindOfClass:[MHEmailAddress class]]) {
+			cellText = [(MHEmailAddress *)objectForCell email];
+		} else if ([objectForCell isKindOfClass:[MHPhoneNumber class]]) {
+			cellText = [(MHPhoneNumber *)objectForCell number];
+		} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
+			cellText = [(MHAddress *)objectForCell displayString];
+		}
+		
+		cell.textLabel.text = cellText;
+		
 	}
 	
-	cell.textLabel.text = cellText;
     
     return cell;
 }

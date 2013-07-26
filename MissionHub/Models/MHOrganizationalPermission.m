@@ -23,16 +23,4 @@
 @dynamic permission;
 @dynamic person;
 
--(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
-	
-	if ([fieldName isEqualToString:@"permission"]) {
-		
-		MHPermissionLevel *newObject = [MHPermissionLevel newObjectFromFields:relationshipObject];
-		
-		self.permission = newObject;
-		
-	}
-	
-}
-
 @end

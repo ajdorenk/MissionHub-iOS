@@ -37,4 +37,13 @@
 //should be overwirtten with subclasses with relationships.
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName;
 
+//is used to construct json object. please overide if you need a different fieldname from the attribute key in your json object
+-(NSString *)fieldNameForJsonObjectWithKey:(NSString *)key;
+//is used to construct the json object. please overide if you need to change the value before it is added to the json object.
+-(id)valueForJsonObjectWithKey:(NSString *)key;
+
+-(NSDictionary *)jsonObject;
+//should be overwirtten with subclasses with relationships.
+-(void)addRelationshipObject:(id)relationshipObject forFieldName:(NSString *)fieldName toJsonObject:(NSMutableDictionary *)jsonObject;
+
 @end

@@ -157,6 +157,10 @@
 		68478DCC177E8CDC0014501D /* topbarOtherOptions_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */; };
 		68478DCD177E8CDC0014501D /* topbarTag_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DBA177E8CDC0014501D /* topbarTag_button.png */; };
 		68478DCE177E8CDC0014501D /* topbarTag_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DBA177E8CDC0014501D /* topbarTag_button.png */; };
+		6851291B17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */; };
+		6851291C17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */; };
+		6851291D17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */; };
+		6851291E17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */; };
 		6855EDD81793B81D00769B71 /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDD71793B81D00769B71 /* DWTagList.m */; };
 		6855EDD91793B81D00769B71 /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDD71793B81D00769B71 /* DWTagList.m */; };
 		6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDC17948EC900769B71 /* MHAddress+Helper.m */; };
@@ -194,6 +198,14 @@
 		68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BD3178A192100927DF8 /* ODRefreshControl.m */; };
 		68A68BD5178A192100927DF8 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BD3178A192100927DF8 /* ODRefreshControl.m */; };
 		68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
+		68B7DDA317A2F95700849F31 /* MHInteraction+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */; };
+		68B7DDA417A2F95800849F31 /* MHInteraction+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */; };
+		68B7DDA717A317BD00849F31 /* MHSurvey+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA617A317BC00849F31 /* MHSurvey+Helper.m */; };
+		68B7DDA817A317BD00849F31 /* MHSurvey+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA617A317BC00849F31 /* MHSurvey+Helper.m */; };
+		68B7DDAB17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAA17A3185900849F31 /* MHOrganizationalLabel+Helper.m */; };
+		68B7DDAC17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAA17A3185900849F31 /* MHOrganizationalLabel+Helper.m */; };
+		68B7DDAF17A318D600849F31 /* MHOrganizationalPermission+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */; };
+		68B7DDB017A318D600849F31 /* MHOrganizationalPermission+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */; };
 		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C0689C176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A71770EFBE007C79D6 /* MHStorage.m */; };
@@ -243,7 +255,7 @@
 		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
-		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */; };
+		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
 		AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */; };
 		AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
@@ -260,8 +272,8 @@
 		AD3C60DC178761E200744167 /* MHProfileInteractionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60DB178761E100744167 /* MHProfileInteractionsViewController.m */; };
 		AD3C60E2178B0F2A00744167 /* sectionHeaderLabels.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */; };
 		AD3C60E3178B0F2A00744167 /* sectionHeaderLabels.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */; };
-		AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
-		AD3C60E6178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
+		AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png */; };
+		AD3C60E6178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png */; };
 		AD75F7AA178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png in Resources */ = {isa = PBXBuildFile; fileRef = AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */; };
 		AD75F7AC178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png in Resources */ = {isa = PBXBuildFile; fileRef = AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */; };
 		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
@@ -421,6 +433,8 @@
 		68478DB8177E8CDC0014501D /* topbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar_background.png; sourceTree = "<group>"; };
 		68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarOtherOptions_button.png; sourceTree = "<group>"; };
 		68478DBA177E8CDC0014501D /* topbarTag_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarTag_button.png; sourceTree = "<group>"; };
+		6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Refresh_Pressed_86.png; sourceTree = "<group>"; };
+		6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Refresh_86.png; sourceTree = "<group>"; };
 		6855EDD61793B81D00769B71 /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DWTagList.h; path = Libraries/DWTagList/DWTagList/Classes/DWTagList.h; sourceTree = "<group>"; };
 		6855EDD71793B81D00769B71 /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DWTagList.m; path = Libraries/DWTagList/DWTagList/Classes/DWTagList.m; sourceTree = "<group>"; };
 		6855EDDB17948EC900769B71 /* MHAddress+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHAddress+Helper.h"; path = "Models/MHAddress+Helper.h"; sourceTree = "<group>"; };
@@ -452,6 +466,14 @@
 		68A68BD3178A192100927DF8 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncodedString.h"; sourceTree = "<group>"; };
 		68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncodedString.m"; sourceTree = "<group>"; };
+		68B7DDA117A2F95600849F31 /* MHInteraction+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteraction+Helper.h"; path = "Models/MHInteraction+Helper.h"; sourceTree = "<group>"; };
+		68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteraction+Helper.m"; path = "Models/MHInteraction+Helper.m"; sourceTree = "<group>"; };
+		68B7DDA517A317BA00849F31 /* MHSurvey+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHSurvey+Helper.h"; path = "Models/MHSurvey+Helper.h"; sourceTree = "<group>"; };
+		68B7DDA617A317BC00849F31 /* MHSurvey+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHSurvey+Helper.m"; path = "Models/MHSurvey+Helper.m"; sourceTree = "<group>"; };
+		68B7DDA917A3185700849F31 /* MHOrganizationalLabel+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHOrganizationalLabel+Helper.h"; path = "Models/MHOrganizationalLabel+Helper.h"; sourceTree = "<group>"; };
+		68B7DDAA17A3185900849F31 /* MHOrganizationalLabel+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganizationalLabel+Helper.m"; path = "Models/MHOrganizationalLabel+Helper.m"; sourceTree = "<group>"; };
+		68B7DDAD17A318D100849F31 /* MHOrganizationalPermission+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHOrganizationalPermission+Helper.h"; path = "Models/MHOrganizationalPermission+Helper.h"; sourceTree = "<group>"; };
+		68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganizationalPermission+Helper.m"; path = "Models/MHOrganizationalPermission+Helper.m"; sourceTree = "<group>"; };
 		68C06899176EB832007C79D6 /* MHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHModel.h; path = Models/MHModel.h; sourceTree = "<group>"; };
 		68C0689A176EB832007C79D6 /* MHModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHModel.m; path = Models/MHModel.m; sourceTree = "<group>"; };
 		68C068A61770EFBE007C79D6 /* MHStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHStorage.h; path = Models/MHStorage.h; sourceTree = "<group>"; };
@@ -551,7 +573,7 @@
 		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
 		AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationViewController.m; path = ViewControllers/MHNavigationViewController.m; sourceTree = "<group>"; };
-		AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Checked_24.png; sourceTree = "<group>"; };
+		AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
 		AD2434F2178C9CDA00FA16F2 /* MHNewInteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNewInteractionViewController.h; path = ViewControllers/MHNewInteractionViewController.h; sourceTree = "<group>"; };
 		AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNewInteractionViewController.m; path = ViewControllers/MHNewInteractionViewController.m; sourceTree = "<group>"; };
 		AD30112A176FE4D900D53E35 /* MHCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCheckbox.h; path = "Custom UI/MHCheckbox.h"; sourceTree = "<group>"; };
@@ -566,7 +588,7 @@
 		AD3C60DA178761DE00744167 /* MHProfileInteractionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileInteractionsViewController.h; path = ViewControllers/MHProfileInteractionsViewController.h; sourceTree = "<group>"; };
 		AD3C60DB178761E100744167 /* MHProfileInteractionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileInteractionsViewController.m; path = ViewControllers/MHProfileInteractionsViewController.m; sourceTree = "<group>"; };
 		AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionHeaderLabels.png; sourceTree = "<group>"; };
-		AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
+		AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Checked_24.png; sourceTree = "<group>"; };
 		AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Save_72.png; sourceTree = "<group>"; };
 		AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Done_72.png; sourceTree = "<group>"; };
 		AD98278B177C93B400A0276A /* MHProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileViewController.h; path = ViewControllers/MHProfileViewController.h; sourceTree = "<group>"; };
@@ -627,12 +649,20 @@
 			children = (
 				68478D89177E8AE20014501D /* MHOrganization.h */,
 				68478D88177E8AE20014501D /* MHOrganization.m */,
-				6821C46E178244970063AA3D /* MHPerson.h */,
-				6821C46F178244970063AA3D /* MHPerson.m */,
 				6823A7D4177EC34C00DBDF3F /* MHAddress.h */,
 				6823A7D5177EC34D00DBDF3F /* MHAddress.m */,
+				68478D39177A5AA20014501D /* MHInteraction.h */,
+				68478D3A177A5AA20014501D /* MHInteraction.m */,
 				68478D8A177E8AE20014501D /* MHLabel.h */,
 				68478D8B177E8AE20014501D /* MHLabel.m */,
+				68D7B8C5177F804300A2E231 /* MHOrganizationalLabel.h */,
+				68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */,
+				68D7B8C1177F804100A2E231 /* MHOrganizationalPermission.h */,
+				68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */,
+				6821C46E178244970063AA3D /* MHPerson.h */,
+				6821C46F178244970063AA3D /* MHPerson.m */,
+				68478D58177A7F410014501D /* MHSurvey.h */,
+				68478D59177A7F410014501D /* MHSurvey.m */,
 			);
 			name = CoreDataGeneratedClasses;
 			sourceTree = "<group>";
@@ -810,14 +840,22 @@
 				680CD8FC1782403600E6E742 /* MHPerson+Helper.m */,
 				680CD8F417823E4600E6E742 /* MHOrganization+Helper.h */,
 				680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */,
-				68478D39177A5AA20014501D /* MHInteraction.h */,
-				68478D3A177A5AA20014501D /* MHInteraction.m */,
+				68B7DDA117A2F95600849F31 /* MHInteraction+Helper.h */,
+				68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */,
+				68B7DDA917A3185700849F31 /* MHOrganizationalLabel+Helper.h */,
+				68B7DDAA17A3185900849F31 /* MHOrganizationalLabel+Helper.m */,
+				68B7DDAD17A318D100849F31 /* MHOrganizationalPermission+Helper.h */,
+				68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */,
+				6855EDDB17948EC900769B71 /* MHAddress+Helper.h */,
+				6855EDDC17948EC900769B71 /* MHAddress+Helper.m */,
+				68B7DDA517A317BA00849F31 /* MHSurvey+Helper.h */,
+				68B7DDA617A317BC00849F31 /* MHSurvey+Helper.m */,
+				68839F531794FE3000B32934 /* MHLabel+Helper.h */,
+				68839F541794FE3000B32934 /* MHLabel+Helper.m */,
 				68478D3C177A70200014501D /* MHInteractionType.h */,
 				68478D3D177A70200014501D /* MHInteractionType.m */,
 				68478D50177A784A0014501D /* MHPermissionLevel.h */,
 				68478D51177A784A0014501D /* MHPermissionLevel.m */,
-				68478D58177A7F410014501D /* MHSurvey.h */,
-				68478D59177A7F410014501D /* MHSurvey.m */,
 				6823A7B9177EA4C900DBDF3F /* MHQuestion.h */,
 				6823A7BA177EA4C900DBDF3F /* MHQuestion.m */,
 				6823A7D8177EC34D00DBDF3F /* MHUser.h */,
@@ -826,14 +864,6 @@
 				6823A7D1177EC34C00DBDF3F /* MHPhoneNumber.m */,
 				6823A7CC177EC34C00DBDF3F /* MHEmailAddress.h */,
 				6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */,
-				68D7B8C5177F804300A2E231 /* MHOrganizationalLabel.h */,
-				68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */,
-				68D7B8C1177F804100A2E231 /* MHOrganizationalPermission.h */,
-				68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */,
-				6855EDDB17948EC900769B71 /* MHAddress+Helper.h */,
-				6855EDDC17948EC900769B71 /* MHAddress+Helper.m */,
-				68839F531794FE3000B32934 /* MHLabel+Helper.h */,
-				68839F541794FE3000B32934 /* MHLabel+Helper.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -888,6 +918,8 @@
 		68478DB0177E8CDC0014501D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */,
+				6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */,
 				687FC3201795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png */,
 				68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */,
 				68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */,
@@ -899,8 +931,8 @@
 				68145B9A17911052008145EA /* MHProfileHeader_Placeholder.png */,
 				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
 				AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */,
-				AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png */,
-				AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png */,
+				AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */,
+				AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png */,
 				AD3C60E1178B0F2A00744167 /* sectionHeaderLabels.png */,
 				68953EC11784CD0100F0796C /* MH_Logo.png */,
 				68134F941782748300227C2A /* MHPersonCell_Placeholder.png */,
@@ -1234,8 +1266,8 @@
 				68134F9B17837E6500227C2A /* SIAlertView.bundle in Resources */,
 				68953EC21784CD0100F0796C /* MH_Logo.png in Resources */,
 				AD3C60E2178B0F2A00744167 /* sectionHeaderLabels.png in Resources */,
-				AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
-				AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Checked_24.png in Resources */,
+				AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png in Resources */,
+				AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
 				AD75F7AA178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png in Resources */,
 				AD75F7AC178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png in Resources */,
 				68145B9B17911052008145EA /* MHProfileHeader_Placeholder.png in Resources */,
@@ -1250,6 +1282,8 @@
 				68839F4F1794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */,
 				68839F511794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */,
 				687FC3211795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png in Resources */,
+				6851291B17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */,
+				6851291D17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1288,7 +1322,7 @@
 				68134F9C17837E6500227C2A /* SIAlertView.bundle in Resources */,
 				68953EC31784CD0100F0796C /* MH_Logo.png in Resources */,
 				AD3C60E3178B0F2A00744167 /* sectionHeaderLabels.png in Resources */,
-				AD3C60E6178B0FF000744167 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
+				AD3C60E6178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png in Resources */,
 				68145B9C17911052008145EA /* MHProfileHeader_Placeholder.png in Resources */,
 				ADCCBA2B17950D5800A613F3 /* InteractionDemo.png in Resources */,
 				ADCCBA2E17950EC700A613F3 /* InfoDemo.png in Resources */,
@@ -1301,6 +1335,8 @@
 				68839F501794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png in Resources */,
 				68839F521794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */,
 				687FC3221795BCD000E53F08 /* MH_Mobile_Default_Image_iPhone5.png in Resources */,
+				6851291C17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */,
+				6851291E17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1411,6 +1447,10 @@
 				ADCCBA311795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */,
 				689F4E551798F57500BCAFFC /* MHInfoCell.m in Sources */,
 				689F4E591798F5AA00BCAFFC /* MHSurveyCell.m in Sources */,
+				68B7DDA317A2F95700849F31 /* MHInteraction+Helper.m in Sources */,
+				68B7DDA717A317BD00849F31 /* MHSurvey+Helper.m in Sources */,
+				68B7DDAB17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */,
+				68B7DDAF17A318D600849F31 /* MHOrganizationalPermission+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1492,6 +1532,10 @@
 				ADCCBA321795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */,
 				689F4E561798F57500BCAFFC /* MHInfoCell.m in Sources */,
 				689F4E5A1798F5AA00BCAFFC /* MHSurveyCell.m in Sources */,
+				68B7DDA417A2F95800849F31 /* MHInteraction+Helper.m in Sources */,
+				68B7DDA817A317BD00849F31 /* MHSurvey+Helper.m in Sources */,
+				68B7DDAC17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */,
+				68B7DDB017A318D600849F31 /* MHOrganizationalPermission+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

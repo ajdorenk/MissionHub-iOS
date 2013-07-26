@@ -228,7 +228,66 @@
 	
 }
 
+-(NSString *)fieldNameForJsonObjectWithKey:(NSString *)key {
+	
+	if ([key isEqualToString:@"remoteID"]) {
+		
+		return @"id";
+		
+	} else {
+		
+		return key;
+		
+	}
+	
+}
+
+-(id)valueForJsonObjectWithKey:(NSString *)key {
+	
+	return [self valueForKey:key];
+	
+}
+
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
+	
+	//should be subclassed to deal with relationships
+	
+}
+
+-(NSDictionary *)jsonObject {
+	
+	NSEntityDescription *entity	= [self entity];
+	__block NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionary];
+	NSDictionary *relationshipDictionary = [entity relationshipsByName];
+	
+	[[entity attributesByName] enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
+		
+		NSString * keyForReturnObject = [self fieldNameForJsonObjectWithKey:key];
+		id returnObject = [self valueForJsonObjectWithKey:key];
+		
+		if (returnObject != nil) {
+			
+			[jsonDictionary setObject:returnObject forKey:keyForReturnObject];
+			
+		}
+		
+	}];
+	
+	[relationshipDictionary enumerateKeysAndObjectsUsingBlock:^(id fieldName, id relationshipObject, BOOL *stop) {
+		
+		if ([fieldName isKindOfClass:[NSString class]]) {
+			
+			[self addRelationshipObject:[self valueForKey:fieldName] forFieldName:fieldName toJsonObject:jsonDictionary];
+			
+		}
+		
+	}];
+	
+	
+	return jsonDictionary;
+}
+
+-(void)addRelationshipObject:(id)relationshipObject forFieldName:(NSString *)fieldName toJsonObject:(NSMutableDictionary *)jsonObject {
 	
 	//should be subclassed to deal with relationships
 	
