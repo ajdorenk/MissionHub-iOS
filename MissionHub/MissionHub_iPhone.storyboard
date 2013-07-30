@@ -640,7 +640,7 @@ select another survey.</string>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Initiator(s)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIJ-8q-fJA">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="0Yg-TB-9uD"/>
+                                    <constraint firstAttribute="height" constant="21" type="user" id="0Yg-TB-9uD"/>
                                     <constraint firstAttribute="width" constant="116" id="ZD4-iZ-6ce"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -650,7 +650,6 @@ select another survey.</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkf-c5-mUi">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="ihe-GK-4gP"/>
-                                    <constraint firstAttribute="width" constant="266" id="lWx-gn-x5k"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -661,17 +660,17 @@ select another survey.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Interaction" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bf4-mB-TYI">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Interaction Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bf4-mB-TYI">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="xRg-zA-DHA"/>
+                                    <constraint firstAttribute="height" constant="21" type="user" id="xRg-zA-DHA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Reciever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="126-c8-sis">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Receiver" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="126-c8-sis">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="DeH-oP-sfI"/>
+                                    <constraint firstAttribute="height" constant="21" type="user" id="DeH-oP-sfI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -703,9 +702,9 @@ select another survey.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Visibility" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b21-gU-mqZ">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Visible to" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b21-gU-mqZ">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="JRS-gp-rVO"/>
+                                    <constraint firstAttribute="height" constant="21" type="user" id="JRS-gp-rVO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -726,7 +725,7 @@ select another survey.</string>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date / Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3s7-1y-Lmo">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="c48-Ch-tJO"/>
+                                    <constraint firstAttribute="height" constant="21" type="user" id="c48-Ch-tJO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -754,7 +753,7 @@ select another survey.</string>
                             </textField>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Aum-Jz-TP0">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="216" id="qJC-Ot-j5r"/>
+                                    <constraint firstAttribute="height" constant="180" type="user" id="j8N-FD-jbF"/>
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="395340076.93574297">
                                     <!--2013-07-12 16:41:16 +0000-->
@@ -781,58 +780,71 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </data>
                                 </timeZone>
                             </datePicker>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQq-FY-LmE">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" type="user" id="uqQ-wn-sZe"/>
+                                    <constraint firstAttribute="height" constant="24" type="user" id="vAq-dq-YiF"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="zic-QC-ExT" firstAttribute="trailing" secondItem="3Cd-FV-V8e" secondAttribute="trailing" type="default" id="3Mb-dA-h7V"/>
+                            <constraint firstItem="hvE-ds-j50" firstAttribute="top" secondItem="8jV-I0-Zfk" secondAttribute="bottom" type="user" id="01p-cI-g43"/>
+                            <constraint firstItem="rkf-c5-mUi" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" constant="27" type="user" id="09H-nt-zbK"/>
+                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="centerX" secondItem="hvE-ds-j50" secondAttribute="centerX" type="user" id="2MG-jy-8x0"/>
+                            <constraint firstItem="Bf4-mB-TYI" firstAttribute="leading" secondItem="rkf-c5-mUi" secondAttribute="leading" type="user" id="30q-br-FMA"/>
+                            <constraint firstItem="zic-QC-ExT" firstAttribute="trailing" secondItem="3Cd-FV-V8e" secondAttribute="trailing" type="user" id="3Mb-dA-h7V"/>
                             <constraint firstItem="8jV-I0-Zfk" firstAttribute="top" secondItem="k2S-Bc-nTY" secondAttribute="bottom" constant="8" type="user" id="5w8-mq-rFq"/>
-                            <constraint firstItem="rkf-c5-mUi" firstAttribute="top" secondItem="SBE-ct-7n4" secondAttribute="top" constant="39" type="user" id="63l-uW-1JZ"/>
-                            <constraint firstItem="k2S-Bc-nTY" firstAttribute="trailing" secondItem="hvE-ds-j50" secondAttribute="trailing" type="default" id="7Jn-gk-RMV"/>
-                            <constraint firstItem="b21-gU-mqZ" firstAttribute="leading" secondItem="3Cd-FV-V8e" secondAttribute="leading" type="default" id="7ht-5W-Fsn"/>
-                            <constraint firstItem="hvE-ds-j50" firstAttribute="top" secondItem="SBE-ct-7n4" secondAttribute="top" constant="312" type="user" id="8Lv-at-nCq"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="trailing" secondItem="SBE-ct-7n4" secondAttribute="trailing" type="default" id="8M7-xA-RRk"/>
-                            <constraint firstItem="3s7-1y-Lmo" firstAttribute="leading" secondItem="zic-QC-ExT" secondAttribute="leading" type="default" id="AQt-dk-DSE"/>
+                            <constraint firstAttribute="trailing" secondItem="rkf-c5-mUi" secondAttribute="trailing" constant="27" type="user" id="6aX-FG-Kx4"/>
+                            <constraint firstItem="k2S-Bc-nTY" firstAttribute="trailing" secondItem="hvE-ds-j50" secondAttribute="trailing" type="user" id="7Jn-gk-RMV"/>
+                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="trailing" secondItem="SBE-ct-7n4" secondAttribute="trailing" type="user" id="7tx-oj-Rga"/>
+                            <constraint firstItem="k2S-Bc-nTY" firstAttribute="top" secondItem="3s7-1y-Lmo" secondAttribute="bottom" type="user" id="AMw-3f-RVu"/>
                             <constraint firstItem="126-c8-sis" firstAttribute="top" secondItem="9YD-rB-pPR" secondAttribute="bottom" constant="8" type="user" id="B0P-g4-mQW"/>
-                            <constraint firstItem="rkf-c5-mUi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SBE-ct-7n4" secondAttribute="top" constant="39" type="user" id="Edp-ln-ENy"/>
+                            <constraint firstAttribute="bottom" secondItem="Aum-Jz-TP0" secondAttribute="bottom" type="user" id="Bvk-Hl-l4Z"/>
+                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="trailing" secondItem="SBE-ct-7n4" secondAttribute="trailing" type="user" id="ElT-Pc-oxw"/>
                             <constraint firstItem="3s7-1y-Lmo" firstAttribute="trailing" secondItem="b21-gU-mqZ" secondAttribute="trailing" type="default" id="Hdw-D7-bUt"/>
-                            <constraint firstItem="3s7-1y-Lmo" firstAttribute="leading" secondItem="k2S-Bc-nTY" secondAttribute="leading" type="default" id="OML-tn-nSn"/>
-                            <constraint firstItem="Bf4-mB-TYI" firstAttribute="leading" secondItem="9YD-rB-pPR" secondAttribute="leading" type="default" id="QUE-g5-bui"/>
-                            <constraint firstItem="3Cd-FV-V8e" firstAttribute="trailing" secondItem="9YD-rB-pPR" secondAttribute="trailing" type="default" id="QYF-Rz-UdX"/>
-                            <constraint firstItem="126-c8-sis" firstAttribute="leading" secondItem="9YD-rB-pPR" secondAttribute="leading" type="default" id="Qoq-9S-rZG"/>
+                            <constraint firstItem="8jV-I0-Zfk" firstAttribute="trailing" secondItem="3s7-1y-Lmo" secondAttribute="trailing" type="default" id="MHi-gY-9vE"/>
+                            <constraint firstItem="8jV-I0-Zfk" firstAttribute="leading" secondItem="hvE-ds-j50" secondAttribute="leading" type="user" id="NxT-Sa-13f"/>
+                            <constraint firstItem="3Cd-FV-V8e" firstAttribute="trailing" secondItem="9YD-rB-pPR" secondAttribute="trailing" type="user" id="QYF-Rz-UdX"/>
                             <constraint firstItem="Bf4-mB-TYI" firstAttribute="top" secondItem="rkf-c5-mUi" secondAttribute="bottom" constant="8" type="user" id="RL3-4a-7nL"/>
-                            <constraint firstItem="3s7-1y-Lmo" firstAttribute="top" secondItem="zic-QC-ExT" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Ram-MJ-Gwz"/>
-                            <constraint firstItem="zic-QC-ExT" firstAttribute="top" secondItem="SBE-ct-7n4" secondAttribute="top" constant="204" id="Rgu-pm-e66"/>
-                            <constraint firstItem="126-c8-sis" firstAttribute="leading" secondItem="3Cd-FV-V8e" secondAttribute="leading" type="default" id="VcG-fc-gkI"/>
-                            <constraint firstItem="3Cd-FV-V8e" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SBE-ct-7n4" secondAttribute="top" constant="149" type="user" id="Yhb-od-iza"/>
-                            <constraint firstItem="IIJ-8q-fJA" firstAttribute="leading" secondItem="rkf-c5-mUi" secondAttribute="leading" type="default" id="aLj-YC-MYR"/>
-                            <constraint firstItem="9YD-rB-pPR" firstAttribute="trailing" secondItem="rkf-c5-mUi" secondAttribute="trailing" type="default" id="abr-tp-52X"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="bottom" secondItem="SBE-ct-7n4" secondAttribute="bottom" type="default" id="afp-Wc-97j"/>
-                            <constraint firstItem="8jV-I0-Zfk" firstAttribute="leading" secondItem="k2S-Bc-nTY" secondAttribute="leading" type="default" id="ajC-Pj-auh"/>
-                            <constraint firstItem="9YD-rB-pPR" firstAttribute="top" secondItem="SBE-ct-7n4" secondAttribute="top" constant="94" type="user" id="btL-T2-eTe"/>
+                            <constraint firstItem="3s7-1y-Lmo" firstAttribute="top" secondItem="zic-QC-ExT" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Ram-MJ-Gwz"/>
+                            <constraint firstItem="hQq-FY-LmE" firstAttribute="centerY" secondItem="9YD-rB-pPR" secondAttribute="centerY" type="user" id="STo-Rs-Wif"/>
+                            <constraint firstItem="3s7-1y-Lmo" firstAttribute="leading" secondItem="k2S-Bc-nTY" secondAttribute="leading" type="user" id="U9d-lA-uFP"/>
+                            <constraint firstItem="zic-QC-ExT" firstAttribute="leading" secondItem="3s7-1y-Lmo" secondAttribute="leading" type="user" id="UCd-ql-dGZ"/>
+                            <constraint firstItem="rkf-c5-mUi" firstAttribute="top" secondItem="IIJ-8q-fJA" secondAttribute="bottom" type="user" id="WZS-3e-KsI"/>
+                            <constraint firstItem="8jV-I0-Zfk" firstAttribute="leading" secondItem="k2S-Bc-nTY" secondAttribute="leading" type="user" id="Wa7-lg-6eh"/>
+                            <constraint firstItem="3Cd-FV-V8e" firstAttribute="leading" secondItem="126-c8-sis" secondAttribute="leading" type="user" id="ZVd-m5-YL8"/>
+                            <constraint firstItem="9YD-rB-pPR" firstAttribute="trailing" secondItem="rkf-c5-mUi" secondAttribute="trailing" type="user" id="abr-tp-52X"/>
                             <constraint firstItem="Bf4-mB-TYI" firstAttribute="trailing" secondItem="IIJ-8q-fJA" secondAttribute="trailing" type="default" id="bzq-0J-Yk4"/>
-                            <constraint firstItem="8jV-I0-Zfk" firstAttribute="leading" secondItem="hvE-ds-j50" secondAttribute="leading" type="default" id="gKJ-AE-l7Z"/>
+                            <constraint firstAttribute="bottom" secondItem="hvE-ds-j50" secondAttribute="bottom" constant="129" type="user" id="fUw-kA-sDr"/>
+                            <constraint firstItem="zic-QC-ExT" firstAttribute="leading" secondItem="b21-gU-mqZ" secondAttribute="leading" type="user" id="g4R-pS-rgJ"/>
+                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" type="user" id="hKF-7U-dtr"/>
                             <constraint firstItem="IIJ-8q-fJA" firstAttribute="top" secondItem="SBE-ct-7n4" secondAttribute="top" constant="20" type="user" id="hko-YN-id8"/>
-                            <constraint firstItem="9YD-rB-pPR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SBE-ct-7n4" secondAttribute="top" constant="94" type="user" id="iFM-jB-zXM"/>
-                            <constraint firstItem="Bf4-mB-TYI" firstAttribute="leading" secondItem="rkf-c5-mUi" secondAttribute="leading" type="default" id="lls-Nh-E72"/>
-                            <constraint firstItem="3Cd-FV-V8e" firstAttribute="top" secondItem="SBE-ct-7n4" secondAttribute="top" constant="149" type="user" id="mG4-Nu-RIb"/>
+                            <constraint firstItem="9YD-rB-pPR" firstAttribute="leading" secondItem="Bf4-mB-TYI" secondAttribute="leading" type="user" id="ia0-2E-Dmm"/>
+                            <constraint firstItem="9YD-rB-pPR" firstAttribute="leading" secondItem="126-c8-sis" secondAttribute="leading" type="user" id="jnY-5O-hdZ"/>
+                            <constraint firstItem="b21-gU-mqZ" firstAttribute="leading" secondItem="3Cd-FV-V8e" secondAttribute="leading" type="user" id="nWH-7r-3T8"/>
                             <constraint firstItem="b21-gU-mqZ" firstAttribute="trailing" secondItem="126-c8-sis" secondAttribute="trailing" type="default" id="oln-sW-RM5"/>
                             <constraint firstItem="126-c8-sis" firstAttribute="trailing" secondItem="Bf4-mB-TYI" secondAttribute="trailing" type="default" id="piy-AS-Wxn"/>
-                            <constraint firstItem="k2S-Bc-nTY" firstAttribute="top" secondItem="SBE-ct-7n4" secondAttribute="top" constant="258" type="user" id="sY2-EO-1wa"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" type="default" id="uRT-Uy-OjR"/>
-                            <constraint firstItem="8jV-I0-Zfk" firstAttribute="trailing" secondItem="3s7-1y-Lmo" secondAttribute="trailing" type="default" id="ure-00-ikA"/>
+                            <constraint firstItem="hQq-FY-LmE" firstAttribute="leading" secondItem="9YD-rB-pPR" secondAttribute="trailing" constant="-32" type="user" id="pko-T2-sdM"/>
+                            <constraint firstItem="3Cd-FV-V8e" firstAttribute="top" secondItem="126-c8-sis" secondAttribute="bottom" type="user" id="pui-lD-lQm"/>
+                            <constraint firstItem="zic-QC-ExT" firstAttribute="top" secondItem="b21-gU-mqZ" secondAttribute="bottom" type="user" id="rtM-Xq-VbB"/>
+                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" type="user" id="uRT-Uy-OjR"/>
+                            <constraint firstItem="hQq-FY-LmE" firstAttribute="top" secondItem="9YD-rB-pPR" secondAttribute="bottom" constant="-26" type="user" id="uwX-re-rrl"/>
+                            <constraint firstItem="9YD-rB-pPR" firstAttribute="top" secondItem="Bf4-mB-TYI" secondAttribute="bottom" type="user" id="vUt-Qd-Sx4"/>
                             <constraint firstItem="b21-gU-mqZ" firstAttribute="top" secondItem="3Cd-FV-V8e" secondAttribute="bottom" constant="8" type="user" id="wAt-3Y-WwF"/>
-                            <constraint firstItem="k2S-Bc-nTY" firstAttribute="trailing" secondItem="zic-QC-ExT" secondAttribute="trailing" type="default" id="xAE-tj-kcC"/>
-                            <constraint firstItem="b21-gU-mqZ" firstAttribute="leading" secondItem="zic-QC-ExT" secondAttribute="leading" type="default" id="yKx-4t-SBT"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="centerX" secondItem="hvE-ds-j50" secondAttribute="centerX" type="default" id="ymL-7p-qpp"/>
+                            <constraint firstItem="k2S-Bc-nTY" firstAttribute="trailing" secondItem="zic-QC-ExT" secondAttribute="trailing" type="user" id="xAE-tj-kcC"/>
+                            <constraint firstItem="rkf-c5-mUi" firstAttribute="leading" secondItem="IIJ-8q-fJA" secondAttribute="leading" type="default" id="yoF-qP-odL"/>
+                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" type="user" id="zKW-Wv-KMx"/>
+                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="trailing" secondItem="SBE-ct-7n4" secondAttribute="trailing" type="user" id="zRd-tl-h9i"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activeField" destination="hvE-ds-j50" id="E6t-Gr-B2f"/>
                         <outlet property="comment" destination="hvE-ds-j50" id="eIq-mk-rQe"/>
                         <outlet property="datePicker" destination="Aum-Jz-TP0" id="OAB-fQ-fgA"/>
                         <outlet property="dateTime" destination="k2S-Bc-nTY" id="ebT-8G-tUY"/>
                         <outlet property="initiator" destination="rkf-c5-mUi" id="wBf-3t-LEu"/>
-                        <outlet property="interaction" destination="9YD-rB-pPR" id="sm7-Y9-l1m"/>
+                        <outlet property="interactionType" destination="9YD-rB-pPR" id="srm-ax-q5W"/>
+                        <outlet property="interactionTypeIcon" destination="hQq-FY-LmE" id="bOR-hP-8Bo"/>
                         <outlet property="receiver" destination="3Cd-FV-V8e" id="rx7-Xf-Wv4"/>
                         <outlet property="visibility" destination="zic-QC-ExT" id="2NN-Sz-fMs"/>
                     </connections>
@@ -1253,6 +1265,184 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="MH_Logo.png" width="144" height="144"/>
         <image name="MH_Mobile_Default_Image_iPhone5.png" width="640" height="1136"/>
     </resources>
+    <classes>
+        <class className="DWTagList" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DWTagList.h"/>
+        </class>
+        <class className="ECSlidingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
+        </class>
+        <class className="M6ParallaxController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/M6ParallaxController.h"/>
+        </class>
+        <class className="MHCheckbox" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHCheckbox.h"/>
+        </class>
+        <class className="MHCreatePersonViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHCreatePersonViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="address1" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="address2" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="city" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="maleFemaleControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="phone" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="zip" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MHGenderListController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
+        </class>
+        <class className="MHGenericListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenericListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="setListTitle:" candidateClass="NSString"/>
+                <relationship kind="outlet" name="listName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tableViewList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MHInfoCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInfoCell.h"/>
+        </class>
+        <class className="MHInitiatorCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInitiatorCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MHInteractionCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInteractionCell.h"/>
+        </class>
+        <class className="MHLoadingCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoadingCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MHLoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHLoginViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MHMenuToolbar" superclassName="UIToolbar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuToolbar.h"/>
+        </class>
+        <class className="MHMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuViewController.h"/>
+        </class>
+        <class className="MHNavigationViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNavigationViewController.h"/>
+        </class>
+        <class className="MHNewInteractionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNewInteractionViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backToMenu:"/>
+                <relationship kind="action" name="chooseInitiator:"/>
+                <relationship kind="action" name="chooseInteraction:"/>
+                <relationship kind="action" name="chooseReceiver:"/>
+                <relationship kind="action" name="chooseVisibility:"/>
+                <relationship kind="action" name="doneWithDatePicker:"/>
+                <relationship kind="action" name="showDatePicker:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="comment" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="dateTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="initiator" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="interactionType" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="interactionTypeIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="receiver" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="visibility" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="MHPeopleListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="activityBar" candidateClass="UIView"/>
+                <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="MHPeopleSearchBar" superclassName="UISearchBar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleSearchBar.h"/>
+        </class>
+        <class className="MHPersonCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPersonCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkbox" candidateClass="MHCheckbox"/>
+                <relationship kind="outlet" name="gender" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameBackgroundView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MHProfileHeaderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileHeaderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pageChanged:" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="headerPageControl" candidateClass="UIPageControl"/>
+                <relationship kind="outlet" name="headerScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="labelList" candidateClass="DWTagList"/>
+                <relationship kind="outlet" name="labelsListLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelsTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MHProfileInfoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileInfoViewController.h"/>
+        </class>
+        <class className="MHProfileInteractionsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileInteractionsViewController.h"/>
+        </class>
+        <class className="MHProfileMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileMenuViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="menuDidChangeSelection:"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="MHSegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="MHProfileSurveysViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileSurveysViewController.h"/>
+        </class>
+        <class className="MHProfileViewController" superclassName="M6ParallaxController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MHRootViewController" superclassName="ECSlidingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>
+        </class>
+        <class className="MHSegmentedControl" superclassName="SDSegmentedControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSegmentedControl.h"/>
+        </class>
+        <class className="MHSurveyCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyCell.h"/>
+        </class>
+        <class className="MHSurveyViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHSurveyViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="messageView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="topToolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SDSegmentedControl" superclassName="UISegmentedControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SDSegmentedControl.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

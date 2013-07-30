@@ -2,11 +2,12 @@
 //  MHOrganization.m
 //  MissionHub
 //
-//  Created by Michael Harrison on 7/11/13.
+//  Created by Michael Harrison on 7/30/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
 #import "MHOrganization.h"
+#import "MHInteractionType.h"
 #import "MHLabel.h"
 #import "MHPerson.h"
 #import "MHSurvey.h"
@@ -25,8 +26,9 @@
 @dynamic admins;
 @dynamic currentUser;
 @dynamic labels;
-@dynamic users;
 @dynamic people;
 @dynamic surveys;
+@dynamic users;
+@dynamic interactionTypes;
 
 @end

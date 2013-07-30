@@ -10,6 +10,7 @@
 #import "MHLabel.h"
 #import "MHPerson.h"
 #import "MHSurvey.h"
+#import "MHInteractionType.h"
 
 @interface MHOrganization (Helper)
 

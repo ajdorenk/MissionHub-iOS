@@ -72,6 +72,18 @@
 			
 		}];
 		
+	} else if ([fieldName isEqualToString:@"interaction_types"]) {
+		
+		NSArray *arrayOfObjects = relationshipObject;
+		
+		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+			
+			MHInteractionType *newObject = [MHInteractionType newObjectFromFields:object];
+			
+			[self addInteractionTypesObject:newObject];
+			
+		}];
+		
 	}
 	
 }

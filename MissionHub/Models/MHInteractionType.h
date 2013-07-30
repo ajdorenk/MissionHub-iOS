@@ -2,7 +2,7 @@
 //  MHInteractionType.h
 //  MissionHub
 //
-//  Created by Michael Harrison on 6/25/13.
+//  Created by Michael Harrison on 7/30/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHInteraction;
+@class MHInteraction, MHOrganization;
 
 @interface MHInteractionType : MHModel
 
@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSNumber * remoteID;
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) NSSet *interactions;
+@property (nonatomic, retain) MHOrganization *organization;
 @end
 
 @interface MHInteractionType (CoreDataGeneratedAccessors)

@@ -2,14 +2,13 @@
 //  MHInteractionType.m
 //  MissionHub
 //
-//  Created by Michael Harrison on 6/25/13.
+//  Created by Michael Harrison on 7/30/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
-#import "MHAPI.h"
 #import "MHInteractionType.h"
-#import "MHOrganization.h"
 #import "MHInteraction.h"
+#import "MHOrganization.h"
 
 
 @implementation MHInteractionType
@@ -21,5 +20,6 @@
 @dynamic remoteID;
 @dynamic updated_at;
 @dynamic interactions;
+@dynamic organization;
 
 @end

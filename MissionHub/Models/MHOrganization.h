@@ -2,7 +2,7 @@
 //  MHOrganization.h
 //  MissionHub
 //
-//  Created by Michael Harrison on 7/11/13.
+//  Created by Michael Harrison on 7/30/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHLabel, MHPerson, MHSurvey;
+@class MHInteractionType, MHLabel, MHPerson, MHSurvey;
 
 @interface MHOrganization : MHModel
 
@@ -25,9 +25,10 @@
 @property (nonatomic, retain) NSSet *admins;
 @property (nonatomic, retain) MHPerson *currentUser;
 @property (nonatomic, retain) NSSet *labels;
-@property (nonatomic, retain) NSSet *users;
 @property (nonatomic, retain) NSSet *people;
 @property (nonatomic, retain) NSSet *surveys;
+@property (nonatomic, retain) NSSet *users;
+@property (nonatomic, retain) NSSet *interactionTypes;
 @end
 
 @interface MHOrganization (CoreDataGeneratedAccessors)
@@ -42,11 +43,6 @@
 - (void)addLabels:(NSSet *)values;
 - (void)removeLabels:(NSSet *)values;
 
-- (void)addUsersObject:(MHPerson *)value;
-- (void)removeUsersObject:(MHPerson *)value;
-- (void)addUsers:(NSSet *)values;
-- (void)removeUsers:(NSSet *)values;
-
 - (void)addPeopleObject:(MHPerson *)value;
 - (void)removePeopleObject:(MHPerson *)value;
 - (void)addPeople:(NSSet *)values;
@@ -56,5 +52,15 @@
 - (void)removeSurveysObject:(MHSurvey *)value;
 - (void)addSurveys:(NSSet *)values;
 - (void)removeSurveys:(NSSet *)values;
+
+- (void)addUsersObject:(MHPerson *)value;
+- (void)removeUsersObject:(MHPerson *)value;
+- (void)addUsers:(NSSet *)values;
+- (void)removeUsers:(NSSet *)values;
+
+- (void)addInteractionTypesObject:(MHInteractionType *)value;
+- (void)removeInteractionTypesObject:(MHInteractionType *)value;
+- (void)addInteractionTypes:(NSSet *)values;
+- (void)removeInteractionTypes:(NSSet *)values;
 
 @end
