@@ -99,7 +99,7 @@
     
 }
 
-- (IBAction)setListTitle:(NSString *)title{
+-(void)setListTitle:(NSString *)title {
 //    self.listTitle = title;
     self.listName.text = title;
     NSLog(@"%@",title);

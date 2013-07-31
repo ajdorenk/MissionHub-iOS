@@ -279,6 +279,7 @@
 	[self addInclude:MHRequestOptionsIncludeOrganizationsSurveys];
 	[self addInclude:MHRequestOptionsIncludeOrganizationsLabels];
 	[self addInclude:MHRequestOptionsIncludeOrganizationsAllQuestions];
+	[self addInclude:MHRequestOptionsIncludeOrganizationsInteractionTypes];
 	
 	return self;
 }
@@ -755,6 +756,9 @@
 			break;
 		case MHRequestOptionsIncludeOrganizationsLabels:
 			includeString = @"labels";
+			break;
+		case MHRequestOptionsIncludeOrganizationsInteractionTypes:
+			includeString = @"interaction_types";
 			break;
 		case MHRequestOptionsIncludePeopleAllOrganizationalPermissions:
 			includeString = @"all_organizational_permissions";

@@ -40,6 +40,7 @@ typedef enum {
 	MHRequestOptionsIncludeOrganizationsSurveys,
 	MHRequestOptionsIncludeOrganizationsAllQuestions,
 	MHRequestOptionsIncludeOrganizationsKeywords,
+	MHRequestOptionsIncludeOrganizationsInteractionTypes,
 	MHRequestOptionsIncludePeopleContactAssignments,
 	MHRequestOptionsIncludePeopleAssignTos,
 	MHRequestOptionsIncludePeopleOrganizationalPermissions,

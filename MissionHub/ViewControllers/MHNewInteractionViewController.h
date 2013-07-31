@@ -20,7 +20,10 @@
     CGRect			_originalCommentFrame;
 }
 
-@property (nonatomic, strong) UIBarButtonItem				*doneButton;
+@property (nonatomic, strong) UIBarButtonItem				*doneWithInteractionTypeButton;
+@property (nonatomic, strong) UIBarButtonItem				*doneWithVisibilityButton;
+@property (nonatomic, strong) UIBarButtonItem				*doneWithDateButton;
+@property (nonatomic, strong) UIBarButtonItem				*doneWithCommentButton;
 @property (nonatomic, strong) UIBarButtonItem				*saveButton;
 
 @property (nonatomic, strong) MHInteraction					*interaction;
@@ -36,7 +39,6 @@
 @property (nonatomic, strong) IBOutlet UIButton				*dateTime;
 @property (nonatomic, strong) IBOutlet UITextField			*comment;
 @property (nonatomic, assign) CGRect						originalCommentFrame;
-@property (nonatomic, strong) IBOutlet UIDatePicker			*datePicker;
 
 @property (nonatomic, strong) MHGenericListViewController	*_initiatorsList;
 @property (nonatomic, strong) UIPickerView					*_interactionTypePicker;

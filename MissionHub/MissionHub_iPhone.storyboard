@@ -647,11 +647,12 @@ select another survey.</string>
                                 <color key="textColor" red="0.50196078431372548" green="0.50980392156862742" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkf-c5-mUi">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkf-c5-mUi">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="ihe-GK-4gP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -676,24 +677,23 @@ select another survey.</string>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-rB-pPR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-rB-pPR">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="2BQ-uF-7p3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cd-FV-V8e">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cd-FV-V8e">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="QbN-mL-lcM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -710,11 +710,12 @@ select another survey.</string>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zic-QC-ExT">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zic-QC-ExT">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="hKf-G6-Ao5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -731,11 +732,12 @@ select another survey.</string>
                                 <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2S-Bc-nTY">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2S-Bc-nTY">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" type="user" id="OhP-sB-eui"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -744,46 +746,17 @@ select another survey.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hvE-ds-j50">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hvE-ds-j50" customClass="MHTextField">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="93" type="user" id="4yf-xF-rWh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Aum-Jz-TP0">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="180" type="user" id="j8N-FD-jbF"/>
-                                </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="395340076.93574297">
-                                    <!--2013-07-12 16:41:16 +0000-->
-                                </date>
-                                <timeZone key="timeZone" name="America/Los_Angeles">
-                                    <data key="data">
-VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
-y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
-5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
-8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
-AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
-DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
-HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
-KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
-OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
-Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
-VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
-Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
-cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
-f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</data>
-                                </timeZone>
-                            </datePicker>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQq-FY-LmE">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" type="user" id="uqQ-wn-sZe"/>
-                                    <constraint firstAttribute="height" constant="24" type="user" id="vAq-dq-YiF"/>
+                                    <constraint firstAttribute="width" constant="18" type="user" id="uqQ-wn-sZe"/>
+                                    <constraint firstAttribute="height" constant="18" type="user" id="vAq-dq-YiF"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -791,24 +764,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <constraints>
                             <constraint firstItem="hvE-ds-j50" firstAttribute="top" secondItem="8jV-I0-Zfk" secondAttribute="bottom" type="user" id="01p-cI-g43"/>
                             <constraint firstItem="rkf-c5-mUi" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" constant="27" type="user" id="09H-nt-zbK"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="centerX" secondItem="hvE-ds-j50" secondAttribute="centerX" type="user" id="2MG-jy-8x0"/>
                             <constraint firstItem="Bf4-mB-TYI" firstAttribute="leading" secondItem="rkf-c5-mUi" secondAttribute="leading" type="user" id="30q-br-FMA"/>
                             <constraint firstItem="zic-QC-ExT" firstAttribute="trailing" secondItem="3Cd-FV-V8e" secondAttribute="trailing" type="user" id="3Mb-dA-h7V"/>
                             <constraint firstItem="8jV-I0-Zfk" firstAttribute="top" secondItem="k2S-Bc-nTY" secondAttribute="bottom" constant="8" type="user" id="5w8-mq-rFq"/>
                             <constraint firstAttribute="trailing" secondItem="rkf-c5-mUi" secondAttribute="trailing" constant="27" type="user" id="6aX-FG-Kx4"/>
                             <constraint firstItem="k2S-Bc-nTY" firstAttribute="trailing" secondItem="hvE-ds-j50" secondAttribute="trailing" type="user" id="7Jn-gk-RMV"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="trailing" secondItem="SBE-ct-7n4" secondAttribute="trailing" type="user" id="7tx-oj-Rga"/>
                             <constraint firstItem="k2S-Bc-nTY" firstAttribute="top" secondItem="3s7-1y-Lmo" secondAttribute="bottom" type="user" id="AMw-3f-RVu"/>
                             <constraint firstItem="126-c8-sis" firstAttribute="top" secondItem="9YD-rB-pPR" secondAttribute="bottom" constant="8" type="user" id="B0P-g4-mQW"/>
-                            <constraint firstAttribute="bottom" secondItem="Aum-Jz-TP0" secondAttribute="bottom" type="user" id="Bvk-Hl-l4Z"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="trailing" secondItem="SBE-ct-7n4" secondAttribute="trailing" type="user" id="ElT-Pc-oxw"/>
                             <constraint firstItem="3s7-1y-Lmo" firstAttribute="trailing" secondItem="b21-gU-mqZ" secondAttribute="trailing" type="default" id="Hdw-D7-bUt"/>
                             <constraint firstItem="8jV-I0-Zfk" firstAttribute="trailing" secondItem="3s7-1y-Lmo" secondAttribute="trailing" type="default" id="MHi-gY-9vE"/>
                             <constraint firstItem="8jV-I0-Zfk" firstAttribute="leading" secondItem="hvE-ds-j50" secondAttribute="leading" type="user" id="NxT-Sa-13f"/>
                             <constraint firstItem="3Cd-FV-V8e" firstAttribute="trailing" secondItem="9YD-rB-pPR" secondAttribute="trailing" type="user" id="QYF-Rz-UdX"/>
                             <constraint firstItem="Bf4-mB-TYI" firstAttribute="top" secondItem="rkf-c5-mUi" secondAttribute="bottom" constant="8" type="user" id="RL3-4a-7nL"/>
                             <constraint firstItem="3s7-1y-Lmo" firstAttribute="top" secondItem="zic-QC-ExT" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Ram-MJ-Gwz"/>
-                            <constraint firstItem="hQq-FY-LmE" firstAttribute="centerY" secondItem="9YD-rB-pPR" secondAttribute="centerY" type="user" id="STo-Rs-Wif"/>
                             <constraint firstItem="3s7-1y-Lmo" firstAttribute="leading" secondItem="k2S-Bc-nTY" secondAttribute="leading" type="user" id="U9d-lA-uFP"/>
                             <constraint firstItem="zic-QC-ExT" firstAttribute="leading" secondItem="3s7-1y-Lmo" secondAttribute="leading" type="user" id="UCd-ql-dGZ"/>
                             <constraint firstItem="rkf-c5-mUi" firstAttribute="top" secondItem="IIJ-8q-fJA" secondAttribute="bottom" type="user" id="WZS-3e-KsI"/>
@@ -816,31 +784,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="3Cd-FV-V8e" firstAttribute="leading" secondItem="126-c8-sis" secondAttribute="leading" type="user" id="ZVd-m5-YL8"/>
                             <constraint firstItem="9YD-rB-pPR" firstAttribute="trailing" secondItem="rkf-c5-mUi" secondAttribute="trailing" type="user" id="abr-tp-52X"/>
                             <constraint firstItem="Bf4-mB-TYI" firstAttribute="trailing" secondItem="IIJ-8q-fJA" secondAttribute="trailing" type="default" id="bzq-0J-Yk4"/>
-                            <constraint firstAttribute="bottom" secondItem="hvE-ds-j50" secondAttribute="bottom" constant="129" type="user" id="fUw-kA-sDr"/>
                             <constraint firstItem="zic-QC-ExT" firstAttribute="leading" secondItem="b21-gU-mqZ" secondAttribute="leading" type="user" id="g4R-pS-rgJ"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" type="user" id="hKF-7U-dtr"/>
                             <constraint firstItem="IIJ-8q-fJA" firstAttribute="top" secondItem="SBE-ct-7n4" secondAttribute="top" constant="20" type="user" id="hko-YN-id8"/>
                             <constraint firstItem="9YD-rB-pPR" firstAttribute="leading" secondItem="Bf4-mB-TYI" secondAttribute="leading" type="user" id="ia0-2E-Dmm"/>
                             <constraint firstItem="9YD-rB-pPR" firstAttribute="leading" secondItem="126-c8-sis" secondAttribute="leading" type="user" id="jnY-5O-hdZ"/>
                             <constraint firstItem="b21-gU-mqZ" firstAttribute="leading" secondItem="3Cd-FV-V8e" secondAttribute="leading" type="user" id="nWH-7r-3T8"/>
                             <constraint firstItem="b21-gU-mqZ" firstAttribute="trailing" secondItem="126-c8-sis" secondAttribute="trailing" type="default" id="oln-sW-RM5"/>
                             <constraint firstItem="126-c8-sis" firstAttribute="trailing" secondItem="Bf4-mB-TYI" secondAttribute="trailing" type="default" id="piy-AS-Wxn"/>
-                            <constraint firstItem="hQq-FY-LmE" firstAttribute="leading" secondItem="9YD-rB-pPR" secondAttribute="trailing" constant="-32" type="user" id="pko-T2-sdM"/>
+                            <constraint firstItem="hQq-FY-LmE" firstAttribute="leading" secondItem="9YD-rB-pPR" secondAttribute="trailing" constant="-23" type="user" id="pko-T2-sdM"/>
                             <constraint firstItem="3Cd-FV-V8e" firstAttribute="top" secondItem="126-c8-sis" secondAttribute="bottom" type="user" id="pui-lD-lQm"/>
                             <constraint firstItem="zic-QC-ExT" firstAttribute="top" secondItem="b21-gU-mqZ" secondAttribute="bottom" type="user" id="rtM-Xq-VbB"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" type="user" id="uRT-Uy-OjR"/>
-                            <constraint firstItem="hQq-FY-LmE" firstAttribute="top" secondItem="9YD-rB-pPR" secondAttribute="bottom" constant="-26" type="user" id="uwX-re-rrl"/>
+                            <constraint firstItem="hQq-FY-LmE" firstAttribute="top" secondItem="9YD-rB-pPR" secondAttribute="bottom" constant="-23" type="user" id="uwX-re-rrl"/>
                             <constraint firstItem="9YD-rB-pPR" firstAttribute="top" secondItem="Bf4-mB-TYI" secondAttribute="bottom" type="user" id="vUt-Qd-Sx4"/>
                             <constraint firstItem="b21-gU-mqZ" firstAttribute="top" secondItem="3Cd-FV-V8e" secondAttribute="bottom" constant="8" type="user" id="wAt-3Y-WwF"/>
                             <constraint firstItem="k2S-Bc-nTY" firstAttribute="trailing" secondItem="zic-QC-ExT" secondAttribute="trailing" type="user" id="xAE-tj-kcC"/>
                             <constraint firstItem="rkf-c5-mUi" firstAttribute="leading" secondItem="IIJ-8q-fJA" secondAttribute="leading" type="default" id="yoF-qP-odL"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="leading" secondItem="SBE-ct-7n4" secondAttribute="leading" type="user" id="zKW-Wv-KMx"/>
-                            <constraint firstItem="Aum-Jz-TP0" firstAttribute="trailing" secondItem="SBE-ct-7n4" secondAttribute="trailing" type="user" id="zRd-tl-h9i"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="comment" destination="hvE-ds-j50" id="eIq-mk-rQe"/>
-                        <outlet property="datePicker" destination="Aum-Jz-TP0" id="OAB-fQ-fgA"/>
                         <outlet property="dateTime" destination="k2S-Bc-nTY" id="ebT-8G-tUY"/>
                         <outlet property="initiator" destination="rkf-c5-mUi" id="wBf-3t-LEu"/>
                         <outlet property="interactionType" destination="9YD-rB-pPR" id="srm-ax-q5W"/>
@@ -1341,15 +1303,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="MHNewInteractionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNewInteractionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backToMenu:"/>
-                <relationship kind="action" name="chooseInitiator:"/>
-                <relationship kind="action" name="chooseInteraction:"/>
-                <relationship kind="action" name="chooseReceiver:"/>
-                <relationship kind="action" name="chooseVisibility:"/>
-                <relationship kind="action" name="doneWithDatePicker:"/>
-                <relationship kind="action" name="showDatePicker:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="comment" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="dateTime" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="initiator" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="interactionType" candidateClass="UIButton"/>
@@ -1435,6 +1389,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="surveyWebView" candidateClass="UIWebView"/>
                 <relationship kind="outlet" name="topToolbar" candidateClass="UIToolbar"/>
             </relationships>
+        </class>
+        <class className="MHTextField" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHTextField.h"/>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

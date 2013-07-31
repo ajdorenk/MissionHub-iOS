@@ -36,13 +36,21 @@
 -(void)chooseVisibility:(id)sender;
 -(void)chooseDate:(id)sender;
 
+-(void)timestampChanged:(UIDatePicker *)sender;
+-(void)doneWithInteractionType:(id)sender;
+-(void)doneWithVisibility:(id)sender;
+-(void)doneWithDate:(id)sender;
+-(void)doneWithComment:(id)sender;
+
+-(void)clearPickers;
+
 -(void)backToMenu:(id)sender;
 
 @end
 
 @implementation MHNewInteractionViewController
 
-@synthesize doneButton, saveButton;
+@synthesize doneWithInteractionTypeButton, doneWithVisibilityButton, doneWithDateButton, doneWithCommentButton, saveButton;
 
 @synthesize interaction				= _interaction;
 @synthesize interactionTypeArray	= _interactionTypeArray;
@@ -55,7 +63,7 @@
 
 #pragma mark - initialization
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -71,12 +79,18 @@
     
 }
 
-- (void)viewDidLoad
-{
+-(void)viewWillDisappear:(BOOL)animated {
+
+	[self clearPickers];
+	
+	[super viewDidDisappear:animated];
+	
+}
+
+-(void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self.datePicker setHidden:YES];
     [self.comment setDelegate:self];
 	
     self.interaction = [MHInteraction newObjectFromFields:nil];
@@ -91,7 +105,11 @@
 							@{@"value": @"me",				@"title": @"Only Me"}
 							]];
 	
-	self.interactionTypeArray = [NSMutableArray arrayWithArray:([[[[MHAPI sharedInstance] currentUser] currentOrganization] interactionTypes] ? [[[[[MHAPI sharedInstance] currentUser] currentOrganization] interactionTypes] allObjects] : @[])];
+	self.interactionTypeArray = [NSMutableArray arrayWithArray:
+								 ([[[[MHAPI sharedInstance] currentUser] currentOrganization] interactionTypes] ?
+																[[[[[MHAPI sharedInstance] currentUser] currentOrganization] interactionTypes] allObjects] :
+																@[])];
+	[self.interactionTypeArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"i18n" ascending:YES]]];
 	
     
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
@@ -110,10 +128,26 @@
     self.saveButton = [[UIBarButtonItem alloc] initWithCustomView:save];
 	
 	UIImage* doneImage = [UIImage imageNamed:@"MH_Mobile_Button_Done_72.png"];
+	
     UIButton *done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
     [done setImage:doneImage forState:UIControlStateNormal];
-    [done addTarget:self action:@selector(doneWithDatePicker:) forControlEvents:UIControlEventTouchUpInside];
-    self.doneButton = [[UIBarButtonItem alloc] initWithCustomView:done];
+    [done addTarget:self action:@selector(doneWithInteractionType:) forControlEvents:UIControlEventTouchUpInside];
+    self.doneWithInteractionTypeButton = [[UIBarButtonItem alloc] initWithCustomView:done];
+	
+	done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
+    [done setImage:doneImage forState:UIControlStateNormal];
+    [done addTarget:self action:@selector(doneWithVisibility:) forControlEvents:UIControlEventTouchUpInside];
+	self.doneWithVisibilityButton = [[UIBarButtonItem alloc] initWithCustomView:done];
+	
+	done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
+    [done setImage:doneImage forState:UIControlStateNormal];
+    [done addTarget:self action:@selector(doneWithDate:) forControlEvents:UIControlEventTouchUpInside];
+	self.doneWithDateButton = [[UIBarButtonItem alloc] initWithCustomView:done];
+	
+	done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
+    [done setImage:doneImage forState:UIControlStateNormal];
+    [done addTarget:self action:@selector(doneWithComment:) forControlEvents:UIControlEventTouchUpInside];
+	self.doneWithCommentButton = [[UIBarButtonItem alloc] initWithCustomView:done];
 	
     
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
@@ -122,7 +156,7 @@
 	//TODO:The initiator button label needs to be preset to the current user's name and the receiver needs to be preset if the interaction button is pressed from a profile, (as opposed to being pressed from the contact list).
 	
     UIImage *whiteButton = [UIImage imageNamed:@"Searchbar_background.png"];
-    [self.initiator setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
+    
     [self.initiator setTintColor:[UIColor clearColor]];
     [self.initiator.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:14.0]];
     [self.initiator setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 0.0f)];
@@ -133,32 +167,33 @@
     [self.initiator.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1] CGColor]];
     [self.initiator addTarget:self action:@selector(chooseInitiator:) forControlEvents:UIControlEventTouchUpInside];
 	
-    
-    [self.interactionType setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [self.interactionType setTintColor:[UIColor clearColor]];
+	[self.interactionType.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:14.0]];
+	[self.interactionType setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [self.interactionType setBackgroundImage:whiteButton forState:UIControlStateNormal];
     [self.interactionType setBackgroundColor:[UIColor clearColor]];
     [self.interactionType.layer setBorderWidth:1.0];
     [self.interactionType.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor]];
-    [self.interactionType addTarget:self action:@selector(chooseInteraction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.interactionType addTarget:self action:@selector(chooseInteractionType:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.receiver setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [self.receiver setTintColor:[UIColor clearColor]];
+	[self.receiver.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:14.0]];
+	[self.receiver setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [self.receiver setBackgroundImage:whiteButton forState:UIControlStateNormal];
     [self.receiver setBackgroundColor:[UIColor clearColor]];
     [self.receiver.layer setBorderWidth:1.0];
     [self.receiver.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor]];
     [self.receiver addTarget:self action:@selector(chooseReceiver:) forControlEvents:UIControlEventTouchUpInside];
 	
-    [self.visibility setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [self.visibility setTintColor:[UIColor clearColor]];
+	[self.visibility.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:14.0]];
+	[self.visibility setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [self.visibility setBackgroundImage:whiteButton forState:UIControlStateNormal];
     [self.visibility setBackgroundColor:[UIColor clearColor]];
     [self.visibility.layer setBorderWidth:1.0];
     [self.visibility.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor]];
     [self.visibility addTarget:self action:@selector(chooseVisibility:) forControlEvents:UIControlEventTouchUpInside];
 	
-    [self.dateTime setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
     [self.dateTime setTintColor:[UIColor clearColor]];
 	[self.dateTime.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:18.0]];
 	[self.dateTime setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
@@ -167,13 +202,14 @@
     [self.dateTime.layer setBorderWidth:1.0];
     [self.dateTime.layer setBorderColor:[[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor]];
     [self.dateTime addTarget:self action:@selector(chooseDate:) forControlEvents:UIControlEventTouchUpInside];
-	
-	[self.datePicker addTarget:self action:@selector(timestampChanged:) forControlEvents:UIControlEventValueChanged];
-    self.datePicker.backgroundColor		= [UIColor blackColor];
     
-    self.comment.layer.backgroundColor	= [[UIColor whiteColor]CGColor];
+	self.comment.font					= [UIFont fontWithName:@"Arial-ItalicMT" size:14.0];
+	self.comment.textColor				= [UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1];
+    self.comment.layer.backgroundColor	= [[UIColor whiteColor] CGColor];
     self.comment.layer.borderColor		= [[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor];
     self.comment.layer.borderWidth		= 1.0f;
+	self.comment.returnKeyType			= UIReturnKeyDone;
+	self.comment.clearButtonMode		= UITextFieldViewModeNever;
     
     self.originalCommentFrame = self.comment.frame;
 	
@@ -246,11 +282,11 @@
 		NSString *name = [[self.interaction type] name];
 		NSString *icon = [[self.interaction type] icon];
 		
-		self.interactionType.titleLabel.text	= (name ? name : @"");
+		[self.interactionType setTitle:(name ? name : @"") forState:UIControlStateNormal];
 		
 		if (icon) {
 			self.interactionTypeIcon.hidden			= NO;
-			self.interactionTypeIcon.image			= [UIImage imageNamed:icon];
+			[self.interactionTypeIcon setImage:[UIImage imageNamed:icon]];
 		} else {
 			self.interactionTypeIcon.hidden			= YES;
 		}
@@ -283,11 +319,25 @@
 	
 	if ([self.interaction privacy_setting]) {
 		
-		self.visibility.titleLabel.text = [self.interaction privacy_setting];
+		__block NSString *visibilityString = @"";
+		
+		[self.visibilityArray enumerateObjectsUsingBlock:^(NSDictionary *object, NSUInteger index, BOOL *stop) {
+			
+			NSString *value = [object objectForKey:@"value"];
+			NSString *title = [object objectForKey:@"title"];
+			
+			if ([value isEqualToString:[self.interaction privacy_setting]]) {
+				visibilityString = title;
+				*stop = YES;
+			}
+			
+		}];
+		
+		[self.visibility setTitle:visibilityString forState:UIControlStateNormal];
 		
 	} else {
 		
-		self.visibility.titleLabel.text = @"";
+		[self.visibility setTitle:@"" forState:UIControlStateNormal];
 		
 	}
 	
@@ -301,11 +351,9 @@
 		
 		NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 		
-		dateFormatter.dateFormat = @"dd MMM yyyy                  HH:mm";
+		dateFormatter.dateFormat = @"dd MMM yyyy                   hh:mm a";
 		
 		[self.dateTime setTitle: [dateFormatter stringFromDate:date] forState: UIControlStateNormal];
-		
-		NSLog(@"Picked the date %@", [dateFormatter stringFromDate:date]);
 		
 	}
 	
@@ -359,6 +407,7 @@
 		
 		self._interactionTypePicker = [[UIPickerView alloc] init];
 		self._interactionTypePicker.delegate = self;
+		self._interactionTypePicker.dataSource = self;
 		self._interactionTypePicker.showsSelectionIndicator = YES;
 		
 	}
@@ -373,6 +422,7 @@
 		
 		self._visibilityPicker = [[UIPickerView alloc] init];
 		self._visibilityPicker.delegate = self;
+		self._visibilityPicker.dataSource = self;
 		self._visibilityPicker.showsSelectionIndicator = YES;
 		
 	}
@@ -424,6 +474,8 @@
 														CGRectGetHeight(pickerFrame));
 		
 	}];
+	
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithInteractionTypeButton, nil]];
     
 }
 
@@ -454,12 +506,12 @@
 														CGRectGetHeight(pickerFrame));
 		
 	}];
-
+	
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithVisibilityButton, nil]];
+	
 }
 
 -(void)chooseDate:(id)sender {
-	
-    //[self.datePicker setHidden:NO];
 	
 	[self.view addSubview:[self timestampPicker]];
 	
@@ -479,7 +531,7 @@
 		
 	}];
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneButton, nil]];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithDateButton, nil]];
     
 }
 
@@ -494,27 +546,6 @@
 	self.interaction.timestamp = [sender date];
 	
 	[self updateInterfaceForTimestamp];
-	
-}
-
--(void)doneWithDatePicker:(id)sender {
-	
-    [self.datePicker setHidden:YES];
-	
-	__block CGRect pickerFrame = [self timestampPicker].frame;
-	
-	[UIView animateWithDuration:0.2 animations:^{
-		
-		[self timestampPicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
-												  CGRectGetMaxY(self.view.frame),
-												  CGRectGetWidth(pickerFrame),
-												  CGRectGetHeight(pickerFrame));
-		
-	}];
-	
-	[[self timestampPicker] removeFromSuperview];
-    
-	[self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
 	
 }
 
@@ -557,7 +588,7 @@
 		
 		numRows = [self.visibilityArray count];
 		
-	} else if ([pickerView isEqual:[self interactionType]]) {
+	} else if ([pickerView isEqual:[self interactionTypePicker]]) {
 		
 		numRows = [self.interactionTypeArray count];
 		
@@ -577,7 +608,7 @@
 		
 		title = [visibilityObject objectForKey:@"title"];
 		
-	} else if ([pickerView isEqual:[self interactionType]]) {
+	} else if ([pickerView isEqual:[self interactionTypePicker]]) {
 		
 		id object = [self.interactionTypeArray objectAtIndex:row];
 		
@@ -611,22 +642,9 @@
 		
 		self.interaction.privacy_setting = [visibilityObject objectForKey:@"value"];
 		
-		__block CGRect pickerFrame = [self visibilityPicker].frame;
-		
-		[UIView animateWithDuration:0.2 animations:^{
-			
-			[self visibilityPicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
-															CGRectGetMaxY(self.view.frame),
-															CGRectGetWidth(pickerFrame),
-															CGRectGetHeight(pickerFrame));
-			
-		}];
-		
-		[[self visibilityPicker] removeFromSuperview];
-		
 		[self updateInterfaceForVisibility];
 		
-	} else if ([pickerView isEqual:[self interactionType]]) {
+	} else if ([pickerView isEqual:[self interactionTypePicker]]) {
 		
 		id object = [self.interactionTypeArray objectAtIndex:row];
 		
@@ -636,19 +654,6 @@
 			
 		}
 		
-		__block CGRect pickerFrame = [self interactionTypePicker].frame;
-		
-		[UIView animateWithDuration:0.2 animations:^{
-			
-			[self interactionTypePicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
-															CGRectGetMaxY(self.view.frame),
-															CGRectGetWidth(pickerFrame),
-															CGRectGetHeight(pickerFrame));
-			
-		}];
-		
-		[[self interactionTypePicker] removeFromSuperview];
-		
 		[self updateInterfaceForInteractionType];
 		
 	}
@@ -657,26 +662,106 @@
 
 //TODO:When the comment box moves up for the iPad, it actually moves to far up so that the top is not visible and it's not sized properly so it's also too short. I think this should be easy to fix if you just change the height differently based on whether it's an iPad or iPhone.
 
+-(void)doneWithInteractionType:(id)sender {
+	
+	__block UIView *pickerView			= [self interactionTypePicker];
+	__block CGRect pickerFrame	= pickerView.frame;
+	
+	[UIView animateWithDuration:0.2 animations:^{
+		
+		pickerView.frame = CGRectMake(CGRectGetMinX(pickerFrame),
+												  CGRectGetMaxY(self.view.frame),
+												  CGRectGetWidth(pickerFrame),
+												  CGRectGetHeight(pickerFrame));
+		
+		[self clearPickers];
+		
+	}];
+	
+}
+
+-(void)doneWithVisibility:(id)sender {
+	
+	__block UIView *pickerView			= [self visibilityPicker];
+	__block CGRect pickerFrame	= pickerView.frame;
+	
+	[UIView animateWithDuration:0.2 animations:^{
+		
+		pickerView.frame = CGRectMake(CGRectGetMinX(pickerFrame),
+												  CGRectGetMaxY(self.view.frame),
+												  CGRectGetWidth(pickerFrame),
+												  CGRectGetHeight(pickerFrame));
+		
+		[self clearPickers];
+		
+	}];
+	
+}
+
+-(void)doneWithDate:(id)sender {
+	
+	__block UIView *pickerView			= [self timestampPicker];
+	__block CGRect pickerFrame	= pickerView.frame;
+	
+	[UIView animateWithDuration:0.2 animations:^{
+		
+		pickerView.frame = CGRectMake(CGRectGetMinX(pickerFrame),
+												  CGRectGetMaxY(self.view.frame),
+												  CGRectGetWidth(pickerFrame),
+												  CGRectGetHeight(pickerFrame));
+		
+		[self clearPickers];
+		
+	}];
+	
+}
+
+-(void)doneWithComment:(id)sender {
+	
+	[self clearPickers];
+	
+}
+
+-(void)clearPickers {
+	
+	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+	
+	if ([[self interactionTypePicker] superview]) {
+		[[self interactionTypePicker] removeFromSuperview];
+	}
+	
+	if ([[self visibilityPicker] superview]) {
+		[[self visibilityPicker] removeFromSuperview];
+	}
+	
+	if ([[self timestampPicker] superview]) {
+		[[self timestampPicker] removeFromSuperview];
+	}
+	
+	[self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
+	
+}
+
 -(void)keyboardWillShow:(NSNotification *)notification {
 
     CGRect newRect				= CGRectZero;
-    CGRect navframe				= [[self.navigationController navigationBar] frame];
 	NSDictionary* keyboardInfo	= [notification userInfo];
     NSValue* keyboardFrameValue	= [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
 	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
     self.originalCommentFrame	= self.comment.frame;
 	
     //Down size your text view
-	newRect.origin.x	= CGRectGetMinX(navframe);
-	newRect.origin.y	= CGRectGetMaxY(navframe);
 	newRect.size.width	= self.view.frame.size.width;
-    newRect.size.height = CGRectGetMinY(keyboardFrame) - CGRectGetMaxY(navframe);
+    newRect.size.height = CGRectGetMinY(keyboardFrame);
 	
 	[UIView beginAnimations:nil context:nil];
 	
     self.comment.frame = newRect;
 	
     [UIView commitAnimations];
+	
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithCommentButton, nil]];
+	
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -695,7 +780,7 @@
 	
     [textField resignFirstResponder];
     
-    return YES;
+    return NO;
 }
 
 #pragma mark - memory management methods
