@@ -16,6 +16,8 @@
 	
 	NSMutableArray	*_interactionTypeArray;
 	NSMutableArray	*_visibilityArray;
+	NSMutableArray	*_suggestions;
+	NSMutableArray	*_selectionsFromParent;
 	
     CGRect			_originalCommentFrame;
 }
@@ -30,6 +32,8 @@
 
 @property (nonatomic, strong) NSMutableArray				*interactionTypeArray;
 @property (nonatomic, strong) NSMutableArray				*visibilityArray;
+@property (nonatomic, strong) NSMutableArray				*suggestions;
+@property (nonatomic, strong) NSMutableArray				*selectionsFromParent;
 
 @property (nonatomic, strong) IBOutlet UIButton				*initiator;
 @property (nonatomic, strong) IBOutlet UIButton				*interactionType;
@@ -47,7 +51,8 @@
 @property (nonatomic, strong) UIDatePicker					*_timestampPicker;
 
 
--(void)updateWithInteraction:(MHInteraction *)interaction;
+-(void)updateWithInteraction:(MHInteraction *)interaction andSelections:(NSArray *)selections;
 -(void)saveInteraction;
+-(void)setSelections:(NSArray *)selections;
 
 @end

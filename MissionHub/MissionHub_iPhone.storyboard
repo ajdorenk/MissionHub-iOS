@@ -110,7 +110,7 @@
                                             <rect key="frame" x="6" y="4" width="35" height="35"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" backgroundImage="BackMenu_Icon.png">
+                                            <state key="normal" backgroundImage="MH_Mobile_Icon_Menu.png">
                                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -346,12 +346,13 @@ select another survey.</string>
                                             <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iy1-tX-ioN" customClass="MHCheckbox">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgX-g3-rbC" customClass="MHCheckbox">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="bLa-hC-Yjd"/>
+                                                <constraint firstAttribute="height" constant="63" id="99Y-AL-OIa"/>
+                                                <constraint firstAttribute="width" constant="40" id="fmi-nF-YcX"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" title="Button">
+                                            <state key="normal">
                                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -364,20 +365,19 @@ select another survey.</string>
                                 </view>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="iy1-tX-ioN" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" type="default" id="0oa-3f-rrU"/>
+                                    <constraint firstItem="pgX-g3-rbC" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" type="default" id="7Uz-yz-Inb"/>
+                                    <constraint firstItem="pgX-g3-rbC" firstAttribute="centerY" secondItem="K8Z-XT-I5E" secondAttribute="centerY" type="default" id="Bsa-mt-4gs"/>
                                     <constraint firstAttribute="bottom" secondItem="nSY-Po-gSd" secondAttribute="bottom" constant="30" id="CO6-qq-vc2"/>
-                                    <constraint firstItem="iy1-tX-ioN" firstAttribute="bottom" secondItem="fno-xF-ChY" secondAttribute="bottom" type="default" id="KDO-PR-eza"/>
                                     <constraint firstItem="nSY-Po-gSd" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" constant="95" id="Ktx-W8-JIo"/>
-                                    <constraint firstItem="nSY-Po-gSd" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" constant="-1" id="XCT-Km-jMh"/>
-                                    <constraint firstItem="iy1-tX-ioN" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" type="default" id="aGc-pl-TDC"/>
+                                    <constraint firstItem="pgX-g3-rbC" firstAttribute="bottom" secondItem="fno-xF-ChY" secondAttribute="bottom" type="default" id="XBu-5Q-hlx"/>
+                                    <constraint firstItem="pgX-g3-rbC" firstAttribute="top" secondItem="nSY-Po-gSd" secondAttribute="top" type="default" id="YPV-QP-ObR"/>
                                     <constraint firstItem="nSY-Po-gSd" firstAttribute="trailing" secondItem="fno-xF-ChY" secondAttribute="trailing" type="default" id="eDS-1x-HlI"/>
                                     <constraint firstItem="mAs-wm-Nme" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" constant="32" id="fXe-IP-NJf"/>
                                     <constraint firstItem="K8Z-XT-I5E" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" constant="40" id="ia0-Rh-wHX"/>
                                     <constraint firstItem="mAs-wm-Nme" firstAttribute="leading" secondItem="fno-xF-ChY" secondAttribute="leading" constant="118" id="oEo-4b-obT"/>
-                                    <constraint firstItem="K8Z-XT-I5E" firstAttribute="top" secondItem="fno-xF-ChY" secondAttribute="top" constant="7" id="xmj-Hi-V6Z"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="checkbox" destination="iy1-tX-ioN" id="pUq-0Z-kvn"/>
+                                    <outlet property="checkbox" destination="pgX-g3-rbC" id="c3P-PQ-tzg"/>
                                     <outlet property="gender" destination="mAs-wm-Nme" id="NSF-ZR-n7G"/>
                                     <outlet property="name" destination="3By-9J-vUT" id="cGg-Ie-2Qu"/>
                                     <outlet property="nameBackgroundView" destination="nSY-Po-gSd" id="AzC-f4-GDa"/>
@@ -830,7 +830,7 @@ select another survey.</string>
                                 </constraints>
                                 <color key="separatorColor" red="0.79840116279069773" green="0.79840116279069773" blue="0.7987827034883721" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHInitiatorCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHInitiatorCell" rowHeight="28" id="a4u-Ll-tQs" customClass="MHInitiatorCell">
+                                    <tableViewCell opaque="NO" contentMode="scaleToFill" restorationIdentifier="MHGenericCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHInitiatorCell" rowHeight="28" id="a4u-Ll-tQs" customClass="MHGenericCell">
                                         <rect key="frame" x="0.0" y="22" width="270" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -846,16 +846,58 @@ select another survey.</string>
                                                     <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqe-dK-j04">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="28" type="user" id="t9f-iS-1cL"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="Sqe-dK-j04" firstAttribute="bottom" secondItem="a4u-Ll-tQs" secondAttribute="bottom" type="default" id="Dd4-p6-9iD"/>
+                                            <constraint firstItem="Sqe-dK-j04" firstAttribute="top" secondItem="a4u-Ll-tQs" secondAttribute="top" type="user" id="FDK-2L-gH1"/>
+                                            <constraint firstItem="Sqe-dK-j04" firstAttribute="top" secondItem="a4u-Ll-tQs" secondAttribute="top" type="user" id="GUK-iU-ZfL"/>
                                             <constraint firstItem="qpz-bU-I5a" firstAttribute="leading" secondItem="a4u-Ll-tQs" secondAttribute="leading" constant="14" id="NHE-Zb-PNK"/>
+                                            <constraint firstAttribute="trailing" secondItem="Sqe-dK-j04" secondAttribute="trailing" type="user" id="Oue-eT-kwG"/>
                                             <constraint firstItem="qpz-bU-I5a" firstAttribute="top" secondItem="a4u-Ll-tQs" secondAttribute="top" type="default" id="gbk-3O-6yY"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="name" destination="qpz-bU-I5a" id="nXJ-Ca-TL0"/>
+                                            <outlet property="checkmark" destination="Sqe-dK-j04" id="nRH-Cm-h5P"/>
+                                            <outlet property="label" destination="qpz-bU-I5a" id="uLE-RB-QYm"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHLoadingCell" id="sJQ-QB-UPE" customClass="MHLoadingCell">
+                                        <rect key="frame" x="0.0" y="50" width="270" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="270" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="57S-1K-O4w">
+                                                    <color key="color" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="all results have been loaded" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQV-Sq-jhv">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="270" type="user" id="UkF-2M-bwL"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="57S-1K-O4w" firstAttribute="centerX" secondItem="DQV-Sq-jhv" secondAttribute="centerX" type="default" id="92q-5A-uVV"/>
+                                            <constraint firstItem="57S-1K-O4w" firstAttribute="top" secondItem="sJQ-QB-UPE" secondAttribute="top" constant="3" id="KKb-k9-drY"/>
+                                            <constraint firstItem="DQV-Sq-jhv" firstAttribute="top" secondItem="sJQ-QB-UPE" secondAttribute="top" constant="10" id="Xy6-ml-AKT"/>
+                                            <constraint firstItem="DQV-Sq-jhv" firstAttribute="leading" secondItem="sJQ-QB-UPE" secondAttribute="leading" type="default" id="jys-KJ-ucn"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="loadingIndicator" destination="57S-1K-O4w" id="Pg8-ng-hLx"/>
+                                            <outlet property="messageView" destination="DQV-Sq-jhv" id="Na5-Tl-r7v"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1226,6 +1268,7 @@ select another survey.</string>
         <image name="BackMenu_Icon.png" width="72" height="72"/>
         <image name="MH_Logo.png" width="144" height="144"/>
         <image name="MH_Mobile_Default_Image_iPhone5.png" width="640" height="1136"/>
+        <image name="MH_Mobile_Icon_Menu.png" width="72" height="72"/>
     </resources>
     <classes>
         <class className="DWTagList" superclassName="UIScrollView">
@@ -1257,22 +1300,22 @@ select another survey.</string>
         <class className="MHGenderListController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenderListController.h"/>
         </class>
+        <class className="MHGenericCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenericCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkmark" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="MHGenericListViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHGenericListViewController.h"/>
             <relationships>
-                <relationship kind="action" name="setListTitle:" candidateClass="NSString"/>
                 <relationship kind="outlet" name="listName" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tableViewList" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="MHInfoCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInfoCell.h"/>
-        </class>
-        <class className="MHInitiatorCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInitiatorCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
-            </relationships>
         </class>
         <class className="MHInteractionCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHInteractionCell.h"/>

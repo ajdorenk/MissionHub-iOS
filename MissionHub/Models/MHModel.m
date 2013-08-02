@@ -53,6 +53,19 @@
 	
 }
 
+-(BOOL)isEqualToModel:(id)model {
+	
+	if ([model isKindOfClass:[self class]]) {
+		
+		return [[self valueForKey:@"remoteID"] isEqualToNumber:[model valueForKey:@"remoteID"]];
+		
+	} else {
+		
+		return NO;
+		
+	}
+	
+}
 
 -(NSString *)displayString {
 	return @"";

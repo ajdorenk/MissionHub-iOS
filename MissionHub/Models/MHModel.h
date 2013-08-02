@@ -22,6 +22,7 @@
 
 
 -(NSString *)displayString;
+-(BOOL)isEqualToModel:(id)model;
 
 +(NSEntityDescription *)entity;
 +(NSEntityDescription *)entityFromName:(NSString *)name;

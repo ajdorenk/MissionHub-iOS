@@ -18,13 +18,14 @@ extern NSString *const MHAPIErrorDomain;
 
 @interface MHAPI : NSObject {
 	
-	NSOperationQueue *_queue;
-	NSString *_baseUrl;
-	NSString *_apiUrl;
-	NSString *_surveyUrl;
-	NSString *_accessToken;
+	NSOperationQueue	*_queue;
+	NSString			*_baseUrl;
+	NSString			*_apiUrl;
+	NSString			*_surveyUrl;
+	NSString			*_accessToken;
 	
-	MHPerson *_currentUser;
+	MHPerson			*_currentUser;
+	MHOrganization		*_currentOrganization;
 	NSMutableArray *_initialPeopleList;
 	BOOL _currentOrganizationIsFinished;
 	BOOL _initialPeopleListIsFinished;
@@ -32,21 +33,26 @@ extern NSString *const MHAPIErrorDomain;
 	
 }
 
-@property (nonatomic, strong) NSOperationQueue *queue;
-@property (nonatomic, strong) NSString *baseUrl;
-@property (nonatomic, strong) NSString *apiUrl;
-@property (nonatomic, strong) NSString *surveyUrl;
-@property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSOperationQueue	*queue;
+@property (nonatomic, strong) NSString			*baseUrl;
+@property (nonatomic, strong) NSString			*apiUrl;
+@property (nonatomic, strong) NSString			*surveyUrl;
+@property (nonatomic, strong) NSString			*accessToken;
 
-@property (nonatomic, strong) MHPerson *currentUser;
-@property (nonatomic, strong) NSMutableArray *initialPeopleList;
-@property (nonatomic, assign) BOOL currentOrganizationIsFinished;
-@property (nonatomic, assign) BOOL initialPeopleListIsFinished;
-@property (nonatomic, strong) NSError *errorForInitialRequests;
+@property (nonatomic, strong) MHPerson			*currentUser;
+@property (nonatomic, strong) MHOrganization	*currentOrganization;
+@property (nonatomic, strong) MHPerson			*_anonymous;
+@property (nonatomic, strong) NSMutableArray	*initialPeopleList;
+@property (nonatomic, assign) BOOL				currentOrganizationIsFinished;
+@property (nonatomic, assign) BOOL				initialPeopleListIsFinished;
+@property (nonatomic, strong) NSError			*errorForInitialRequests;
 
 
 +(MHAPI *)sharedInstance;
 -(id)initWithConfigFile:(NSString *)configFilePath;
+
+//misc
+-(MHPerson *)anonymous;
 
 //general request call
 -(void)getResultWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;

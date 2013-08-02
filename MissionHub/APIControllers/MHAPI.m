@@ -91,6 +91,15 @@ typedef enum {
     return self;
 }
 
+-(MHPerson *)anonymous {
+	
+	return [MHPerson newObjectFromFields:@{
+			@"id": @0,
+			@"first_name": @"Anonymous"
+			}];
+	
+}
+
 -(void)getResultWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 
 	MHRequestOptions *requestOptions = (options ? options : [[MHRequestOptions alloc] init]);
@@ -590,8 +599,9 @@ typedef enum {
 			
 		} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
 			
-			self.currentUser.currentOrganization = [modelArray objectAtIndex:0];
-			self.currentOrganizationIsFinished = YES;
+			self.currentUser.currentOrganization	= [modelArray objectAtIndex:0];
+			self.currentOrganization				= self.currentUser.currentOrganization;
+			self.currentOrganizationIsFinished		= YES;
 			
 			if (self.initialPeopleListIsFinished) {
 				

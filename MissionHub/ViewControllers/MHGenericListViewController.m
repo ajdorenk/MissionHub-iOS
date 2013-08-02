@@ -9,6 +9,7 @@
 #import "MHGenericListViewController.h"
 #import "MHPeopleListViewController.h"
 #import "MHGenericCell.h"
+#import "MHLoadingCell.h"
 #import "MHPerson+Helper.h"
 
 #define ROW_HEIGHT 28.0f
@@ -20,52 +21,38 @@
 
 @implementation MHGenericListViewController
 
+@synthesize listName;
+@synthesize tableViewList;
 
 @synthesize selectionDelegate       = _selectionDelegate;
 @synthesize objectArray				= _objectArray;
-@synthesize listName;
-//@synthesize listTitle;
+@synthesize requestOptions			= _requestOptions;
+@synthesize refreshController		= _refreshController;
+@synthesize isLoading				= _isLoading;
+@synthesize refreshIsLoading		= _refreshIsLoading;
+@synthesize pagingIsLoading			= _pagingIsLoading;
+@synthesize hasLoadedAllPages		= _hasLoadedAllPages;
+@synthesize suggestionArray			= _suggestionArray;
+@synthesize selectedObject			= _selectedObject;
+@synthesize selectedSet				= _selectedSet;
+@synthesize multipleSelection		= _multipleSelection;
 
 - (void)awakeFromNib {
+	
     [super awakeFromNib];
-    self.objectArray = [NSMutableArray array];
+	
+    self.objectArray		= [NSMutableArray array];
+	self.requestOptions		= nil;
+	self.multipleSelection	= NO;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    /*
-    
-	MHPerson *person2 =[MHPerson newObjectFromFields:@{@"id":@1234,@"first_name":@"John",
-                        @"last_name":@"Doe",
-                        @"gender":@"Male",
-                        @"year_in_school":@"Second Year",
-                        @"major":@" Philosophy",
-                        @"minor":@"Computer Science",
-                        @"birth_date":@"1982-07-07",
-                        @"date_became_christian":@"2000-01-01",
-                        @"graduation_date":@"2010-01-07",
-                        @"user_id":@12345,
-                        @"fb_uid":@123456,
-                        @"updated_at":@"2012-11-19T19:29:30:06:00",
-                        @"created_at":@"2002-11-28T00:00:00:06:00"
-                        }];
+	
+	self.refreshController = [[ODRefreshControl alloc] initInScrollView:self.tableViewList];
+    [self.refreshController addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
 
-    
-    
-       
-    self.objectArray = [NSArray arrayWithObjects:person1, person2, nil];
-    */
-    
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-    
-    
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
     UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
     [backMenu setImage:menuImage forState:UIControlStateNormal];
@@ -75,7 +62,6 @@
     self.navigationItem.leftBarButtonItem = backMenuButton;
     self.tableViewList.layer.borderWidth = 1.0;
     self.tableViewList.layer.borderColor = [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
-   // self.listName.text = self.listTitle;
 
     //self.tableViewList.separatorColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
     
@@ -91,12 +77,147 @@
 */
 }
 
+-(BOOL)isSelected:(id)object {
+	
+	__block BOOL selected = NO;
+	
+	if (self.multipleSelection) {
+		
+		[self.selectedSet enumerateObjectsUsingBlock:^(id selectedObject, BOOL *stop) {
+			
+			if ([selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
+				selected	= [selectedObject isEqualToString:object];
+			} else if ([selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
+				selected	= [selectedObject isEqualToModel:object];
+			}
+			
+			*stop		= selected;
+			
+		}];
+		
+	} else {
+		
+		if ([self.selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
+			selected = [self.selectedObject isEqualToString:object];
+		} else if ([self.selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
+			selected = [self.selectedObject isEqualToModel:object];
+		}
+		
+	}
+	
+	return selected;
+	
+}
+
+-(void)refresh {
+	
+	[self.refreshController beginRefreshing];
+	[self dropViewDidBeginRefreshing:self.refreshController];
+	
+}
+
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+{
+	
+	if (self.requestOptions) {
+	
+		self.hasLoadedAllPages = NO;
+		self.refreshIsLoading = YES;
+		[self.tableViewList reloadData];
+		
+		[self.requestOptions resetPaging];
+		
+		[[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
+										successBlock:^(NSArray *result, MHRequestOptions *options) {
+											
+											self.refreshIsLoading = NO;
+											if (options.limit > 0) {
+												self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+											} else {
+												self.hasLoadedAllPages = YES;
+											}
+											
+											
+											self.objectArray =  [NSMutableArray arrayWithArray:result];
+											[self.tableViewList reloadData];
+											[self.refreshController endRefreshing];
+											
+											
+										}
+										   failBlock:^(NSError *error, MHRequestOptions *options) {
+											   
+											   NSString *errorMessage = [NSString stringWithFormat:@"Failed to refresh results due to: \"%@\". Try again by pulling down on the list. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+											   NSError *presentingError = [NSError errorWithDomain:error.domain
+																							  code:error.code
+																						  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+											   
+											   [MHErrorHandler presentError:presentingError];
+											   self.refreshIsLoading = NO;
+											   [self.tableViewList reloadData];
+											   [self.refreshController endRefreshing];
+											   
+										   }];
+		
+	}
+	
+}
+
+-(void)setSuggestions:(NSArray *)suggestionsArray andSelections:(NSSet *)selectedSet {
+	
+	self.suggestionArray	= [NSMutableArray arrayWithArray:[selectedSet allObjects]];
+	[self.suggestionArray addObjectsFromArray:suggestionsArray];
+	self.selectedSet		= [NSMutableSet setWithSet:selectedSet];
+	
+}
+
+-(void)setSuggestions:(NSArray *)suggestionsArray andSelectionObject:(id)selectedObject {
+	
+	self.suggestionArray	= [NSMutableArray arrayWithArray:selectedObject];
+	[self.suggestionArray addObjectsFromArray:suggestionsArray];
+	self.selectedObject		= selectedObject;
+	
+}
+
+-(void)setDataFromRequestOptions:(MHRequestOptions *)options {
+	
+	[self setDataArray:nil forRequestOptions:options];
+	
+}
 
 -(void)setDataArray:(NSArray *)dataArray {
     
-	self.objectArray = [NSMutableArray arrayWithArray:dataArray];
-	//[self.tableViewList reloadData];
+	[self setDataArray:dataArray forRequestOptions:nil];
     
+}
+
+-(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
+	
+	self.requestOptions		= options;
+	self.isLoading			= NO;
+	self.refreshIsLoading	= NO;
+	self.pagingIsLoading	= NO;
+	
+	if (dataArray == nil) {
+		
+		[self.objectArray removeAllObjects];
+		
+		self.hasLoadedAllPages = NO;
+		[self refresh];
+		
+	} else {
+		
+		self.objectArray = [NSMutableArray arrayWithArray:dataArray];
+		
+		if (self.requestOptions) {
+			
+			self.hasLoadedAllPages = ( [self.objectArray count] < self.requestOptions.limit ? YES : NO );
+			
+		}
+		
+	}
+	
+	[self.tableViewList reloadData];
+	
 }
 
 -(void)setListTitle:(NSString *)title {
@@ -109,40 +230,111 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+	
 	// Return the number of sections.
-    return 1;
+	if (self.multipleSelection) {
+		return 2;
+	} else {
+		return 1;
+	}
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	
-    // Return the number of rows in the section.
-    return [self.objectArray count];
+	if (self.multipleSelection && section == 0) {
+		
+		return [self.suggestionArray count];
+		
+	} else if ((self.multipleSelection && section == 1) || (!self.multipleSelection)) {
+		
+		if (self.requestOptions) {
+			
+			return [self.objectArray count] + 1;
+			
+		} else {
+			
+			return [self.objectArray count];
+			
+		}
+		
+	} else {
+		
+		return 0;
+		
+	}
+	
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MHGenericCell";
-    MHGenericCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    // Configure the cell...
-
-    if (cell == nil) {
-        
-        cell = [[MHGenericCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
-    }
-
-    
-    id object = [self.objectArray objectAtIndex:indexPath.row];
 	
-	if ([object isKindOfClass:[NSString class]]) {
-		[cell populateWithString:object];
-	} else if ([object isKindOfClass:[MHModel class]]) {
-		[cell populateWithString:[(MHModel *)object displayString]];
+	if (indexPath.row < [self.objectArray count]) {
+		
+		static NSString *CellIdentifier = @"MHGenericCell";
+		MHGenericCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		
+		// Configure the cell...
+		if (cell == nil) {
+			cell = [[MHGenericCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		}
+		
+		id object		= nil;
+		BOOL selected	= NO;
+		
+		if (self.multipleSelection && indexPath.section == 0) {
+			
+			object		= [self.suggestionArray objectAtIndex:indexPath.row];
+			selected	= YES;
+			
+		} else if ((self.multipleSelection && indexPath.section == 1) || (!self.multipleSelection)) {
+			
+			object		= [self.objectArray objectAtIndex:indexPath.row];
+			selected	= [self isSelected:object];
+			
+		}
+		
+		if ([object isKindOfClass:[NSString class]]) {
+			[cell populateWithString:object andSelected:selected];
+		} else if ([object isKindOfClass:[MHModel class]]) {
+			[cell populateWithString:[(MHModel *)object displayString] andSelected:selected];
+		}
+		
+		return cell;
+		
+	} else {
+		
+		static NSString *CellIdentifier = @"MHLoadingCell";
+		MHLoadingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		
+		// Configure the cell...
+		if (cell == nil) {
+			cell = [[MHLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		}
+		
+		if (self.hasLoadedAllPages) {
+			
+			[cell showFinishedMessage];
+			
+		} else {
+			
+			if (self.refreshController.refreshing) {
+				
+				[cell hideFinishedMessage];
+				[cell stopLoading];
+				
+			} else {
+				
+				[cell startLoading];
+				
+			}
+			
+		}
+		
+		return cell;
 	}
 	
-    return cell;
 }
 
 
@@ -153,45 +345,6 @@
 
     
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 
 - (void)didReceiveMemoryWarning
@@ -205,13 +358,103 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id object = [self.objectArray objectAtIndex:indexPath.row];
+	
+	if (self.multipleSelection) {
+		
+		if ([self isSelected:object]) {
+			
+			[self.selectedSet removeObject:object];
+			[self.suggestionArray removeObject:object];
+			
+			if ([self.selectionDelegate respondsToSelector:@selector(list:didDeselectObject:atIndexPath:)]) {
+				[self.selectionDelegate list:self didDeselectObject:object atIndexPath:indexPath];
+			}
+			
+		} else {
+			
+			[self.selectedSet addObject:object];
+			[self.suggestionArray addObject:object];
+			
+			if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectObject:atIndexPath:)]) {
+				[self.selectionDelegate list:self didSelectObject:object atIndexPath:indexPath];
+			}
+			
+		}
+		
+	} else {
     
-    if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectObject:atIndexPath:)]) {
-        [self.selectionDelegate list:self didSelectObject:object atIndexPath:indexPath];
-    }
+		[self.suggestionArray removeObject:self.selectedObject];
+		self.selectedObject = object;
+		[self.suggestionArray addObject:self.selectedObject];
+		
+		if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectObject:atIndexPath:)]) {
+			[self.selectionDelegate list:self didSelectObject:object atIndexPath:indexPath];
+		}
+		
+	}
 	
 	[self.tableViewList deselectRowAtIndexPath:indexPath animated:YES];
+	[self.tableViewList reloadData];
     
+}
+
+#pragma mark - Scroll view delegate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	
+	if (self.requestOptions) {
+	
+		// UITableView only moves in one direction, y axis
+		NSInteger currentOffset = scrollView.contentOffset.y;
+		NSInteger maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+		
+		// Change 10.0 to adjust the distance from bottom
+		if (maximumOffset - currentOffset > 0.0 && maximumOffset - currentOffset <= 5.0f * ROW_HEIGHT) {
+			
+			if ([scrollView isEqual:self.tableViewList] && !self.hasLoadedAllPages && !self.pagingIsLoading) {
+				
+				[self.requestOptions configureForNextPageRequest];
+				
+				self.pagingIsLoading = YES;
+				
+				[[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
+												successBlock:^(NSArray *result, MHRequestOptions *options) {
+													
+													//remove loading cell if it has been displayed
+													self.pagingIsLoading = NO;
+													
+													if (options.limit > 0) {
+														self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+													} else {
+														self.hasLoadedAllPages = YES;
+													}
+													
+													
+													//update array with results
+													[self.objectArray addObjectsFromArray:result];
+													[self.tableViewList reloadData];
+													
+												}
+												   failBlock:^(NSError *error, MHRequestOptions *options) {
+													   
+													   NSString *errorMessage = [NSString stringWithFormat:@"Failed to retreive more results due to: \"%@\". Try again by scrolling up and scrolling back down. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+													   NSError *presentingError = [NSError errorWithDomain:error.domain
+																									  code:error.code
+																								  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+													   
+													   [MHErrorHandler presentError:presentingError];
+													   
+													   self.pagingIsLoading = NO;
+													   [self.tableViewList reloadData];
+													   
+												   }];
+				
+			}
+			
+		}
+		
+	}
+	
 }
 
 

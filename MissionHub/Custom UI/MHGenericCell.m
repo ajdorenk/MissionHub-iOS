@@ -10,6 +10,8 @@
 
 @implementation MHGenericCell
 
+@synthesize label, checkmark;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -28,10 +30,21 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+	if (selected) {
+		
+		self.checkmark.image = [UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"];
+		
+	} else {
+		
+		self.checkmark.image = [UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark_24.png"];
+		
+	}
+	
 }
 
--(void)populateWithString:(NSString *)text {
+-(void)populateWithString:(NSString *)text andSelected:(BOOL)selected {
 	self.textLabel.text = text;
+	self.selected		= selected;
 }
 
 @end

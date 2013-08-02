@@ -10,6 +10,9 @@
 
 @interface MHGenericCell : UITableViewCell
 
--(void)populateWithString:(NSString *)text;
+@property (nonatomic, strong) IBOutlet UILabel		*label;
+@property (nonatomic, strong) IBOutlet UIImageView	*checkmark;
+
+-(void)populateWithString:(NSString *)text andSelected:(BOOL)selected;
 
 @end

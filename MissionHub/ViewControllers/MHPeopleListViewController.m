@@ -94,7 +94,7 @@
 	[genderButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
 	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
     [genderButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [genderButton addTarget:self action:@selector(chooseGender:) forControlEvents:UIControlEventTouchUpInside];
+    [genderButton addTarget:self action:@selector(chooseSortField:) forControlEvents:UIControlEventTouchUpInside];
     
     [sectionHeader addSubview:genderButton];
 	
@@ -239,7 +239,7 @@
     
     
 
-    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
+    UIImage* menuImage = [UIImage imageNamed:@"MH_Mobile_Icon_Menu.png"];
     UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(5, 0, 34, 34)];
     [backMenu setImage:menuImage forState:UIControlStateNormal];
     [backMenu addTarget:self action:@selector(revealMenu:) forControlEvents:UIControlEventTouchUpInside];
@@ -510,7 +510,6 @@
 -(IBAction)addInteractionActivity:(id)sender {
     NSLog(@"Label Action");
     	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
- //   [self.createInteractionViewController removeToolbar];
 
 }
 
@@ -533,14 +532,13 @@
     }
 }
 
--(IBAction)chooseGender:(id)sender {
-    NSLog(@"chooseGender");
+-(void)chooseSortField:(id)sender {
+    NSLog(@"chooseSortField");
     [self presentViewController:[self fieldSelectorViewController] animated:YES completion:Nil];
-    NSString *title = @"";
-    [self.fieldSelectorViewController setListTitle:title];
+    [[self fieldSelectorViewController] setListTitle:@""];
 }
 
--(IBAction)sortOnOff:(UIButton *)button {
+-(void)sortOnOff:(UIButton *)button {
     
     if ([button.titleLabel.text isEqualToString:@"Sort: off"]) {
         [button setTitle:@"Sort: asc" forState:UIControlStateNormal];
@@ -936,36 +934,11 @@
 	
 }
 
-//-(void)addPersonPressed:(id)sender
-//{
-//}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-/*-(void)roleTableViewCell:(MHLabelSelectorCell *)cell didTapIconWithRoleItem:(MHLabelSelectorCell *)roleItem {
-	
-	if ([self.selectedRoles hasRole:roleItem]) {
-		
-		[self.selectedRoles removeRole:roleItem];
-		[cell setChecked:NO];
-		
-	} else {
-		
-		[self.selectedRoles addRole:roleItem];
-		[cell setChecked:YES];
-		
-	}
-	
-	//[self.tableView reloadData];
-	
-}
-*/
 
 
 @end

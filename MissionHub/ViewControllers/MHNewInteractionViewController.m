@@ -55,6 +55,8 @@
 @synthesize interaction				= _interaction;
 @synthesize interactionTypeArray	= _interactionTypeArray;
 @synthesize visibilityArray			= _visibilityArray;
+@synthesize suggestions				= _suggestions;
+@synthesize selectionsFromParent	= _selectionsFromParent;
 
 //buttons in storyboard
 @synthesize initiator, interactionType, receiver, visibility, dateTime, comment, originalCommentFrame = _originalCommentFrame;
@@ -109,7 +111,7 @@
 								 ([[[[MHAPI sharedInstance] currentUser] currentOrganization] interactionTypes] ?
 																[[[[[MHAPI sharedInstance] currentUser] currentOrganization] interactionTypes] allObjects] :
 																@[])];
-	[self.interactionTypeArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"i18n" ascending:YES]]];
+	[self.interactionTypeArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
 	
     
     UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
@@ -159,7 +161,6 @@
     
     [self.initiator setTintColor:[UIColor clearColor]];
     [self.initiator.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:14.0]];
-    [self.initiator setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 0.0f)];
     [self.initiator setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [self.initiator setBackgroundImage:whiteButton forState:UIControlStateNormal];
     [self.initiator setBackgroundColor:[UIColor clearColor]];
@@ -195,7 +196,7 @@
     [self.visibility addTarget:self action:@selector(chooseVisibility:) forControlEvents:UIControlEventTouchUpInside];
 	
     [self.dateTime setTintColor:[UIColor clearColor]];
-	[self.dateTime.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:18.0]];
+	[self.dateTime.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:14.0]];
 	[self.dateTime setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
     [self.dateTime setBackgroundImage:whiteButton forState:UIControlStateNormal];
     [self.dateTime setBackgroundColor:[UIColor clearColor]];
@@ -228,11 +229,18 @@
 
 #pragma mark - accessor methods/model methods
 
--(void)updateWithInteraction:(MHInteraction *)interaction {
+-(void)updateWithInteraction:(MHInteraction *)interaction andSelections:(NSArray *)selections {
 	
 	self.interaction = interaction;
+	[self setSelections:selections];
 	
 	[self updateInterface];
+	
+}
+
+-(void)setSelections:(NSArray *)selections {
+	
+	self.selectionsFromParent = [NSMutableArray arrayWithArray:selections];
 	
 }
 
@@ -267,7 +275,7 @@
 	
 	if ([self.interaction.initiators count] > 1) {
 		
-		textForInitiatorButton = [NSString stringWithFormat:@"%@ [+%d]", [[[self.interaction.initiators allObjects] objectAtIndex:0] fullName], [self.interaction.initiators count] - 1];
+		textForInitiatorButton = [NSString stringWithFormat:@"%@ +%d", [[[self.interaction.initiators allObjects] objectAtIndex:0] fullName], [self.interaction.initiators count] - 1];
 		
 	}
     
@@ -311,7 +319,7 @@
 		
 	}
     
-    [self.initiator setTitle:textForReceiverButton forState:UIControlStateNormal];
+    [self.receiver setTitle:textForReceiverButton forState:UIControlStateNormal];
 	
 }
 
@@ -351,7 +359,7 @@
 		
 		NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 		
-		dateFormatter.dateFormat = @"dd MMM yyyy                   hh:mm a";
+		dateFormatter.dateFormat = @"dd MMM yyyy                    hh:mm a";
 		
 		[self.dateTime setTitle: [dateFormatter stringFromDate:date] forState: UIControlStateNormal];
 		
@@ -378,9 +386,10 @@
 	if (self._initiatorsList == nil) {
 		
 		self._initiatorsList = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
-		self._initiatorsList.selectionDelegate = self;
+		self._initiatorsList.selectionDelegate	= self;
+		self._initiatorsList.multipleSelection	= YES;
 		[self._initiatorsList setListTitle:@"Initiator(s)"];
-		//TODO: load list of all people
+		[self._initiatorsList setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
 	}
 	
 	return self._initiatorsList;
@@ -394,7 +403,7 @@
 		self._receiversList = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
 		self._receiversList.selectionDelegate = self;
 		[self._receiversList setListTitle:@"Receiver"];
-		//TODO: load list of all people
+		[self._receiversList setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
 	}
 	
 	return self._receiversList;
@@ -445,11 +454,14 @@
 	
 }
 
-//TODO:The lists for choosing the initiator(s), interaction, receiver, and visibility are currently all empty. I wasn't quite sure where to put this, but somehow the options need to be loaded when the generic list is pushed onto the view.
 #pragma mark - launch UI to choose value
 
 -(void)chooseInitiator:(id)sender{
     
+	NSMutableArray *suggestions = [NSMutableArray arrayWithArray:self.suggestions];
+	[suggestions addObjectsFromArray:self.selectionsFromParent];
+	
+	[[self initiatorsList] setSuggestions:suggestions andSelections:self.interaction.initiators];
     [self.navigationController pushViewController:[self initiatorsList] animated:YES];
     
 }
@@ -457,7 +469,27 @@
 
 -(void)chooseInteractionType:(id)sender {
     
+	__block NSInteger selectedRow = 0;
+	MHInteractionType *type = self.interaction.type;
+	
+	if (type) {
+		
+		[self.interactionTypeArray enumerateObjectsUsingBlock:^(id typeObject, NSUInteger row, BOOL *stop) {
+			
+			if ([type isEqualToModel:typeObject]) {
+				
+				selectedRow = row;
+				*stop		= YES;
+				
+			}
+			
+		}];
+		
+	}
+	
 	[self.view addSubview:[self interactionTypePicker]];
+	
+	[[self interactionTypePicker] selectRow:selectedRow inComponent:0 animated:NO];
 	
 	__block CGRect pickerFrame = [self interactionTypePicker].frame;
 	
@@ -482,14 +514,33 @@
 
 -(void)chooseReceiver:(id)sender {
     
+	NSMutableArray *suggestions = [NSMutableArray arrayWithArray:self.suggestions];
+	[suggestions addObjectsFromArray:self.selectionsFromParent];
+	
+	[[self receiversList] setSuggestions:suggestions andSelections:self.interaction.initiators];
     [self.navigationController pushViewController:[self receiversList] animated:YES];
 
 }
 
 
 -(void)chooseVisibility:(id)sender {
+	
+	__block NSInteger selectedRow = 0;
 
+	[self.visibilityArray enumerateObjectsUsingBlock:^(NSDictionary *object, NSUInteger row, BOOL *stop) {
+		
+		NSString *value = [object objectForKey:@"value"];
+		
+		if ([value isEqualToString:[self.interaction privacy_setting]]) {
+			selectedRow = row;;
+			*stop = YES;
+		}
+		
+	}];
+	
     [self.view addSubview:[self visibilityPicker]];
+	
+	[[self visibilityPicker] selectRow:selectedRow inComponent:0 animated:NO];
 	
 	__block CGRect pickerFrame = [self visibilityPicker].frame;
 	
@@ -514,6 +565,8 @@
 -(void)chooseDate:(id)sender {
 	
 	[self.view addSubview:[self timestampPicker]];
+	
+	[[self timestampPicker] setDate:self.interaction.timestamp];
 	
 	__block CGRect pickerFrame = [self timestampPicker].frame;
 	
@@ -555,8 +608,6 @@
 	
 		MHPerson *person = (MHPerson *)object;
 		
-		[self.navigationController popViewControllerAnimated:YES];
-		
 		if ([viewController isEqual:[self initiatorsList]]) {
 			
 			[self.interaction addInitiatorsObject:person];
@@ -564,8 +615,27 @@
 			
 		} else if ([viewController isEqual:[self receiversList]]) {
 			
+			[self.navigationController popViewControllerAnimated:YES];
+			
 			[self.interaction setReceiver:person];
 			[self updateInterfaceForReceiver];
+			
+		}
+		
+	}
+	
+}
+
+-(void)list:(MHGenericListViewController *)viewController didDeselectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+	
+	if ([object isKindOfClass:[MHPerson class]]) {
+		
+		MHPerson *person = (MHPerson *)object;
+		
+		if ([viewController isEqual:[self initiatorsList]]) {
+			
+			[self.interaction removeInitiatorsObject:person];
+			[self updateInterfaceForInitiators];
 			
 		}
 		
