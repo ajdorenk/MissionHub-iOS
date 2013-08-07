@@ -120,6 +120,7 @@ typedef enum {
 	MHRequestOptionsOrderDirections	_orderDirection;
 	
 	NSMutableDictionary				*_postParams;
+	NSData							*_postData;
 	
 	void (^_successBlock)(NSArray *results, MHRequestOptions *options);
 	void (^_failBlock)(NSError *error, MHRequestOptions *options);
@@ -138,6 +139,7 @@ typedef enum {
 @property (nonatomic, assign) MHRequestOptionsOrderDirections	orderDirection;
 
 @property (nonatomic, strong) NSMutableDictionary				*postParams;
+@property (nonatomic, strong) NSData							*postData;
 
 @property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
 @property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);
@@ -159,6 +161,7 @@ typedef enum {
 -(id)configureForNextPageRequest;
 -(id)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
 -(id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID;
+-(id)configureForCreateInteractionRequest;
 
 -(id)addInclude:(MHRequestOptionsIncludes)include;
 -(id)addIncludesForProfileRequest;

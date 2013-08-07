@@ -149,7 +149,16 @@ typedef enum {
 	request.successBlock		= successBlock;
 	request.failBlock			= failBlock;
 	request.requestMethod		= methodString;
-	[request addPostParamsFromDictionary:requestOptions.postParams];
+	
+	if (requestOptions.postData) {
+		
+		[request setPostBody:[requestOptions.postData mutableCopy]];
+		
+	} else {
+		
+		[request addPostParamsFromDictionary:requestOptions.postParams];
+		
+	}
 	
 	[self.queue addOperation:request];
 	
@@ -285,6 +294,31 @@ typedef enum {
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForInteractionRequestForPersonWithRemoteID:remoteID];
 	
 	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
+-(void)createInteraction:(MHInteraction *)interaction withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreateInteractionRequest];
+	NSError *error;
+	
+	[requestOptions addPostParam:[requestOptions stringInSingluarFormatForEndpoint] withValue:interaction];
+	NSDictionary *postDictionary = @{[requestOptions stringInSingluarFormatForEndpoint]: [interaction jsonObject]};
+	requestOptions.postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:NSJSONWritingPrettyPrinted error:&error];
+	
+	if (error) {
+		
+		if (failBlock) {
+			failBlock(error, requestOptions);
+		} else {
+			[MHErrorHandler presentError:error];
+		}
+		
+	} else {
+		
+		[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+		
+	}
 	
 }
 
@@ -434,6 +468,8 @@ typedef enum {
 	if (*error) {
 		return nil;
 	}
+	
+	urlString = [urlString stringByAppendingString:@"?"];
 	
 	[self addAccessTokenToParams:params withError:error];
 	

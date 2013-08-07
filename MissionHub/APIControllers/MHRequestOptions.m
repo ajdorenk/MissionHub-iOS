@@ -39,8 +39,8 @@
 @synthesize successBlock	= _successBlock;
 @synthesize failBlock		= _failBlock;
 
-//TODO: implement postParams initialization and accessor functions
 @synthesize postParams		= _postParams;
+@synthesize postData		= _postData;
 
 -(id)init {
 	
@@ -88,6 +88,8 @@
 		self.postParams	= [NSMutableDictionary dictionary];
 	}
 	
+	self.postData		= nil;
+	
 	return self;
 }
 
@@ -95,7 +97,7 @@
 	
 	MHRequestOptions *returnObject = [[MHRequestOptions alloc] init];
 	
-	returnObject.requestName	= self.requestName;
+	returnObject.requestName	= [self.requestName copy];
 	returnObject.type			= self.type;
 	returnObject.endpoint		= self.endpoint;
 	returnObject.remoteID		= self.remoteID;
@@ -112,6 +114,7 @@
 	returnObject.failBlock		= self.failBlock;
 	
 	returnObject.postParams		= [NSMutableDictionary dictionaryWithDictionary:self.postParams];
+	returnObject.postData		= [self.postData copy];
 	
 	return returnObject;
 }
@@ -154,6 +157,14 @@
 -(id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID {
 	
 	[[[[self reset] addIncludesForPeoplePageRequest] setLimitAndOffsetForFirstPage] addFilter:MHRequestOptionsFilterPeopleAssignedTo withValue:[remoteAssignedToID stringValue]];
+	
+	return self;
+}
+
+-(id)configureForCreateInteractionRequest {
+	
+	[[self reset] setEndpoint:MHRequestOptionsEndpointInteractions];
+	self.type = MHRequestOptionsTypeCreate;
 	
 	return self;
 }

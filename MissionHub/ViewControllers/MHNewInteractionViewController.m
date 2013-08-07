@@ -252,7 +252,25 @@
 
 -(void)saveInteraction {
 	
+	NSError *error;
 	
+	if ([self.interaction validateForServerCreate:&error]) {
+		
+		[[MHAPI sharedInstance] createInteraction:self.interaction withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+			
+			[self.navigationController popViewControllerAnimated:YES];
+			
+		} failBlock:^(NSError *error, MHRequestOptions *options) {
+			
+			[MHErrorHandler presentError:error];
+			
+		}];
+		
+	} else {
+		
+		[MHErrorHandler presentError:error];
+		
+	}
 	
 }
 
@@ -854,7 +872,7 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
 	
-    [textField resignFirstResponder];
+    [self clearPickers];
     
     return NO;
 }

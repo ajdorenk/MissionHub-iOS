@@ -18,12 +18,78 @@
 	[self addInitiatorsObject:[MHAPI sharedInstance].currentUser];
 	self.type			= [[[MHAPI sharedInstance].currentUser.currentOrganization interactionTypes] findWithRemoteID:@1]; //comment interaction type has id=1
 	self.comment		= @"";
-	self.privacy_setting = [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingEveryone],
+	self.privacy_setting = [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingEveryone];
 	self.timestamp		= [NSDate date];
 	self.created_at		= [NSDate date];
 	self.updated_at		= [NSDate date];
 	self.creator		= [MHAPI sharedInstance].currentUser;
 	self.updater		= [MHAPI sharedInstance].currentUser;
+	
+}
+
+-(BOOL)validateForServerCreate:(NSError **)error {
+	
+	NSMutableString *errorMessage = [NSMutableString string];
+	
+	if (![self.remoteID isEqual: @0]) {
+		[errorMessage appendString:@"Interaction Already Exists"];
+		*error = [NSError errorWithDomain:@"MHInteraction.errorDomain"
+									 code:1
+								 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+		
+		return NO;
+		
+	}
+	
+	if ([self.initiators count] == 0) {
+		[errorMessage appendString:@"Initiator Missing. "];
+	}
+	
+	if (!self.receiver) {
+		[errorMessage appendString:@"Receiver Missing. "];
+	}
+	
+	if ([self.privacy_setting length] == 0) {
+		[errorMessage appendString:@"Privacy Setting Missing. "];
+	}
+	
+	if (!self.comment) {
+		self.comment = @"";
+	}
+	
+	/*
+	if (!self.timestamp) {
+		[errorMessage appendString:@"Timestamp Missing. "];
+	}
+	
+	if (!self.created_at) {
+		[errorMessage appendString:@"Created At Date Missing. "];
+	}
+	
+	if (!self.updated_at) {
+		[errorMessage appendString:@"Updated At Date Missing. "];
+	}
+	
+	if (!self.creator) {
+		[errorMessage appendString:@"Creator Missing. "];
+	}
+	
+	if (!self.updater) {
+		[errorMessage appendString:@"Update Missing. "];
+	}
+	*/
+	
+	if ([errorMessage length] > 0) {
+		
+		*error = [NSError errorWithDomain:@"MHInteraction.errorDomain"
+									code:1
+								userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+		
+		return NO;
+		
+	}
+	
+	return YES;
 	
 }
 

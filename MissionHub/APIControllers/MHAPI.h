@@ -66,6 +66,8 @@ extern NSString *const MHAPIErrorDomain;
 -(void)getProfileForRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
 -(void)getInteractionsForPersonWithRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
 
+-(void)createInteraction:(MHInteraction *)interaction withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
+
 -(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error;
 -(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error;
 -(NSString *)stringForShowRequestWith:(MHRequestOptions *)options error:(NSError **)error;
