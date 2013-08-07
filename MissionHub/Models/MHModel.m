@@ -47,9 +47,16 @@
 			
 		}];
 		*/
+		
+		[self setDefaults];
+		
 	}
 	
 	return self;
+	
+}
+
+-(void)setDefaults {
 	
 }
 

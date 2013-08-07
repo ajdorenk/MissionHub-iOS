@@ -12,8 +12,7 @@
 #import "MHPersonCell.h"
 #import "MHLoadingCell.h"
 #import "MHMenuToolbar.h"   
-#import "MHPeopleSearchBar.h" 
-#import "MHGenderListController.h"
+#import "MHPeopleSearchBar.h"
 #import "UIImageView+AFNetworking.h"
 
 
@@ -59,9 +58,10 @@
 	
 	[super awakeFromNib];
 	
-	self.peopleArray = [NSMutableArray array];
-	self.searchResultArray = [NSMutableArray array];
-	self.requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
+	self.peopleArray		= [NSMutableArray array];
+	self.searchResultArray	= [NSMutableArray array];
+	self.selectedPeople		= [NSMutableArray array];
+	self.requestOptions		= [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	self.searchRequestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
 	
 	self.sortField			= MHRequestOptionsOrderFieldPeopleFollowupStatus;
@@ -78,27 +78,27 @@
 	
 	headerLabel.text = @"All";
     */
-    //Add genderButton
-    UIButton *genderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    //Add sortFieldButton
+    UIButton *sortFieldButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [genderButton setFrame:CGRectMake(94, 5.0, 154.0, 22.0)];
+        [sortFieldButton setFrame:CGRectMake(94, 5.0, 154.0, 22.0)];
     }
     else{
-        [genderButton setFrame:CGRectMake(420, 5.0, 270.0, 22.0)];
+        [sortFieldButton setFrame:CGRectMake(420, 5.0, 270.0, 22.0)];
     }
-    //[button setTitle:@"Gender" forState:UIControlStateNormal];
-    [genderButton setTintColor:[UIColor clearColor]];
-    [genderButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
 	
-    [genderButton setBackgroundColor:[UIColor clearColor]];
-	[genderButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
-	[genderButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
-    [genderButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [genderButton addTarget:self action:@selector(chooseSortField:) forControlEvents:UIControlEventTouchUpInside];
+    [sortFieldButton setTintColor:[UIColor clearColor]];
+    [sortFieldButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
+	
+    [sortFieldButton setBackgroundColor:[UIColor clearColor]];
+	[sortFieldButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
+	[sortFieldButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+    [sortFieldButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [sortFieldButton addTarget:self action:@selector(chooseSortField:) forControlEvents:UIControlEventTouchUpInside];
     
-    [sectionHeader addSubview:genderButton];
+    [sectionHeader addSubview:sortFieldButton];
 	
-	self.fieldButton = genderButton;
+	self.fieldButton = sortFieldButton;
     
     UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
@@ -509,7 +509,11 @@
 
 -(IBAction)addInteractionActivity:(id)sender {
     NSLog(@"Label Action");
-    	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
+	MHInteraction *newInteraction = [MHInteraction newObjectFromFields:nil];
+	[newInteraction addInitiators:[NSSet setWithArray:self.selectedPeople]];
+	
+	[[self createInteractionViewController] updateWithInteraction:newInteraction andSelections:self.selectedPeople]; //create selected array
+	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
 
 }
 
@@ -931,6 +935,34 @@
 }
 
 -(void)cell:(MHPersonCell *)cell didSelectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath {
+	
+	if (person) {
+		
+		[self.selectedPeople addObject:person];
+		
+	}
+	
+	if ([self.selectedPeople count] == 1) {
+		
+		//launch activity view controller
+		
+	}
+	
+}
+
+-(void)cell:(MHPersonCell *)cell didDeselectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath {
+	
+	if (person) {
+		
+		[self.selectedPeople removeObject:person];
+		
+	}
+	
+	if ([self.selectedPeople count] == 0) {
+		
+		//remove activity view controller
+		
+	}
 	
 }
 

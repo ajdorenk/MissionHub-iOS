@@ -95,16 +95,22 @@
     
     [self.comment setDelegate:self];
 	
-    self.interaction = [MHInteraction newObjectFromFields:nil];
+	if (!self.interaction) {
+		
+		self.interaction = [MHInteraction newObjectFromFields:nil];
+		
+	}
+	
+	self.suggestions = [NSMutableArray arrayWithArray:@[[MHAPI sharedInstance].currentUser]];
 	
 	NSString *orgName = ([[[[MHAPI sharedInstance] currentUser] currentOrganization] name] ? [[[[MHAPI sharedInstance] currentUser] currentOrganization] name] : @"");
 	
 	self.visibilityArray = [NSMutableArray arrayWithArray:@[
-							@{@"value": @"everyone",		@"title": @"Everyone"},
-							@{@"value": @"parent",			@"title": [NSString stringWithFormat:@"Everyone in Parent of %@", orgName]}, //TODO: on login grab the name of the parent org and use it here
-							@{@"value": @"organization",	@"title": [NSString stringWithFormat:@"Everyone in %@", orgName]},
-							@{@"value": @"admins",			@"title": [NSString stringWithFormat:@"Admins in %@", orgName]},
-							@{@"value": @"me",				@"title": @"Only Me"}
+							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingEveryone],		@"title": @"Everyone"},
+							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingParent],			@"title": [NSString stringWithFormat:@"Everyone in Parent of %@", orgName]}, //TODO: on login grab the name of the parent org and use it here
+							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingOrganization],	@"title": [NSString stringWithFormat:@"Everyone in %@", orgName]},
+							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingAdmins],			@"title": [NSString stringWithFormat:@"Admins in %@", orgName]},
+							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingMe],				@"title": @"Only Me"}
 							]];
 	
 	self.interactionTypeArray = [NSMutableArray arrayWithArray:
@@ -458,8 +464,7 @@
 
 -(void)chooseInitiator:(id)sender{
     
-	NSMutableArray *suggestions = [NSMutableArray arrayWithArray:self.suggestions];
-	[suggestions addObjectsFromArray:self.selectionsFromParent];
+	NSSet *suggestions = [NSSet setWithArray:self.suggestions];
 	
 	[[self initiatorsList] setSuggestions:suggestions andSelections:self.interaction.initiators];
     [self.navigationController pushViewController:[self initiatorsList] animated:YES];
@@ -514,10 +519,11 @@
 
 -(void)chooseReceiver:(id)sender {
     
-	NSMutableArray *suggestions = [NSMutableArray arrayWithArray:self.suggestions];
+	NSMutableSet *suggestions	= [NSMutableSet setWithArray:self.suggestions];
 	[suggestions addObjectsFromArray:self.selectionsFromParent];
+	NSSet *receiverSet			= (self.interaction.receiver ? [NSSet setWithObject:self.interaction.receiver] : [NSSet set]);
 	
-	[[self receiversList] setSuggestions:suggestions andSelections:self.interaction.initiators];
+	[[self receiversList] setSuggestions:suggestions andSelections:receiverSet];
     [self.navigationController pushViewController:[self receiversList] animated:YES];
 
 }

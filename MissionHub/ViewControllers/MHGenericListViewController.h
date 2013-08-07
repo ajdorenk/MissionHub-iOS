@@ -11,10 +11,11 @@
 #import "MHErrorHandler.h"
 #import "MHRequestOptions.h"
 #import "ODRefreshControl.h"
+#import "MHGenericCell.h"
 
 @protocol MHGenericListViewControllerDelegate;
 
-@interface MHGenericListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MHGenericListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MHGenericCellDelegate>
 {
 	
     id<MHGenericListViewControllerDelegate>	_selectionDelegate;
@@ -30,7 +31,10 @@
     NSMutableArray							*_suggestionArray;
 	id										_selectedObject;
 	NSMutableSet							*_selectedSet;
+	NSMutableSet							*_suggestionSet;
 	BOOL									_multipleSelection;
+	BOOL									_showSuggestions;
+	BOOL									_showHeaders;
 	
 }
 
@@ -51,7 +55,10 @@
 @property (nonatomic, strong) NSMutableArray							*suggestionArray;
 @property (nonatomic, strong) id										selectedObject;
 @property (nonatomic, strong) NSMutableSet								*selectedSet;
+@property (nonatomic, strong) NSMutableSet								*suggestionSet;
 @property (nonatomic, assign) BOOL										multipleSelection;
+@property (nonatomic, assign) BOOL										showSuggestions;
+@property (nonatomic, assign) BOOL										showHeaders;
 
 -(void)setListTitle:(NSString *)title;
 -(void)refresh;
@@ -59,8 +66,8 @@
 -(void)setDataFromRequestOptions:(MHRequestOptions *)options;
 -(void)setDataArray:(NSArray *)dataArray;
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
--(void)setSuggestions:(NSArray *)suggestionsArray andSelections:(NSSet *)selectedSet;
--(void)setSuggestions:(NSArray *)suggestionsArray andSelectionObject:(id)selectedObject;
+-(void)setSuggestions:(NSSet *)suggestionsArray andSelections:(NSSet *)selectedSet;
+-(void)setSuggestions:(NSSet *)suggestionsArray andSelectionObject:(id)selectedObject;
 
 @end
 

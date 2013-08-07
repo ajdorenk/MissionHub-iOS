@@ -173,6 +173,7 @@ typedef enum {
 
 -(id)setLimitAndOffsetForFirstPage;
 -(id)setLimitAndOffsetForNextPage;
+-(id)setLimitForScreenDimensions;
 -(id)resetPaging;
 
 -(id)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value;

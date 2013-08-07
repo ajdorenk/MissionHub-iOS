@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSDictionary *attributes;
 //@property (nonatomic, strong) NSDictionary *relationships;
 
+-(void)setDefaults;
 
 -(NSString *)displayString;
 -(BOOL)isEqualToModel:(id)model;

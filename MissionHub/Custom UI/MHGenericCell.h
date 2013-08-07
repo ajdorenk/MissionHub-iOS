@@ -7,12 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHBlankCheckbox.h"
 
-@interface MHGenericCell : UITableViewCell
+@protocol MHGenericCellDelegate;
 
-@property (nonatomic, strong) IBOutlet UILabel		*label;
-@property (nonatomic, strong) IBOutlet UIImageView	*checkmark;
+@interface MHGenericCell : UITableViewCell <MHCheckboxDelegate>
 
--(void)populateWithString:(NSString *)text andSelected:(BOOL)selected;
+@property (nonatomic, weak) id<MHGenericCellDelegate>	cellDelegate;
+@property (nonatomic, strong) NSIndexPath				*indexPath;
+@property (nonatomic, strong) id						object;
+@property (nonatomic, weak) IBOutlet UILabel			*label;
+@property (nonatomic, weak) IBOutlet MHBlankCheckbox	*checkmark;
+
+-(void)populateWithTitle:(NSString *)text forObject:(id)object andSelected:(BOOL)selected atIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+@protocol MHGenericCellDelegate <NSObject>
+@optional
+-(void)cell:(MHGenericCell *)cell didSelectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath;
+-(void)cell:(MHGenericCell *)cell didDeselectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath;
 
 @end

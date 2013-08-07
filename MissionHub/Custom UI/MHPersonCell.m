@@ -18,11 +18,6 @@
 @synthesize fieldName		= _fieldName;
 @synthesize name, gender, profilePicture, checkbox, nameBackgroundView;
 
-//@synthesize delegate;
-//@synthesize allRoles, selectedRoles, originallySelectedRoles;
-//@synthesize applyButton;
-//@synthesize tableView;
-
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -31,6 +26,8 @@
         // Initialization code
         self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
         self.nameBackgroundView.layer.borderWidth = 1.0;
+		
+		self.checkbox.checkboxDelegate = self;
 
     }
     return self;
@@ -41,18 +38,11 @@
     
     self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
     self.nameBackgroundView.layer.borderWidth = 1.0;
+	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         self.nameBackgroundView.layer.backgroundColor = [UIColor whiteColor].CGColor;
     }
-    
-   // UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	
-//TODO:The checkbox image needs to be adjusted. The button should be large, but the checkbox image needs to be smaller.
-    UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
-    [self.checkbox setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
-    [self.checkbox setTintColor:[UIColor clearColor]];
-    [self.checkbox setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
-    [self.checkbox setBackgroundColor:[UIColor clearColor]];
 	self.checkbox.checkboxDelegate = self;
     
     
@@ -68,7 +58,8 @@
 
 -(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField atIndexPath:(NSIndexPath *)indexPath {
     
-	self.indexPath = indexPath;
+	self.person		= person;
+	self.indexPath	= indexPath;
 	
     if (person.picture == nil) {
 		
@@ -88,11 +79,25 @@
 
 -(void)checkbox:(MHCheckbox *)checkbox didChangeValue:(BOOL)checked {
 	
-	if ([self.cellDelegate respondsToSelector:@selector(cell:didSelectPerson:atIndexPath:)]) {
+	if (checked) {
 		
-		[self.cellDelegate cell:self didSelectPerson:self.person atIndexPath:self.indexPath];
+		if ([self.cellDelegate respondsToSelector:@selector(cell:didSelectPerson:atIndexPath:)]) {
+			
+			[self.cellDelegate cell:self didSelectPerson:self.person atIndexPath:self.indexPath];
+			
+		}
+		
+	} else {
+		
+		if ([self.cellDelegate respondsToSelector:@selector(cell:didDeselectPerson:atIndexPath:)]) {
+			
+			[self.cellDelegate cell:self didDeselectPerson:self.person atIndexPath:self.indexPath];
+			
+		}
 		
 	}
+	
+	
 	
 }
 

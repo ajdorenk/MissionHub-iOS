@@ -7,8 +7,25 @@
 //
 
 #import "MHInteraction+Helper.h"
+#import "MHAPI.h"
+#import "NSSet+MHSearchForRemoteID.h"
 
 @implementation MHInteraction (Helper)
+
+-(void)setDefaults {
+	
+	//turn this into defaults
+	[self addInitiatorsObject:[MHAPI sharedInstance].currentUser];
+	self.type			= [[[MHAPI sharedInstance].currentUser.currentOrganization interactionTypes] findWithRemoteID:@1]; //comment interaction type has id=1
+	self.comment		= @"";
+	self.privacy_setting = [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingEveryone],
+	self.timestamp		= [NSDate date];
+	self.created_at		= [NSDate date];
+	self.updated_at		= [NSDate date];
+	self.creator		= [MHAPI sharedInstance].currentUser;
+	self.updater		= [MHAPI sharedInstance].currentUser;
+	
+}
 
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
 	
@@ -102,6 +119,35 @@
 		}
 		
 	}
+	
+}
+
++(NSString *)stringForPrivacySetting:(MHInteractionPrivacySettings)privacySetting {
+	
+	NSString *returnString = @"";
+	
+	switch (privacySetting) {
+		case MHInteractionPrivacySettingAdmins:
+			returnString = @"admins";
+			break;
+		case MHInteractionPrivacySettingEveryone:
+			returnString = @"everyone";
+			break;
+		case MHInteractionPrivacySettingMe:
+			returnString = @"me";
+			break;
+		case MHInteractionPrivacySettingOrganization:
+			returnString = @"organization";
+			break;
+		case MHInteractionPrivacySettingParent:
+			returnString = @"parent";
+			break;
+			
+		default:
+			break;
+	}
+	
+	return returnString;
 	
 }
 

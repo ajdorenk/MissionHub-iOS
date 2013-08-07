@@ -21,6 +21,7 @@
 
 	NSMutableArray *_peopleArray;
 	NSMutableArray *_searchResultArray;
+	NSMutableArray *_selectedPeople;
 	MHRequestOptions *_requestOptions;
 	MHRequestOptions *_searchRequestOptions;
 	ODRefreshControl *_refreshController;
@@ -51,6 +52,7 @@
 @property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
 @property (nonatomic, strong) NSMutableArray *peopleArray;
 @property (nonatomic, strong) NSMutableArray *searchResultArray;
+@property (nonatomic, strong) NSMutableArray *selectedPeople;
 @property (nonatomic, strong) MHRequestOptions *requestOptions;
 @property (nonatomic, strong) MHRequestOptions *searchRequestOptions;
 @property (nonatomic, strong) ODRefreshControl *refreshController;

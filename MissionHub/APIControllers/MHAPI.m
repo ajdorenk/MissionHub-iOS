@@ -47,21 +47,22 @@ typedef enum {
 @synthesize initialPeopleListIsFinished		= _initialPeopleListIsFinished;
 @synthesize errorForInitialRequests			= _errorForInitialRequests;
 
-+ (MHAPI *)sharedInstance
-{
-	static MHAPI *sharedInstance;
++ (MHAPI *)sharedInstance {
 	
-	@synchronized(self)
-	{
-		if (!sharedInstance)
-			sharedInstance = [[MHAPI alloc] initWithConfigFile:[[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"]];
+	static MHAPI *sharedInstance;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
 		
-		return sharedInstance;
-	}
+		sharedInstance = [[MHAPI alloc] initWithConfigFile:[[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"]];
+		
+	});
+	
+	return sharedInstance;
+		
 }
 
--(id)initWithConfigFile:(NSString *)configFilePath
-{
+-(id)initWithConfigFile:(NSString *)configFilePath {
     self = [super init];
     if (self) {
         // Custom initialization
@@ -248,30 +249,6 @@ typedef enum {
 		request.requestName			= requestName;
 	}
 	
-	request.delegate			= self;
-	request.options				= requestOptions;
-	request.successBlock		= successBlock;
-	request.failBlock			= failBlock;
-	
-	[self.queue addOperation:request];
-	
-}
-
--(void)getLabelsForCurrentOrganizationWithSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
-	
-	MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
-	
-	requestOptions.endpoint = MHRequestOptionsEndpointLabels;
-	
-	NSError *error;
-	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
-	NSLog(@"%@", urlString);
-	if (error) {
-		[MHErrorHandler presentError:error];
-		return;
-	}
-	
-	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
 	request.delegate			= self;
 	request.options				= requestOptions;
 	request.successBlock		= successBlock;

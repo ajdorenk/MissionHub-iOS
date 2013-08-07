@@ -10,6 +10,16 @@
 #import "MHPerson.h"
 #import "MHInteractionType.h"
 
+typedef enum {
+	MHInteractionPrivacySettingEveryone,
+	MHInteractionPrivacySettingParent,
+	MHInteractionPrivacySettingOrganization,
+	MHInteractionPrivacySettingAdmins,
+	MHInteractionPrivacySettingMe,
+} MHInteractionPrivacySettings;
+
 @interface MHInteraction (Helper)
+
++(NSString *)stringForPrivacySetting:(MHInteractionPrivacySettings)privacySetting;
 
 @end

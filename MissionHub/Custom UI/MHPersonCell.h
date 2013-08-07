@@ -40,5 +40,6 @@
 @protocol MHPersonCellDelegate <NSObject>
 @optional
 -(void)cell:(MHPersonCell *)cell didSelectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath;
+-(void)cell:(MHPersonCell *)cell didDeselectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath;
 
 @end

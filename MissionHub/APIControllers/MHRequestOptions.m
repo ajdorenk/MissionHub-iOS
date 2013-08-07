@@ -304,31 +304,7 @@
 	
 	self.offset = 0;
 	
-	if (isPad) {
-		
-		if (isPortrait) {
-			
-			self.limit = 30;
-			
-		} else {
-			
-			self.limit = 20;
-			
-		}
-		
-	} else {
-		
-		if (isPortrait) {
-			
-			self.limit = 20;
-			
-		} else {
-			
-			self.limit = 10;
-			
-		}
-		
-	}
+	[self setLimitForScreenDimensions];
 	
 	return self;
 }
@@ -337,7 +313,26 @@
 	
 	self.offset += self.limit;
 	
+	[self setLimitForScreenDimensions];
+	
+	return self;
+}
+
+-(id)setLimitForScreenDimensions {
+	
 	if (isPad) {
+		
+		if (isPortrait) {
+			
+			self.limit = 40;
+			
+		} else {
+			
+			self.limit = 30;
+			
+		}
+		
+	} else {
 		
 		if (isPortrait) {
 			
@@ -349,21 +344,10 @@
 			
 		}
 		
-	} else {
-		
-		if (isPortrait) {
-			
-			self.limit = 20;
-			
-		} else {
-			
-			self.limit = 10;
-			
-		}
-		
 	}
 	
 	return self;
+	
 }
 
 -(id)clearIncludes {
