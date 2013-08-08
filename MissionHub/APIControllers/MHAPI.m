@@ -7,6 +7,7 @@
 //
 
 #import "MHAPI.h"
+#import "AFHTTPClient.h"
 #import "MHRequest.h"
 #import "MHPerson+Helper.h"
 
@@ -54,7 +55,7 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		sharedInstance = [[MHAPI alloc] initWithConfigFile:[[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"]];
+		sharedInstance = [[MHAPI alloc] initWithConfigFile:[[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"]];
 		
 	});
 	
@@ -150,11 +151,20 @@ typedef enum {
 	request.failBlock			= failBlock;
 	request.requestMethod		= methodString;
 	
+	if (requestOptions.jsonString) {
+		
+		//[request appendPostData:[requestOptions.jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+		[request addPostValue:requestOptions.jsonString forKey:[requestOptions stringInSingluarFormatForEndpoint]];
+		
+	}
+	
 	if (requestOptions.postData) {
 		
-		[request setPostBody:[requestOptions.postData mutableCopy]];
+		[request appendPostData:requestOptions.postData];
 		
-	} else {
+	}
+	
+	if ([requestOptions.postParams count]) {
 		
 		[request addPostParamsFromDictionary:requestOptions.postParams];
 		
@@ -299,13 +309,29 @@ typedef enum {
 
 -(void)createInteraction:(MHInteraction *)interaction withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreateInteractionRequest];
+	__block MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreateInteractionRequest];
 	NSError *error;
 	
-	[requestOptions addPostParam:[requestOptions stringInSingluarFormatForEndpoint] withValue:interaction];
-	NSDictionary *postDictionary = @{[requestOptions stringInSingluarFormatForEndpoint]: [interaction jsonObject]};
-	requestOptions.postData = [NSJSONSerialization dataWithJSONObject:postDictionary options:NSJSONWritingPrettyPrinted error:&error];
+	NSDictionary *postDictionary	= [interaction jsonObject];
+	//[requestOptions addPostParam:[requestOptions stringInSingluarFormatForEndpoint] withValue:postDictionary];
+	//requestOptions.postData		= [NSJSONSerialization dataWithJSONObject:postDictionary options:NSJSONWritingPrettyPrinted error:&error];
+	requestOptions.jsonString		= [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error] encoding:NSUTF8StringEncoding];
+	/*
+	AFHTTPClient *apiClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:self.apiUrl]];
+	[apiClient setDefaultHeader:@"Accept" value:@"application/json"];
+	apiClient.parameterEncoding = AFJSONParameterEncoding;
+	[apiClient postPath:[NSString stringWithFormat:@"/apis/v3/%@?facebook_token=%@", [requestOptions stringForEndpoint], self.accessToken]
+			 parameters:postDictionary
+				success:^(AFHTTPRequestOperation *operation, id responseObject) {
+					NSLog(@"%@", responseObject);
+				}
+				failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+					[MHErrorHandler presentError:error];
+				}];
+	*/
+	NSLog(@"%@", requestOptions.jsonString);
 	
+	//handles error here (instead of handleError:forRequest:) because the request has not yet been created
 	if (error) {
 		
 		if (failBlock) {
@@ -321,6 +347,23 @@ typedef enum {
 	}
 	
 }
+/*
+{
+	"interaction"=> {
+		"comment"=>"This is an interaction creation test. 3.",
+		"created_at"=>"2013-08-07T17:55:02-04:00",
+		"created_by_id"=>"2033631",
+		"initiator_ids"=>["2033631"],
+		"interaction_type_id"=>"1",
+		"privacy_setting"=>"everyone",
+		"receiver_id"=>"2594597",
+		"timestamp"=>"2013-08-07T17:55:02-04:00",
+		"updated_at"=>"2013-08-07T17:55:02-04:00",
+		"updated_by_id"=>"2033631"
+	},
+	"facebook_token"=>"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD"
+}
+ */
 
 -(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error {
 	
@@ -527,7 +570,13 @@ typedef enum {
 	
 	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
 	//@try {
-		
+
+		if (request.responseStatusCode > 201) {
+			
+			[self requestDidFail:request];
+			return;
+			
+		}
 		
 		//parse response and put into result dictionary
 		result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
@@ -691,7 +740,47 @@ typedef enum {
 	*/
 	
 }
+/*
+{
+	"interaction"=> {
+		"initiator_ids"=>[2033631],
+		"updated_by_id"=>2033631,
+		"created_by_id"=>2033631,
+		"privacy_setting"=>"everyone",
+		"updated_at"=>"2013-08-07T16:00:37-04:00",
+		"timestamp"=>"2013-08-07T16:00:37-04:00",
+		"comment"=>"This is an interaction creation test. 1",
+		"created_at"=>"2013-08-07T16:00:37-04:00",
+		"receiver_id"=>2594597,
+		"interaction_type_id"=>1
+	},
+	"facebook_token"=>"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD"
+}
 
+{
+	{
+		"interaction" : {
+			"initiator_ids" : {
+				2033631
+				{,
+					"updated_by_id" : 2033631,
+					"created_by_id" : 2033631,
+					"privacy_setting" : "everyone",
+					"updated_at" : "2013-08-07T16:00:37-04:00",
+					"timestamp" : "2013-08-07T16:00:37-04:00",
+					"comment" : "This is an interaction creation test. 1",
+					"created_at" : "2013-08-07T16:00:37-04:00",
+					"receiver_id" : 2594597,
+					"interaction_type_id" : 1
+				}
+			}
+			=>nil}
+	},
+	"facebook_token"=>"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD"
+}
+
+{"interaction" : {"initiator_ids" : [2033631],"updated_by_id" : 2033631,"created_by_id" : 2033631,"privacy_setting" : "everyone","updated_at" : "2013-08-07T16:00:37-04:00","timestamp" : "2013-08-07T16:00:37-04:00","comment" : "This is an interaction creation test. 1","created_at" : "2013-08-07T16:00:37-04:00","receiver_id" : 2594597,"interaction_type_id" : 1}}
+*/
 -(void)requestDidFail:(MHRequest *)request {
 	
 	NSError *error, *responseError;

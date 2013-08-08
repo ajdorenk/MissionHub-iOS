@@ -285,7 +285,7 @@
 		NSString * keyForReturnObject = [self fieldNameForJsonObjectWithKey:key];
 		id returnObject = [self valueForJsonObjectWithKey:key];
 		
-		if (returnObject != nil) {
+		if (returnObject && ![keyForReturnObject isEqualToString:@"id"]) {
 			
 			[jsonDictionary setObject:returnObject forKey:keyForReturnObject];
 			

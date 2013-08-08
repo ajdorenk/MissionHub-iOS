@@ -861,6 +861,8 @@
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     
+	self.interaction.comment = self.comment.text;
+	
     // Resize your textview when keyboard is going to hide
     [UIView setAnimationBeginsFromCurrentState:YES];
 	

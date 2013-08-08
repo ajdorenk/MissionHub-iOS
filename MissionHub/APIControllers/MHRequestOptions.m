@@ -41,6 +41,7 @@
 
 @synthesize postParams		= _postParams;
 @synthesize postData		= _postData;
+@synthesize jsonString		= _jsonString;
 
 -(id)init {
 	
@@ -89,6 +90,7 @@
 	}
 	
 	self.postData		= nil;
+	self.jsonString		= nil;
 	
 	return self;
 }
@@ -115,6 +117,7 @@
 	
 	returnObject.postParams		= [NSMutableDictionary dictionaryWithDictionary:self.postParams];
 	returnObject.postData		= [self.postData copy];
+	returnObject.jsonString		= [self.jsonString copy];
 	
 	return returnObject;
 }

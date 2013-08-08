@@ -54,7 +54,7 @@
 	}
 	
 	if (!self.comment) {
-		self.comment = @"";
+		[errorMessage appendString:@"Comment Missing. "];
 	}
 	
 	/*
@@ -139,10 +139,10 @@
 	
 	if ([fieldName isEqualToString:@"initiators"]) {
 		
-		NSArray *arrayOfObjects = relationshipObject;
+		NSSet *arrayOfObjects = (NSSet *)relationshipObject;
 		NSMutableArray *arrayOfIds = [NSMutableArray array];
 		
-		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, BOOL *stop) {
 			
 			MHPerson *newObject = (MHPerson *)object;
 			

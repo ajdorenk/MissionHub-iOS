@@ -121,6 +121,7 @@ typedef enum {
 	
 	NSMutableDictionary				*_postParams;
 	NSData							*_postData;
+	NSString						*_jsonString;
 	
 	void (^_successBlock)(NSArray *results, MHRequestOptions *options);
 	void (^_failBlock)(NSError *error, MHRequestOptions *options);
@@ -140,6 +141,7 @@ typedef enum {
 
 @property (nonatomic, strong) NSMutableDictionary				*postParams;
 @property (nonatomic, strong) NSData							*postData;
+@property (nonatomic, strong) NSString							*jsonString;
 
 @property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
 @property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);
