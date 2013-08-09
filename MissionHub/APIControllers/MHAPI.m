@@ -8,7 +8,7 @@
 
 #import "MHAPI.h"
 #import "AFHTTPClient.h"
-#import "MHRequest.h"
+#import "MHRequestOperation.h"
 #import "MHPerson+Helper.h"
 
 NSString *const MHAPIErrorDomain = @"com.missionhub.errorDomain.API";
@@ -36,17 +36,16 @@ typedef enum {
 
 @implementation MHAPI
 
-@synthesize queue		= _queue;
-@synthesize apiUrl		= _apiUrl;
-@synthesize baseUrl		= _baseUrl;
-@synthesize surveyUrl	= _surveyUrl;
-@synthesize accessToken	= _accessToken;
+@synthesize surveyURL;
+@synthesize accessToken;
 
-@synthesize currentUser						= _currentUser;
-@synthesize initialPeopleList				= _initialPeopleList;
-@synthesize currentOrganizationIsFinished	= _currentOrganizationIsFinished;
-@synthesize initialPeopleListIsFinished		= _initialPeopleListIsFinished;
-@synthesize errorForInitialRequests			= _errorForInitialRequests;
+@synthesize currentUser;
+@synthesize currentOrganization;
+@synthesize _anonymous;
+@synthesize initialPeopleList;
+@synthesize currentOrganizationIsFinished;
+@synthesize initialPeopleListIsFinished;
+@synthesize errorForInitialRequests;
 
 + (MHAPI *)sharedInstance {
 	
@@ -55,7 +54,16 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		sharedInstance = [[MHAPI alloc] initWithConfigFile:[[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"]];
+		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
+		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
+		
+		NSString *baseUrlString			= ( [configDictionary valueForKey:@"api_url"] ? [configDictionary valueForKey:@"api_url"] : @"" );
+		NSString *surveyUrlString		= ( [configDictionary valueForKey:@"survey_url"] ? [configDictionary valueForKey:@"survey_url"] : @"" );
+		
+		NSURL *baseURL					= [NSURL URLWithString:baseUrlString];
+		NSURL *surveyURL				= [NSURL URLWithString:surveyUrlString];
+		
+		sharedInstance					= [[MHAPI alloc] initWithBaseURL:baseURL andSurveyURL:surveyURL];
 		
 	});
 	
@@ -63,37 +71,21 @@ typedef enum {
 		
 }
 
--(id)initWithConfigFile:(NSString *)configFilePath {
-    self = [super init];
+- (id)initWithBaseURL:(NSURL *)url andSurveyURL:(NSURL *)surveyUrl {
+	
+    self = [super initWithBaseURL:url];
+	
     if (self) {
         // Custom initialization
 		
-		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
-		
-		self.baseUrl					= [configDictionary valueForKey:@"base_url"];
-		self.apiUrl						= [configDictionary valueForKey:@"api_url"];
-		self.surveyUrl					= [configDictionary valueForKey:@"survey_url"];
+		self.surveyURL					= surveyUrl;
 		self.accessToken				= @"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD";
-		
-		if (self.baseUrl == nil) {
-				
-			self.baseUrl = @"";
-				
-		}
-			
-		if (self.apiUrl == nil) {
-				
-			self.apiUrl = @"";
-				
-		}
-		
-		self.queue = [[NSOperationQueue alloc] init];
 		
     }
     return self;
 }
 
--(MHPerson *)anonymous {
+- (MHPerson *)anonymous {
 	
 	return [MHPerson newObjectFromFields:@{
 			@"id": @0,
@@ -102,75 +94,24 @@ typedef enum {
 	
 }
 
--(void)getResultWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (NSMutableURLRequest *)requestWithOptions:(MHRequestOptions *)options {
+	
+	return [self requestWithMethod:[options method]
+							  path:[options path]
+						parameters:[options parameters]];
+	
+}
 
-	MHRequestOptions *requestOptions = (options ? options : [[MHRequestOptions alloc] init]);
+- (void)getResultWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	NSError *error;
-	NSString *urlString = @"GET";
-	NSString *methodString = nil;
+	MHRequestOptions *requestOptions	= (options ? options : [[MHRequestOptions alloc] init]);
+	requestOptions.successBlock			= successBlock;
+	requestOptions.failBlock			= failBlock;
 	
-	switch (requestOptions.type) {
-		case MHRequestOptionsTypeShow:
-			urlString = [self stringForShowRequestWith:requestOptions error:&error];
-			methodString = @"GET";
-			break;
-		case MHRequestOptionsTypeIndex:
-			urlString = [self stringForIndexRequestWith:requestOptions error:&error];
-			methodString = @"GET";
-			break;
-		case MHRequestOptionsTypeCreate:
-			urlString = [self stringForCreateRequestWith:requestOptions error:&error];
-			methodString = @"POST";
-			break;
-		case MHRequestOptionsTypeUpdate:
-			urlString = [self stringForUpdateOrDeleteRequestWith:requestOptions error:&error];
-			methodString = @"PUT";
-			break;
-		case MHRequestOptionsTypeDelete:
-			urlString = [self stringForUpdateOrDeleteRequestWith:requestOptions error:&error];
-			methodString = @"DELETE";
-			break;
-			
-		default:
-			break;
-	}
+	NSMutableURLRequest *request		= [self requestWithOptions:requestOptions];
+    MHRequestOperation *operation		= [MHRequestOperation operationWithRequest:request options:requestOptions andDelegate:self];
+    [self enqueueHTTPRequestOperation:operation];
 	
-	NSLog(@"%@", urlString);
-	
-	if (error) {
-		[MHErrorHandler presentError:error];
-		return;
-	}
-	
-	__block MHRequest *request	= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
-	request.requestName			= (requestOptions.requestName ? requestOptions.requestName : nil);
-	request.delegate			= self;
-	request.options				= requestOptions;
-	request.successBlock		= successBlock;
-	request.failBlock			= failBlock;
-	request.requestMethod		= methodString;
-	
-	if (requestOptions.jsonString) {
-		
-		//[request appendPostData:[requestOptions.jsonString dataUsingEncoding:NSUTF8StringEncoding]];
-		[request addPostValue:requestOptions.jsonString forKey:[requestOptions stringInSingluarFormatForEndpoint]];
-		
-	}
-	
-	if (requestOptions.postData) {
-		
-		[request appendPostData:requestOptions.postData];
-		
-	}
-	
-	if ([requestOptions.postParams count]) {
-		
-		[request addPostParamsFromDictionary:requestOptions.postParams];
-		
-	}
-	
-	[self.queue addOperation:request];
 	
 }
 
@@ -186,7 +127,7 @@ typedef enum {
 		return;
 	}
 	
-	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
 	request.requestName			= MHAPIRequestNameMe;
 	request.delegate			= self;
 	request.options				= requestOptions;
@@ -208,7 +149,7 @@ typedef enum {
 		return;
 	}
 	
-	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
 	request.delegate			= self;
 	request.options				= requestOptions;
 	request.successBlock		= successBlock;
@@ -230,7 +171,7 @@ typedef enum {
 		return;
 	}
 	
-	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
 	request.requestName			= MHAPIRequestNameCurrentOrganization;
 	request.delegate			= self;
 	request.options				= requestOptions;
@@ -262,7 +203,7 @@ typedef enum {
 		return;
 	}
 	
-	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
 	
 	if (requestName) {
 		request.requestName			= requestName;
@@ -289,7 +230,7 @@ typedef enum {
 		return;
 	}
 	
-	MHRequest *request			= [[MHRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
 	request.delegate			= self;
 	request.options				= requestOptions;
 	request.successBlock		= successBlock;
@@ -365,24 +306,11 @@ typedef enum {
 }
  */
 
--(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error {
+-(NSURL *)urlForSurveyWith:(NSNumber *)remoteID {
 	
-	NSString *urlString = [self surveyUrl];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/%@", remoteID] relativeToURL:self.surveyURL];
 	
-	if (urlString == nil || [urlString length] <= 0 ) {
-		
-		if (error) {
-			*error = [NSError errorWithDomain:MHAPIErrorDomain
-										 code:MHAPIErrorMissingUrl
-									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Survey URL Missing", @"Survey URL Missing")}];
-		}
-		
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingFormat:@"/%@", remoteID];
-	
-	return urlString;
+	return url;
 }
 
 -(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error {
@@ -561,7 +489,7 @@ typedef enum {
 	return urlString;
 }
 
--(void)requestDidFinish:(MHRequest *)request {
+-(void)requestDidFinish:(MHRequestOperation *)request {
 	
 	NSError *error;
 	__block NSMutableArray *modelArray = [NSMutableArray array];
@@ -781,7 +709,7 @@ typedef enum {
 
 {"interaction" : {"initiator_ids" : [2033631],"updated_by_id" : 2033631,"created_by_id" : 2033631,"privacy_setting" : "everyone","updated_at" : "2013-08-07T16:00:37-04:00","timestamp" : "2013-08-07T16:00:37-04:00","comment" : "This is an interaction creation test. 1","created_at" : "2013-08-07T16:00:37-04:00","receiver_id" : 2594597,"interaction_type_id" : 1}}
 */
--(void)requestDidFail:(MHRequest *)request {
+-(void)requestDidFail:(MHRequestOperation *)request {
 	
 	NSError *error, *responseError;
 	NSInteger errorCode	= request.responseStatusCode;
@@ -909,7 +837,7 @@ typedef enum {
 	
 }
 
--(void)handleError:(NSError *)error forRequest:(MHRequest *)request {
+-(void)handleError:(NSError *)error forRequest:(MHRequestOperation *)request {
 	
 	if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
 		

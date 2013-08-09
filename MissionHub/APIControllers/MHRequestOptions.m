@@ -122,6 +122,35 @@
 	return returnObject;
 }
 
+-(NSString *)method {
+	
+	NSString *methodString = nil;
+	
+	switch (self.type) {
+		case MHRequestOptionsTypeShow:
+			methodString = @"GET";
+			break;
+		case MHRequestOptionsTypeIndex:
+			methodString = @"GET";
+			break;
+		case MHRequestOptionsTypeCreate:
+			methodString = @"POST";
+			break;
+		case MHRequestOptionsTypeUpdate:
+			methodString = @"PUT";
+			break;
+		case MHRequestOptionsTypeDelete:
+			methodString = @"DELETE";
+			break;
+			
+		default:
+			break;
+	}
+	
+	return methodString;
+	
+}
+
 -(BOOL)hasRemoteID {
 	return (self.remoteID > 0);
 }

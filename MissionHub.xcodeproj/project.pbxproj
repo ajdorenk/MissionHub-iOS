@@ -256,8 +256,8 @@
 		68C0696017710BF1007C79D6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695C17710BF1007C79D6 /* libz.dylib */; };
 		68C0696117710BF1007C79D6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695D17710BF1007C79D6 /* MobileCoreServices.framework */; };
 		68C0696217710BF1007C79D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695E17710BF1007C79D6 /* SystemConfiguration.framework */; };
-		68C0696517710E60007C79D6 /* MHRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequest.m */; };
-		68C0696617710E60007C79D6 /* MHRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequest.m */; };
+		68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequestOperation.m */; };
+		68C0696617710E60007C79D6 /* MHRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequestOperation.m */; };
 		68C069691772252C007C79D6 /* MHRequestOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C069681772252C007C79D6 /* MHRequestOptions.m */; };
 		68C0696A1772252C007C79D6 /* MHRequestOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C069681772252C007C79D6 /* MHRequestOptions.m */; };
 		68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
@@ -559,8 +559,8 @@
 		68C0695C17710BF1007C79D6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		68C0695D17710BF1007C79D6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		68C0695E17710BF1007C79D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		68C0696317710E60007C79D6 /* MHRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHRequest.h; path = APIControllers/MHRequest.h; sourceTree = "<group>"; };
-		68C0696417710E60007C79D6 /* MHRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRequest.m; path = APIControllers/MHRequest.m; sourceTree = "<group>"; };
+		68C0696317710E60007C79D6 /* MHRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHRequestOperation.h; path = APIControllers/MHRequestOperation.h; sourceTree = "<group>"; };
+		68C0696417710E60007C79D6 /* MHRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRequestOperation.m; path = APIControllers/MHRequestOperation.m; sourceTree = "<group>"; };
 		68C069671772252C007C79D6 /* MHRequestOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHRequestOptions.h; path = APIControllers/MHRequestOptions.h; sourceTree = "<group>"; };
 		68C069681772252C007C79D6 /* MHRequestOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRequestOptions.m; path = APIControllers/MHRequestOptions.m; sourceTree = "<group>"; };
 		68D7AA3C1766783200B9B0B1 /* MHAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAPI.h; path = APIControllers/MHAPI.h; sourceTree = "<group>"; };
@@ -1131,8 +1131,8 @@
 				68D7AA3D1766783200B9B0B1 /* MHAPI.m */,
 				68D7AA421766C98000B9B0B1 /* MHLoginViewController.h */,
 				68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */,
-				68C0696317710E60007C79D6 /* MHRequest.h */,
-				68C0696417710E60007C79D6 /* MHRequest.m */,
+				68C0696317710E60007C79D6 /* MHRequestOperation.h */,
+				68C0696417710E60007C79D6 /* MHRequestOperation.m */,
 				68C069671772252C007C79D6 /* MHRequestOptions.h */,
 				68C069681772252C007C79D6 /* MHRequestOptions.m */,
 				68EB33CB17792D8F003958A0 /* MHErrorHandler.h */,
@@ -1485,7 +1485,7 @@
 				68C0691517710357007C79D6 /* ASINetworkQueue.m in Sources */,
 				68C0695417710517007C79D6 /* Reachability.m in Sources */,
 				68C0695817710565007C79D6 /* MMReachabilityViewController.m in Sources */,
-				68C0696517710E60007C79D6 /* MHRequest.m in Sources */,
+				68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */,
 				68C069691772252C007C79D6 /* MHRequestOptions.m in Sources */,
 				68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */,
 				68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */,
@@ -1577,7 +1577,7 @@
 				68EB33CA17791306003958A0 /* ASINetworkQueue.m in Sources */,
 				68EB33C217791306003958A0 /* Reachability.m in Sources */,
 				68C0695917710565007C79D6 /* MMReachabilityViewController.m in Sources */,
-				68C0696617710E60007C79D6 /* MHRequest.m in Sources */,
+				68C0696617710E60007C79D6 /* MHRequestOperation.m in Sources */,
 				68C0696A1772252C007C79D6 /* MHRequestOptions.m in Sources */,
 				68EB33CE17792D8F003958A0 /* MHErrorHandler.m in Sources */,
 				68478D3F177A70200014501D /* MHInteractionType.m in Sources */,

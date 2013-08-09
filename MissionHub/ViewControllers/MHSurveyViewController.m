@@ -118,22 +118,7 @@
 		
 	}
 	
-	if (self.survey.remoteID > 0) {
-		
-		NSError *error;
-		NSString *surveyUrlString = [[MHAPI sharedInstance] stringForSurveyWith:self.survey.remoteID error:&error];
-		
-		if (error) {
-			[MHErrorHandler presentError:error];
-			return;
-		}
-		
-		NSLog(@"%@", surveyUrlString);
-		NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:surveyUrlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
-		
-		[self.surveyWebView loadRequest:surveyRequest];
-		
-	}
+	[self displaySurvey:self.survey];
 	
 }
 
@@ -159,15 +144,15 @@
 	if (self.survey.remoteID > 0 && self.isVisible) {
 		
 		NSError *error;
-		NSString *surveyUrlString = [[MHAPI sharedInstance] stringForSurveyWith:self.survey.remoteID error:&error];
+		NSURL *surveyUrl = [[MHAPI sharedInstance] urlForSurveyWith:self.survey.remoteID];
 		
 		if (error) {
 			[MHErrorHandler presentError:error];
 			return self;
 		}
 		
-		NSLog(@"%@", surveyUrlString);
-		NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:surveyUrlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+		NSLog(@"%@", [surveyUrl absoluteString]);
+		NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:surveyUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
 		
 		[self.surveyWebView loadRequest:surveyRequest];
 		

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPClient.h"
+#import "MHRequestOperation.h"
 #import "MHRequestOptions.h"
 #import "NSDictionary+UrlEncodedString.h"
 #import "MHErrorHandler.h"
@@ -14,29 +16,11 @@
 
 extern NSString *const MHAPIErrorDomain;
 
-@class MHRequest, MHPerson, MHOrganization;
+@class MHRequestOperation, MHPerson, MHOrganization;
 
-@interface MHAPI : NSObject {
-	
-	NSOperationQueue	*_queue;
-	NSString			*_baseUrl;
-	NSString			*_apiUrl;
-	NSString			*_surveyUrl;
-	NSString			*_accessToken;
-	
-	MHPerson			*_currentUser;
-	MHOrganization		*_currentOrganization;
-	NSMutableArray *_initialPeopleList;
-	BOOL _currentOrganizationIsFinished;
-	BOOL _initialPeopleListIsFinished;
-	NSError *_errorForInitialRequests;
-	
-}
+@interface MHAPI : AFHTTPClient <MHRequestDelegate>
 
-@property (nonatomic, strong) NSOperationQueue	*queue;
-@property (nonatomic, strong) NSString			*baseUrl;
-@property (nonatomic, strong) NSString			*apiUrl;
-@property (nonatomic, strong) NSString			*surveyUrl;
+@property (nonatomic, strong) NSURL				*surveyURL;
 @property (nonatomic, strong) NSString			*accessToken;
 
 @property (nonatomic, strong) MHPerson			*currentUser;
@@ -48,11 +32,12 @@ extern NSString *const MHAPIErrorDomain;
 @property (nonatomic, strong) NSError			*errorForInitialRequests;
 
 
-+(MHAPI *)sharedInstance;
--(id)initWithConfigFile:(NSString *)configFilePath;
++ (MHAPI *)sharedInstance;
+- (id)initWithBaseURL:(NSURL *)url andSurveyURL:(NSURL *)surveyURL;
 
 //misc
--(MHPerson *)anonymous;
+- (MHPerson *)anonymous;
+- (NSMutableURLRequest *)requestWithOptions:(MHRequestOptions *)options;
 
 //general request call
 -(void)getResultWithOptions:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
@@ -68,7 +53,8 @@ extern NSString *const MHAPIErrorDomain;
 
 -(void)createInteraction:(MHInteraction *)interaction withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock;
 
--(NSString *)stringForSurveyWith:(NSNumber *)remoteID error:(NSError **)error;
+-(NSURL *)urlForSurveyWith:(NSNumber *)remoteID;
+
 -(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error;
 -(NSString *)stringForShowRequestWith:(MHRequestOptions *)options error:(NSError **)error;
 -(NSString *)stringForIndexRequestWith:(MHRequestOptions *)options error:(NSError **)error;
@@ -77,9 +63,9 @@ extern NSString *const MHAPIErrorDomain;
 -(NSString *)stringForDeleteRequestWith:(MHRequestOptions *)options error:(NSError **)error;
 -(NSString *)stringForUpdateOrDeleteRequestWith:(MHRequestOptions *)options error:(NSError **)error;
 
--(void)requestDidFinish:(MHRequest *)request;
--(void)requestDidFail:(MHRequest *)request;
+-(void)requestDidFinish:(MHRequestOperation *)operation;
+-(void)requestDidFail:(MHRequestOperation *)operation;
 
--(void)handleError:(NSError *)error forRequest:(MHRequest *)request;
+-(void)handleError:(NSError *)error forRequest:(MHRequestOperation *)operation;
 
 @end
