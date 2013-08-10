@@ -143,16 +143,9 @@
 	
 	if (self.survey.remoteID > 0 && self.isVisible) {
 		
-		NSError *error;
-		NSURL *surveyUrl = [[MHAPI sharedInstance] urlForSurveyWith:self.survey.remoteID];
+		NSURLRequest *surveyRequest = [[MHAPI sharedInstance] requestForSurveyWith:self.survey.remoteID];
 		
-		if (error) {
-			[MHErrorHandler presentError:error];
-			return self;
-		}
-		
-		NSLog(@"%@", [surveyUrl absoluteString]);
-		NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:surveyUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+		NSLog(@"%@", [surveyRequest.URL absoluteString]);
 		
 		[self.surveyWebView loadRequest:surveyRequest];
 		

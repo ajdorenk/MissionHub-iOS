@@ -91,6 +91,7 @@
 	
 	self.postData		= nil;
 	self.jsonString		= nil;
+	self.jsonObject		= nil;
 	
 	return self;
 }
@@ -122,14 +123,45 @@
 	return returnObject;
 }
 
+- (NSString *)path {
+	
+	NSString *pathString = nil;
+	
+	switch (self.type) {
+			
+		case MHRequestOptionsTypeMe:
+			
+			pathString = [NSString stringWithFormat:@"%@/me", [self stringFromEndpoint:MHRequestOptionsEndpointPeople]];
+			break;
+			
+		case MHRequestOptionsTypeIndex:
+		case MHRequestOptionsTypeCreate:
+			
+			pathString = [self stringForEndpoint];
+			break;
+			
+		case MHRequestOptionsTypeShow:
+		case MHRequestOptionsTypeUpdate:
+		case MHRequestOptionsTypeDelete:
+			
+			pathString = [NSString stringWithFormat:@"%@/%d", [self stringForEndpoint], [self remoteID]];
+			break;
+			
+		default:
+			break;
+	}
+	
+	return pathString;
+	
+}
+
 -(NSString *)method {
 	
 	NSString *methodString = nil;
 	
 	switch (self.type) {
+		case MHRequestOptionsTypeMe:
 		case MHRequestOptionsTypeShow:
-			methodString = @"GET";
-			break;
 		case MHRequestOptionsTypeIndex:
 			methodString = @"GET";
 			break;
@@ -148,6 +180,88 @@
 	}
 	
 	return methodString;
+	
+}
+
+- (NSMutableDictionary *)parameters {
+	
+	__block NSMutableDictionary *parametersDictionary = [NSMutableDictionary dictionary];
+	
+	switch (self.type) {
+			
+		case MHRequestOptionsTypeMe:
+		case MHRequestOptionsTypeShow:
+		case MHRequestOptionsTypeDelete:
+			
+			if ([self hasIncludes]) {
+				
+				parametersDictionary[@"include"] = [self stringForIncludes];
+				
+			}
+			
+			break;
+			
+		case MHRequestOptionsTypeIndex:
+			
+			if ([self hasFilters]) {
+				
+				[self.filters enumerateKeysAndObjectsUsingBlock:^(NSString *filter, NSString *value, BOOL *stop) {
+					
+					NSString *filterKey				= [NSString stringWithFormat:@"filters[%@]", filter];
+					parametersDictionary[filterKey] = value;
+					
+				}];
+				
+			}
+			
+			if ([self hasIncludes]) {
+				
+				parametersDictionary[@"include"] = [self stringForIncludes];
+				
+			}
+			
+			if ([self hasLimit]) {
+				
+				parametersDictionary[@"limit"] = [self stringForLimit];
+				
+			}
+			
+			if ([self hasOffset]) {
+				
+				parametersDictionary[@"offset"] = [self stringForOffset];
+				
+			}
+			
+			if ([self hasOrderField] && [self hasOrderDirection]) {
+				
+				parametersDictionary[@"order"] = [self stringForOrders];
+				
+			}
+			
+			break;
+			
+		case MHRequestOptionsTypeCreate:
+		case MHRequestOptionsTypeUpdate:
+			
+			if ([self hasIncludes]) {
+				
+				parametersDictionary[@"include"] = [self stringForIncludes];
+				
+			}
+			
+			if (self.jsonObject) {
+				
+				parametersDictionary[ [self stringInSingluarFormatForEndpoint] ] = self.jsonObject;
+				
+			}
+			
+			break;
+			
+		default:
+			break;
+	}
+	
+	return parametersDictionary;
 	
 }
 
@@ -179,6 +293,10 @@
 	return (self.orderDirection != MHRequestOptionsOrderDirectionNone);
 }
 
+- (BOOL)hadPostParams {
+	return ([self.postParams count] > 0);
+}
+
 -(id)configureForInitialPeoplePageRequest {
 	
 	[[[self reset] addIncludesForPeoplePageRequest] setLimitAndOffsetForFirstPage];
@@ -193,10 +311,11 @@
 	return self;
 }
 
--(id)configureForCreateInteractionRequest {
+-(id)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction {
 	
 	[[self reset] setEndpoint:MHRequestOptionsEndpointInteractions];
-	self.type = MHRequestOptionsTypeCreate;
+	self.type		= MHRequestOptionsTypeCreate;
+	self.jsonObject	= [interaction jsonObject];
 	
 	return self;
 }
@@ -221,7 +340,7 @@
 -(id)configureForMeRequest {
 	
 	[[self reset] addIncludesForMeRequest];
-	self.type = MHRequestOptionsTypeShow;
+	self.type = MHRequestOptionsTypeMe;
 	
 	return self;
 }

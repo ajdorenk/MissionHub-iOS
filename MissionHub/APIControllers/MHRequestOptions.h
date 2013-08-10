@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MHInteraction+Helper.h"
 
 typedef enum {
+	MHRequestOptionsTypeMe,
 	MHRequestOptionsTypeShow,
 	MHRequestOptionsTypeIndex,
 	MHRequestOptionsTypeCreate,
@@ -121,6 +123,7 @@ typedef enum {
 	
 	NSMutableDictionary				*_postParams;
 	NSData							*_postData;
+	id								_jsonObject;
 	NSString						*_jsonString;
 	
 	void (^_successBlock)(NSArray *results, MHRequestOptions *options);
@@ -141,74 +144,78 @@ typedef enum {
 
 @property (nonatomic, strong) NSMutableDictionary				*postParams;
 @property (nonatomic, strong) NSData							*postData;
+@property (nonatomic, strong) id								jsonObject;
 @property (nonatomic, strong) NSString							*jsonString;
 
 @property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
 @property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);
 
--(NSString *)method;
+- (NSString *)method;
+- (NSString *)path;
+- (NSMutableDictionary *)parameters;
 
--(BOOL)hasRemoteID;
--(BOOL)hasFilters;
--(BOOL)hasIncludes;
--(BOOL)hasLimit;
--(BOOL)hasOffset;
--(BOOL)hasOrderField;
--(BOOL)hasOrderDirection;
+- (BOOL)hasRemoteID;
+- (BOOL)hasFilters;
+- (BOOL)hasIncludes;
+- (BOOL)hasLimit;
+- (BOOL)hasOffset;
+- (BOOL)hasOrderField;
+- (BOOL)hasOrderDirection;
+- (BOOL)hadPostParams;
 
--(id)configureForInitialPeoplePageRequest;
--(id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
-//-(id)configureForInitialContactAssignmentsPageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
--(id)configureForMeRequest;
--(id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID;
--(id)configureForNextPageRequest;
--(id)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
--(id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID;
--(id)configureForCreateInteractionRequest;
+- (id)configureForInitialPeoplePageRequest;
+- (id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
+//- (id)configureForInitialContactAssignmentsPageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
+- (id)configureForMeRequest;
+- (id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID;
+- (id)configureForNextPageRequest;
+- (id)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
+- (id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID;
+- (id)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction;
 
--(id)addInclude:(MHRequestOptionsIncludes)include;
--(id)addIncludesForProfileRequest;
--(id)addIncludesForOrganizationRequest;
--(id)addIncludesForMeRequest;
--(id)addIncludesForPeoplePageRequest;
--(id)addIncludesForContactAssignmentsPageRequest;
--(id)clearIncludes;
+- (id)addInclude:(MHRequestOptionsIncludes)include;
+- (id)addIncludesForProfileRequest;
+- (id)addIncludesForOrganizationRequest;
+- (id)addIncludesForMeRequest;
+- (id)addIncludesForPeoplePageRequest;
+- (id)addIncludesForContactAssignmentsPageRequest;
+- (id)clearIncludes;
 
--(id)setOrderField:(MHRequestOptionsOrderFields)orderField orderDirection:(MHRequestOptionsOrderDirections)orderDirection;
--(id)clearOrders;
+- (id)setOrderField:(MHRequestOptionsOrderFields)orderField orderDirection:(MHRequestOptionsOrderDirections)orderDirection;
+- (id)clearOrders;
 
--(id)setLimitAndOffsetForFirstPage;
--(id)setLimitAndOffsetForNextPage;
--(id)setLimitForScreenDimensions;
--(id)resetPaging;
+- (id)setLimitAndOffsetForFirstPage;
+- (id)setLimitAndOffsetForNextPage;
+- (id)setLimitForScreenDimensions;
+- (id)resetPaging;
 
--(id)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value;
--(id)updatePostParam:(NSString *)paramName withValue:(id <NSObject>)value;
--(id)removePostParam:(NSString *)paramName;
--(id)clearPostParams;
+- (id)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value;
+- (id)updatePostParam:(NSString *)paramName withValue:(id <NSObject>)value;
+- (id)removePostParam:(NSString *)paramName;
+- (id)clearPostParams;
 
--(id)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
--(id)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
--(id)removeFilter:(MHRequestOptionsFilters)filter;
--(id)clearFilters;
+- (id)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
+- (id)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
+- (id)removeFilter:(MHRequestOptionsFilters)filter;
+- (id)clearFilters;
 
--(id)reset;
+- (id)reset;
 
--(NSString *)stringForEndpoint;
--(NSString *)stringInSingluarFormatForEndpoint;
--(NSString *)stringForFilters;
--(NSString *)stringForIncludes;
--(NSString *)stringForLimit;
--(NSString *)stringForOffset;
--(NSString *)stringForOrders;
--(NSString *)classNameForEndpoint;
+- (NSString *)stringForEndpoint;
+- (NSString *)stringInSingluarFormatForEndpoint;
+- (NSString *)stringForFilters;
+- (NSString *)stringForIncludes;
+- (NSString *)stringForLimit;
+- (NSString *)stringForOffset;
+- (NSString *)stringForOrders;
+- (NSString *)classNameForEndpoint;
 
--(NSString *)classNameFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
--(NSString *)stringFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
--(NSString *)stringFromFilter:(MHRequestOptionsFilters)filter;
--(NSString *)stringInSingluarFormatFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
--(NSString *)stringFromInclude:(MHRequestOptionsIncludes)include;
--(NSString *)stringFromOrderField:(MHRequestOptionsOrderFields)orderField;
--(NSString *)stringFromOrderDirection:(MHRequestOptionsOrderDirections)orderDirection;
+- (NSString *)classNameFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
+- (NSString *)stringFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
+- (NSString *)stringFromFilter:(MHRequestOptionsFilters)filter;
+- (NSString *)stringInSingluarFormatFromEndpoint:(MHRequestOptionsEndpoints)endpoint;
+- (NSString *)stringFromInclude:(MHRequestOptionsIncludes)include;
+- (NSString *)stringFromOrderField:(MHRequestOptionsOrderFields)orderField;
+- (NSString *)stringFromOrderDirection:(MHRequestOptionsOrderDirections)orderDirection;
 
 @end

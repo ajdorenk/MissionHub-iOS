@@ -231,11 +231,11 @@
 
     
     UIImage* interactionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
-    UIButton *addInteraction = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
-    [addInteraction setImage:interactionImage forState:UIControlStateNormal];
-    [addInteraction addTarget:self action:@selector(addInteractionActivity:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addInteractionButton = [[UIBarButtonItem alloc] initWithCustomView:addInteraction];
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addInteractionButton, addPersonButton, nil]];
+    UIButton *addInteractionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
+    [addInteractionButton setImage:interactionImage forState:UIControlStateNormal];
+    [addInteractionButton addTarget:self action:@selector(addInteraction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addInteractionBarButton = [[UIBarButtonItem alloc] initWithCustomView:addInteractionButton];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addInteractionBarButton, addPersonButton, nil]];
     
     
 
@@ -507,8 +507,8 @@
                                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }*/
 
--(IBAction)addInteractionActivity:(id)sender {
-    NSLog(@"Label Action");
+- (void)addInteraction {
+	
 	MHInteraction *newInteraction = [MHInteraction newObjectFromFields:nil];
 	[newInteraction addInitiators:[NSSet setWithArray:self.selectedPeople]];
 	

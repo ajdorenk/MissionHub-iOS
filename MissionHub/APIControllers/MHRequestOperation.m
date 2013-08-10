@@ -19,22 +19,24 @@
 @synthesize successBlock		= _successBlock;
 @synthesize failBlock			= _failBlock;
 
-+ (instancetype)operationWithRequest:(NSMutableURLRequest *)request options:(MHRequestOptions *)options andDelegate:(id<MHRequestDelegate>)delegate {
++ (instancetype)operationWithRequest:(NSMutableURLRequest *)request options:(MHRequestOptions *)options andDelegate:(id<MHRequestOperationDelegate>)delegate {
 	
 	MHRequestOperation *selfRequestOperation = [(MHRequestOperation *)[self alloc] initWithRequest:request];
 	
-	selfRequestOperation.options	= options;
-	selfRequestOperation.delegate	= delegate;
+	selfRequestOperation.options		= options;
+	selfRequestOperation.delegate		= delegate;
+	selfRequestOperation.successBlock	= options.successBlock;
+	selfRequestOperation.failBlock		= options.failBlock;
 	
 	[selfRequestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
 		
 		MHRequestOperation *requestOperation	= (MHRequestOperation *)operation;
 		
-		if ([requestOperation.delegate respondsToSelector:@selector(requestDidFinish:)]) {
+		if ([requestOperation.delegate respondsToSelector:@selector(operationDidFinish:)]) {
 			
 			requestOperation.jsonObject			= [requestOperation responseJSON];
 			
-			[delegate requestDidFinish:requestOperation];
+			[delegate operationDidFinish:requestOperation];
 			
 		}
 		
@@ -42,11 +44,11 @@
 		
 		MHRequestOperation *requestOperation	= (MHRequestOperation *)operation;
 		
-		if ([requestOperation.delegate respondsToSelector:@selector(requestDidFinish:)]) {
+		if ([requestOperation.delegate respondsToSelector:@selector(operationDidFail:)]) {
 			
 			requestOperation.jsonObject			= [requestOperation responseJSON];
 			
-			[delegate requestDidFinish:requestOperation];
+			[delegate operationDidFail:requestOperation];
 			
 		}
 		

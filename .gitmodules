@@ -1,6 +1,3 @@
-[submodule "Libraries/asi-http-request"]
-	path = Libraries/asi-http-request
-	url = https://github.com/michaelharro/asi-http-request.git
 [submodule "Libraries/ECSlidingViewController"]
 	path = Libraries/ECSlidingViewController
 	url = https://github.com/edgecase/ECSlidingViewController.git

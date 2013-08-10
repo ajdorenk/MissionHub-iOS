@@ -15,6 +15,7 @@ NSString *const MHAPIErrorDomain = @"com.missionhub.errorDomain.API";
 NSString *const MHAPIRequestNameMe = @"com.missionhub.API.requestName.me";
 NSString *const MHAPIRequestNameCurrentOrganization = @"com.missionhub.API.requestName.currentOrganization";
 NSString *const MHAPIRequestNameInitialPeopleList = @"com.missionhub.API.requestName.initialPeopleList";
+NSString *const MHAPIRequestNameContactAssignmentFilter = @"com.missionhub.API.requestName.contactAssignmentFilter";
 
 typedef enum {
 	MHAPIErrorCouldNotRetrieveCurrentUser,
@@ -24,13 +25,12 @@ typedef enum {
 	MHAPIErrorMalformedResponse,
 	MHAPIErrorServerError,
 	MHAPIErrorAccessTokenError,
-	MHAPIErrorAccessDenied
+	MHAPIErrorAccessDenied,
+	MHAPIErrorUserNotFound,
+	MHAPIErrorUnknownError
 } MHAPIErrors;
 
-@interface MHAPI (PrivateMethods)
-
--(NSString *)stringForBaseUrlWith:(MHRequestOptions *)options error:(NSError **)error;
--(void)addAccessTokenToParams:(NSMutableDictionary *)params withError:(NSError **)error;
+@interface MHAPI ()
 
 @end
 
@@ -54,7 +54,7 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
+		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
 		
 		NSString *baseUrlString			= ( [configDictionary valueForKey:@"api_url"] ? [configDictionary valueForKey:@"api_url"] : @"" );
@@ -80,6 +80,7 @@ typedef enum {
 		
 		self.surveyURL					= surveyUrl;
 		self.accessToken				= @"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD";
+		self.parameterEncoding			= AFJSONParameterEncoding;
 		
     }
     return self;
@@ -96,9 +97,12 @@ typedef enum {
 
 - (NSMutableURLRequest *)requestWithOptions:(MHRequestOptions *)options {
 	
+	NSMutableDictionary *parameters = [options parameters];
+	parameters[@"facebook_token"]	= self.accessToken;
+	
 	return [self requestWithMethod:[options method]
 							  path:[options path]
-						parameters:[options parameters]];
+						parameters:parameters];
 	
 }
 
@@ -110,111 +114,52 @@ typedef enum {
 	
 	NSMutableURLRequest *request		= [self requestWithOptions:requestOptions];
     MHRequestOperation *operation		= [MHRequestOperation operationWithRequest:request options:requestOptions andDelegate:self];
-    [self enqueueHTTPRequestOperation:operation];
-	
+	operation.requestName				= requestOptions.requestName;
+    
+	[self enqueueHTTPRequestOperation:operation];
 	
 }
 
 -(void)getMeWithSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForMeRequest];
+	MHRequestOptions *requestOptions	= [[[MHRequestOptions alloc] init] configureForMeRequest];
+	requestOptions.requestName			= MHAPIRequestNameMe;
 	
-	NSError *error;
-	NSString *urlString = [self stringForMeRequestWith:requestOptions error:&error];
-	NSLog(@"%@", urlString);
-	if (error) {
-		[MHErrorHandler presentError:error];
-		return;
-	}
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	
-	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
-	request.requestName			= MHAPIRequestNameMe;
-	request.delegate			= self;
-	request.options				= requestOptions;
-	request.successBlock		= successBlock;
-	request.failBlock			= failBlock;
-	
-	[self.queue addOperation:request];
 }
 
 -(void)getOrganizationWithRemoteID:(NSNumber *)remoteID successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions	= [[[MHRequestOptions alloc] init] configureForOrganizationRequestWithRemoteID:remoteID];
 	
-	NSError *error;
-	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
-	NSLog(@"%@", urlString);
-	if (error) {
-		[MHErrorHandler presentError:error];
-		return;
-	}
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	
-	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
-	request.delegate			= self;
-	request.options				= requestOptions;
-	request.successBlock		= successBlock;
-	request.failBlock			= failBlock;
-	
-	[self.queue addOperation:request];
 }
 
 -(void)getCurrentOrganizationWith:(MHUser *)user successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions	= [[[MHRequestOptions alloc] init] configureForOrganizationRequestWithRemoteID:user.primary_organization_id];
-	self.currentOrganizationIsFinished = NO;
+	requestOptions.requestName			= MHAPIRequestNameCurrentOrganization;
+	self.currentOrganizationIsFinished	= NO;
 	
-	NSError *error;
-	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
-	NSLog(@"%@", urlString);
-	if (error) {
-		[MHErrorHandler presentError:error];
-		return;
-	}
-	
-	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
-	request.requestName			= MHAPIRequestNameCurrentOrganization;
-	request.delegate			= self;
-	request.options				= requestOptions;
-	request.successBlock		= successBlock;
-	request.failBlock			= failBlock;
-	
-	[self.queue addOperation:request];
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	
 }
 
 -(void)getPeopleListWith:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions;
-	NSString *requestName;
 	
 	if (options) {
 		requestOptions = options;
 	} else {
-		requestOptions = [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
-		requestName = MHAPIRequestNameInitialPeopleList;
+		requestOptions				= [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest];
+		requestOptions.requestName	= MHAPIRequestNameInitialPeopleList;
 		self.initialPeopleListIsFinished = NO;
 	}
 	
-	NSError *error;
-	NSString *urlString = [self stringForIndexRequestWith:requestOptions error:&error];
-	NSLog(@"%@", urlString);
-	if (error) {
-		[MHErrorHandler presentError:error];
-		return;
-	}
-	
-	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
-	
-	if (requestName) {
-		request.requestName			= requestName;
-	}
-	
-	request.delegate			= self;
-	request.options				= requestOptions;
-	request.successBlock		= successBlock;
-	request.failBlock			= failBlock;
-	
-	[self.queue addOperation:request];
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	
 }
 
@@ -222,21 +167,7 @@ typedef enum {
 	
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForProfileRequestWithRemoteID:remoteID];
 	
-	NSError *error;
-	NSString *urlString = [self stringForShowRequestWith:requestOptions error:&error];
-	NSLog(@"%@", urlString);
-	if (error) {
-		[MHErrorHandler presentError:error];
-		return;
-	}
-	
-	MHRequestOperation *request			= [[MHRequestOperation alloc] initWithURL:[NSURL URLWithString:urlString]];
-	request.delegate			= self;
-	request.options				= requestOptions;
-	request.successBlock		= successBlock;
-	request.failBlock			= failBlock;
-	
-	[self.queue addOperation:request];
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	
 }
 
@@ -250,300 +181,57 @@ typedef enum {
 
 -(void)createInteraction:(MHInteraction *)interaction withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	__block MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreateInteractionRequest];
-	NSError *error;
+	__block MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreateInteractionRequestWithInteraction:interaction];
 	
-	NSDictionary *postDictionary	= [interaction jsonObject];
-	//[requestOptions addPostParam:[requestOptions stringInSingluarFormatForEndpoint] withValue:postDictionary];
-	//requestOptions.postData		= [NSJSONSerialization dataWithJSONObject:postDictionary options:NSJSONWritingPrettyPrinted error:&error];
-	requestOptions.jsonString		= [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:postDictionary options:0 error:&error] encoding:NSUTF8StringEncoding];
-	/*
-	AFHTTPClient *apiClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:self.apiUrl]];
-	[apiClient setDefaultHeader:@"Accept" value:@"application/json"];
-	apiClient.parameterEncoding = AFJSONParameterEncoding;
-	[apiClient postPath:[NSString stringWithFormat:@"/apis/v3/%@?facebook_token=%@", [requestOptions stringForEndpoint], self.accessToken]
-			 parameters:postDictionary
-				success:^(AFHTTPRequestOperation *operation, id responseObject) {
-					NSLog(@"%@", responseObject);
-				}
-				failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-					[MHErrorHandler presentError:error];
-				}];
-	*/
-	NSLog(@"%@", requestOptions.jsonString);
-	
-	//handles error here (instead of handleError:forRequest:) because the request has not yet been created
-	if (error) {
-		
-		if (failBlock) {
-			failBlock(error, requestOptions);
-		} else {
-			[MHErrorHandler presentError:error];
-		}
-		
-	} else {
-		
-		[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
-		
-	}
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	
 }
-/*
-{
-	"interaction"=> {
-		"comment"=>"This is an interaction creation test. 3.",
-		"created_at"=>"2013-08-07T17:55:02-04:00",
-		"created_by_id"=>"2033631",
-		"initiator_ids"=>["2033631"],
-		"interaction_type_id"=>"1",
-		"privacy_setting"=>"everyone",
-		"receiver_id"=>"2594597",
-		"timestamp"=>"2013-08-07T17:55:02-04:00",
-		"updated_at"=>"2013-08-07T17:55:02-04:00",
-		"updated_by_id"=>"2033631"
-	},
-	"facebook_token"=>"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD"
-}
- */
 
--(NSURL *)urlForSurveyWith:(NSNumber *)remoteID {
+-(NSURLRequest *)requestForSurveyWith:(NSNumber *)remoteID {
 	
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/%@", remoteID] relativeToURL:self.surveyURL];
+	NSURL *url				= [NSURL URLWithString:[remoteID stringValue] relativeToURL:self.surveyURL];
+	NSURLRequest *request	= [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
 	
-	return url;
+	return request;
 }
 
--(NSString *)stringForMeRequestWith:(MHRequestOptions *)options error:(NSError **)error {
-	
-	NSString *urlString	= [self stringForBaseUrlWith:options error:error];
-	NSMutableDictionary	*params	= [[NSMutableDictionary alloc] init];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingString:@"/me?"];
-	
-	if ([options hasIncludes]) {
-		
-		[params setValue:[options stringForIncludes] forKey:@"include"];
-		
-	}
-	
-	[self addAccessTokenToParams:params withError:error];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
-	
-	return urlString;
-}
-
--(NSString *)stringForShowRequestWith:(MHRequestOptions *)options error:(NSError **)error {
-	
-	NSString *urlString	= [self stringForBaseUrlWith:options error:error];
-	NSMutableDictionary	*params	= [[NSMutableDictionary alloc] init];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	if ([options hasRemoteID]) {
-		
-		urlString = [urlString stringByAppendingFormat:@"/%d?", options.remoteID];
-		
-	}
-	
-	if ([options hasIncludes]) {
-		
-		[params setValue:[options stringForIncludes] forKey:@"include"];
-		
-	}
-	
-	[self addAccessTokenToParams:params withError:error];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
-	
-	return urlString;
-}
-
--(NSString *)stringForIndexRequestWith:(MHRequestOptions *)options error:(NSError **)error {
-	
-	NSString			*urlString	= [self stringForBaseUrlWith:options error:error];
-	NSMutableDictionary	*params		= [[NSMutableDictionary alloc] init];
-
-	if (*error) {
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingString:@"?"];
-	
-	if ([options hasFilters]) {
-		
-		[urlString stringByAppendingString:[options stringForFilters]];
-		
-	}
-	
-	if ([options hasIncludes]) {
-			
-		[params setValue:[options stringForIncludes] forKey:@"include"];
-			
-	}
-	
-	if ([options hasLimit]) {
-		
-		[params setValue:[options stringForLimit] forKey:@"limit"];
-		
-	}
-	
-	if ([options hasOffset]) {
-		
-		[params setValue:[options stringForOffset] forKey:@"offset"];
-		
-	}
-	
-	if ([options hasOrderField] && [options hasOrderDirection]) {
-		
-		[params setValue:[options stringForOrders] forKey:@"order"];
-		
-	}
-	
-	[self addAccessTokenToParams:params withError:error];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
-	
-	if ([options hasFilters]) {
-		
-		urlString = [urlString stringByAppendingString:[options stringForFilters]];
-		
-	}
-	
-	return urlString;
-}
-
--(NSString *)stringForCreateRequestWith:(MHRequestOptions *)options error:(NSError **)error {
-	
-	NSString *urlString	= [self stringForBaseUrlWith:options error:error];
-	NSMutableDictionary	*params	= [[NSMutableDictionary alloc] init];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingString:@"?"];
-	
-	[self addAccessTokenToParams:params withError:error];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
-	
-	return urlString;
-}
-
--(NSString *)stringForUpdateRequestWith:(MHRequestOptions *)options error:(NSError **)error {
-	
-	return [self stringForUpdateOrDeleteRequestWith:options error:error];
-}
-
--(NSString *)stringForDeleteRequestWith:(MHRequestOptions *)options error:(NSError **)error {
-	
-	return [self stringForUpdateOrDeleteRequestWith:options error:error];
-}
-
--(NSString *)stringForUpdateOrDeleteRequestWith:(MHRequestOptions *)options error:(NSError **)error {
-	
-	NSString *urlString	= [self stringForBaseUrlWith:options error:error];
-	NSMutableDictionary	*params	= [[NSMutableDictionary alloc] init];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	if ([options hasRemoteID]) {
-		
-		urlString = [urlString stringByAppendingFormat:@"/%d?", options.remoteID];
-		
-	}
-	
-	[self addAccessTokenToParams:params withError:error];
-	
-	if (*error) {
-		return nil;
-	}
-	
-	urlString = [urlString stringByAppendingString:[params urlEncodedString]];
-	
-	return urlString;
-}
-
--(void)requestDidFinish:(MHRequestOperation *)request {
+- (void)operationDidFinish:(MHRequestOperation *)operation {
 	
 	NSError *error;
-	__block NSMutableArray *modelArray = [NSMutableArray array];
-	__block NSString *nameOfClassForEndpoint = [request.options classNameForEndpoint];
-	NSDictionary *result = nil;
+	__block NSMutableArray *modelArray			= [NSMutableArray array];
+	__block NSString *nameOfClassForEndpoint	= [operation.options classNameForEndpoint];
+	NSDictionary *result						= operation.jsonObject;
 	
 	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
 	//@try {
 
-		if (request.responseStatusCode > 201) {
+		if (![operation hasAcceptableStatusCode]) {
 			
-			[self requestDidFail:request];
+			[self operationDidFail:operation];
 			return;
 			
 		}
-		
-		//parse response and put into result dictionary
-		result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
-		
-		//if there was a parsing error stop updating model and notify calling method of the error through the fail block
-		if (error) {
-			
-			if (request.failBlock) {
-				request.failBlock(error, request.options);
-			} else {
-				//if no fail block show the error anyway
-				[MHErrorHandler presentError:error];
-			}
-			
-			return;
-			
-		}
-		
 		
 		//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
-		if ([[[result allKeys] objectAtIndex:0] isEqualToString:[request.options stringInSingluarFormatForEndpoint]]) {
+		if ([[[result allKeys] objectAtIndex:0] isEqualToString:[operation.options stringInSingluarFormatForEndpoint]]) {
 
-			NSDictionary *responseObject = [result objectForKey:[request.options stringInSingluarFormatForEndpoint]];
+			NSDictionary *responseObject = [result objectForKey:[operation.options stringInSingluarFormatForEndpoint]];
 			
 			id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromFields:responseObject];
 			
 			[modelArray addObject:modelObject];
 			
-		} else if ([[[result allKeys] objectAtIndex:0] isEqualToString:[request.options stringForEndpoint]]) {
+		} else if ([[[result allKeys] objectAtIndex:0] isEqualToString:[operation.options stringForEndpoint]]) {
 			
-			__block NSArray *arrayOfResponseObjects = [result objectForKey:[request.options stringForEndpoint]];
+			__block NSArray *arrayOfResponseObjects = [result objectForKey:[operation.options stringForEndpoint]];
 			
 			//if changed you need to also change in the request options MHRequestOptions configureForInitialContactAssignmentsPageRequestWithAssignedToID:
-			if ([request.options.requestName isEqualToString:@"contactAssignmentFilter"]) {
+			if ([operation.requestName isEqualToString:MHAPIRequestNameContactAssignmentFilter]) {
 				
 				[arrayOfResponseObjects enumerateObjectsUsingBlock:^(id responseObject, NSUInteger index, BOOL *stop) {
 					
-					id modelObject = [MHModel newObjectForClass:[request.options classNameFromEndpoint:MHRequestOptionsEndpointPeople]
-													 fromFields:[responseObject objectForKey:[request.options stringFromInclude:MHRequestOptionsIncludeConactAssignmentsPerson]]];
+					id modelObject = [MHModel newObjectForClass:[operation.options classNameFromEndpoint:MHRequestOptionsEndpointPeople]
+													 fromFields:[responseObject objectForKey:[operation.options stringFromInclude:MHRequestOptionsIncludeConactAssignmentsPerson]]];
 					
 					[modelArray addObject:modelObject];
 					
@@ -567,8 +255,8 @@ typedef enum {
 										code:MHAPIErrorMalformedResponse
 									userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has incorrect name for root element. It should match the name of the endpoint. Please contact support@missionhub.com", @"Response JSON object has incorrect name for root element. It should match the name of the endpoint. Please contact support@missionhub.com")}];
 			
-			if (request.failBlock) {
-				request.failBlock(error, request.options);
+			if (operation.failBlock) {
+				operation.failBlock(error, operation.options);
 			} else {
 				//if no fail block show the error anyway
 				[MHErrorHandler presentError:error];
@@ -579,15 +267,15 @@ typedef enum {
 		}
 	
 		//deal with result
-		if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
+		if ([operation.requestName isEqualToString:MHAPIRequestNameMe]) {
 			
-			self.currentUser = [modelArray objectAtIndex:0];
-			self.errorForInitialRequests = nil;
+			self.currentUser				= [modelArray objectAtIndex:0];
+			self.errorForInitialRequests	= nil;
 			
-			[self getCurrentOrganizationWith:self.currentUser.user successBlock:request.successBlock failBlock:request.failBlock];
-			[self getPeopleListWith:nil successBlock:request.successBlock failBlock:request.failBlock];
+			[self getCurrentOrganizationWith:self.currentUser.user successBlock:operation.successBlock failBlock:operation.failBlock];
+			[self getPeopleListWith:nil successBlock:operation.successBlock failBlock:operation.failBlock];
 			
-		} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
+		} else if ([operation.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
 			
 			self.currentUser.currentOrganization	= [modelArray objectAtIndex:0];
 			self.currentOrganization				= self.currentUser.currentOrganization;
@@ -600,8 +288,8 @@ typedef enum {
 					NSArray *returnArray = @[self.currentUser, self.errorForInitialRequests];
 					
 					//call success block if it exists so that the calling method can access the result
-					if (request.successBlock) {
-						request.successBlock(returnArray, request.options);
+					if (operation.successBlock) {
+						operation.successBlock(returnArray, operation.options);
 					}
 					
 				} else {
@@ -609,15 +297,15 @@ typedef enum {
 					NSArray *returnArray = @[self.currentUser, self.initialPeopleList];
 					
 					//call success block if it exists so that the calling method can access the result
-					if (request.successBlock) {
-						request.successBlock(returnArray, request.options);
+					if (operation.successBlock) {
+						operation.successBlock(returnArray, operation.options);
 					}
 					
 				}
 				
 			}
 			
-		} else if ([request.requestName isEqualToString:MHAPIRequestNameInitialPeopleList]) {
+		} else if ([operation.requestName isEqualToString:MHAPIRequestNameInitialPeopleList]) {
 			
 			self.initialPeopleList = modelArray;
 			self.initialPeopleListIsFinished = YES;
@@ -629,8 +317,8 @@ typedef enum {
 					NSArray *returnArray = @[self.currentUser, self.initialPeopleList];
 					
 					//call success block if it exists so that the calling method can access the result
-					if (request.successBlock) {
-						request.successBlock(returnArray, request.options);
+					if (operation.successBlock) {
+						operation.successBlock(returnArray, operation.options);
 					}
 					
 				}
@@ -640,8 +328,8 @@ typedef enum {
 		} else {
 			
 			//call success block if it exists so that the calling method can access the result
-			if (request.successBlock) {
-				request.successBlock(modelArray, request.options);
+			if (operation.successBlock) {
+				operation.successBlock(modelArray, operation.options);
 			}
 			
 		}
@@ -656,7 +344,7 @@ typedef enum {
 									code:MHAPIErrorMalformedResponse
 								userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com", @"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com")}];
 		
-	 [self handleError:error forRequest:request];
+	 [self handleError:error forOperation:operation];
 	 return;
 		
 		
@@ -668,59 +356,19 @@ typedef enum {
 	*/
 	
 }
-/*
-{
-	"interaction"=> {
-		"initiator_ids"=>[2033631],
-		"updated_by_id"=>2033631,
-		"created_by_id"=>2033631,
-		"privacy_setting"=>"everyone",
-		"updated_at"=>"2013-08-07T16:00:37-04:00",
-		"timestamp"=>"2013-08-07T16:00:37-04:00",
-		"comment"=>"This is an interaction creation test. 1",
-		"created_at"=>"2013-08-07T16:00:37-04:00",
-		"receiver_id"=>2594597,
-		"interaction_type_id"=>1
-	},
-	"facebook_token"=>"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD"
-}
 
-{
-	{
-		"interaction" : {
-			"initiator_ids" : {
-				2033631
-				{,
-					"updated_by_id" : 2033631,
-					"created_by_id" : 2033631,
-					"privacy_setting" : "everyone",
-					"updated_at" : "2013-08-07T16:00:37-04:00",
-					"timestamp" : "2013-08-07T16:00:37-04:00",
-					"comment" : "This is an interaction creation test. 1",
-					"created_at" : "2013-08-07T16:00:37-04:00",
-					"receiver_id" : 2594597,
-					"interaction_type_id" : 1
-				}
-			}
-			=>nil}
-	},
-	"facebook_token"=>"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD"
-}
-
-{"interaction" : {"initiator_ids" : [2033631],"updated_by_id" : 2033631,"created_by_id" : 2033631,"privacy_setting" : "everyone","updated_at" : "2013-08-07T16:00:37-04:00","timestamp" : "2013-08-07T16:00:37-04:00","comment" : "This is an interaction creation test. 1","created_at" : "2013-08-07T16:00:37-04:00","receiver_id" : 2594597,"interaction_type_id" : 1}}
-*/
--(void)requestDidFail:(MHRequestOperation *)request {
+- (void)operationDidFail:(MHRequestOperation *)operation {
 	
 	NSError *error, *responseError;
-	NSInteger errorCode	= request.responseStatusCode;
-	NSString *errorMessage = @"";
+	NSInteger errorCode		= operation.responseStatusCode;
+	NSString *errorMessage	= @"";
 	
 	//parse errors and put into NSError object
 	@try {
 		
-		if (request.responseStatusCode == 400 || request.responseStatusCode == 401 || request.responseStatusCode == 404 || request.responseStatusCode == 422 || request.responseStatusCode == 500) {
+		if (operation.responseStatusCode == 400 || operation.responseStatusCode == 401 || operation.responseStatusCode == 404 || operation.responseStatusCode == 422 || operation.responseStatusCode == 500) {
 		
-			switch (request.responseStatusCode) {
+			switch (operation.responseStatusCode) {
 				case 400:
 					errorMessage = [errorMessage stringByAppendingString:@"Bad Request: "];
 				case 401:
@@ -739,37 +387,33 @@ typedef enum {
 					break;
 			}
 			
-			if (request.responseStatusCode == 400 || request.responseStatusCode == 401 || request.responseStatusCode == 422) {
+			if (operation.responseStatusCode == 400 || operation.responseStatusCode == 401 || operation.responseStatusCode == 422) {
 				
 				NSString *responseErrorString;
 				
 				//parse response and put into result dictionary
-				NSDictionary *result = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingMutableContainers error:&error];
-				
-				//if there was a parsing error stop updating model and notify calling method of the error through the fail block
-				if (error) {
-					
-					responseError = [NSError errorWithDomain:MHAPIErrorDomain
-												code:MHAPIErrorMalformedResponse
-											userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response did not contain a readable error message. Please contact support@missionhub.com", nil)}];
-					
-					[self handleError:responseError forRequest:request];
-					return;
-					
-				}
+				NSDictionary *result	= operation.jsonObject;
+				NSArray *errorsArray	= result[@"errors"];
+				NSString *code			= result[@"code"];
 				
 				//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
-				if ([[[result allKeys] objectAtIndex:0] isEqualToString:@"errors"]) {
+				if (errorsArray) {
 					
-					responseErrorString	= [[result objectForKey:@"errors"] objectAtIndex:0];
+					responseErrorString	= errorsArray[0];
 					
-					if ([[[result allKeys] objectAtIndex:1] isEqualToString:@"code"]) {
-						
-						id code = [[result objectForKey:@"code"] objectAtIndex:1];
+					if (code) {
 						
 						if ([code isEqualToString:@"invalid_facebook_token"]) {
 							
 							errorCode = MHAPIErrorAccessTokenError;
+							
+						} else if ([code isEqualToString:@"user_not_found"]) {
+							
+							errorCode = MHAPIErrorUserNotFound;
+							
+						} else {
+							
+							errorCode = MHAPIErrorUnknownError;
 							
 						}
 						
@@ -789,15 +433,15 @@ typedef enum {
 												code:errorCode
 											userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
 			
-			[self handleError:responseError forRequest:request];
+			[self handleError:responseError forOperation:operation];
 			return;
 			
 		} else {
 	
 			//if there is a connection error and the request has dealt with the error then return that error
-			if (request.error) {
+			if (operation.error) {
 				
-				responseError = request.error;
+				responseError = operation.error;
 			
 			//otherwise parse the error
 			} else {
@@ -806,7 +450,7 @@ typedef enum {
 											code:MHAPIErrorMalformedResponse
 										userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response did not contain a valid error. Please contact support@missionhub.com", @"Response did not contain a valid error. Please contact support@missionhub.com")}];
 				
-				[self handleError:responseError forRequest:request];
+				[self handleError:responseError forOperation:operation];
 				return;
 					
 			}
@@ -823,7 +467,7 @@ typedef enum {
 									code:MHAPIErrorMalformedResponse
 								userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com", @"Response JSON object has unexpected format, unexpected field names or is corrupt/malformed. Please contact support@missionhub.com")}];
 
-		[self handleError:responseError forRequest:request];
+		[self handleError:responseError forOperation:operation];
 		return;
 		
 		
@@ -832,14 +476,14 @@ typedef enum {
 		//nothing to clean up with ARC. YAY!
 	}
 	
-	[self handleError:responseError forRequest:request];
+	[self handleError:responseError forOperation:operation];
 	return;
 	
 }
 
--(void)handleError:(NSError *)error forRequest:(MHRequestOperation *)request {
+-(void)handleError:(NSError *)error forOperation:(MHRequestOperation *)operation {
 	
-	if ([request.requestName isEqualToString:MHAPIRequestNameMe]) {
+	if ([operation.requestName isEqualToString:MHAPIRequestNameMe]) {
 		
 		NSString *errorMessage = [NSString stringWithFormat:@"Initial Load Failed due to error: %@ Please try reloading the initial data. Please contact support@missionhub.com if the problem continues.", [error localizedDescription]];
 		
@@ -848,14 +492,14 @@ typedef enum {
 								userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage,nil)}];
 		
 		//call fail block if it exists so that the calling method can access the result
-		if (request.failBlock) {
-			request.failBlock(error, request.options);
+		if (operation.failBlock) {
+			operation.failBlock(error, operation.options);
 		} else {
 			//if no fail block show the error anyway
 			[MHErrorHandler presentError:self.errorForInitialRequests];
 		}
 		
-	} else if ([request.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
+	} else if ([operation.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
 		
 		NSString *errorMessage = [NSString stringWithFormat:@"Initial Load Failed due to error: %@ Please try reloading the initial data. Please contact support@missionhub.com if the problem continues.", [error localizedDescription]];
 		
@@ -866,8 +510,8 @@ typedef enum {
 													   userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage,nil)}];
 		
 		//call fail block if it exists so that the calling method can access the result
-		if (request.failBlock) {
-			request.failBlock(self.errorForInitialRequests, request.options);
+		if (operation.failBlock) {
+			operation.failBlock(self.errorForInitialRequests, operation.options);
 		} else {
 			//if no fail block show the error anyway
 			[MHErrorHandler presentError:self.errorForInitialRequests];
@@ -880,7 +524,7 @@ typedef enum {
 		}
 		
 		
-	} else if ([request.requestName isEqualToString:MHAPIRequestNameInitialPeopleList]) {
+	} else if ([operation.requestName isEqualToString:MHAPIRequestNameInitialPeopleList]) {
 		
 		self.initialPeopleListIsFinished = YES;
 		
@@ -901,8 +545,8 @@ typedef enum {
 				NSArray *returnArray = @[self.currentUser, self.errorForInitialRequests];
 					
 				//call success block if it exists so that the calling method can access the result
-				if (request.successBlock) {
-					request.successBlock(returnArray, request.options);
+				if (operation.successBlock) {
+					operation.successBlock(returnArray, operation.options);
 				}
 				
 			}
@@ -920,8 +564,8 @@ typedef enum {
 	} else {
 		
 		//call fail block if it exists so that the calling method can access the result
-		if (request.failBlock) {
-			request.failBlock(error, request.options);
+		if (operation.failBlock) {
+			operation.failBlock(error, operation.options);
 		} else {
 			//if no fail block show the error anyway
 			[MHErrorHandler presentError:error];
@@ -931,62 +575,6 @@ typedef enum {
 	
 	
 	
-}
-
-#pragma mark - Private Methods
-
--(NSString *)stringForBaseUrlWith:(MHRequestOptions *)options error:(NSError **)error {
-	
-	NSString *urlString = [self apiUrl];
-	
-	if (urlString == nil || [urlString length] <= 0 ) {
-		
-		if (error) {
-			*error = [NSError errorWithDomain:MHAPIErrorDomain
-										 code:MHAPIErrorMissingUrl
-									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"API URL Missing", @"API URL Missing")}];
-		}
-		
-		return nil;
-	}
-	
-	if ([options stringForEndpoint]) {
-		
-		urlString = [urlString stringByAppendingFormat:@"/%@", [options stringForEndpoint]];
-		
-	} else {
-		
-		if (error) {
-			*error = [NSError errorWithDomain:MHAPIErrorDomain
-										 code:MHAPIErrorMissingEndpoint
-									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"API Endpoint Missing", @"API Endpoint Missing")}];
-		}
-		
-		return nil;
-	}
-	
-	return urlString;
-	
-}
-
--(void)addAccessTokenToParams:(NSMutableDictionary *)params withError:(NSError **)error {
-	
-	if ([self accessToken]) {
-		
-		[params setValue:self.accessToken forKey:@"facebook_token"];
-		
-	} else {
-		
-		if (error) {
-			*error = [NSError errorWithDomain:MHAPIErrorDomain
-										 code:MHAPIErrorMissionAccessToken
-									 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"API token Missing. You must login first.", @"API token Missing. You must login first.")}];
-		}
-	
-	}
-
-	return;
-
 }
 
 @end
