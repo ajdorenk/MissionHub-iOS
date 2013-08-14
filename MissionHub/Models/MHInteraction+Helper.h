@@ -21,6 +21,5 @@ typedef enum {
 @interface MHInteraction (Helper)
 
 +(NSString *)stringForPrivacySetting:(MHInteractionPrivacySettings)privacySetting;
--(BOOL)validateForServerCreate:(NSError **)error;
 
 @end

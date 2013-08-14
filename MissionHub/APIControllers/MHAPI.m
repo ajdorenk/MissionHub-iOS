@@ -54,7 +54,7 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"];
+		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
 		
 		NSString *baseUrlString			= ( [configDictionary valueForKey:@"api_url"] ? [configDictionary valueForKey:@"api_url"] : @"" );
@@ -99,6 +99,10 @@ typedef enum {
 	
 	NSMutableDictionary *parameters = [options parameters];
 	parameters[@"facebook_token"]	= self.accessToken;
+	
+	if (self.currentOrganization) {
+		parameters[@"organization_id"]	= self.currentOrganization.remoteID;
+	}
 	
 	return [self requestWithMethod:[options method]
 							  path:[options path]
@@ -179,9 +183,17 @@ typedef enum {
 	
 }
 
+- (void)createPerson:(MHPerson *)person withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreatePersonRequestWithPerson:person];
+	
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
 -(void)createInteraction:(MHInteraction *)interaction withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	__block MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreateInteractionRequestWithInteraction:interaction];
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreateInteractionRequestWithInteraction:interaction];
 	
 	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	

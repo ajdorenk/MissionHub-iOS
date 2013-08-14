@@ -313,4 +313,22 @@
 	
 }
 
+-(BOOL)validateForServerCreate:(NSError **)error {
+	
+	return YES;
+	
+}
+
+-(BOOL)validateForServerUpdate:(NSError **)error {
+	
+	return YES;
+	
+}
+
+-(BOOL)validateForServerDelete:(NSError **)error {
+	
+	return YES;
+	
+}
+
 @end

@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MHTextField : UITextField
+@interface MHTextField : UITextField {
+	
+	UIEdgeInsets _textInset;
+	UIEdgeInsets _editingTextInset;
+	
+}
+
+@property (nonatomic, assign) UIEdgeInsets textInset;
+@property (nonatomic, assign) UIEdgeInsets editingTextInset;
 
 @end

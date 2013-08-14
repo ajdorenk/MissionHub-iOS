@@ -82,8 +82,8 @@
 	if ([errorMessage length] > 0) {
 		
 		*error = [NSError errorWithDomain:@"MHInteraction.errorDomain"
-									code:1
-								userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+									code:2
+								userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage, nil)}];
 		
 		return NO;
 		

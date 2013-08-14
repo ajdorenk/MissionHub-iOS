@@ -88,4 +88,10 @@
 	
 }
 
+- (MHPermissionLevel *)permissionLevelWithRemoteID:(MHPermissionLevelRemoteIds)remoteID {
+	
+	return [MHPermissionLevel permissionLevelWithRemoteID:remoteID];
+	
+}
+
 @end

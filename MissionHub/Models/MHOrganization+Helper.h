@@ -11,7 +11,10 @@
 #import "MHPerson.h"
 #import "MHSurvey.h"
 #import "MHInteractionType.h"
+#import "MHPermissionLevel+Helper.h"
 
 @interface MHOrganization (Helper)
+
+- (MHPermissionLevel *)permissionLevelWithRemoteID:(MHPermissionLevelRemoteIds)remoteID;
 
 @end

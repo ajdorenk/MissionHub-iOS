@@ -10,6 +10,12 @@
 
 @implementation MHPerson (Helper)
 
+- (void)setDefaults {
+	
+	self.gender = @"Male";
+	
+}
+
 -(NSString *)valueForSortField:(MHPersonSortFields)sortField {
 	
 	NSString *value = @"";
@@ -77,6 +83,38 @@
 	}
 	
 	return value;
+	
+}
+
+-(BOOL)validateForServerCreate:(NSError **)error {
+	
+	NSMutableString *errorMessage = [NSMutableString string];
+	
+	if (![self.remoteID isEqual: @0]) {
+		
+		[errorMessage appendString:@"Person Already Exists"];
+		*error = [NSError errorWithDomain:@"MHPerson.errorDomain"
+									 code:1
+								 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+		
+		return NO;
+		
+	}
+	
+	if ([self.first_name length]) {
+		
+		return YES;
+		
+	} else {
+		
+		[errorMessage appendString:@"First Name Missing "];
+		*error = [NSError errorWithDomain:@"MHPerson.errorDomain"
+									 code:2
+								 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+		
+		return NO;
+		
+	}
 	
 }
 
@@ -264,6 +302,135 @@
 		self.user = newObject;
 		
 	}
+	
+}
+
+-(void)addRelationshipObject:(id)relationshipObject forFieldName:(NSString *)fieldName toJsonObject:(NSMutableDictionary *)jsonObject {
+	
+	if ([fieldName isEqualToString:@"permissionLevel"]) {
+		
+		MHOrganizationalPermission *newObject = (MHOrganizationalPermission *)relationshipObject;
+		
+		//if there is an object that hasn't been created yet add it to the jsonObject
+		if (newObject && [newObject.remoteID integerValue] == 0) {
+			
+			[jsonObject setObject:[newObject jsonObject] forKey:@"organizational_permission"];
+			
+		}
+		
+	} else if ([fieldName isEqualToString:@"labels"]) {
+		
+		NSSet *setOfObjects = (NSSet *)relationshipObject;
+		__block NSMutableArray *arrayOfJsonObject = [NSMutableArray array];
+		
+		[setOfObjects enumerateObjectsUsingBlock:^(id object, BOOL *stop) {
+			
+			MHOrganizationalLabel *newObject = (MHOrganizationalLabel *)object;
+			
+			//if there is an object that hasn't been created yet add it to the jsonObject
+			if (newObject && [newObject.remoteID integerValue] == 0) {
+				
+				[arrayOfJsonObject addObject:[newObject jsonObject]];
+				
+			}
+			
+		}];
+		
+		if ([arrayOfJsonObject count] > 0) {
+			
+			[jsonObject setObject:arrayOfJsonObject forKey:@"organizational_labels"];
+			
+		}
+		
+	} else if ([fieldName isEqualToString:@"emailAddresses"]) {
+		
+		NSSet *setOfObjects = (NSSet *)relationshipObject;
+		__block NSMutableArray *arrayOfJsonObject = [NSMutableArray array];
+		
+		[setOfObjects enumerateObjectsUsingBlock:^(id object, BOOL *stop) {
+			
+			MHEmailAddress *newObject = (MHEmailAddress *)object;
+			
+			//if there is an object that hasn't been created yet add it to the jsonObject
+			if (newObject && [newObject.remoteID integerValue] == 0) {
+				
+				[arrayOfJsonObject addObject:[newObject jsonObject]];
+				
+			}
+			
+		}];
+		
+		if ([arrayOfJsonObject count] > 0) {
+			
+			[jsonObject setObject:arrayOfJsonObject forKey:@"email_addresses"];
+			
+		}
+		
+	} else if ([fieldName isEqualToString:@"phoneNumbers"]) {
+		
+		NSSet *setOfObjects = (NSSet *)relationshipObject;
+		__block NSMutableArray *arrayOfJsonObject = [NSMutableArray array];
+		
+		[setOfObjects enumerateObjectsUsingBlock:^(id object, BOOL *stop) {
+			
+			MHPhoneNumber *newObject = (MHPhoneNumber *)object;
+			
+			//if there is an object that hasn't been created yet add it to the jsonObject
+			if (newObject && [newObject.remoteID integerValue] == 0) {
+				
+				[arrayOfJsonObject addObject:[newObject jsonObject]];
+				
+			}
+			
+		}];
+		
+		if ([arrayOfJsonObject count] > 0) {
+			
+			[jsonObject setObject:arrayOfJsonObject forKey:@"phone_numbers"];
+			
+		}
+		
+	} else if ([fieldName isEqualToString:@"addresses"]) {
+		
+		NSSet *setOfObjects = (NSSet *)relationshipObject;
+		__block NSMutableArray *arrayOfJsonObject = [NSMutableArray array];
+		
+		[setOfObjects enumerateObjectsUsingBlock:^(id object, BOOL *stop) {
+			
+			MHAddress *newObject = (MHAddress *)object;
+			
+			//if there is an object that hasn't been created yet add it to the jsonObject
+			if (newObject && [newObject.remoteID integerValue] == 0) {
+				
+				[arrayOfJsonObject addObject:[newObject jsonObject]];
+				
+			}
+			
+		}];
+		
+		if ([arrayOfJsonObject count] > 0) {
+			
+			[jsonObject setObject:arrayOfJsonObject forKey:@"addresses"];
+			
+		}
+		
+	}
+	
+}
+
+-(id)valueForJsonObjectWithKey:(NSString *)key {
+	
+	id value = [super valueForJsonObjectWithKey:key];
+	
+	if ([key isEqualToString:@"fb_uid"] && [value integerValue] == 0) {
+		value = nil;
+	}
+	
+	if ([key isEqualToString:@"user_id"] && [value integerValue] == 0) {
+		value = nil;
+	}
+	
+	return [self valueForKey:key];
 	
 }
 

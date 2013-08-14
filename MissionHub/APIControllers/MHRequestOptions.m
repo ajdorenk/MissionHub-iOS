@@ -311,6 +311,15 @@
 	return self;
 }
 
+- (id)configureForCreatePersonRequestWithPerson:(MHPerson *)person {
+	
+	[[self reset] setEndpoint:MHRequestOptionsEndpointPeople];
+	self.type		= MHRequestOptionsTypeCreate;
+	self.jsonObject	= [person jsonObject];
+	
+	return self;
+}
+
 -(id)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction {
 	
 	[[self reset] setEndpoint:MHRequestOptionsEndpointInteractions];

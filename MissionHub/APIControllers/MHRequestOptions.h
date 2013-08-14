@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MHPerson+Helper.h"
 #import "MHInteraction+Helper.h"
 
 typedef enum {
@@ -172,6 +173,7 @@ typedef enum {
 - (id)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
 - (id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID;
 - (id)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction;
+- (id)configureForCreatePersonRequestWithPerson:(MHPerson *)person;
 
 - (id)addInclude:(MHRequestOptionsIncludes)include;
 - (id)addIncludesForProfileRequest;

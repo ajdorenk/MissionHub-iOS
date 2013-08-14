@@ -25,9 +25,14 @@
 -(void)setTextFieldLeftView;
 @property (nonatomic, strong) MHNewInteractionViewController		*_createInteractionViewController;
 @property (nonatomic, strong) MHCreatePersonViewController          *_createPersonViewController;
+@property (nonatomic, strong) UIPopoverController					*_createPersonPopoverViewController;
 
 -(MHNewInteractionViewController *)createInteractionViewController;
 -(MHCreatePersonViewController *)createPersonViewController;
+- (UIPopoverController *)createPersonPopoverViewController;
+
+- (void)addPerson:(id)sender;
+- (void)addInteraction:(id)sender;
 
 @end
 
@@ -218,22 +223,13 @@
     UIImage* contactImage = [UIImage imageNamed:@"NewContact_Icon.png"];
     UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
     [newPerson setImage:contactImage forState:UIControlStateNormal];
+	[newPerson addTarget:self action:@selector(addPerson:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
-	
-//TODO: need to make a popover for the iPad. The code below adds a target for the newPerson button based on whether it is the iPad or the iPhone
-   // if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [newPerson addTarget:self action:@selector(addPersonActivityPhone:) forControlEvents:UIControlEventTouchUpInside];
-    /*}
-    
-    else{
-        [newPerson addTarget:self action:@selector(addPersonActivityPad:) forControlEvents:UIControlEventTouchUpInside];
-    }*/
-
     
     UIImage* interactionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
     UIButton *addInteractionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
     [addInteractionButton setImage:interactionImage forState:UIControlStateNormal];
-    [addInteractionButton addTarget:self action:@selector(addInteraction) forControlEvents:UIControlEventTouchUpInside];
+    [addInteractionButton addTarget:self action:@selector(addInteraction:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addInteractionBarButton = [[UIBarButtonItem alloc] initWithCustomView:addInteractionButton];
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addInteractionBarButton, addPersonButton, nil]];
     
@@ -307,6 +303,19 @@
 	}
 	
 	return self._createPersonViewController;
+	
+}
+
+- (UIPopoverController *)createPersonPopoverViewController {
+
+	if (self._createPersonPopoverViewController == nil) {
+	
+		self._createPersonPopoverViewController = [[UIPopoverController alloc] initWithContentViewController:[self createPersonViewController]];
+		self._createPersonPopoverViewController.delegate = self;
+
+	}
+	
+	return self._createPersonPopoverViewController;
 	
 }
 
@@ -484,30 +493,23 @@
 	
 }
 
--(IBAction)addPersonActivityPhone:(id)sender{
+- (void)addPerson:(id)sender {
     NSLog(@"add Person Action");
     
-    [self.navigationController pushViewController:[self createPersonViewController] animated:YES];
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		
+		[self.navigationController pushViewController:[self createPersonViewController] animated:YES];
+		
+	} else {
+		
+		[[self createPersonPopoverViewController] presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+		
+	}
+    
 
 }
 
-//TODO:The code below is meant for displaying the popover window to add a new contact on the iPad. There still needs to be a popover controller created however. I do not know all the details of how to go about creating the popover.
-
-/*- (IBAction)addPersonActivityPad:(id)sender
-{
-    MHCreatePersonViewController *content = [[MHCreatePersonViewController alloc] init];
-    UIPopoverController* aPopover = [[UIPopoverController alloc]
-                                     initWithContentViewController:content];
-    aPopover.delegate = self;
-    
-    // Store the popover in a custom property for later use.
-    self.popoverController = aPopover;
-    
-    [self.popoverController presentPopoverFromBarButtonItem:sender
-                                   permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}*/
-
-- (void)addInteraction {
+- (void)addInteraction:(id)sender {
 	
 	MHInteraction *newInteraction = [MHInteraction newObjectFromFields:nil];
 	[newInteraction addInitiators:[NSSet setWithArray:self.selectedPeople]];
@@ -963,6 +965,14 @@
 		//remove activity view controller
 		
 	}
+	
+}
+
+#pragma mark - UIPopover delegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+	
+	
 	
 }
 

@@ -48,4 +48,8 @@
 //should be overwirtten with subclasses with relationships.
 -(void)addRelationshipObject:(id)relationshipObject forFieldName:(NSString *)fieldName toJsonObject:(NSMutableDictionary *)jsonObject;
 
+-(BOOL)validateForServerCreate:(NSError **)error;
+-(BOOL)validateForServerUpdate:(NSError **)error;
+-(BOOL)validateForServerDelete:(NSError **)error;
+
 @end

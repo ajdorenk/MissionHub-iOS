@@ -81,11 +81,33 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+	
+}
+
 -(void)viewWillDisappear:(BOOL)animated {
 
 	[self clearPickers];
 	
-	[super viewDidDisappear:animated];
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+	
+	[super viewWillDisappear:animated];
 	
 }
 
@@ -219,15 +241,6 @@
 	self.comment.clearButtonMode		= UITextFieldViewModeNever;
     
     self.originalCommentFrame = self.comment.frame;
-	
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
 	
 	[self updateInterface];
 	
@@ -845,8 +858,8 @@
     self.originalCommentFrame	= self.comment.frame;
 	
     //Down size your text view
-	newRect.size.width	= self.view.frame.size.width;
-    newRect.size.height = CGRectGetMinY(keyboardFrame);
+	newRect.size.width	= CGRectGetWidth(self.view.frame);
+    newRect.size.height = CGRectGetHeight(self.view.frame) - CGRectGetHeight(keyboardFrame);
 	
 	[UIView beginAnimations:nil context:nil];
 	
