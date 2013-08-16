@@ -17,7 +17,7 @@
 #import "MHPersonCell.h"
 #import "MHGenericListViewController.h"
 
-@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate> {
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate> {
 
 	NSMutableArray *_peopleArray;
 	NSMutableArray *_searchResultArray;

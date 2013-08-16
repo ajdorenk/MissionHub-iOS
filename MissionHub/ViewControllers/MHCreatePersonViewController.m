@@ -21,6 +21,10 @@
 - (MHAddress *)address;
 - (MHOrganizationalPermission *)organizationalPermissionLevel;
 
+- (void)removePhoneNumberIfEmpty;
+- (void)removeEmailAddressIfEmpty;
+- (void)removeAddressIfEmpty;
+
 - (void)changePermissionLevelTo:(NSInteger)level;
 - (void)changeGenderTo:(NSInteger)genderId;
 
@@ -40,6 +44,8 @@
 @end
 
 @implementation MHCreatePersonViewController
+
+@synthesize createPersonDelegate	= _createPersonDelegate;
 
 @synthesize person					= _person;
 
@@ -194,23 +200,26 @@
 
 - (void)updateGender {
 	
+	NSInteger selection = 0;
+	
 	if (self.person.gender) {
 		
 		if ([self.person.gender caseInsensitiveCompare:@"Female"] == NSOrderedSame) {
-			[self changeGenderTo:1];
+			selection = 1;
 		} else if ([self.person.gender caseInsensitiveCompare:@"Male"] == NSOrderedSame) {
-			[self changeGenderTo:0];
-		} else {
-			[self changeGenderTo:0];
+			selection = 0;
 		}
 		
-	} else {
-		[self changeGenderTo:0];
 	}
+	
+	[self changeGenderTo:selection];
+	self.gender.selectedSegmentIndex = selection;
 	
 }
 
 - (void)updatePermissionLevel {
+	
+	NSInteger selection = 2;
 	
 	if (self.person.permissionLevel) {
 		
@@ -218,32 +227,31 @@
 				
 			case MHPermissionLevelRemoteIdAdmin:
 				
-				[self changePermissionLevelTo:0];
+				selection = 0;
 				
 				break;
 			case MHPermissionLevelRemoteIdUser:
 				
-				[self changePermissionLevelTo:1];
+				selection = 1;
 				
 				break;
 			case MHPermissionLevelRemoteIdNoPermissions:
 				
-				[self changePermissionLevelTo:2];
+				selection = 2;
 				
 				break;
 				
 			default:
 				
-				[self changePermissionLevelTo:2];
+				selection = 2;
 				
 				break;
 		}
 		
-	} else {
-		
-		
-		
 	}
+	
+	[self changePermissionLevelTo:selection];
+	self.permissionLevel.selectedSegmentIndex = selection;
 	
 }
 
@@ -251,9 +259,25 @@
 	
 	NSError *error;
 	
+	[self removeAddressIfEmpty];
+	[self removeEmailAddressIfEmpty];
+	[self removePhoneNumberIfEmpty];
+	
+	self.saveButton.enabled = NO;
+	
 	if ([self.person validateForServerCreate:&error]) {
 		
 		[[MHAPI sharedInstance] createPerson:self.person withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+			
+			MHPerson *person = [result objectAtIndex:0];
+			
+			if ([self.createPersonDelegate respondsToSelector:@selector(controller:didCreatePerson:)]) {
+				
+				[self.createPersonDelegate controller:self didCreatePerson:person];
+				
+			}
+			
+			self.saveButton.enabled = YES;
 			
 			[self.navigationController popViewControllerAnimated:YES];
 			
@@ -261,11 +285,15 @@
 			
 			[MHErrorHandler presentError:error];
 			
+			self.saveButton.enabled = YES;
+			
 		}];
 		
 	} else {
 		
 		[MHErrorHandler presentError:error];
+		
+		self.saveButton.enabled = YES;
 		
 	}
 	
@@ -281,7 +309,7 @@
 	
 	MHPhoneNumber *phoneNumber;
 	
-	if ([self.person.phoneNumbers count]) {
+	if ([self.person.phoneNumbers count] > 0) {
 		
 		phoneNumber = [[self.person.phoneNumbers allObjects] objectAtIndex:0];
 		
@@ -296,11 +324,29 @@
 	
 }
 
+- (void)removePhoneNumberIfEmpty {
+	
+	MHPhoneNumber *phoneNumber;
+	
+	if ([self.person.phoneNumbers count] > 0) {
+		
+		phoneNumber = [[self.person.phoneNumbers allObjects] objectAtIndex:0];
+		
+		if ( phoneNumber && !phoneNumber.number.length ) {
+			
+			[self.person removePhoneNumbersObject:phoneNumber];
+			
+		}
+		
+	}
+	
+}
+
 - (MHEmailAddress *)emailAddress {
 	
 	MHEmailAddress *emailAddress;
 	
-	if ([self.person.emailAddresses count]) {
+	if ([self.person.emailAddresses count] > 0) {
 		
 		emailAddress = [[self.person.emailAddresses allObjects] objectAtIndex:0];
 		
@@ -315,22 +361,65 @@
 	
 }
 
+- (void)removeEmailAddressIfEmpty {
+	
+	MHEmailAddress *emailAddress;
+	
+	if ([self.person.emailAddresses count] > 0) {
+		
+		emailAddress = [[self.person.emailAddresses allObjects] objectAtIndex:0];
+		
+		if ( emailAddress && !emailAddress.email.length ) {
+			
+			[self.person removeEmailAddressesObject:emailAddress];
+			
+		}
+		
+	}
+	
+}
+
 - (MHAddress *)address {
 	
 	MHAddress *address;
 	
-	if ([self.person.addresses count]) {
+	if ([self.person.addresses count] > 0) {
 		
 		address = [[self.person.addresses allObjects] objectAtIndex:0];
 		
 	} else {
 		
-		address = [MHAddress newObjectFromFields:nil];
+		address = [MHAddress newObjectFromFields:@{@"address_type": @"current"}];
 		[self.person addAddressesObject:address];
 		
 	}
 	
 	return address;
+	
+}
+
+- (void)removeAddressIfEmpty {
+	
+	MHAddress *address;
+	
+	if ([self.person.addresses count] > 0) {
+		
+		address = [[self.person.addresses allObjects] objectAtIndex:0];
+		
+		if ( address &&
+			!address.address1.length &&
+			!address.address2.length &&
+			!address.city.length &&
+			!address.state.length &&
+			!address.country.length &&
+			!address.zip.length
+			) {
+			
+			[self.person removeAddressesObject:address];
+			
+		}
+		
+	}
 	
 }
 

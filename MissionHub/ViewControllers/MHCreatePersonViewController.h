@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MHTextField.h"
 
+@protocol MHCreatePersonDelegate;
+
 @interface MHCreatePersonViewController : UIViewController <UITextFieldDelegate> {
+	
+	__weak id<MHCreatePersonDelegate> _createPersonDelegate;
 	
 	MHPerson		*_person;
 	CGSize			_oldSize;
@@ -21,6 +25,8 @@
 	UIBarButtonItem *_doneButton;
 	
 }
+
+@property (nonatomic, weak) id<MHCreatePersonDelegate> createPersonDelegate;
 
 @property (nonatomic, strong) MHPerson				*person;
 
@@ -48,5 +54,12 @@
 @property (nonatomic, strong) UIBarButtonItem		*doneButton;
 
 - (void)updateWithPerson:(MHPerson *)person;
+
+@end
+
+@protocol MHCreatePersonDelegate <NSObject>
+
+@optional
+- (void)controller:(MHCreatePersonViewController *)controller didCreatePerson:(MHPerson *)person;
 
 @end

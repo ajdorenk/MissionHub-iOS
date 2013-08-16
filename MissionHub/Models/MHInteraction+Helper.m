@@ -31,7 +31,7 @@
 	
 	NSMutableString *errorMessage = [NSMutableString string];
 	
-	if (![self.remoteID isEqual: @0]) {
+	if (![self.remoteID isEqualToNumber:@0]) {
 		[errorMessage appendString:@"Interaction Already Exists"];
 		*error = [NSError errorWithDomain:@"MHInteraction.errorDomain"
 									 code:1

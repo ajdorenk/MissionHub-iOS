@@ -299,6 +299,7 @@
 	if (self._createPersonViewController == nil) {
 		
 		self._createPersonViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHCreatePersonViewController"];
+		self._createPersonViewController.createPersonDelegate = self;
 		
 	}
 	
@@ -494,7 +495,9 @@
 }
 
 - (void)addPerson:(id)sender {
-    NSLog(@"add Person Action");
+	
+	MHPerson *newPerson = [MHPerson newObjectFromFields:nil];
+	[[self createPersonViewController] updateWithPerson:newPerson];
     
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 		
@@ -973,6 +976,14 @@
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 	
 	
+	
+}
+
+#pragma mark - MHCreatePersonDelegate
+
+-(void)controller:(MHCreatePersonViewController *)controller didCreatePerson:(MHPerson *)person {
+	
+	[self refresh];
 	
 }
 

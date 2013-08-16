@@ -90,7 +90,7 @@
 	
 	NSMutableString *errorMessage = [NSMutableString string];
 	
-	if (![self.remoteID isEqual: @0]) {
+	if (![self.remoteID isEqualToNumber:@0]) {
 		
 		[errorMessage appendString:@"Person Already Exists"];
 		*error = [NSError errorWithDomain:@"MHPerson.errorDomain"
@@ -307,18 +307,19 @@
 
 -(void)addRelationshipObject:(id)relationshipObject forFieldName:(NSString *)fieldName toJsonObject:(NSMutableDictionary *)jsonObject {
 	
-	if ([fieldName isEqualToString:@"permissionLevel"]) {
-		
-		MHOrganizationalPermission *newObject = (MHOrganizationalPermission *)relationshipObject;
-		
-		//if there is an object that hasn't been created yet add it to the jsonObject
-		if (newObject && [newObject.remoteID integerValue] == 0) {
-			
-			[jsonObject setObject:[newObject jsonObject] forKey:@"organizational_permission"];
-			
-		}
-		
-	} else if ([fieldName isEqualToString:@"labels"]) {
+//	if ([fieldName isEqualToString:@"permissionLevel"]) {
+//		
+//		MHOrganizationalPermission *newObject = (MHOrganizationalPermission *)relationshipObject;
+//		
+//		//if there is an object that hasn't been created yet add it to the jsonObject
+//		if (newObject && [newObject.remoteID isEqualToNumber:@0]) {
+//			
+//			[jsonObject setObject:newObject.remoteID forKey:@"permissions"];
+//			
+//		}
+//		
+//	} else if ([fieldName isEqualToString:@"labels"]) {
+	if ([fieldName isEqualToString:@"labels"]) {
 		
 		NSSet *setOfObjects = (NSSet *)relationshipObject;
 		__block NSMutableArray *arrayOfJsonObject = [NSMutableArray array];
@@ -328,7 +329,7 @@
 			MHOrganizationalLabel *newObject = (MHOrganizationalLabel *)object;
 			
 			//if there is an object that hasn't been created yet add it to the jsonObject
-			if (newObject && [newObject.remoteID integerValue] == 0) {
+			if (newObject && [newObject.remoteID isEqualToNumber:@0]) {
 				
 				[arrayOfJsonObject addObject:[newObject jsonObject]];
 				
@@ -352,7 +353,7 @@
 			MHEmailAddress *newObject = (MHEmailAddress *)object;
 			
 			//if there is an object that hasn't been created yet add it to the jsonObject
-			if (newObject && [newObject.remoteID integerValue] == 0) {
+			if (newObject && [newObject.remoteID isEqualToNumber:@0]) {
 				
 				[arrayOfJsonObject addObject:[newObject jsonObject]];
 				
@@ -376,7 +377,7 @@
 			MHPhoneNumber *newObject = (MHPhoneNumber *)object;
 			
 			//if there is an object that hasn't been created yet add it to the jsonObject
-			if (newObject && [newObject.remoteID integerValue] == 0) {
+			if (newObject && [newObject.remoteID isEqualToNumber:@0]) {
 				
 				[arrayOfJsonObject addObject:[newObject jsonObject]];
 				
@@ -400,7 +401,7 @@
 			MHAddress *newObject = (MHAddress *)object;
 			
 			//if there is an object that hasn't been created yet add it to the jsonObject
-			if (newObject && [newObject.remoteID integerValue] == 0) {
+			if (newObject && [newObject.remoteID isEqualToNumber:@0]) {
 				
 				[arrayOfJsonObject addObject:[newObject jsonObject]];
 				
@@ -422,15 +423,15 @@
 	
 	id value = [super valueForJsonObjectWithKey:key];
 	
-	if ([key isEqualToString:@"fb_uid"] && [value integerValue] == 0) {
+	if ([key isEqualToString:@"fb_uid"] && [(NSNumber *)value isEqual:@0]) {
 		value = nil;
 	}
 	
-	if ([key isEqualToString:@"user_id"] && [value integerValue] == 0) {
+	if ([key isEqualToString:@"user_id"] && [(NSNumber *)value isEqual:@0]) {
 		value = nil;
 	}
 	
-	return [self valueForKey:key];
+	return value;
 	
 }
 

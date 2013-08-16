@@ -64,27 +64,26 @@
 	self.remoteID		= 0;
 	
 	if (self.filters) {
-		[self.filters removeAllObjects];
+		[self clearFilters];
 	} else {
 		self.filters	= [NSMutableDictionary dictionary];
 	}
 	
 	if (self.includes) {
-		[self.includes removeAllIndexes];
+		[self clearIncludes];
 	} else {
 		self.includes	= [NSMutableIndexSet indexSet];
 	}
 	
 	self.limit			= 0;
 	self.offset			= 0;
-	self.orderField		= MHRequestOptionsOrderFieldNone;
-	self.orderDirection	= MHRequestOptionsOrderDirectionNone;
+	[self clearOrders];
 	
 	self.successBlock	= nil;
 	self.failBlock		= nil;
 	
 	if (self.postParams) {
-		[self.postParams removeAllObjects];
+		[self clearPostParams];
 	} else {
 		self.postParams	= [NSMutableDictionary dictionary];
 	}
@@ -255,6 +254,12 @@
 				
 			}
 			
+			if ([self hasPostParams]) {
+				
+				[parametersDictionary addEntriesFromDictionary:self.postParams];
+				
+			}
+			
 			break;
 			
 		default:
@@ -293,7 +298,7 @@
 	return (self.orderDirection != MHRequestOptionsOrderDirectionNone);
 }
 
-- (BOOL)hadPostParams {
+- (BOOL)hasPostParams {
 	return ([self.postParams count] > 0);
 }
 
@@ -316,6 +321,12 @@
 	[[self reset] setEndpoint:MHRequestOptionsEndpointPeople];
 	self.type		= MHRequestOptionsTypeCreate;
 	self.jsonObject	= [person jsonObject];
+	
+	if (person.permissionLevel && [person.permissionLevel.permission_id integerValue] > 0) {
+		
+		[self addPostParam:@"permissions" withValue:[person.permissionLevel.permission_id stringValue]];
+		
+	}
 	
 	return self;
 }

@@ -162,7 +162,7 @@ typedef enum {
 - (BOOL)hasOffset;
 - (BOOL)hasOrderField;
 - (BOOL)hasOrderDirection;
-- (BOOL)hadPostParams;
+- (BOOL)hasPostParams;
 
 - (id)configureForInitialPeoplePageRequest;
 - (id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
