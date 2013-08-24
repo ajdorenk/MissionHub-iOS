@@ -11,6 +11,21 @@
         <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="addresses" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
+    <entity name="MHAnswer" representedClassName="MHAnswer" syncable="YES">
+        <attribute name="question_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="answerSheet" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHAnswerSheet" inverseName="answers" inverseEntity="MHAnswerSheet" syncable="YES"/>
+    </entity>
+    <entity name="MHAnswerSheet" representedClassName="MHAnswerSheet" syncable="YES">
+        <attribute name="completed_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="survey_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="answers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHAnswer" inverseName="answerSheet" inverseEntity="MHAnswer" syncable="YES"/>
+        <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="answerSheets" inverseEntity="MHPerson" syncable="YES"/>
+    </entity>
     <entity name="MHEmailAddress" representedClassName="MHEmailAddress" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -120,6 +135,7 @@
         <relationship name="adminInOrganization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="admins" inverseEntity="MHOrganization" syncable="YES"/>
         <relationship name="allOrganizationalPermissions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHOrganizationalPermission" inverseName="person" inverseEntity="MHOrganizationalPermission" syncable="YES"/>
         <relationship name="allOrganizations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHOrganization" inverseName="people" inverseEntity="MHOrganization" syncable="YES"/>
+        <relationship name="answerSheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHAnswerSheet" inverseName="person" inverseEntity="MHAnswerSheet" syncable="YES"/>
         <relationship name="assignedConacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="assignedLeader" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="assignedLeader" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="assignedConacts" inverseEntity="MHPerson" syncable="YES"/>
         <relationship name="createdInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="creator" inverseEntity="MHInteraction" syncable="YES"/>
@@ -191,10 +207,12 @@
         <element name="MHOrganizationalLabel" positionX="160" positionY="192" width="128" height="180"/>
         <element name="MHOrganizationalPermission" positionX="160" positionY="192" width="128" height="180"/>
         <element name="MHPermissionLevel" positionX="207" positionY="2921" width="128" height="135"/>
-        <element name="MHPerson" positionX="232" positionY="2453" width="128" height="555"/>
+        <element name="MHPerson" positionX="232" positionY="2453" width="128" height="570"/>
         <element name="MHPhoneNumber" positionX="160" positionY="192" width="128" height="180"/>
         <element name="MHQuestion" positionX="160" positionY="192" width="128" height="255"/>
         <element name="MHSurvey" positionX="387" positionY="3492" width="128" height="195"/>
         <element name="MHUser" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="MHAnswerSheet" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="MHAnswer" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

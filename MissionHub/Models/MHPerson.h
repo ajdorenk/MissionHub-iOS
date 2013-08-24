@@ -2,7 +2,7 @@
 //  MHPerson.h
 //  MissionHub
 //
-//  Created by Michael Harrison on 7/11/13.
+//  Created by Michael Harrison on 8/23/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MHModel.h"
 
-@class MHAddress, MHEmailAddress, MHInteraction, MHOrganization, MHOrganizationalLabel, MHOrganizationalPermission, MHPerson, MHPhoneNumber, MHSurvey, MHUser;
+@class MHAddress, MHAnswerSheet, MHEmailAddress, MHInteraction, MHOrganization, MHOrganizationalLabel, MHOrganizationalPermission, MHPerson, MHPhoneNumber, MHSurvey, MHUser;
 
 @interface MHPerson : MHModel
 
@@ -41,13 +41,14 @@
 @property (nonatomic, retain) NSSet *emailAddresses;
 @property (nonatomic, retain) NSSet *initiatedInteractions;
 @property (nonatomic, retain) NSSet *labels;
-@property (nonatomic, retain) MHOrganization *userInOrganization;
 @property (nonatomic, retain) MHOrganizationalPermission *permissionLevel;
 @property (nonatomic, retain) NSSet *phoneNumbers;
 @property (nonatomic, retain) NSSet *receivedInteractions;
 @property (nonatomic, retain) NSSet *surveys;
 @property (nonatomic, retain) NSSet *updatedInteractions;
 @property (nonatomic, retain) MHUser *user;
+@property (nonatomic, retain) MHOrganization *userInOrganization;
+@property (nonatomic, retain) NSSet *answerSheets;
 @end
 
 @interface MHPerson (CoreDataGeneratedAccessors)
@@ -111,5 +112,10 @@
 - (void)removeUpdatedInteractionsObject:(MHInteraction *)value;
 - (void)addUpdatedInteractions:(NSSet *)values;
 - (void)removeUpdatedInteractions:(NSSet *)values;
+
+- (void)addAnswerSheetsObject:(MHAnswerSheet *)value;
+- (void)removeAnswerSheetsObject:(MHAnswerSheet *)value;
+- (void)addAnswerSheets:(NSSet *)values;
+- (void)removeAnswerSheets:(NSSet *)values;
 
 @end

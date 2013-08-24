@@ -54,7 +54,7 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
+		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
 		
 		NSString *baseUrlString			= ( [configDictionary valueForKey:@"api_url"] ? [configDictionary valueForKey:@"api_url"] : @"" );
@@ -119,7 +119,9 @@ typedef enum {
 	NSMutableURLRequest *request		= [self requestWithOptions:requestOptions];
     MHRequestOperation *operation		= [MHRequestOperation operationWithRequest:request options:requestOptions andDelegate:self];
 	operation.requestName				= requestOptions.requestName;
-    
+	
+    NSLog(@"%@", [[request URL] absoluteString]);
+	
 	[self enqueueHTTPRequestOperation:operation];
 	
 }
@@ -178,6 +180,14 @@ typedef enum {
 -(void)getInteractionsForPersonWithRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForInteractionRequestForPersonWithRemoteID:remoteID];
+	
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
+-(void)getPersonWithSurveyAnswerSheetsForPersonWithRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:remoteID];
 	
 	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	

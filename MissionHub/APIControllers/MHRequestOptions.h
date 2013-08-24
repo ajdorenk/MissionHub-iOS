@@ -67,7 +67,8 @@ typedef enum {
 	MHRequestOptionsIncludeSurveysQuestions,
 	MHRequestOptionsIncludeSurveysKeywords,
 	MHRequestOptionsIncludeOrganizationalLabelsLabel,
-	MHRequestOptionsIncludeOrganizationalPermissionsPermission
+	MHRequestOptionsIncludeOrganizationalPermissionsPermission,
+	MHRequestOptionsIncludeAnswerSheetsAnswers,
 } MHRequestOptionsIncludes;
 
 typedef enum {
@@ -172,6 +173,7 @@ typedef enum {
 - (id)configureForNextPageRequest;
 - (id)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
 - (id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID;
+-(id)configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:(NSNumber *)personID;
 - (id)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction;
 - (id)configureForCreatePersonRequestWithPerson:(MHPerson *)person;
 

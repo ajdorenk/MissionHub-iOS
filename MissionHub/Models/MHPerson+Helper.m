@@ -92,10 +92,14 @@
 	
 	if (![self.remoteID isEqualToNumber:@0]) {
 		
-		[errorMessage appendString:@"Person Already Exists"];
-		*error = [NSError errorWithDomain:@"MHPerson.errorDomain"
-									 code:1
-								 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+		if (error != NULL) {
+		
+			[errorMessage appendString:@"Person Already Exists"];
+			*error = [NSError errorWithDomain:@"MHPerson.errorDomain"
+										 code:1
+									 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+			
+		}
 		
 		return NO;
 		
@@ -107,10 +111,14 @@
 		
 	} else {
 		
-		[errorMessage appendString:@"First Name Missing "];
-		*error = [NSError errorWithDomain:@"MHPerson.errorDomain"
-									 code:2
-								 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+		if (error != NULL) {
+		
+			[errorMessage appendString:@"First Name Missing "];
+			*error = [NSError errorWithDomain:@"MHPerson.errorDomain"
+										 code:2
+									 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+			
+		}
 		
 		return NO;
 		
@@ -292,6 +300,18 @@
 			MHAddress *newObject = [MHAddress newObjectFromFields:object];
 			
 			[self addAddressesObject:newObject];
+			
+		}];
+		
+	} else if ([fieldName isEqualToString:@"answer_sheets"]) {
+		
+		NSArray *arrayOfObjects = relationshipObject;
+		
+		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+			
+			MHAnswerSheet *newObject = [MHAnswerSheet newObjectFromFields:object];
+			
+			[self addAnswerSheetsObject:newObject];
 			
 		}];
 		

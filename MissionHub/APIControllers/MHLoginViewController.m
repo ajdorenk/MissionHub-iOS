@@ -275,7 +275,8 @@ typedef enum {
 		
 		NSError *error = [NSError errorWithDomain:MHLoginErrorDomain
 											 code:code
-										 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(alertMessage, nil)}];
+										 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(alertMessage, nil),
+													@"title": alertTitle}];
 		
 		[MHErrorHandler presentError:error];
     }

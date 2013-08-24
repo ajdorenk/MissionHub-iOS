@@ -32,10 +32,15 @@
 	NSMutableString *errorMessage = [NSMutableString string];
 	
 	if (![self.remoteID isEqualToNumber:@0]) {
-		[errorMessage appendString:@"Interaction Already Exists"];
-		*error = [NSError errorWithDomain:@"MHInteraction.errorDomain"
-									 code:1
-								 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+		
+		if (error != NULL) {
+		
+			[errorMessage appendString:@"Interaction Already Exists"];
+			*error = [NSError errorWithDomain:@"MHInteraction.errorDomain"
+										 code:1
+									 userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+			
+		}
 		
 		return NO;
 		
@@ -81,9 +86,13 @@
 	
 	if ([errorMessage length] > 0) {
 		
-		*error = [NSError errorWithDomain:@"MHInteraction.errorDomain"
-									code:2
-								userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage, nil)}];
+		if (error != NULL) {
+		
+			*error = [NSError errorWithDomain:@"MHInteraction.errorDomain"
+										code:2
+									userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage, nil)}];
+			
+		}
 		
 		return NO;
 		

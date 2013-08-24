@@ -2,12 +2,13 @@
 //  MHPerson.m
 //  MissionHub
 //
-//  Created by Michael Harrison on 7/11/13.
+//  Created by Michael Harrison on 8/23/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
 #import "MHPerson.h"
 #import "MHAddress.h"
+#import "MHAnswerSheet.h"
 #import "MHEmailAddress.h"
 #import "MHInteraction.h"
 #import "MHOrganization.h"
@@ -48,12 +49,13 @@
 @dynamic emailAddresses;
 @dynamic initiatedInteractions;
 @dynamic labels;
-@dynamic userInOrganization;
 @dynamic permissionLevel;
 @dynamic phoneNumbers;
 @dynamic receivedInteractions;
 @dynamic surveys;
 @dynamic updatedInteractions;
 @dynamic user;
+@dynamic userInOrganization;
+@dynamic answerSheets;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MHPerson.h"
 #import "MHAddress.h"
+#import "MHAnswerSheet.h"
 #import "MHEmailAddress.h"
 #import "MHInteraction.h"
 #import "MHOrganization.h"

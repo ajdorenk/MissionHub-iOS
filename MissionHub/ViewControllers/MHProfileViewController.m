@@ -205,6 +205,23 @@
 		self._person = person;
 		[self refreshProfile];
 		
+		[[MHAPI sharedInstance] getPersonWithSurveyAnswerSheetsForPersonWithRemoteID:person.remoteID
+													withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+														
+														if ([[result objectAtIndex:0] isKindOfClass:[MHPerson class]]) {
+															
+															MHPerson *profilePerson = [result objectAtIndex:0];
+															
+															[self._person addAnswerSheets:profilePerson.answerSheets];
+															
+														}
+														
+													} failBlock:^(NSError *error, MHRequestOptions *options) {
+														
+														[MHErrorHandler presentError:error];
+														
+													}];
+		
 		[[MHAPI sharedInstance] getInteractionsForPersonWithRemoteID:person.remoteID
 													withSuccessBlock:^(NSArray *resultArray, MHRequestOptions *options) {
 														

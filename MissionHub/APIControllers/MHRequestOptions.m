@@ -392,6 +392,16 @@
 	return self;
 }
 
+-(id)configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:(NSNumber *)personID {
+	
+	[[[self reset] addInclude:MHRequestOptionsIncludePeopleAnswerSheets] addInclude:MHRequestOptionsIncludeAnswerSheetsAnswers];
+	self.endpoint = MHRequestOptionsEndpointPeople;
+	self.remoteID = [personID integerValue];
+	self.type		= MHRequestOptionsTypeShow;
+	
+	return self;
+}
+
 -(id)configureForNextPageRequest {
 	
 	[self setLimitAndOffsetForNextPage];
@@ -994,6 +1004,9 @@
 			break;
 		case MHRequestOptionsIncludeInteractionsReceiver:
 			includeString = @"receiver";
+			break;
+		case MHRequestOptionsIncludeAnswerSheetsAnswers:
+			includeString = @"answers";
 			break;
 			
 		default:

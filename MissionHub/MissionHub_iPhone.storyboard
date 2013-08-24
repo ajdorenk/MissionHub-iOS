@@ -135,12 +135,7 @@
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bF6-d3-W7E">
                                         <color key="color" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="MH_Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="rCR-jh-jVW">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="67" id="9lp-av-H5H"/>
-                                            <constraint firstAttribute="width" constant="240" id="k1h-gp-8Nk"/>
-                                        </constraints>
-                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="MH_Mobile_Default_Image_iPhone5.png" translatesAutoresizingMaskIntoConstraints="NO" id="rCR-jh-jVW"/>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="Xmz-2q-J0e">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="83" id="5dy-dT-Zy2"/>
@@ -156,12 +151,14 @@ select another survey.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Xmz-2q-J0e" firstAttribute="top" secondItem="tIp-cw-0ua" secondAttribute="top" constant="198" id="8Pl-bB-4Jw"/>
+                                    <constraint firstItem="rCR-jh-jVW" firstAttribute="trailing" secondItem="tIp-cw-0ua" secondAttribute="trailing" type="default" id="1ZQ-jp-cjK"/>
+                                    <constraint firstItem="rCR-jh-jVW" firstAttribute="top" secondItem="tIp-cw-0ua" secondAttribute="top" type="default" id="6P3-Qo-cz8"/>
+                                    <constraint firstItem="bF6-d3-W7E" firstAttribute="top" secondItem="Xmz-2q-J0e" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Dkd-tC-bwy"/>
+                                    <constraint firstItem="Xmz-2q-J0e" firstAttribute="top" secondItem="tIp-cw-0ua" secondAttribute="top" constant="218" id="EkV-XL-VhX"/>
+                                    <constraint firstItem="rCR-jh-jVW" firstAttribute="bottom" secondItem="tIp-cw-0ua" secondAttribute="bottom" type="default" id="JXG-X8-lI4"/>
                                     <constraint firstItem="Xmz-2q-J0e" firstAttribute="trailing" secondItem="tIp-cw-0ua" secondAttribute="trailing" type="default" id="N7T-Bf-Ylu"/>
                                     <constraint firstItem="bF6-d3-W7E" firstAttribute="centerX" secondItem="Xmz-2q-J0e" secondAttribute="centerX" type="default" id="WhH-i2-GzI"/>
-                                    <constraint firstAttribute="bottom" secondItem="bF6-d3-W7E" secondAttribute="bottom" constant="159" id="iiY-ap-5hN"/>
-                                    <constraint firstItem="rCR-jh-jVW" firstAttribute="top" secondItem="tIp-cw-0ua" secondAttribute="top" constant="70" id="piR-a2-lvu"/>
-                                    <constraint firstItem="rCR-jh-jVW" firstAttribute="centerX" secondItem="Xmz-2q-J0e" secondAttribute="centerX" type="default" id="v0S-Mq-CyF"/>
+                                    <constraint firstItem="rCR-jh-jVW" firstAttribute="leading" secondItem="tIp-cw-0ua" secondAttribute="leading" type="default" id="iZY-mz-Jwl"/>
                                     <constraint firstItem="Xmz-2q-J0e" firstAttribute="leading" secondItem="tIp-cw-0ua" secondAttribute="leading" type="default" id="wPR-rY-1C0"/>
                                 </constraints>
                             </view>
@@ -399,23 +396,8 @@ select another survey.</string>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name, etc." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21B-nF-jGQ">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="156" id="gQF-oT-2zj"/>
-                                                        <constraint firstAttribute="height" constant="20" id="u6K-kI-fHH"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="21B-nF-jGQ" firstAttribute="centerY" secondItem="aKB-Ci-Xl2" secondAttribute="centerY" type="default" id="IrA-qk-FE9"/>
-                                            <constraint firstItem="21B-nF-jGQ" firstAttribute="leading" secondItem="aKB-Ci-Xl2" secondAttribute="leading" constant="117" id="P0X-uB-gg8"/>
-                                        </constraints>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -428,7 +410,7 @@ select another survey.</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FTS-py-wMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2700" y="86"/>
+            <point key="canvasLocation" x="2284" y="78"/>
         </scene>
         <!--Profile Header View Controller-->
         <scene sceneID="QDV-h9-D5P">
@@ -503,7 +485,7 @@ select another survey.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0EV-wD-eEg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2284" y="-273"/>
+            <point key="canvasLocation" x="2279" y="-300"/>
         </scene>
         <!--Profile Menu View Controller-->
         <scene sceneID="WLs-va-hGv">
@@ -539,7 +521,7 @@ select another survey.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M06-4X-qeR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2728" y="-136"/>
+            <point key="canvasLocation" x="2284" y="-63"/>
         </scene>
         <!--New Interaction View Controller-->
         <scene sceneID="o6T-CS-fIN">
@@ -732,7 +714,7 @@ select another survey.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0j-qr-iic" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3668" y="86"/>
+            <point key="canvasLocation" x="1394" y="-1360"/>
         </scene>
         <!--Generic List View Controller-->
         <scene sceneID="7cf-0Z-UkV">
@@ -860,7 +842,7 @@ select another survey.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28f-Oq-ODl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4147" y="78"/>
+            <point key="canvasLocation" x="1860" y="-1360"/>
         </scene>
         <!--Profile Interactions View Controller-->
         <scene sceneID="Jl4-jg-SEQ">
@@ -880,22 +862,8 @@ select another survey.</string>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Interaction 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vq-zB-axA">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="139" id="5d4-94-5VD"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="9vq-zB-axA" firstAttribute="top" secondItem="tzL-Nz-AJT" secondAttribute="top" constant="11" id="Al9-h0-5xu"/>
-                                            <constraint firstItem="9vq-zB-axA" firstAttribute="leading" secondItem="tzL-Nz-AJT" secondAttribute="leading" constant="109" id="sza-To-VlJ"/>
-                                        </constraints>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -908,7 +876,7 @@ select another survey.</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TA7-iH-Ifh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3188" y="94"/>
+            <point key="canvasLocation" x="2284" y="801"/>
         </scene>
         <!--Create Person View Controller-->
         <scene sceneID="bfC-e1-884">
@@ -1231,7 +1199,7 @@ select another survey.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xka-Sg-ziU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1838" y="-641"/>
+            <point key="canvasLocation" x="1394" y="-641"/>
         </scene>
         <!--Profile Surveys View Controller-->
         <scene sceneID="cMw-YO-dzN">
@@ -1251,23 +1219,8 @@ select another survey.</string>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name, etc." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b93-7d-IEw">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="5yk-af-XJM"/>
-                                                        <constraint firstAttribute="width" constant="156" id="AYN-sk-13C"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstItem="b93-7d-IEw" firstAttribute="leading" secondItem="QhB-RI-4yH" secondAttribute="leading" constant="117" id="7tp-Mh-jgq"/>
-                                            <constraint firstItem="b93-7d-IEw" firstAttribute="centerY" secondItem="QhB-RI-4yH" secondAttribute="centerY" type="default" id="Uza-bz-yNU"/>
-                                        </constraints>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1280,11 +1233,10 @@ select another survey.</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2J6-WU-qFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2316" y="78"/>
+            <point key="canvasLocation" x="2284" y="1518"/>
         </scene>
     </scenes>
     <resources>
-        <image name="MH_Logo.png" width="144" height="144"/>
         <image name="MH_Mobile_Default_Image_iPhone5.png" width="640" height="1136"/>
         <image name="MH_Mobile_Icon_Menu.png" width="72" height="72"/>
     </resources>
@@ -1309,19 +1261,19 @@ select another survey.</string>
             <relationships>
                 <relationship kind="action" name="genderDidChange:" candidateClass="UISegmentedControl"/>
                 <relationship kind="action" name="permissionLevelDidChange:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="address1" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="address2" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="city" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="country" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="firstName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="address1" candidateClass="MHTextField"/>
+                <relationship kind="outlet" name="address2" candidateClass="MHTextField"/>
+                <relationship kind="outlet" name="city" candidateClass="MHTextField"/>
+                <relationship kind="outlet" name="country" candidateClass="MHTextField"/>
+                <relationship kind="outlet" name="email" candidateClass="MHTextField"/>
+                <relationship kind="outlet" name="firstName" candidateClass="MHTextField"/>
                 <relationship kind="outlet" name="gender" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="lastName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lastName" candidateClass="MHTextField"/>
                 <relationship kind="outlet" name="permissionLevel" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="phone" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="phone" candidateClass="MHTextField"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="state" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="zip" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="state" candidateClass="MHTextField"/>
+                <relationship kind="outlet" name="zip" candidateClass="MHTextField"/>
             </relationships>
         </class>
         <class className="MHGenericCell" superclassName="UITableViewCell">
@@ -1382,6 +1334,7 @@ select another survey.</string>
         <class className="MHPeopleListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHPeopleListViewController.h"/>
             <relationships>
+                <relationship kind="action" name="checkAllContacts:" candidateClass="UIButton"/>
                 <relationship kind="action" name="revealMenu:"/>
                 <relationship kind="outlet" name="activityBar" candidateClass="UIView"/>
                 <relationship kind="outlet" name="peopleSearchBar" candidateClass="UISearchBar"/>
