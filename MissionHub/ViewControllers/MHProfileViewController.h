@@ -24,6 +24,6 @@
 @property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 @property (retain, nonatomic) IBOutlet UITableView *table;
 
--(void)refreshProfile;
+- (void)refresh;
 
 @end

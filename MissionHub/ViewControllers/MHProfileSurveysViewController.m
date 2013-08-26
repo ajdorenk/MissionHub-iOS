@@ -15,6 +15,8 @@
 
 @implementation MHProfileSurveysViewController
 
+@synthesize _person;
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
     [self.parallaxController tableViewControllerDidScroll:self];
@@ -59,6 +61,14 @@
 
 -(void)setPerson:(MHPerson *)person {
 	
+	if (person) {
+		
+		self._person = person;
+		
+		[self.tableView reloadData];
+		
+	}
+	
 }
 
 #pragma mark - Table view data source
@@ -66,17 +76,17 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return self._person.answerSheets.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    return ((MHAnswerSheet *)[self._person.answerSheets.allObjects objectAtIndex:section]).answers.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return 0;
+	return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -85,7 +95,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	
-	return 0.0f;
+	return 60.0f;
 	
 }
 

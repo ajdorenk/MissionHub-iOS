@@ -15,6 +15,4 @@
 @property (nonatomic, strong) MHPerson *_person;
 @property (nonatomic, strong) NSMutableArray *_interactionArray;
 
--(void)setInteractionArray:(NSMutableArray *)interactionArray;
-
 @end

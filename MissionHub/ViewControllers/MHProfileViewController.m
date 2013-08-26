@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSArray								*allViewControllers;
 @property (nonatomic, strong) UIViewController						*currentViewController;
 @property (nonatomic, strong) MHPerson								*_person;
-@property (nonatomic, strong) NSMutableArray						*_interactionArray;
 
 @property (nonatomic, strong) MHNewInteractionViewController		*_createInteractionViewController;
 @property (nonatomic, strong) MHProfileHeaderViewController			*_headerViewController;
@@ -43,7 +42,6 @@
 @synthesize _person;
 //@synthesize addLabelButton, addTagButton, backMenuButton;
 //@synthesize menu;
-@synthesize _interactionArray;
 
 -(void) awakeFromNib
 {
@@ -59,7 +57,6 @@
 			 segmentedViewController:[self menuViewController]];
 	
 	self._person = [MHAPI sharedInstance].currentUser;
-	self._interactionArray = [NSMutableArray array];
 	
 }
 
@@ -203,7 +200,7 @@
 	if (person) {
 		
 		self._person = person;
-		[self refreshProfile];
+		[self refresh];
 		
 		[[MHAPI sharedInstance] getPersonWithSurveyAnswerSheetsForPersonWithRemoteID:person.remoteID
 													withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
@@ -225,7 +222,6 @@
 		[[MHAPI sharedInstance] getInteractionsForPersonWithRemoteID:person.remoteID
 													withSuccessBlock:^(NSArray *resultArray, MHRequestOptions *options) {
 														
-														[self._interactionArray removeAllObjects];
 														[[self._person mutableSetValueForKey:@"createdInteractions"] removeAllObjects];
 														[[self._person mutableSetValueForKey:@"initiatedInteractions"] removeAllObjects];
 														[[self._person mutableSetValueForKey:@"receivedInteractions"] removeAllObjects];
@@ -261,14 +257,11 @@
 																	
 																}
 																
-																[self._interactionArray addObject:interactionObject];
-																
 															}
 															
 														}];
 														
-														[[self interactionsViewController] setInteractionArray:self._interactionArray];
-														[self refreshProfile];
+														[self refresh];
 			
 		}
 														   failBlock:^(NSError *error, MHRequestOptions *options) {
@@ -281,7 +274,7 @@
 	
 }
 
--(void)refreshProfile {
+-(void)refresh {
 	
 	[[self headerViewController] setPerson:self._person];
 	[[self currentTableViewContoller] setPerson:self._person];

@@ -11,6 +11,6 @@
 
 @protocol MHProfileProtocol <NSObject>
 @required
--(void)setPerson:(MHPerson *)person;
+- (void)setPerson:(MHPerson *)person;
 
 @end

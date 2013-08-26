@@ -11,4 +11,6 @@
 
 @interface MHProfileSurveysViewController : UITableViewController <MHProfileProtocol>
 
+@property (nonatomic, strong) MHPerson *_person;
+
 @end
