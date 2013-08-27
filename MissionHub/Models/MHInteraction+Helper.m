@@ -9,6 +9,7 @@
 #import "MHInteraction+Helper.h"
 #import "MHAPI.h"
 #import "NSSet+MHSearchForRemoteID.h"
+#import "MHInteractionType+Helper.h"
 
 @implementation MHInteraction (Helper)
 
@@ -24,6 +25,99 @@
 	self.updated_at		= [NSDate date];
 	self.creator		= [MHAPI sharedInstance].currentUser;
 	self.updater		= [MHAPI sharedInstance].currentUser;
+	
+}
+
+- (NSString *)updatedString {
+	
+	NSMutableString *returnString = [NSMutableString stringWithString:@"Last updated "];
+	
+	if (self.updater) {
+		
+		[returnString appendFormat:@"by %@ ", [self.updater fullName]];
+	}
+	
+	if (self.updated_at) {
+		
+		[returnString appendFormat:@"on %@ ", [self updatedAtString]];
+		
+	}
+	
+	if ([returnString isEqualToString:@"Last updated "]) {
+		
+		return @"";
+		
+	}
+	
+	return returnString;
+	
+}
+
+- (NSString *)displayString {
+	
+	NSString *returnString = @"";
+	
+	if (self.type) {
+		
+		NSMutableString *template	= [self.type displayTemplate];
+		
+		[template replaceOccurrencesOfString:@"{{initiator}}" withString:[self initiatorsNames] options:NSLiteralSearch range:NSMakeRange(0, [template length])];
+		[template replaceOccurrencesOfString:@"{{receiver}}" withString:[self receiverName] options:NSLiteralSearch range:NSMakeRange(0, [template length])];
+		
+		returnString = template;
+	}
+	
+	return returnString;
+	
+}
+
+- (NSString *)updatedAtString {
+	
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"dd MMM yyyy"];
+	
+	return [dateFormatter stringFromDate:self.updated_at];
+	
+}
+
+- (NSString *)receiverName {
+
+	return [self.receiver fullName];
+	
+}
+
+- (NSString *)initiatorsNames {
+	
+	__block NSMutableString *initiatorsString	= [NSMutableString string];
+	
+	//create a displayable list of names from the intiators of the interaction
+	if (self.initiators.count == 1) {
+		
+		[initiatorsString appendString:[[self.initiators.allObjects objectAtIndex:0] fullName]];
+		
+	} else {
+		
+		[self.initiators.allObjects enumerateObjectsUsingBlock:^(MHPerson *initiator, NSUInteger index, BOOL *stop) {
+			
+			if (index == self.initiators.count - 1) {
+				
+				//remove trailing ,
+				[initiatorsString deleteCharactersInRange:NSMakeRange([initiatorsString length] - 2, 2)];
+				//add and {{name}} so that it is grammatically correct
+				[initiatorsString appendFormat:@" and %@", [initiator fullName]];
+				
+				
+			} else {
+				
+				[initiatorsString appendFormat:@"%@, ", [initiator fullName]];
+				
+			}
+			
+		}];
+		
+	}
+	
+	return initiatorsString;
 	
 }
 

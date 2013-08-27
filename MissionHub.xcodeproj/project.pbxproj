@@ -276,6 +276,10 @@
 		68D7B8C8177F804300A2E231 /* MHOrganizationalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */; };
 		68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68EB33CE17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
+		68EC3A5B17CD053500EE3717 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5A17CD053500EE3717 /* TTTAttributedLabel.m */; };
+		68EC3A5C17CD053500EE3717 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5A17CD053500EE3717 /* TTTAttributedLabel.m */; };
+		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
+		68EC3A6017CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
 		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
@@ -599,6 +603,10 @@
 		68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalLabel.m; path = Models/MHOrganizationalLabel.m; sourceTree = "<group>"; };
 		68EB33CB17792D8F003958A0 /* MHErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHErrorHandler.h; path = APIControllers/MHErrorHandler.h; sourceTree = "<group>"; };
 		68EB33CC17792D8F003958A0 /* MHErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHErrorHandler.m; path = APIControllers/MHErrorHandler.m; sourceTree = "<group>"; };
+		68EC3A5917CD053500EE3717 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		68EC3A5A17CD053500EE3717 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteractionType+Helper.h"; path = "Models/MHInteractionType+Helper.h"; sourceTree = "<group>"; };
+		68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteractionType+Helper.m"; path = "Models/MHInteractionType+Helper.m"; sourceTree = "<group>"; };
 		AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationBar.h; path = "Custom UI/MHCustomNavigationBar.h"; sourceTree = "<group>"; };
 		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
@@ -693,6 +701,8 @@
 				68478D59177A7F410014501D /* MHSurvey.m */,
 				68478D50177A784A0014501D /* MHPermissionLevel.h */,
 				68478D51177A784A0014501D /* MHPermissionLevel.m */,
+				68478D3C177A70200014501D /* MHInteractionType.h */,
+				68478D3D177A70200014501D /* MHInteractionType.m */,
 				68818AFA17C7FFF800624887 /* MHAnswerSheet.h */,
 				68818AFB17C7FFF800624887 /* MHAnswerSheet.m */,
 				68818B0817C81E7900624887 /* MHPerson.h */,
@@ -876,8 +886,8 @@
 				6823A7D9177EC34D00DBDF3F /* MHUser.m */,
 				68B7DDA117A2F95600849F31 /* MHInteraction+Helper.h */,
 				68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */,
-				68478D3C177A70200014501D /* MHInteractionType.h */,
-				68478D3D177A70200014501D /* MHInteractionType.m */,
+				68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */,
+				68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */,
 				68B7DDAD17A318D100849F31 /* MHOrganizationalPermission+Helper.h */,
 				68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */,
 				682C68E717B9E3A600BAD332 /* MHPermissionLevel+Helper.h */,
@@ -1050,6 +1060,7 @@
 		68C068AA17710298007C79D6 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				68EC3A5817CD053500EE3717 /* TTTAttributedLabel */,
 				6855EDDA1793B82300769B71 /* DWTagList */,
 				68A68BD1178A192100927DF8 /* ODRefreshControl */,
 				68134F9717837E6500227C2A /* SIAlertView */,
@@ -1150,6 +1161,16 @@
 			name = DeprecatedHeaders;
 			path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/DeprecatedHeaders;
 			sourceTree = SOURCE_ROOT;
+		};
+		68EC3A5817CD053500EE3717 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				68EC3A5917CD053500EE3717 /* TTTAttributedLabel.h */,
+				68EC3A5A17CD053500EE3717 /* TTTAttributedLabel.m */,
+			);
+			name = TTTAttributedLabel;
+			path = Libraries/TTTAttributedLabel/TTTAttributedLabel;
+			sourceTree = "<group>";
 		};
 		AD301125176FE41F00D53E35 /* Custom UI */ = {
 			isa = PBXGroup;
@@ -1506,6 +1527,8 @@
 				68818AFC17C7FFF800624887 /* MHAnswerSheet.m in Sources */,
 				68818B0017C7FFF900624887 /* MHAnswer.m in Sources */,
 				68818B0417C800A300624887 /* MHAnswerSheet+Helper.m in Sources */,
+				68EC3A5B17CD053500EE3717 /* TTTAttributedLabel.m in Sources */,
+				68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1587,6 +1610,8 @@
 				68818AFD17C7FFF800624887 /* MHAnswerSheet.m in Sources */,
 				68818B0117C7FFF900624887 /* MHAnswer.m in Sources */,
 				68818B0517C800A300624887 /* MHAnswerSheet+Helper.m in Sources */,
+				68EC3A5C17CD053500EE3717 /* TTTAttributedLabel.m in Sources */,
+				68EC3A6017CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

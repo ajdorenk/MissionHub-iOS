@@ -22,3 +22,6 @@
 [submodule "Libraries/DWTagList"]
 	path = Libraries/DWTagList
 	url = https://github.com/michaelharro/DWTagList.git
+[submodule "Libraries/TTTAttributedLabel"]
+	path = Libraries/TTTAttributedLabel
+	url = https://github.com/mattt/TTTAttributedLabel.git

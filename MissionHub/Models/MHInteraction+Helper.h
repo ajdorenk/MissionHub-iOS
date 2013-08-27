@@ -20,6 +20,10 @@ typedef enum {
 
 @interface MHInteraction (Helper)
 
-+(NSString *)stringForPrivacySetting:(MHInteractionPrivacySettings)privacySetting;
++ (NSString *)stringForPrivacySetting:(MHInteractionPrivacySettings)privacySetting;
+- (NSString *)initiatorsNames;
+- (NSString *)receiverName;
+- (NSString *)updatedString;
+- (NSString *)updatedAtString;
 
 @end
