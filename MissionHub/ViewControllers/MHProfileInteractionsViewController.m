@@ -35,6 +35,14 @@
     return self;
 }
 
+- (void)awakeFromNib {
+	
+	[super awakeFromNib];
+	
+	self._interactionArray = [NSMutableArray array];
+	
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -123,23 +131,24 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	return 44.0f;
+	MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:indexPath.row]);
+	return [MHInteractionCell heightForCellWithInteraction:interaction];
 	
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString *CellIdentifier = @"InteractionsCell";
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	static NSString *CellIdentifier = @"MHInteractionsCell";
+	MHInteractionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
 	// Configure the cell...
 	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		cell = [[MHInteractionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
     
     // Configure the cell...
 	MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:indexPath.row]);
-	cell.textLabel.text = [interaction valueForKey:@"timestamp"];
+	cell.interaction = interaction;
     
     return cell;
 }

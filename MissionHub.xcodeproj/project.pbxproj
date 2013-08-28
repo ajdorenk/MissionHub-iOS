@@ -280,6 +280,18 @@
 		68EC3A5C17CD053500EE3717 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5A17CD053500EE3717 /* TTTAttributedLabel.m */; };
 		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
 		68EC3A6017CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
+		68EC3A6217CE6D0400EE3717 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EC3A6117CE6D0400EE3717 /* CoreText.framework */; };
+		68EC3A6317CE6E4B00EE3717 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0917C81E7900624887 /* MHPerson.m */; };
+		68EC3A6417CE6E8700EE3717 /* MHInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D3A177A5AA20014501D /* MHInteraction.m */; };
+		68EC3A6517CE6E8700EE3717 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0917C81E7900624887 /* MHPerson.m */; };
+		68EC3A6617CE6E8700EE3717 /* MHOrganization+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */; };
+		68EC3A6717CE6E8700EE3717 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
+		68EC3A6817CE6E8700EE3717 /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
+		68EC3A6917CE6E8700EE3717 /* MHProfileHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHProfileHeaderViewController.m */; };
+		68EC3A6A17CE6E8700EE3717 /* MHProfileInteractionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3C60DB178761E100744167 /* MHProfileInteractionsViewController.m */; };
+		68EC3A6B17CE6E8700EE3717 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AD177102C9007C79D6 /* ECSlidingViewController.m */; };
+		68EC3A6C17CE6E8700EE3717 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AF177102C9007C79D6 /* UIImage+ImageWithUIView.m */; };
+		68EC3A6D17CE6E8700EE3717 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
@@ -607,6 +619,7 @@
 		68EC3A5A17CD053500EE3717 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteractionType+Helper.h"; path = "Models/MHInteractionType+Helper.h"; sourceTree = "<group>"; };
 		68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteractionType+Helper.m"; path = "Models/MHInteractionType+Helper.m"; sourceTree = "<group>"; };
+		68EC3A6117CE6D0400EE3717 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationBar.h; path = "Custom UI/MHCustomNavigationBar.h"; sourceTree = "<group>"; };
 		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
@@ -650,6 +663,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68EC3A6217CE6D0400EE3717 /* CoreText.framework in Frameworks */,
 				68C0695F17710BF1007C79D6 /* CFNetwork.framework in Frameworks */,
 				68C0696017710BF1007C79D6 /* libz.dylib in Frameworks */,
 				68C0696117710BF1007C79D6 /* MobileCoreServices.framework in Frameworks */,
@@ -745,6 +759,7 @@
 		683910851760FD3100E01B46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68EC3A6117CE6D0400EE3717 /* CoreText.framework */,
 				6812256F1767B75500D8C238 /* AdSupport.framework */,
 				68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */,
 				68D7AA481766CE4100B9B0B1 /* Security.framework */,
@@ -1443,6 +1458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68EC3A6317CE6E4B00EE3717 /* MHPerson.m in Sources */,
 				AD3C60CE1781E9AE00744167 /* ECSlidingViewController.m in Sources */,
 				AD3C60CF1781E9AE00744167 /* UIImage+ImageWithUIView.m in Sources */,
 				683910951760FD3100E01B46 /* main.m in Sources */,
@@ -1536,6 +1552,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68EC3A6417CE6E8700EE3717 /* MHInteraction.m in Sources */,
+				68EC3A6517CE6E8700EE3717 /* MHPerson.m in Sources */,
+				68EC3A6617CE6E8700EE3717 /* MHOrganization+Helper.m in Sources */,
+				68EC3A6717CE6E8700EE3717 /* MHNavigationViewController.m in Sources */,
+				68EC3A6817CE6E8700EE3717 /* MHProfileViewController.m in Sources */,
+				68EC3A6917CE6E8700EE3717 /* MHProfileHeaderViewController.m in Sources */,
+				68EC3A6A17CE6E8700EE3717 /* MHProfileInteractionsViewController.m in Sources */,
+				68EC3A6B17CE6E8700EE3717 /* ECSlidingViewController.m in Sources */,
+				68EC3A6C17CE6E8700EE3717 /* UIImage+ImageWithUIView.m in Sources */,
+				68EC3A6D17CE6E8700EE3717 /* NSDictionary+UrlEncodedString.m in Sources */,
 				683910B81760FD3100E01B46 /* MissionHubTests.m in Sources */,
 				683910D41761087600E01B46 /* MHRootViewController.m in Sources */,
 				683910D91761356000E01B46 /* MHMenuViewController.m in Sources */,

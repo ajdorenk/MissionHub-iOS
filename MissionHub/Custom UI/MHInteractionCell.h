@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) MHInteraction *interaction;
 @property (nonatomic, strong) TTTAttributedLabel *descriptionLabel;
-@property (nonatomic, strong) UILabel *commentLabel;
+@property (nonatomic, strong) TTTAttributedLabel *commentLabel;
 @property (nonatomic, strong) TTTAttributedLabel *updatedLabel;
 
 - (void)populateWithInteraction:(MHInteraction *)interaction;

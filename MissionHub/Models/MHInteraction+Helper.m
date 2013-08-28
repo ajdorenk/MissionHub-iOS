@@ -61,9 +61,13 @@
 		
 		NSMutableString *template	= [self.type displayTemplate];
 		
-		[template replaceOccurrencesOfString:@"{{initiator}}" withString:[self initiatorsNames] options:NSLiteralSearch range:NSMakeRange(0, [template length])];
-		[template replaceOccurrencesOfString:@"{{receiver}}" withString:[self receiverName] options:NSLiteralSearch range:NSMakeRange(0, [template length])];
+		if (template.length > 0) {
+			
+			[template replaceOccurrencesOfString:@"{{initiator}}" withString:[self initiatorsNames] options:NSLiteralSearch range:NSMakeRange(0, [template length])];
+			[template replaceOccurrencesOfString:@"{{receiver}}" withString:[self receiverName] options:NSLiteralSearch range:NSMakeRange(0, [template length])];
 		
+		}
+			
 		returnString = template;
 	}
 	
@@ -81,8 +85,12 @@
 }
 
 - (NSString *)receiverName {
+	
+	NSString *receiverName = [self.receiver fullName];
+	
+	receiverName = (receiverName.length > 0 ? receiverName : @"unknown");
 
-	return [self.receiver fullName];
+	return receiverName;
 	
 }
 
@@ -116,6 +124,8 @@
 		}];
 		
 	}
+	
+	initiatorsString = (initiatorsString.length > 0 ? initiatorsString : [@"unknown" mutableCopy]);
 	
 	return initiatorsString;
 	

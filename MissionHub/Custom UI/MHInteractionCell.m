@@ -16,12 +16,18 @@ static CGFloat const MHInteractionCellDescriptionFontSize	= 14;
 static NSString * const MHInteractionCellNameFont			= @"Arial-BoldMT";
 static CGFloat const MHInteractionCellNameFontSize			= 14;
 static NSString * const MHInteractionCellCommentFont		= @"Arial-ItalicMT";
-static CGFloat const MHInteractionCellCommentFontSize		= 12;
+static CGFloat const MHInteractionCellCommentFontSize		= 14;
 static NSString * const MHInteractionCellUpdatedFont		= @"ArialMT";
 static CGFloat const MHInteractionCellUpdatedFontSize		= 12;
 static NSString * const MHInteractionCellUpdatedAtFont		= @"Arial-BoldMT";
 static CGFloat const MHInteractionCellUpdatedAtFontSize		= 12;
 static CGFloat const MHInteractionCellMargin				= 20.0f;
+
+@interface MHInteractionCell ()
+
+- (void)configure;
+
+@end
 
 @implementation MHInteractionCell
 
@@ -37,18 +43,7 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
         return nil;
     }
     
-    self.layer.shouldRasterize = YES;
-    self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
-    
-    self.descriptionLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    self.descriptionLabel.font = [UIFont fontWithName:MHInteractionCellDescriptionFont size:MHInteractionCellDescriptionFontSize];
-    self.descriptionLabel.textColor = [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
-    self.descriptionLabel.lineBreakMode = UILineBreakModeWordWrap;
-    self.descriptionLabel.numberOfLines = 0;
-	
-    self.descriptionLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
-	
-    [self.contentView addSubview:self.descriptionLabel];
+    [self configure];
     
     return self;
 	
@@ -58,27 +53,46 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 - (void)awakeFromNib {
 	
 	[super awakeFromNib];
+	
+	[self configure];
+	
+}
 
-    self.layer.shouldRasterize = YES;
+- (void)configure {
+	
+	self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     
-    self.descriptionLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    self.descriptionLabel.font = [UIFont fontWithName:MHInteractionCellDescriptionFont size:MHInteractionCellDescriptionFontSize];
-    self.descriptionLabel.textColor = [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
+    self.descriptionLabel				= [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    self.descriptionLabel.font			= [UIFont fontWithName:MHInteractionCellDescriptionFont size:MHInteractionCellDescriptionFontSize];
+    self.descriptionLabel.textColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
     self.descriptionLabel.lineBreakMode = UILineBreakModeWordWrap;
     self.descriptionLabel.numberOfLines = 0;
 	
     self.descriptionLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
 	
-	//TODO: comment
+	self.commentLabel				= [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    self.commentLabel.font			= [UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize];
+    self.commentLabel.textColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
+    self.commentLabel.lineBreakMode = UILineBreakModeWordWrap;
+    self.commentLabel.numberOfLines = 0;
 	
-	//TODO: updated
+    self.commentLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+	
+	self.updatedLabel				= [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    self.updatedLabel.font			= [UIFont fontWithName:MHInteractionCellUpdatedFont size:MHInteractionCellUpdatedFontSize];
+    self.updatedLabel.textColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
+    self.updatedLabel.lineBreakMode = UILineBreakModeWordWrap;
+	self.updatedLabel.textAlignment	= UITextAlignmentRight;
+    self.updatedLabel.numberOfLines = 0;
+	
+    self.updatedLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
 	
     [self.contentView addSubview:self.descriptionLabel];
+	[self.contentView addSubview:self.commentLabel];
+	[self.contentView addSubview:self.updatedLabel];
 	
 }
-
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -91,78 +105,99 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 
 - (void)populateWithInteraction:(MHInteraction *)interaction {
     
+	self.interaction = interaction;
+	
 }
 
 - (void)setInteraction:(MHInteraction *)interaction {
 	
     [self willChangeValueForKey:@"interaction"];
-    _interaction = [interaction copy];
+    _interaction = interaction;
     [self didChangeValueForKey:@"interaction"];
 	
 	__block NSString *initiator		= [self.interaction initiatorsNames];
 	__block NSString *receiver		= [self.interaction receiverName];
 	__block NSString *description	= [self.interaction displayString];
-    
-    [self.descriptionLabel setText:description afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
-		
-        NSRange initiatorRange	=  [description rangeOfString:initiator];
-		NSRange receiverRange	= [description rangeOfString:receiver];
-		
-        CTFontRef boldFont		= CTFontCreateWithName((__bridge CFStringRef)MHInteractionCellNameFont, MHInteractionCellNameFontSize, NULL);
-		
-		UIColor *boldColor		= [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
-		
-        if (boldFont) {
-			
-            [mutableAttributedString removeAttribute:(__bridge NSString *)kCTFontAttributeName range:initiatorRange];
-            [mutableAttributedString addAttribute:(__bridge NSString *)kCTFontAttributeName value:(__bridge id)boldFont range:initiatorRange];
-			
-			[mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:initiatorRange];
-			[mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)[boldColor CGColor] range:initiatorRange];
-			
-			[mutableAttributedString removeAttribute:(__bridge NSString *)kCTFontAttributeName range:receiverRange];
-            [mutableAttributedString addAttribute:(__bridge NSString *)kCTFontAttributeName value:(__bridge id)boldFont range:receiverRange];
-			
-			[mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:receiverRange];
-			[mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)[boldColor CGColor] range:receiverRange];
-			
-            CFRelease(boldFont);
-			
-        }
-		
-        return mutableAttributedString;
-		
-    }];
 	
-	self.commentLabel.text		= self.interaction.comment;
+//	initiator		= @"Olivia Olson";
+//	receiver		= @"Kristen King";
+//	description		= @"Olivia Olson prayed to receive Christ with Kristen King.";
+    
+	if (description.length > 0) {
+	
+		[self.descriptionLabel setText:description afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+			
+			NSRange initiatorRange	=  [description rangeOfString:initiator];
+			NSRange receiverRange	= [description rangeOfString:receiver];
+			
+			CTFontRef boldFont		= CTFontCreateWithName((__bridge CFStringRef)MHInteractionCellNameFont, MHInteractionCellNameFontSize, NULL);
+			
+			UIColor *boldColor		= [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
+			
+			if (boldFont) {
+				
+				[mutableAttributedString removeAttribute:(__bridge NSString *)kCTFontAttributeName range:initiatorRange];
+				[mutableAttributedString addAttribute:(__bridge NSString *)kCTFontAttributeName value:(__bridge id)boldFont range:initiatorRange];
+				
+				[mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:initiatorRange];
+				[mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)[boldColor CGColor] range:initiatorRange];
+				
+				[mutableAttributedString removeAttribute:(__bridge NSString *)kCTFontAttributeName range:receiverRange];
+				[mutableAttributedString addAttribute:(__bridge NSString *)kCTFontAttributeName value:(__bridge id)boldFont range:receiverRange];
+				
+				[mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:receiverRange];
+				[mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)[boldColor CGColor] range:receiverRange];
+				
+				CFRelease(boldFont);
+				
+			}
+			
+			return mutableAttributedString;
+			
+		}];
+		
+	} else {
+		
+		self.descriptionLabel.text = @"";
+		
+	}
+	
+	self.commentLabel.text			= self.interaction.comment;
+//	self.commentLabel.text			= @"This is a comment";
 	
 	//__block NSString *updater		= [self.interaction.updater fullName];
 	__block NSString *updatedDate	= [self.interaction updatedAtString];
 	__block NSString *updated		= [self.interaction updatedString];
 	
-	[self.updatedLabel setText:updated afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+//	updatedDate	= @"06 Sep 2011";
+//	updated		= @"Last updated by Kristen King on 06 Sep 2011";
+	
+	if (updated.length > 0) {
 		
-		NSRange updatedDateRange	= [updated rangeOfString:updatedDate];
-		
-        CTFontRef boldFont		= CTFontCreateWithName((__bridge CFStringRef)MHInteractionCellUpdatedAtFont, MHInteractionCellUpdatedAtFontSize, NULL);
-		//TODO: updated with correct color
-		UIColor *boldColor		= [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
-		
-        if (boldFont) {
+		[self.updatedLabel setText:updated afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
 			
-            [mutableAttributedString removeAttribute:(__bridge NSString *)kCTFontAttributeName range:updatedDateRange];
-            [mutableAttributedString addAttribute:(__bridge NSString *)kCTFontAttributeName value:(__bridge id)boldFont range:updatedDateRange];
+			NSRange updatedDateRange	= [updated rangeOfString:updatedDate];
 			
-			[mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:updatedDateRange];
-			[mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)[boldColor CGColor] range:updatedDateRange];
+			CTFontRef boldFont		= CTFontCreateWithName((__bridge CFStringRef)MHInteractionCellUpdatedAtFont, MHInteractionCellUpdatedAtFontSize, NULL);
 			
-            CFRelease(boldFont);
+			if (boldFont) {
+				
+				[mutableAttributedString removeAttribute:(__bridge NSString *)kCTFontAttributeName range:updatedDateRange];
+				[mutableAttributedString addAttribute:(__bridge NSString *)kCTFontAttributeName value:(__bridge id)boldFont range:updatedDateRange];
+				
+				CFRelease(boldFont);
+				
+			}
 			
-        }
+			return mutableAttributedString;
+			
+		}];
 		
-        return mutableAttributedString;
+	} else {
 		
-    }];
+		self.updatedLabel.text = @"";
+		
+	}
 	
 }
 
@@ -172,17 +207,40 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	NSString *updatedString	= [interaction updatedString];
 	NSString *commentString = interaction.comment;
 	
-    CGFloat height = MHInteractionCellMargin;
-    height += ceilf([description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
-	height += MHInteractionCellMargin;
+//	description	= @"Olivia Olson prayed to receive Christ with Kristen King.";
+//	updatedString	= @"Last updated by Kristen King on 06 Sep 2011";
+//	commentString = @"This is a comment";
 	
-	if (interaction.comment.length > 0) {
-		height += ceilf([commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
-		height += MHInteractionCellMargin;
+    CGFloat height = MHInteractionCellMargin;
+	
+	if (description.length > 0) {
+		
+		height += ceilf([description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
+		height += 0.5 * MHInteractionCellMargin;
+		
 	}
 	
-	height += ceilf([updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
-	height += MHInteractionCellMargin;
+	if (commentString.length > 0) {
+		
+		height += ceilf([commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
+		height += 0.5 * MHInteractionCellMargin;
+		
+	}
+	
+	if (updatedString.length > 0) {
+		
+		height += ceilf([updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
+		height += MHInteractionCellMargin;
+		
+	}
+	
+	if (height == MHInteractionCellMargin) {
+		
+		height = 0;
+		
+	}
+	
+    return height;
 	
     return height;
 }
@@ -196,18 +254,31 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
     self.textLabel.hidden			= YES;
     self.detailTextLabel.hidden		= YES;
 	
-    self.descriptionLabel.frame		= CGRectMake(MHInteractionCellMargin, MHInteractionCellMargin, CGRectGetWidth(self.descriptionLabel.frame), CGRectGetHeight(self.descriptionLabel.frame));
+	NSString *description	= [self.interaction displayString];
+	NSString *updatedString	= [self.interaction updatedString];
+	NSString *commentString = self.interaction.comment;
 	
-	if (self.interaction.comment.length > 0) {
+//	description	= @"Olivia Olson prayed to receive Christ with Kristen King.";
+//	updatedString	= @"Last updated by Kristen King on 06 Sep 2011";
+//	commentString = @"This is a comment";
+	
+	CGSize descriptionSize = [description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];
+	CGSize commentSize = [commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];
+	CGSize updatedSize = [updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];
+	
+	
+	self.descriptionLabel.frame		= CGRectMake(MHInteractionCellMargin, MHInteractionCellMargin, descriptionSize.width, descriptionSize.height);
+	
+	if (((NSString *)self.commentLabel.text).length > 0) {
 		
 		self.commentLabel.hidden	= NO;
-		self.commentLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.descriptionLabel.frame) + MHInteractionCellMargin, CGRectGetWidth(self.commentLabel.frame), CGRectGetHeight(self.commentLabel.frame));
-		self.updatedLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.commentLabel.frame) + MHInteractionCellMargin, CGRectGetWidth(self.updatedLabel.frame), CGRectGetHeight(self.updatedLabel.frame));
+		self.commentLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.descriptionLabel.frame) + 0.5 *MHInteractionCellMargin, commentSize.width, commentSize.height);
+		self.updatedLabel.frame		= CGRectMake(320.0 - updatedSize.width - MHInteractionCellMargin, CGRectGetMaxY(self.commentLabel.frame) + 0.5 * MHInteractionCellMargin, updatedSize.width, updatedSize.height);
 		
 	} else {
 		
 		self.commentLabel.hidden	= YES;
-		self.updatedLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.descriptionLabel.frame) + MHInteractionCellMargin, CGRectGetWidth(self.updatedLabel.frame), CGRectGetHeight(self.updatedLabel.frame));
+		self.updatedLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.descriptionLabel.frame) + 0.5 * MHInteractionCellMargin, updatedSize.width, updatedSize.height);
 		
 	}
 	
@@ -215,3 +286,6 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 
 
 @end
+
+#pragma clang diagnostic pop
+

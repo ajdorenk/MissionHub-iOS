@@ -174,6 +174,7 @@
 		if ([key isEqualToString:@"created_at"] ||
 			[key isEqualToString:@"updated_at"] ||
 			[key isEqualToString:@"deleted_at"] ||
+			[key isEqualToString:@"completed_at"] ||
 			[key isEqualToString:@"timestamp"] ||
 			[key isEqualToString:@"email_updated_at"]) {
 			
