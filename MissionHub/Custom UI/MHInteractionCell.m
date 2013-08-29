@@ -8,9 +8,6 @@
 
 #import "MHInteractionCell.h"
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
 static NSString * const MHInteractionCellDescriptionFont	= @"ArialMT";
 static CGFloat const MHInteractionCellDescriptionFontSize	= 14;
 static NSString * const MHInteractionCellNameFont			= @"Arial-BoldMT";
@@ -66,7 +63,7 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
     self.descriptionLabel				= [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     self.descriptionLabel.font			= [UIFont fontWithName:MHInteractionCellDescriptionFont size:MHInteractionCellDescriptionFontSize];
     self.descriptionLabel.textColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
-    self.descriptionLabel.lineBreakMode = UILineBreakModeWordWrap;
+    self.descriptionLabel.lineBreakMode = LINE_BREAK_WORD_WRAP;
     self.descriptionLabel.numberOfLines = 0;
 	
     self.descriptionLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
@@ -74,7 +71,7 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	self.commentLabel				= [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     self.commentLabel.font			= [UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize];
     self.commentLabel.textColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
-    self.commentLabel.lineBreakMode = UILineBreakModeWordWrap;
+    self.commentLabel.lineBreakMode = LINE_BREAK_WORD_WRAP;
     self.commentLabel.numberOfLines = 0;
 	
     self.commentLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
@@ -82,9 +79,19 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	self.updatedLabel				= [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     self.updatedLabel.font			= [UIFont fontWithName:MHInteractionCellUpdatedFont size:MHInteractionCellUpdatedFontSize];
     self.updatedLabel.textColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
-    self.updatedLabel.lineBreakMode = UILineBreakModeWordWrap;
-	self.updatedLabel.textAlignment	= UITextAlignmentRight;
+    self.updatedLabel.lineBreakMode = LINE_BREAK_WORD_WRAP;
     self.updatedLabel.numberOfLines = 0;
+	
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+	
+#ifdef __IPHONE_6_0
+	self.updatedLabel.textAlignment	= NSTextAlignmentRight;
+#else
+	self.updatedLabel.textAlignment	= UITextAlignmentRight;
+#endif
+	
+#pragma clang diagnostic pop
 	
     self.updatedLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
 	
@@ -211,30 +218,30 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 //	updatedString	= @"Last updated by Kristen King on 06 Sep 2011";
 //	commentString = @"This is a comment";
 	
-    CGFloat height = MHInteractionCellMargin;
+    CGFloat height = 0.5 * MHInteractionCellMargin;
 	
 	if (description.length > 0) {
 		
-		height += ceilf([description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
+		height += ceilf([description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		height += 0.5 * MHInteractionCellMargin;
 		
 	}
 	
 	if (commentString.length > 0) {
 		
-		height += ceilf([commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
+		height += ceilf([commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		height += 0.5 * MHInteractionCellMargin;
 		
 	}
 	
 	if (updatedString.length > 0) {
 		
-		height += ceilf([updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap].height);
+		height += ceilf([updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		height += MHInteractionCellMargin;
 		
 	}
 	
-	if (height == MHInteractionCellMargin) {
+	if (height == 0.5 * MHInteractionCellMargin) {
 		
 		height = 0;
 		
@@ -254,31 +261,49 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
     self.textLabel.hidden			= YES;
     self.detailTextLabel.hidden		= YES;
 	
-	NSString *description	= [self.interaction displayString];
-	NSString *updatedString	= [self.interaction updatedString];
-	NSString *commentString = self.interaction.comment;
+	NSString *description			= [self.interaction displayString];
+	NSString *updatedString			= [self.interaction updatedString];
+	NSString *commentString			= self.interaction.comment;
 	
-//	description	= @"Olivia Olson prayed to receive Christ with Kristen King.";
-//	updatedString	= @"Last updated by Kristen King on 06 Sep 2011";
-//	commentString = @"This is a comment";
-	
-	CGSize descriptionSize = [description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];
-	CGSize commentSize = [commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];
-	CGSize updatedSize = [updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];
-	
-	
-	self.descriptionLabel.frame		= CGRectMake(MHInteractionCellMargin, MHInteractionCellMargin, descriptionSize.width, descriptionSize.height);
+	if (((NSString *)self.descriptionLabel.text).length > 0) {
+		
+		CGSize descriptionSize = [description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		
+		self.descriptionLabel.frame	= CGRectMake(MHInteractionCellMargin, 0.5 * MHInteractionCellMargin, descriptionSize.width, descriptionSize.height);
+		self.descriptionLabel.hidden= NO;
+		
+	} else {
+		
+		self.descriptionLabel.hidden= YES;
+		self.descriptionLabel.frame	= CGRectZero;
+		
+	}
 	
 	if (((NSString *)self.commentLabel.text).length > 0) {
 		
+		CGSize commentSize			= [commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		
+		self.commentLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.descriptionLabel.frame) + 0.5 * MHInteractionCellMargin, commentSize.width, commentSize.height);
 		self.commentLabel.hidden	= NO;
-		self.commentLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.descriptionLabel.frame) + 0.5 *MHInteractionCellMargin, commentSize.width, commentSize.height);
-		self.updatedLabel.frame		= CGRectMake(320.0 - updatedSize.width - MHInteractionCellMargin, CGRectGetMaxY(self.commentLabel.frame) + 0.5 * MHInteractionCellMargin, updatedSize.width, updatedSize.height);
 		
 	} else {
 		
 		self.commentLabel.hidden	= YES;
-		self.updatedLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.descriptionLabel.frame) + 0.5 * MHInteractionCellMargin, updatedSize.width, updatedSize.height);
+		self.commentLabel.frame		= CGRectMake(CGRectGetMinX(self.descriptionLabel.frame), CGRectGetMaxY(self.descriptionLabel.frame), 0, 0);
+		
+	}
+	
+	if (((NSString *)self.updatedLabel.text).length > 0) {
+		
+		CGSize updatedSize			= [updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		
+		self.updatedLabel.frame		= CGRectMake(320.0 - updatedSize.width - MHInteractionCellMargin, CGRectGetMaxY(self.commentLabel.frame) + 0.5 * MHInteractionCellMargin, updatedSize.width, updatedSize.height);
+		self.updatedLabel.hidden	= NO;
+		
+	} else {
+		
+		self.updatedLabel.hidden	= YES;
+		self.updatedLabel.frame		= CGRectMake(CGRectGetMinX(self.commentLabel.frame), CGRectGetMaxY(self.commentLabel.frame), 0, 0);
 		
 	}
 	
@@ -286,6 +311,4 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 
 
 @end
-
-#pragma clang diagnostic pop
 

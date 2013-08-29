@@ -20,10 +20,13 @@ typedef enum {
 
 @interface MHInteraction (Helper)
 
++ (NSDateFormatter *)dateFormatter;
 + (NSString *)stringForPrivacySetting:(MHInteractionPrivacySettings)privacySetting;
+- (NSString *)title;
 - (NSString *)initiatorsNames;
 - (NSString *)receiverName;
 - (NSString *)updatedString;
 - (NSString *)updatedAtString;
+- (NSString *)timestampString;
 
 @end

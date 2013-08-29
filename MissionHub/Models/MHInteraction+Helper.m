@@ -13,6 +13,21 @@
 
 @implementation MHInteraction (Helper)
 
++ (NSDateFormatter *)dateFormatter {
+	
+	static NSDateFormatter *dateFormatterShared;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		
+		dateFormatterShared = [[NSDateFormatter alloc] init];
+		[dateFormatterShared setDateFormat:@"dd MMM yyyy"];
+		
+	});
+	
+	return dateFormatterShared;
+	
+}
+
 -(void)setDefaults {
 	
 	//turn this into defaults
@@ -25,6 +40,18 @@
 	self.updated_at		= [NSDate date];
 	self.creator		= [MHAPI sharedInstance].currentUser;
 	self.updater		= [MHAPI sharedInstance].currentUser;
+	
+}
+
+- (NSString *)title {
+	
+	NSString *returnString = @"Comment";
+	
+	if (self.type) {
+		returnString = self.type.name;
+	}
+	
+	return returnString;
 	
 }
 
@@ -77,10 +104,13 @@
 
 - (NSString *)updatedAtString {
 	
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"dd MMM yyyy"];
+	return [[MHInteraction dateFormatter] stringFromDate:self.updated_at];
 	
-	return [dateFormatter stringFromDate:self.updated_at];
+}
+
+- (NSString *)timestampString {
+	
+	return [[MHInteraction dateFormatter] stringFromDate:self.timestamp];
 	
 }
 

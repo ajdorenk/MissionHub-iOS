@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6801976217CFE88200DCE330 /* MHHeaderCell.m */; };
+		6801976417CFE88200DCE330 /* MHHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6801976217CFE88200DCE330 /* MHHeaderCell.m */; };
 		680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */; };
 		680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FC1782403600E6E742 /* MHPerson+Helper.m */; };
 		680CD8FE1782403600E6E742 /* MHPerson+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FC1782403600E6E742 /* MHPerson+Helper.m */; };
@@ -344,6 +346,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6801975A17CFB44300DCE330 /* MHInteractionCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInteractionCellHeader.h; path = "Custom UI/MHInteractionCellHeader.h"; sourceTree = "<group>"; };
+		6801975B17CFB44300DCE330 /* MHInteractionCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionCellHeader.m; path = "Custom UI/MHInteractionCellHeader.m"; sourceTree = "<group>"; };
+		6801976117CFE88200DCE330 /* MHHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHHeaderCell.h; path = "Custom UI/MHHeaderCell.h"; sourceTree = "<group>"; };
+		6801976217CFE88200DCE330 /* MHHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHHeaderCell.m; path = "Custom UI/MHHeaderCell.m"; sourceTree = "<group>"; };
 		680CD8F417823E4600E6E742 /* MHOrganization+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHOrganization+Helper.h"; path = "Models/MHOrganization+Helper.h"; sourceTree = "<group>"; };
 		680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganization+Helper.m"; path = "Models/MHOrganization+Helper.m"; sourceTree = "<group>"; };
 		680CD8FB1782403600E6E742 /* MHPerson+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHPerson+Helper.h"; path = "Models/MHPerson+Helper.h"; sourceTree = "<group>"; };
@@ -1214,10 +1220,14 @@
 				689F4E541798F57500BCAFFC /* MHInfoCell.m */,
 				AD3C60D617838A3B00744167 /* MHInteractionCell.h */,
 				AD3C60D717838A3C00744167 /* MHInteractionCell.m */,
+				6801975A17CFB44300DCE330 /* MHInteractionCellHeader.h */,
+				6801975B17CFB44300DCE330 /* MHInteractionCellHeader.m */,
 				689F4E571798F5AA00BCAFFC /* MHSurveyCell.h */,
 				689F4E581798F5AA00BCAFFC /* MHSurveyCell.m */,
 				68A38F0117A998730010CAC6 /* MHTextField.h */,
 				68A38F0217A998730010CAC6 /* MHTextField.m */,
+				6801976117CFE88200DCE330 /* MHHeaderCell.h */,
+				6801976217CFE88200DCE330 /* MHHeaderCell.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1545,6 +1555,7 @@
 				68818B0417C800A300624887 /* MHAnswerSheet+Helper.m in Sources */,
 				68EC3A5B17CD053500EE3717 /* TTTAttributedLabel.m in Sources */,
 				68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
+				6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1638,6 +1649,7 @@
 				68818B0517C800A300624887 /* MHAnswerSheet+Helper.m in Sources */,
 				68EC3A5C17CD053500EE3717 /* TTTAttributedLabel.m in Sources */,
 				68EC3A6017CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
+				6801976417CFE88200DCE330 /* MHHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

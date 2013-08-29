@@ -8,6 +8,7 @@
 
 #import "MHProfileInteractionsViewController.h"
 #import "M6ParallaxController.h"
+#import "MHHeaderCell.h"
 #import "MHInteractionCell.h"
 #import "MHInteractionType.h"
 
@@ -93,7 +94,9 @@
 	
 	if (interactionArray) {
 		
-		self._interactionArray = interactionArray;
+		[self willChangeValueForKey:@"interactionArray"];
+		_interactionArray = interactionArray;
+		[self didChangeValueForKey:@"interactionArray"];
 		
 		[self.tableView reloadData];
 		
@@ -112,7 +115,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self._interactionArray count];
+    return 2 * [self._interactionArray count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -131,33 +134,67 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:indexPath.row]);
-	return [MHInteractionCell heightForCellWithInteraction:interaction];
+	if (indexPath.row % 2 == 0) {
+		
+		return MHHeaderCellHeight;
+		
+	} else {
+	
+		NSInteger interactionRow	= floor(indexPath.row / 2);
+		MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
+		return [MHInteractionCell heightForCellWithInteraction:interaction];
+		
+	}
 	
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString *CellIdentifier = @"MHInteractionsCell";
-	MHInteractionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
-	// Configure the cell...
-	if (cell == nil) {
-		cell = [[MHInteractionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+	static NSString *headerCellIdentifier		= @"MHHeaderCell";
+	static NSString *interactionCellIdentifier	= @"MHInteractionsCell";
+	
+	if (indexPath.row % 2 == 0) {
+	
+		MHHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:headerCellIdentifier];
+		
+		// Configure the cell...
+		if (cell == nil) {
+			cell = [[MHHeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:headerCellIdentifier];
+		}
+		
+		// Configure the cell...
+		NSInteger interactionRow	= floor(indexPath.row / 2);
+		MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
+		[cell configureCellWithTitle:interaction.title andDate:interaction.timestampString forTableview:tableView];
+		
+		return cell;
+		
+	} else {
+			
+		MHInteractionCell *cell = [tableView dequeueReusableCellWithIdentifier:interactionCellIdentifier];
+		
+		// Configure the cell...
+		if (cell == nil) {
+			cell = [[MHInteractionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:interactionCellIdentifier];
+		}
+		
+		// Configure the cell...
+		NSInteger interactionRow	= floor(indexPath.row / 2);
+		MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
+		cell.interaction = interaction;
+		
+		return cell;
+			
 	}
-    
-    // Configure the cell...
-	MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:indexPath.row]);
-	cell.interaction = interaction;
-    
-    return cell;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:indexPath.row]);
+    NSInteger interactionRow	= floor(indexPath.row / 2);
+	MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
 	
 	NSLog(@"%@", [interaction jsonObject]);
 	
