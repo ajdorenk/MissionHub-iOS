@@ -295,6 +295,8 @@
 		68EC3A6C17CE6E8700EE3717 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068AF177102C9007C79D6 /* UIImage+ImageWithUIView.m */; };
 		68EC3A6D17CE6E8700EE3717 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
+		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
+		68F4CC4A17D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
 		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
@@ -626,6 +628,8 @@
 		68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteractionType+Helper.h"; path = "Models/MHInteractionType+Helper.h"; sourceTree = "<group>"; };
 		68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteractionType+Helper.m"; path = "Models/MHInteractionType+Helper.m"; sourceTree = "<group>"; };
 		68EC3A6117CE6D0400EE3717 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		68F4CC4717D10846004D6574 /* MHAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerCell.m; path = "Custom UI/MHAnswerCell.m"; sourceTree = "<group>"; };
+		68F4CC4817D10846004D6574 /* MHAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswerCell.h; path = "Custom UI/MHAnswerCell.h"; sourceTree = "<group>"; };
 		AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationBar.h; path = "Custom UI/MHCustomNavigationBar.h"; sourceTree = "<group>"; };
 		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
@@ -1196,6 +1200,8 @@
 		AD301125176FE41F00D53E35 /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				68F4CC4817D10846004D6574 /* MHAnswerCell.h */,
+				68F4CC4717D10846004D6574 /* MHAnswerCell.m */,
 				68478DAC177E8C9F0014501D /* MHPeopleSearchBar.h */,
 				68478DAD177E8C9F0014501D /* MHPeopleSearchBar.m */,
 				AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */,
@@ -1556,6 +1562,7 @@
 				68EC3A5B17CD053500EE3717 /* TTTAttributedLabel.m in Sources */,
 				68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
 				6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */,
+				68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1650,6 +1657,7 @@
 				68EC3A5C17CD053500EE3717 /* TTTAttributedLabel.m in Sources */,
 				68EC3A6017CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
 				6801976417CFE88200DCE330 /* MHHeaderCell.m in Sources */,
+				68F4CC4A17D10846004D6574 /* MHAnswerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

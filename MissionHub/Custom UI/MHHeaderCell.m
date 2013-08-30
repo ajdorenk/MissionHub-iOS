@@ -50,24 +50,14 @@ CGFloat const MHHeaderCellDateFontSize				= 12.0;
 
 - (void)configureCellWithTitle:(NSString *)title andDate:(NSString *)date forTableview:(UITableView *)tableview {
 	
-	self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:MHHeaderCellBackgroundImageName]];
-	
 	CGSize titleSize = [title sizeWithFont:[UIFont fontWithName:MHHeaderCellTitleFont size:MHHeaderCellTitleFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(tableview.frame) - (2 * MHHeaderCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 	
 	self.textLabel.frame				= CGRectMake(MHHeaderCellMargin, MHHeaderCellMargin, titleSize.width, titleSize.height);
-	self.textLabel.font					= [UIFont fontWithName:MHHeaderCellTitleFont size:MHHeaderCellTitleFontSize];
-	self.textLabel.textColor			= [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
-	self.textLabel.lineBreakMode		= LINE_BREAK_WORD_WRAP;
-	self.textLabel.numberOfLines		= 0;
 	self.textLabel.text					= title;
 	
 	CGSize dateSize = [date sizeWithFont:[UIFont fontWithName:MHHeaderCellDateFont size:MHHeaderCellDateFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(tableview.frame) - (2 * MHHeaderCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 	
 	self.detailTextLabel.frame			= CGRectMake(MHHeaderCellMargin, CGRectGetHeight(self.textLabel.frame) + MHHeaderCellMargin * 0.5, dateSize.width, dateSize.height);
-	self.detailTextLabel.font			= [UIFont fontWithName:MHHeaderCellDateFont size:MHHeaderCellDateFontSize];
-	self.detailTextLabel.textColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
-	self.detailTextLabel.lineBreakMode	= LINE_BREAK_WORD_WRAP;
-	self.detailTextLabel.numberOfLines	= 0;
 	self.detailTextLabel.text			= date;
 	
 }

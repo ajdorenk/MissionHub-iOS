@@ -16,18 +16,15 @@
 @synthesize person			= _person;
 @synthesize indexPath		= _indexPath;
 @synthesize fieldName		= _fieldName;
-@synthesize name, gender, profilePicture, checkbox, nameBackgroundView;
+@synthesize field, name, profilePicture, checkbox, nameBackgroundView;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
-        self.nameBackgroundView.layer.borderWidth = 1.0;
-		
-		self.checkbox.checkboxDelegate = self;
+		[self configure];
 
     }
     return self;
@@ -36,6 +33,22 @@
 
 -(void)awakeFromNib {
     
+	[super awakeFromNib];
+	
+	[self configure];
+    
+}
+
+- (void)configure {
+	
+//	self.imageView.frame						= CGRectMake(40, 7, 45, 45);
+//	self.imageView.contentMode					= UIViewContentModeScaleAspectFill;
+//	self.textLabel.frame						= CGRectMake(100, 10, 220, 26);
+//	self.textLabel.textColor					= [UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1.0];
+//	self.textLabel.font							= [UIFont fontWithName:@"ArialRoundedMTBold" size:15.0];
+//	self.detailTextLabel.frame					= CGRectMake(120, 32, 200, 26);
+//	self.detailTextLabel.font					= [UIFont fontWithName:@"ArialMT" size:14.0];
+//	self.detailTextLabel.textColor				= [UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1.0];
     self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
     self.nameBackgroundView.layer.borderWidth = 1.0;
 	
@@ -44,8 +57,7 @@
     }
 	
 	self.checkbox.checkboxDelegate = self;
-    
-    
+	
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -68,10 +80,10 @@
     } else {
 		
         [self.profilePicture setImageWithURL:[NSURL URLWithString:person.picture]
-													  placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
+					   placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
     }
     
-	self.gender.text = [person valueForSortField:sortField];
+	self.field.text = [person valueForSortField:sortField];
 
     self.name.text = [person fullName];
 	

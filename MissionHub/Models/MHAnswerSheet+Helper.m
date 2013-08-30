@@ -10,6 +10,27 @@
 
 @implementation MHAnswerSheet (Helper)
 
++ (NSDateFormatter *)dateFormatter {
+	
+	static NSDateFormatter *dateFormatterShared;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		
+		dateFormatterShared = [[NSDateFormatter alloc] init];
+		[dateFormatterShared setDateFormat:@"dd MMM yyyy"];
+		
+	});
+	
+	return dateFormatterShared;
+	
+}
+
+- (NSString *)updatedAtString {
+	
+	return [[MHAnswerSheet dateFormatter] stringFromDate:self.updated_at];
+	
+}
+
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
 	
 	if ([fieldName isEqualToString:@"answers"]) {

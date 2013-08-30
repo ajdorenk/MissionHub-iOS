@@ -606,6 +606,9 @@
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		}
 		
+		cell.imageView.frame		= CGRectMake(40, 7, 45, 45);
+		cell.imageView.contentMode	= UIViewContentModeScaleAspectFill;
+		
 		if (indexPath.row < [self.searchResultArray count]) {
 		
 			MHPerson *person = [self.searchResultArray objectAtIndex:indexPath.row];

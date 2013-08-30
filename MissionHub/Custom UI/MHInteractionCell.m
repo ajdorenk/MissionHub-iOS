@@ -125,10 +125,6 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	__block NSString *initiator		= [self.interaction initiatorsNames];
 	__block NSString *receiver		= [self.interaction receiverName];
 	__block NSString *description	= [self.interaction displayString];
-	
-//	initiator		= @"Olivia Olson";
-//	receiver		= @"Kristen King";
-//	description		= @"Olivia Olson prayed to receive Christ with Kristen King.";
     
 	if (description.length > 0) {
 	
@@ -176,9 +172,6 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	__block NSString *updatedDate	= [self.interaction updatedAtString];
 	__block NSString *updated		= [self.interaction updatedString];
 	
-//	updatedDate	= @"06 Sep 2011";
-//	updated		= @"Last updated by Kristen King on 06 Sep 2011";
-	
 	if (updated.length > 0) {
 		
 		[self.updatedLabel setText:updated afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
@@ -214,10 +207,6 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	NSString *updatedString	= [interaction updatedString];
 	NSString *commentString = interaction.comment;
 	
-//	description	= @"Olivia Olson prayed to receive Christ with Kristen King.";
-//	updatedString	= @"Last updated by Kristen King on 06 Sep 2011";
-//	commentString = @"This is a comment";
-	
     CGFloat height = 0.5 * MHInteractionCellMargin;
 	
 	if (description.length > 0) {
@@ -246,8 +235,6 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 		height = 0;
 		
 	}
-	
-    return height;
 	
     return height;
 }

@@ -11,4 +11,7 @@
 
 @interface MHAnswerSheet (Helper)
 
++ (NSDateFormatter *)dateFormatter;
+- (NSString *)updatedAtString;
+
 @end

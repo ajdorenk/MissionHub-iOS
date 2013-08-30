@@ -12,14 +12,7 @@
 
 @protocol MHPersonCellDelegate;
 
-@interface MHPersonCell : UITableViewCell <MHCheckboxDelegate> {
-
-	id<MHPersonCellDelegate> cellDelegate;
-	MHPerson *_person;
-	NSIndexPath *_indexPath;
-	NSString *_fieldName;
-    
-}
+@interface MHPersonCell : UITableViewCell <MHCheckboxDelegate>
 
 @property (nonatomic, strong) id<MHPersonCellDelegate> cellDelegate;
 @property (nonatomic, strong) MHPerson *person;
@@ -27,11 +20,12 @@
 @property (nonatomic, strong) NSString *fieldName;
 
 @property (nonatomic, strong) IBOutlet UILabel *name;
-@property (nonatomic, strong) IBOutlet UILabel *gender;
+@property (nonatomic, strong) IBOutlet UILabel *field;
 @property (nonatomic, strong) IBOutlet UIImageView *profilePicture;
 @property (nonatomic, strong) IBOutlet MHCheckbox *checkbox;
 @property (nonatomic, strong) IBOutlet UIView *nameBackgroundView;
 
+- (void)configure;
 -(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField atIndexPath:(NSIndexPath *)indexPath;
 
 @end

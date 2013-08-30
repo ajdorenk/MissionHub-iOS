@@ -11,6 +11,10 @@
 #import "MHPerson+Helper.h"
 #import "MHAddress+Helper.h"
 
+CGFloat const MHProfileInfoViewControllerHeaderCellHeight	= 21.0;
+CGFloat const MHProfileInfoViewControllerInfoCellHeight		= 44.0;
+CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
+
 @interface MHProfileInfoViewController ()
 
 @end
@@ -245,6 +249,14 @@
 		
 		cell.textLabel.text = cellText;
 		cell.textLabel.font = [UIFont systemFontOfSize:14.f];
+		
+		UIView *background					= [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(cell.frame), MHProfileInfoViewControllerHeaderCellHeight)];
+		CAGradientLayer *gradient			= [CAGradientLayer layer];
+        gradient.frame						= CGRectMake(0, 0, CGRectGetWidth(cell.frame), MHProfileInfoViewControllerHeaderCellHeight);
+        gradient.colors						= [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor colorWithRed:0.973 green:0.973 blue:0.973 alpha:1.000] CGColor], nil];
+        [background.layer addSublayer:gradient];
+		
+		cell.backgroundView					= background;
 		
 	} else {
 		
