@@ -36,6 +36,8 @@
 		68145B9917910984008145EA /* MHProfileMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68145B9717910984008145EA /* MHProfileMenuViewController.m */; };
 		68145B9B17911052008145EA /* MHProfileHeader_Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68145B9A17911052008145EA /* MHProfileHeader_Placeholder.png */; };
 		68145B9C17911052008145EA /* MHProfileHeader_Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68145B9A17911052008145EA /* MHProfileHeader_Placeholder.png */; };
+		681C65B117D185170021D2EE /* MHAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681C65B017D185170021D2EE /* MHAddressCell.m */; };
+		681C65B217D185170021D2EE /* MHAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681C65B017D185170021D2EE /* MHAddressCell.m */; };
 		6823A7BB177EA4C900DBDF3F /* MHQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7BA177EA4C900DBDF3F /* MHQuestion.m */; };
 		6823A7BC177EA4C900DBDF3F /* MHQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7BA177EA4C900DBDF3F /* MHQuestion.m */; };
 		6823A7C2177EB00100DBDF3F /* Searchbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7BD177EB00100DBDF3F /* Searchbar_background.png */; };
@@ -373,6 +375,8 @@
 		68145B9617910984008145EA /* MHProfileMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileMenuViewController.h; path = ViewControllers/MHProfileMenuViewController.h; sourceTree = "<group>"; };
 		68145B9717910984008145EA /* MHProfileMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileMenuViewController.m; path = ViewControllers/MHProfileMenuViewController.m; sourceTree = "<group>"; };
 		68145B9A17911052008145EA /* MHProfileHeader_Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MHProfileHeader_Placeholder.png; sourceTree = "<group>"; };
+		681C65AF17D185170021D2EE /* MHAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAddressCell.h; path = "Custom UI/MHAddressCell.h"; sourceTree = "<group>"; };
+		681C65B017D185170021D2EE /* MHAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAddressCell.m; path = "Custom UI/MHAddressCell.m"; sourceTree = "<group>"; };
 		6823A7B9177EA4C900DBDF3F /* MHQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHQuestion.h; path = Models/MHQuestion.h; sourceTree = "<group>"; };
 		6823A7BA177EA4C900DBDF3F /* MHQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHQuestion.m; path = Models/MHQuestion.m; sourceTree = "<group>"; };
 		6823A7BD177EB00100DBDF3F /* Searchbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Searchbar_background.png; sourceTree = "<group>"; };
@@ -1234,6 +1238,8 @@
 				68A38F0217A998730010CAC6 /* MHTextField.m */,
 				6801976117CFE88200DCE330 /* MHHeaderCell.h */,
 				6801976217CFE88200DCE330 /* MHHeaderCell.m */,
+				681C65AF17D185170021D2EE /* MHAddressCell.h */,
+				681C65B017D185170021D2EE /* MHAddressCell.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1563,6 +1569,7 @@
 				68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
 				6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */,
 				68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */,
+				681C65B117D185170021D2EE /* MHAddressCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1658,6 +1665,7 @@
 				68EC3A6017CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
 				6801976417CFE88200DCE330 /* MHHeaderCell.m in Sources */,
 				68F4CC4A17D10846004D6574 /* MHAnswerCell.m in Sources */,
+				681C65B217D185170021D2EE /* MHAddressCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

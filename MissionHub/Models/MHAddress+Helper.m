@@ -10,6 +10,26 @@
 
 @implementation MHAddress (Helper)
 
+- (NSString *)cityLine {
+	
+	NSMutableArray *returnArray	= [NSMutableArray array];
+	
+	if (self.city) {
+		[returnArray addObject:self.city];
+	}
+	
+	if (self.state) {
+		[returnArray addObject:self.state];
+	}
+	
+	if (self.zip) {
+		[returnArray addObject:self.zip];
+	}
+	
+	return [returnArray componentsJoinedByString:@" "];
+	
+}
+
 -(NSString *)displayString {
 	
 	NSString *returnString = @"";

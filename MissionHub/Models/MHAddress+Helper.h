@@ -10,4 +10,6 @@
 
 @interface MHAddress (Helper)
 
+- (NSString *)cityLine;
+
 @end

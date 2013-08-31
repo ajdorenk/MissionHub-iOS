@@ -10,6 +10,7 @@
 #import "M6ParallaxController.h"
 #import "MHPerson+Helper.h"
 #import "MHAddress+Helper.h"
+#import "MHAddressCell.h"
 
 CGFloat const MHProfileInfoViewControllerHeaderCellHeight	= 21.0;
 CGFloat const MHProfileInfoViewControllerInfoCellHeight		= 44.0;
@@ -223,7 +224,18 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 	if (indexPath.row == 0) {
 		return 21.0f;
 	} else {
-		return 44.0f;
+		
+		id objectForCell = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+		
+		if ([objectForCell isKindOfClass:[MHAddress class]]) {
+			
+			return [MHAddressCell heightForCellWithAddress:(MHAddress *)objectForCell];
+			
+		} else {
+			
+			return 44.0f;
+			
+		}
 	}
 	
 }
@@ -248,7 +260,8 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 		}
 		
 		cell.textLabel.text = cellText;
-		cell.textLabel.font = [UIFont systemFontOfSize:14.f];
+		cell.textLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:14.0];
+		cell.textLabel.textColor	= [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];;
 		
 		UIView *background					= [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(cell.frame), MHProfileInfoViewControllerHeaderCellHeight)];
 		CAGradientLayer *gradient			= [CAGradientLayer layer];
@@ -270,10 +283,24 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 		} else if ([objectForCell isKindOfClass:[MHPhoneNumber class]]) {
 			cellText = [(MHPhoneNumber *)objectForCell number];
 		} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
-			cellText = [(MHAddress *)objectForCell displayString];
+			
+			static NSString *addressCellIdentifier = @"MHAddressCell";
+			MHAddressCell *addressCell = [tableView dequeueReusableCellWithIdentifier:addressCellIdentifier];
+			
+			// Configure the cell...
+			if (addressCell == nil) {
+				addressCell = [[MHAddressCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:addressCellIdentifier];
+			}
+			
+			addressCell.address = (MHAddress *)objectForCell;
+			
+			return addressCell;
+			
 		}
 		
-		cell.textLabel.text = cellText;
+		cell.textLabel.font			= [UIFont fontWithName:@"ArialMT" size:16.0];
+		cell.textLabel.textColor	= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];;
+		cell.textLabel.text			= cellText;
 		
 	}
 	
