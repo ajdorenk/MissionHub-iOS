@@ -390,7 +390,7 @@ select another survey.</string>
                         <sections>
                             <tableViewSection id="mDQ-NW-4Bq">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MHInfoCell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MHInfoCell" id="aKB-Ci-Xl2" customClass="MHInfoCell">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="MHInfoCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="MHInfoCell" id="aKB-Ci-Xl2" customClass="MHInfoCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -403,8 +403,8 @@ select another survey.</string>
                             </tableViewSection>
                         </sections>
                         <connections>
-                            <outlet property="dataSource" destination="WO2-6D-Eg9" id="d8D-kw-RKt"/>
-                            <outlet property="delegate" destination="WO2-6D-Eg9" id="QLd-gP-aVw"/>
+                            <outlet property="dataSource" destination="WO2-6D-Eg9" id="v6u-8Q-Olh"/>
+                            <outlet property="delegate" destination="WO2-6D-Eg9" id="HQY-aV-Hu6"/>
                         </connections>
                     </tableView>
                 </tableViewController>

@@ -37,11 +37,11 @@
 	NSMutableArray *stateArray	= [NSMutableArray array];
 	
 	if (self.address1) {
-		[addressArray addObject:self.city];
+		[addressArray addObject:self.address1];
 	}
 	
 	if (self.address2) {
-		[addressArray addObject:self.state];
+		[addressArray addObject:self.address2];
 	}
 	
 	if (self.state) {

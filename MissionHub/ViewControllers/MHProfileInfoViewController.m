@@ -33,6 +33,8 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 -(void)awakeFromNib {
 	
 	[super awakeFromNib];
+	self.tableView.userInteractionEnabled = YES;
+	self.tableView.allowsSelection = YES;
 	self.sectionTitles = [NSMutableArray array];
 	self.sections = [NSMutableArray array];
 	
@@ -343,7 +345,9 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 	} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
 		
 		NSString *address = [(MHAddress *)objectForCell displayString];
-		NSURL *addressURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", address]];
+		NSString *googleAddressString = [address stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+		NSString *urlEncodedString	= [[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", googleAddressString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		NSURL *addressURL = [NSURL URLWithString:urlEncodedString];
 		
 		[[UIApplication sharedApplication] openURL:addressURL];
 		
