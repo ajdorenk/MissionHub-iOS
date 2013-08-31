@@ -32,41 +32,43 @@
 
 -(NSString *)displayString {
 	
-	NSString *returnString = @"";
+	NSMutableArray *returnArray	= [NSMutableArray array];
+	NSMutableArray *addressArray= [NSMutableArray array];
+	NSMutableArray *stateArray	= [NSMutableArray array];
 	
 	if (self.address1) {
-		returnString = [returnString stringByAppendingFormat:@"%@\n", self.address1];
+		[addressArray addObject:self.city];
 	}
 	
 	if (self.address2) {
-		returnString = [returnString stringByAppendingFormat:@"%@\n", self.address2];
-	}
-	
-	if (self.city) {
-		returnString = [returnString stringByAppendingFormat:@"%@ ", self.city];
+		[addressArray addObject:self.state];
 	}
 	
 	if (self.state) {
-		returnString = [returnString stringByAppendingFormat:@"%@ ", self.state];
+		[stateArray addObject:self.state];
 	}
 	
 	if (self.zip) {
-		returnString = [returnString stringByAppendingFormat:@"%@ ", self.zip];
+		[stateArray addObject:self.zip];
 	}
 	
-	if ([returnString length] > 0 && [[returnString substringFromIndex:[returnString length] - 1] isEqualToString:@" "]) {
-		returnString = [[returnString substringToIndex:[returnString length] - 1] stringByAppendingString:@"\n"];
+	if (addressArray.count > 0) {
+		[returnArray addObject:[addressArray componentsJoinedByString:@" "]];
+	}
+	
+	if (self.city) {
+		[returnArray addObject:self.city];
+	}
+	
+	if (stateArray.count > 0) {
+		[returnArray addObject:[stateArray componentsJoinedByString:@" "]];
 	}
 	
 	if (self.country) {
-		returnString = [returnString stringByAppendingFormat:@"%@", self.country];
+		[returnArray addObject:self.country];
 	}
 	
-	if ([returnString length] > 0 && [[returnString substringFromIndex:[returnString length] - 1] isEqualToString:@"\n"]) {
-		returnString = [returnString substringToIndex:[returnString length] - 1];
-	}
-	
-	return returnString;
+	return [returnArray componentsJoinedByString:@", "];
 	
 }
 

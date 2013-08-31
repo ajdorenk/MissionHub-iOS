@@ -38,6 +38,7 @@
 		68145B9C17911052008145EA /* MHProfileHeader_Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68145B9A17911052008145EA /* MHProfileHeader_Placeholder.png */; };
 		681C65B117D185170021D2EE /* MHAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681C65B017D185170021D2EE /* MHAddressCell.m */; };
 		681C65B217D185170021D2EE /* MHAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681C65B017D185170021D2EE /* MHAddressCell.m */; };
+		681C65B417D19F550021D2EE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681C65B317D19F550021D2EE /* MessageUI.framework */; };
 		6823A7BB177EA4C900DBDF3F /* MHQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7BA177EA4C900DBDF3F /* MHQuestion.m */; };
 		6823A7BC177EA4C900DBDF3F /* MHQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7BA177EA4C900DBDF3F /* MHQuestion.m */; };
 		6823A7C2177EB00100DBDF3F /* Searchbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6823A7BD177EB00100DBDF3F /* Searchbar_background.png */; };
@@ -377,6 +378,7 @@
 		68145B9A17911052008145EA /* MHProfileHeader_Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MHProfileHeader_Placeholder.png; sourceTree = "<group>"; };
 		681C65AF17D185170021D2EE /* MHAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAddressCell.h; path = "Custom UI/MHAddressCell.h"; sourceTree = "<group>"; };
 		681C65B017D185170021D2EE /* MHAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAddressCell.m; path = "Custom UI/MHAddressCell.m"; sourceTree = "<group>"; };
+		681C65B317D19F550021D2EE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6823A7B9177EA4C900DBDF3F /* MHQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHQuestion.h; path = Models/MHQuestion.h; sourceTree = "<group>"; };
 		6823A7BA177EA4C900DBDF3F /* MHQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHQuestion.m; path = Models/MHQuestion.m; sourceTree = "<group>"; };
 		6823A7BD177EB00100DBDF3F /* Searchbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Searchbar_background.png; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				681C65B417D19F550021D2EE /* MessageUI.framework in Frameworks */,
 				68EC3A6217CE6D0400EE3717 /* CoreText.framework in Frameworks */,
 				68C0695F17710BF1007C79D6 /* CFNetwork.framework in Frameworks */,
 				68C0696017710BF1007C79D6 /* libz.dylib in Frameworks */,
@@ -773,6 +776,7 @@
 		683910851760FD3100E01B46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				681C65B317D19F550021D2EE /* MessageUI.framework */,
 				68EC3A6117CE6D0400EE3717 /* CoreText.framework */,
 				6812256F1767B75500D8C238 /* AdSupport.framework */,
 				68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */,

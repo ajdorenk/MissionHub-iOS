@@ -313,8 +313,66 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
+	id objectForCell = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
 	
+	if ([objectForCell isKindOfClass:[MHEmailAddress class]]) {
+		
+		if ([(MHEmailAddress *)objectForCell email].length > 0) {
+			
+			NSArray *toRecipents = [NSArray arrayWithObject:[(MHEmailAddress *)objectForCell email]];
+			
+			MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+			mc.mailComposeDelegate = self;
+			[mc setToRecipients:toRecipents];
+			
+			// Present mail view controller on screen
+			[self presentViewController:mc animated:YES completion:NULL];
+		
+		}
+		
+	} else if ([objectForCell isKindOfClass:[MHPhoneNumber class]]) {
+		
+		NSString *phoneNumber = [(MHPhoneNumber *)objectForCell number];
+		NSString *cleanedString = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+		NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+		
+		[[UIApplication sharedApplication] openURL:telURL];
+		
+	} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
+		
+		NSString *address = [(MHAddress *)objectForCell displayString];
+		NSURL *addressURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", address]];
+		
+		[[UIApplication sharedApplication] openURL:addressURL];
+		
+	}
+	
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+			NSLog(@"Mail cancelled");
+			break;
+		case MFMailComposeResultSaved:
+			NSLog(@"Mail saved");
+			break;
+		case MFMailComposeResultSent:
+			NSLog(@"Mail sent");
+			break;
+		case MFMailComposeResultFailed:
+			NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+			break;
+		default:
+			break;
+	}
+	
+	// Close the Mail Interface
+	[self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

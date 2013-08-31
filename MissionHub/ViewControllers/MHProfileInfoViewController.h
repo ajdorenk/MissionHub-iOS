@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "MHProfileProtocol.h"
 
-@interface MHProfileInfoViewController : UITableViewController <MHProfileProtocol> {
+@interface MHProfileInfoViewController : UITableViewController <MHProfileProtocol, MFMailComposeViewControllerDelegate> {
 	
 	NSMutableArray *_sectionTitles;
 	NSMutableArray *_sections;
