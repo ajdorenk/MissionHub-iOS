@@ -144,8 +144,6 @@
 		68478DAF177E8C9F0014501D /* MHPeopleSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478DAD177E8C9F0014501D /* MHPeopleSearchBar.m */; };
 		68478DBB177E8CDC0014501D /* BackMenu_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB1177E8CDC0014501D /* BackMenu_Icon.png */; };
 		68478DBC177E8CDC0014501D /* BackMenu_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB1177E8CDC0014501D /* BackMenu_Icon.png */; };
-		68478DBD177E8CDC0014501D /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB2177E8CDC0014501D /* bg.jpg */; };
-		68478DBE177E8CDC0014501D /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB2177E8CDC0014501D /* bg.jpg */; };
 		68478DBF177E8CDC0014501D /* gradient-over-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB3177E8CDC0014501D /* gradient-over-image@2x.png */; };
 		68478DC0177E8CDC0014501D /* gradient-over-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB3177E8CDC0014501D /* gradient-over-image@2x.png */; };
 		68478DC1177E8CDC0014501D /* gradient_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB4177E8CDC0014501D /* gradient_overlay@2x.png */; };
@@ -154,8 +152,6 @@
 		68478DC4177E8CDC0014501D /* NewContact_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB5177E8CDC0014501D /* NewContact_Icon.png */; };
 		68478DC5177E8CDC0014501D /* NewInteraction_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB6177E8CDC0014501D /* NewInteraction_Icon.png */; };
 		68478DC6177E8CDC0014501D /* NewInteraction_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB6177E8CDC0014501D /* NewInteraction_Icon.png */; };
-		68478DC7177E8CDC0014501D /* sunflower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB7177E8CDC0014501D /* sunflower.jpg */; };
-		68478DC8177E8CDC0014501D /* sunflower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB7177E8CDC0014501D /* sunflower.jpg */; };
 		68478DC9177E8CDC0014501D /* topbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB8177E8CDC0014501D /* topbar_background.png */; };
 		68478DCA177E8CDC0014501D /* topbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB8177E8CDC0014501D /* topbar_background.png */; };
 		68478DCB177E8CDC0014501D /* topbarOtherOptions_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */; };
@@ -166,6 +162,38 @@
 		6851291C17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */; };
 		6851291D17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */; };
 		6851291E17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */; };
+		685405DE17D652B400E2BA33 /* REActivityViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6854059F17D652B300E2BA33 /* REActivityViewController.strings */; };
+		685405DF17D652B400E2BA33 /* REActivityViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6854059F17D652B300E2BA33 /* REActivityViewController.strings */; };
+		685405E217D652B400E2BA33 /* REActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405AA17D652B400E2BA33 /* REActivity.m */; };
+		685405E317D652B400E2BA33 /* REActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405AA17D652B400E2BA33 /* REActivity.m */; };
+		685405E417D652B400E2BA33 /* REActivityDelegateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405AC17D652B400E2BA33 /* REActivityDelegateObject.m */; };
+		685405E517D652B400E2BA33 /* REActivityDelegateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405AC17D652B400E2BA33 /* REActivityDelegateObject.m */; };
+		685405E617D652B400E2BA33 /* REActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405AE17D652B400E2BA33 /* REActivityView.m */; };
+		685405E717D652B400E2BA33 /* REActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405AE17D652B400E2BA33 /* REActivityView.m */; };
+		685405E817D652B400E2BA33 /* REActivityViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 685405AF17D652B400E2BA33 /* REActivityViewController.bundle */; };
+		685405E917D652B400E2BA33 /* REActivityViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 685405AF17D652B400E2BA33 /* REActivityViewController.bundle */; };
+		685405EA17D652B400E2BA33 /* REActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B117D652B400E2BA33 /* REActivityViewController.m */; };
+		685405EB17D652B400E2BA33 /* REActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B117D652B400E2BA33 /* REActivityViewController.m */; };
+		685405EC17D652B400E2BA33 /* REAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B317D652B400E2BA33 /* REAuthCell.m */; };
+		685405ED17D652B400E2BA33 /* REAuthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B317D652B400E2BA33 /* REAuthCell.m */; };
+		685405EE17D652B400E2BA33 /* REAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B517D652B400E2BA33 /* REAuthViewController.m */; };
+		685405EF17D652B400E2BA33 /* REAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B517D652B400E2BA33 /* REAuthViewController.m */; };
+		685405F017D652B400E2BA33 /* REChromeActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B717D652B400E2BA33 /* REChromeActivity.m */; };
+		685405F117D652B400E2BA33 /* REChromeActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B717D652B400E2BA33 /* REChromeActivity.m */; };
+		685405F217D652B400E2BA33 /* RECopyActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B917D652B400E2BA33 /* RECopyActivity.m */; };
+		685405F317D652B400E2BA33 /* RECopyActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405B917D652B400E2BA33 /* RECopyActivity.m */; };
+		685405FC17D652B400E2BA33 /* REMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405C317D652B400E2BA33 /* REMailActivity.m */; };
+		685405FD17D652B400E2BA33 /* REMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405C317D652B400E2BA33 /* REMailActivity.m */; };
+		685405FE17D652B400E2BA33 /* REMapsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405C517D652B400E2BA33 /* REMapsActivity.m */; };
+		685405FF17D652B400E2BA33 /* REMapsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405C517D652B400E2BA33 /* REMapsActivity.m */; };
+		6854060017D652B400E2BA33 /* REMessageActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405C717D652B400E2BA33 /* REMessageActivity.m */; };
+		6854060117D652B400E2BA33 /* REMessageActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405C717D652B400E2BA33 /* REMessageActivity.m */; };
+		6854060417D652B400E2BA33 /* REPrintActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405CB17D652B400E2BA33 /* REPrintActivity.m */; };
+		6854060517D652B400E2BA33 /* REPrintActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405CB17D652B400E2BA33 /* REPrintActivity.m */; };
+		6854060817D652B400E2BA33 /* RESafariActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405CF17D652B400E2BA33 /* RESafariActivity.m */; };
+		6854060917D652B400E2BA33 /* RESafariActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405CF17D652B400E2BA33 /* RESafariActivity.m */; };
+		6854061617D652B400E2BA33 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405DD17D652B400E2BA33 /* UIImage+Resize.m */; };
+		6854061717D652B400E2BA33 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 685405DD17D652B400E2BA33 /* UIImage+Resize.m */; };
 		6855EDD81793B81D00769B71 /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDD71793B81D00769B71 /* DWTagList.m */; };
 		6855EDD91793B81D00769B71 /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDD71793B81D00769B71 /* DWTagList.m */; };
 		6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDC17948EC900769B71 /* MHAddress+Helper.m */; };
@@ -478,17 +506,51 @@
 		68478DAC177E8C9F0014501D /* MHPeopleSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPeopleSearchBar.h; path = "Custom UI/MHPeopleSearchBar.h"; sourceTree = "<group>"; };
 		68478DAD177E8C9F0014501D /* MHPeopleSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPeopleSearchBar.m; path = "Custom UI/MHPeopleSearchBar.m"; sourceTree = "<group>"; };
 		68478DB1177E8CDC0014501D /* BackMenu_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackMenu_Icon.png; sourceTree = "<group>"; };
-		68478DB2177E8CDC0014501D /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		68478DB3177E8CDC0014501D /* gradient-over-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient-over-image@2x.png"; sourceTree = "<group>"; };
 		68478DB4177E8CDC0014501D /* gradient_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient_overlay@2x.png"; sourceTree = "<group>"; };
 		68478DB5177E8CDC0014501D /* NewContact_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewContact_Icon.png; sourceTree = "<group>"; };
 		68478DB6177E8CDC0014501D /* NewInteraction_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewInteraction_Icon.png; sourceTree = "<group>"; };
-		68478DB7177E8CDC0014501D /* sunflower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sunflower.jpg; sourceTree = "<group>"; };
 		68478DB8177E8CDC0014501D /* topbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar_background.png; sourceTree = "<group>"; };
 		68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarOtherOptions_button.png; sourceTree = "<group>"; };
 		68478DBA177E8CDC0014501D /* topbarTag_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbarTag_button.png; sourceTree = "<group>"; };
 		6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Refresh_Pressed_86.png; sourceTree = "<group>"; };
 		6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Refresh_86.png; sourceTree = "<group>"; };
+		685405A017D652B300E2BA33 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/REActivityViewController.strings; sourceTree = "<group>"; };
+		685405A117D652B300E2BA33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/REActivityViewController.strings; sourceTree = "<group>"; };
+		685405A217D652B300E2BA33 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/REActivityViewController.strings; sourceTree = "<group>"; };
+		685405A517D652B300E2BA33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/REActivityViewController.strings; sourceTree = "<group>"; };
+		685405A617D652B300E2BA33 /* ua */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ua; path = ua.lproj/REActivityViewController.strings; sourceTree = "<group>"; };
+		685405A717D652B300E2BA33 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/REActivityViewController.strings"; sourceTree = "<group>"; };
+		685405A817D652B400E2BA33 /* REActivities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REActivities.h; sourceTree = "<group>"; };
+		685405A917D652B400E2BA33 /* REActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REActivity.h; sourceTree = "<group>"; };
+		685405AA17D652B400E2BA33 /* REActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REActivity.m; sourceTree = "<group>"; };
+		685405AB17D652B400E2BA33 /* REActivityDelegateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REActivityDelegateObject.h; sourceTree = "<group>"; };
+		685405AC17D652B400E2BA33 /* REActivityDelegateObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REActivityDelegateObject.m; sourceTree = "<group>"; };
+		685405AD17D652B400E2BA33 /* REActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REActivityView.h; sourceTree = "<group>"; };
+		685405AE17D652B400E2BA33 /* REActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REActivityView.m; sourceTree = "<group>"; };
+		685405AF17D652B400E2BA33 /* REActivityViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = REActivityViewController.bundle; sourceTree = "<group>"; };
+		685405B017D652B400E2BA33 /* REActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REActivityViewController.h; sourceTree = "<group>"; };
+		685405B117D652B400E2BA33 /* REActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REActivityViewController.m; sourceTree = "<group>"; };
+		685405B217D652B400E2BA33 /* REAuthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REAuthCell.h; sourceTree = "<group>"; };
+		685405B317D652B400E2BA33 /* REAuthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REAuthCell.m; sourceTree = "<group>"; };
+		685405B417D652B400E2BA33 /* REAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REAuthViewController.h; sourceTree = "<group>"; };
+		685405B517D652B400E2BA33 /* REAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REAuthViewController.m; sourceTree = "<group>"; };
+		685405B617D652B400E2BA33 /* REChromeActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REChromeActivity.h; sourceTree = "<group>"; };
+		685405B717D652B400E2BA33 /* REChromeActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REChromeActivity.m; sourceTree = "<group>"; };
+		685405B817D652B400E2BA33 /* RECopyActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECopyActivity.h; sourceTree = "<group>"; };
+		685405B917D652B400E2BA33 /* RECopyActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECopyActivity.m; sourceTree = "<group>"; };
+		685405C217D652B400E2BA33 /* REMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMailActivity.h; sourceTree = "<group>"; };
+		685405C317D652B400E2BA33 /* REMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMailActivity.m; sourceTree = "<group>"; };
+		685405C417D652B400E2BA33 /* REMapsActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMapsActivity.h; sourceTree = "<group>"; };
+		685405C517D652B400E2BA33 /* REMapsActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMapsActivity.m; sourceTree = "<group>"; };
+		685405C617D652B400E2BA33 /* REMessageActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMessageActivity.h; sourceTree = "<group>"; };
+		685405C717D652B400E2BA33 /* REMessageActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMessageActivity.m; sourceTree = "<group>"; };
+		685405CA17D652B400E2BA33 /* REPrintActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REPrintActivity.h; sourceTree = "<group>"; };
+		685405CB17D652B400E2BA33 /* REPrintActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REPrintActivity.m; sourceTree = "<group>"; };
+		685405CE17D652B400E2BA33 /* RESafariActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESafariActivity.h; sourceTree = "<group>"; };
+		685405CF17D652B400E2BA33 /* RESafariActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESafariActivity.m; sourceTree = "<group>"; };
+		685405DC17D652B400E2BA33 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		685405DD17D652B400E2BA33 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		6855EDD61793B81D00769B71 /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DWTagList.h; path = Libraries/DWTagList/DWTagList/Classes/DWTagList.h; sourceTree = "<group>"; };
 		6855EDD71793B81D00769B71 /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DWTagList.m; path = Libraries/DWTagList/DWTagList/Classes/DWTagList.m; sourceTree = "<group>"; };
 		6855EDDB17948EC900769B71 /* MHAddress+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHAddress+Helper.h"; path = "Models/MHAddress+Helper.h"; sourceTree = "<group>"; };
@@ -806,6 +868,7 @@
 				683AE38F176D2A030027EDE4 /* Models */,
 				68D7AA3B176677DA00B9B0B1 /* API Controllers */,
 				683910D51761095000E01B46 /* View Controllers */,
+				AD301125176FE41F00D53E35 /* Custom UI */,
 				683910971760FD3100E01B46 /* MHAppDelegate.h */,
 				683910981760FD3100E01B46 /* MHAppDelegate.m */,
 				683910A01760FD3100E01B46 /* MissionHub.xcdatamodeld */,
@@ -815,7 +878,6 @@
 				68478DB0177E8CDC0014501D /* Resources */,
 				68C068AA17710298007C79D6 /* Libraries */,
 				68AB5AAD177398BC00FA1558 /* Categories */,
-				AD301125176FE41F00D53E35 /* Custom UI */,
 			);
 			path = MissionHub;
 			sourceTree = "<group>";
@@ -1035,17 +1097,62 @@
 				6823A7BE177EB00100DBDF3F /* searchbar_image.png */,
 				6823A7C1177EB00100DBDF3F /* sectionHeaderSort.png */,
 				68478DB1177E8CDC0014501D /* BackMenu_Icon.png */,
-				68478DB2177E8CDC0014501D /* bg.jpg */,
 				68478DB3177E8CDC0014501D /* gradient-over-image@2x.png */,
 				68478DB4177E8CDC0014501D /* gradient_overlay@2x.png */,
 				68478DB5177E8CDC0014501D /* NewContact_Icon.png */,
 				68478DB6177E8CDC0014501D /* NewInteraction_Icon.png */,
-				68478DB7177E8CDC0014501D /* sunflower.jpg */,
 				68478DB8177E8CDC0014501D /* topbar_background.png */,
 				68478DB9177E8CDC0014501D /* topbarOtherOptions_button.png */,
 				68478DBA177E8CDC0014501D /* topbarTag_button.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6854059D17D652B300E2BA33 /* REActivityViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6854059E17D652B300E2BA33 /* Localizations */,
+				685405A817D652B400E2BA33 /* REActivities.h */,
+				685405A917D652B400E2BA33 /* REActivity.h */,
+				685405AA17D652B400E2BA33 /* REActivity.m */,
+				685405AB17D652B400E2BA33 /* REActivityDelegateObject.h */,
+				685405AC17D652B400E2BA33 /* REActivityDelegateObject.m */,
+				685405AD17D652B400E2BA33 /* REActivityView.h */,
+				685405AE17D652B400E2BA33 /* REActivityView.m */,
+				685405AF17D652B400E2BA33 /* REActivityViewController.bundle */,
+				685405B017D652B400E2BA33 /* REActivityViewController.h */,
+				685405B117D652B400E2BA33 /* REActivityViewController.m */,
+				685405B217D652B400E2BA33 /* REAuthCell.h */,
+				685405B317D652B400E2BA33 /* REAuthCell.m */,
+				685405B417D652B400E2BA33 /* REAuthViewController.h */,
+				685405B517D652B400E2BA33 /* REAuthViewController.m */,
+				685405B617D652B400E2BA33 /* REChromeActivity.h */,
+				685405B717D652B400E2BA33 /* REChromeActivity.m */,
+				685405B817D652B400E2BA33 /* RECopyActivity.h */,
+				685405B917D652B400E2BA33 /* RECopyActivity.m */,
+				685405C217D652B400E2BA33 /* REMailActivity.h */,
+				685405C317D652B400E2BA33 /* REMailActivity.m */,
+				685405C417D652B400E2BA33 /* REMapsActivity.h */,
+				685405C517D652B400E2BA33 /* REMapsActivity.m */,
+				685405C617D652B400E2BA33 /* REMessageActivity.h */,
+				685405C717D652B400E2BA33 /* REMessageActivity.m */,
+				685405CA17D652B400E2BA33 /* REPrintActivity.h */,
+				685405CB17D652B400E2BA33 /* REPrintActivity.m */,
+				685405CE17D652B400E2BA33 /* RESafariActivity.h */,
+				685405CF17D652B400E2BA33 /* RESafariActivity.m */,
+				685405DC17D652B400E2BA33 /* UIImage+Resize.h */,
+				685405DD17D652B400E2BA33 /* UIImage+Resize.m */,
+			);
+			name = REActivityViewController;
+			path = Libraries/REActivityViewController/REActivityViewController;
+			sourceTree = "<group>";
+		};
+		6854059E17D652B300E2BA33 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				6854059F17D652B300E2BA33 /* REActivityViewController.strings */,
+			);
+			path = Localizations;
 			sourceTree = "<group>";
 		};
 		6855EDDA1793B82300769B71 /* DWTagList */ = {
@@ -1093,6 +1200,7 @@
 		68C068AA17710298007C79D6 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6854059D17D652B300E2BA33 /* REActivityViewController */,
 				68EC3A5817CD053500EE3717 /* TTTAttributedLabel */,
 				6855EDDA1793B82300769B71 /* DWTagList */,
 				68A68BD1178A192100927DF8 /* ODRefreshControl */,
@@ -1303,6 +1411,11 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
+				fr,
+				ru,
+				ua,
+				"zh-Hans",
 			);
 			mainGroup = 6839107A1760FD3100E01B46;
 			productRefGroup = 683910841760FD3100E01B46 /* Products */;
@@ -1339,12 +1452,10 @@
 				683AE3A0176D2DC20027EDE4 /* appicon-small-50.png in Resources */,
 				683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */,
 				68478DBB177E8CDC0014501D /* BackMenu_Icon.png in Resources */,
-				68478DBD177E8CDC0014501D /* bg.jpg in Resources */,
 				68478DBF177E8CDC0014501D /* gradient-over-image@2x.png in Resources */,
 				68478DC1177E8CDC0014501D /* gradient_overlay@2x.png in Resources */,
 				68478DC3177E8CDC0014501D /* NewContact_Icon.png in Resources */,
 				68478DC5177E8CDC0014501D /* NewInteraction_Icon.png in Resources */,
-				68478DC7177E8CDC0014501D /* sunflower.jpg in Resources */,
 				68478DC9177E8CDC0014501D /* topbar_background.png in Resources */,
 				68478DCB177E8CDC0014501D /* topbarOtherOptions_button.png in Resources */,
 				68478DCD177E8CDC0014501D /* topbarTag_button.png in Resources */,
@@ -1389,6 +1500,8 @@
 				685923A317AC427F0047A5A5 /* MH_Mobile_Checkbox_Checked_48_padded.png in Resources */,
 				685923A517AC427F0047A5A5 /* MH_Mobile_Checkbox_PartiallyChecked_48_padded.png in Resources */,
 				68BF197917BF26F000177485 /* MH_Mobile_Default_Image_iPad.png in Resources */,
+				685405DE17D652B400E2BA33 /* REActivityViewController.strings in Resources */,
+				685405E817D652B400E2BA33 /* REActivityViewController.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1411,12 +1524,10 @@
 				683AE3A1176D2DC20027EDE4 /* appicon-small-50.png in Resources */,
 				683AE3A3176D2DC20027EDE4 /* appicon-72.png in Resources */,
 				68478DBC177E8CDC0014501D /* BackMenu_Icon.png in Resources */,
-				68478DBE177E8CDC0014501D /* bg.jpg in Resources */,
 				68478DC0177E8CDC0014501D /* gradient-over-image@2x.png in Resources */,
 				68478DC2177E8CDC0014501D /* gradient_overlay@2x.png in Resources */,
 				68478DC4177E8CDC0014501D /* NewContact_Icon.png in Resources */,
 				68478DC6177E8CDC0014501D /* NewInteraction_Icon.png in Resources */,
-				68478DC8177E8CDC0014501D /* sunflower.jpg in Resources */,
 				68478DCA177E8CDC0014501D /* topbar_background.png in Resources */,
 				68478DCC177E8CDC0014501D /* topbarOtherOptions_button.png in Resources */,
 				68478DCE177E8CDC0014501D /* topbarTag_button.png in Resources */,
@@ -1458,6 +1569,8 @@
 				685923A417AC427F0047A5A5 /* MH_Mobile_Checkbox_Checked_48_padded.png in Resources */,
 				685923A617AC427F0047A5A5 /* MH_Mobile_Checkbox_PartiallyChecked_48_padded.png in Resources */,
 				68BF197A17BF26F000177485 /* MH_Mobile_Default_Image_iPad.png in Resources */,
+				685405DF17D652B400E2BA33 /* REActivityViewController.strings in Resources */,
+				685405E917D652B400E2BA33 /* REActivityViewController.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1574,6 +1687,20 @@
 				6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */,
 				68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */,
 				681C65B117D185170021D2EE /* MHAddressCell.m in Sources */,
+				685405E217D652B400E2BA33 /* REActivity.m in Sources */,
+				685405E417D652B400E2BA33 /* REActivityDelegateObject.m in Sources */,
+				685405E617D652B400E2BA33 /* REActivityView.m in Sources */,
+				685405EA17D652B400E2BA33 /* REActivityViewController.m in Sources */,
+				685405EC17D652B400E2BA33 /* REAuthCell.m in Sources */,
+				685405EE17D652B400E2BA33 /* REAuthViewController.m in Sources */,
+				685405F017D652B400E2BA33 /* REChromeActivity.m in Sources */,
+				685405F217D652B400E2BA33 /* RECopyActivity.m in Sources */,
+				685405FC17D652B400E2BA33 /* REMailActivity.m in Sources */,
+				685405FE17D652B400E2BA33 /* REMapsActivity.m in Sources */,
+				6854060017D652B400E2BA33 /* REMessageActivity.m in Sources */,
+				6854060417D652B400E2BA33 /* REPrintActivity.m in Sources */,
+				6854060817D652B400E2BA33 /* RESafariActivity.m in Sources */,
+				6854061617D652B400E2BA33 /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1670,6 +1797,20 @@
 				6801976417CFE88200DCE330 /* MHHeaderCell.m in Sources */,
 				68F4CC4A17D10846004D6574 /* MHAnswerCell.m in Sources */,
 				681C65B217D185170021D2EE /* MHAddressCell.m in Sources */,
+				685405E317D652B400E2BA33 /* REActivity.m in Sources */,
+				685405E517D652B400E2BA33 /* REActivityDelegateObject.m in Sources */,
+				685405E717D652B400E2BA33 /* REActivityView.m in Sources */,
+				685405EB17D652B400E2BA33 /* REActivityViewController.m in Sources */,
+				685405ED17D652B400E2BA33 /* REAuthCell.m in Sources */,
+				685405EF17D652B400E2BA33 /* REAuthViewController.m in Sources */,
+				685405F117D652B400E2BA33 /* REChromeActivity.m in Sources */,
+				685405F317D652B400E2BA33 /* RECopyActivity.m in Sources */,
+				685405FD17D652B400E2BA33 /* REMailActivity.m in Sources */,
+				685405FF17D652B400E2BA33 /* REMapsActivity.m in Sources */,
+				6854060117D652B400E2BA33 /* REMessageActivity.m in Sources */,
+				6854060517D652B400E2BA33 /* REPrintActivity.m in Sources */,
+				6854060917D652B400E2BA33 /* RESafariActivity.m in Sources */,
+				6854061717D652B400E2BA33 /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1698,6 +1839,19 @@
 				683910B41760FD3100E01B46 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6854059F17D652B300E2BA33 /* REActivityViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				685405A017D652B300E2BA33 /* de */,
+				685405A117D652B300E2BA33 /* en */,
+				685405A217D652B300E2BA33 /* fr */,
+				685405A517D652B300E2BA33 /* ru */,
+				685405A617D652B300E2BA33 /* ua */,
+				685405A717D652B300E2BA33 /* zh-Hans */,
+			);
+			name = REActivityViewController.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -25,3 +25,6 @@
 [submodule "Libraries/TTTAttributedLabel"]
 	path = Libraries/TTTAttributedLabel
 	url = https://github.com/mattt/TTTAttributedLabel.git
+[submodule "Libraries/REActivityViewController"]
+	path = Libraries/REActivityViewController
+	url = https://github.com/michaelharro/REActivityViewController.git
