@@ -298,7 +298,7 @@
 	
     [self.navigationController popViewControllerAnimated:YES];
 	
- }
+}
 
 - (IBAction)addLabelActivity:(id)sender {
 
@@ -324,7 +324,12 @@
 }
 
 - (IBAction)newInteractionActivity:(id)sender {
-NSLog(@"Interaction Action");
+	
+	MHInteraction *newInteraction	= [MHInteraction newObjectFromFields:nil];
+	newInteraction.receiver			= self._person;
+	NSArray *selectionArray			= (self._person ? @[self._person] : @[]);
+	
+	[[self createInteractionViewController] updateWithInteraction:newInteraction andSelections:selectionArray]; //create selected array
 	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
     
  
