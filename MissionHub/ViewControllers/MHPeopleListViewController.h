@@ -16,31 +16,9 @@
 #import "MHCreatePersonViewController.h"
 #import "MHPersonCell.h"
 #import "MHGenericListViewController.h"
+#import "REActivityViewController.h"
 
-@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate> {
-
-	NSMutableArray *_peopleArray;
-	NSMutableArray *_searchResultArray;
-	NSMutableArray *_selectedPeople;
-	MHRequestOptions *_requestOptions;
-	MHRequestOptions *_searchRequestOptions;
-	ODRefreshControl *_refreshController;
-	
-	BOOL _isLoading;
-	BOOL _refreshIsLoading;
-	BOOL _pagingIsLoading;
-	BOOL _hasLoadedAllPages;
-	BOOL _searchIsLoading;
-	BOOL _searchHasLoadedAllPages;
-	
-	MHPersonSortFields _secondaryFieldName;
-	MHRequestOptionsOrderFields _sortField;
-	
-	//caching ui
-	UIView *_header;
-	
-	
-}
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate>
 
 
 /*@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
@@ -68,8 +46,12 @@
 @property (nonatomic, strong) UIButton *fieldButton;
 @property (nonatomic, strong) UIView *header;
 @property (nonatomic, strong) IBOutlet UIView *activityBar;
-@property (nonatomic, strong) MHProfileViewController *_profileViewController;
-@property (nonatomic, strong) MHGenericListViewController *_fieldSelectorViewController;
+@property (nonatomic, strong, readonly) MHProfileViewController *profileViewController;
+@property (nonatomic, strong, readonly) MHGenericListViewController *fieldSelectorViewController;
+@property (nonatomic, strong, readonly) MHNewInteractionViewController *createInteractionViewController;
+@property (nonatomic, strong, readonly) MHCreatePersonViewController *createPersonViewController;
+@property (nonatomic, strong, readonly) UIPopoverController	*createPersonPopoverViewController;
+@property (nonatomic, strong, readonly) REActivityViewController *activityViewController;
 
 -(IBAction)revealMenu:(id)sender;
 -(void)refresh;

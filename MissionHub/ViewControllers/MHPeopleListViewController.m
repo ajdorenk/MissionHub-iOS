@@ -23,13 +23,6 @@
 @interface MHPeopleListViewController ()
 
 -(void)setTextFieldLeftView;
-@property (nonatomic, strong) MHNewInteractionViewController		*_createInteractionViewController;
-@property (nonatomic, strong) MHCreatePersonViewController          *_createPersonViewController;
-@property (nonatomic, strong) UIPopoverController					*_createPersonPopoverViewController;
-
--(MHNewInteractionViewController *)createInteractionViewController;
--(MHCreatePersonViewController *)createPersonViewController;
-- (UIPopoverController *)createPersonPopoverViewController;
 
 - (void)addPerson:(id)sender;
 - (void)addInteraction:(id)sender;
@@ -54,10 +47,15 @@
 @synthesize searchHasLoadedAllPages	= _searchHasLoadedAllPages;
 @synthesize secondaryFieldName		= _secondaryFieldName;
 @synthesize fieldButton;
-@synthesize sortField				= _sortField;
-@synthesize header					= _header;
-@synthesize _profileViewController;
-@synthesize _fieldSelectorViewController;
+@synthesize sortField							= _sortField;
+@synthesize header								= _header;
+@synthesize profileViewController				= _profileViewController;
+@synthesize fieldSelectorViewController			= _fieldSelectorViewController;
+@synthesize createInteractionViewController		= _createInteractionViewController;
+@synthesize createPersonViewController			= _createPersonViewController;
+@synthesize createPersonPopoverViewController	= _createPersonPopoverViewController;
+@synthesize activityViewController				= _activityViewController;
+
 
 -(void)awakeFromNib {
 	
@@ -148,23 +146,28 @@
 
 -(MHProfileViewController *)profileViewController {
 	
-	if (self._profileViewController == nil) {
+	if (_profileViewController == nil) {
 		
-		self._profileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileViewController"];
+		[self willChangeValueForKey:@"profileViewController"];
+		_profileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileViewController"];
+		[self didChangeValueForKey:@"profileViewController"];
 		
 	}
 	
-	return self._profileViewController;
+	return _profileViewController;
 	
 }
 
 -(MHGenericListViewController *)fieldSelectorViewController {
 	
-	if (self._fieldSelectorViewController == nil) {
+	if (_fieldSelectorViewController == nil) {
 		
-		self._fieldSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
-		self._fieldSelectorViewController.selectionDelegate = self;
-		self._fieldSelectorViewController.objectArray = [NSMutableArray arrayWithArray:@[
+		[self willChangeValueForKey:@"fieldSelectorViewController"];
+		_fieldSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		[self didChangeValueForKey:@"fieldSelectorViewController"];
+		
+		_fieldSelectorViewController.selectionDelegate = self;
+		_fieldSelectorViewController.objectArray = [NSMutableArray arrayWithArray:@[
 														 [MHPerson fieldNameForSortField:MHPersonSortFieldGender],
 														 [MHPerson fieldNameForSortField:MHPersonSortFieldFollowupStatus],
 														 [MHPerson fieldNameForSortField:MHPersonSortFieldPermission],
@@ -174,7 +177,74 @@
 		
 	}
 	
-	return self._fieldSelectorViewController;
+	return _fieldSelectorViewController;
+	
+}
+
+-(MHNewInteractionViewController *)createInteractionViewController {
+	
+	if (_createInteractionViewController == nil) {
+		
+		[self willChangeValueForKey:@"createInteractionViewController"];
+		_createInteractionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+		[self didChangeValueForKey:@"createInteractionViewController"];
+		
+	}
+	
+	return _createInteractionViewController;
+	
+}
+
+
+-(MHCreatePersonViewController *)createPersonViewController {
+	
+	if (_createPersonViewController == nil) {
+		
+		[self willChangeValueForKey:@"createPersonViewController"];
+		_createPersonViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHCreatePersonViewController"];
+		[self didChangeValueForKey:@"createPersonViewController"];
+		
+		_createPersonViewController.createPersonDelegate = self;
+		
+	}
+	
+	return _createPersonViewController;
+	
+}
+
+- (UIPopoverController *)createPersonPopoverViewController {
+	
+	if (_createPersonPopoverViewController == nil) {
+		
+		[self willChangeValueForKey:@"createPersonPopoverViewController"];
+		_createPersonPopoverViewController = [[UIPopoverController alloc] initWithContentViewController:[self createPersonViewController]];
+		[self didChangeValueForKey:@"createPersonPopoverViewController"];
+		
+		_createPersonPopoverViewController.delegate = self;
+		
+	}
+	
+	return _createPersonPopoverViewController;
+	
+}
+
+- (REActivityViewController *)activityViewController {
+	
+	if (_activityViewController == nil) {
+		
+		REMessageActivity *messageActivity = [[REMessageActivity alloc] init];
+		REMailActivity *mailActivity = [[REMailActivity alloc] init];
+		RESafariActivity *safariActivity = [[RESafariActivity alloc] init];
+		
+		NSArray *activities = @[messageActivity, mailActivity, safariActivity];
+		
+		[self willChangeValueForKey:@"activityViewController"];
+		_activityViewController = [[REActivityViewController alloc] initWithViewController:self activities:activities];
+		[self didChangeValueForKey:@"activityViewController"];
+		
+	}
+	
+	return _activityViewController;
 	
 }
 
@@ -278,45 +348,6 @@
 	[self refresh];
 	[self dismissViewControllerAnimated:YES completion:nil];
 	//[self.tableView reloadData];
-	
-}
-
--(MHNewInteractionViewController *)createInteractionViewController {
-	
-	if (self._createInteractionViewController == nil) {
-		
-		self._createInteractionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
-		
-	}
-	
-	return self._createInteractionViewController;
-	
-}
-
-
--(MHCreatePersonViewController *)createPersonViewController {
-	
-	if (self._createPersonViewController == nil) {
-		
-		self._createPersonViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHCreatePersonViewController"];
-		self._createPersonViewController.createPersonDelegate = self;
-		
-	}
-	
-	return self._createPersonViewController;
-	
-}
-
-- (UIPopoverController *)createPersonPopoverViewController {
-
-	if (self._createPersonPopoverViewController == nil) {
-	
-		self._createPersonPopoverViewController = [[UIPopoverController alloc] initWithContentViewController:[self createPersonViewController]];
-		self._createPersonPopoverViewController.delegate = self;
-
-	}
-	
-	return self._createPersonPopoverViewController;
 	
 }
 
@@ -832,93 +863,6 @@
 	}
 	
 }
-
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	/*
-	if (tableView == self.tableView && !self.hasLoadedAllPages && !self.pagingIsLoading) {
-		
-		if (indexPath.row + 5 >= [self.peopleArray count]) {
-			
-			[self.requestOptions configureForNextPageRequest];
-
-			self.pagingIsLoading = YES;
-			
-			[[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
-											successBlock:^(NSArray *result, MHRequestOptions *options) {
-											 
-											 //remove loading cell if it has been displayed
-											 self.pagingIsLoading = NO;
-											 
-											 self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
-											 
-											 //update array with results
-											 [self.peopleArray addObjectsFromArray:result];
-											 [self.tableView reloadData];
-											 
-										 }
-											   failBlock:^(NSError *error, MHRequestOptions *options) {
-												
-													NSString *errorMessage = [NSString stringWithFormat:@"Failed to retreive more results due to: \"%@\". Try again by scrolling up and scrolling back down. If the problem continues please contact support@missionhub.com", error.localizedDescription];
-													NSError *presentingError = [NSError errorWithDomain:error.domain
-																								   code:error.code
-																							   userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
-													
-													[MHErrorHandler presentError:presentingError];
-													
-													self.pagingIsLoading = NO;
-													[self.tableView reloadData];
-												
-											}];
-			
-		}
-		
-	}
-	
-	if (tableView == self.searchDisplayController.searchResultsTableView && !self.searchHasLoadedAllPages && !self.searchPagingIsLoading) {
-		
-		if (indexPath.row + 5 >= [self.searchResultArray count]) {
-			
-			[self.searchRequestOptions configureForNextPageRequest];
-			
-			self.searchPagingIsLoading = YES;
-			
-			[[MHAPI sharedInstance] getResultWithOptions:self.searchRequestOptions
-											successBlock:^(NSArray *result, MHRequestOptions *options) {
-												
-												//remove loading cell if it has been displayed
-												self.searchPagingIsLoading = NO;
-												
-												self.searchHasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
-												
-												//update array with results
-												if ([result count] == 0) {
-													[self.searchResultArray removeAllObjects];
-												} else {
-													self.searchResultArray =  [NSMutableArray arrayWithArray:result];
-												}
-												[self.searchDisplayController.searchResultsTableView reloadData];
-												
-											}
-											   failBlock:^(NSError *error, MHRequestOptions *options) {
-												   
-												   NSString *errorMessage = [NSString stringWithFormat:@"Failed to retreive more results due to: \"%@\". Try again by scrolling up and scrolling back down. If the problem continues please contact support@missionhub.com", error.localizedDescription];
-												   NSError *presentingError = [NSError errorWithDomain:error.domain
-																								  code:error.code
-																							  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
-												   
-												   [MHErrorHandler presentError:presentingError];
-												   
-												   self.searchPagingIsLoading = NO;
-												   [self.searchDisplayController.searchResultsTableView reloadData];
-												   
-											   }];
-			
-		}
-		
-	}
-	*/ 
-	
-}
  
 #pragma mark - Table view delegate
 
@@ -948,11 +892,14 @@
 		
 		[self.selectedPeople addObject:person];
 		
+		self.activityViewController.userInfo = @{ @"people": self.selectedPeople };
+		
 	}
 	
 	if ([self.selectedPeople count] == 1) {
 		
 		//launch activity view controller
+		[self.activityViewController presentFromRootViewController];
 		
 	}
 	
@@ -969,6 +916,7 @@
 	if ([self.selectedPeople count] == 0) {
 		
 		//remove activity view controller
+		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
 		
 	}
 	
