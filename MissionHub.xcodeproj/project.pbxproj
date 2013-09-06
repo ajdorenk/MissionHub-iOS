@@ -55,6 +55,24 @@
 		6823A7D7177EC34D00DBDF3F /* MHAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D5177EC34D00DBDF3F /* MHAddress.m */; };
 		6823A7DA177EC34D00DBDF3F /* MHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D9177EC34D00DBDF3F /* MHUser.m */; };
 		6823A7DB177EC34D00DBDF3F /* MHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D9177EC34D00DBDF3F /* MHUser.m */; };
+		682462CE17D90C3500E1AFBB /* MHLabelActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462CD17D90C3500E1AFBB /* MHLabelActivity.m */; };
+		682462CF17D90C3500E1AFBB /* MHLabelActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462CD17D90C3500E1AFBB /* MHLabelActivity.m */; };
+		682462D317D90DDC00E1AFBB /* MHAssignActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462D217D90DDC00E1AFBB /* MHAssignActivity.m */; };
+		682462D417D90DDC00E1AFBB /* MHAssignActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462D217D90DDC00E1AFBB /* MHAssignActivity.m */; };
+		682462D717D90E2B00E1AFBB /* MHPermissionsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462D617D90E2B00E1AFBB /* MHPermissionsActivity.m */; };
+		682462D817D90E2B00E1AFBB /* MHPermissionsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462D617D90E2B00E1AFBB /* MHPermissionsActivity.m */; };
+		682462DB17D9252F00E1AFBB /* MHDeleteActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462DA17D9252F00E1AFBB /* MHDeleteActivity.m */; };
+		682462DC17D9252F00E1AFBB /* MHDeleteActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462DA17D9252F00E1AFBB /* MHDeleteActivity.m */; };
+		682462DF17D9318700E1AFBB /* MHActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462DE17D9318700E1AFBB /* MHActivity.m */; };
+		682462E017D9318700E1AFBB /* MHActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462DE17D9318700E1AFBB /* MHActivity.m */; };
+		682462E317D9425F00E1AFBB /* MHArchiveActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462E217D9425F00E1AFBB /* MHArchiveActivity.m */; };
+		682462E417D9425F00E1AFBB /* MHArchiveActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462E217D9425F00E1AFBB /* MHArchiveActivity.m */; };
+		682462E717D9429E00E1AFBB /* MHEmailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462E617D9429E00E1AFBB /* MHEmailActivity.m */; };
+		682462E817D9429E00E1AFBB /* MHEmailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462E617D9429E00E1AFBB /* MHEmailActivity.m */; };
+		682462EB17D942B600E1AFBB /* MHTextActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462EA17D942B500E1AFBB /* MHTextActivity.m */; };
+		682462EC17D942B600E1AFBB /* MHTextActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462EA17D942B500E1AFBB /* MHTextActivity.m */; };
+		682462EF17D9432C00E1AFBB /* MHActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462EE17D9432C00E1AFBB /* MHActivityViewController.m */; };
+		682462F017D9432C00E1AFBB /* MHActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462EE17D9432C00E1AFBB /* MHActivityViewController.m */; };
 		682C68E917B9E3A600BAD332 /* MHPermissionLevel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 682C68E817B9E3A600BAD332 /* MHPermissionLevel+Helper.m */; };
 		682C68EA17B9E3A600BAD332 /* MHPermissionLevel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 682C68E817B9E3A600BAD332 /* MHPermissionLevel+Helper.m */; };
 		683910871760FD3100E01B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910861760FD3100E01B46 /* UIKit.framework */; };
@@ -420,6 +438,25 @@
 		6823A7D5177EC34D00DBDF3F /* MHAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAddress.m; path = Models/MHAddress.m; sourceTree = "<group>"; };
 		6823A7D8177EC34D00DBDF3F /* MHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHUser.h; path = Models/MHUser.h; sourceTree = "<group>"; };
 		6823A7D9177EC34D00DBDF3F /* MHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHUser.m; path = Models/MHUser.m; sourceTree = "<group>"; };
+		682462CC17D90C3500E1AFBB /* MHLabelActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLabelActivity.h; path = "Custom UI/Activities/MHLabelActivity.h"; sourceTree = "<group>"; };
+		682462CD17D90C3500E1AFBB /* MHLabelActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHLabelActivity.m; path = "Custom UI/Activities/MHLabelActivity.m"; sourceTree = "<group>"; };
+		682462D117D90DDB00E1AFBB /* MHAssignActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAssignActivity.h; path = "Custom UI/Activities/MHAssignActivity.h"; sourceTree = "<group>"; };
+		682462D217D90DDC00E1AFBB /* MHAssignActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAssignActivity.m; path = "Custom UI/Activities/MHAssignActivity.m"; sourceTree = "<group>"; };
+		682462D517D90E2B00E1AFBB /* MHPermissionsActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPermissionsActivity.h; path = "Custom UI/Activities/MHPermissionsActivity.h"; sourceTree = "<group>"; };
+		682462D617D90E2B00E1AFBB /* MHPermissionsActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPermissionsActivity.m; path = "Custom UI/Activities/MHPermissionsActivity.m"; sourceTree = "<group>"; };
+		682462D917D9252F00E1AFBB /* MHDeleteActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHDeleteActivity.h; path = "Custom UI/Activities/MHDeleteActivity.h"; sourceTree = "<group>"; };
+		682462DA17D9252F00E1AFBB /* MHDeleteActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHDeleteActivity.m; path = "Custom UI/Activities/MHDeleteActivity.m"; sourceTree = "<group>"; };
+		682462DD17D9318700E1AFBB /* MHActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHActivity.h; path = "Custom UI/Activities/MHActivity.h"; sourceTree = "<group>"; };
+		682462DE17D9318700E1AFBB /* MHActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHActivity.m; path = "Custom UI/Activities/MHActivity.m"; sourceTree = "<group>"; };
+		682462E117D9425E00E1AFBB /* MHArchiveActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHArchiveActivity.h; path = "Custom UI/Activities/MHArchiveActivity.h"; sourceTree = "<group>"; };
+		682462E217D9425F00E1AFBB /* MHArchiveActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHArchiveActivity.m; path = "Custom UI/Activities/MHArchiveActivity.m"; sourceTree = "<group>"; };
+		682462E517D9429E00E1AFBB /* MHEmailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHEmailActivity.h; path = "Custom UI/Activities/MHEmailActivity.h"; sourceTree = "<group>"; };
+		682462E617D9429E00E1AFBB /* MHEmailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHEmailActivity.m; path = "Custom UI/Activities/MHEmailActivity.m"; sourceTree = "<group>"; };
+		682462E917D942B500E1AFBB /* MHTextActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHTextActivity.h; path = "Custom UI/Activities/MHTextActivity.h"; sourceTree = "<group>"; };
+		682462EA17D942B500E1AFBB /* MHTextActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHTextActivity.m; path = "Custom UI/Activities/MHTextActivity.m"; sourceTree = "<group>"; };
+		682462ED17D9432B00E1AFBB /* MHActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHActivityViewController.h; path = "Custom UI/Activities/MHActivityViewController.h"; sourceTree = "<group>"; };
+		682462EE17D9432C00E1AFBB /* MHActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHActivityViewController.m; path = "Custom UI/Activities/MHActivityViewController.m"; sourceTree = "<group>"; };
+		682462F117D9449400E1AFBB /* MHActivities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHActivities.h; path = "Custom UI/Activities/MHActivities.h"; sourceTree = "<group>"; };
 		682C68E717B9E3A600BAD332 /* MHPermissionLevel+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHPermissionLevel+Helper.h"; path = "Models/MHPermissionLevel+Helper.h"; sourceTree = "<group>"; };
 		682C68E817B9E3A600BAD332 /* MHPermissionLevel+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHPermissionLevel+Helper.m"; path = "Models/MHPermissionLevel+Helper.m"; sourceTree = "<group>"; };
 		683910831760FD3100E01B46 /* MissionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -813,6 +850,32 @@
 			);
 			name = SIAlertView;
 			path = Libraries/SIAlertView/SIAlertView;
+			sourceTree = "<group>";
+		};
+		682462D017D90C4000E1AFBB /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				682462CC17D90C3500E1AFBB /* MHLabelActivity.h */,
+				682462CD17D90C3500E1AFBB /* MHLabelActivity.m */,
+				682462D117D90DDB00E1AFBB /* MHAssignActivity.h */,
+				682462D217D90DDC00E1AFBB /* MHAssignActivity.m */,
+				682462D517D90E2B00E1AFBB /* MHPermissionsActivity.h */,
+				682462D617D90E2B00E1AFBB /* MHPermissionsActivity.m */,
+				682462D917D9252F00E1AFBB /* MHDeleteActivity.h */,
+				682462DA17D9252F00E1AFBB /* MHDeleteActivity.m */,
+				682462E117D9425E00E1AFBB /* MHArchiveActivity.h */,
+				682462E217D9425F00E1AFBB /* MHArchiveActivity.m */,
+				682462E517D9429E00E1AFBB /* MHEmailActivity.h */,
+				682462E617D9429E00E1AFBB /* MHEmailActivity.m */,
+				682462E917D942B500E1AFBB /* MHTextActivity.h */,
+				682462EA17D942B500E1AFBB /* MHTextActivity.m */,
+				682462ED17D9432B00E1AFBB /* MHActivityViewController.h */,
+				682462EE17D9432C00E1AFBB /* MHActivityViewController.m */,
+				682462DD17D9318700E1AFBB /* MHActivity.h */,
+				682462DE17D9318700E1AFBB /* MHActivity.m */,
+				682462F117D9449400E1AFBB /* MHActivities.h */,
+			);
+			name = Activities;
 			sourceTree = "<group>";
 		};
 		6839107A1760FD3100E01B46 = {
@@ -1316,6 +1379,7 @@
 		AD301125176FE41F00D53E35 /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				682462D017D90C4000E1AFBB /* Activities */,
 				68F4CC4817D10846004D6574 /* MHAnswerCell.h */,
 				68F4CC4717D10846004D6574 /* MHAnswerCell.m */,
 				68478DAC177E8C9F0014501D /* MHPeopleSearchBar.h */,
@@ -1701,6 +1765,15 @@
 				6854060417D652B400E2BA33 /* REPrintActivity.m in Sources */,
 				6854060817D652B400E2BA33 /* RESafariActivity.m in Sources */,
 				6854061617D652B400E2BA33 /* UIImage+Resize.m in Sources */,
+				682462CE17D90C3500E1AFBB /* MHLabelActivity.m in Sources */,
+				682462D317D90DDC00E1AFBB /* MHAssignActivity.m in Sources */,
+				682462D717D90E2B00E1AFBB /* MHPermissionsActivity.m in Sources */,
+				682462DB17D9252F00E1AFBB /* MHDeleteActivity.m in Sources */,
+				682462DF17D9318700E1AFBB /* MHActivity.m in Sources */,
+				682462E317D9425F00E1AFBB /* MHArchiveActivity.m in Sources */,
+				682462E717D9429E00E1AFBB /* MHEmailActivity.m in Sources */,
+				682462EB17D942B600E1AFBB /* MHTextActivity.m in Sources */,
+				682462EF17D9432C00E1AFBB /* MHActivityViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1811,6 +1884,15 @@
 				6854060517D652B400E2BA33 /* REPrintActivity.m in Sources */,
 				6854060917D652B400E2BA33 /* RESafariActivity.m in Sources */,
 				6854061717D652B400E2BA33 /* UIImage+Resize.m in Sources */,
+				682462CF17D90C3500E1AFBB /* MHLabelActivity.m in Sources */,
+				682462D417D90DDC00E1AFBB /* MHAssignActivity.m in Sources */,
+				682462D817D90E2B00E1AFBB /* MHPermissionsActivity.m in Sources */,
+				682462DC17D9252F00E1AFBB /* MHDeleteActivity.m in Sources */,
+				682462E017D9318700E1AFBB /* MHActivity.m in Sources */,
+				682462E417D9425F00E1AFBB /* MHArchiveActivity.m in Sources */,
+				682462E817D9429E00E1AFBB /* MHEmailActivity.m in Sources */,
+				682462EC17D942B600E1AFBB /* MHTextActivity.m in Sources */,
+				682462F017D9432C00E1AFBB /* MHActivityViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

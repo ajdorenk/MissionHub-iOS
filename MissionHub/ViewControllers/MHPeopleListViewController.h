@@ -16,7 +16,7 @@
 #import "MHCreatePersonViewController.h"
 #import "MHPersonCell.h"
 #import "MHGenericListViewController.h"
-#import "REActivityViewController.h"
+#import "MHActivityViewController.h"
 
 @interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate>
 
@@ -51,7 +51,7 @@
 @property (nonatomic, strong, readonly) MHNewInteractionViewController *createInteractionViewController;
 @property (nonatomic, strong, readonly) MHCreatePersonViewController *createPersonViewController;
 @property (nonatomic, strong, readonly) UIPopoverController	*createPersonPopoverViewController;
-@property (nonatomic, strong, readonly) REActivityViewController *activityViewController;
+@property (nonatomic, strong, readonly) MHActivityViewController *activityViewController;
 
 -(IBAction)revealMenu:(id)sender;
 -(void)refresh;

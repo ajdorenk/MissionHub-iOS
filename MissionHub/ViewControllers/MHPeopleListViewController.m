@@ -228,18 +228,14 @@
 	
 }
 
-- (REActivityViewController *)activityViewController {
+- (MHActivityViewController *)activityViewController {
 	
 	if (_activityViewController == nil) {
 		
-		REMessageActivity *messageActivity = [[REMessageActivity alloc] init];
-		REMailActivity *mailActivity = [[REMailActivity alloc] init];
-		RESafariActivity *safariActivity = [[RESafariActivity alloc] init];
-		
-		NSArray *activities = @[messageActivity, mailActivity, safariActivity];
+		NSArray *activities = [MHActivityViewController allActivities];
 		
 		[self willChangeValueForKey:@"activityViewController"];
-		_activityViewController = [[REActivityViewController alloc] initWithViewController:self activities:activities];
+		_activityViewController = [[MHActivityViewController alloc] initWithViewController:self activities:activities];
 		[self didChangeValueForKey:@"activityViewController"];
 		
 	}
@@ -424,8 +420,9 @@
 
 - (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
 {
-	self.hasLoadedAllPages = NO;
-	self.refreshIsLoading = YES;
+	self.hasLoadedAllPages	= NO;
+	self.refreshIsLoading	= YES;
+	self.selectedPeople		= [NSMutableArray array];
 	[self.tableView reloadData];
 	
 	[self.requestOptions resetPaging];
