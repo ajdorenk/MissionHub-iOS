@@ -146,6 +146,11 @@
 			pathString = [NSString stringWithFormat:@"%@/%d", [self stringForEndpoint], [self remoteID]];
 			break;
 			
+		case MHRequestOptionsTypeBulk:
+			
+			pathString = [NSString stringWithFormat:@"%@/bulk", [self stringForEndpoint]];
+			break;
+			
 		default:
 			break;
 	}
@@ -164,6 +169,7 @@
 		case MHRequestOptionsTypeIndex:
 			methodString = @"GET";
 			break;
+		case MHRequestOptionsTypeBulk:
 		case MHRequestOptionsTypeCreate:
 			methodString = @"POST";
 			break;
@@ -251,6 +257,33 @@
 			if (self.jsonObject) {
 				
 				parametersDictionary[ [self stringInSingluarFormatForEndpoint] ] = self.jsonObject;
+				
+			}
+			
+			if ([self hasPostParams]) {
+				
+				[parametersDictionary addEntriesFromDictionary:self.postParams];
+				
+			}
+			
+			break;
+			
+		case MHRequestOptionsTypeBulk:
+			
+			if ([self hasFilters]) {
+				
+				[self.filters enumerateKeysAndObjectsUsingBlock:^(NSString *filter, NSString *value, BOOL *stop) {
+					
+					NSString *filterKey				= [NSString stringWithFormat:@"filters[%@]", filter];
+					parametersDictionary[filterKey] = value;
+					
+				}];
+				
+			}
+			
+			if ([self hasIncludes]) {
+				
+				parametersDictionary[@"include"] = [self stringForIncludes];
 				
 			}
 			

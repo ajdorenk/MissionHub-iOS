@@ -58,6 +58,7 @@
 -(void)setDataFromRequestOptions:(MHRequestOptions *)options;
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
 -(MHProfileViewController *)profileViewController;
+-(BOOL)isSelected:(MHPerson *)person;
 
 
 @end

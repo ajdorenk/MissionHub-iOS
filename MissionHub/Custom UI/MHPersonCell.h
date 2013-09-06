@@ -14,7 +14,7 @@
 
 @interface MHPersonCell : UITableViewCell <MHCheckboxDelegate>
 
-@property (nonatomic, strong) id<MHPersonCellDelegate> cellDelegate;
+@property (nonatomic, weak) id<MHPersonCellDelegate> cellDelegate;
 @property (nonatomic, strong) MHPerson *person;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) NSString *fieldName;
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) IBOutlet UIView *nameBackgroundView;
 
 - (void)configure;
--(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField atIndexPath:(NSIndexPath *)indexPath;
+-(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField withSelection:(BOOL)selected atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

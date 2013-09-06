@@ -67,8 +67,7 @@
     // Configure the view for the selected state
 }
 
-
--(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField atIndexPath:(NSIndexPath *)indexPath {
+-(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField withSelection:(BOOL)selected atIndexPath:(NSIndexPath *)indexPath {
     
 	self.person		= person;
 	self.indexPath	= indexPath;
@@ -86,6 +85,8 @@
 	self.field.text = [person valueForSortField:sortField];
 
     self.name.text = [person fullName];
+	
+	self.checkbox.selected = selected;
 	
 }
 

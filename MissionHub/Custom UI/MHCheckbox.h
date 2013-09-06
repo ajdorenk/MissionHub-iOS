@@ -10,13 +10,9 @@
 
 @protocol MHCheckboxDelegate;
 
-@interface MHCheckbox : UIButton {
-	id<MHCheckboxDelegate> _checkboxDelegate;
-    BOOL isChecked;
-}
+@interface MHCheckbox : UIButton
 
-@property (nonatomic, strong) id<MHCheckboxDelegate> checkboxDelegate;
-@property (nonatomic, assign) BOOL isChecked;
+@property (nonatomic, weak) id<MHCheckboxDelegate> checkboxDelegate;
 
 -(void)checkBoxClicked;
 

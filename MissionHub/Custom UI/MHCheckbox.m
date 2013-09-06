@@ -11,7 +11,6 @@
 @implementation MHCheckbox
 
 @synthesize checkboxDelegate = _checkboxDelegate;
-@synthesize isChecked;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -29,8 +28,6 @@
 		[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_PartiallyChecked_48_padded.png"]forState:UIControlStateHighlighted];
         
         [self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
-		
-		self.isChecked = NO;
 		
     }
     return self;
@@ -52,28 +49,25 @@
 	
 	[self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
 	
-	self.isChecked = NO;
 	
 }
 
 //TODO:The action bar still needs to be created and popup when the checkbox is clicked, (though I'm not entirely sure where to do that)
 - (void)checkBoxClicked {
 	
-    if (self.isChecked){
+    if (self.selected){
 		
-        self.isChecked = NO;
-		[self setSelected:NO];
+		self.selected	= NO;
 		
     } else {
 		
-        self.isChecked = YES;
-		[self setSelected:YES];
+		self.selected	= YES;
 		
     }
 	
 	if ([self.checkboxDelegate respondsToSelector:@selector(checkbox:didChangeValue:)]) {
 		
-		[self.checkboxDelegate checkbox:self didChangeValue:self.isChecked];
+		[self.checkboxDelegate checkbox:self didChangeValue:self.selected];
 		
 	}
 	

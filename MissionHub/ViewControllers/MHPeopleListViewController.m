@@ -423,6 +423,7 @@
 	self.hasLoadedAllPages	= NO;
 	self.refreshIsLoading	= YES;
 	self.selectedPeople		= [NSMutableArray array];
+	[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
 	[self.tableView reloadData];
 	
 	[self.requestOptions resetPaging];
@@ -592,6 +593,21 @@
         
 }
 
+-(BOOL)isSelected:(MHPerson *)person {
+	
+	__block BOOL selected = NO;
+	
+	[self.selectedPeople enumerateObjectsUsingBlock:^(MHPerson *selectedPerson, NSUInteger index, BOOL *stop) {
+		
+		selected	= [selectedPerson isEqualToModel:person];
+		*stop		= selected;
+		
+	}];
+	
+	return selected;
+	
+}
+
 
 #pragma mark - Table view data source
 
@@ -652,8 +668,8 @@
 									placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
 			}
 			
-			cell.textLabel.text = [person fullName];
-			cell.detailTextLabel.text = [person primaryEmail];
+			cell.textLabel.text			= [person fullName];
+			cell.detailTextLabel.text	= [person primaryEmail];
 			
 		} else {
 			
@@ -698,8 +714,8 @@
 			MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
 				//Display person in the table cell
 			
-			cell.cellDelegate = self;
-			[cell populateWithPerson:person forField:self.secondaryFieldName atIndexPath:indexPath];
+			cell.cellDelegate	= self;
+			[cell populateWithPerson:person forField:self.secondaryFieldName withSelection:[self isSelected:person] atIndexPath:indexPath];
 		
 			return cell;
 			
@@ -888,7 +904,6 @@
 	if (person) {
 		
 		[self.selectedPeople addObject:person];
-		
 		self.activityViewController.userInfo = @{ @"people": self.selectedPeople };
 		
 	}
@@ -907,6 +922,7 @@
 	if (person) {
 		
 		[self.selectedPeople removeObject:person];
+		self.activityViewController.userInfo = @{ @"people": self.selectedPeople };
 		
 	}
 	

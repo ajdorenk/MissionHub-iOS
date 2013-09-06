@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "MHPerson+Helper.h"
 #import "MHInteraction+Helper.h"
+#import "MHOrganizationalLabel+Helper.h"
+#import "MHPermissionLevel+Helper.h"
 
 typedef enum {
 	MHRequestOptionsTypeMe,
@@ -16,7 +18,8 @@ typedef enum {
 	MHRequestOptionsTypeIndex,
 	MHRequestOptionsTypeCreate,
 	MHRequestOptionsTypeUpdate,
-	MHRequestOptionsTypeDelete
+	MHRequestOptionsTypeDelete,
+	MHRequestOptionsTypeBulk
 } MHRequestOptionsTypes;
 
 typedef enum {
@@ -176,6 +179,8 @@ typedef enum {
 -(id)configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:(NSNumber *)personID;
 - (id)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction;
 - (id)configureForCreatePersonRequestWithPerson:(MHPerson *)person;
+- (id)configureForBulkLabelingRequestWithLabelsToAdd:(NSArray *)labelsToAdd labelsToRemove:(NSArray *)labelsToRemove forPeople:(NSArray *)people;
+- (id)configureForBulkPermissionLevelRequestWithNewPermissionLevel:(MHPermissionLevel *)permissionLevel forPeople:(NSArray *)people;
 
 - (id)addInclude:(MHRequestOptionsIncludes)include;
 - (id)addIncludesForProfileRequest;

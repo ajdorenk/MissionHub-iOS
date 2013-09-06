@@ -1386,12 +1386,12 @@
 				68478DAD177E8C9F0014501D /* MHPeopleSearchBar.m */,
 				AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */,
 				AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */,
-				AD30112A176FE4D900D53E35 /* MHCheckbox.h */,
-				AD30112B176FE4D900D53E35 /* MHCheckbox.m */,
 				6840C39517AD7B8900C2DB26 /* MHBlankCheckbox.h */,
 				6840C39617AD7B8900C2DB26 /* MHBlankCheckbox.m */,
 				AD30112C176FE4D900D53E35 /* MHMenuToolbar.h */,
 				AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */,
+				AD30112A176FE4D900D53E35 /* MHCheckbox.h */,
+				AD30112B176FE4D900D53E35 /* MHCheckbox.m */,
 				AD30112E176FE4D900D53E35 /* MHPersonCell.h */,
 				AD30112F176FE4D900D53E35 /* MHPersonCell.m */,
 				ADCCBA1A17948E0500A613F3 /* MHInitiatorCell.h */,
@@ -2010,7 +2010,7 @@
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41379945-8524-4668-9BC1-F675DA1FB545";
+				PROVISIONING_PROFILE = "F17F75BF-195B-4C23-BA43-929A0E694931";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2018,7 +2018,7 @@
 		683910BD1760FD3100E01B46 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc (3EQ94S9G86)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
@@ -2028,7 +2028,7 @@
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "909AD43C-AE96-4979-8AAB-6EB11942AD21";
+				PROVISIONING_PROFILE = "7D1F43DC-D292-4295-9218-E4B7D6145933";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2096,7 +2096,7 @@
 		68478DD0177E93490014501D /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc (3EQ94S9G86)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
@@ -2106,7 +2106,7 @@
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DFED8DEB-A89C-4B9C-82CF-21AB6E7C0F68";
+				PROVISIONING_PROFILE = "205ED601-49EB-4F03-8A14-7342D07FEE93";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Adhoc;
