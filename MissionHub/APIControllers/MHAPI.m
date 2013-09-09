@@ -19,6 +19,7 @@ NSString *const MHAPIRequestNameContactAssignmentFilter = @"com.missionhub.API.r
 
 typedef enum {
 	MHAPIErrorCouldNotRetrieveCurrentUser,
+	MHAPIErrorMissingDataInRequest,
 	MHAPIErrorMissingUrl,
 	MHAPIErrorMissingEndpoint,
 	MHAPIErrorMissionAccessToken,
@@ -126,7 +127,7 @@ typedef enum {
 	
 }
 
--(void)getMeWithSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (void)getMeWithSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions	= [[[MHRequestOptions alloc] init] configureForMeRequest];
 	requestOptions.requestName			= MHAPIRequestNameMe;
@@ -135,7 +136,7 @@ typedef enum {
 	
 }
 
--(void)getOrganizationWithRemoteID:(NSNumber *)remoteID successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (void)getOrganizationWithRemoteID:(NSNumber *)remoteID successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions	= [[[MHRequestOptions alloc] init] configureForOrganizationRequestWithRemoteID:remoteID];
 	
@@ -143,7 +144,7 @@ typedef enum {
 	
 }
 
--(void)getCurrentOrganizationWith:(MHUser *)user successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (void)getCurrentOrganizationWith:(MHUser *)user successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions	= [[[MHRequestOptions alloc] init] configureForOrganizationRequestWithRemoteID:user.primary_organization_id];
 	requestOptions.requestName			= MHAPIRequestNameCurrentOrganization;
@@ -153,7 +154,7 @@ typedef enum {
 	
 }
 
--(void)getPeopleListWith:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (void)getPeopleListWith:(MHRequestOptions *)options successBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions;
 	
@@ -169,7 +170,7 @@ typedef enum {
 	
 }
 
--(void)getProfileForRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (void)getProfileForRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForProfileRequestWithRemoteID:remoteID];
 	
@@ -177,7 +178,7 @@ typedef enum {
 	
 }
 
--(void)getInteractionsForPersonWithRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (void)getInteractionsForPersonWithRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForInteractionRequestForPersonWithRemoteID:remoteID];
 	
@@ -185,7 +186,7 @@ typedef enum {
 	
 }
 
--(void)getPersonWithSurveyAnswerSheetsForPersonWithRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (void)getPersonWithSurveyAnswerSheetsForPersonWithRemoteID:(NSNumber *)remoteID withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:remoteID];
 	
@@ -201,13 +202,140 @@ typedef enum {
 	
 }
 
--(void)createInteraction:(MHInteraction *)interaction withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+- (void)createInteraction:(MHInteraction *)interaction withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForCreateInteractionRequestWithInteraction:interaction];
 	
 	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	
 }
+
+- (void)bulkDeletePeople:(NSArray *)people withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	if (people.count > 0) {
+		
+		MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForBulkDeleteRequestForPeople:people];
+		
+		[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+		
+	} else {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"No People to Delete.", nil)}];
+		
+		failBlock(error, requestOptions);
+		
+	}
+	
+}
+
+- (void)bulkArchivePeople:(NSArray *)people withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	if (people.count > 0) {
+		
+		MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForBulkArchiveRequestForPeople:people];
+		
+		[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+		
+	} else {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"No People to Archive.", nil)}];
+		
+		failBlock(error, requestOptions);
+		
+	}
+	
+}
+
+- (void)bulkChangePermissionLevel:(MHPermissionLevel *)permissionLevel forPeople:(NSArray *)people withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	if (!permissionLevel) {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Missing Permission Level.", nil)}];
+		
+		failBlock(error, requestOptions);
+		return;
+		
+	}
+	
+	if (people.count <= 0) {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"No People to change Permission Level for.", nil)}];
+		
+		failBlock(error, requestOptions);
+		return;
+		
+	}
+	
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForBulkPermissionLevelRequestWithNewPermissionLevel:permissionLevel forPeople:people];
+	
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
+- (void)bulkAssignPeople:(NSArray *)people toPerson:(MHPerson *)person withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	if (!person) {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Missing Leader for Assignment.", nil)}];
+		
+		failBlock(error, requestOptions);
+		return;
+		
+	}
+	
+	if (people.count <= 0) {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"No People to assign to leader.", nil)}];
+		
+		failBlock(error, requestOptions);
+		return;
+		
+	}
+	
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForBulkAssignmentRequestWithLeader:person forPeople:people];
+	
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
+- (void)bulkChangeLabelsWithLabelsToAdd:(NSArray *)labelsToAdd labelsToRemove:(NSArray *)labelsToRemove forPeople:(NSArray *)people withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	if (people.count <= 0) {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"No People to apply labels to.", nil)}];
+		
+		failBlock(error, requestOptions);
+		return;
+		
+	}
+	
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForBulkLabelingRequestWithLabelsToAdd:labelsToAdd labelsToRemove:labelsToRemove forPeople:people];
+	
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
 
 -(NSURLRequest *)requestForSurveyWith:(NSNumber *)remoteID {
 	

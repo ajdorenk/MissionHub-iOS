@@ -19,7 +19,11 @@ typedef enum {
 	MHRequestOptionsTypeCreate,
 	MHRequestOptionsTypeUpdate,
 	MHRequestOptionsTypeDelete,
-	MHRequestOptionsTypeBulk
+	MHRequestOptionsTypeBulk,
+	MHRequestOptionsTypeBulkCreate,
+	MHRequestOptionsTypeBulkUpdate,
+	MHRequestOptionsTypeBulkArchive,
+	MHRequestOptionsTypeBulkDelete
 } MHRequestOptionsTypes;
 
 typedef enum {
@@ -113,28 +117,7 @@ typedef enum {
 	MHRequestOptionsOrderDirectionDesc
 } MHRequestOptionsOrderDirections;
 
-@interface MHRequestOptions : NSObject {
-	
-	NSString						*_requestName;
-	MHRequestOptionsTypes			_type;
-	MHRequestOptionsEndpoints		_endpoint;
-	NSUInteger						_remoteID;
-	NSMutableDictionary				*_filters;
-	NSMutableIndexSet				*_includes;
-	NSUInteger						_limit;
-	NSUInteger						_offset;
-	MHRequestOptionsOrderFields		_orderField;
-	MHRequestOptionsOrderDirections	_orderDirection;
-	
-	NSMutableDictionary				*_postParams;
-	NSData							*_postData;
-	id								_jsonObject;
-	NSString						*_jsonString;
-	
-	void (^_successBlock)(NSArray *results, MHRequestOptions *options);
-	void (^_failBlock)(NSError *error, MHRequestOptions *options);
-	
-}
+@interface MHRequestOptions : NSObject
 
 @property (nonatomic, strong) NSString							*requestName;
 @property (nonatomic, assign) MHRequestOptionsTypes				type;
@@ -159,56 +142,52 @@ typedef enum {
 - (NSString *)path;
 - (NSMutableDictionary *)parameters;
 
-- (BOOL)hasRemoteID;
-- (BOOL)hasFilters;
-- (BOOL)hasIncludes;
-- (BOOL)hasLimit;
-- (BOOL)hasOffset;
-- (BOOL)hasOrderField;
-- (BOOL)hasOrderDirection;
-- (BOOL)hasPostParams;
+- (instancetype)configureForInitialPeoplePageRequest;
+- (instancetype)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
 
-- (id)configureForInitialPeoplePageRequest;
-- (id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
-//- (id)configureForInitialContactAssignmentsPageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID;
-- (id)configureForMeRequest;
-- (id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID;
-- (id)configureForNextPageRequest;
-- (id)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
-- (id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID;
--(id)configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:(NSNumber *)personID;
-- (id)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction;
-- (id)configureForCreatePersonRequestWithPerson:(MHPerson *)person;
-- (id)configureForBulkLabelingRequestWithLabelsToAdd:(NSArray *)labelsToAdd labelsToRemove:(NSArray *)labelsToRemove forPeople:(NSArray *)people;
-- (id)configureForBulkPermissionLevelRequestWithNewPermissionLevel:(MHPermissionLevel *)permissionLevel forPeople:(NSArray *)people;
+- (instancetype)configureForMeRequest;
+- (instancetype)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID;
+- (instancetype)configureForNextPageRequest;
+- (instancetype)configureForProfileRequestWithRemoteID:(NSNumber *)personID;
+- (instancetype)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID;
+- (instancetype)configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:(NSNumber *)personID;
 
-- (id)addInclude:(MHRequestOptionsIncludes)include;
-- (id)addIncludesForProfileRequest;
-- (id)addIncludesForOrganizationRequest;
-- (id)addIncludesForMeRequest;
-- (id)addIncludesForPeoplePageRequest;
-- (id)addIncludesForContactAssignmentsPageRequest;
-- (id)clearIncludes;
+- (instancetype)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction;
+- (instancetype)configureForCreatePersonRequestWithPerson:(MHPerson *)person;
 
-- (id)setOrderField:(MHRequestOptionsOrderFields)orderField orderDirection:(MHRequestOptionsOrderDirections)orderDirection;
-- (id)clearOrders;
+- (instancetype)configureForBulkDeleteRequestForPeople:(NSArray *)people;
+- (instancetype)configureForBulkArchiveRequestForPeople:(NSArray *)people;
+- (instancetype)configureForBulkPermissionLevelRequestWithNewPermissionLevel:(MHPermissionLevel *)permissionLevel forPeople:(NSArray *)people;
+- (instancetype)configureForBulkAssignmentRequestWithLeader:(MHPerson *)person forPeople:(NSArray *)people;
+- (instancetype)configureForBulkLabelingRequestWithLabelsToAdd:(NSArray *)labelsToAdd labelsToRemove:(NSArray *)labelsToRemove forPeople:(NSArray *)people;
 
-- (id)setLimitAndOffsetForFirstPage;
-- (id)setLimitAndOffsetForNextPage;
-- (id)setLimitForScreenDimensions;
-- (id)resetPaging;
+- (instancetype)addInclude:(MHRequestOptionsIncludes)include;
+- (instancetype)addIncludesForProfileRequest;
+- (instancetype)addIncludesForOrganizationRequest;
+- (instancetype)addIncludesForMeRequest;
+- (instancetype)addIncludesForPeoplePageRequest;
+- (instancetype)addIncludesForContactAssignmentsPageRequest;
+- (instancetype)clearIncludes;
 
-- (id)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value;
-- (id)updatePostParam:(NSString *)paramName withValue:(id <NSObject>)value;
-- (id)removePostParam:(NSString *)paramName;
-- (id)clearPostParams;
+- (instancetype)setOrderField:(MHRequestOptionsOrderFields)orderField orderDirection:(MHRequestOptionsOrderDirections)orderDirection;
+- (instancetype)clearOrders;
 
-- (id)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
-- (id)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
-- (id)removeFilter:(MHRequestOptionsFilters)filter;
-- (id)clearFilters;
+- (instancetype)setLimitAndOffsetForFirstPage;
+- (instancetype)setLimitAndOffsetForNextPage;
+- (instancetype)setLimitForScreenDimensions;
+- (instancetype)resetPaging;
 
-- (id)reset;
+- (instancetype)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value;
+- (instancetype)updatePostParam:(NSString *)paramName withValue:(id <NSObject>)value;
+- (instancetype)removePostParam:(NSString *)paramName;
+- (instancetype)clearPostParams;
+
+- (instancetype)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
+- (instancetype)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value;
+- (instancetype)removeFilter:(MHRequestOptionsFilters)filter;
+- (instancetype)clearFilters;
+
+- (instancetype)reset;
 
 - (NSString *)stringForEndpoint;
 - (NSString *)stringInSingluarFormatForEndpoint;

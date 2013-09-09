@@ -23,6 +23,21 @@
 #define isPad    UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? YES : NO
 #define isPhone    UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? YES : NO
 
+@interface MHRequestOptions ()
+
+- (NSString *)idStringFromPeopleArray:(NSArray *)people;
+- (NSString *)idStringFromLabelArray:(NSArray *)labels;
+- (BOOL)hasRemoteID;
+- (BOOL)hasFilters;
+- (BOOL)hasIncludes;
+- (BOOL)hasLimit;
+- (BOOL)hasOffset;
+- (BOOL)hasOrderField;
+- (BOOL)hasOrderDirection;
+- (BOOL)hasPostParams;
+
+@end
+
 @implementation MHRequestOptions
 
 @synthesize requestName		= _requestName;
@@ -43,7 +58,7 @@
 @synthesize postData		= _postData;
 @synthesize jsonString		= _jsonString;
 
--(id)init {
+- (id)init {
 	
 	self = [super init];
 	
@@ -56,7 +71,7 @@
 	return self;
 }
 
--(id)reset {
+- (instancetype)reset {
 	
 	self.requestName	= @"";
 	self.type			= MHRequestOptionsTypeIndex;
@@ -95,7 +110,7 @@
 	return self;
 }
 
--(id)copy {
+- (instancetype)copy {
 	
 	MHRequestOptions *returnObject = [[MHRequestOptions alloc] init];
 	
@@ -151,6 +166,26 @@
 			pathString = [NSString stringWithFormat:@"%@/bulk", [self stringForEndpoint]];
 			break;
 			
+		case MHRequestOptionsTypeBulkArchive:
+			
+			pathString = [NSString stringWithFormat:@"%@/bulk_archive", [self stringForEndpoint]];
+			break;
+			
+		case MHRequestOptionsTypeBulkCreate:
+			
+			pathString = [NSString stringWithFormat:@"%@/bulk_create", [self stringForEndpoint]];
+			break;
+			
+		case MHRequestOptionsTypeBulkDelete:
+			
+			pathString = [NSString stringWithFormat:@"%@/bulk_destroy", [self stringForEndpoint]];
+			break;
+			
+		case MHRequestOptionsTypeBulkUpdate:
+			
+			pathString = [NSString stringWithFormat:@"%@/bulk_update", [self stringForEndpoint]];
+			break;
+			
 		default:
 			break;
 	}
@@ -159,7 +194,7 @@
 	
 }
 
--(NSString *)method {
+- (NSString *)method {
 	
 	NSString *methodString = nil;
 	
@@ -170,6 +205,10 @@
 			methodString = @"GET";
 			break;
 		case MHRequestOptionsTypeBulk:
+		case MHRequestOptionsTypeBulkCreate:
+		case MHRequestOptionsTypeBulkUpdate:
+		case MHRequestOptionsTypeBulkArchive:
+		case MHRequestOptionsTypeBulkDelete:
 		case MHRequestOptionsTypeCreate:
 			methodString = @"POST";
 			break;
@@ -268,6 +307,9 @@
 			
 			break;
 			
+		case MHRequestOptionsTypeBulkArchive:
+		case MHRequestOptionsTypeBulkCreate:
+		case MHRequestOptionsTypeBulkDelete:
 		case MHRequestOptionsTypeBulk:
 			
 			if ([self hasFilters]) {
@@ -295,6 +337,39 @@
 			
 			break;
 			
+		case MHRequestOptionsTypeBulkUpdate:
+			
+			if ([self hasFilters]) {
+				
+				[self.filters enumerateKeysAndObjectsUsingBlock:^(NSString *filter, NSString *value, BOOL *stop) {
+					
+					NSString *filterKey				= [NSString stringWithFormat:@"filters[%@]", filter];
+					parametersDictionary[filterKey] = value;
+					
+				}];
+				
+			}
+			
+			if ([self hasIncludes]) {
+				
+				parametersDictionary[@"include"] = [self stringForIncludes];
+				
+			}
+			
+			if ([self hasPostParams]) {
+				
+				[parametersDictionary addEntriesFromDictionary:self.postParams];
+				
+			}
+		
+			if (self.jsonObject) {
+				
+				parametersDictionary[ [self stringForEndpoint] ] = self.jsonObject;
+				
+			}
+			
+			break;
+			
 		default:
 			break;
 	}
@@ -303,31 +378,31 @@
 	
 }
 
--(BOOL)hasRemoteID {
+- (BOOL)hasRemoteID {
 	return (self.remoteID > 0);
 }
 
--(BOOL)hasFilters {
+- (BOOL)hasFilters {
 	return ([self.filters count] > 0);
 }
 
--(BOOL)hasIncludes {
+- (BOOL)hasIncludes {
 	return ([self.includes count] > 0);
 }
 
--(BOOL)hasLimit {
+- (BOOL)hasLimit {
 	return (self.limit > 0);
 }
 
--(BOOL)hasOffset {
+- (BOOL)hasOffset {
 	return (self.offset > 0);
 }
 
--(BOOL)hasOrderField {
+- (BOOL)hasOrderField {
 	return (self.orderField != MHRequestOptionsOrderFieldNone);
 }
 
--(BOOL)hasOrderDirection {
+- (BOOL)hasOrderDirection {
 	return (self.orderDirection != MHRequestOptionsOrderDirectionNone);
 }
 
@@ -335,21 +410,21 @@
 	return ([self.postParams count] > 0);
 }
 
--(id)configureForInitialPeoplePageRequest {
+- (instancetype)configureForInitialPeoplePageRequest {
 	
 	[[[self reset] addIncludesForPeoplePageRequest] setLimitAndOffsetForFirstPage];
 	
 	return self;
 }
 
--(id)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID {
+- (instancetype)configureForInitialPeoplePageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID {
 	
 	[[[[self reset] addIncludesForPeoplePageRequest] setLimitAndOffsetForFirstPage] addFilter:MHRequestOptionsFilterPeopleAssignedTo withValue:[remoteAssignedToID stringValue]];
 	
 	return self;
 }
 
-- (id)configureForCreatePersonRequestWithPerson:(MHPerson *)person {
+- (instancetype)configureForCreatePersonRequestWithPerson:(MHPerson *)person {
 	
 	[[self reset] setEndpoint:MHRequestOptionsEndpointPeople];
 	self.type		= MHRequestOptionsTypeCreate;
@@ -364,7 +439,7 @@
 	return self;
 }
 
--(id)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction {
+- (instancetype)configureForCreateInteractionRequestWithInteraction:(MHInteraction *)interaction {
 	
 	[[self reset] setEndpoint:MHRequestOptionsEndpointInteractions];
 	self.type		= MHRequestOptionsTypeCreate;
@@ -373,24 +448,7 @@
 	return self;
 }
 
-/*
--(id)configureForInitialContactAssignmentsPageRequestWithAssignedToID:(NSNumber *)remoteAssignedToID {
-	
-	[[[[[self reset]
-		addIncludesForContactAssignmentsPageRequest]
-	   addIncludesForPeoplePageRequest]
-	  addFilter:MHRequestOptionsFilterContactAssignmentsAssignedToId withValue:[remoteAssignedToID stringValue]]
-	 setLimitAndOffsetForFirstPage];
-	
-	//if changed you need to also change in the parser in MHAPI requestDidFinish
-	self.requestName = @"contactAssignmentFilter";
-	self.endpoint = MHRequestOptionsEndpointContactAssignments;
-	
-	return self;
-}
- */
-
--(id)configureForMeRequest {
+- (instancetype)configureForMeRequest {
 	
 	[[self reset] addIncludesForMeRequest];
 	self.type = MHRequestOptionsTypeMe;
@@ -398,7 +456,7 @@
 	return self;
 }
 
--(id)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID {
+- (instancetype)configureForOrganizationRequestWithRemoteID:(NSNumber *)remoteID {
 	
 	[[self reset] addIncludesForOrganizationRequest];
 	self.endpoint	= MHRequestOptionsEndpointOrganizations;
@@ -408,7 +466,7 @@
 	return self;
 }
 
--(id)configureForProfileRequestWithRemoteID:(NSNumber *)remoteID {
+- (instancetype)configureForProfileRequestWithRemoteID:(NSNumber *)remoteID {
 	
 	[[self reset] addIncludesForProfileRequest];
 	self.remoteID	= [remoteID integerValue];
@@ -417,7 +475,7 @@
 	return self;
 }
 
--(id)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID {
+- (instancetype)configureForInteractionRequestForPersonWithRemoteID:(NSNumber *)personID {
 	
 	[[[self reset] addIncludesForInteractionsRequest] addFilter:MHRequestOptionsFilterInteractionsPeopleIds withValue:[personID stringValue]];
 	self.endpoint = MHRequestOptionsEndpointInteractions;
@@ -425,24 +483,160 @@
 	return self;
 }
 
--(id)configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:(NSNumber *)personID {
+- (instancetype)configureForSurveyAnswerSheetsRequestForPersonWithRemoteID:(NSNumber *)personID {
 	
 	[[[self reset] addInclude:MHRequestOptionsIncludePeopleAnswerSheets] addInclude:MHRequestOptionsIncludeAnswerSheetsAnswers];
-	self.endpoint = MHRequestOptionsEndpointPeople;
-	self.remoteID = [personID integerValue];
+	self.endpoint	= MHRequestOptionsEndpointPeople;
+	self.remoteID	= [personID integerValue];
 	self.type		= MHRequestOptionsTypeShow;
 	
 	return self;
 }
 
--(id)configureForNextPageRequest {
+- (NSString *)idStringFromPeopleArray:(NSArray *)people {
+	
+	NSArray *peopleArray				= ( people ? people : @[] );
+	__block NSMutableString *idString	= [NSMutableString string];
+	
+	[peopleArray enumerateObjectsUsingBlock:^(id personObject, NSUInteger index, BOOL *stop) {
+		
+		if ([personObject isKindOfClass:[MHPerson class]]) {
+			
+			[idString appendFormat:@"%@,", ((MHPerson *)personObject).remoteID];
+			
+		}
+		
+	}];
+	
+	//remove trailing comma
+	if (idString.length > 0) {
+		[idString deleteCharactersInRange:NSMakeRange(idString.length - 1, 1)];
+	}
+	
+	return idString;
+	
+}
+
+- (NSString *)idStringFromLabelArray:(NSArray *)labels {
+	
+	NSArray *array				= ( labels ? labels : @[] );
+	__block NSMutableString *idString	= [NSMutableString string];
+	
+	[array enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+		
+		if ([object isKindOfClass:[MHLabel class]]) {
+			
+			[idString appendFormat:@"%@,", ((MHLabel *)object).remoteID];
+			
+		}
+		
+	}];
+	
+	//remove trailing comma
+	if (idString.length > 0) {
+		[idString deleteCharactersInRange:NSMakeRange(idString.length - 1, 1)];
+	}
+	
+	return idString;
+	
+}
+
+- (instancetype)configureForBulkDeleteRequestForPeople:(NSArray *)people {
+	
+	NSString *idString	= [self idStringFromPeopleArray:people];
+	
+	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
+	self.type			= MHRequestOptionsTypeBulkDelete;
+	
+	return self;
+}
+
+- (instancetype)configureForBulkArchiveRequestForPeople:(NSArray *)people {
+	
+	NSString *idString	= [self idStringFromPeopleArray:people];
+	
+	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
+	self.type			= MHRequestOptionsTypeBulkArchive;
+	
+	return self;
+}
+
+- (instancetype)configureForBulkPermissionLevelRequestWithNewPermissionLevel:(MHPermissionLevel *)permissionLevel forPeople:(NSArray *)people {
+	
+	NSString *idString				= [self idStringFromPeopleArray:people];
+	NSString *newPermissionIdString	= [NSString stringWithFormat:@"%@", permissionLevel.remoteID];
+	
+	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
+	self.type						= MHRequestOptionsTypeBulk;
+	
+	if (newPermissionIdString.length > 0) {
+		[self addPostParam:@"add_permission" withValue:newPermissionIdString];
+	}
+	
+	return self;
+}
+
+- (instancetype)configureForBulkAssignmentRequestWithLeader:(MHPerson *)person forPeople:(NSArray *)people {
+	
+	if (person) {
+	
+		__block NSMutableArray	*contactAssignmentArray	= [NSMutableArray array];
+		NSArray					*array					= ( people ? people : @[] );
+		
+		[array enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+			
+			if ([object isKindOfClass:[MHPerson class]]) {
+				
+				//TODO: create a model for contact assignments and use model
+				NSDictionary *contactAssignment = @{
+										@"person_id"		: ((MHPerson *)object).remoteID,
+										@"assigned_to_id"	: person.remoteID
+				};
+				
+				[contactAssignmentArray addObject:contactAssignment];
+				
+			}
+			
+		}];
+		
+		[self reset];
+		self.type		= MHRequestOptionsTypeBulkUpdate;
+		self.jsonObject	= contactAssignmentArray;
+		
+	}
+	
+	return self;
+}
+
+- (instancetype)configureForBulkLabelingRequestWithLabelsToAdd:(NSArray *)labelsToAdd labelsToRemove:(NSArray *)labelsToRemove forPeople:(NSArray *)people {
+	
+	NSString *idString				= [self idStringFromPeopleArray:people];
+	NSString *addLabelIdString		= [self idStringFromLabelArray:labelsToAdd];
+	NSString *removeLabelIdString	= [self idStringFromLabelArray:labelsToAdd];
+	
+	
+	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
+	self.type						= MHRequestOptionsTypeBulk;
+	
+	if (addLabelIdString.length > 0) {
+		[self addPostParam:@"add_labels" withValue:addLabelIdString];
+	}
+	
+	if (removeLabelIdString.length > 0) {
+		[self addPostParam:@"remove_labels" withValue:removeLabelIdString];
+	}
+	
+	return self;
+}
+
+- (instancetype)configureForNextPageRequest {
 	
 	[self setLimitAndOffsetForNextPage];
 	
 	return self;
 }
 
--(id)addInclude:(MHRequestOptionsIncludes)include {
+- (instancetype)addInclude:(MHRequestOptionsIncludes)include {
 	
 	[self.includes addIndex:include];
 	
@@ -450,7 +644,7 @@
 	
 }
 
--(id)addIncludesForInteractionsRequest {
+- (instancetype)addIncludesForInteractionsRequest {
 	
 	[self addInclude:MHRequestOptionsIncludeInteractionsCreator];
 	[self addInclude:MHRequestOptionsIncludeInteractionsInitiators];
@@ -460,7 +654,7 @@
 	return self;
 }
 
--(id)addIncludesForProfileRequest {
+- (instancetype)addIncludesForProfileRequest {
 	
 	
 	//[self addInclude:MHRequestOptionsIncludePeopleInteractions];
@@ -476,7 +670,7 @@
 	return self;
 }
 
--(id)addIncludesForPeoplePageRequest {
+- (instancetype)addIncludesForPeoplePageRequest {
 	
 	
 	[self addInclude:MHRequestOptionsIncludePeopleOrganizationalPermissions];
@@ -489,7 +683,7 @@
 	return self;
 }
 
--(id)addIncludesForContactAssignmentsPageRequest {
+- (instancetype)addIncludesForContactAssignmentsPageRequest {
 	
 	[self addInclude:MHRequestOptionsIncludeConactAssignmentsPerson];
 	
@@ -497,7 +691,7 @@
 	
 }
 
--(id)addIncludesForOrganizationRequest {
+- (instancetype)addIncludesForOrganizationRequest {
 	
 	[self addInclude:MHRequestOptionsIncludeOrganizationsAdmins];
 	[self addInclude:MHRequestOptionsIncludeOrganizationsUsers];
@@ -509,7 +703,7 @@
 	return self;
 }
 
--(id)addIncludesForMeRequest {
+- (instancetype)addIncludesForMeRequest {
 	
 	[self addIncludesForProfileRequest];
 	[self addInclude:MHRequestOptionsIncludePeopleAllOrganizationsAndChildren];
@@ -519,13 +713,13 @@
 	return self;
 }
 
--(id)resetPaging {
+- (instancetype)resetPaging {
 	
 	return [self setLimitAndOffsetForFirstPage];
 	
 }
 
--(id)setLimitAndOffsetForFirstPage {
+- (instancetype)setLimitAndOffsetForFirstPage {
 	
 	self.offset = 0;
 	
@@ -534,7 +728,7 @@
 	return self;
 }
 
--(id)setLimitAndOffsetForNextPage {
+- (instancetype)setLimitAndOffsetForNextPage {
 	
 	self.offset += self.limit;
 	
@@ -543,7 +737,7 @@
 	return self;
 }
 
--(id)setLimitForScreenDimensions {
+- (instancetype)setLimitForScreenDimensions {
 	
 	if (isPad) {
 		
@@ -575,14 +769,14 @@
 	
 }
 
--(id)clearIncludes {
+- (instancetype)clearIncludes {
 	
 	[self.includes removeAllIndexes];
 	
 	return self;
 }
 
--(id)setOrderField:(MHRequestOptionsOrderFields)orderField orderDirection:(MHRequestOptionsOrderDirections)orderDirection {
+- (instancetype)setOrderField:(MHRequestOptionsOrderFields)orderField orderDirection:(MHRequestOptionsOrderDirections)orderDirection {
 	
 	self.orderField		= orderField;
 	self.orderDirection = orderDirection;
@@ -591,7 +785,7 @@
 	
 }
 
--(id)clearOrders {
+- (instancetype)clearOrders {
 	
 	self.orderField		= MHRequestOptionsOrderFieldNone;
 	self.orderDirection = MHRequestOptionsOrderDirectionNone;
@@ -599,56 +793,56 @@
 	return self;
 }
 
--(id)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value {
+- (instancetype)addPostParam:(NSString *)paramName withValue:(id <NSObject>)value {
 	
 	[self.postParams setObject:value forKey:paramName];
 	
 	return self;
 }
 
--(id)updatePostParam:(NSString *)paramName withValue:(id <NSObject>)value {
+- (instancetype)updatePostParam:(NSString *)paramName withValue:(id <NSObject>)value {
 	
 	[self.postParams setObject:value forKey:paramName];
 	
 	return self;
 }
 
--(id)removePostParam:(NSString *)paramName {
+- (instancetype)removePostParam:(NSString *)paramName {
 	
 	[self.postParams removeObjectForKey:paramName];
 	
 	return self;
 }
 
--(id)clearPostParams {
+- (instancetype)clearPostParams {
 	
 	[self.postParams removeAllObjects];
 	
 	return self;
 }
 
--(id)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
+- (instancetype)addFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
 	
 	[self.filters setObject:value forKey:[self stringFromFilter:filter]];
 	
 	return self;
 }
 
--(id)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
+- (instancetype)updateFilter:(MHRequestOptionsFilters)filter withValue:(NSString *)value {
 	
 	[self.filters setValue:value forKey:[self stringFromFilter:filter]];
 	
 	return self;
 }
 
--(id)removeFilter:(MHRequestOptionsFilters)filter {
+- (instancetype)removeFilter:(MHRequestOptionsFilters)filter {
 	
 	[self.filters removeObjectForKey:[self stringFromFilter:filter]];
 	
 	return self;
 }
 
--(id)clearFilters {
+- (instancetype)clearFilters {
 	
 	[self.filters removeAllObjects];
 	
