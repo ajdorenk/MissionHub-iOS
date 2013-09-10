@@ -16,33 +16,12 @@
 @protocol MHGenericListViewControllerDelegate;
 
 @interface MHGenericListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MHGenericCellDelegate>
-{
-	
-    id<MHGenericListViewControllerDelegate>	_selectionDelegate;
-    NSMutableArray							*_objectArray;
-	MHRequestOptions						*_requestOptions;
-	ODRefreshControl						*_refreshController;
-	
-	BOOL									_isLoading;
-	BOOL									_refreshIsLoading;
-	BOOL									_pagingIsLoading;
-	BOOL									_hasLoadedAllPages;
-	
-    NSMutableArray							*_suggestionArray;
-	id										_selectedObject;
-	NSMutableSet							*_selectedSet;
-	NSMutableSet							*_suggestionSet;
-	BOOL									_multipleSelection;
-	BOOL									_showSuggestions;
-	BOOL									_showHeaders;
-	
-}
 
+@property (nonatomic, weak) IBOutlet UILabel							*listName;
+@property (nonatomic, weak) IBOutlet UITableView						*tableViewList;
+@property (nonatomic, weak) IBOutlet UIView								*contentView;
 
-@property (nonatomic, strong) IBOutlet UILabel							*listName;
-@property (nonatomic, strong) IBOutlet UITableView						*tableViewList;
-
-@property (nonatomic, strong) id<MHGenericListViewControllerDelegate>	selectionDelegate;
+@property (nonatomic, weak) id<MHGenericListViewControllerDelegate>	selectionDelegate;
 @property (nonatomic, strong) NSMutableArray							*objectArray;
 @property (nonatomic, strong) MHRequestOptions							*requestOptions;
 @property (nonatomic, strong) ODRefreshControl							*refreshController;

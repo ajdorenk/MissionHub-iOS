@@ -289,6 +289,10 @@
 		68A68BD4178A192100927DF8 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BD3178A192100927DF8 /* ODRefreshControl.m */; };
 		68A68BD5178A192100927DF8 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BD3178A192100927DF8 /* ODRefreshControl.m */; };
 		68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
+		68ACD0A217DFB80B003630F0 /* MHToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ACD0A117DFB80A003630F0 /* MHToolbar.m */; };
+		68ACD0A317DFB80B003630F0 /* MHToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ACD0A117DFB80A003630F0 /* MHToolbar.m */; };
+		68ACD0A617DFBF00003630F0 /* MHStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ACD0A517DFBF00003630F0 /* MHStyle.m */; };
+		68ACD0A717DFBF00003630F0 /* MHStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ACD0A517DFBF00003630F0 /* MHStyle.m */; };
 		68B7DDA317A2F95700849F31 /* MHInteraction+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */; };
 		68B7DDA417A2F95800849F31 /* MHInteraction+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */; };
 		68B7DDA717A317BD00849F31 /* MHSurvey+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA617A317BC00849F31 /* MHSurvey+Helper.m */; };
@@ -646,6 +650,10 @@
 		68A68BD3178A192100927DF8 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncodedString.h"; sourceTree = "<group>"; };
 		68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncodedString.m"; sourceTree = "<group>"; };
+		68ACD0A017DFB80A003630F0 /* MHToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHToolbar.h; path = "Custom UI/MHToolbar.h"; sourceTree = "<group>"; };
+		68ACD0A117DFB80A003630F0 /* MHToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHToolbar.m; path = "Custom UI/MHToolbar.m"; sourceTree = "<group>"; };
+		68ACD0A417DFBF00003630F0 /* MHStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHStyle.h; path = "Custom UI/MHStyle.h"; sourceTree = "<group>"; };
+		68ACD0A517DFBF00003630F0 /* MHStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHStyle.m; path = "Custom UI/MHStyle.m"; sourceTree = "<group>"; };
 		68B7DDA117A2F95600849F31 /* MHInteraction+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteraction+Helper.h"; path = "Models/MHInteraction+Helper.h"; sourceTree = "<group>"; };
 		68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteraction+Helper.m"; path = "Models/MHInteraction+Helper.m"; sourceTree = "<group>"; };
 		68B7DDA517A317BA00849F31 /* MHSurvey+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHSurvey+Helper.h"; path = "Models/MHSurvey+Helper.h"; sourceTree = "<group>"; };
@@ -1416,6 +1424,10 @@
 				6801976217CFE88200DCE330 /* MHHeaderCell.m */,
 				681C65AF17D185170021D2EE /* MHAddressCell.h */,
 				681C65B017D185170021D2EE /* MHAddressCell.m */,
+				68ACD0A017DFB80A003630F0 /* MHToolbar.h */,
+				68ACD0A117DFB80A003630F0 /* MHToolbar.m */,
+				68ACD0A417DFBF00003630F0 /* MHStyle.h */,
+				68ACD0A517DFBF00003630F0 /* MHStyle.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1774,6 +1786,8 @@
 				682462E717D9429E00E1AFBB /* MHEmailActivity.m in Sources */,
 				682462EB17D942B600E1AFBB /* MHTextActivity.m in Sources */,
 				682462EF17D9432C00E1AFBB /* MHActivityViewController.m in Sources */,
+				68ACD0A217DFB80B003630F0 /* MHToolbar.m in Sources */,
+				68ACD0A617DFBF00003630F0 /* MHStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1893,6 +1907,8 @@
 				682462E817D9429E00E1AFBB /* MHEmailActivity.m in Sources */,
 				682462EC17D942B600E1AFBB /* MHTextActivity.m in Sources */,
 				682462F017D9432C00E1AFBB /* MHActivityViewController.m in Sources */,
+				68ACD0A317DFB80B003630F0 /* MHToolbar.m in Sources */,
+				68ACD0A717DFBF00003630F0 /* MHStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

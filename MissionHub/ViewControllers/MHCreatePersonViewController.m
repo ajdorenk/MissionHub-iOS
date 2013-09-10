@@ -9,6 +9,7 @@
 #import "MHCreatePersonViewController.h"
 #import "MHAPI.h"
 #import "MHOrganization+Helper.h"
+#import "MHToolbar.h"
 
 @interface MHCreatePersonViewController ()
 
@@ -36,6 +37,9 @@
 
 - (void)done:(id)sender;
 - (void)clearKeyboard;
+
+-(void)updateBarButtons;
+-(void)replaceBarButtons;
 
 - (void)updateInterface;
 - (void)updateGender;
@@ -177,6 +181,39 @@
 	self.person = person;
 	
 	[self updateInterface];
+	
+}
+
+-(void)updateBarButtons {
+	
+	//replace the right button that is already there
+	if ([self.navigationItem.rightBarButtonItem isEqual:self.saveButton]) {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.saveButton;
+		
+	} else if ([self.navigationItem.rightBarButtonItem isEqual:self.doneButton]) {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.doneButton;
+		
+	} else {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.saveButton;
+		
+	}
+	
+}
+
+-(void)replaceBarButtons {
+	
+	//replace the left button
+	self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+	
+	//create all the other buttons for later use
+    self.saveButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(savePerson:) forBar:self.navigationController.navigationBar];
+	self.doneButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(done:) forBar:self.navigationController.navigationBar];
 	
 }
 
@@ -631,6 +668,32 @@
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 	
 	[self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
+	
+}
+
+#pragma mark - orientation methods
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+    return UIInterfaceOrientationMaskAll;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+    return YES;
+	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+	
+    return YES;
+	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[self updateBarButtons];
 	
 }
 

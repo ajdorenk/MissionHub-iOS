@@ -30,8 +30,9 @@
 
 @implementation MHGenericListViewController
 
-@synthesize listName;
-@synthesize tableViewList;
+@synthesize listName				= _listName;
+@synthesize tableViewList			= _tableViewList;
+@synthesize contentView				= _contentView;
 
 @synthesize selectionDelegate       = _selectionDelegate;
 @synthesize objectArray				= _objectArray;
@@ -78,29 +79,40 @@
 	
 	self.refreshController = [[ODRefreshControl alloc] initInScrollView:self.tableViewList];
     [self.refreshController addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
-
-    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
-    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [backMenu setImage:menuImage forState:UIControlStateNormal];
-    [backMenu addTarget:self action:@selector(backToMenu:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
     
-    self.navigationItem.leftBarButtonItem = backMenuButton;
-    self.tableViewList.layer.borderWidth = 1.0;
-    self.tableViewList.layer.borderColor = [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
-
-    //self.tableViewList.separatorColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+    self.tableViewList.layer.borderWidth	= 1.0;
+    self.tableViewList.layer.borderColor	= [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
+	self.tableViewList.separatorColor		= [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
     
 //TODO: need to uncomment to add a toolbar for when the navigator bar does not show, (i.e. when adding a label and when choosing what secondary information to show in contact list, for which there is currently no way to go back without making a selection). Also means there needs to be a method to hide the toolbar when the navigation bar does show, i.e. when creating a new interaction and choosing the initiator, interaction, receiver, and visibilty.
 	
-    /*UIToolbar *toolbar = [[UIToolbar alloc] init];
-    self.genericToolbar = toolbar;
-    self.genericToolbar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
-    NSMutableArray *toolbarButtons = [[NSMutableArray alloc] init];
-    [toolbarButtons addObject:backMenuButton];
-    [self.genericToolbar setItems:toolbarButtons animated:NO];
-    [self.view addSubview:self.genericToolbar];
-*/
+	if (self.navigationController) {
+		
+		UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
+		UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+		[backMenu setImage:menuImage forState:UIControlStateNormal];
+		[backMenu addTarget:self action:@selector(backToMenu:) forControlEvents:UIControlEventTouchUpInside];
+		UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
+	
+		self.navigationItem.leftBarButtonItem = backMenuButton;
+	
+	} else {
+		
+		UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backToMenu:)];
+		
+		UIToolbar *toolbar = [[UIToolbar alloc] init];
+		toolbar.alpha		= 0.5;
+		toolbar.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44);
+		NSMutableArray *toolbarButtons = [[NSMutableArray alloc] init];
+		[toolbarButtons addObject:backMenuButton];
+		[toolbar setItems:toolbarButtons animated:NO];
+		[self.view addSubview:toolbar];
+		
+		self.contentView.frame		= CGRectMake(0, 44, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.contentView.frame) - 44);
+		self.tableViewList.frame	= CGRectMake(0, 44, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.contentView.frame) - 44);
+		
+	}
+
 }
 
 -(BOOL)isSelected:(id)object {
@@ -582,8 +594,16 @@
 }
 
 - (IBAction)backToMenu:(id)sender {
-    //[[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+	if (self.navigationController) {
+	
+		[self.navigationController popViewControllerAnimated:YES];
+		
+	} else {
+		
+		[[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+		
+	}
 	
 }
 

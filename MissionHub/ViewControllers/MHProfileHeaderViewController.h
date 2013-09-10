@@ -7,18 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MHSegmentedControl.h"
 #import "MHPerson+Helper.h"
 #import "MHProfileProtocol.h"
 
-@interface MHProfileHeaderViewController : UIViewController <UIScrollViewDelegate, MHProfileProtocol> {
-
-}
+@interface MHProfileHeaderViewController : UIViewController <UIScrollViewDelegate, MHProfileProtocol>
 
 -(void)setProfileImageWithUrl:(NSString *)urlString;
 -(void)setName:(NSString *)nameString;
 -(void)setLabelListWithSetOfOrganizationalLabels:(NSSet *)organizationalLabels;
 
--(void)resetLabelListSize;
+-(void)updateLayout;
 
 @end

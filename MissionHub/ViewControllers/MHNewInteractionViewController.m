@@ -10,6 +10,7 @@
 #import "MHNewInteractionViewController.h"
 #import "MHInteraction+Helper.h"
 #import "MHAPI.h"
+#import "MHToolbar.h"
 
 
 //TODO:The sizing for this view controller needs to be adjusted on the storyboard for the iPad. This might be another place in which a popover would be better for the iPad.
@@ -21,6 +22,9 @@
 -(UIPickerView *)interactionTypePicker;
 -(UIPickerView *)visibilityPicker;
 -(UIDatePicker *)timestampPicker;
+
+-(void)updateBarButtons;
+-(void)replaceBarButtons;
 
 -(void)updateInterface;
 -(void)updateInterfaceForInitiators;
@@ -142,43 +146,7 @@
 	[self.interactionTypeArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
 	
     
-    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
-    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [backMenu setImage:menuImage forState:UIControlStateNormal];
-    [backMenu addTarget:self action:@selector(backToMenu:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
-    
-    self.navigationItem.leftBarButtonItem = backMenuButton;
-    
-    
-    UIImage* saveImage = [UIImage imageNamed:@"MH_Mobile_Button_Save_72.png"];
-    UIButton *save = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
-    [save setImage:saveImage forState:UIControlStateNormal];
-    [save addTarget:self action:@selector(saveInteraction) forControlEvents:UIControlEventTouchUpInside];
-    self.saveButton = [[UIBarButtonItem alloc] initWithCustomView:save];
-	
-	UIImage* doneImage = [UIImage imageNamed:@"MH_Mobile_Button_Done_72.png"];
-	
-    UIButton *done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
-    [done setImage:doneImage forState:UIControlStateNormal];
-    [done addTarget:self action:@selector(doneWithInteractionType:) forControlEvents:UIControlEventTouchUpInside];
-    self.doneWithInteractionTypeButton = [[UIBarButtonItem alloc] initWithCustomView:done];
-	
-	done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
-    [done setImage:doneImage forState:UIControlStateNormal];
-    [done addTarget:self action:@selector(doneWithVisibility:) forControlEvents:UIControlEventTouchUpInside];
-	self.doneWithVisibilityButton = [[UIBarButtonItem alloc] initWithCustomView:done];
-	
-	done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
-    [done setImage:doneImage forState:UIControlStateNormal];
-    [done addTarget:self action:@selector(doneWithDate:) forControlEvents:UIControlEventTouchUpInside];
-	self.doneWithDateButton = [[UIBarButtonItem alloc] initWithCustomView:done];
-	
-	done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
-    [done setImage:doneImage forState:UIControlStateNormal];
-    [done addTarget:self action:@selector(doneWithComment:) forControlEvents:UIControlEventTouchUpInside];
-	self.doneWithCommentButton = [[UIBarButtonItem alloc] initWithCustomView:done];
-	
+    [self updateBarButtons];
     
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
     
@@ -288,6 +256,57 @@
 }
 
 #pragma mark - update UI methods
+
+-(void)updateBarButtons {
+	
+	//replace the right button that is already there
+	if ([self.navigationItem.rightBarButtonItem isEqual:self.saveButton]) {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.saveButton;
+		
+	} else if ([self.navigationItem.rightBarButtonItem isEqual:self.doneWithInteractionTypeButton]) {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.doneWithInteractionTypeButton;
+		
+	} else if ([self.navigationItem.rightBarButtonItem isEqual:self.doneWithVisibilityButton]) {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.doneWithVisibilityButton;
+		
+	} else if ([self.navigationItem.rightBarButtonItem isEqual:self.doneWithDateButton]) {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.doneWithDateButton;
+		
+	} else if ([self.navigationItem.rightBarButtonItem isEqual:self.doneWithCommentButton]) {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.doneWithCommentButton;
+		
+	} else {
+		
+		[self replaceBarButtons];
+		self.navigationItem.rightBarButtonItem		= self.saveButton;
+		
+	}
+	
+}
+
+-(void)replaceBarButtons {
+	
+	//replace the left button
+	self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+	
+	//create all the other buttons for later use
+    self.saveButton = [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(saveInteraction) forBar:self.navigationController.navigationBar];
+	self.doneWithInteractionTypeButton			= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithInteractionType:) forBar:self.navigationController.navigationBar];
+	self.doneWithVisibilityButton				= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithVisibility:) forBar:self.navigationController.navigationBar];
+	self.doneWithDateButton						= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithDate:) forBar:self.navigationController.navigationBar];
+	self.doneWithCommentButton					= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithComment:) forBar:self.navigationController.navigationBar];
+	
+}
 
 -(void)updateInterface {
 	
@@ -890,6 +909,32 @@
     [self clearPickers];
     
     return NO;
+}
+
+#pragma mark - orientation methods
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+    return UIInterfaceOrientationMaskAll;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+    return YES;
+	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+	
+    return YES;
+	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[self updateBarButtons];
+	
 }
 
 #pragma mark - memory management methods

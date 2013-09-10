@@ -193,20 +193,20 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 	
     return [[self.sections objectAtIndex:section] count] + 1;
 }
-/*
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	
-	UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-	
-	header.backgroundColor	= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
-	header.text				= [self.sectionTitles objectAtIndex:section];
-	header.textColor		= [UIColor colorWithRed:(0.0/255.0) green:(0.0/255.0) blue:(0.0/255.0) alpha:1.0];
-	header.font				= [UIFont fontWithName:@"HelveticaNeue" size:14.0];
-	
-	return header;
-	
-}
-*/
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//	
+//	UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+//	
+//	header.backgroundColor	= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
+//	header.text				= [self.sectionTitles objectAtIndex:section];
+//	header.textColor		= [UIColor colorWithRed:(0.0/255.0) green:(0.0/255.0) blue:(0.0/255.0) alpha:1.0];
+//	header.font				= [UIFont fontWithName:@"HelveticaNeue" size:14.0];
+//	
+//	return header;
+//	
+//}
+
 -(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
 	return 0;
 }
@@ -317,39 +317,43 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
     
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	id objectForCell = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+	if (indexPath.row > 0) {
 	
-	if ([objectForCell isKindOfClass:[MHEmailAddress class]]) {
+		id objectForCell = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
 		
-		if ([(MHEmailAddress *)objectForCell email].length > 0) {
+		if ([objectForCell isKindOfClass:[MHEmailAddress class]]) {
 			
-			NSArray *toRecipents = [NSArray arrayWithObject:[(MHEmailAddress *)objectForCell email]];
+			if ([(MHEmailAddress *)objectForCell email].length > 0) {
+				
+				NSArray *toRecipents = [NSArray arrayWithObject:[(MHEmailAddress *)objectForCell email]];
+				
+				MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+				mc.mailComposeDelegate = self;
+				[mc setToRecipients:toRecipents];
+				
+				// Present mail view controller on screen
+				[self presentViewController:mc animated:YES completion:NULL];
 			
-			MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-			mc.mailComposeDelegate = self;
-			[mc setToRecipients:toRecipents];
+			}
 			
-			// Present mail view controller on screen
-			[self presentViewController:mc animated:YES completion:NULL];
-		
+		} else if ([objectForCell isKindOfClass:[MHPhoneNumber class]]) {
+			
+			NSString *phoneNumber = [(MHPhoneNumber *)objectForCell number];
+			NSString *cleanedString = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+			NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+			
+			[[UIApplication sharedApplication] openURL:telURL];
+			
+		} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
+			
+			NSString *address = [(MHAddress *)objectForCell displayString];
+			NSString *googleAddressString = [address stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+			NSString *urlEncodedString	= [[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", googleAddressString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			NSURL *addressURL = [NSURL URLWithString:urlEncodedString];
+			
+			[[UIApplication sharedApplication] openURL:addressURL];
+			
 		}
-		
-	} else if ([objectForCell isKindOfClass:[MHPhoneNumber class]]) {
-		
-		NSString *phoneNumber = [(MHPhoneNumber *)objectForCell number];
-		NSString *cleanedString = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
-		NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
-		
-		[[UIApplication sharedApplication] openURL:telURL];
-		
-	} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
-		
-		NSString *address = [(MHAddress *)objectForCell displayString];
-		NSString *googleAddressString = [address stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-		NSString *urlEncodedString	= [[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", googleAddressString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		NSURL *addressURL = [NSURL URLWithString:urlEncodedString];
-		
-		[[UIApplication sharedApplication] openURL:addressURL];
 		
 	}
 	

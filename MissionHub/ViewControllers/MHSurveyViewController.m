@@ -9,6 +9,7 @@
 #import "MHSurveyViewController.h"
 #import "MHMenuToolbar.h"
 #import "MHAPI.h"
+#import "MHToolbar.h"
 
 @interface MHSurveyViewController () {
 	
@@ -214,6 +215,37 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+    return UIInterfaceOrientationMaskAll;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+    return YES;
+	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+	
+    return YES;
+	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	if ([self.topToolbar.items count] > 0) {
+		
+		NSMutableArray *itemArray = [NSMutableArray arrayWithArray:self.topToolbar.items];
+		[itemArray replaceObjectAtIndex:0 withObject:[MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(revealMenu:) forBar:self.topToolbar]];
+		[self.topToolbar setItems:itemArray animated:NO];
+		
+	}
+	
 }
 
 @end

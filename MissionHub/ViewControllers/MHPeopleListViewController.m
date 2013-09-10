@@ -13,6 +13,7 @@
 #import "MHLoadingCell.h"
 #import "MHMenuToolbar.h"   
 #import "MHPeopleSearchBar.h"
+#import "MHToolbar.h"
 #import "UIImageView+AFNetworking.h"
 
 
@@ -26,6 +27,8 @@
 
 - (void)addPerson:(id)sender;
 - (void)addInteraction:(id)sender;
+
+- (void)updateBarButtons;
 
 @end
 
@@ -264,6 +267,8 @@
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
 	
+	[self updateBarButtons];
+	
 //TODO:The search bar cancel button is NOT currently customized. Not absolutely necessary but it would look nice for it to have a red or grey background instead of the blue, though I do not know how to implement that
 	
     /*id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
@@ -285,29 +290,6 @@
 	
 	self.refreshController = [[ODRefreshControl alloc] initInScrollView:self.tableView];
     [self.refreshController addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
-
-    UIImage* contactImage = [UIImage imageNamed:@"NewContact_Icon.png"];
-    UIButton *newPerson = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
-    [newPerson setImage:contactImage forState:UIControlStateNormal];
-	[newPerson addTarget:self action:@selector(addPerson:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addPersonButton = [[UIBarButtonItem alloc] initWithCustomView:newPerson];
-    
-    UIImage* interactionImage = [UIImage imageNamed:@"NewInteraction_Icon.png"];
-    UIButton *addInteractionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 51, 34)];
-    [addInteractionButton setImage:interactionImage forState:UIControlStateNormal];
-    [addInteractionButton addTarget:self action:@selector(addInteraction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addInteractionBarButton = [[UIBarButtonItem alloc] initWithCustomView:addInteractionButton];
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addInteractionBarButton, addPersonButton, nil]];
-    
-    
-
-    UIImage* menuImage = [UIImage imageNamed:@"MH_Mobile_Icon_Menu.png"];
-    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(5, 0, 34, 34)];
-    [backMenu setImage:menuImage forState:UIControlStateNormal];
-    [backMenu addTarget:self action:@selector(revealMenu:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
-    
-    self.navigationItem.leftBarButtonItem = backMenuButton;
 
 }
 
@@ -948,6 +930,43 @@
 -(void)controller:(MHCreatePersonViewController *)controller didCreatePerson:(MHPerson *)person {
 	
 	[self refresh];
+	
+}
+
+#pragma mark - layout methods
+
+- (void)updateBarButtons {
+	
+	[self.navigationItem setRightBarButtonItems:@[
+	 [MHToolbar barButtonWithStyle:MHToolbarStyleCreateInteraction target:self selector:@selector(addInteraction:) forBar:self.navigationController.navigationBar],
+	 [MHToolbar barButtonWithStyle:MHToolbarStyleCreatePerson target:self selector:@selector(addPerson:) forBar:self.navigationController.navigationBar]
+	 ]];
+	
+    self.navigationItem.leftBarButtonItem = [MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(revealMenu:) forBar:self.navigationController.navigationBar];
+	
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+    return UIInterfaceOrientationMaskAll;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+    return YES;
+	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+	
+    return YES;
+	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[self updateBarButtons];
 	
 }
 

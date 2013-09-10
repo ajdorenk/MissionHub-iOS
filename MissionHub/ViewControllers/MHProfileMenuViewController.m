@@ -14,8 +14,8 @@
 
 @implementation MHProfileMenuViewController
 
-@synthesize menuDelegate;
-@synthesize segmentedControl;
+@synthesize menuDelegate		= _menuDelegate;
+@synthesize segmentedControl	= _segmentedControl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

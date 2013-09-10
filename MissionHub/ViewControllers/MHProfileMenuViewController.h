@@ -17,11 +17,11 @@
 
 @interface MHProfileMenuViewController : UIViewController
 
-@property (nonatomic, strong) id<MHProfileMenuDelegate> menuDelegate;
-@property (nonatomic, strong) IBOutlet MHSegmentedControl *segmentedControl;
+@property (nonatomic, weak) id<MHProfileMenuDelegate> menuDelegate;
+@property (nonatomic, weak) IBOutlet MHSegmentedControl *segmentedControl;
 
--(IBAction)menuDidChangeSelection:(id)sender;
--(void)setMenuSelection:(NSInteger)selection;
--(NSInteger)menuSelection;
+- (IBAction)menuDidChangeSelection:(id)sender;
+- (void)setMenuSelection:(NSInteger)selection;
+- (NSInteger)menuSelection;
 
 @end

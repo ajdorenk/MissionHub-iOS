@@ -52,7 +52,6 @@
 	
 }
 
-//TODO:The action bar still needs to be created and popup when the checkbox is clicked, (though I'm not entirely sure where to do that)
 - (void)checkBoxClicked {
 	
     if (self.selected){

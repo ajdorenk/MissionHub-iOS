@@ -13,23 +13,22 @@
 
 #define GAP_BETWEEN_NAME_AND_LABEL_LIST 20.0f
 #define GAP_BETWEEN_LABEL_LIST_AND_LABEL_TITLE 10.0f
+CGFloat const MHProfileHeaderLabelListMarginVertical = 10.0f;
+CGFloat const MHProfileHeaderLabelListMarginHorizontal = 10.0f;
+CGFloat const MHProfileHeaderLabelTitleMarginVertical = 25.0f;
+CGFloat const MHProfileHeaderNameMarginVertical = 25.0f;
+CGFloat const MHProfileHeaderContentBuffer = 40.0f;
+
 
 @interface MHProfileHeaderViewController ()
 
 @property (strong, nonatomic) IBOutlet DWTagList *labelList;
-@property (strong, nonatomic) IBOutlet UIScrollView *headerScrollView;
-@property (strong, nonatomic) IBOutlet UIPageControl *headerPageControl;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UILabel *labelsTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *labelsListLabel;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
-//@property (strong, nonatomic) IBOutlet UIImageView *gradientImageView;
-@property (nonatomic, assign) BOOL usedPageControl;
-
-- (IBAction)pageChanged:(UIPageControl *)sender;
-- (void)darkenTheBackground:(CGFloat)xOffSet;
+- (void)updateLayout;
 
 @end
 
@@ -49,16 +48,26 @@
 	
 	[super awakeFromNib];
 	
+	[self updateLayout];
+	
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.imageView.image = [UIImage imageNamed:@"MHProfileHeader_Placeholder.png"];
-	self.headerScrollView.contentSize = self.contentView.frame.size;
-    self.headerScrollView.scrollsToTop = NO;
+    self.imageView.image			= [UIImage imageNamed:@"MHProfileHeader_Placeholder.png"];
+	self.view.autoresizingMask		= UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	self.labelList.clipsToBounds	= NO;
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	
+	[self updateLayout];
+	
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,76 +164,55 @@
 	
 }
 
--(void)resetLabelListSize {
+- (void)updateLayout {
 	
-	//calculate the size of the label list label with the current string
-	CGSize maximumLabelSize = CGSizeMake(self.labelsListLabel.frame.size.width, FLT_MAX);
-	CGSize expectedLabelSize = [self.labelsListLabel.text sizeWithFont:self.labelsListLabel.font constrainedToSize:maximumLabelSize lineBreakMode:self.labelsListLabel.lineBreakMode];
+	if (CGRectGetWidth(self.imageView.frame) != CGRectGetWidth(self.view.frame)) {
+		self.imageView.frame		= self.view.frame;
+	}
 	
-	//adjust the label list label to the new height and position.
-	CGRect newFrame			= self.labelsListLabel.frame;
-	newFrame.origin.y		= self.nameLabel.frame.origin.y - GAP_BETWEEN_NAME_AND_LABEL_LIST - expectedLabelSize.height;
-	newFrame.size.height	= expectedLabelSize.height;
-	self.labelsListLabel.frame = newFrame;
+	self.contentView.frame			= CGRectInset(self.view.frame, 0, -MHProfileHeaderContentBuffer);
 	
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	self.labelList.frame			= CGRectMake(MHProfileHeaderLabelListMarginHorizontal,
+												 MHProfileHeaderContentBuffer + CGRectGetMaxY(self.view.frame) - CGRectGetHeight(self.labelList.frame) - MHProfileHeaderLabelListMarginVertical,
+												 CGRectGetWidth(self.view.frame) - 2 * MHProfileHeaderLabelListMarginHorizontal,
+												 CGRectGetHeight(self.labelList.frame));
 	
-    if (scrollView == self.headerScrollView) {
-        [self darkenTheBackground:scrollView.contentOffset.x];
-    }
+	self.labelsTitleLabel.center	= self.contentView.center;
+	self.labelsTitleLabel.frame		= CGRectMake(CGRectGetMinX(self.labelsTitleLabel.frame),
+												 CGRectGetMinY(self.labelList.frame) - MHProfileHeaderLabelTitleMarginVertical,
+												 CGRectGetWidth(self.labelsTitleLabel.frame),
+												 CGRectGetHeight(self.labelsTitleLabel.frame));
 	
-}
-
-- (void)darkenTheBackground:(CGFloat)xOffSet {
+	self.nameLabel.center			= self.contentView.center;
+	self.nameLabel.frame			= CGRectMake(CGRectGetMinX(self.nameLabel.frame),
+												 CGRectGetMinY(self.labelsTitleLabel.frame) - MHProfileHeaderNameMarginVertical,
+												 CGRectGetWidth(self.nameLabel.frame),
+												 CGRectGetHeight(self.nameLabel.frame));
 	
-    if (xOffSet != 0) {
-		
-        CGFloat pageWidth = self.headerScrollView.frame.size.width;
-        CGFloat alphaForContentView = xOffSet / pageWidth;
-		
-        if (alphaForContentView > 1.f) {
-            alphaForContentView = 1.f;
-        } else if (alphaForContentView < 0) {
-            alphaForContentView = 0;
-        }
-        
-		self.headerScrollView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7*alphaForContentView];
-        
-		if (!self.usedPageControl) {
-            int page = floor((xOffSet - pageWidth / 2) / pageWidth) + 1;
-            self.headerPageControl.currentPage = page;
-        }
-		
-    }
 	
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+#pragma mark -
+#pragma mark Orientation
+
+- (NSUInteger)supportedInterfaceOrientations {
 	
-    if (scrollView == self.headerScrollView) {
-        self.usedPageControl = NO;
-    }
-	
+    return UIInterfaceOrientationMaskAll;
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+- (BOOL)shouldAutorotate {
 	
-    if (scrollView == self.headerScrollView) {
-        self.usedPageControl = NO;
-    }
-	
+    return YES;
 }
 
-- (IBAction)pageChanged:(UIPageControl *)sender {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
 	
-    CGFloat headerViewWidth = self.headerScrollView.frame.size.width;
-    CGRect frame = self.headerScrollView.frame;
-    frame.origin = CGPointMake(headerViewWidth * sender.currentPage, 0);
+    return YES;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	
-    self.usedPageControl = YES;
-    [self.headerScrollView scrollRectToVisible:frame animated:YES];
+	[self updateLayout];
 	
 }
 
