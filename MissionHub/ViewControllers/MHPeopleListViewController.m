@@ -35,21 +35,20 @@
 
 @implementation MHPeopleListViewController
 
-@synthesize peopleSearchBar;
-@synthesize peopleArray				= _peopleArray;
-@synthesize searchResultArray		= _searchResultArray;
-@synthesize requestOptions			= _requestOptions;
-@synthesize searchRequestOptions	= _searchRequestOptions;
-@synthesize refreshController		= _refreshController;
-@synthesize isLoading				= _isLoading;
-@synthesize refreshIsLoading		= _refreshIsLoading;
-@synthesize pagingIsLoading			= _pagingIsLoading;
-@synthesize hasLoadedAllPages		= _hasLoadedAllPages;
-@synthesize searchIsLoading			= _searchIsLoading;
-@synthesize searchPagingIsLoading	= _searchPagingIsLoading;
-@synthesize searchHasLoadedAllPages	= _searchHasLoadedAllPages;
-@synthesize secondaryFieldName		= _secondaryFieldName;
-@synthesize fieldButton;
+@synthesize peopleSearchBar						= _peopleSearchBar;
+@synthesize peopleArray							= _peopleArray;
+@synthesize searchResultArray					= _searchResultArray;
+@synthesize requestOptions						= _requestOptions;
+@synthesize searchRequestOptions				= _searchRequestOptions;
+@synthesize refreshController					= _refreshController;
+@synthesize isLoading							= _isLoading;
+@synthesize refreshIsLoading					= _refreshIsLoading;
+@synthesize pagingIsLoading						= _pagingIsLoading;
+@synthesize hasLoadedAllPages					= _hasLoadedAllPages;
+@synthesize searchIsLoading						= _searchIsLoading;
+@synthesize searchPagingIsLoading				= _searchPagingIsLoading;
+@synthesize searchHasLoadedAllPages				= _searchHasLoadedAllPages;
+@synthesize secondaryFieldName					= _secondaryFieldName;
 @synthesize sortField							= _sortField;
 @synthesize header								= _header;
 @synthesize profileViewController				= _profileViewController;
@@ -72,78 +71,7 @@
 	
 	self.sortField			= MHRequestOptionsOrderFieldPeopleFollowupStatus;
 	self.secondaryFieldName = MHPersonSortFieldFollowupStatus;
-	
-	UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 22.0)];
-    sectionHeader.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
-	/*
-	UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(41, 6.5, 20, 20.0)];
-    headerLabel.textColor = [UIColor whiteColor];
-	headerLabel.backgroundColor = [UIColor clearColor];
-	headerLabel.textAlignment = NSTextAlignmentLeft;
-	[sectionHeader addSubview:headerLabel];
-	
-	headerLabel.text = @"All";
-    */
-    //Add sortFieldButton
-    UIButton *sortFieldButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [sortFieldButton setFrame:CGRectMake(94, 5.0, 154.0, 22.0)];
-    }
-    else{
-        [sortFieldButton setFrame:CGRectMake(420, 5.0, 270.0, 22.0)];
-    }
-	
-    [sortFieldButton setTintColor:[UIColor clearColor]];
-    [sortFieldButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
-	
-    [sortFieldButton setBackgroundColor:[UIColor clearColor]];
-	[sortFieldButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
-	[sortFieldButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
-    [sortFieldButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [sortFieldButton addTarget:self action:@selector(chooseSortField:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [sectionHeader addSubview:sortFieldButton];
-	
-	self.fieldButton = sortFieldButton;
-    
-    UIButton *sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [sortButton setFrame:CGRectMake(257, 5.0, 59.0, 22.0)];
-    }
-    
-    else{
-        [sortButton setFrame:CGRectMake(700, 5.0, 55.0, 22.0)];
-    }
-    //[button setTitle:@"Sort" forState:UIControlStateNormal];
-    [sortButton setTintColor:[UIColor clearColor]];
-    [sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
-    [sortButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [sortButton setTitle:@"Sort: off" forState:UIControlStateNormal];
-    [sortButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [sortButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
-    
-    
-    [sortButton setBackgroundColor:[UIColor clearColor]];
-    [sortButton addTarget:self action:@selector(sortOnOff:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [sectionHeader addSubview:sortButton];
-    
-	
-//TODO:Needs a checkbox and label "All" to check all contacts, (see "to do" comment above the checkAllContacts method)
-    /*
-    UIButton *allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
-    [allButton setFrame:CGRectMake(13.0, 9.0, 15.0, 15.0)];
-    [allButton setTintColor:[UIColor clearColor]];
-    [allButton setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
-    
-    [allButton setBackgroundColor:[UIColor clearColor]];
-    [allButton addTarget:self action:@selector(checkAllContacts:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [sectionHeader addSubview:allButton];
-	*/
-	self.header = sectionHeader;
+	self.header				= [MHSortHeader headerWithTableView:self.tableView sortField:self.secondaryFieldName delegate:self];
 	
 }
 
@@ -321,11 +249,10 @@
 			break;
 	}
 	
-	[self.fieldButton setTitle:[MHPerson fieldNameForSortField:self.secondaryFieldName] forState:UIControlStateNormal];
+	[self.header updateInterfaceWithSortField:self.secondaryFieldName];
 	[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:self.requestOptions.orderDirection];
 	[self refresh];
 	[self dismissViewControllerAnimated:YES completion:nil];
-	//[self.tableView reloadData];
 	
 }
 
@@ -552,27 +479,26 @@
     }
 }
 
--(void)chooseSortField:(id)sender {
+-(void)fieldButtonPressed {
     NSLog(@"chooseSortField");
     [self presentViewController:[self fieldSelectorViewController] animated:YES completion:Nil];
     [[self fieldSelectorViewController] setListTitle:@""];
 }
 
--(void)sortOnOff:(UIButton *)button {
-    
-    if ([button.titleLabel.text isEqualToString:@"Sort: off"]) {
-        [button setTitle:@"Sort: asc" forState:UIControlStateNormal];
-		[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:MHRequestOptionsOrderDirectionAsc];
-    } else if ([button.titleLabel.text isEqualToString:@"Sort: asc"]) {
-        [button setTitle:@"Sort: desc" forState:UIControlStateNormal];
-		[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:MHRequestOptionsOrderDirectionDesc];
-    } else if ([button.titleLabel.text isEqualToString:@"Sort: desc"]) {
-        [button setTitle:@"Sort: off" forState:UIControlStateNormal];
+-(void)sortDirectionDidChangeTo:(MHRequestOptionsOrderDirections)direction {
+	
+	if (direction == MHRequestOptionsOrderDirectionNone) {
+		
 		[self.requestOptions clearOrders];
-    }
+		
+	} else {
+		
+		[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:direction];
+		
+	}
 	
 	[self refresh];
-        
+	
 }
 
 -(BOOL)isSelected:(MHPerson *)person {
@@ -754,7 +680,7 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
 		return 0;
 	} else {
-		return HEADER_HEIGHT;
+		return MHSortHeaderHeight;
 	}
 }
 

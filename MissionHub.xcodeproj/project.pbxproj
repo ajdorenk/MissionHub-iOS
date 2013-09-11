@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6801976217CFE88200DCE330 /* MHHeaderCell.m */; };
 		6801976417CFE88200DCE330 /* MHHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6801976217CFE88200DCE330 /* MHHeaderCell.m */; };
+		680B401A17E0DE8700A5E62B /* MHSortHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 680B401917E0DE8700A5E62B /* MHSortHeader.m */; };
+		680B401B17E0DE8700A5E62B /* MHSortHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 680B401917E0DE8700A5E62B /* MHSortHeader.m */; };
 		680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */; };
 		680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FC1782403600E6E742 /* MHPerson+Helper.m */; };
 		680CD8FE1782403600E6E742 /* MHPerson+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FC1782403600E6E742 /* MHPerson+Helper.m */; };
@@ -405,6 +407,8 @@
 		6801975B17CFB44300DCE330 /* MHInteractionCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionCellHeader.m; path = "Custom UI/MHInteractionCellHeader.m"; sourceTree = "<group>"; };
 		6801976117CFE88200DCE330 /* MHHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHHeaderCell.h; path = "Custom UI/MHHeaderCell.h"; sourceTree = "<group>"; };
 		6801976217CFE88200DCE330 /* MHHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHHeaderCell.m; path = "Custom UI/MHHeaderCell.m"; sourceTree = "<group>"; };
+		680B401817E0DE8700A5E62B /* MHSortHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSortHeader.h; path = "Custom UI/MHSortHeader.h"; sourceTree = "<group>"; };
+		680B401917E0DE8700A5E62B /* MHSortHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSortHeader.m; path = "Custom UI/MHSortHeader.m"; sourceTree = "<group>"; };
 		680CD8F417823E4600E6E742 /* MHOrganization+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHOrganization+Helper.h"; path = "Models/MHOrganization+Helper.h"; sourceTree = "<group>"; };
 		680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganization+Helper.m"; path = "Models/MHOrganization+Helper.m"; sourceTree = "<group>"; };
 		680CD8FB1782403600E6E742 /* MHPerson+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHPerson+Helper.h"; path = "Models/MHPerson+Helper.h"; sourceTree = "<group>"; };
@@ -1428,6 +1432,8 @@
 				68ACD0A117DFB80A003630F0 /* MHToolbar.m */,
 				68ACD0A417DFBF00003630F0 /* MHStyle.h */,
 				68ACD0A517DFBF00003630F0 /* MHStyle.m */,
+				680B401817E0DE8700A5E62B /* MHSortHeader.h */,
+				680B401917E0DE8700A5E62B /* MHSortHeader.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1788,6 +1794,7 @@
 				682462EF17D9432C00E1AFBB /* MHActivityViewController.m in Sources */,
 				68ACD0A217DFB80B003630F0 /* MHToolbar.m in Sources */,
 				68ACD0A617DFBF00003630F0 /* MHStyle.m in Sources */,
+				680B401A17E0DE8700A5E62B /* MHSortHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1909,6 +1916,7 @@
 				682462F017D9432C00E1AFBB /* MHActivityViewController.m in Sources */,
 				68ACD0A317DFB80B003630F0 /* MHToolbar.m in Sources */,
 				68ACD0A717DFBF00003630F0 /* MHStyle.m in Sources */,
+				680B401B17E0DE8700A5E62B /* MHSortHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

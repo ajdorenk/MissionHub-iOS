@@ -19,15 +19,14 @@
 
 @interface MHMenuViewController ()
 
-@property (nonatomic, strong) MHNavigationViewController *_peopleNavigationViewController;
-@property (nonatomic, strong) MHSurveyViewController *_surveyViewController;
-@property (nonatomic, strong) MHGenericListViewController *_organizationViewController;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong, readonly) MHNavigationViewController *peopleNavigationViewController;
+@property (nonatomic, strong, readonly) MHSurveyViewController *surveyViewController;
+@property (nonatomic, strong, readonly) MHGenericListViewController *organizationViewController;
 @property (nonatomic, strong) MHPerson *user;
 @property (nonatomic, strong) NSArray *menuHeaders;
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
--(MHNavigationViewController *)peopleNavigationViewController;
--(MHSurveyViewController *)surveyViewController;
 -(void)changeOrganization;
 -(void)logout;
 
@@ -35,48 +34,62 @@
 
 @implementation MHMenuViewController
 
+@synthesize tableView						= _tableView;
+@synthesize peopleNavigationViewController	= _peopleNavigationViewController;
+@synthesize surveyViewController			= _surveyViewController;
+@synthesize organizationViewController		= _organizationViewController;
+@synthesize user							= _user;
+@synthesize menuHeaders						= _menuHeaders;
+@synthesize menuItems						= _menuItems;
+
 -(MHNavigationViewController *)peopleNavigationViewController {
 	
-	if (self._peopleNavigationViewController == nil) {
+	if (_peopleNavigationViewController == nil) {
 		
-		self._peopleNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNavigationViewController"];
+		[self willChangeValueForKey:@"peopleNavigationViewController"];
+		_peopleNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNavigationViewController"];
+		[self didChangeValueForKey:@"peopleNavigationViewController"];
 		
 	}
 	
-	return self._peopleNavigationViewController;
+	return _peopleNavigationViewController;
 	
 }
 
 -(MHSurveyViewController *)surveyViewController {
 	
-	if (self._surveyViewController == nil) {
+	if (_surveyViewController == nil) {
 		
-		self._surveyViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHSurveyViewController"];
+		[self willChangeValueForKey:@"surveyViewController"];
+		_surveyViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHSurveyViewController"];
+		[self didChangeValueForKey:@"surveyViewController"];
 		
 	}
 	
-	return self._surveyViewController;
+	return _surveyViewController;
 	
 }
 
 -(MHGenericListViewController *)organizationViewController {
 	
-	if (self._organizationViewController == nil) {
+	if (_organizationViewController == nil) {
 		
-		self._organizationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		[self willChangeValueForKey:@"organizationViewController"];
+		_organizationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		[self didChangeValueForKey:@"organizationViewController"];
 		
 	}
 	
-	return self._organizationViewController;
+	return _organizationViewController;
 	
 }
 
 -(void)changeOrganization {
 	
 	NSLog(@"change org");
-	[self organizationViewController].selectionDelegate = self;
-	[self organizationViewController].objectArray = [NSMutableArray arrayWithArray:[self.user.allOrganizations allObjects]];
-	[self presentViewController:[self organizationViewController] animated:YES completion:nil];
+	self.organizationViewController.selectionDelegate = self;
+	self.organizationViewController.objectArray = [NSMutableArray arrayWithArray:[self.user.allOrganizations allObjects]];
+	[self presentViewController:self.organizationViewController animated:YES completion:nil];
 	
 }
 
@@ -121,6 +134,8 @@
 	
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
 	self.slidingViewController.underLeftWidthLayout = ECFullWidth;
+	
+	self.tableView.frame	= self.view.bounds;
 	
 }
 
@@ -334,6 +349,31 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - orientation methods
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+    return UIInterfaceOrientationMaskAll;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+    return YES;
+	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+	
+    return YES;
+	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	self.tableView.frame	= self.view.bounds;
+	
+}
 
 - (void)didReceiveMemoryWarning
 {

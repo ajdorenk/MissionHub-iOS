@@ -52,6 +52,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="gp3-NM-vXW" id="54D-L8-oE1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHz-p3-ci1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -996,6 +999,9 @@ select another survey.</string>
         </class>
         <class className="MHMenuViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMenuViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="MHNavigationViewController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHNavigationViewController.h"/>
@@ -1061,10 +1067,6 @@ select another survey.</string>
         </class>
         <class className="MHProfileViewController" superclassName="M6ParallaxController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHProfileViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
         </class>
         <class className="MHRootViewController" superclassName="ECSlidingViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MHRootViewController.h"/>

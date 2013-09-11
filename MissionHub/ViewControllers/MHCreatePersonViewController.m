@@ -125,28 +125,7 @@
 		
 	}
 
-    UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
-    UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [backMenu setImage:menuImage forState:UIControlStateNormal];
-    [backMenu addTarget:self action:@selector(backToMenu:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
-    
-    self.navigationItem.leftBarButtonItem = backMenuButton;
-    
-    
-    UIImage* saveImage = [UIImage imageNamed:@"MH_Mobile_Button_Save_72.png"];
-    UIButton *save = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
-    [save setImage:saveImage forState:UIControlStateNormal];
-    [save addTarget:self action:@selector(savePerson:) forControlEvents:UIControlEventTouchUpInside];
-    self.saveButton = [[UIBarButtonItem alloc] initWithCustomView:save];
-	
-	UIImage* doneImage = [UIImage imageNamed:@"MH_Mobile_Button_Done_72.png"];
-	
-    UIButton *done = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 35)];
-    [done setImage:doneImage forState:UIControlStateNormal];
-    [done addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-    self.doneButton = [[UIBarButtonItem alloc] initWithCustomView:done];
-    
+    [self replaceBarButtons];
     
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
 	
@@ -209,7 +188,7 @@
 -(void)replaceBarButtons {
 	
 	//replace the left button
-	self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+	self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
 	
 	//create all the other buttons for later use
     self.saveButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(savePerson:) forBar:self.navigationController.navigationBar];

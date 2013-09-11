@@ -17,8 +17,9 @@
 #import "MHPersonCell.h"
 #import "MHGenericListViewController.h"
 #import "MHActivityViewController.h"
+#import "MHSortHeader.h"
 
-@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate>
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate, MHSortHeaderDelegate>
 
 
 /*@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
@@ -43,8 +44,7 @@
 @property (nonatomic, assign) BOOL searchHasLoadedAllPages;
 @property (nonatomic, assign) MHPersonSortFields secondaryFieldName;
 @property (nonatomic, assign) MHRequestOptionsOrderFields sortField;
-@property (nonatomic, strong) UIButton *fieldButton;
-@property (nonatomic, strong) UIView *header;
+@property (nonatomic, strong) MHSortHeader *header;
 @property (nonatomic, strong) IBOutlet UIView *activityBar;
 @property (nonatomic, strong, readonly) MHProfileViewController *profileViewController;
 @property (nonatomic, strong, readonly) MHGenericListViewController *fieldSelectorViewController;

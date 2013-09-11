@@ -297,7 +297,7 @@
 -(void)replaceBarButtons {
 	
 	//replace the left button
-	self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+	self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
 	
 	//create all the other buttons for later use
     self.saveButton = [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(saveInteraction) forBar:self.navigationController.navigationBar];
