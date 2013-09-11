@@ -114,4 +114,20 @@
 	
 }
 
+- (void)layoutSubviews {
+	
+	[super layoutSubviews];
+	
+	self.nameBackgroundView.frame	= CGRectMake(CGRectGetMinX(self.nameBackgroundView.frame),
+												 CGRectGetMinY(self.nameBackgroundView.frame),
+												 CGRectGetWidth(self.frame) - CGRectGetMinX(self.nameBackgroundView.frame) + 1,
+												 CGRectGetHeight(self.nameBackgroundView.frame));
+	
+	self.field.frame	= CGRectMake(CGRectGetMinX(self.field.frame),
+												 CGRectGetMinY(self.field.frame),
+												 CGRectGetWidth(self.frame) - CGRectGetMinX(self.field.frame),
+												 CGRectGetHeight(self.field.frame));
+	
+}
+
 @end

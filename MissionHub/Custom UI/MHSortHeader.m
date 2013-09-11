@@ -161,6 +161,8 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 
 - (void)layoutSubviews {
 	
+	[super layoutSubviews];
+	
 	[self.sortButton setFrame:CGRectMake(CGRectGetWidth(self.frame) - MHSortHeaderSortButtonWidth - MHSortHeaderMargin,
 												  MHSortHeaderMargin,
 												  MHSortHeaderSortButtonWidth,

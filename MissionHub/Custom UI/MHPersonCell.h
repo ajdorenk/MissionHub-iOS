@@ -19,11 +19,11 @@
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) NSString *fieldName;
 
-@property (nonatomic, strong) IBOutlet UILabel *name;
-@property (nonatomic, strong) IBOutlet UILabel *field;
-@property (nonatomic, strong) IBOutlet UIImageView *profilePicture;
-@property (nonatomic, strong) IBOutlet MHCheckbox *checkbox;
-@property (nonatomic, strong) IBOutlet UIView *nameBackgroundView;
+@property (nonatomic, weak) IBOutlet UILabel *name;
+@property (nonatomic, weak) IBOutlet UILabel *field;
+@property (nonatomic, weak) IBOutlet UIImageView *profilePicture;
+@property (nonatomic, weak) IBOutlet MHCheckbox *checkbox;
+@property (nonatomic, weak) IBOutlet UIView *nameBackgroundView;
 
 - (void)configure;
 -(void)populateWithPerson:(MHPerson *)person forField:(MHPersonSortFields)sortField withSelection:(BOOL)selected atIndexPath:(NSIndexPath *)indexPath;
