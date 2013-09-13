@@ -12,14 +12,11 @@
 #import "MHRequestOptions.h"
 #import "ODRefreshControl.h"
 #import "MHGenericCell.h"
+#import "MHToolbar.h"
 
 @protocol MHGenericListViewControllerDelegate;
 
 @interface MHGenericListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MHGenericCellDelegate>
-
-@property (nonatomic, weak) IBOutlet UILabel							*listName;
-@property (nonatomic, weak) IBOutlet UITableView						*tableViewList;
-@property (nonatomic, weak) IBOutlet UIView								*contentView;
 
 @property (nonatomic, weak) id<MHGenericListViewControllerDelegate>	selectionDelegate;
 @property (nonatomic, strong) NSMutableArray							*objectArray;
@@ -31,6 +28,7 @@
 @property (nonatomic, assign) BOOL										pagingIsLoading;
 @property (nonatomic, assign) BOOL										hasLoadedAllPages;
 
+@property (nonatomic, strong) NSString									*listTitle;
 @property (nonatomic, strong) NSMutableArray							*suggestionArray;
 @property (nonatomic, strong) id										selectedObject;
 @property (nonatomic, strong) NSMutableSet								*selectedSet;
@@ -39,14 +37,13 @@
 @property (nonatomic, assign) BOOL										showSuggestions;
 @property (nonatomic, assign) BOOL										showHeaders;
 
--(void)setListTitle:(NSString *)title;
--(void)refresh;
--(BOOL)isSelected:(id)object;
--(void)setDataFromRequestOptions:(MHRequestOptions *)options;
--(void)setDataArray:(NSArray *)dataArray;
--(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
--(void)setSuggestions:(NSSet *)suggestionsArray andSelections:(NSSet *)selectedSet;
--(void)setSuggestions:(NSSet *)suggestionsArray andSelectionObject:(id)selectedObject;
+- (void)refresh;
+- (BOOL)isSelected:(id)object;
+- (void)setDataFromRequestOptions:(MHRequestOptions *)options;
+- (void)setDataArray:(NSArray *)dataArray;
+- (void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
+- (void)setSuggestions:(NSSet *)suggestionsArray andSelections:(NSSet *)selectedSet;
+- (void)setSuggestions:(NSSet *)suggestionsArray andSelectionObject:(id)selectedObject;
 
 @end
 

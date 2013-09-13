@@ -36,7 +36,7 @@
 {
     // Drawing code
     [super drawRect:rect];
-    UIImage *backgroundImage = [UIImage imageNamed:@"topbar_background.png"];
+    UIImage *backgroundImage = [UIImage imageNamed:@"MH_Mobile_Topbar_Background.png"];
     [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 }
 

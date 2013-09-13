@@ -74,12 +74,12 @@
 	
     if (person.picture == nil) {
 		
-        self.profilePicture.image = [UIImage imageNamed:@"MHPersonCell_Placeholder.png"];
+        self.profilePicture.image = [UIImage imageNamed:@"MH_Mobile_PersonCell_Placeholder.png"];
         
     } else {
 		
         [self.profilePicture setImageWithURL:[NSURL URLWithString:person.picture]
-					   placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
+					   placeholderImage:[UIImage imageNamed:@"MH_Mobile_PersonCell_Placeholder.png"]];
     }
     
 	self.field.text = [person valueForSortField:sortField];

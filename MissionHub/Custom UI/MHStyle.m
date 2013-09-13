@@ -15,7 +15,7 @@
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		
-		UIImage *navBackground =[[UIImage imageNamed:@"topbar_background.png"]
+		UIImage *navBackground =[[UIImage imageNamed:@"MH_Mobile_Topbar_Background.png"]
 								 resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
 		[[UINavigationBar appearance] setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
 		[[UINavigationBar appearance] setBackgroundImage:navBackground forBarMetrics:UIBarMetricsLandscapePhone];

@@ -74,7 +74,7 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 													  MHSortHeaderSortButtonWidth,
 													  MHSortHeaderHeight - 2 * MHSortHeaderMargin)];
 		[header.sortButton setTintColor:[UIColor clearColor]];
-		[header.sortButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderSort.png"] forState:UIControlStateNormal];
+		[header.sortButton setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_SortButton_40.png"] forState:UIControlStateNormal];
 		[header.sortButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
 		[header.sortButton setTitle:@"Sort: off" forState:UIControlStateNormal];
 		[header.sortButton setTitleColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1] forState:UIControlStateNormal];
@@ -90,7 +90,7 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 											 MHSortHeaderFieldButtonWidth,
 											 MHSortHeaderHeight - 2 * MHSortHeaderMargin)];
 		[header.fieldButton setTintColor:[UIColor clearColor]];
-		[header.fieldButton setBackgroundImage:[UIImage imageNamed:@"sectionHeaderLabels.png"] forState:UIControlStateNormal];
+		[header.fieldButton setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_ColumnButton_40.png"] forState:UIControlStateNormal];
 		[header.fieldButton setBackgroundColor:[UIColor clearColor]];
 		[header.fieldButton.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
 		[header.fieldButton setTitle:[MHPerson fieldNameForSortField:sortField] forState:UIControlStateNormal];

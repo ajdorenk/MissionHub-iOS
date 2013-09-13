@@ -55,7 +55,7 @@
     [self.slidingViewController setAnchorRightRevealAmount:280.0f];
     
     
-    UIImage *navBackground =[[UIImage imageNamed:@"topbar_background.png"]
+    UIImage *navBackground =[[UIImage imageNamed:@"MH_Mobile_Topbar_Background.png"]
                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     [[UINavigationBar appearance] setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -63,7 +63,6 @@
     self.navigationBar.layer.shadowOpacity = 0.05;
     self.navigationBar.layer.masksToBounds = NO;
     self.navigationBar.layer.shouldRasterize = YES;
-    [self.navigationController setToolbarHidden:NO];
 
     
 }

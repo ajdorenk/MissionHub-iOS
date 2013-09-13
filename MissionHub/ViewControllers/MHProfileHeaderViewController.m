@@ -56,7 +56,7 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.imageView.image			= [UIImage imageNamed:@"MHProfileHeader_Placeholder.png"];
+    self.imageView.image			= [UIImage imageNamed:@"MH_Mobile_Profile_Header_Placeholder.png"];
 	self.view.autoresizingMask		= UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	self.labelList.clipsToBounds	= NO;
     
@@ -88,13 +88,13 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 	
 	if (urlString == nil) {
 		
-        self.imageView.image = [UIImage imageNamed:@"MHProfileHeader_Placeholder.png"];
+        self.imageView.image = [UIImage imageNamed:@"MH_Mobile_Profile_Header_Placeholder.png"];
         
     } else {
 		
 		urlString = [urlString stringByAppendingString:@"?type=large"];
         [self.imageView setImageWithURL:[NSURL URLWithString:urlString]
-					   placeholderImage:[UIImage imageNamed:@"MHProfileHeader_Placeholder.png"]];
+					   placeholderImage:[UIImage imageNamed:@"MH_Mobile_Profile_Header_Placeholder.png"]];
     }
 	
 }

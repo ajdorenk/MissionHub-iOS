@@ -13,18 +13,30 @@
 #import "MHPerson+Helper.h"
 #import "NSMutableArray+removeDuplicatesForKey.h"
 
-#define ROW_HEIGHT 36.0f
-#define HEADER_HEIGHT 21.0f
-
+CGFloat const MHGenericListViewControllerRowHeight					= 36.0f;
+CGFloat const MHGenericListViewControllerHeaderHeight				= 21.0f;
+CGFloat const MHGenericListViewControllerTableViewMarginHorizontal	= 30.0f;
+CGFloat const MHGenericListViewControllerListLableHeight			= 21.0f;
+CGFloat const MHGenericListViewControllerListLableMarginHorizontal	= MHGenericListViewControllerTableViewMarginHorizontal + 2;
+CGFloat const MHGenericListViewControllerListLableMarginTop			= 0.5 * MHGenericListViewControllerTableViewMarginHorizontal;
+CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 
 @interface MHGenericListViewController ()
 
--(void)addSelection:(id)selectionObject;
--(void)removeSelection:(id)selectionObject;
--(void)updateSelectedObject:(id)selectedObject;
+@property (nonatomic, weak) IBOutlet UILabel		*listName;
+@property (nonatomic, weak) IBOutlet UITableView	*tableViewList;
+@property (nonatomic, weak) IBOutlet UIView			*contentView;
+@property (nonatomic, strong) MHToolbar				*toolbar;
 
--(void)willAddToSuggestionArray:(NSInteger)numberOfObjects;
--(void)willRemoveFromSuggestionArray:(NSInteger)numberOfObjects;
+- (void)addSelection:(id)selectionObject;
+- (void)removeSelection:(id)selectionObject;
+- (void)updateSelectedObject:(id)selectedObject;
+
+- (void)willAddToSuggestionArray:(NSInteger)numberOfObjects;
+- (void)willRemoveFromSuggestionArray:(NSInteger)numberOfObjects;
+
+- (void)updateBarLayoutWithParentFrame:(CGRect)parentFrame;
+- (void)updateLayoutWithParentFrame:(CGRect)parentFrame;
 
 @end
 
@@ -33,6 +45,7 @@
 @synthesize listName				= _listName;
 @synthesize tableViewList			= _tableViewList;
 @synthesize contentView				= _contentView;
+@synthesize toolbar					= _toolbar;
 
 @synthesize selectionDelegate       = _selectionDelegate;
 @synthesize objectArray				= _objectArray;
@@ -49,12 +62,14 @@
 @synthesize multipleSelection		= _multipleSelection;
 @synthesize showSuggestions			= _showSuggestions;
 @synthesize showHeaders				= _showHeaders;
+@synthesize listTitle				= _listTitle;
 
 - (void)awakeFromNib {
 	
     [super awakeFromNib];
 	
 	self.selectionDelegate	= nil;
+	self.toolbar			= nil;
 	
 	self.isLoading			= NO;
 	self.refreshIsLoading	= NO;
@@ -83,39 +98,66 @@
     self.tableViewList.layer.borderWidth	= 1.0;
     self.tableViewList.layer.borderColor	= [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
 	self.tableViewList.separatorColor		= [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
-    
-//TODO: need to uncomment to add a toolbar for when the navigator bar does not show, (i.e. when adding a label and when choosing what secondary information to show in contact list, for which there is currently no way to go back without making a selection). Also means there needs to be a method to hide the toolbar when the navigation bar does show, i.e. when creating a new interaction and choosing the initiator, interaction, receiver, and visibilty.
-	
-	if (self.navigationController) {
-		
-		UIImage* menuImage = [UIImage imageNamed:@"BackMenu_Icon.png"];
-		UIButton *backMenu = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-		[backMenu setImage:menuImage forState:UIControlStateNormal];
-		[backMenu addTarget:self action:@selector(backToMenu:) forControlEvents:UIControlEventTouchUpInside];
-		UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backMenu];
-	
-		self.navigationItem.leftBarButtonItem = backMenuButton;
-	
-	} else {
-		
-		UIBarButtonItem *backMenuButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backToMenu:)];
-		
-		UIToolbar *toolbar = [[UIToolbar alloc] init];
-		toolbar.alpha		= 0.5;
-		toolbar.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44);
-		NSMutableArray *toolbarButtons = [[NSMutableArray alloc] init];
-		[toolbarButtons addObject:backMenuButton];
-		[toolbar setItems:toolbarButtons animated:NO];
-		[self.view addSubview:toolbar];
-		
-		self.contentView.frame		= CGRectMake(0, 44, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.contentView.frame) - 44);
-		self.tableViewList.frame	= CGRectMake(0, 44, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.contentView.frame) - 44);
-		
-	}
 
 }
 
--(BOOL)isSelected:(id)object {
+- (void)viewWillAppear:(BOOL)animated {
+	
+	self.listName.text	= ( self.listTitle ? self.listTitle : @"" );
+	
+	[self updateBarLayoutWithParentFrame:self.view.frame];
+	[self updateLayoutWithParentFrame:self.view.frame];
+	
+}
+
+- (void)updateBarLayoutWithParentFrame:(CGRect)parentFrame {
+	
+	if (self.navigationController) {
+		
+		self.navigationItem.leftBarButtonItem = [MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		
+	} else {
+		
+		if (!self.toolbar) {
+			
+			self.toolbar		= [[MHToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(parentFrame), 44)];
+			self.toolbar.alpha	= 0.5;
+			self.toolbar.items	= @[[MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.toolbar]];
+			[self.view addSubview:self.toolbar];
+			
+		} else {
+			
+			self.toolbar.frame	= CGRectMake(0, 0, CGRectGetWidth(parentFrame), 44);
+			self.toolbar.items	= @[[MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.toolbar]];
+			
+		}
+		
+	}
+	
+}
+
+- (void)updateLayoutWithParentFrame:(CGRect)parentFrame {
+	
+	UIView *bar						= (UIView *)( self.toolbar ? self.toolbar : self.navigationController.navigationBar );
+	
+	self.contentView.frame			= CGRectMake(0,
+												 CGRectGetHeight(bar.frame),
+												 CGRectGetWidth(parentFrame),
+												 CGRectGetHeight(parentFrame) - CGRectGetHeight(bar.frame));
+	
+	self.listName.frame				= CGRectMake(MHGenericListViewControllerListLableMarginHorizontal,
+												 MHGenericListViewControllerListLableMarginTop,
+												 CGRectGetWidth(self.contentView.frame) - 2 * MHGenericListViewControllerListLableMarginHorizontal,
+												 MHGenericListViewControllerListLableHeight);
+	
+	self.tableViewList.frame		= CGRectMake(MHGenericListViewControllerTableViewMarginHorizontal,
+												 CGRectGetMaxY(self.listName.frame) + MHGenericListViewControllerListLableMarginBottom,
+												 CGRectGetWidth(self.contentView.frame) - 2 * MHGenericListViewControllerTableViewMarginHorizontal,
+												 CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(self.listName.frame) - MHGenericListViewControllerListLableMarginBottom);
+	
+}
+
+- (BOOL)isSelected:(id)object {
 	
 	__block BOOL selected = NO;
 	
@@ -151,7 +193,7 @@
 	
 }
 
--(void)refresh {
+- (void)refresh {
 	
 	[self.refreshController beginRefreshing];
 	[self dropViewDidBeginRefreshing:self.refreshController];
@@ -209,7 +251,7 @@
 	
 }
 
--(void)setSuggestions:(NSSet *)suggestionSet andSelections:(NSSet *)selectedSet {
+- (void)setSuggestions:(NSSet *)suggestionSet andSelections:(NSSet *)selectedSet {
 	
 	self.suggestionSet			= [NSMutableSet setWithSet:suggestionSet];
 	self.selectedSet			= [NSMutableSet setWithSet:selectedSet];
@@ -293,11 +335,11 @@
 	
 }
 
--(void)setSuggestions:(NSSet *)suggestionsSet andSelectionObject:(id)selectedObject {
+- (void)setSuggestions:(NSSet *)suggestionsSet andSelectionObject:(id)selectedObject {
 	
 	self.suggestionSet		= [NSMutableSet setWithSet:suggestionsSet];
 	self.selectedSet		= nil;
-	self.suggestionArray	= [NSMutableArray arrayWithObject:[suggestionsSet allObjects]];
+	self.suggestionArray	= [NSMutableArray arrayWithArray:[suggestionsSet allObjects]];
 	
 	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
 	[self.suggestionSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
@@ -359,7 +401,7 @@
 }
 
 //TODO: change add, insert and remove object calls to ones that match the id.
--(void)addSelection:(id)selectionObject {
+- (void)addSelection:(id)selectionObject {
 	
 	if (selectionObject) {
 		
@@ -403,7 +445,7 @@
 	
 }
 
--(void)removeSelection:(id)selectionObject {
+- (void)removeSelection:(id)selectionObject {
 	
 	//remove from selectionSet
 	if ([selectionObject isKindOfClass:[MHModel class]]) {
@@ -451,7 +493,7 @@
 	
 }
 
--(void)updateSelectedObject:(id)selectedObject {
+- (void)updateSelectedObject:(id)selectedObject {
 	
 	NSInteger numberOfObjectsAddedToSuggestionArray = 0;
 	
@@ -539,19 +581,19 @@
 	
 }
 
--(void)setDataFromRequestOptions:(MHRequestOptions *)options {
+- (void)setDataFromRequestOptions:(MHRequestOptions *)options {
 	
 	[self setDataArray:nil forRequestOptions:options];
 	
 }
 
--(void)setDataArray:(NSArray *)dataArray {
+- (void)setDataArray:(NSArray *)dataArray {
     
 	[self setDataArray:dataArray forRequestOptions:nil];
     
 }
 
--(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
+- (void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
 	
 	self.requestOptions		= options;
 	self.isLoading			= NO;
@@ -581,15 +623,13 @@
 	
 }
 
--(void)setListTitle:(NSString *)title {
+- (void)setListTitle:(NSString *)title {
+	
+	[self willChangeValueForKey:@"listTitle"];
+	_listTitle	= title;
+	[self didChangeValueForKey:@"listTitle"];
 	
     self.listName.text = title;
-	
-}
-
--(NSString *)getListTitle {
-	
-	return self.listName.text;
 	
 }
 
@@ -726,17 +766,17 @@
 
 #pragma mark - Table view delegate
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	return ROW_HEIGHT;
+	return MHGenericListViewControllerRowHeight;
 	
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	
 	if (self.showHeaders) {
 		
-		return HEADER_HEIGHT;
+		return MHGenericListViewControllerHeaderHeight;
 		
 	} else {
 		
@@ -746,9 +786,9 @@
 	
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	
-	UIView	*header			= [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_HEIGHT)];
+	UIView	*header			= [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, MHGenericListViewControllerHeaderHeight)];
 	UILabel *headerLabel	= [[UILabel alloc] initWithFrame:CGRectInset(header.frame, 5, 0)];
 	
 	header.backgroundColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
@@ -765,7 +805,7 @@
 			
 		} else if ((self.showSuggestions && section == 1) || (!self.showSuggestions && section == 0)) {
 			
-			headerLabel.text		= [self getListTitle];
+			headerLabel.text		= self.listTitle;
 			
 		} else {
 			
@@ -787,7 +827,7 @@
 
 //if selection is initiated by the cell (ie a button on the cell) instead of by the cell being selected
 //then that message should be passed on so the sam action can be taken
--(void)cell:(MHGenericCell *)cell didSelectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
+- (void)cell:(MHGenericCell *)cell didSelectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
 	
 	[self tableView:self.tableViewList didSelectRowAtIndexPath:indexPath];
 	
@@ -795,40 +835,40 @@
 
 //if selection is initiated by the cell (ie a button on the cell) instead of by the cell being selected
 //then that message should be passed on so the sam action can be taken
--(void)cell:(MHGenericCell *)cell didDeselectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
+- (void)cell:(MHGenericCell *)cell didDeselectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
 	
 	[self tableView:self.tableViewList didSelectRowAtIndexPath:indexPath];
 	
 }
 
--(void)willAddToSuggestionArray:(NSInteger)numberOfObjects {
+- (void)willAddToSuggestionArray:(NSInteger)numberOfObjects {
 	
 	CGPoint currentContentOffset	= self.tableViewList.contentOffset;
 	CGPoint scrollToContentOffset	= self.tableViewList.contentOffset;
 	CGFloat heightOfSuggestions		= 0;
-	heightOfSuggestions				+= ( self.showHeaders && self.showSuggestions ? HEADER_HEIGHT : 0 );
-	heightOfSuggestions				+= ( self.showSuggestions ? [self.suggestionArray count] * ROW_HEIGHT : 0 );
+	heightOfSuggestions				+= ( self.showHeaders && self.showSuggestions ? MHGenericListViewControllerHeaderHeight : 0 );
+	heightOfSuggestions				+= ( self.showSuggestions ? [self.suggestionArray count] * MHGenericListViewControllerRowHeight : 0 );
 	
 	//if the list is scrolled down past the suggestions section then correct for adding a row in suggestions
 	if (currentContentOffset.y > heightOfSuggestions) {
-		scrollToContentOffset.y = MIN(self.tableViewList.contentSize.height - self.tableViewList.frame.size.height, scrollToContentOffset.y + (ROW_HEIGHT * numberOfObjects));
+		scrollToContentOffset.y = MIN(self.tableViewList.contentSize.height - self.tableViewList.frame.size.height, scrollToContentOffset.y + (MHGenericListViewControllerRowHeight * numberOfObjects));
 	}
 	
 	self.tableViewList.contentOffset = scrollToContentOffset;
 	
 }
 
--(void)willRemoveFromSuggestionArray:(NSInteger)numberOfObjects {
+- (void)willRemoveFromSuggestionArray:(NSInteger)numberOfObjects {
 	
 	CGPoint currentContentOffset	= self.tableViewList.contentOffset;
 	CGPoint scrollToContentOffset	= self.tableViewList.contentOffset;
 	CGFloat heightOfSuggestions		= 0;
-	heightOfSuggestions				+= ( self.showHeaders && self.showSuggestions ? HEADER_HEIGHT : 0 );
-	heightOfSuggestions				+= ( self.showSuggestions ? [self.suggestionArray count] * ROW_HEIGHT : 0 );
+	heightOfSuggestions				+= ( self.showHeaders && self.showSuggestions ? MHGenericListViewControllerHeaderHeight : 0 );
+	heightOfSuggestions				+= ( self.showSuggestions ? [self.suggestionArray count] * MHGenericListViewControllerRowHeight : 0 );
 	
 	//if the list is scrolled down past the suggestions section then correct for removing a row in suggestions
 	if (currentContentOffset.y > heightOfSuggestions) {
-		scrollToContentOffset.y = MAX(0, scrollToContentOffset.y - (ROW_HEIGHT * numberOfObjects));
+		scrollToContentOffset.y = MAX(0, scrollToContentOffset.y - (MHGenericListViewControllerRowHeight * numberOfObjects));
 	}
 	
 	self.tableViewList.contentOffset = scrollToContentOffset;
@@ -888,7 +928,7 @@
 
 #pragma mark - Scroll view delegate
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
 	if (self.requestOptions) {
 	
@@ -896,7 +936,7 @@
 		NSInteger currentOffset = scrollView.contentOffset.y;
 		NSInteger maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
 		CGFloat distanceToEndOfList = maximumOffset - currentOffset;
-		CGFloat reloadDistance = (self.requestOptions.limit / 3) * ROW_HEIGHT;
+		CGFloat reloadDistance = (self.requestOptions.limit / 3) * MHGenericListViewControllerRowHeight;
 		
 		// Change 10.0 to adjust the distance from bottom
 		if (distanceToEndOfList > 0.0 && distanceToEndOfList <= reloadDistance) {
@@ -944,6 +984,45 @@
 		}
 		
 	}
+	
+}
+
+#pragma mark - orientation methods
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+    return UIInterfaceOrientationMaskAll;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+    return YES;
+	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+	
+    return YES;
+	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	CGRect frame;
+	
+	if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+		
+		frame	= CGRectMake(CGRectGetMinX(self.view.frame), CGRectGetMinY(self.view.frame), CGRectGetHeight(self.view.frame), CGRectGetWidth(self.view.frame));
+		
+	} else {
+		
+		frame	= self.view.frame;
+		
+	}
+	
+	[self updateBarLayoutWithParentFrame:frame];
+	[self updateLayoutWithParentFrame:frame];
 	
 }
 

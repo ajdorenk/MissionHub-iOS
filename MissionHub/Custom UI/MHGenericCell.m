@@ -8,6 +8,8 @@
 
 #import "MHGenericCell.h"
 
+CGFloat const MHGenericCellMarginHorizontal	= 5.0;
+
 @implementation MHGenericCell
 
 @synthesize label, checkmark;
@@ -70,6 +72,21 @@
 	}
 	
 	
+	
+}
+
+- (void)layoutSubviews {
+	
+	[super layoutSubviews];
+	
+	self.checkmark.frame	= CGRectMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.checkmark.frame) - MHGenericCellMarginHorizontal,
+									 CGRectGetMinY(self.checkmark.frame),
+									 CGRectGetWidth(self.checkmark.frame),
+									 CGRectGetHeight(self.checkmark.frame));
+	self.label.frame		= CGRectMake(CGRectGetMinX(self.label.frame),
+									 CGRectGetMinY(self.label.frame),
+									 CGRectGetWidth(self.frame) - CGRectGetMinX(self.label.frame) - 2 * MHGenericCellMarginHorizontal - CGRectGetWidth(self.checkmark.frame),
+									 CGRectGetHeight(self.label.frame));
 	
 }
 

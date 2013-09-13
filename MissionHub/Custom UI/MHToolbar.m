@@ -44,6 +44,21 @@ CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
 
 - (void)configure {
 	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		
+		UIImage *background		= [[UIImage imageNamed:@"MH_Mobile_Topbar_Background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+		[[UIToolbar appearance] setBackgroundImage:background forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+		
+	});
+	
+	self.layer.shadowColor		= [[UIColor blackColor] CGColor];
+    self.layer.shadowOffset		= CGSizeMake(0.0, 1.0);
+	self.layer.shadowRadius		= 1.0;
+    self.layer.shadowOpacity	= 0.6;
+    self.layer.masksToBounds	= NO;
+    self.layer.shouldRasterize	= YES;
+	
 }
 
 + (UIBarButtonItem *)barButtonWithStyle:(MHToolbarStyle)style target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
@@ -54,22 +69,22 @@ CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
 			
 		case MHToolbarStyleBack:
 			
-			imageName = @"BackMenu_Icon.png";
+			imageName = @"MH_Mobile_Icon_LeftArrow.png";
 			break;
 			
 		case MHToolbarStyleCreateInteraction:
 			
-			imageName = @"NewInteraction_Icon.png";
+			imageName = @"MH_Mobile_Icon_NewInteraction.png";
 			break;
 			
 		case MHToolbarStyleCreatePerson:
 			
-			imageName = @"NewContact_Icon.png";
+			imageName = @"MH_Mobile_Icon_AddContact.png";
 			break;
 			
 		case MHToolbarStyleLabel:
 			
-			imageName = @"topbarTag_button.png";
+			imageName = @"MH_Mobile_Icon_Labels.png";
 			break;
 			
 		case MHToolbarStyleMenu:
@@ -79,12 +94,13 @@ CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
 			
 		case MHToolbarStyleMore:
 			
-			imageName = @"topbarOtherOptions_button.png";
+			imageName = @"MH_Mobile_Icon_DownArrow.png";
 			break;
 			
 		case MHToolbarStyleCancel:
 			
-			imageName = @"MH_Mobile_Button_Cancel_72.png";
+			//imageName = @"MH_Mobile_Button_Cancel_72.png";
+			imageName = @"MH_Mobile_Button_Done_72.png";
 			break;
 			
 		case MHToolbarStyleDone:

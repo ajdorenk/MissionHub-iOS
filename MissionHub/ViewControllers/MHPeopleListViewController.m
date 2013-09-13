@@ -97,14 +97,19 @@
 		_fieldSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
 		[self didChangeValueForKey:@"fieldSelectorViewController"];
 		
-		_fieldSelectorViewController.selectionDelegate = self;
-		_fieldSelectorViewController.objectArray = [NSMutableArray arrayWithArray:@[
+		_fieldSelectorViewController.listTitle			= @"Fields";
+		_fieldSelectorViewController.multipleSelection	= NO;
+		_fieldSelectorViewController.showSuggestions	= NO;
+		_fieldSelectorViewController.showHeaders		= NO;
+		_fieldSelectorViewController.selectionDelegate	= self;
+		[_fieldSelectorViewController setDataArray:[NSMutableArray arrayWithArray:@[
 														 [MHPerson fieldNameForSortField:MHPersonSortFieldGender],
 														 [MHPerson fieldNameForSortField:MHPersonSortFieldFollowupStatus],
 														 [MHPerson fieldNameForSortField:MHPersonSortFieldPermission],
 														 [MHPerson fieldNameForSortField:MHPersonSortFieldPrimaryPhone],
 														 [MHPerson fieldNameForSortField:MHPersonSortFieldPrimaryEmail]
-														 ]];
+														 ]]];
+		[_fieldSelectorViewController setSuggestions:nil andSelectionObject:[MHPerson fieldNameForSortField:self.secondaryFieldName]];
 		
 	}
 	
@@ -209,12 +214,11 @@
     [barButtonAppearanceInSearchBar setTitle:@""];*/
 }
 
-- (void)viewDidLoad
-{
-    
-    [self setTextFieldLeftView];
+- (void)viewDidLoad {
     
     [super viewDidLoad];
+	
+    [self setTextFieldLeftView];
 	
 	self.refreshController = [[ODRefreshControl alloc] initInScrollView:self.tableView];
     [self.refreshController addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
@@ -480,9 +484,9 @@
 }
 
 -(void)fieldButtonPressed {
-    NSLog(@"chooseSortField");
+	
     [self presentViewController:[self fieldSelectorViewController] animated:YES completion:Nil];
-    [[self fieldSelectorViewController] setListTitle:@""];
+    
 }
 
 -(void)sortDirectionDidChangeTo:(MHRequestOptionsOrderDirections)direction {
@@ -568,12 +572,12 @@
 			
 			if (person.picture == nil) {
 				
-				cell.imageView.image = [UIImage imageNamed:@"MHPersonCell_Placeholder.png"];
+				cell.imageView.image = [UIImage imageNamed:@"MH_Mobile_PersonCell_Placeholder.png"];
 				
 			} else {
 				
 				[cell.imageView setImageWithURL:[NSURL URLWithString:person.picture]
-									placeholderImage:[UIImage imageNamed:@"MHPersonCell_Placeholder.png"]];
+									placeholderImage:[UIImage imageNamed:@"MH_Mobile_PersonCell_Placeholder.png"]];
 			}
 			
 			cell.textLabel.text			= [person fullName];

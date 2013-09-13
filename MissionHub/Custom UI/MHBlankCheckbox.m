@@ -8,49 +8,45 @@
 
 #import "MHBlankCheckbox.h"
 
+@interface MHBlankCheckbox ()
+
+- (void)configure;
+
+@end
+
 @implementation MHBlankCheckbox
 
-- (id)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]){
+- (id)initWithFrame:(CGRect)frame {
+	
+    if (self = [super initWithFrame:frame]) {
 		
-		[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark_24.png"]forState:UIControlStateNormal];
-		[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"]forState:UIControlStateSelected];
-		[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"]forState:UIControlStateHighlighted];
-		
-        [self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark_24.png"]forState:UIControlStateNormal];
-		[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"]forState:UIControlStateSelected];
-		[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"]forState:UIControlStateHighlighted];
-		
-		self.exclusiveTouch = NO;
+		[self configure];
 		
     }
+	
     return self;
 }
 
--(void)awakeFromNib {
+- (void)awakeFromNib {
 	
 	[super awakeFromNib];
 	
-	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark_24.png"]forState:UIControlStateNormal];
-	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"]forState:UIControlStateSelected];
-	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"]forState:UIControlStateHighlighted];
+	[self configure];
 	
-	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark_24.png"]forState:UIControlStateNormal];
-	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"]forState:UIControlStateSelected];
-	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_24.png"]forState:UIControlStateHighlighted];
+}
+
+- (void)configure {
+	
+	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
+	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
+	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateHighlighted];
+	
+	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
+	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
+	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateHighlighted];
 	
 	self.exclusiveTouch = NO;
 	
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
