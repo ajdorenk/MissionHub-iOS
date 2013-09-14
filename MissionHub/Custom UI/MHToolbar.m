@@ -55,7 +55,7 @@ CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
 	self.layer.shadowColor		= [[UIColor blackColor] CGColor];
     self.layer.shadowOffset		= CGSizeMake(0.0, 1.0);
 	self.layer.shadowRadius		= 1.0;
-    self.layer.shadowOpacity	= 0.6;
+    self.layer.shadowOpacity	= 0.75;
     self.layer.masksToBounds	= NO;
     self.layer.shouldRasterize	= YES;
 	

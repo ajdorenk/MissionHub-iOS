@@ -1227,7 +1227,7 @@ select another survey.</string>
     </scenes>
     <resources>
         <image name="BackMenu_Icon.png" width="72" height="72"/>
-        <image name="MH_Mobile_Default_Image_iPad.png" width="640" height="1136"/>
+        <image name="MH_Mobile_Default_Image_iPad.png" width="16" height="16"/>
         <image name="MH_Mobile_Icon_Menu.png" width="72" height="72"/>
     </resources>
     <classes>

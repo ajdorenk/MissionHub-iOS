@@ -11,12 +11,7 @@
 #import "MHAPI.h"
 #import "MHToolbar.h"
 
-@interface MHSurveyViewController () {
-	
-	MHSurvey *_survey;
-	BOOL		_isVisible;
-	
-}
+@interface MHSurveyViewController ()
 
 @property (nonatomic, assign) BOOL isVisible;
 @property (nonatomic, strong) MHSurvey *survey;
@@ -26,21 +21,24 @@
 @property (nonatomic, strong) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, assign) NSInteger numberOfAssetsLoading;
+@property (nonatomic, assign) NSInteger numberOfFailedAssests;
+
+- (void)updateLayout;
 
 @end
 
 @implementation MHSurveyViewController
 
-@synthesize isVisible = _isVisible;
-@synthesize survey = _survey;
-@synthesize numberOfAssetsLoading;
-@synthesize topToolbar;
-@synthesize toolbarTitle;
+@synthesize isVisible			= _isVisible;
+@synthesize survey				= _survey;
+@synthesize numberOfAssetsLoading	= _numberOfAssetsLoading;
+@synthesize topToolbar			= _topToolbar;
+@synthesize toolbarTitle		= _toolbarTitle;
 //@synthesize backMenu;
-@synthesize surveyWebView;
-@synthesize messageView;
-@synthesize messageLabel;
-@synthesize loadingIndicator;
+@synthesize surveyWebView		= _surveyWebView;
+@synthesize messageView			= _messageView;
+@synthesize messageLabel		= _messageLabel;
+@synthesize loadingIndicator	= _loadingIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,13 +58,17 @@
 -(void)viewWillAppear:(BOOL)animated {
 	
 	[super viewWillAppear:animated];
-	
 
 	// shadowPath, shadowOffset, and rotation is handled by ECSlidingViewController.
 	// You just need to set the opacity, radius, and color.
 	self.view.layer.shadowOpacity = 0.75f;
 	self.view.layer.shadowRadius = 10.0f;
 	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+	
+	self.topToolbar.layer.shadowColor	= [UIColor blackColor].CGColor;
+	self.topToolbar.layer.shadowRadius	= 1.0f;
+	self.topToolbar.layer.shadowOpacity	= 0.75f;
+	self.topToolbar.layer.shadowOffset	= CGSizeMake(0.0, 1.0);
 	
 	if (![self.slidingViewController.underLeftViewController isKindOfClass:[MHMenuViewController class]]) {
 		self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"MHMenuViewController"];
@@ -87,6 +89,8 @@
 -(void)viewDidAppear:(BOOL)animated	{
 	
 	[super viewDidAppear:animated];
+	
+	[self updateLayout];
 	
 	self.isVisible = YES;
 	
@@ -131,6 +135,35 @@
 	
 }
 
+- (void)updateLayout {
+	
+	CGRect frame = self.view.frame;
+	
+	self.topToolbar.frame			= CGRectMake(0,
+												 0,
+												 CGRectGetWidth(frame),
+												 CGRectGetHeight(self.topToolbar.frame));
+	
+	if ([self.topToolbar.items count] > 0) {
+		
+		NSMutableArray *itemArray	= [NSMutableArray arrayWithArray:self.topToolbar.items];
+		[itemArray replaceObjectAtIndex:0 withObject:[MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(revealMenu:) forBar:self.topToolbar]];
+		[self.topToolbar setItems:itemArray animated:NO];
+		
+	}
+	
+	self.surveyWebView.frame	= CGRectMake(CGRectGetMinX(self.surveyWebView.frame),
+											 CGRectGetMaxY(self.topToolbar.frame),
+											 CGRectGetWidth(frame),
+											 CGRectGetHeight(frame) - CGRectGetHeight(self.topToolbar.frame));
+	
+	self.messageView.frame		= CGRectMake(CGRectGetMinX(self.messageView.frame),
+											 CGRectGetMaxY(self.topToolbar.frame),
+											 CGRectGetWidth(frame),
+											 CGRectGetHeight(frame) - CGRectGetHeight(self.topToolbar.frame));
+	
+}
+
 - (IBAction)revealMenu:(id)sender {
 	
 	[self.slidingViewController anchorTopViewTo:ECRight];
@@ -148,6 +181,7 @@
 		
 		NSLog(@"%@", [surveyRequest.URL absoluteString]);
 		
+		[self.surveyWebView stopLoading];
 		[self.surveyWebView loadRequest:surveyRequest];
 		
 	}
@@ -157,38 +191,42 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 
-	if (self.numberOfAssetsLoading == 0) {
+	//if (self.numberOfAssetsLoading == 0) {
 		
-		self.messageLabel.hidden = NO;
-		self.messageLabel.hidden = YES;
+		self.messageView.hidden			= NO;
+		self.messageLabel.hidden		= YES;
+		self.loadingIndicator.hidden	= NO;
 		[self.loadingIndicator startAnimating];
 		[self.view bringSubviewToFront:self.messageView];
 		
-	}
+	//}
 	
 	self.numberOfAssetsLoading++;
-	
+	NSLog(@"start: %d - %@", self.numberOfAssetsLoading, [request.URL absoluteString]);
 	return YES;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
 	
-	NSLog(@"%@", webView.request);
+	NSLog(@"%@", [webView.request.URL absoluteString]);
+	self.numberOfFailedAssests	= 0;
 	
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
 	
 	self.numberOfAssetsLoading--;
-	
-	if (self.numberOfAssetsLoading && self.messageView.hidden == NO) {
-	
-		self.messageView.hidden = YES;
-		self.messageLabel.hidden = YES;
-		[self.loadingIndicator stopAnimating];
-		[self.view bringSubviewToFront:self.surveyWebView];
-		
-	}
+	NSLog(@"finish: %d", self.numberOfAssetsLoading);
+//	if (!self.numberOfAssetsLoading) {
+//	
+//		self.messageView.hidden			= YES;
+//		self.messageLabel.hidden		= YES;
+//		self.loadingIndicator.hidden	= YES;
+//		[self.loadingIndicator stopAnimating];
+//		[self.view bringSubviewToFront:self.surveyWebView];
+//		
+//	}
+	self.messageView.hidden = YES;
 	
 }
 
@@ -196,18 +234,22 @@
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	
 	self.numberOfAssetsLoading--;
-	
-	if (self.numberOfAssetsLoading) {
-		
-		if (self.messageView.hidden) {
-			self.messageView.hidden = NO;
-		}
-		
-		self.messageLabel.hidden = NO;
-		[self.loadingIndicator stopAnimating];
-		[self.view bringSubviewToFront:self.messageView];
-	
-	}
+	self.numberOfFailedAssests++;
+	NSLog(@"fail: %d", self.numberOfAssetsLoading);
+//	if (self.numberOfAssetsLoading) {
+//		
+//		self.messageView.hidden = NO;
+//		self.messageLabel.hidden = NO;
+//		self.loadingIndicator.hidden	= YES;
+//		[self.loadingIndicator stopAnimating];
+//		[self.view bringSubviewToFront:self.messageView];
+//	
+//	} else {
+//		
+//		self.messageView.hidden = YES;
+//		
+//	}
+	self.messageView.hidden = YES;
 
 }
 
@@ -238,13 +280,7 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	
-	if ([self.topToolbar.items count] > 0) {
-		
-		NSMutableArray *itemArray = [NSMutableArray arrayWithArray:self.topToolbar.items];
-		[itemArray replaceObjectAtIndex:0 withObject:[MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(revealMenu:) forBar:self.topToolbar]];
-		[self.topToolbar setItems:itemArray animated:NO];
-		
-	}
+	[self updateLayout];
 	
 }
 

@@ -139,6 +139,14 @@
 	
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	
+	[super viewWillAppear:animated];
+	
+	self.tableView.frame	= self.view.bounds;
+	
+}
+
 -(id)setCurrentUser:(MHPerson *)currentUser {
 	
 	self.user = currentUser;
