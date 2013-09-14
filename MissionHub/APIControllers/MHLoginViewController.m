@@ -65,7 +65,7 @@ typedef enum {
 	
 	self.loginButtonView.delegate	= self;
 	self.loginButtonView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
-											 CGRectGetMidY(self.view.frame) - (LOGIN_BUTTON_HEIGHT / 2),
+											 CGRectGetMidY(self.view.frame),
 											 LOGIN_BUTTON_WIDTH,
 											 LOGIN_BUTTON_HEIGHT);
 	
@@ -73,8 +73,8 @@ typedef enum {
 	
 	[self.loginButtonView sizeToFit];
 	
-	self.loginButtonView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (self.loginButtonView.frame.size.width / 2),
-										 CGRectGetMidY(self.view.frame) - (self.loginButtonView.frame.size.height / 2),
+	self.loginButtonView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (CGRectGetWidth(self.loginButtonView.frame) / 2),
+										 CGRectGetMidY(self.view.frame),
 										 self.loginButtonView.frame.size.width,
 										 self.loginButtonView.frame.size.height);
 	
@@ -391,6 +391,26 @@ typedef enum {
 	}
 	
 	[MHErrorHandler presentError:error];
+	
+}
+
+#pragma mark - orientation methods
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+    return UIInterfaceOrientationPortrait;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+    return NO;
+	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+	
+    return NO;
 	
 }
 
