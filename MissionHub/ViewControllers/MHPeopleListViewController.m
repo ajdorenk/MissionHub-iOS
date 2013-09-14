@@ -801,7 +801,11 @@
 		
 	} else {
 		
-		person = [self.peopleArray objectAtIndex:indexPath.row];
+		if (indexPath.row < self.peopleArray.count) {
+			
+			person = [self.peopleArray objectAtIndex:indexPath.row];
+			
+		}
 		
 	}
 	

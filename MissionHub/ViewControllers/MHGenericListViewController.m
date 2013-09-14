@@ -883,9 +883,15 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	id object;
 	
 	if (self.showSuggestions && indexPath.section == 0) {
+		
 		object						= [self.suggestionArray objectAtIndex:indexPath.row];
+		
 	} else {
-		object						= [self.objectArray objectAtIndex:indexPath.row];
+		
+		if (indexPath.row < self.objectArray.count) {
+			object					= [self.objectArray objectAtIndex:indexPath.row];
+		}
+		
 	}
 	
 	if (object) {
