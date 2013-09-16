@@ -16,6 +16,7 @@
 #import "MHToolbar.h"
 
 CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
+CGFloat const MHProfileHeaderHeight = 150.0f;
 
 @interface MHProfileViewController ()
 
@@ -35,6 +36,7 @@ CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
 - (void)addLabelActivity:(id)sender;
 - (void)otherOptionsActivity:(id)sender;
 
+- (void)updateLayoutWithFrame:(CGRect)frame;
 - (void)updateBarButtons;
 
 @end
@@ -58,15 +60,15 @@ CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
 - (void) awakeFromNib
 {
 	// Add A and B view controllers to the array
-    self.allViewControllers = @[[self infoViewController],[self interactionsViewController], [self surveysViewController]];
+    self.allViewControllers = @[self.infoViewController,self.interactionsViewController, self.surveysViewController];
 	
-    [[self menuViewController] setMenuSelection:0];
-	[[self menuViewController] setMenuDelegate:self];
+    [self.menuViewController setMenuSelection:0];
+	[self.menuViewController setMenuDelegate:self];
 	
-	[self setupWithTopViewController:[self headerViewController]
-							  height:150
-				 tableViewController:(UITableViewController *)[self currentTableViewContoller]
-			 segmentedViewController:[self menuViewController]];
+	[self setupWithTopViewController:self.headerViewController
+							  height:MHProfileHeaderHeight
+				 tableViewController:(UITableViewController *)self.currentTableViewContoller
+			 segmentedViewController:self.menuViewController];
 	
 	[self willChangeValueForKey:@"person"];
 	_person = [MHAPI sharedInstance].currentUser;
@@ -78,8 +80,6 @@ CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-	
-	//[self updateBarButtons];
 
 }
 
@@ -88,6 +88,7 @@ CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
 	[super viewWillAppear:animated];
 	
 	[self updateBarButtons];
+	[self updateLayoutWithFrame:self.view.frame];
 	
 }
 
@@ -96,6 +97,8 @@ CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
 	[super viewDidAppear:animated];
 	
 	[[self menuViewController] setMenuSelection:0];
+	[self switchTableViewController:[self.allViewControllers objectAtIndex:0]];
+	
 }
 
 #pragma mark - accessor methods
@@ -351,6 +354,22 @@ CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
 	
 }
 
+- (void)updateLayoutWithFrame:(CGRect)frame {
+	
+	self.headerViewController.view.frame = CGRectMake(CGRectGetMinX(self.headerViewController.view.frame),
+													  CGRectGetMinY(self.headerViewController.view.frame),
+													  CGRectGetWidth(frame),
+													  MHProfileHeaderHeight);
+	[self.headerViewController updateLayout];
+	
+	self.menuViewController.view.frame	= CGRectMake(CGRectGetMinX(self.menuViewController.view.frame),
+													 CGRectGetMinY(self.menuViewController.view.frame),
+													 CGRectGetWidth(frame),
+													 CGRectGetHeight(self.menuViewController.view.frame));
+	[self.menuViewController updateLayout];
+	
+}
+
 - (void)updateBarButtons {
 	
 	[self.navigationItem setRightBarButtonItems:@[
@@ -383,7 +402,10 @@ CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
 	[self updateBarButtons];
+	[self updateLayoutWithFrame:self.view.frame];
 	
 }
 

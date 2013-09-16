@@ -142,7 +142,7 @@
 	
 		NSInteger interactionRow	= floor(indexPath.row / 2);
 		MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
-		return [MHInteractionCell heightForCellWithInteraction:interaction];
+		return [MHInteractionCell heightForCellWithInteraction:interaction andWidth:CGRectGetWidth(self.tableView.frame)];
 		
 	}
 	

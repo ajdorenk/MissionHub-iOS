@@ -17,7 +17,15 @@ CGFloat const MHHeaderCellTitleFontSize				= 18.0;
 NSString * const MHHeaderCellDateFont				= @"ArialMT";
 CGFloat const MHHeaderCellDateFontSize				= 12.0;
 
+@interface MHHeaderCell ()
+
+@property (nonatomic, strong) CAGradientLayer *gradient;
+
+@end
+
 @implementation MHHeaderCell
+
+@synthesize gradient	= _gradient;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -26,10 +34,10 @@ CGFloat const MHHeaderCellDateFontSize				= 12.0;
 	if (self) {
 		
 		UIView *background					= [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), MHHeaderCellHeight)];
-		CAGradientLayer *gradient			= [CAGradientLayer layer];
-        gradient.frame						= CGRectMake(0, 0, CGRectGetWidth(self.frame), MHHeaderCellHeight);
-        gradient.colors						= [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor colorWithRed:0.973 green:0.973 blue:0.973 alpha:1.000] CGColor], nil];
-        [background.layer addSublayer:gradient];
+		self.gradient						= [CAGradientLayer layer];
+        self.gradient.frame					= CGRectMake(0, 0, CGRectGetWidth(self.frame), MHHeaderCellHeight);
+        self.gradient.colors				= [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor colorWithRed:0.973 green:0.973 blue:0.973 alpha:1.000] CGColor], nil];
+        [background.layer addSublayer:self.gradient];
 		
 		self.backgroundView					= background;
 		
@@ -67,6 +75,14 @@ CGFloat const MHHeaderCellDateFontSize				= 12.0;
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)layoutSubviews {
+	
+	[super layoutSubviews];
+	
+	self.gradient.frame					= CGRectMake(0, 0, CGRectGetWidth(self.frame), MHHeaderCellHeight);
+	
 }
 
 @end

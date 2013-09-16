@@ -104,31 +104,31 @@ static CGFloat const MHAddressCellMargin			= 10.0f;
 	
 }
 
-+ (CGFloat)heightForCellWithAddress:(MHAddress *)address {
++ (CGFloat)heightForCellWithAddress:(MHAddress *)address andWidth:(CGFloat)width {
 	
     CGFloat height = MHAddressCellMargin;
 	
 	if (address.address1.length > 0) {
 		
-		height += ceilf([address.address1 sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([address.address1 sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(width - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		
 	}
 	
 	if (address.address2.length > 0) {
 		
-		height += ceilf([address.address2 sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([address.address2 sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(width - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		
 	}
 	
 	if (address.cityLine.length > 0) {
 		
-		height += ceilf([address.cityLine sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([address.cityLine sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(width - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		
 	}
 	
 	if (address.country.length > 0) {
 		
-		height += ceilf([address.country sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([address.country sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(width - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		
 	}
 	
@@ -156,7 +156,7 @@ static CGFloat const MHAddressCellMargin			= 10.0f;
 	
 	if (self.address.address1.length > 0) {
 		
-		CGSize textSize = [self.address.address1 sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize textSize = [self.address.address1 sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
 		self.lineOneLabel.frame		= CGRectMake(MHAddressCellMargin, MHAddressCellMargin, textSize.width, textSize.height);
 		self.lineOneLabel.hidden	= NO;
@@ -170,7 +170,7 @@ static CGFloat const MHAddressCellMargin			= 10.0f;
 	
 	if (self.address.address2.length > 0) {
 		
-		CGSize textSize = [self.address.address2 sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize textSize = [self.address.address2 sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
 		self.lineTwoLabel.frame		= CGRectMake(MHAddressCellMargin, CGRectGetMaxY(self.lineOneLabel.frame), textSize.width, textSize.height);
 		self.lineTwoLabel.hidden	= NO;
@@ -184,7 +184,7 @@ static CGFloat const MHAddressCellMargin			= 10.0f;
 	
 	if (self.address.cityLine.length > 0) {
 		
-		CGSize textSize = [self.address.cityLine sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize textSize = [self.address.cityLine sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
 		self.cityLabel.frame		= CGRectMake(MHAddressCellMargin, CGRectGetMaxY(self.lineTwoLabel.frame), textSize.width, textSize.height);
 		self.cityLabel.hidden		= NO;
@@ -198,7 +198,7 @@ static CGFloat const MHAddressCellMargin			= 10.0f;
 	
 	if (self.address.country.length > 0) {
 		
-		CGSize textSize = [self.address.country sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize textSize = [self.address.country sizeWithFont:[UIFont fontWithName:MHAddressCellFont size:MHAddressCellFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (2 * MHAddressCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
 		self.countryLabel.frame		= CGRectMake(MHAddressCellMargin, CGRectGetMaxY(self.cityLabel.frame), textSize.width, textSize.height);
 		self.countryLabel.hidden	= NO;

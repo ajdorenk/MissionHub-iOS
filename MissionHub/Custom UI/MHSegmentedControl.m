@@ -8,6 +8,12 @@
 
 #import "MHSegmentedControl.h"
 
+@interface MHSegmentedControl ()
+
+- (void)configure;
+
+@end
+
 @implementation MHSegmentedControl
 
 - (id)initWithFrame:(CGRect)frame
@@ -15,8 +21,24 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+		[self configure];
     }
     return self;
+}
+
+- (void)awakeFromNib {
+	
+	[super awakeFromNib];
+	
+	[self configure];
+	
+}
+
+- (void)configure {
+	
+    self.layer.shadowOpacity	= 0.4;
+	self.borderColor			= [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.000];
+	
 }
 
 /*

@@ -18,7 +18,7 @@ static NSString * const MHInteractionCellUpdatedFont		= @"ArialMT";
 static CGFloat const MHInteractionCellUpdatedFontSize		= 12;
 static NSString * const MHInteractionCellUpdatedAtFont		= @"Arial-BoldMT";
 static CGFloat const MHInteractionCellUpdatedAtFontSize		= 12;
-static CGFloat const MHInteractionCellMargin				= 20.0f;
+static CGFloat const MHInteractionCellMargin				= 16.0f;
 
 @interface MHInteractionCell ()
 
@@ -57,9 +57,14 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 
 - (void)configure {
 	
-	self.layer.shouldRasterize = YES;
-    self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+	self.layer.backgroundColor		= [UIColor whiteColor].CGColor;
+	self.layer.shouldRasterize		= YES;
+    self.layer.rasterizationScale	= [[UIScreen mainScreen] scale];
     
+	UIView *background				= [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+	background.backgroundColor		= [UIColor whiteColor];
+	self.backgroundView				= background;
+	
     self.descriptionLabel				= [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     self.descriptionLabel.font			= [UIFont fontWithName:MHInteractionCellDescriptionFont size:MHInteractionCellDescriptionFontSize];
     self.descriptionLabel.textColor		= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];
@@ -201,7 +206,7 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	
 }
 
-+ (CGFloat)heightForCellWithInteraction:(MHInteraction *)interaction {
++ (CGFloat)heightForCellWithInteraction:(MHInteraction *)interaction andWidth:(CGFloat)width {
 	
 	NSString *description	= [interaction displayString];
 	NSString *updatedString	= [interaction updatedString];
@@ -211,21 +216,21 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	
 	if (description.length > 0) {
 		
-		height += ceilf([description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(width - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		height += 0.5 * MHInteractionCellMargin;
 		
 	}
 	
 	if (commentString.length > 0) {
 		
-		height += ceilf([commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(width - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		height += 0.5 * MHInteractionCellMargin;
 		
 	}
 	
 	if (updatedString.length > 0) {
 		
-		height += ceilf([updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(width - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		height += MHInteractionCellMargin;
 		
 	}
@@ -254,7 +259,7 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	
 	if (((NSString *)self.descriptionLabel.text).length > 0) {
 		
-		CGSize descriptionSize = [description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize descriptionSize = [description sizeWithFont:[UIFont fontWithName:MHInteractionCellNameFont size:MHInteractionCellNameFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
 		self.descriptionLabel.frame	= CGRectMake(MHInteractionCellMargin, 0.5 * MHInteractionCellMargin, descriptionSize.width, descriptionSize.height);
 		self.descriptionLabel.hidden= NO;
@@ -268,7 +273,7 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	
 	if (((NSString *)self.commentLabel.text).length > 0) {
 		
-		CGSize commentSize			= [commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize commentSize			= [commentString sizeWithFont:[UIFont fontWithName:MHInteractionCellCommentFont size:MHInteractionCellCommentFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
 		self.commentLabel.frame		= CGRectMake(MHInteractionCellMargin, CGRectGetMaxY(self.descriptionLabel.frame) + 0.5 * MHInteractionCellMargin, commentSize.width, commentSize.height);
 		self.commentLabel.hidden	= NO;
@@ -282,9 +287,9 @@ static CGFloat const MHInteractionCellMargin				= 20.0f;
 	
 	if (((NSString *)self.updatedLabel.text).length > 0) {
 		
-		CGSize updatedSize			= [updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize updatedSize			= [updatedString sizeWithFont:[UIFont fontWithName:MHInteractionCellUpdatedAtFont size:MHInteractionCellUpdatedAtFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (2 * MHInteractionCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
-		self.updatedLabel.frame		= CGRectMake(320.0 - updatedSize.width - MHInteractionCellMargin, CGRectGetMaxY(self.commentLabel.frame) + 0.5 * MHInteractionCellMargin, updatedSize.width, updatedSize.height);
+		self.updatedLabel.frame		= CGRectMake(CGRectGetWidth(self.frame) - updatedSize.width - MHInteractionCellMargin, CGRectGetMaxY(self.commentLabel.frame) + 0.5 * MHInteractionCellMargin, updatedSize.width, updatedSize.height);
 		self.updatedLabel.hidden	= NO;
 		
 	} else {

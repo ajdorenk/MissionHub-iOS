@@ -7,7 +7,6 @@
 //
 
 #import "MHSurveyViewController.h"
-#import "MHMenuToolbar.h"
 #import "MHAPI.h"
 #import "MHToolbar.h"
 
@@ -279,6 +278,8 @@
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
 	[self updateLayout];
 	

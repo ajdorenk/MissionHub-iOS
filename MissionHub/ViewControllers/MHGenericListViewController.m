@@ -1015,6 +1015,8 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
 	CGRect frame;
 	
 	if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {

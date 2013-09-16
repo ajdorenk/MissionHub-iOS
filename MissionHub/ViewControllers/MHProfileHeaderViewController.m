@@ -28,7 +28,7 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 @property (strong, nonatomic) IBOutlet UILabel *labelsTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
-- (void)updateLayout;
+- (void)updateLayoutWithFrame:(CGRect)frame;
 
 @end
 
@@ -48,7 +48,7 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 	
 	[super awakeFromNib];
 	
-	[self updateLayout];
+	[self updateLayoutWithFrame:self.view.frame];
 	
 }
 
@@ -66,7 +66,7 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 	
 	[super viewDidAppear:animated];
 	
-	[self updateLayout];
+	[self updateLayoutWithFrame:self.view.frame];
 	
 }
 
@@ -166,14 +166,20 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 
 - (void)updateLayout {
 	
+	[self updateLayoutWithFrame:self.view.frame];
+	
+}
+
+- (void)updateLayoutWithFrame:(CGRect)frame {
+	
 	if (CGRectGetWidth(self.imageView.frame) != CGRectGetWidth(self.view.frame)) {
-		self.imageView.frame		= self.view.frame;
+		self.imageView.frame		= self.view.bounds;
 	}
 	
-	self.contentView.frame			= CGRectInset(self.view.frame, 0, -MHProfileHeaderContentBuffer);
+	self.contentView.frame			= CGRectInset(self.view.bounds, 0, -MHProfileHeaderContentBuffer);
 	
 	self.labelList.frame			= CGRectMake(MHProfileHeaderLabelListMarginHorizontal,
-												 MHProfileHeaderContentBuffer + CGRectGetMaxY(self.view.frame) - CGRectGetHeight(self.labelList.frame) - MHProfileHeaderLabelListMarginVertical,
+												 MHProfileHeaderContentBuffer + CGRectGetHeight(self.view.frame) - CGRectGetHeight(self.labelList.frame) - MHProfileHeaderLabelListMarginVertical,
 												 CGRectGetWidth(self.view.frame) - 2 * MHProfileHeaderLabelListMarginHorizontal,
 												 CGRectGetHeight(self.labelList.frame));
 	
@@ -212,7 +218,11 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	
-	[self updateLayout];
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+	CGRect frame	= self.view.frame;
+	frame.size		= CGSizeMake(CGRectGetWidth(self.view.frame), 150);
+	[self updateLayoutWithFrame:frame];
 	
 }
 

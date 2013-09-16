@@ -19,6 +19,6 @@
 
 - (void)populateWithInteraction:(MHInteraction *)interaction;
 
-+ (CGFloat)heightForCellWithInteraction:(MHInteraction *)interaction;
++ (CGFloat)heightForCellWithInteraction:(MHInteraction *)interaction andWidth:(CGFloat)width;
 
 @end

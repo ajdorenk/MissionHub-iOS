@@ -17,6 +17,6 @@
 @property (nonatomic, strong) UILabel *cityLabel;
 @property (nonatomic, strong) UILabel *countryLabel;
 
-+ (CGFloat)heightForCellWithAddress:(MHAddress *)address;
++ (CGFloat)heightForCellWithAddress:(MHAddress *)address andWidth:(CGFloat)width;
 
 @end

@@ -55,7 +55,7 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
+		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_lwi" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
 		
 		NSString *baseUrlString			= ( [configDictionary valueForKey:@"api_url"] ? [configDictionary valueForKey:@"api_url"] : @"" );

@@ -10,6 +10,8 @@
 
 @interface MHProfileMenuViewController ()
 
+
+
 @end
 
 @implementation MHProfileMenuViewController
@@ -22,8 +24,17 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+		[UIColor colorWithRed:0.953 green:0.953 blue:0.953 alpha:1.000];
     }
     return self;
+}
+
+- (void)awakeFromNib {
+	
+	[super awakeFromNib];
+	
+	[UIColor colorWithRed:0.953 green:0.953 blue:0.953 alpha:1.000];
+	
 }
 
 - (void)viewDidLoad
@@ -32,7 +43,15 @@
 	// Do any additional setup after loading the view.
 }
 
--(IBAction)menuDidChangeSelection:(id)sender {
+- (void)viewWillAppear:(BOOL)animated {
+	
+	[super viewWillAppear:animated];
+	
+	[self updateLayout];
+	
+}
+
+- (IBAction)menuDidChangeSelection:(id)sender {
 	
 	if ([self.menuDelegate respondsToSelector:@selector(menuDidChangeSelection:)]) {
 		
@@ -42,20 +61,59 @@
 	
 }
 
--(void)setMenuSelection:(NSInteger)selection {
+- (void)setMenuSelection:(NSInteger)selection {
 	
 	[self.segmentedControl setSelectedSegmentIndex:selection];
 	
 }
 
--(NSInteger)menuSelection {
+- (NSInteger)menuSelection {
 	
 	return self.segmentedControl.selectedSegmentIndex;
 	
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)updateLayout {
+	
+	self.segmentedControl.frame = CGRectMake(0,
+											 0,
+											 CGRectGetWidth(self.view.frame),
+											 CGRectGetHeight(self.view.frame));
+	
+	//self.segmentedControl.center = self.view.center;
+	
+}
+
+#pragma mark - orientation methods
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+    return UIInterfaceOrientationMaskAll;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+    return YES;
+	
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+	
+    return YES;
+	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+	[self updateLayout];
+	
+}
+
+- (void)didReceiveMemoryWarning {
+	
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

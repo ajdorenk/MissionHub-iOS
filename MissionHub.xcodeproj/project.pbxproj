@@ -25,13 +25,6 @@
 		680BE78A17E28D3800BA8C12 /* MH_Mobile_Icon_LeftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE78117E28D3600BA8C12 /* MH_Mobile_Icon_LeftArrow.png */; };
 		680BE78B17E28D3800BA8C12 /* MH_Mobile_Icon_DownArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE78217E28D3700BA8C12 /* MH_Mobile_Icon_DownArrow.png */; };
 		680BE78C17E28D3800BA8C12 /* MH_Mobile_Icon_DownArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE78217E28D3700BA8C12 /* MH_Mobile_Icon_DownArrow.png */; };
-		680BE7AB17E49D3100BA8C12 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 687FC3231795BD8F00E53F08 /* Default-568h@2x.png */; };
-		680BE7AD17E49D4800BA8C12 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7AC17E49D4700BA8C12 /* Default@2x.png */; };
-		680BE7AF17E49D9400BA8C12 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7AE17E49D9300BA8C12 /* Default.png */; };
-		680BE7B117E49DAD00BA8C12 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7B017E49DAC00BA8C12 /* Default-Portrait~ipad.png */; };
-		680BE7B317E49DBA00BA8C12 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7B217E49DB900BA8C12 /* Default-Portrait@2x~ipad.png */; };
-		680BE7B517E49DC800BA8C12 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7B417E49DC700BA8C12 /* Default-Landscape~ipad.png */; };
-		680BE7B717E49DD200BA8C12 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7B617E49DD100BA8C12 /* Default-Landscape@2x~ipad.png */; };
 		680BE7B917E49FEB00BA8C12 /* MH_Mobile_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7B817E49FEA00BA8C12 /* MH_Mobile_Logo@2x.png */; };
 		680BE7BA17E49FEB00BA8C12 /* MH_Mobile_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7B817E49FEA00BA8C12 /* MH_Mobile_Logo@2x.png */; };
 		680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */; };
@@ -231,6 +224,16 @@
 		685923A417AC427F0047A5A5 /* MH_Mobile_Checkbox_Checked_48_padded.png in Resources */ = {isa = PBXBuildFile; fileRef = 6859239F17AC427F0047A5A5 /* MH_Mobile_Checkbox_Checked_48_padded.png */; };
 		685923A517AC427F0047A5A5 /* MH_Mobile_Checkbox_PartiallyChecked_48_padded.png in Resources */ = {isa = PBXBuildFile; fileRef = 685923A017AC427F0047A5A5 /* MH_Mobile_Checkbox_PartiallyChecked_48_padded.png */; };
 		685923A617AC427F0047A5A5 /* MH_Mobile_Checkbox_PartiallyChecked_48_padded.png in Resources */ = {isa = PBXBuildFile; fileRef = 685923A017AC427F0047A5A5 /* MH_Mobile_Checkbox_PartiallyChecked_48_padded.png */; };
+		68631FA217E74E8B00A24B3F /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631F9E17E74E8B00A24B3F /* Default-Landscape~ipad.png */; };
+		68631FA317E74E8B00A24B3F /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631F9E17E74E8B00A24B3F /* Default-Landscape~ipad.png */; };
+		68631FA417E74E8B00A24B3F /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631F9F17E74E8B00A24B3F /* Default-Landscape@2x~ipad.png */; };
+		68631FA517E74E8B00A24B3F /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631F9F17E74E8B00A24B3F /* Default-Landscape@2x~ipad.png */; };
+		68631FA617E74E8B00A24B3F /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631FA017E74E8B00A24B3F /* Default-Portrait@2x~ipad.png */; };
+		68631FA717E74E8B00A24B3F /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631FA017E74E8B00A24B3F /* Default-Portrait@2x~ipad.png */; };
+		68631FA817E74E8B00A24B3F /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631FA117E74E8B00A24B3F /* Default-Portrait~ipad.png */; };
+		68631FA917E74E8B00A24B3F /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631FA117E74E8B00A24B3F /* Default-Portrait~ipad.png */; };
+		68631FAC17E7992C00A24B3F /* MHInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68631FAB17E7992C00A24B3F /* MHInfoHeaderCell.m */; };
+		68631FAD17E7992C00A24B3F /* MHInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68631FAB17E7992C00A24B3F /* MHInfoHeaderCell.m */; };
 		68818AFC17C7FFF800624887 /* MHAnswerSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFB17C7FFF800624887 /* MHAnswerSheet.m */; };
 		68818AFD17C7FFF800624887 /* MHAnswerSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFB17C7FFF800624887 /* MHAnswerSheet.m */; };
 		68818B0017C7FFF900624887 /* MHAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFF17C7FFF900624887 /* MHAnswer.m */; };
@@ -261,8 +264,6 @@
 		689664A017907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
 		689F4E551798F57500BCAFFC /* MHInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689F4E541798F57500BCAFFC /* MHInfoCell.m */; };
 		689F4E561798F57500BCAFFC /* MHInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689F4E541798F57500BCAFFC /* MHInfoCell.m */; };
-		689F4E591798F5AA00BCAFFC /* MHSurveyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689F4E581798F5AA00BCAFFC /* MHSurveyCell.m */; };
-		689F4E5A1798F5AA00BCAFFC /* MHSurveyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689F4E581798F5AA00BCAFFC /* MHSurveyCell.m */; };
 		68A38F0317A998730010CAC6 /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A38F0217A998730010CAC6 /* MHTextField.m */; };
 		68A38F0417A998730010CAC6 /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A38F0217A998730010CAC6 /* MHTextField.m */; };
 		68A38F0C17A9A9120010CAC6 /* survey.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A38F0517A9A9120010CAC6 /* survey.png */; };
@@ -353,15 +354,12 @@
 		68F310C8178CD1330036EA42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
 		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		68F4CC4A17D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
-		AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
 		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
 		AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */; };
 		AD2434F5178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */; };
 		AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
 		AD301131176FE4D900D53E35 /* MHCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112B176FE4D900D53E35 /* MHCheckbox.m */; };
-		AD301132176FE4D900D53E35 /* MHMenuToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */; };
-		AD301133176FE4D900D53E35 /* MHMenuToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */; };
 		AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301135176FE4D900D53E35 /* MHPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD30112F176FE4D900D53E35 /* MHPersonCell.m */; };
 		AD301139176FEEB800D53E35 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */; };
@@ -377,8 +375,6 @@
 		AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD98278C177C93B400A0276A /* MHProfileViewController.m */; };
 		AD982794177C9D6700A0276A /* MHProfileHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD982793177C9D6700A0276A /* MHProfileHeaderViewController.m */; };
 		AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
-		ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */; };
-		ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */; };
 		ADCCBA201794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */; };
 		ADCCBA211794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */; };
 		ADCCBA311795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */; };
@@ -396,8 +392,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6801975A17CFB44300DCE330 /* MHInteractionCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInteractionCellHeader.h; path = "Custom UI/MHInteractionCellHeader.h"; sourceTree = "<group>"; };
-		6801975B17CFB44300DCE330 /* MHInteractionCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInteractionCellHeader.m; path = "Custom UI/MHInteractionCellHeader.m"; sourceTree = "<group>"; };
 		6801976117CFE88200DCE330 /* MHHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHHeaderCell.h; path = "Custom UI/MHHeaderCell.h"; sourceTree = "<group>"; };
 		6801976217CFE88200DCE330 /* MHHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHHeaderCell.m; path = "Custom UI/MHHeaderCell.m"; sourceTree = "<group>"; };
 		680B401817E0DE8700A5E62B /* MHSortHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSortHeader.h; path = "Custom UI/MHSortHeader.h"; sourceTree = "<group>"; };
@@ -409,12 +403,6 @@
 		680BE78017E28D3500BA8C12 /* MH_Mobile_Icon_AddContact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_AddContact.png; sourceTree = "<group>"; };
 		680BE78117E28D3600BA8C12 /* MH_Mobile_Icon_LeftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_LeftArrow.png; sourceTree = "<group>"; };
 		680BE78217E28D3700BA8C12 /* MH_Mobile_Icon_DownArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_DownArrow.png; sourceTree = "<group>"; };
-		680BE7AC17E49D4700BA8C12 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
-		680BE7AE17E49D9300BA8C12 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
-		680BE7B017E49DAC00BA8C12 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		680BE7B217E49DB900BA8C12 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		680BE7B417E49DC700BA8C12 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		680BE7B617E49DD100BA8C12 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		680BE7B817E49FEA00BA8C12 /* MH_Mobile_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MH_Mobile_Logo@2x.png"; sourceTree = "<group>"; };
 		680CD8F417823E4600E6E742 /* MHOrganization+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHOrganization+Helper.h"; path = "Models/MHOrganization+Helper.h"; sourceTree = "<group>"; };
 		680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganization+Helper.m"; path = "Models/MHOrganization+Helper.m"; sourceTree = "<group>"; };
@@ -603,7 +591,12 @@
 		6859239E17AC427F0047A5A5 /* MH_Mobile_Checkbox_UnChecked_48_padded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_UnChecked_48_padded.png; sourceTree = "<group>"; };
 		6859239F17AC427F0047A5A5 /* MH_Mobile_Checkbox_Checked_48_padded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Checked_48_padded.png; sourceTree = "<group>"; };
 		685923A017AC427F0047A5A5 /* MH_Mobile_Checkbox_PartiallyChecked_48_padded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_PartiallyChecked_48_padded.png; sourceTree = "<group>"; };
-		687FC3231795BD8F00E53F08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		68631F9E17E74E8B00A24B3F /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		68631F9F17E74E8B00A24B3F /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		68631FA017E74E8B00A24B3F /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		68631FA117E74E8B00A24B3F /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		68631FAA17E7992B00A24B3F /* MHInfoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInfoHeaderCell.h; path = "Custom UI/MHInfoHeaderCell.h"; sourceTree = "<group>"; };
+		68631FAB17E7992C00A24B3F /* MHInfoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInfoHeaderCell.m; path = "Custom UI/MHInfoHeaderCell.m"; sourceTree = "<group>"; };
 		68818AFA17C7FFF800624887 /* MHAnswerSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswerSheet.h; path = Models/MHAnswerSheet.h; sourceTree = "<group>"; };
 		68818AFB17C7FFF800624887 /* MHAnswerSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerSheet.m; path = Models/MHAnswerSheet.m; sourceTree = "<group>"; };
 		68818AFE17C7FFF900624887 /* MHAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswer.h; path = Models/MHAnswer.h; sourceTree = "<group>"; };
@@ -629,8 +622,6 @@
 		6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+removeDuplicatesForKey.m"; sourceTree = "<group>"; };
 		689F4E531798F57500BCAFFC /* MHInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInfoCell.h; path = "Custom UI/MHInfoCell.h"; sourceTree = "<group>"; };
 		689F4E541798F57500BCAFFC /* MHInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInfoCell.m; path = "Custom UI/MHInfoCell.m"; sourceTree = "<group>"; };
-		689F4E571798F5AA00BCAFFC /* MHSurveyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSurveyCell.h; path = "Custom UI/MHSurveyCell.h"; sourceTree = "<group>"; };
-		689F4E581798F5AA00BCAFFC /* MHSurveyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSurveyCell.m; path = "Custom UI/MHSurveyCell.m"; sourceTree = "<group>"; };
 		68A38F0117A998730010CAC6 /* MHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHTextField.h; path = "Custom UI/MHTextField.h"; sourceTree = "<group>"; };
 		68A38F0217A998730010CAC6 /* MHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHTextField.m; path = "Custom UI/MHTextField.m"; sourceTree = "<group>"; };
 		68A38F0517A9A9120010CAC6 /* survey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = survey.png; sourceTree = "<group>"; };
@@ -743,8 +734,6 @@
 		68EC3A6117CE6D0400EE3717 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		68F4CC4717D10846004D6574 /* MHAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerCell.m; path = "Custom UI/MHAnswerCell.m"; sourceTree = "<group>"; };
 		68F4CC4817D10846004D6574 /* MHAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswerCell.h; path = "Custom UI/MHAnswerCell.h"; sourceTree = "<group>"; };
-		AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCustomNavigationBar.h; path = "Custom UI/MHCustomNavigationBar.h"; sourceTree = "<group>"; };
-		AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCustomNavigationBar.m; path = "Custom UI/MHCustomNavigationBar.m"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
 		AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationViewController.m; path = ViewControllers/MHNavigationViewController.m; sourceTree = "<group>"; };
 		AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
@@ -752,8 +741,6 @@
 		AD2434F3178C9CDA00FA16F2 /* MHNewInteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNewInteractionViewController.m; path = ViewControllers/MHNewInteractionViewController.m; sourceTree = "<group>"; };
 		AD30112A176FE4D900D53E35 /* MHCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCheckbox.h; path = "Custom UI/MHCheckbox.h"; sourceTree = "<group>"; };
 		AD30112B176FE4D900D53E35 /* MHCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCheckbox.m; path = "Custom UI/MHCheckbox.m"; sourceTree = "<group>"; };
-		AD30112C176FE4D900D53E35 /* MHMenuToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHMenuToolbar.h; path = "Custom UI/MHMenuToolbar.h"; sourceTree = "<group>"; };
-		AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHMenuToolbar.m; path = "Custom UI/MHMenuToolbar.m"; sourceTree = "<group>"; };
 		AD30112E176FE4D900D53E35 /* MHPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPersonCell.h; path = "Custom UI/MHPersonCell.h"; sourceTree = "<group>"; };
 		AD30112F176FE4D900D53E35 /* MHPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPersonCell.m; path = "Custom UI/MHPersonCell.m"; sourceTree = "<group>"; };
 		AD301138176FEEB800D53E35 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
@@ -769,8 +756,6 @@
 		AD982792177C9D6700A0276A /* MHProfileHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileHeaderViewController.h; path = ViewControllers/MHProfileHeaderViewController.h; sourceTree = "<group>"; };
 		AD982793177C9D6700A0276A /* MHProfileHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileHeaderViewController.m; path = ViewControllers/MHProfileHeaderViewController.m; sourceTree = "<group>"; };
 		AD9827A4177CF04200A0276A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		ADCCBA1A17948E0500A613F3 /* MHInitiatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHInitiatorCell.h; path = "Custom UI/MHInitiatorCell.h"; sourceTree = "<group>"; };
-		ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHInitiatorCell.m; path = "Custom UI/MHInitiatorCell.m"; sourceTree = "<group>"; };
 		ADCCBA1E1794DDA000A613F3 /* MHCreatePersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCreatePersonViewController.h; path = ViewControllers/MHCreatePersonViewController.h; sourceTree = "<group>"; };
 		ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCreatePersonViewController.m; path = ViewControllers/MHCreatePersonViewController.m; sourceTree = "<group>"; };
 		ADCCBA2F1795101800A613F3 /* MHProfileSurveysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileSurveysViewController.h; path = ViewControllers/MHProfileSurveysViewController.h; sourceTree = "<group>"; };
@@ -951,13 +936,6 @@
 		6839108F1760FD3100E01B46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				680BE7B617E49DD100BA8C12 /* Default-Landscape@2x~ipad.png */,
-				680BE7B417E49DC700BA8C12 /* Default-Landscape~ipad.png */,
-				680BE7B217E49DB900BA8C12 /* Default-Portrait@2x~ipad.png */,
-				680BE7B017E49DAC00BA8C12 /* Default-Portrait~ipad.png */,
-				680BE7AE17E49D9300BA8C12 /* Default.png */,
-				680BE7AC17E49D4700BA8C12 /* Default@2x.png */,
-				687FC3231795BD8F00E53F08 /* Default-568h@2x.png */,
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
 				683AE393176D2DC20027EDE4 /* appicon.png */,
 				683AE394176D2DC20027EDE4 /* appicon-small@2x.png */,
@@ -976,6 +954,10 @@
 				6839109A1760FD3100E01B46 /* Default.png */,
 				6839109C1760FD3100E01B46 /* Default@2x.png */,
 				6839109E1760FD3100E01B46 /* Default-568h@2x.png */,
+				68631F9E17E74E8B00A24B3F /* Default-Landscape~ipad.png */,
+				68631F9F17E74E8B00A24B3F /* Default-Landscape@2x~ipad.png */,
+				68631FA017E74E8B00A24B3F /* Default-Portrait@2x~ipad.png */,
+				68631FA117E74E8B00A24B3F /* Default-Portrait~ipad.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1383,48 +1365,40 @@
 			isa = PBXGroup;
 			children = (
 				682462D017D90C4000E1AFBB /* Activities */,
-				68F4CC4817D10846004D6574 /* MHAnswerCell.h */,
-				68F4CC4717D10846004D6574 /* MHAnswerCell.m */,
-				68478DAC177E8C9F0014501D /* MHPeopleSearchBar.h */,
-				68478DAD177E8C9F0014501D /* MHPeopleSearchBar.m */,
-				AD010D2F177B5D9700E6F0E6 /* MHCustomNavigationBar.h */,
-				AD010D30177B5D9800E6F0E6 /* MHCustomNavigationBar.m */,
-				6840C39517AD7B8900C2DB26 /* MHBlankCheckbox.h */,
-				6840C39617AD7B8900C2DB26 /* MHBlankCheckbox.m */,
-				AD30112C176FE4D900D53E35 /* MHMenuToolbar.h */,
-				AD30112D176FE4D900D53E35 /* MHMenuToolbar.m */,
-				AD30112A176FE4D900D53E35 /* MHCheckbox.h */,
-				AD30112B176FE4D900D53E35 /* MHCheckbox.m */,
-				AD30112E176FE4D900D53E35 /* MHPersonCell.h */,
-				AD30112F176FE4D900D53E35 /* MHPersonCell.m */,
-				ADCCBA1A17948E0500A613F3 /* MHInitiatorCell.h */,
-				ADCCBA1B17948E0500A613F3 /* MHInitiatorCell.m */,
-				68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */,
-				68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */,
-				68145B9217910867008145EA /* MHSegmentedControl.h */,
-				68145B9317910867008145EA /* MHSegmentedControl.m */,
-				68839F571795000500B32934 /* MHGenericCell.h */,
-				68839F581795000500B32934 /* MHGenericCell.m */,
-				689F4E531798F57500BCAFFC /* MHInfoCell.h */,
-				689F4E541798F57500BCAFFC /* MHInfoCell.m */,
-				AD3C60D617838A3B00744167 /* MHInteractionCell.h */,
-				AD3C60D717838A3C00744167 /* MHInteractionCell.m */,
-				6801975A17CFB44300DCE330 /* MHInteractionCellHeader.h */,
-				6801975B17CFB44300DCE330 /* MHInteractionCellHeader.m */,
-				689F4E571798F5AA00BCAFFC /* MHSurveyCell.h */,
-				689F4E581798F5AA00BCAFFC /* MHSurveyCell.m */,
-				68A38F0117A998730010CAC6 /* MHTextField.h */,
-				68A38F0217A998730010CAC6 /* MHTextField.m */,
-				6801976117CFE88200DCE330 /* MHHeaderCell.h */,
-				6801976217CFE88200DCE330 /* MHHeaderCell.m */,
-				681C65AF17D185170021D2EE /* MHAddressCell.h */,
-				681C65B017D185170021D2EE /* MHAddressCell.m */,
-				68ACD0A017DFB80A003630F0 /* MHToolbar.h */,
-				68ACD0A117DFB80A003630F0 /* MHToolbar.m */,
 				68ACD0A417DFBF00003630F0 /* MHStyle.h */,
 				68ACD0A517DFBF00003630F0 /* MHStyle.m */,
+				68478DAC177E8C9F0014501D /* MHPeopleSearchBar.h */,
+				68478DAD177E8C9F0014501D /* MHPeopleSearchBar.m */,
 				680B401817E0DE8700A5E62B /* MHSortHeader.h */,
 				680B401917E0DE8700A5E62B /* MHSortHeader.m */,
+				AD30112E176FE4D900D53E35 /* MHPersonCell.h */,
+				AD30112F176FE4D900D53E35 /* MHPersonCell.m */,
+				AD30112A176FE4D900D53E35 /* MHCheckbox.h */,
+				AD30112B176FE4D900D53E35 /* MHCheckbox.m */,
+				68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */,
+				68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */,
+				68ACD0A017DFB80A003630F0 /* MHToolbar.h */,
+				68ACD0A117DFB80A003630F0 /* MHToolbar.m */,
+				68839F571795000500B32934 /* MHGenericCell.h */,
+				68839F581795000500B32934 /* MHGenericCell.m */,
+				6840C39517AD7B8900C2DB26 /* MHBlankCheckbox.h */,
+				6840C39617AD7B8900C2DB26 /* MHBlankCheckbox.m */,
+				68A38F0117A998730010CAC6 /* MHTextField.h */,
+				68A38F0217A998730010CAC6 /* MHTextField.m */,
+				68145B9217910867008145EA /* MHSegmentedControl.h */,
+				68145B9317910867008145EA /* MHSegmentedControl.m */,
+				68631FAA17E7992B00A24B3F /* MHInfoHeaderCell.h */,
+				68631FAB17E7992C00A24B3F /* MHInfoHeaderCell.m */,
+				689F4E531798F57500BCAFFC /* MHInfoCell.h */,
+				689F4E541798F57500BCAFFC /* MHInfoCell.m */,
+				681C65AF17D185170021D2EE /* MHAddressCell.h */,
+				681C65B017D185170021D2EE /* MHAddressCell.m */,
+				6801976117CFE88200DCE330 /* MHHeaderCell.h */,
+				6801976217CFE88200DCE330 /* MHHeaderCell.m */,
+				AD3C60D617838A3B00744167 /* MHInteractionCell.h */,
+				AD3C60D717838A3C00744167 /* MHInteractionCell.m */,
+				68F4CC4817D10846004D6574 /* MHAnswerCell.h */,
+				68F4CC4717D10846004D6574 /* MHAnswerCell.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1567,14 +1541,11 @@
 				680BE78717E28D3800BA8C12 /* MH_Mobile_Icon_AddContact.png in Resources */,
 				680BE78917E28D3800BA8C12 /* MH_Mobile_Icon_LeftArrow.png in Resources */,
 				680BE78B17E28D3800BA8C12 /* MH_Mobile_Icon_DownArrow.png in Resources */,
-				680BE7AB17E49D3100BA8C12 /* Default-568h@2x.png in Resources */,
-				680BE7AD17E49D4800BA8C12 /* Default@2x.png in Resources */,
-				680BE7AF17E49D9400BA8C12 /* Default.png in Resources */,
-				680BE7B117E49DAD00BA8C12 /* Default-Portrait~ipad.png in Resources */,
-				680BE7B317E49DBA00BA8C12 /* Default-Portrait@2x~ipad.png in Resources */,
-				680BE7B517E49DC800BA8C12 /* Default-Landscape~ipad.png in Resources */,
-				680BE7B717E49DD200BA8C12 /* Default-Landscape@2x~ipad.png in Resources */,
 				680BE7B917E49FEB00BA8C12 /* MH_Mobile_Logo@2x.png in Resources */,
+				68631FA217E74E8B00A24B3F /* Default-Landscape~ipad.png in Resources */,
+				68631FA417E74E8B00A24B3F /* Default-Landscape@2x~ipad.png in Resources */,
+				68631FA617E74E8B00A24B3F /* Default-Portrait@2x~ipad.png in Resources */,
+				68631FA817E74E8B00A24B3F /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1637,6 +1608,10 @@
 				680BE78A17E28D3800BA8C12 /* MH_Mobile_Icon_LeftArrow.png in Resources */,
 				680BE78C17E28D3800BA8C12 /* MH_Mobile_Icon_DownArrow.png in Resources */,
 				680BE7BA17E49FEB00BA8C12 /* MH_Mobile_Logo@2x.png in Resources */,
+				68631FA317E74E8B00A24B3F /* Default-Landscape~ipad.png in Resources */,
+				68631FA517E74E8B00A24B3F /* Default-Landscape@2x~ipad.png in Resources */,
+				68631FA717E74E8B00A24B3F /* Default-Portrait@2x~ipad.png in Resources */,
+				68631FA917E74E8B00A24B3F /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1676,7 +1651,6 @@
 				68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */,
 				68D7AA441766C98000B9B0B1 /* MHLoginViewController.m in Sources */,
 				AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */,
-				AD301132176FE4D900D53E35 /* MHMenuToolbar.m in Sources */,
 				AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */,
 				68C0689B176EB832007C79D6 /* MHModel.m in Sources */,
 				68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */,
@@ -1730,13 +1704,11 @@
 				68145B9817910984008145EA /* MHProfileMenuViewController.m in Sources */,
 				6855EDD81793B81D00769B71 /* DWTagList.m in Sources */,
 				6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
-				ADCCBA1C17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
 				68839F551794FE3000B32934 /* MHLabel+Helper.m in Sources */,
 				68839F591795000500B32934 /* MHGenericCell.m in Sources */,
 				ADCCBA201794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */,
 				ADCCBA311795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */,
 				689F4E551798F57500BCAFFC /* MHInfoCell.m in Sources */,
-				689F4E591798F5AA00BCAFFC /* MHSurveyCell.m in Sources */,
 				68B7DDA317A2F95700849F31 /* MHInteraction+Helper.m in Sources */,
 				68B7DDA717A317BD00849F31 /* MHSurvey+Helper.m in Sources */,
 				68B7DDAB17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */,
@@ -1779,6 +1751,7 @@
 				68ACD0A217DFB80B003630F0 /* MHToolbar.m in Sources */,
 				68ACD0A617DFBF00003630F0 /* MHStyle.m in Sources */,
 				680B401A17E0DE8700A5E62B /* MHSortHeader.m in Sources */,
+				68631FAC17E7992C00A24B3F /* MHInfoHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1804,7 +1777,6 @@
 				68D7AA3F1766783200B9B0B1 /* MHAPI.m in Sources */,
 				68D7AA451766C98000B9B0B1 /* MHLoginViewController.m in Sources */,
 				AD301131176FE4D900D53E35 /* MHCheckbox.m in Sources */,
-				AD301133176FE4D900D53E35 /* MHMenuToolbar.m in Sources */,
 				AD301135176FE4D900D53E35 /* MHPersonCell.m in Sources */,
 				68C0689C176EB832007C79D6 /* MHModel.m in Sources */,
 				68C068A91770EFBE007C79D6 /* MHStorage.m in Sources */,
@@ -1825,7 +1797,6 @@
 				68478D81177E3F000014501D /* AFURLConnectionOperation.m in Sources */,
 				68478D83177E3F000014501D /* AFXMLRequestOperation.m in Sources */,
 				68478D85177E3F000014501D /* UIImageView+AFNetworking.m in Sources */,
-				AD010D31177B5D9800E6F0E6 /* MHCustomNavigationBar.m in Sources */,
 				68478D8F177E8AE20014501D /* MHOrganization.m in Sources */,
 				68478D91177E8AE20014501D /* MHLabel.m in Sources */,
 				68478D9B177E8B140014501D /* MHGenericListViewController.m in Sources */,
@@ -1852,13 +1823,11 @@
 				68145B9917910984008145EA /* MHProfileMenuViewController.m in Sources */,
 				6855EDD91793B81D00769B71 /* DWTagList.m in Sources */,
 				6855EDDE17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
-				ADCCBA1D17948E0500A613F3 /* MHInitiatorCell.m in Sources */,
 				68839F561794FE3000B32934 /* MHLabel+Helper.m in Sources */,
 				68839F5A1795000500B32934 /* MHGenericCell.m in Sources */,
 				ADCCBA211794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */,
 				ADCCBA321795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */,
 				689F4E561798F57500BCAFFC /* MHInfoCell.m in Sources */,
-				689F4E5A1798F5AA00BCAFFC /* MHSurveyCell.m in Sources */,
 				68B7DDA417A2F95800849F31 /* MHInteraction+Helper.m in Sources */,
 				68B7DDA817A317BD00849F31 /* MHSurvey+Helper.m in Sources */,
 				68B7DDAC17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */,
@@ -1901,6 +1870,7 @@
 				68ACD0A317DFB80B003630F0 /* MHToolbar.m in Sources */,
 				68ACD0A717DFBF00003630F0 /* MHStyle.m in Sources */,
 				680B401B17E0DE8700A5E62B /* MHSortHeader.m in Sources */,
+				68631FAD17E7992C00A24B3F /* MHInfoHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

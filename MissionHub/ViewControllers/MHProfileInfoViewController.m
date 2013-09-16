@@ -10,6 +10,8 @@
 #import "M6ParallaxController.h"
 #import "MHPerson+Helper.h"
 #import "MHAddress+Helper.h"
+#import "MHInfoHeaderCell.h"
+#import "MHInfoCell.h"
 #import "MHAddressCell.h"
 
 CGFloat const MHProfileInfoViewControllerHeaderCellHeight	= 21.0;
@@ -231,7 +233,7 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 		
 		if ([objectForCell isKindOfClass:[MHAddress class]]) {
 			
-			return [MHAddressCell heightForCellWithAddress:(MHAddress *)objectForCell];
+			return [MHAddressCell heightForCellWithAddress:(MHAddress *)objectForCell andWidth:CGRectGetWidth(self.tableView.frame)];
 			
 		} else {
 			
@@ -242,17 +244,25 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 	
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	static NSString *CellIdentifier = @"InfoCell";
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	static NSString *CellIdentifier = @"MHInfoCell";
+	MHInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
 	// Configure the cell...
 	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		cell = [[MHInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
 	
 	if (indexPath.row == 0) {
+		
+		static NSString *CellIdentifier = @"MHInfoHeaderCell";
+		MHInfoHeaderCell *headerCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		
+		// Configure the cell...
+		if (headerCell == nil) {
+			headerCell = [[MHInfoHeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		}
 		
 		id objectForCell = [self.sectionTitles objectAtIndex:indexPath.section];
 		NSString *cellText = @"";
@@ -261,17 +271,9 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 			cellText = objectForCell;
 		}
 		
-		cell.textLabel.text = cellText;
-		cell.textLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:14.0];
-		cell.textLabel.textColor	= [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];;
+		headerCell.text = cellText;
 		
-		UIView *background					= [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(cell.frame), MHProfileInfoViewControllerHeaderCellHeight)];
-		CAGradientLayer *gradient			= [CAGradientLayer layer];
-        gradient.frame						= CGRectMake(0, 0, CGRectGetWidth(cell.frame), MHProfileInfoViewControllerHeaderCellHeight);
-        gradient.colors						= [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor colorWithRed:0.973 green:0.973 blue:0.973 alpha:1.000] CGColor], nil];
-        [background.layer addSublayer:gradient];
-		
-		cell.backgroundView					= background;
+		return headerCell;
 		
 	} else {
 		
@@ -279,11 +281,17 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 		NSString *cellText = @"";
 		
 		if ([objectForCell isKindOfClass:[NSString class]]) {
+			
 			cellText = objectForCell;
+			
 		} else if ([objectForCell isKindOfClass:[MHEmailAddress class]]) {
+			
 			cellText = [(MHEmailAddress *)objectForCell email];
+			
 		} else if ([objectForCell isKindOfClass:[MHPhoneNumber class]]) {
+			
 			cellText = [(MHPhoneNumber *)objectForCell number];
+			
 		} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
 			
 			static NSString *addressCellIdentifier = @"MHAddressCell";
@@ -300,14 +308,12 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 			
 		}
 		
-		cell.textLabel.font			= [UIFont fontWithName:@"ArialMT" size:16.0];
-		cell.textLabel.textColor	= [UIColor colorWithRed:(128.0/255.0) green:(130.0/255.0) blue:(132.0/255.0) alpha:1.0];;
-		cell.textLabel.text			= cellText;
+		cell.text		= cellText;
 		
 	}
 	
-    
     return cell;
+	
 }
 
 #pragma mark - Table view delegate

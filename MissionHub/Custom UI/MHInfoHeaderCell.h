@@ -1,14 +1,14 @@
 //
-//  MHInfoCell.h
+//  MHInfoHeaderCell.h
 //  MissionHub
 //
-//  Created by Michael Harrison on 7/18/13.
+//  Created by Michael Harrison on 9/16/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface MHInfoCell : UITableViewCell
+@interface MHInfoHeaderCell : UITableViewCell
 
 @property (nonatomic, strong) NSString *text;
 

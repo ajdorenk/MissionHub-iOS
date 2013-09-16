@@ -10,8 +10,7 @@
 
 #import "MHAPI.h"
 #import "MHPersonCell.h"
-#import "MHLoadingCell.h"
-#import "MHMenuToolbar.h"   
+#import "MHLoadingCell.h" 
 #import "MHPeopleSearchBar.h"
 #import "MHToolbar.h"
 #import "UIImageView+AFNetworking.h"
@@ -899,6 +898,8 @@
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
 	[self updateBarButtons];
 	

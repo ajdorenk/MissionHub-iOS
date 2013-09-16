@@ -15,6 +15,6 @@
 @property (nonatomic, strong) UILabel *questionLabel;
 @property (nonatomic, strong) UILabel *answerLabel;
 
-+ (CGFloat)heightForCellWithAnswer:(MHAnswer *)answer;
++ (CGFloat)heightForCellWithAnswer:(MHAnswer *)answer andWidth:(CGFloat)width;
 
 @end

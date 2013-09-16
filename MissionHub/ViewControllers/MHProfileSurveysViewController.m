@@ -148,7 +148,7 @@
 		
 		MHAnswerSheet *survey	= [self._surveyArray objectAtIndex:indexPath.section];
 		MHAnswer *answer		= [survey.answers.allObjects objectAtIndex:indexPath.row - 1];
-		return [MHAnswerCell heightForCellWithAnswer:answer];
+		return [MHAnswerCell heightForCellWithAnswer:answer andWidth:CGRectGetWidth(self.tableView.frame)];
 		
 	}
 	
@@ -158,7 +158,7 @@
 {
 	
 	static NSString *headerCellIdentifier	= @"MHHeaderCell";
-	static NSString *surveyCellIdentifier	= @"MHSurveyCell";
+	static NSString *surveyCellIdentifier	= @"MHAnswerCell";
 	
 	if (indexPath.row == 0) {
 		

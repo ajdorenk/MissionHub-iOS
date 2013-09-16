@@ -56,6 +56,10 @@ static CGFloat const MHAnswerCellMargin					= 20.0f;
 	self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     
+	UIView *background				= [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+	background.backgroundColor		= [UIColor whiteColor];
+	self.backgroundView				= background;
+	
     self.questionLabel				= [[UILabel alloc] initWithFrame:CGRectZero];
     self.questionLabel.font			= [UIFont fontWithName:MHAnswerCellQuestionFont size:MHAnswerCellQuestionFontSize];
     self.questionLabel.textColor	= [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
@@ -107,7 +111,7 @@ static CGFloat const MHAnswerCellMargin					= 20.0f;
 	
 }
 
-+ (CGFloat)heightForCellWithAnswer:(MHAnswer *)answer {
++ (CGFloat)heightForCellWithAnswer:(MHAnswer *)answer andWidth:(CGFloat)width {
 	
 	NSString *questionString	= @"Unknown Question";
 	MHSurvey *survey			= (MHSurvey *)[[MHAPI sharedInstance].currentOrganization.surveys findWithRemoteID:answer.answerSheet.survey_id];
@@ -129,14 +133,14 @@ static CGFloat const MHAnswerCellMargin					= 20.0f;
 	
 	if (questionString.length > 0) {
 		
-		height += ceilf([questionString sizeWithFont:[UIFont fontWithName:MHAnswerCellQuestionFont size:MHAnswerCellQuestionFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAnswerCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([questionString sizeWithFont:[UIFont fontWithName:MHAnswerCellQuestionFont size:MHAnswerCellQuestionFontSize] constrainedToSize:CGSizeMake(width - (2 * MHAnswerCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		height += 0.5 * MHAnswerCellMargin;
 		
 	}
 	
 	if (answer.value.length > 0) {
 		
-		height += ceilf([answer.value sizeWithFont:[UIFont fontWithName:MHAnswerCellAnswerFont size:MHAnswerCellAnswerFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAnswerCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
+		height += ceilf([answer.value sizeWithFont:[UIFont fontWithName:MHAnswerCellAnswerFont size:MHAnswerCellAnswerFontSize] constrainedToSize:CGSizeMake(width - (2 * MHAnswerCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP].height);
 		height += 0.5 * MHAnswerCellMargin;
 		
 	}
@@ -177,7 +181,7 @@ static CGFloat const MHAnswerCellMargin					= 20.0f;
 	
 	if (questionString.length > 0) {
 		
-		CGSize questionSize = [questionString sizeWithFont:[UIFont fontWithName:MHAnswerCellQuestionFont size:MHAnswerCellQuestionFontSize] constrainedToSize:CGSizeMake(320.0f - (1.5 * MHAnswerCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize questionSize = [questionString sizeWithFont:[UIFont fontWithName:MHAnswerCellQuestionFont size:MHAnswerCellQuestionFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (1.5 * MHAnswerCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
 		self.questionLabel.frame	= CGRectMake(MHAnswerCellMargin, 0.5 * MHAnswerCellMargin, questionSize.width, questionSize.height);
 		self.questionLabel.hidden	= NO;
@@ -191,7 +195,7 @@ static CGFloat const MHAnswerCellMargin					= 20.0f;
 	
 	if (self.answer.value.length > 0) {
 		
-		CGSize answerSize			= [self.answer.value sizeWithFont:[UIFont fontWithName:MHAnswerCellAnswerFont size:MHAnswerCellAnswerFontSize] constrainedToSize:CGSizeMake(320.0f - (2 * MHAnswerCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
+		CGSize answerSize			= [self.answer.value sizeWithFont:[UIFont fontWithName:MHAnswerCellAnswerFont size:MHAnswerCellAnswerFontSize] constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - (2 * MHAnswerCellMargin), CGFLOAT_MAX) lineBreakMode:LINE_BREAK_WORD_WRAP];
 		
 		self.answerLabel.frame		= CGRectMake(1.5 * MHAnswerCellMargin, CGRectGetMaxY(self.questionLabel.frame) + 0.25 * MHAnswerCellMargin, answerSize.width, answerSize.height);
 		self.answerLabel.hidden	= NO;
