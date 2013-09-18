@@ -50,6 +50,19 @@
 @property (nonatomic, weak) IBOutlet UISegmentedControl	*gender;
 @property (nonatomic, weak) IBOutlet UISegmentedControl	*permissionLevel;
 
+@property (nonatomic, weak) IBOutlet UILabel		*firstNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*lastNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*emailLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*phoneLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*address1Label;
+@property (nonatomic, weak) IBOutlet UILabel		*address2Label;
+@property (nonatomic, weak) IBOutlet UILabel		*cityLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*stateLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*countryLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*zipLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*genderLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*permissionLevelLabel;
+
 @property (nonatomic, strong) UIBarButtonItem		*saveButton;
 @property (nonatomic, strong) UIBarButtonItem		*doneButton;
 

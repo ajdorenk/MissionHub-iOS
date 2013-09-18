@@ -12,18 +12,57 @@
 #import "MHAPI.h"
 #import "MHToolbar.h"
 
+CGFloat const MHNewInteractionViewControllerViewMarginHorizontal		= 20.0f;
+CGFloat const MHNewInteractionViewControllerViewMarginVertical			= 10.0f;
+CGFloat const MHNewInteractionViewControllerLabelMarginTop				= 2.0f;
+CGFloat const MHNewInteractionViewControllerLabelHeight					= 21.0f;
+CGFloat const MHNewInteractionViewControllerButtonMarginTop				= 0.0f;
+CGFloat const MHNewInteractionViewControllerButtonHeight				= 29.0f;
+CGFloat const MHNewInteractionViewControllerInteractionTypeIconMargin	= 5.0f;
+CGFloat const MHNewInteractionViewControllerInteractionTypeIconHeight	= MHNewInteractionViewControllerButtonHeight - 2 * MHNewInteractionViewControllerInteractionTypeIconMargin;
+CGFloat const MHNewInteractionViewControllerInteractionTypeIconWidth	= MHNewInteractionViewControllerInteractionTypeIconHeight;
+CGFloat const MHNewInteractionViewControllerTextFieldMarginTop			= MHNewInteractionViewControllerButtonMarginTop;
+CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 
 //TODO:The sizing for this view controller needs to be adjusted on the storyboard for the iPad. This might be another place in which a popover would be better for the iPad.
 
 @interface MHNewInteractionViewController ()
 
--(MHGenericListViewController *)initiatorsList;
--(MHGenericListViewController *)receiversList;
--(UIPickerView *)interactionTypePicker;
--(UIPickerView *)visibilityPicker;
--(UIDatePicker *)timestampPicker;
+@property (nonatomic, strong) UIBarButtonItem				*doneWithInteractionTypeButton;
+@property (nonatomic, strong) UIBarButtonItem				*doneWithVisibilityButton;
+@property (nonatomic, strong) UIBarButtonItem				*doneWithDateButton;
+@property (nonatomic, strong) UIBarButtonItem				*doneWithCommentButton;
+@property (nonatomic, strong) UIBarButtonItem				*saveButton;
+
+@property (nonatomic, strong) NSMutableArray				*interactionTypeArray;
+@property (nonatomic, strong) NSMutableArray				*visibilityArray;
+@property (nonatomic, strong) NSMutableArray				*suggestions;
+@property (nonatomic, strong) NSMutableArray				*selectionsFromParent;
+
+@property (nonatomic, weak) IBOutlet UIScrollView			*scrollView;
+@property (nonatomic, weak) IBOutlet UILabel				*initiatorLabel;
+@property (nonatomic, weak) IBOutlet UIButton				*initiator;
+@property (nonatomic, weak) IBOutlet UILabel				*interactionTypeLabel;
+@property (nonatomic, weak) IBOutlet UIButton				*interactionType;
+@property (nonatomic, weak) IBOutlet UIImageView			*interactionTypeIcon;
+@property (nonatomic, weak) IBOutlet UILabel				*receiverLabel;
+@property (nonatomic, weak) IBOutlet UIButton				*receiver;
+@property (nonatomic, weak) IBOutlet UILabel				*visibilityLabel;
+@property (nonatomic, weak) IBOutlet UIButton				*visibility;
+@property (nonatomic, weak) IBOutlet UILabel				*dateTimeLabel;
+@property (nonatomic, weak) IBOutlet UIButton				*dateTime;
+@property (nonatomic, weak) IBOutlet UILabel				*commentLabel;
+@property (nonatomic, weak) IBOutlet UITextField			*comment;
+@property (nonatomic, assign) CGRect						originalCommentFrame;
+
+@property (nonatomic, strong, readonly) MHGenericListViewController	*initiatorsList;
+@property (nonatomic, strong, readonly) UIPickerView				*interactionTypePicker;
+@property (nonatomic, strong, readonly) MHGenericListViewController	*receiversList;
+@property (nonatomic, strong, readonly) UIPickerView				*visibilityPicker;
+@property (nonatomic, strong, readonly) UIDatePicker				*timestampPicker;
 
 -(void)updateBarButtons;
+-(void)updateLayout;
 -(void)replaceBarButtons;
 
 -(void)updateInterface;
@@ -54,18 +93,43 @@
 
 @implementation MHNewInteractionViewController
 
-@synthesize doneWithInteractionTypeButton, doneWithVisibilityButton, doneWithDateButton, doneWithCommentButton, saveButton;
+@synthesize interaction						= _interaction;
 
-@synthesize interaction				= _interaction;
-@synthesize interactionTypeArray	= _interactionTypeArray;
-@synthesize visibilityArray			= _visibilityArray;
-@synthesize suggestions				= _suggestions;
-@synthesize selectionsFromParent	= _selectionsFromParent;
+@synthesize doneWithInteractionTypeButton	= _doneWithInteractionTypeButton;
+@synthesize doneWithVisibilityButton		= _doneWithVisibilityButton;
+@synthesize doneWithDateButton				= _doneWithDateButton;
+@synthesize doneWithCommentButton			= _doneWithCommentButton;
+@synthesize saveButton						= _saveButton;
+
+@synthesize interactionTypeArray			= _interactionTypeArray;
+@synthesize visibilityArray					= _visibilityArray;
+@synthesize suggestions						= _suggestions;
+@synthesize selectionsFromParent			= _selectionsFromParent;
 
 //buttons in storyboard
-@synthesize initiator, interactionType, receiver, visibility, dateTime, comment, originalCommentFrame = _originalCommentFrame;
+@synthesize scrollView						= _scrollView;
+@synthesize initiator						= _initiator;
+@synthesize interactionType					= _interactionType;
+@synthesize interactionTypeIcon				= _interactionTypeIcon;
+@synthesize receiver						= _receiver;
+@synthesize visibility						= _visibility;
+@synthesize dateTime						= _dateTime;
+@synthesize comment							= _comment;
+@synthesize originalCommentFrame			= _originalCommentFrame;
+
+@synthesize initiatorLabel					= _initiatorLabel;
+@synthesize interactionTypeLabel			= _interactionTypeLabel;
+@synthesize receiverLabel					= _receiverLabel;
+@synthesize visibilityLabel					= _visibilityLabel;
+@synthesize dateTimeLabel					= _dateTimeLabel;
+@synthesize commentLabel					= _commentLabel;
+
 //lazy loaded lists/pickers for each type
-@synthesize _initiatorsList, _interactionTypePicker, _receiversList, _visibilityPicker, _timestampPicker;
+@synthesize initiatorsList					= _initiatorsList;
+@synthesize interactionTypePicker			= _interactionTypePicker;
+@synthesize receiversList					= _receiversList;
+@synthesize visibilityPicker				= _visibilityPicker;
+@synthesize timestampPicker					= _timestampPicker;
 
 #pragma mark - initialization
 
@@ -83,6 +147,15 @@
 	[super awakeFromNib];
     
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	
+	[super viewWillAppear:animated];
+	
+	[self updateBarButtons];
+	[self updateLayout];
+	
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -256,6 +329,90 @@
 }
 
 #pragma mark - update UI methods
+
+- (void)updateLayout {
+	
+	self.scrollView.frame				= self.view.frame;
+	
+	self.initiatorLabel.frame			= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerViewMarginVertical,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerLabelHeight);
+	self.initiator.frame				= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.initiatorLabel.frame) + MHNewInteractionViewControllerButtonMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerButtonHeight);
+	
+	self.interactionTypeLabel.frame		= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.initiator.frame) + MHNewInteractionViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerLabelHeight);
+	self.interactionType.frame			= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.interactionTypeLabel.frame) + MHNewInteractionViewControllerButtonMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerButtonHeight);
+	self.interactionTypeIcon.frame		= CGRectMake(CGRectGetMaxX(self.interactionType.frame) - MHNewInteractionViewControllerInteractionTypeIconMargin - MHNewInteractionViewControllerInteractionTypeIconWidth,
+													 CGRectGetMinY(self.interactionType.frame) + MHNewInteractionViewControllerInteractionTypeIconMargin,
+													 MHNewInteractionViewControllerInteractionTypeIconWidth,
+													 MHNewInteractionViewControllerInteractionTypeIconHeight);
+	
+	self.receiverLabel.frame			= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.interactionType.frame) + MHNewInteractionViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerLabelHeight);
+	self.receiver.frame					= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.receiverLabel.frame) + MHNewInteractionViewControllerButtonMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerButtonHeight);
+	
+	self.visibilityLabel.frame			= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.receiver.frame) + MHNewInteractionViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerLabelHeight);
+	self.visibility.frame				= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.visibilityLabel.frame) + MHNewInteractionViewControllerButtonMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerButtonHeight);
+	
+	self.dateTimeLabel.frame			= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.visibility.frame) + MHNewInteractionViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerLabelHeight);
+	self.dateTime.frame					= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.dateTimeLabel.frame) + MHNewInteractionViewControllerButtonMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerButtonHeight);
+	
+	self.commentLabel.frame				= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.dateTime.frame) + MHNewInteractionViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerLabelHeight);
+	
+	
+	
+	self.comment.frame					= CGRectMake(MHNewInteractionViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.commentLabel.frame) + MHNewInteractionViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHNewInteractionViewControllerViewMarginHorizontal,
+													 MHNewInteractionViewControllerTextFieldHeight);
+	
+	self.scrollView.contentSize			= CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetMaxY(self.comment.frame) + MHNewInteractionViewControllerViewMarginVertical);
+	self.scrollView.contentOffset		= CGPointZero;
+	
+	if (CGRectGetHeight(self.view.frame) > self.scrollView.contentSize.height) {
+		
+		self.scrollView.scrollEnabled	= NO;
+		
+	} else {
+		
+		self.scrollView.scrollEnabled	= YES;
+		
+	}
+	
+	[self clearPickers];
+	
+	self.navigationItem.rightBarButtonItem	= self.saveButton;
+	
+}
 
 -(void)updateBarButtons {
 	
@@ -439,80 +596,98 @@
 
 -(MHGenericListViewController *)initiatorsList {
 	
-	if (self._initiatorsList == nil) {
+	if (_initiatorsList == nil) {
 		
-		self._initiatorsList = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
-		self._initiatorsList.selectionDelegate	= self;
-		self._initiatorsList.multipleSelection	= YES;
-		[self._initiatorsList setListTitle:@"Initiator(s)"];
-		[self._initiatorsList setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+		[self willChangeValueForKey:@"initiatorsList"];
+		_initiatorsList						= [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		[self didChangeValueForKey:@"initiatorsList"];
+		
+		_initiatorsList.selectionDelegate	= self;
+		_initiatorsList.multipleSelection	= YES;
+		_initiatorsList.listTitle			= @"Initiator(s)";
+		[_initiatorsList setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+		
 	}
 	
-	return self._initiatorsList;
+	return _initiatorsList;
 	
 }
 
 -(MHGenericListViewController *)receiversList {
 	
-	if (self._receiversList == nil) {
+	if (_receiversList == nil) {
 		
-		self._receiversList = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
-		self._receiversList.selectionDelegate = self;
-		[self._receiversList setListTitle:@"Receiver"];
-		[self._receiversList setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+		[self willChangeValueForKey:@"receiversList"];
+		_receiversList						= [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		[self didChangeValueForKey:@"receiversList"];
+		
+		_receiversList.selectionDelegate	= self;
+		_receiversList.listTitle			= @"Receiver";
+		[_receiversList setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+		
 	}
 	
-	return self._receiversList;
+	return _receiversList;
 	
 }
 
 -(UIPickerView *)interactionTypePicker {
 	
-	if (self._interactionTypePicker == nil) {
+	if (_interactionTypePicker == nil) {
 		
-		self._interactionTypePicker = [[UIPickerView alloc] init];
-		self._interactionTypePicker.delegate = self;
-		self._interactionTypePicker.dataSource = self;
-		self._interactionTypePicker.showsSelectionIndicator = YES;
+		[self willChangeValueForKey:@"interactionTypePicker"];
+		_interactionTypePicker							= [[UIPickerView alloc] init];
+		[self didChangeValueForKey:@"interactionTypePicker"];
+		
+		_interactionTypePicker.delegate					= self;
+		_interactionTypePicker.dataSource				= self;
+		_interactionTypePicker.showsSelectionIndicator	= YES;
 		
 	}
 	
-	return self._interactionTypePicker;
+	return _interactionTypePicker;
 	
 }
 
 -(UIPickerView *)visibilityPicker {
 	
-	if (self._visibilityPicker == nil) {
+	if (_visibilityPicker == nil) {
 		
-		self._visibilityPicker = [[UIPickerView alloc] init];
-		self._visibilityPicker.delegate = self;
-		self._visibilityPicker.dataSource = self;
-		self._visibilityPicker.showsSelectionIndicator = YES;
+		[self willChangeValueForKey:@"visibilityPicker"];
+		_visibilityPicker							= [[UIPickerView alloc] init];
+		[self didChangeValueForKey:@"visibilityPicker"];
+		
+		_visibilityPicker.delegate					= self;
+		_visibilityPicker.dataSource				= self;
+		_visibilityPicker.showsSelectionIndicator	= YES;
 		
 	}
 	
-	return self._visibilityPicker;
+	return _visibilityPicker;
 	
 }
 
 -(UIDatePicker *)timestampPicker {
 	
-	if (self._timestampPicker == nil) {
+	if (_timestampPicker == nil) {
 		
-		self._timestampPicker = [[UIDatePicker alloc] init];
-		[self._timestampPicker addTarget:self action:@selector(timestampChanged:) forControlEvents:UIControlEventValueChanged];
-		self._timestampPicker.backgroundColor	= [UIColor blackColor];
+		[self willChangeValueForKey:@"timestampPicker"];
+		_timestampPicker = [[UIDatePicker alloc] init];
+		[self didChangeValueForKey:@"timestampPicker"];
+		
+		_timestampPicker					= [[UIDatePicker alloc] init];
+		_timestampPicker.backgroundColor	= [UIColor blackColor];
+		[_timestampPicker addTarget:self action:@selector(timestampChanged:) forControlEvents:UIControlEventValueChanged];
 		
 	}
 	
-	return self._timestampPicker;
+	return _timestampPicker;
 	
 }
 
 #pragma mark - launch UI to choose value
 
--(void)chooseInitiator:(id)sender{
+-(void)chooseInitiator:(id)sender {
     
 	NSSet *suggestions = [NSSet setWithArray:self.suggestions];
 	
@@ -876,9 +1051,12 @@
 	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
     self.originalCommentFrame	= self.comment.frame;
 	
+	CGFloat keyboardHeight		= ( CGRectGetHeight(keyboardFrame) > CGRectGetHeight(self.view.frame) ? CGRectGetWidth(keyboardFrame) : CGRectGetHeight(keyboardFrame) );
+	
     //Down size your text view
-	newRect.size.width	= CGRectGetWidth(self.view.frame);
-    newRect.size.height = CGRectGetHeight(self.view.frame) - CGRectGetHeight(keyboardFrame);
+	newRect.origin.y	= self.scrollView.contentOffset.y;
+	newRect.size.width	= CGRectGetWidth(self.scrollView.frame);
+    newRect.size.height = CGRectGetHeight(self.view.frame) - keyboardHeight;
 	
 	[UIView beginAnimations:nil context:nil];
 	
@@ -888,19 +1066,21 @@
 	
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithCommentButton, nil]];
 	
+	self.scrollView.scrollEnabled	= NO;
+	
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     
-	self.interaction.comment = self.comment.text;
+	self.interaction.comment		= self.comment.text;
+	self.scrollView.scrollEnabled	= YES;
 	
-    // Resize your textview when keyboard is going to hide
-    [UIView setAnimationBeginsFromCurrentState:YES];
-	
-    self.comment.frame = self.originalCommentFrame;
-	
-    [UIView commitAnimations];
+	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+		
+		self.comment.frame = self.originalCommentFrame;
+		
+	} completion:nil];
     
 }
 
@@ -936,6 +1116,7 @@
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
 	[self updateBarButtons];
+	[self updateLayout];
 	
 }
 

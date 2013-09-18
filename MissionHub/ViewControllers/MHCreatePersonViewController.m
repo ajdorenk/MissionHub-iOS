@@ -11,6 +11,15 @@
 #import "MHOrganization+Helper.h"
 #import "MHToolbar.h"
 
+CGFloat const MHCreatePersonViewControllerMarginVertical			= 20.0;
+CGFloat const MHCreatePersonViewControllerViewMarginHorizontal		= 20.0f;
+CGFloat const MHCreatePersonViewControllerViewMarginVertical		= 10.0f;
+CGFloat const MHCreatePersonViewControllerLabelMarginTop			= 2.0f;
+CGFloat const MHCreatePersonViewControllerLabelHeight				= 21.0f;
+CGFloat const MHCreatePersonViewControllerTextFieldMarginTop		= 0.0f;
+CGFloat const MHCreatePersonViewControllerTextFieldHeight			= 22.0f;
+CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
+
 @interface MHCreatePersonViewController ()
 
 - (void)configureTextField:(MHTextField *)textField;
@@ -38,8 +47,9 @@
 - (void)done:(id)sender;
 - (void)clearKeyboard;
 
--(void)updateBarButtons;
--(void)replaceBarButtons;
+- (void)updateLayout;
+- (void)updateBarButtons;
+- (void)replaceBarButtons;
 
 - (void)updateInterface;
 - (void)updateGender;
@@ -82,6 +92,15 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	
+	[super viewWillAppear:animated];
+	
+	[self updateBarButtons];
+	[self updateLayout];
+	
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -163,7 +182,138 @@
 	
 }
 
--(void)updateBarButtons {
+- (void)updateLayout {
+	
+	self.scrollView.frame			= self.view.frame;
+	
+	self.firstNameLabel.frame			= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerViewMarginVertical,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.firstName.frame				= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.firstNameLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.lastNameLabel.frame			= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.firstName.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.lastName.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.lastNameLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.genderLabel.frame				= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.lastName.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.gender.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.genderLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 MHCreatePersonViewControllerGenderWidth,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.emailLabel.frame				= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.gender.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.email.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.emailLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.phoneLabel.frame				= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.email.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.phone.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.phoneLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.address1Label.frame			= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.phone.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.address1.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.address1Label.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.address2Label.frame			= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.address1.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.address2.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.address2Label.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.cityLabel.frame				= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.address2.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.city.frame						= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.cityLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.stateLabel.frame				= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.city.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.state.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.stateLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.countryLabel.frame				= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.state.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.country.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.countryLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.zipLabel.frame					= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.country.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.zip.frame						= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.zipLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.permissionLevelLabel.frame		= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.zip.frame) + MHCreatePersonViewControllerLabelMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerLabelHeight);
+	self.permissionLevel.frame			= CGRectMake(MHCreatePersonViewControllerViewMarginHorizontal,
+													 CGRectGetMaxY(self.permissionLevelLabel.frame) + MHCreatePersonViewControllerTextFieldMarginTop,
+													 CGRectGetWidth(self.scrollView.frame) - 2 * MHCreatePersonViewControllerViewMarginHorizontal,
+													 MHCreatePersonViewControllerTextFieldHeight);
+	
+	self.scrollView.contentSize		= CGSizeMake(CGRectGetWidth(self.scrollView.frame), CGRectGetMaxY(self.permissionLevel.frame) + MHCreatePersonViewControllerMarginVertical);
+	self.scrollView.contentOffset	= CGPointZero;
+	
+	if (CGRectGetHeight(self.view.frame) > self.scrollView.contentSize.height) {
+		
+		self.scrollView.scrollEnabled	= NO;
+		
+	} else {
+		
+		self.scrollView.scrollEnabled	= YES;
+		
+	}
+	
+	[self clearKeyboard];
+	
+	self.navigationItem.rightBarButtonItem	= self.saveButton;
+	
+}
+
+- (void)updateBarButtons {
 	
 	//replace the right button that is already there
 	if ([self.navigationItem.rightBarButtonItem isEqual:self.saveButton]) {
@@ -185,7 +335,7 @@
 	
 }
 
--(void)replaceBarButtons {
+- (void)replaceBarButtons {
 	
 	//replace the left button
 	self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
@@ -515,7 +665,7 @@
 	
     //CGPoint newContentOffset	= self.scrollView.contentOffset;
 	//CGSize newContentSize		= self.scrollView.contentSize;
-	CGRect newRect				= CGRectZero;
+	__block CGRect newRect		= CGRectZero;
 	NSDictionary* keyboardInfo	= [notification userInfo];
     NSValue* keyboardFrameValue	= [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
 	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
@@ -530,6 +680,28 @@
     self.scrollView.frame = newRect;
 	
     [UIView commitAnimations];
+	
+	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+		
+		self.scrollView.frame = newRect;
+		
+	} completion:^(BOOL finished) {
+		
+		self.originalContentOffset	= self.scrollView.contentOffset;
+		
+		NSLog(@"%f > %f + %f (%f)", CGRectGetMaxY(self.activeTextField.frame), CGRectGetMaxY(self.scrollView.frame), self.scrollView.contentOffset.y, CGRectGetMaxY(self.scrollView.frame) + self.scrollView.contentOffset.y);
+		
+		if (CGRectGetMaxY(self.activeTextField.frame) > CGRectGetMaxY(self.scrollView.frame) + self.scrollView.contentOffset.y) {
+			
+			CGPoint newContentOffset	= self.scrollView.contentOffset;
+			newContentOffset.y			= CGRectGetMaxY(self.activeTextField.frame) - ( CGRectGetHeight(keyboardFrame) * 0.5 );
+			[self.scrollView setContentOffset:newContentOffset animated:YES];
+			
+		}
+		
+		[self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneButton, nil]];
+		
+	}];
 	/*
 	self.oldSize				= self.scrollView.frame;
 	
@@ -541,20 +713,6 @@
 	self.scrollView.contentSize	= newContentSize;
 	 */
 	//[self.scrollView setContentOffset:newContentOffset animated:YES];
-	
-	self.originalContentOffset	= self.scrollView.contentOffset;
-	
-	NSLog(@"%f > %f + %f (%f)", CGRectGetMaxY(self.activeTextField.frame), CGRectGetMaxY(self.scrollView.frame), self.scrollView.contentOffset.y, CGRectGetMaxY(self.scrollView.frame) + self.scrollView.contentOffset.y);
-	
-	if (CGRectGetMaxY(self.activeTextField.frame) > CGRectGetMaxY(self.scrollView.frame) + self.scrollView.contentOffset.y) {
-		
-		CGPoint newContentOffset	= self.scrollView.contentOffset;
-		newContentOffset.y			= CGRectGetMaxY(self.activeTextField.frame) - ( CGRectGetHeight(keyboardFrame) * 0.5 );
-		[self.scrollView setContentOffset:newContentOffset animated:YES];
-		
-	}
-	
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneButton, nil]];
 	
 }
 
@@ -570,11 +728,11 @@
 	self.scrollView.contentSize	= self.oldSize;
 	[self.scrollView setContentOffset:newContentOffset animated:YES];
 	*/
-	[UIView setAnimationBeginsFromCurrentState:YES];
-	
-    self.scrollView.frame = self.originalContentFrame;
-	
-    [UIView commitAnimations];
+	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+		
+		self.scrollView.frame = self.originalContentFrame;
+		
+	} completion:nil];
     
 }
 
@@ -675,6 +833,7 @@
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
 	[self updateBarButtons];
+	[self updateLayout];
 	
 }
 

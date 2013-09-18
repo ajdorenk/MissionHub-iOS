@@ -25,6 +25,5 @@ extern CGFloat const MHToolBarBarButtonMarginVertical;
 @interface MHToolbar : UIToolbar
 
 + (UIBarButtonItem *)barButtonWithStyle:(MHToolbarStyle)style target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar;
-+ (UIBarButtonItem *)barButtonWithImage:(UIImage *)image target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar;
 
 @end

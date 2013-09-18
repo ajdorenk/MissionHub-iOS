@@ -114,14 +114,13 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 	if (self.navigationController) {
 		
-		self.navigationItem.leftBarButtonItem = [MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		self.navigationItem.leftBarButtonItem = [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
 		
 	} else {
 		
 		if (!self.toolbar) {
 			
 			self.toolbar		= [[MHToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(parentFrame), 44)];
-			self.toolbar.alpha	= 0.5;
 			self.toolbar.items	= @[[MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.toolbar]];
 			[self.view addSubview:self.toolbar];
 			

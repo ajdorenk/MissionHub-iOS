@@ -8,10 +8,13 @@
 
 #import "MHToolbar.h"
 
-CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
+CGFloat const MHToolBarBarButtonMarginVertical		= 4.0;
+static CGFloat const MHToolBarBarButtonFontSize		= 12;
+static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 
 @interface MHToolbar ()
 
++ (UIBarButtonItem *)barButtonWithTitle:(NSString *)title image:(UIImage *)image target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar;
 - (void)configure;
 
 @end
@@ -64,6 +67,7 @@ CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
 + (UIBarButtonItem *)barButtonWithStyle:(MHToolbarStyle)style target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
 	
 	NSString *imageName = @"";
+	NSString *title		= @"";
 	
 	switch (style) {
 			
@@ -99,18 +103,20 @@ CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
 			
 		case MHToolbarStyleCancel:
 			
-			//imageName = @"MH_Mobile_Button_Cancel_72.png";
-			imageName = @"MH_Mobile_Button_Done_72.png";
+			title		= @"Cancel";
+			imageName	= @"MH_Mobile_Menu_Button_Red_72.png";
 			break;
 			
 		case MHToolbarStyleDone:
 			
-			imageName = @"MH_Mobile_Button_Done_72.png";
+			//title		= @"Done";
+			imageName	= @"MH_Mobile_Button_Done_72.png";
 			break;
 			
 		case MHToolbarStyleSave:
 			
-			imageName = @"MH_Mobile_Button_Save_72.png";
+			//title		= @"Save";
+			imageName	= @"MH_Mobile_Button_Save_72.png";
 			break;
 			
 		default:
@@ -119,12 +125,13 @@ CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
 
 	UIImage *image = [UIImage imageNamed:imageName];
 
-	return [MHToolbar barButtonWithImage:image target:target selector:selector forBar:navigationOrToolbar];
+	return [MHToolbar barButtonWithTitle:title image:image target:target selector:selector forBar:navigationOrToolbar];
 
 }
 
-+ (UIBarButtonItem *)barButtonWithImage:(UIImage *)image target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
++ (UIBarButtonItem *)barButtonWithTitle:(NSString *)title image:(UIImage *)image target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
 	
+	NSString *buttonTitle	= ( title ? title : @"" );
 	UIImage *buttonImage	= ( image ? image : [[UIImage alloc] init] );
 	CGRect frame			= CGRectZero;
 	frame.size				= image.size;
@@ -141,7 +148,10 @@ CGFloat const MHToolBarBarButtonMarginVertical = 4.0;
 	
     UIButton *button		= [[UIButton alloc] initWithFrame:frame];
 	
-    [button setImage:buttonImage forState:UIControlStateNormal];
+	[button setTitle:buttonTitle forState:UIControlStateNormal];
+	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	button.titleLabel.font	= [UIFont fontWithName:MHToolBarBarButtonFont size:MHToolBarBarButtonFontSize];
+    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
 	
 	if (target && selector) {
 		
