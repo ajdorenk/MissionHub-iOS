@@ -675,62 +675,32 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 	newRect.size.width	= CGRectGetWidth(self.view.frame);
     newRect.size.height = CGRectGetHeight(self.view.frame) - CGRectGetHeight(keyboardFrame);
 	
-	[UIView beginAnimations:nil context:nil];
-	
-    self.scrollView.frame = newRect;
-	
-    [UIView commitAnimations];
-	
-	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		
 		self.scrollView.frame = newRect;
 		
-	} completion:^(BOOL finished) {
-		
-		self.originalContentOffset	= self.scrollView.contentOffset;
-		
-		NSLog(@"%f > %f + %f (%f)", CGRectGetMaxY(self.activeTextField.frame), CGRectGetMaxY(self.scrollView.frame), self.scrollView.contentOffset.y, CGRectGetMaxY(self.scrollView.frame) + self.scrollView.contentOffset.y);
-		
-		if (CGRectGetMaxY(self.activeTextField.frame) > CGRectGetMaxY(self.scrollView.frame) + self.scrollView.contentOffset.y) {
-			
-			CGPoint newContentOffset	= self.scrollView.contentOffset;
-			newContentOffset.y			= CGRectGetMaxY(self.activeTextField.frame) - ( CGRectGetHeight(keyboardFrame) * 0.5 );
-			[self.scrollView setContentOffset:newContentOffset animated:YES];
-			
-		}
-		
-		[self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneButton, nil]];
-		
-	}];
-	/*
-	self.oldSize				= self.scrollView.frame;
+	} completion:nil];
 	
-	CGFloat newHeight			= ( self.scrollView.contentSize.height + self.scrollView.contentOffset.y < CGRectGetMaxY(self.view.frame) + CGRectGetHeight(keyboardFrame) ? CGRectGetMaxY(self.view.frame) + CGRectGetHeight(keyboardFrame) - self.scrollView.contentOffset.y : self.scrollView.contentSize.height );
+	self.originalContentOffset	= self.scrollView.contentOffset;
 	
-	newContentSize.height		= newHeight;
-    newContentOffset.y			+= CGRectGetMinY(keyboardFrame);
+	if (CGRectGetMaxY(self.activeTextField.frame) > CGRectGetHeight(self.scrollView.frame) + self.scrollView.contentOffset.y) {
+		
+		CGPoint newContentOffset	= self.scrollView.contentOffset;
+		newContentOffset.y			= CGRectGetMaxY(self.activeTextField.frame) - ( CGRectGetHeight(keyboardFrame) * 0.5 );
+		[self.scrollView setContentOffset:newContentOffset animated:YES];
+		
+	}
 	
-	self.scrollView.contentSize	= newContentSize;
-	 */
-	//[self.scrollView setContentOffset:newContentOffset animated:YES];
+	[self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneButton, nil]];
 	
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    /*
-	CGPoint newContentOffset	= self.scrollView.contentOffset;
-	NSDictionary* keyboardInfo	= [notification userInfo];
-    NSValue* keyboardFrameValue	= [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
 	
-    newContentOffset.y			-= CGRectGetMinY(keyboardFrame);
-	
-	self.scrollView.contentSize	= self.oldSize;
-	[self.scrollView setContentOffset:newContentOffset animated:YES];
-	*/
-	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		
-		self.scrollView.frame = self.originalContentFrame;
+		self.scrollView.frame			= self.originalContentFrame;
+		[self.scrollView setContentOffset:self.originalContentOffset animated:YES];
 		
 	} completion:nil];
     
