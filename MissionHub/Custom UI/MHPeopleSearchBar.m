@@ -8,13 +8,15 @@
 
 #import "MHPeopleSearchBar.h"
 
-@interface MHPeopleSearchBar(){
-    UITextField *searchTextField;
-}
+@interface MHPeopleSearchBar ()
+
+@property (nonatomic, strong) UITextField *searchTextField;
 
 @end
 
 @implementation MHPeopleSearchBar
+
+@synthesize searchTextField	= _searchTextField;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,33 +30,43 @@
 
 
 -(void)layoutSubviews {
+	
     [super layoutSubviews];
     
-    CGRect frame = searchTextField.frame;
-    frame.origin.x = 0;
-    frame.origin.y = 0;
-    frame.size.height = self.frame.size.height;
-    frame.size.width = self.frame.size.width;
-    searchTextField.frame = frame;
+	if (self.searchTextField) {
+		
+		CGRect frame = self.searchTextField.frame;
+		frame.origin.x = 0;
+		frame.origin.y = 0;
+		frame.size.height = self.frame.size.height;
+		frame.size.width = self.frame.size.width;
+		self.searchTextField.frame	= frame;
+		self.searchTextField.font	= [UIFont fontWithName:@"Helvetica" size:20];
+		
+		UIImage *image					= [UIImage imageNamed:@"searchbar_image.png"];
+        UIImageView *view				= [[UIImageView alloc] initWithImage:image];
+        self.searchTextField.leftView	= view;
+		
+	}
+    
+	self.backgroundImage		= [UIImage imageNamed:@"Searchbar_background.png"];
+	
 }
 
 - (void)awakeFromNib {
+	
     [super awakeFromNib];
     
     for (int i = [self.subviews count] - 1; i >= 0; i--) {
+		
         UIView *subview = [self.subviews objectAtIndex:i];
-        if ([subview.class isSubclassOfClass:[UITextField class]]){
-            searchTextField = (UITextField *)subview;
+        if ([subview.class isSubclassOfClass:[UITextField class]]) {
+			
+            self.searchTextField = (UITextField *)subview;
+			
         }
-    } 
-    /*for(id subview in [self subviews])
-    {
-        if ([subview isKindOfClass:[UIButton class]]) {
-            [subview setEnabled:YES];
-        }
-    }*/
-    
-    //self.showsCancelButton = YES;
+		
+    }
     
 }
 

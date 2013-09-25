@@ -37,7 +37,7 @@ CGFloat const MHHeaderCellDateFontSize				= 12.0;
 		self.gradient						= [CAGradientLayer layer];
         self.gradient.frame					= CGRectMake(0, 0, CGRectGetWidth(self.frame), MHHeaderCellHeight);
         self.gradient.colors				= [NSArray arrayWithObjects:(id)[[UIColor whiteColor] CGColor], (id)[[UIColor colorWithRed:0.973 green:0.973 blue:0.973 alpha:1.000] CGColor], nil];
-        [background.layer addSublayer:self.gradient];
+        [background.layer insertSublayer:self.gradient atIndex:1];
 		
 		self.backgroundView					= background;
 		

@@ -167,10 +167,11 @@
 	
 	if (_activityViewController == nil) {
 		
-		NSArray *activities = [MHActivityViewController allActivities];
+		NSArray *activities		= [MHActivityViewController allActivities];
+		NSArray *activityItems	= ( self.selectedPeople ? self.selectedPeople : @[]);
 		
 		[self willChangeValueForKey:@"activityViewController"];
-		_activityViewController = [[MHActivityViewController alloc] initWithViewController:self activities:activities];
+		_activityViewController = [[MHActivityViewController alloc] initWithViewController:self activityItems:activityItems activities:activities];
 		[self didChangeValueForKey:@"activityViewController"];
 		
 	}
@@ -194,10 +195,11 @@
     self.peopleSearchBar.layer.shadowRadius = 2.0f;
     self.peopleSearchBar.layer.shadowColor = [UIColor blackColor].CGColor;
     self.peopleSearchBar.placeholder = @"Search";
-    UITextField *text = [[self.peopleSearchBar subviews] objectAtIndex:1];
-    [text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
+    //UITextField *text = [[self.peopleSearchBar subviews] objectAtIndex:1];
+    //[text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
     
     [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
+	[self.activityViewController setModalInPopover:NO];
 	
 	[self updateBarButtons];
 	
@@ -217,7 +219,7 @@
     
     [super viewDidLoad];
 	
-    [self setTextFieldLeftView];
+    //[self setTextFieldLeftView];
 	
 	self.refreshController = [[ODRefreshControl alloc] initInScrollView:self.tableView];
     [self.refreshController addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
@@ -819,7 +821,7 @@
 	if (person) {
 		
 		[self.selectedPeople addObject:person];
-		self.activityViewController.userInfo = @{ @"people": self.selectedPeople };
+		self.activityViewController.activityItems	= self.selectedPeople;
 		
 	}
 	
@@ -837,7 +839,7 @@
 	if (person) {
 		
 		[self.selectedPeople removeObject:person];
-		self.activityViewController.userInfo = @{ @"people": self.selectedPeople };
+		self.activityViewController.activityItems	= self.selectedPeople;
 		
 	}
 	
@@ -863,6 +865,17 @@
 -(void)controller:(MHCreatePersonViewController *)controller didCreatePerson:(MHPerson *)person {
 	
 	[self refresh];
+	
+}
+
+#pragma mark - MHActivityViewControllerDelegate
+
+- (void)activityDidFinish:(BOOL)completed {
+	
+	//remove activity view controller
+	[self.selectedPeople removeAllObjects];
+	[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
+	[self.tableView reloadData];
 	
 }
 

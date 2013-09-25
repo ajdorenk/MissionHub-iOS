@@ -19,7 +19,7 @@
 #import "MHActivityViewController.h"
 #import "MHSortHeader.h"
 
-@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate, MHSortHeaderDelegate>
+@interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate, MHSortHeaderDelegate, MHActivityViewControllerDelegate>
 
 
 /*@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;

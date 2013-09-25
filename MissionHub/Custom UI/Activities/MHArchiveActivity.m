@@ -21,13 +21,19 @@
     if (!self)
         return nil;
     
-    __typeof(&*self) __weak weakSelf = self;
-    self.actionBlock = ^(REActivity *activity, REActivityViewController *activityViewController) {
-        NSDictionary *userInfo = weakSelf.userInfo ? weakSelf.userInfo : activityViewController.userInfo;
-        
-    };
+	//    __typeof(&*self) __weak weakSelf = self;
+	//    self.actionBlock = ^(REActivity *activity, REActivityViewController *activityViewController) {
+	//        NSDictionary *userInfo = weakSelf.userInfo ? weakSelf.userInfo : activityViewController.userInfo;
+	//
+	//    };
     
     return self;
+}
+
+- (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
+	
+	return YES;
+	
 }
 
 @end

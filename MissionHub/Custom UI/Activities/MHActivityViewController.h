@@ -9,8 +9,19 @@
 #import "REActivityViewController.h"
 #import "MHActivities.h"
 
+@protocol MHActivityViewControllerDelegate;
+
 @interface MHActivityViewController : REActivityViewController
 
+@property (nonatomic, weak) id<MHActivityViewControllerDelegate> delegate;
+
 + (NSArray *)allActivities;
+
+@end
+
+@protocol MHActivityViewControllerDelegate <NSObject>
+
+@optional
+- (void)activityDidFinish:(BOOL)completed;
 
 @end

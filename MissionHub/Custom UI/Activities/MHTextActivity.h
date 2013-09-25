@@ -7,7 +7,8 @@
 //
 
 #import "MHActivity.h"
+#import <MessageUI/MessageUI.h>
 
-@interface MHTextActivity : MHActivity
+@interface MHTextActivity : MHActivity <MFMessageComposeViewControllerDelegate>
 
 @end
