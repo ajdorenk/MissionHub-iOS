@@ -547,6 +547,7 @@
 	
 	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
 	self.type			= MHRequestOptionsTypeBulkDelete;
+	self.endpoint		= MHRequestOptionsEndpointOrganizationalPermissions;
 	
 	return self;
 }
@@ -557,6 +558,7 @@
 	
 	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
 	self.type			= MHRequestOptionsTypeBulkArchive;
+	self.endpoint		= MHRequestOptionsEndpointOrganizationalPermissions;
 	
 	return self;
 }
@@ -568,6 +570,7 @@
 	
 	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
 	self.type						= MHRequestOptionsTypeBulk;
+	self.endpoint					= MHRequestOptionsEndpointOrganizationalPermissions;
 	
 	if (newPermissionIdString.length > 0) {
 		[self addPostParam:@"add_permission" withValue:newPermissionIdString];
@@ -601,6 +604,7 @@
 		
 		[self reset];
 		self.type		= MHRequestOptionsTypeBulkUpdate;
+		self.endpoint	= MHRequestOptionsEndpointContactAssignments;
 		self.jsonObject	= contactAssignmentArray;
 		
 	}
@@ -617,6 +621,7 @@
 	
 	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
 	self.type						= MHRequestOptionsTypeBulk;
+	self.endpoint					= MHRequestOptionsEndpointOrganizationalLabels;
 	
 	if (addLabelIdString.length > 0) {
 		[self addPostParam:@"add_labels" withValue:addLabelIdString];
