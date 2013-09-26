@@ -167,12 +167,13 @@
 	
 	if (_activityViewController == nil) {
 		
-		NSArray *activities		= [MHActivityViewController allActivities];
-		NSArray *activityItems	= ( self.selectedPeople ? self.selectedPeople : @[]);
+		NSArray *activities					= [MHActivityViewController allActivities];
+		NSArray *activityItems				= ( self.selectedPeople ? self.selectedPeople : @[]);
 		
 		[self willChangeValueForKey:@"activityViewController"];
-		_activityViewController = [[MHActivityViewController alloc] initWithViewController:self activityItems:activityItems activities:activities];
+		_activityViewController				= [[MHActivityViewController alloc] initWithViewController:self activityItems:activityItems activities:activities];
 		[self didChangeValueForKey:@"activityViewController"];
+		_activityViewController.delegate	= self;
 		
 	}
 	
