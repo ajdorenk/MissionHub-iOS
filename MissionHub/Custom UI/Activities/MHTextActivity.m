@@ -11,7 +11,15 @@
 #import "MHPerson+Helper.h"
 #import "MHPhoneNumber.h"
 
+@interface MHTextActivity ()
+
+@property (nonatomic, strong) NSMutableArray *recipients;
+
+@end
+
 @implementation MHTextActivity
+
+@synthesize recipients	= _recipients;
 
 - (id)init
 {
@@ -22,56 +30,7 @@
     
     if (self) {
 		
-		__typeof(&*self) __weak weakSelf = self;
-		self.actionBlock = ^(REActivity *activity, REActivityViewController *activityViewController) {
-			
-			MFMessageComposeViewController *messageComposeViewController = [[MFMessageComposeViewController alloc] init];
-			messageComposeViewController.messageComposeDelegate = weakSelf;
-			
-			__block NSMutableArray *recipients	= [NSMutableArray array];
-			[weakSelf.activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
-				
-				MHPerson *person			= nil;
-				MHPhoneNumber *phoneNumber	= nil;
-				NSString *phoneNumberString	= @"";
-				
-				if ([object isKindOfClass:[MHPerson class]]) {
-					
-					person	= (MHPerson *)object;
-					
-					if (person.primaryPhone) {
-						
-						phoneNumberString	= person.primaryPhone;
-						
-					}
-					
-				}
-				
-				if ([object isKindOfClass:[MHPhoneNumber class]]) {
-					
-					phoneNumber	= (MHPhoneNumber *)object;
-					
-					if (phoneNumber.number) {
-						
-						phoneNumberString	= phoneNumber.number;
-						
-					}
-					
-				}
-				
-				if (phoneNumberString.length > 0) {
-					
-					[recipients addObject:phoneNumberString];
-					
-				}
-				
-			}];
-			
-			messageComposeViewController.recipients	= recipients;
-			
-			[activityViewController.presentingController presentViewController:messageComposeViewController animated:YES completion:nil];
-			
-		};
+		self.recipients	= [NSMutableArray array];
 		
 	}
     
@@ -102,17 +61,66 @@
 	
 }
 
+- (void)prepareWithActivityItems:(NSArray *)activityItems {
+	
+	self.activityItems	= activityItems;
+	
+	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+		
+		MHPerson *person			= nil;
+		MHPhoneNumber *phoneNumber	= nil;
+		NSString *phoneNumberString	= @"";
+		
+		if ([object isKindOfClass:[MHPerson class]]) {
+			
+			person	= (MHPerson *)object;
+			
+			if (person.primaryPhone) {
+				
+				phoneNumberString	= person.primaryPhone;
+				
+			}
+			
+		}
+		
+		if ([object isKindOfClass:[MHPhoneNumber class]]) {
+			
+			phoneNumber	= (MHPhoneNumber *)object;
+			
+			if (phoneNumber.number) {
+				
+				phoneNumberString	= phoneNumber.number;
+				
+			}
+			
+		}
+		
+		if (phoneNumberString.length > 0) {
+			
+			[self.recipients addObject:phoneNumberString];
+			
+		}
+		
+	}];
+	
+}
+
+- (void)performActivity {
+	
+	MFMessageComposeViewController *messageComposeViewController = [[MFMessageComposeViewController alloc] init];
+	messageComposeViewController.messageComposeDelegate = self;
+	
+	messageComposeViewController.recipients	= self.recipients;
+	
+	[self.activityViewController.presentingController presentViewController:messageComposeViewController animated:YES completion:nil];
+	
+}
+
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
 	
-	MHActivityViewController *activityViewController = (MHActivityViewController *)self.activityViewController;
+    [self.activityViewController.presentingController dismissViewControllerAnimated:YES completion:nil];
 	
-    [activityViewController.presentingController dismissViewControllerAnimated:YES completion:nil];
-	
-	if ([activityViewController.delegate respondsToSelector:@selector(activityDidFinish:)]) {
-		
-		[activityViewController.delegate activityDidFinish:result];
-		
-	}
+	[self activityDidFinish:result];
 	
 }
 

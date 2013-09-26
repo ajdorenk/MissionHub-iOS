@@ -11,71 +11,31 @@
 #import "MHPerson+Helper.h"
 #import "MHEmailAddress.h"
 
+@interface MHEmailActivity ()
+
+@property (nonatomic, strong) NSMutableArray *recipients;
+
+@end
+
 @implementation MHEmailActivity
 
-- (id)init
-{
+@synthesize recipients	= _recipients;
+
+- (id)init {
+	
     self = [super initWithTitle:@"Email"
                           image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Email_48"]
                     actionBlock:nil];
     
     
     if (self) {
-    
-		__typeof(&*self) __weak weakSelf = self;
-		self.actionBlock = ^(REActivity *activity, REActivityViewController *activityViewController) {
-			
-			MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
-			mailComposeViewController.mailComposeDelegate = weakSelf;
-			
-			__block NSMutableArray *recipients	= [NSMutableArray array];
-			[weakSelf.activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
-				
-				MHPerson *person				= nil;
-				MHEmailAddress *emailAddress	= nil;
-				NSString *emailString			= @"";
-				
-				if ([object isKindOfClass:[MHPerson class]]) {
-					
-					person	= (MHPerson *)object;
-					
-					if (person.primaryEmail) {
-						
-						emailString	= person.primaryEmail;
-						
-					}
-					
-				}
-				
-				if ([object isKindOfClass:[MHEmailAddress class]]) {
-					
-					emailAddress	= (MHEmailAddress *)object;
-					
-					if (emailAddress.email) {
-						
-						emailString	= emailAddress.email;
-						
-					}
-					
-				}
-				
-				if (emailString.length > 0) {
-					
-					[recipients addObject:emailString];
-					
-				}
-				
-			}];
-			
-			[mailComposeViewController setToRecipients:recipients];
-			
-			[activityViewController.presentingController presentViewController:mailComposeViewController animated:YES completion:nil];
-
-		};
+		
+		self.recipients	= [NSMutableArray array];
 		
 	}
     
     return self;
+	
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
@@ -102,17 +62,66 @@
 	
 }
 
+- (void)prepareWithActivityItems:(NSArray *)activityItems {
+	
+	self.activityItems	= activityItems;
+	
+	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+		
+		MHPerson *person				= nil;
+		MHEmailAddress *emailAddress	= nil;
+		NSString *emailString			= @"";
+		
+		if ([object isKindOfClass:[MHPerson class]]) {
+			
+			person	= (MHPerson *)object;
+			
+			if (person.primaryEmail) {
+				
+				emailString	= person.primaryEmail;
+				
+			}
+			
+		}
+		
+		if ([object isKindOfClass:[MHEmailAddress class]]) {
+			
+			emailAddress	= (MHEmailAddress *)object;
+			
+			if (emailAddress.email) {
+				
+				emailString	= emailAddress.email;
+				
+			}
+			
+		}
+		
+		if (emailString.length > 0) {
+			
+			[self.recipients addObject:emailString];
+			
+		}
+		
+	}];
+	
+}
+
+- (void)performActivity {
+	
+	MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+	mailComposeViewController.mailComposeDelegate = self;
+	
+	[mailComposeViewController setToRecipients:self.recipients];
+	
+	[self.activityViewController.presentingController presentViewController:mailComposeViewController animated:YES completion:nil];
+	
+}
+
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
 	
-	MHActivityViewController *activityViewController = (MHActivityViewController *)self.activityViewController;
+	[self.activityViewController.presentingController dismissViewControllerAnimated:YES completion:nil];
 	
-    [activityViewController.presentingController dismissViewControllerAnimated:YES completion:nil];
-	
-	if ([activityViewController.delegate respondsToSelector:@selector(activityDidFinish:)]) {
-		
-		[activityViewController.delegate activityDidFinish:result];
-		
-	}
+	[self activityDidFinish:result];
 	
 }
 

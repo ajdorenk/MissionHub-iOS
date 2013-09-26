@@ -7,7 +7,28 @@
 //
 
 #import "MHActivity.h"
+#import "MHActivityViewController.h"
+
+NSString * const MHActivityTypeDefault	= @"com.missionhub.mhactivity.type.default";
 
 @implementation MHActivity
+
+- (NSString *)activityType {
+	
+	return MHActivityTypeDefault;
+	
+}
+
+- (void)activityDidFinish:(BOOL)completed {
+	
+	MHActivityViewController *activityViewController = (MHActivityViewController *)self.activityViewController;
+	
+	if ([activityViewController.delegate respondsToSelector:@selector(activityDidFinish:)]) {
+		
+		[activityViewController.delegate activityDidFinish:completed];
+		
+	}
+	
+}
 
 @end
