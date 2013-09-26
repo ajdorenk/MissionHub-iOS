@@ -77,6 +77,7 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 	
 	[self.recipients removeAllObjects];
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
 		MHPerson *person				= nil;
@@ -109,7 +110,7 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 		
 		if (emailString.length > 0) {
 			
-			[self.recipients addObject:emailString];
+			[weakSelf.recipients addObject:emailString];
 			
 		}
 		

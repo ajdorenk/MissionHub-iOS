@@ -7,9 +7,10 @@
 //
 
 #import "MHActivity.h"
+#import "MHGenericListViewController.h"
 
 extern NSString * const MHActivityTypePermissions;
 
-@interface MHPermissionsActivity : MHActivity
+@interface MHPermissionsActivity : MHActivity <MHGenericListViewControllerDelegate>
 
 @end

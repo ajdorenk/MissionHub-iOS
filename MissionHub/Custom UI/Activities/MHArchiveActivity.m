@@ -71,11 +71,12 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 	
 	[self.peopleToArchive removeAllObjects];
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
 		if ([object isKindOfClass:[MHPerson class]]) {
 			
-			[self.peopleToArchive addObject:object];
+			[weakSelf.peopleToArchive addObject:object];
 			
 		}
 		
@@ -88,19 +89,18 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 	SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Warning"
 													 andMessage:[NSString stringWithFormat:@"Are you sure you want to archive %d people?", self.peopleToArchive.count]];
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[alertView addButtonWithTitle:@"Yes"
 							 type:SIAlertViewButtonTypeDestructive
 						  handler:^(SIAlertView *alertView) {
 							  
-							  [[MHAPI sharedInstance] bulkArchivePeople:self.peopleToArchive withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+							  [[MHAPI sharedInstance] bulkArchivePeople:weakSelf.peopleToArchive withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 								  
 								  SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																				   andMessage:[NSString stringWithFormat:@"%d people were successfully archived?", self.peopleToArchive.count]];
+																				   andMessage:[NSString stringWithFormat:@"%d people were successfully archived?", weakSelf.peopleToArchive.count]];
 								  [successAlertView addButtonWithTitle:@"Ok"
 														   type:SIAlertViewButtonTypeDestructive
 														handler:^(SIAlertView *alertView) {
-															
-															[self activityDidFinish:YES];
 															
 														}];
 								  
@@ -109,16 +109,18 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 								  
 								  [successAlertView show];
 								  
+								  [weakSelf activityDidFinish:YES];
+								  
 							  } failBlock:^(NSError *error, MHRequestOptions *options) {
 								  
-								  NSString *message				= [NSString stringWithFormat:@"Archiving %d people failed because: %@. If the problem persists please contact support@mission.com", self.peopleToArchive.count, [error localizedDescription]];
+								  NSString *message				= [NSString stringWithFormat:@"Archiving %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToArchive.count, [error localizedDescription]];
 								  NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 																				   code: [error code]
 																			   userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 								  
 								  [MHErrorHandler presentError:presentationError];
 								  
-								  [self activityDidFinish:NO];
+								  [weakSelf activityDidFinish:NO];
 								  
 							  }];
 							  
@@ -128,7 +130,7 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 							 type:SIAlertViewButtonTypeCancel
 						  handler:^(SIAlertView *alertView) {
 							  
-							  [self activityDidFinish:NO];
+							  [weakSelf activityDidFinish:NO];
 							  
 						  }];
 	

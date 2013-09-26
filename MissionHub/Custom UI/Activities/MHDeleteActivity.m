@@ -71,11 +71,12 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 	
 	[self.peopleToDelete removeAllObjects];
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
 		if ([object isKindOfClass:[MHPerson class]]) {
 			
-			[self.peopleToDelete addObject:object];
+			[weakSelf.peopleToDelete addObject:object];
 			
 		}
 		
@@ -88,19 +89,18 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 	SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Warning"
 													 andMessage:[NSString stringWithFormat:@"Are you sure you want to delete %d people?", self.peopleToDelete.count]];
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[alertView addButtonWithTitle:@"Yes"
 							 type:SIAlertViewButtonTypeDestructive
 						  handler:^(SIAlertView *alertView) {
 							  
-							  [[MHAPI sharedInstance] bulkDeletePeople:self.peopleToDelete withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+							  [[MHAPI sharedInstance] bulkDeletePeople:weakSelf.peopleToDelete withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 								  
 								  SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																				   andMessage:[NSString stringWithFormat:@"%d people were successfully deleted?", self.peopleToDelete.count]];
+																				   andMessage:[NSString stringWithFormat:@"%d people were successfully deleted?", weakSelf.peopleToDelete.count]];
 								  [successAlertView addButtonWithTitle:@"Ok"
 														   type:SIAlertViewButtonTypeDestructive
 														handler:^(SIAlertView *alertView) {
-															
-															[self activityDidFinish:YES];
 															
 														}];
 								  
@@ -109,15 +109,17 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 								  
 								  [successAlertView show];
 								  
+								  [weakSelf activityDidFinish:YES];
+								  
 							  } failBlock:^(NSError *error, MHRequestOptions *options) {
 								  
-								  NSString *message				= [NSString stringWithFormat:@"Deleting %d people failed because: %@. If the problem persists please contact support@mission.com", self.peopleToDelete.count, [error localizedDescription]];
+								  NSString *message				= [NSString stringWithFormat:@"Deleting %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToDelete.count, [error localizedDescription]];
 								  NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 																				   code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 								  
 								  [MHErrorHandler presentError:presentationError];
 								  
-								  [self activityDidFinish:NO];
+								  [weakSelf activityDidFinish:NO];
 								  
 							  }];
 							  
@@ -127,7 +129,7 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 							 type:SIAlertViewButtonTypeCancel
 						  handler:^(SIAlertView *alertView) {
 							  
-							  [self activityDidFinish:NO];
+							  [weakSelf activityDidFinish:NO];
 							  
 						  }];
 	

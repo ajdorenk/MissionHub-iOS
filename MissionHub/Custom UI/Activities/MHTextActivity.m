@@ -76,6 +76,7 @@ NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 	
 	[self.recipients removeAllObjects];
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
 		MHPerson *person			= nil;
@@ -108,7 +109,7 @@ NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 		
 		if (phoneNumberString.length > 0) {
 			
-			[self.recipients addObject:phoneNumberString];
+			[weakSelf.recipients addObject:phoneNumberString];
 			
 		}
 		
