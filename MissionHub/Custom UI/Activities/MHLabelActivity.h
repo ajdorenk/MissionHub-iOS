@@ -8,6 +8,8 @@
 
 #import "MHActivity.h"
 
+extern NSString * const MHActivityTypeLabel;
+
 @interface MHLabelActivity : MHActivity
 
 @end

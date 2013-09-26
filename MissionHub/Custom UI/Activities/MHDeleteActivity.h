@@ -8,6 +8,8 @@
 
 #import "MHActivity.h"
 
+extern NSString * const MHActivityTypeDelete;
+
 @interface MHDeleteActivity : MHActivity
 
 @end

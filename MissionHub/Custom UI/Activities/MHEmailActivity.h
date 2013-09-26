@@ -9,6 +9,8 @@
 #import "MHActivity.h"
 #import <MessageUI/MessageUI.h>
 
+extern NSString * const MHActivityTypeEmail;
+
 @interface MHEmailActivity : MHActivity <MFMailComposeViewControllerDelegate>
 
 @end

@@ -871,7 +871,7 @@
 
 #pragma mark - MHActivityViewControllerDelegate
 
-- (void)activityDidFinish:(BOOL)completed {
+- (void)activityDidFinish:(NSString *)activityType completed:(BOOL)completed {
 	
 	//remove activity view controller
 	[self.selectedPeople removeAllObjects];

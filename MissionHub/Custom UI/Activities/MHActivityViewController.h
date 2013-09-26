@@ -22,6 +22,6 @@
 @protocol MHActivityViewControllerDelegate <NSObject>
 
 @optional
-- (void)activityDidFinish:(BOOL)completed;
+- (void)activityDidFinish:(NSString *)activityType completed:(BOOL)completed;
 
 @end

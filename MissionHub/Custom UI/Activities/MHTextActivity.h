@@ -9,6 +9,8 @@
 #import "MHActivity.h"
 #import <MessageUI/MessageUI.h>
 
+extern NSString * const MHActivityTypeText;
+
 @interface MHTextActivity : MHActivity <MFMessageComposeViewControllerDelegate>
 
 @end

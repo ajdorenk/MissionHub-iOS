@@ -23,9 +23,9 @@ NSString * const MHActivityTypeDefault	= @"com.missionhub.mhactivity.type.defaul
 	
 	MHActivityViewController *activityViewController = (MHActivityViewController *)self.activityViewController;
 	
-	if ([activityViewController.delegate respondsToSelector:@selector(activityDidFinish:)]) {
+	if ([activityViewController.delegate respondsToSelector:@selector(activityDidFinish:completed:)]) {
 		
-		[activityViewController.delegate activityDidFinish:completed];
+		[activityViewController.delegate activityDidFinish:self.activityType completed:completed];
 		
 	}
 	

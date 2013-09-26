@@ -9,6 +9,8 @@
 #import "MHLabelActivity.h"
 #import "MHActivityViewController.h"
 
+NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
+
 @implementation MHLabelActivity
 
 - (id)init
@@ -28,6 +30,12 @@
 //    };
     
     return self;
+}
+
+- (NSString *)activityType {
+	
+	return MHActivityTypeLabel;
+	
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {

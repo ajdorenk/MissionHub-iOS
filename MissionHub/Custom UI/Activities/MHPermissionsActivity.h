@@ -8,6 +8,8 @@
 
 #import "MHActivity.h"
 
+extern NSString * const MHActivityTypePermissions;
+
 @interface MHPermissionsActivity : MHActivity
 
 @end

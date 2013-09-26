@@ -10,6 +10,9 @@
 #import "MHActivityViewController.h"
 #import "MHPerson+Helper.h"
 #import "MHEmailAddress.h"
+#import "MHErrorHandler.h"
+
+NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 
 @interface MHEmailActivity ()
 
@@ -35,6 +38,12 @@
 	}
     
     return self;
+	
+}
+
+- (NSString *)activityType {
+	
+	return MHActivityTypeEmail;
 	
 }
 
@@ -65,6 +74,8 @@
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
 	self.activityItems	= activityItems;
+	
+	[self.recipients removeAllObjects];
 	
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
@@ -121,7 +132,33 @@
 	
 	[self.activityViewController.presentingController dismissViewControllerAnimated:YES completion:nil];
 	
-	[self activityDidFinish:result];
+	BOOL completed	= NO;
+	
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			completed	= NO;
+			
+			break;
+		case MFMailComposeResultFailed:
+			completed	= NO;
+			
+			[MHErrorHandler presentError:error];
+			
+			break;
+		case MFMailComposeResultSaved:
+			completed	= YES;
+			
+			break;
+		case MFMailComposeResultSent:
+			completed	= YES;
+			
+			break;
+			
+		default:
+			break;
+	}
+	
+	[self activityDidFinish:completed];
 	
 }
 

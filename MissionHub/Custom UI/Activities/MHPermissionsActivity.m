@@ -9,6 +9,8 @@
 #import "MHPermissionsActivity.h"
 #import "MHActivityViewController.h"
 
+NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.permissions";
+
 @implementation MHPermissionsActivity
 
 - (id)init
@@ -28,6 +30,12 @@
 	//    };
     
     return self;
+}
+
+- (NSString *)activityType {
+	
+	return MHActivityTypePermissions;
+	
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {

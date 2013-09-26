@@ -10,6 +10,9 @@
 #import "MHActivityViewController.h"
 #import "MHPerson+Helper.h"
 #import "MHPhoneNumber.h"
+#import "MHErrorHandler.h"
+
+NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 
 @interface MHTextActivity ()
 
@@ -21,8 +24,8 @@
 
 @synthesize recipients	= _recipients;
 
-- (id)init
-{
+- (id)init {
+	
     self = [super initWithTitle:@"Text"
                           image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Text_48"]
                     actionBlock:nil];
@@ -35,6 +38,12 @@
 	}
     
     return self;
+}
+
+- (NSString *)activityType {
+	
+	return MHActivityTypeText;
+	
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
@@ -64,6 +73,8 @@
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
 	self.activityItems	= activityItems;
+	
+	[self.recipients removeAllObjects];
 	
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
@@ -120,7 +131,34 @@
 	
     [self.activityViewController.presentingController dismissViewControllerAnimated:YES completion:nil];
 	
-	[self activityDidFinish:result];
+	BOOL completed	= NO;
+	
+	switch (result) {
+		case MessageComposeResultCancelled: {
+			completed	= NO;
+			
+			break;
+		} case MessageComposeResultFailed: {
+			completed	= NO;
+			
+			NSError *error = [NSError errorWithDomain:MHActivityTypeText
+												 code:1
+											 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Text Failed to Send.", nil)}];
+			
+			[MHErrorHandler presentError:error];
+			
+			break;
+		} case MessageComposeResultSent: {
+			completed	= YES;
+			
+			break;
+			
+		} default:{
+			break;
+		}
+	}
+	
+	[self activityDidFinish:completed];
 	
 }
 

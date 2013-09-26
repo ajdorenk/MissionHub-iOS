@@ -9,6 +9,8 @@
 #import "MHAssignActivity.h"
 #import "MHActivityViewController.h"
 
+NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign";
+
 @implementation MHAssignActivity
 
 - (id)init
@@ -28,6 +30,12 @@
 	//    };
     
     return self;
+}
+
+- (NSString *)activityType {
+	
+	return MHActivityTypeAssign;
+	
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {

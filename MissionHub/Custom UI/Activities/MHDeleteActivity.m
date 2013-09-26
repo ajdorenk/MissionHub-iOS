@@ -13,6 +13,8 @@
 #import "MHPerson+Helper.h"
 #import "SIAlertView.h"
 
+NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete";
+
 @interface MHDeleteActivity ()
 
 @property (nonatomic, strong) NSMutableArray *peopleToDelete;
@@ -39,6 +41,12 @@
     return self;
 }
 
+- (NSString *)activityType {
+	
+	return MHActivityTypeDelete;
+	
+}
+
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
 	
 	__block BOOL hasPeople = NO;
@@ -61,6 +69,8 @@
 	
 	self.activityItems	= activityItems;
 	
+	[self.peopleToDelete removeAllObjects];
+	
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
 		if ([object isKindOfClass:[MHPerson class]]) {
@@ -76,7 +86,7 @@
 - (void)performActivity {
 	
 	SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Warning"
-													 andMessage:[NSString stringWithFormat:@"Are you sure you want to delete these %d people?", self.peopleToDelete.count]];
+													 andMessage:[NSString stringWithFormat:@"Are you sure you want to delete %d people?", self.peopleToDelete.count]];
 	
 	[alertView addButtonWithTitle:@"Yes"
 							 type:SIAlertViewButtonTypeDestructive
@@ -84,9 +94,9 @@
 							  
 							  [[MHAPI sharedInstance] bulkDeletePeople:self.peopleToDelete withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 								  
-								  SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Success"
+								  SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
 																				   andMessage:[NSString stringWithFormat:@"%d people were successfully deleted?", self.peopleToDelete.count]];
-								  [alertView addButtonWithTitle:@"Ok"
+								  [successAlertView addButtonWithTitle:@"Ok"
 														   type:SIAlertViewButtonTypeDestructive
 														handler:^(SIAlertView *alertView) {
 															
@@ -94,9 +104,14 @@
 															
 														}];
 								  
+								  successAlertView.transitionStyle = SIAlertViewTransitionStyleDropDown;
+								  successAlertView.backgroundStyle = SIAlertViewBackgroundStyleGradient;
+								  
+								  [successAlertView show];
+								  
 							  } failBlock:^(NSError *error, MHRequestOptions *options) {
 								  
-								  NSString *message				= [NSString stringWithFormat:@"Deleting these %d people failed because: %@. If the problem persists please contact support@mission.com", self.peopleToDelete.count, [error localizedDescription]];
+								  NSString *message				= [NSString stringWithFormat:@"Deleting %d people failed because: %@. If the problem persists please contact support@mission.com", self.peopleToDelete.count, [error localizedDescription]];
 								  NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 																				   code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 								  

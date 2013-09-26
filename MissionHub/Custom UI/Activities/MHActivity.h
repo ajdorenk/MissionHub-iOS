@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "REActivity.h"
 
+extern NSString * const MHActivityTypeDefault;
+
 @class MHActivity;
 @class MHActivityViewController;
 
