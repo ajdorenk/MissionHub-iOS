@@ -7,9 +7,10 @@
 //
 
 #import "MHActivity.h"
+#import "MHGenericListViewController.h"
 
 extern NSString * const MHActivityTypeAssign;
 
-@interface MHAssignActivity : MHActivity
+@interface MHAssignActivity : MHActivity <MHGenericListViewControllerDelegate>
 
 @end

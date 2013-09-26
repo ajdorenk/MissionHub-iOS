@@ -110,7 +110,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 		[[MHAPI sharedInstance] bulkChangePermissionLevel:permissionLevel forPeople:self.peopleToChangePermissionLevel withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 			
 			SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																	andMessage:[NSString stringWithFormat:@"%d people now are: %@?", weakSelf.peopleToChangePermissionLevel.count, permissionLevel.name]];
+																	andMessage:[NSString stringWithFormat:@"%d people now are: %@", weakSelf.peopleToChangePermissionLevel.count, permissionLevel.name]];
 			[successAlertView addButtonWithTitle:@"Ok"
 											type:SIAlertViewButtonTypeDestructive
 										 handler:^(SIAlertView *alertView) {
