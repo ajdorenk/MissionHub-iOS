@@ -96,4 +96,10 @@
 	
 }
 
+- (NSString *)displayString {
+	
+	return self.name;
+	
+}
+
 @end

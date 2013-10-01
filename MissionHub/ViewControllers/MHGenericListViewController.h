@@ -34,8 +34,10 @@
 @property (nonatomic, strong) NSMutableSet								*selectedSet;
 @property (nonatomic, strong) NSMutableSet								*suggestionSet;
 @property (nonatomic, assign) BOOL										multipleSelection;
+@property (nonatomic, assign) BOOL										useThreeStateCell;
 @property (nonatomic, assign) BOOL										showSuggestions;
 @property (nonatomic, assign) BOOL										showHeaders;
+@property (nonatomic, assign) BOOL										showApplyButton;
 
 - (void)refresh;
 - (BOOL)isSelected:(id)object;
@@ -44,16 +46,22 @@
 - (void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
 - (void)setSuggestions:(NSSet *)suggestionsArray andSelections:(NSSet *)selectedSet;
 - (void)setSuggestions:(NSSet *)suggestionsArray andSelectionObject:(id)selectedObject;
+- (void)setObjectsWithStateAllState:(NSArray *)allState someState:(NSArray *)someState noneState:(NSArray *)noneState;
 
 @end
 
-
+typedef enum {
+	MHGenericListObjectStateSelectedAll,
+	MHGenericListObjectStateSelectedSome,
+	MHGenericListObjectStateSelectedNone
+} MHGenericListObjectState;
 
 @protocol MHGenericListViewControllerDelegate <NSObject>
 
-@required
-- (void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
 @optional
+- (void)list:(MHGenericListViewController *)viewController didTapApplyButton:(UIBarButtonItem *)applyButton;
+- (void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
 - (void)list:(MHGenericListViewController *)viewController didDeselectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
+- (void)list:(MHGenericListViewController *)viewController didChangeState:(MHGenericListObjectState)state forObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
 
 @end
