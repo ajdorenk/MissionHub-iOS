@@ -176,26 +176,25 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	
 	permissionLevelList.selectionDelegate	= self;
 	permissionLevelList.multipleSelection	= YES;
-	permissionLevelList.useThreeStateCell	= YES;
 	permissionLevelList.showHeaders			= YES;
 	permissionLevelList.showSuggestions		= NO;
 	permissionLevelList.showApplyButton		= YES;
-	permissionLevelList.listTitle			= @"Users";
+	permissionLevelList.listTitle			= @"Label(s)";
 	[permissionLevelList setDataArray:[[MHAPI sharedInstance].currentOrganization.labels allObjects]];
-	[permissionLevelList setObjectsWithStateAllState:self.labelsWithAllState someState:self.labelsWithSomeState noneState:self.labelsWithNoneState];
+	[permissionLevelList setObjectsWithStateAllState:self.labelsWithAllState someState:self.labelsWithSomeState];
 	
 	[self.activityViewController.presentingController presentViewController:permissionLevelList animated:YES completion:nil];
 	
 }
 
-- (void)list:(MHGenericListViewController *)viewController didChangeState:(MHGenericListObjectState)state forObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+- (void)list:(MHGenericListViewController *)viewController didChangeObjectStateFrom:(MHGenericListObjectState)fromState toState:(MHGenericListObjectState)toState forObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
 	
 	if ([object isKindOfClass:[MHLabel class]]) {
 		
 		MHLabel *label = (MHLabel *)object;
 		NSDictionary *labelState	= [self.labelStates objectForKey:label.remoteID];
 		
-		[labelState setValue:[NSNumber numberWithInteger:state] forKey:@"afterState"];
+		[labelState setValue:[NSNumber numberWithInteger:toState] forKey:@"afterState"];
 		
 	}
 	

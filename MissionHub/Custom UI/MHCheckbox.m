@@ -8,34 +8,37 @@
 
 #import "MHCheckbox.h"
 
+@interface MHCheckbox ()
+
+- (void)configure;
+
+@end
+
 @implementation MHCheckbox
 
 @synthesize checkboxDelegate = _checkboxDelegate;
 
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
+	
     if (self = [super initWithFrame:frame]){
         
-		self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        
-		[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_UnChecked_48_padded.png"]forState:UIControlStateNormal];
-		[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_48_padded.png"]forState:UIControlStateSelected];
-		[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_PartiallyChecked_48_padded.png"]forState:UIControlStateHighlighted];
-		
-        [self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_UnChecked_48_padded.png"]forState:UIControlStateNormal];
-		[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_48_padded.png"]forState:UIControlStateSelected];
-		[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_PartiallyChecked_48_padded.png"]forState:UIControlStateHighlighted];
-        
-        [self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
+		[self configure];
 		
     }
+	
     return self;
 }
 
 -(void)awakeFromNib {
 	
 	[super awakeFromNib];
+	
+	[self configure];
+	
+}
+
+- (void)configure {
 	
 	self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 	
@@ -48,7 +51,6 @@
 	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_PartiallyChecked_48_padded.png"]forState:UIControlStateHighlighted];
 	
 	[self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
-	
 	
 }
 

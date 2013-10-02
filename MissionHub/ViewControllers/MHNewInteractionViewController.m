@@ -839,12 +839,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 		MHPerson *person = (MHPerson *)object;
 		
-		if ([viewController isEqual:[self initiatorsList]]) {
-			
-			[self.interaction addInitiatorsObject:person];
-			[self updateInterfaceForInitiators];
-			
-		} else if ([viewController isEqual:[self receiversList]]) {
+		if ([viewController isEqual:[self receiversList]]) {
 			
 			[self.navigationController popViewControllerAnimated:YES];
 			
@@ -857,15 +852,27 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 }
 
--(void)list:(MHGenericListViewController *)viewController didDeselectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+- (void)list:(MHGenericListViewController *)viewController didChangeObjectStateFrom:(MHGenericListObjectState)fromState toState:(MHGenericListObjectState)toState forObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
 	
 	if ([object isKindOfClass:[MHPerson class]]) {
 		
 		MHPerson *person = (MHPerson *)object;
 		
 		if ([viewController isEqual:[self initiatorsList]]) {
+		
+			if (toState == MHGenericListObjectStateSelectedAll) {
+				
+				[self.interaction addInitiatorsObject:person];
+				[self updateInterfaceForInitiators];
+				
+			}
 			
-			[self.interaction removeInitiatorsObject:person];
+			if (toState == MHGenericListObjectStateSelectedNone) {
+				
+				[self.interaction removeInitiatorsObject:person];
+				
+			}
+			
 			[self updateInterfaceForInitiators];
 			
 		}
@@ -873,6 +880,23 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	}
 	
 }
+
+//-(void)list:(MHGenericListViewController *)viewController didDeselectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+//	
+//	if ([object isKindOfClass:[MHPerson class]]) {
+//		
+//		MHPerson *person = (MHPerson *)object;
+//		
+//		if ([viewController isEqual:[self initiatorsList]]) {
+//			
+//			[self.interaction removeInitiatorsObject:person];
+//			[self updateInterfaceForInitiators];
+//			
+//		}
+//		
+//	}
+//	
+//}
 
 #pragma mark - Picker view data source
 

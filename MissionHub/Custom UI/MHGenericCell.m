@@ -10,68 +10,131 @@
 
 CGFloat const MHGenericCellMarginHorizontal	= 5.0;
 
+@interface MHGenericCell ()
+
+- (void)configure;
+- (MHGenericCellState)stateFromCheckBoxState:(MHBlankCheckboxState)state;
+
+@end
+
 @implementation MHGenericCell
 
-@synthesize label, checkmark;
+@synthesize state		= _state;
+@synthesize label		= _label;
+@synthesize checkmark	= _checkmark;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+	
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    
+	if (self) {
+		
         // Initialization code
-		self.checkmark.checkboxDelegate = self;
+		[self configure];
 		
     }
-    return self;
+    
+	return self;
 }
 
--(void)awakeFromNib {
+- (void)awakeFromNib {
 	
 	[super awakeFromNib];
+	
+	[self configure];
+	
+}
+
+- (void)configure {
 	
 	self.checkmark.checkboxDelegate = self;
 	
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-	
-}
-
--(void)populateWithTitle:(NSString *)text forObject:(id)object andSelected:(BOOL)selected atIndexPath:(NSIndexPath *)indexPath {
+- (void)populateWithTitle:(NSString *)text forObject:(id)object andState:(MHGenericCellState)state atIndexPath:(NSIndexPath *)indexPath {
 	
 	self.label.text	= text;
 	self.object		= object;
 	self.indexPath	= indexPath;
-	
-	[self.checkmark setSelected:selected];
+	self.state		= state;
 	
 }
 
--(void)checkbox:(MHCheckbox *)checkbox didChangeValue:(BOOL)checked {
+- (MHGenericCellState)stateFromCheckBoxState:(MHBlankCheckboxState)state {
 	
-	if (checked) {
+	switch (state) {
+			
+		case MHBlankCheckboxStateAll:
+			
+			return MHGenericCellStateAll;
+			
+			break;
+			
+		case MHBlankCheckboxStateSome:
+			
+			return MHGenericCellStateSome;
+			
+			break;
+			
+		case MHBlankCheckboxStateNone:
+			
+			return MHGenericCellStateNone;
+			
+			break;
+			
+		default:
+			break;
+	}
+	
+	return MHGenericCellStateNone;
+	
+}
+
+- (MHGenericCellState)state {
+	
+	return [self stateFromCheckBoxState:self.checkmark.state];
+	
+}
+
+- (void)setState:(MHGenericCellState)state {
+	
+	if (self.checkmark) {
 		
-		if ([self.cellDelegate respondsToSelector:@selector(cell:didSelectPerson:atIndexPath:)]) {
-			
-			[self.cellDelegate cell:self didSelectPerson:self.object atIndexPath:self.indexPath];
-			
-		}
-		
-	} else {
-		
-		if ([self.cellDelegate respondsToSelector:@selector(cell:didDeselectPerson:atIndexPath:)]) {
-			
-			[self.cellDelegate cell:self didDeselectPerson:self.object atIndexPath:self.indexPath];
-			
+		switch (state) {
+				
+			case MHGenericCellStateAll:
+				
+				self.checkmark.state	= MHBlankCheckboxStateAll;
+				
+				break;
+				
+			case MHGenericCellStateSome:
+				
+				self.checkmark.state	= MHBlankCheckboxStateSome;
+				
+				break;
+				
+			case MHGenericCellStateNone:
+				
+				self.checkmark.state	= MHBlankCheckboxStateNone;
+				
+				break;
+				
+			default:
+				break;
 		}
 		
 	}
 	
+}
+
+- (void)checkboxDidGetTapped:(MHBlankCheckbox *)checkbox {
 	
+	if ([self.cellDelegate respondsToSelector:@selector(cell:didChangeStateForObject:atIndexPath:)]) {
+		
+		[self.cellDelegate cell:self didChangeStateForObject:self.object atIndexPath:self.indexPath];
+		
+	}
 	
 }
 

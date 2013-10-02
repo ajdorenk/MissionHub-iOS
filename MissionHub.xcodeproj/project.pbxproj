@@ -91,6 +91,8 @@
 		682462F017D9432C00E1AFBB /* MHActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682462EE17D9432C00E1AFBB /* MHActivityViewController.m */; };
 		682C68E917B9E3A600BAD332 /* MHPermissionLevel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 682C68E817B9E3A600BAD332 /* MHPermissionLevel+Helper.m */; };
 		682C68EA17B9E3A600BAD332 /* MHPermissionLevel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 682C68E817B9E3A600BAD332 /* MHPermissionLevel+Helper.m */; };
+		6835D5CC17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6835D5CB17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png */; };
+		6835D5CD17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6835D5CB17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png */; };
 		683910871760FD3100E01B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910861760FD3100E01B46 /* UIKit.framework */; };
 		683910891760FD3100E01B46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910881760FD3100E01B46 /* Foundation.framework */; };
 		6839108B1760FD3100E01B46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108A1760FD3100E01B46 /* CoreGraphics.framework */; };
@@ -465,6 +467,7 @@
 		682462F117D9449400E1AFBB /* MHActivities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHActivities.h; path = "Custom UI/Activities/MHActivities.h"; sourceTree = "<group>"; };
 		682C68E717B9E3A600BAD332 /* MHPermissionLevel+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHPermissionLevel+Helper.h"; path = "Models/MHPermissionLevel+Helper.h"; sourceTree = "<group>"; };
 		682C68E817B9E3A600BAD332 /* MHPermissionLevel+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHPermissionLevel+Helper.m"; path = "Models/MHPermissionLevel+Helper.m"; sourceTree = "<group>"; };
+		6835D5CB17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png; sourceTree = "<group>"; };
 		683910831760FD3100E01B46 /* MissionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683910861760FD3100E01B46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		683910881760FD3100E01B46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1137,6 +1140,7 @@
 				68A38F2017AB593F0010CAC6 /* MH_Mobile_Checkbox_PartiallyChecked_24.png */,
 				68A38F2117AB593F0010CAC6 /* MH_Mobile_Checkbox_Checkmark_24.png */,
 				68A38F1D17AB585C0010CAC6 /* MH_Mobile_Checkbox_No_Box_No_Checkmark.png */,
+				6835D5CB17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png */,
 				68A38F1A17AB58220010CAC6 /* MH_Mobile_Checkbox_No_Box_Checkmark.png */,
 				AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */,
 				AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png */,
@@ -1501,6 +1505,7 @@
 				AD301139176FEEB800D53E35 /* FacebookSDKResources.bundle in Resources */,
 				683AE391176D2B1F0027EDE4 /* Entitlements.plist in Resources */,
 				683AE398176D2DC20027EDE4 /* appicon@2x.png in Resources */,
+				6835D5CC17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png in Resources */,
 				683AE39A176D2DC20027EDE4 /* appicon.png in Resources */,
 				683AE39C176D2DC20027EDE4 /* appicon-small@2x.png in Resources */,
 				683AE39E176D2DC20027EDE4 /* appicon-small.png in Resources */,
@@ -1593,6 +1598,7 @@
 				68839F521794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */,
 				6851291C17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */,
 				6851291E17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */,
+				6835D5CD17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png in Resources */,
 				68A38F0D17A9A9120010CAC6 /* survey.png in Resources */,
 				68A38F0F17A9A9120010CAC6 /* spiritual_convo.png in Resources */,
 				68A38F1117A9A9120010CAC6 /* gospel_pres.png in Resources */,

@@ -23,20 +23,53 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 
 @interface MHGenericListViewController ()
 
-@property (nonatomic, weak) IBOutlet UILabel		*listName;
-@property (nonatomic, weak) IBOutlet UITableView	*tableViewList;
-@property (nonatomic, weak) IBOutlet UIView			*contentView;
+@property (nonatomic, weak)   IBOutlet UILabel		*listName;
+@property (nonatomic, weak)   IBOutlet UITableView	*tableViewList;
+@property (nonatomic, weak)   IBOutlet UIView		*contentView;
 @property (nonatomic, strong) MHToolbar				*toolbar;
 
-- (void)addSelection:(id)selectionObject;
-- (void)removeSelection:(id)selectionObject;
+@property (nonatomic, strong) NSMutableArray		*objectArray;
+@property (nonatomic, strong) MHRequestOptions		*requestOptions;
+@property (nonatomic, strong) ODRefreshControl		*refreshController;
+
+@property (nonatomic, strong) NSMutableArray		*suggestionArray;
+@property (nonatomic, strong) id					selectedObject;
+@property (nonatomic, strong) NSMutableSet			*allStateSet;
+@property (nonatomic, strong) NSMutableSet			*someStateSet;
+@property (nonatomic, strong) NSMutableSet			*suggestionSet;
+
+@property (nonatomic, assign) BOOL					isLoading;
+@property (nonatomic, assign) BOOL					refreshIsLoading;
+@property (nonatomic, assign) BOOL					pagingIsLoading;
+@property (nonatomic, assign) BOOL					hasLoadedAllPages;
+
+//- (void)addSelection:(id)selectionObject;
+//- (void)removeSelection:(id)selectionObject;
 - (void)updateSelectedObject:(id)selectedObject;
+
+- (void)addObject:(id)object toSet:(NSMutableSet *)set;
+- (void)removeObject:(id)object fromSet:(NSMutableSet *)set;
+- (void)object:(id)object didChangeStateAtIndexPath:(NSIndexPath *)indexPath;
+- (void)changeStateOfObject:(id)object fromState:(MHGenericCellState)fromState toState:(MHGenericCellState)toState;
 
 - (void)willAddToSuggestionArray:(NSInteger)numberOfObjects;
 - (void)willRemoveFromSuggestionArray:(NSInteger)numberOfObjects;
 
 - (void)updateBarLayoutWithParentFrame:(CGRect)parentFrame;
 - (void)updateLayoutWithParentFrame:(CGRect)parentFrame;
+
+//- (BOOL)isSelected:(id)object;
+- (MHGenericListObjectState)stateForObject:(id)object;
+- (MHGenericListObjectState)stateFromCellState:(MHGenericCellState)cellState;
+- (MHGenericCellState)cellStateForObject:(id)object;
+- (MHGenericCellState)nextCellStateAfterState:(MHGenericCellState)state;
+
+- (void)applyButton:(id)sender;
+- (void)backToMenu:(id)sender;
+- (void)runApplyButtonCodeOnDelegateWithButton:(id)sender;
+- (void)dismiss;
+
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl;
 
 @end
 
@@ -57,7 +90,7 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 @synthesize hasLoadedAllPages		= _hasLoadedAllPages;
 @synthesize suggestionArray			= _suggestionArray;
 @synthesize selectedObject			= _selectedObject;
-@synthesize selectedSet				= _selectedSet;
+@synthesize allStateSet				= _allStateSet;
 @synthesize suggestionSet			= _suggestionSet;
 @synthesize multipleSelection		= _multipleSelection;
 @synthesize showSuggestions			= _showSuggestions;
@@ -79,13 +112,16 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	self.selectedObject		= nil;
     self.objectArray		= [NSMutableArray array];
 	self.suggestionSet		= [NSMutableSet set];
-	self.selectedSet		= [NSMutableSet set];
+	self.allStateSet		= [NSMutableSet set];
+	self.someStateSet		= [NSMutableSet set];
 	self.suggestionArray	= [NSMutableArray array];
 	self.requestOptions		= nil;
 	
 	self.multipleSelection	= NO;
 	self.showSuggestions	= YES;
 	self.showHeaders		= YES;
+	
+	self.showApplyButton	= NO;
 }
 
 - (void)viewDidLoad
@@ -114,19 +150,35 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 	if (self.navigationController) {
 		
-		self.navigationItem.leftBarButtonItem = [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		
+		if (self.showApplyButton) {
+			
+			self.navigationItem.rightBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleApply target:self selector:@selector(applyButton:) forBar:self.toolbar];
+			
+		}
 		
 	} else {
 		
 		if (!self.toolbar) {
 			
 			self.toolbar		= [[MHToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(parentFrame), 44)];
-			self.toolbar.items	= @[[MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.toolbar]];
 			[self.view addSubview:self.toolbar];
 			
 		} else {
 			
 			self.toolbar.frame	= CGRectMake(0, 0, CGRectGetWidth(parentFrame), 44);
+			
+		}
+		
+		if (self.showApplyButton) {
+			
+			self.toolbar.items	= @[[MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.toolbar],
+									[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+									[MHToolbar barButtonWithStyle:MHToolbarStyleApply target:self selector:@selector(applyButton:) forBar:self.toolbar]];
+			
+		} else {
+			
 			self.toolbar.items	= @[[MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.toolbar]];
 			
 		}
@@ -156,39 +208,171 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-- (BOOL)isSelected:(id)object {
+//- (BOOL)isSelected:(id)object {
+//	
+//	__block BOOL selected = NO;
+//	
+//	if (self.multipleSelection) {
+//		
+//		[self.allStateSet enumerateObjectsUsingBlock:^(id selectedObject, BOOL *stop) {
+//			
+//			if ([selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
+//				selected	= [selectedObject isEqualToString:object];
+//			} else if ([selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
+//				selected	= [selectedObject isEqualToModel:object];
+//			} else {
+//				selected = [selectedObject isEqual:object];
+//			}
+//			
+//			*stop		= selected;
+//			
+//		}];
+//		
+//	} else {
+//		
+//		if ([self.selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
+//			selected = [self.selectedObject isEqualToString:object];
+//		} else if ([self.selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
+//			selected = [self.selectedObject isEqualToModel:object];
+//		} else {
+//			selected = [self.selectedObject isEqual:object];
+//		}
+//		
+//	}
+//	
+//	return selected;
+//	
+//}
+
+- (MHGenericListObjectState)stateForObject:(id)object {
 	
-	__block BOOL selected = NO;
+	MHGenericCellState state	= [self cellStateForObject:object];
+	
+	return [self stateFromCellState:state];
+	
+}
+
+- (MHGenericListObjectState)stateFromCellState:(MHGenericCellState)cellState {
+	
+	MHGenericListObjectState state	= MHGenericListObjectStateSelectedNone;
+	
+	switch (cellState) {
+			
+		case MHGenericCellStateAll:
+			
+			state	= MHGenericListObjectStateSelectedAll;
+			
+			break;
+			
+		case MHGenericCellStateSome:
+			
+			state	= MHGenericListObjectStateSelectedSome;
+			
+			break;
+			
+		case MHGenericCellStateNone:
+			
+			state	= MHGenericListObjectStateSelectedNone;
+			
+			break;
+			
+		default:
+			break;
+	}
+	
+	return state;
+	
+}
+
+- (MHGenericCellState)nextCellStateAfterState:(MHGenericCellState)state {
+	
+	MHGenericCellState toState	= MHGenericCellStateAll;
+	
+	switch (state) {
+			
+		case MHBlankCheckboxStateAll:
+			
+			toState	= MHGenericCellStateNone;
+			
+			break;
+			
+		case MHBlankCheckboxStateSome:
+		case MHBlankCheckboxStateNone:
+			
+			toState	= MHGenericCellStateAll;
+			
+			break;
+			
+		default:
+			break;
+			
+	}
+	
+	return toState;
+	
+}
+
+- (MHGenericCellState)cellStateForObject:(id)object {
+	
+	__block MHGenericCellState state	= MHGenericCellStateNone;
 	
 	if (self.multipleSelection) {
 		
-		[self.selectedSet enumerateObjectsUsingBlock:^(id selectedObject, BOOL *stop) {
+		[self.allStateSet enumerateObjectsUsingBlock:^(id selectedObject, BOOL *stop) {
 			
 			if ([selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
-				selected	= [selectedObject isEqualToString:object];
+				*stop	= [selectedObject isEqualToString:object];
 			} else if ([selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
-				selected	= [selectedObject isEqualToModel:object];
+				*stop	= [selectedObject isEqualToModel:object];
 			} else {
-				selected = [selectedObject isEqual:object];
+				*stop = [selectedObject isEqual:object];
 			}
 			
-			*stop		= selected;
+			if (*stop) {
+				state	= MHGenericCellStateAll;
+			}
 			
 		}];
 		
+		if (state == MHGenericListObjectStateSelectedNone) {
+			
+			[self.someStateSet enumerateObjectsUsingBlock:^(id selectedObject, BOOL *stop) {
+				
+				if ([selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
+					*stop	= [selectedObject isEqualToString:object];
+				} else if ([selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
+					*stop	= [selectedObject isEqualToModel:object];
+				} else {
+					*stop = [selectedObject isEqual:object];
+				}
+				
+				if (*stop) {
+					state	= MHGenericCellStateSome;
+				}
+				
+			}];
+			
+		}
+		
 	} else {
 		
+		BOOL selected	= NO;
+		
 		if ([self.selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
-			selected = [self.selectedObject isEqualToString:object];
+			selected	= [self.selectedObject isEqualToString:object];
 		} else if ([self.selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
-			selected = [self.selectedObject isEqualToModel:object];
+			selected	= [self.selectedObject isEqualToModel:object];
 		} else {
-			selected = [self.selectedObject isEqual:object];
+			selected	= [self.selectedObject isEqual:object];
+		}
+		
+		if (selected) {
+			state		= MHGenericCellStateAll;
 		}
 		
 	}
 	
-	return selected;
+	return state;
 	
 }
 
@@ -199,8 +383,7 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
-{
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl {
 	
 	if (self.requestOptions) {
 	
@@ -252,8 +435,10 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 
 - (void)setSuggestions:(NSSet *)suggestionSet andSelections:(NSSet *)selectedSet {
 	
+	self.multipleSelection		= YES;
 	self.suggestionSet			= [NSMutableSet setWithSet:suggestionSet];
-	self.selectedSet			= [NSMutableSet setWithSet:selectedSet];
+	self.allStateSet			= [NSMutableSet setWithSet:selectedSet];
+	self.someStateSet			= [NSMutableSet set];
 	self.selectedObject			= nil;
 	
 	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
@@ -280,19 +465,19 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	}];
 	
 	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
-	[self.selectedSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
+	[self.allStateSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
 		
 		if ([suggestionObject isKindOfClass:[MHModel class]]) {
 			
 			//remove all repeats if remote ID is the same
 			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)suggestionObject valueForKey:@"remoteID"]];
-			NSArray *filteredArray = [[self.selectedSet allObjects] filteredArrayUsingPredicate:predicate];
+			NSArray *filteredArray = [[self.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
 			
 			if ([filteredArray count] > 1) {
 				
 				for (NSInteger resultCounter = 1; resultCounter < [filteredArray count]; resultCounter++) {
 					
-					[self.selectedSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+					[self.allStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
 					
 				}
 				
@@ -303,7 +488,7 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	}];
 	
 	NSMutableSet *combinedSet	= [NSMutableSet setWithSet:self.suggestionSet];
-	[combinedSet addObjectsFromArray:[self.selectedSet allObjects]];
+	[combinedSet addObjectsFromArray:[self.allStateSet allObjects]];
 	
 	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
 	[combinedSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
@@ -336,8 +521,10 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 
 - (void)setSuggestions:(NSSet *)suggestionsSet andSelectionObject:(id)selectedObject {
 	
+	self.multipleSelection	= NO;
 	self.suggestionSet		= [NSMutableSet setWithSet:suggestionsSet];
-	self.selectedSet		= nil;
+	self.allStateSet		= [NSMutableSet set];
+	self.someStateSet		= [NSMutableSet set];
 	self.suggestionArray	= [NSMutableArray arrayWithArray:[suggestionsSet allObjects]];
 	
 	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
@@ -399,44 +586,151 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-//TODO: change add, insert and remove object calls to ones that match the id.
-- (void)addSelection:(id)selectionObject {
+- (void)setObjectsWithStateAllState:(NSArray *)allState someState:(NSArray *)someState {
 	
-	if (selectionObject) {
+	self.multipleSelection		= YES;
+	self.allStateSet			= [NSMutableSet setWithArray:allState];
+	self.someStateSet			= [NSMutableSet setWithArray:someState];
+	self.suggestionSet			= [NSMutableSet set];
+	self.suggestionArray		= [NSMutableArray array];
+	self.selectedObject			= nil;
+	
+	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
+	[self.allStateSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
 		
-		if ([selectionObject isKindOfClass:[MHModel class]]) {
+		if ([suggestionObject isKindOfClass:[MHModel class]]) {
+			
+			//remove all repeats if remote ID is the same
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)suggestionObject valueForKey:@"remoteID"]];
+			NSArray *filteredArray = [[self.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
+			
+			if ([filteredArray count] > 1) {
+				
+				for (NSInteger resultCounter = 1; resultCounter < [filteredArray count]; resultCounter++) {
+					
+					[self.allStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+					
+				}
+				
+			}
+			
+		}
+		
+	}];
+	
+	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
+	[self.someStateSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
+		
+		if ([suggestionObject isKindOfClass:[MHModel class]]) {
+			
+			//remove all repeats if remote ID is the same
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)suggestionObject valueForKey:@"remoteID"]];
+			NSArray *filteredArray = [[self.someStateSet allObjects] filteredArrayUsingPredicate:predicate];
+			
+			if ([filteredArray count] > 1) {
+				
+				for (NSInteger resultCounter = 1; resultCounter < [filteredArray count]; resultCounter++) {
+					
+					[self.someStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+					
+				}
+				
+			}
+			
+		}
+		
+	}];
+	
+}
+
+- (void)changeStateOfObject:(id)object fromState:(MHGenericCellState)fromState toState:(MHGenericCellState)toState {
+	
+	if (!object) {
+		return;
+	}
+	
+	NSMutableSet *currentSet		= nil;
+	NSMutableSet *newSet			= nil;
+	
+	switch (fromState) {
+			
+		case MHGenericCellStateAll:
+			currentSet	= self.allStateSet;
+			break;
+			
+		case MHGenericCellStateSome:
+			currentSet	= self.someStateSet;
+			break;
+			
+		default:
+			break;
+	}
+	
+	if (currentSet) {
+		
+		[self removeObject:object fromSet:currentSet];
+		
+	}
+	
+	switch (toState) {
+			
+		case MHGenericCellStateAll:
+			newSet	= self.allStateSet;
+			break;
+			
+		case MHGenericCellStateSome:
+			newSet	= self.someStateSet;
+			break;
+			
+		default:
+			break;
+	}
+	
+	if (newSet) {
+		
+		[self addObject:object toSet:currentSet];
+		
+	}
+	
+}
+
+- (void)addObject:(id)object toSet:(NSMutableSet *)set {
+	
+	if (object && set) {
+		
+		if ([object isKindOfClass:[MHModel class]]) {
 			
 			//find all repeats if remote ID is the same
-			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)object valueForKey:@"remoteID"]];
 			NSArray *filteredArray = [self.suggestionArray filteredArrayUsingPredicate:predicate];
 			
 			if ([filteredArray count] == 0) {
 				
 				[self willAddToSuggestionArray:1];
-				[self.suggestionArray addObject:selectionObject];
+				[self.suggestionArray addObject:object];
 				
 			}
 			
-			predicate		= [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
-			filteredArray	= [[self.selectedSet allObjects] filteredArrayUsingPredicate:predicate];
+			predicate		= [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)object valueForKey:@"remoteID"]];
+			filteredArray	= [[set allObjects] filteredArrayUsingPredicate:predicate];
 			
 			if ([filteredArray count] == 0) {
 				
-				[self.selectedSet addObject:selectionObject];
+				[set addObject:object];
 				
 			}
 			
 		} else {
 			
 			//duplicate if same object
-			if (![self.suggestionSet member:selectionObject] || ![self.selectedSet member:selectionObject]) {
+			if (![self.suggestionSet member:object] || ![set member:object]) {
 				
 				[self willAddToSuggestionArray:1];
-				[self.suggestionArray addObject:selectionObject];
+				[self.suggestionArray addObject:object];
 				
 			}
 			
-			[self.selectedSet addObject:selectionObject];
+			[set addObject:object];
 			
 		}
 		
@@ -444,53 +738,149 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-- (void)removeSelection:(id)selectionObject {
+- (void)removeObject:(id)object fromSet:(NSMutableSet *)set {
 	
-	//remove from selectionSet
-	if ([selectionObject isKindOfClass:[MHModel class]]) {
-		
-		//remove all repeats if remote ID is the same
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
-		NSArray *filteredArray = [[self.selectedSet allObjects] filteredArrayUsingPredicate:predicate];
-		
-		for (NSInteger resultCounter = 0; resultCounter < [filteredArray count]; resultCounter++) {
+	if (object && set) {
+	
+		//remove from selectionSet
+		if ([object isKindOfClass:[MHModel class]]) {
 			
-			[self.selectedSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+			//remove all repeats if remote ID is the same
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)object valueForKey:@"remoteID"]];
+			NSArray *filteredArray = [[set allObjects] filteredArrayUsingPredicate:predicate];
+			
+			for (NSInteger resultCounter = 0; resultCounter < [filteredArray count]; resultCounter++) {
+				
+				[set removeObject:[filteredArray objectAtIndex:resultCounter]];
+				
+			}
+			
+		} else {
+			
+			[set removeObject:object];
 			
 		}
 		
-	} else {
-		
-		[self.selectedSet removeObject:selectionObject];
-		
-	}
-	
-	//remove from the suggestion array unless it is a suggestion (suggestion array is an array of sugestions and selections
-	if ([selectionObject isKindOfClass:[MHModel class]]) {
-		
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
-		NSArray *filteredArray = [[self.suggestionSet allObjects] filteredArrayUsingPredicate:predicate];
-		
-		if ([filteredArray count] == 0) {
+		//remove from the suggestion array unless it is a suggestion (suggestion array is an array of sugestions and selections
+		if ([object isKindOfClass:[MHModel class]]) {
 			
-			[self willRemoveFromSuggestionArray:1];
-			[self.suggestionArray removeObject:selectionObject];
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)object valueForKey:@"remoteID"]];
+			NSArray *filteredArray = [[self.suggestionSet allObjects] filteredArrayUsingPredicate:predicate];
 			
-		}
-		
-	} else {
-		
-		//if this object is a suggested object then keep it in the suggestion array and just deselect it
-		if (![self.suggestionSet member:selectionObject]) {
+			if ([filteredArray count] == 0) {
+				
+				[self willRemoveFromSuggestionArray:1];
+				[self.suggestionArray removeObject:object];
+				
+			}
 			
-			[self willRemoveFromSuggestionArray:1];
-			[self.suggestionArray removeObject:selectionObject];
+		} else {
+			
+			//if this object is a suggested object then keep it in the suggestion array and just deselect it
+			if (![self.suggestionSet member:object]) {
+				
+				[self willRemoveFromSuggestionArray:1];
+				[self.suggestionArray removeObject:object];
+				
+			}
 			
 		}
 		
 	}
 	
 }
+
+//- (void)addSelection:(id)selectionObject {
+//	
+//	if (selectionObject) {
+//		
+//		if ([selectionObject isKindOfClass:[MHModel class]]) {
+//			
+//			//find all repeats if remote ID is the same
+//			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
+//			NSArray *filteredArray = [self.suggestionArray filteredArrayUsingPredicate:predicate];
+//			
+//			if ([filteredArray count] == 0) {
+//				
+//				[self willAddToSuggestionArray:1];
+//				[self.suggestionArray addObject:selectionObject];
+//				
+//			}
+//			
+//			predicate		= [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
+//			filteredArray	= [[self.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
+//			
+//			if ([filteredArray count] == 0) {
+//				
+//				[self.allStateSet addObject:selectionObject];
+//				
+//			}
+//			
+//		} else {
+//			
+//			//duplicate if same object
+//			if (![self.suggestionSet member:selectionObject] || ![self.allStateSet member:selectionObject]) {
+//				
+//				[self willAddToSuggestionArray:1];
+//				[self.suggestionArray addObject:selectionObject];
+//				
+//			}
+//			
+//			[self.allStateSet addObject:selectionObject];
+//			
+//		}
+//		
+//	}
+//	
+//}
+
+//- (void)removeSelection:(id)selectionObject {
+//	
+//	//remove from selectionSet
+//	if ([selectionObject isKindOfClass:[MHModel class]]) {
+//		
+//		//remove all repeats if remote ID is the same
+//		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
+//		NSArray *filteredArray = [[self.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
+//		
+//		for (NSInteger resultCounter = 0; resultCounter < [filteredArray count]; resultCounter++) {
+//			
+//			[self.allStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+//			
+//		}
+//		
+//	} else {
+//		
+//		[self.allStateSet removeObject:selectionObject];
+//		
+//	}
+//	
+//	//remove from the suggestion array unless it is a suggestion (suggestion array is an array of sugestions and selections
+//	if ([selectionObject isKindOfClass:[MHModel class]]) {
+//		
+//		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
+//		NSArray *filteredArray = [[self.suggestionSet allObjects] filteredArrayUsingPredicate:predicate];
+//		
+//		if ([filteredArray count] == 0) {
+//			
+//			[self willRemoveFromSuggestionArray:1];
+//			[self.suggestionArray removeObject:selectionObject];
+//			
+//		}
+//		
+//	} else {
+//		
+//		//if this object is a suggested object then keep it in the suggestion array and just deselect it
+//		if (![self.suggestionSet member:selectionObject]) {
+//			
+//			[self willRemoveFromSuggestionArray:1];
+//			[self.suggestionArray removeObject:selectionObject];
+//			
+//		}
+//		
+//	}
+//	
+//}
 
 - (void)updateSelectedObject:(id)selectedObject {
 	
@@ -557,7 +947,7 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 			
 		} else {
 			
-			if (![self.suggestionSet member:self.selectedObject] && ![self.selectedSet member:self.selectedObject]) {
+			if (![self.suggestionSet member:self.selectedObject] && ![self.allStateSet member:self.selectedObject]) {
 				
 				[self.suggestionArray insertObject:self.selectedObject atIndex:0];
 				numberOfObjectsAddedToSuggestionArray++;
@@ -632,10 +1022,38 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-- (IBAction)backToMenu:(id)sender {
-    
-	if (self.navigationController) {
+- (void)applyButton:(id)sender {
 	
+	if ([self.selectionDelegate respondsToSelector:@selector(list:didTapApplyButton:)]) {
+		
+		[self performSelectorOnMainThread:@selector(runApplyButtonCodeOnDelegateWithButton:) withObject:sender waitUntilDone:YES];
+		
+	}
+	
+	[self dismiss];
+	
+}
+
+- (void)backToMenu:(id)sender {
+    
+	[self dismiss];
+	
+}
+
+- (void)runApplyButtonCodeOnDelegateWithButton:(id)sender {
+	
+	if ([self.selectionDelegate respondsToSelector:@selector(list:didTapApplyButton:)]) {
+		
+		[self.selectionDelegate list:self didTapApplyButton:sender];
+		
+	}
+	
+}
+
+- (void)dismiss {
+	
+	if (self.navigationController) {
+		
 		[self.navigationController popViewControllerAnimated:YES];
 		
 	} else {
@@ -691,8 +1109,7 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	if (indexPath.row < [self.objectArray count]) {
 		
@@ -705,26 +1122,23 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 		}
 		
 		id object		= nil;
-		BOOL selected	= NO;
 		
 		cell.cellDelegate = self;
 		
 		if (self.showSuggestions && indexPath.section == 0) {
 			
 			object		= [self.suggestionArray objectAtIndex:indexPath.row];
-			selected	= [self isSelected:object];;
 			
 		} else if ((self.showSuggestions && indexPath.section == 1) || (!self.showSuggestions && indexPath.section == 0)) {
 			
 			object		= [self.objectArray objectAtIndex:indexPath.row];
-			selected	= [self isSelected:object];
 			
 		}
 		
 		if ([object isKindOfClass:[NSString class]]) {
-			[cell populateWithTitle:object forObject:object andSelected:selected atIndexPath:indexPath];
+			[cell populateWithTitle:object forObject:object andState:[self cellStateForObject:object] atIndexPath:indexPath];
 		} else if ([object isKindOfClass:[MHModel class]]) {
-			[cell populateWithTitle:[(MHModel *)object displayString] forObject:object andSelected:selected atIndexPath:indexPath];
+			[cell populateWithTitle:[(MHModel *)object displayString] forObject:object andState:[self cellStateForObject:object] atIndexPath:indexPath];
 		}
 		
 		return cell;
@@ -824,19 +1238,54 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-//if selection is initiated by the cell (ie a button on the cell) instead of by the cell being selected
-//then that message should be passed on so the sam action can be taken
-- (void)cell:(MHGenericCell *)cell didSelectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
+////if selection is initiated by the cell (ie a button on the cell) instead of by the cell being selected
+////then that message should be passed on so the sam action can be taken
+//- (void)cell:(MHGenericCell *)cell didSelectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
+//	
+//	[self tableView:self.tableViewList didSelectRowAtIndexPath:indexPath];
+//	
+//}
+//
+////if selection is initiated by the cell (ie a button on the cell) instead of by the cell being selected
+////then that message should be passed on so the sam action can be taken
+//- (void)cell:(MHGenericCell *)cell didDeselectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
+//	
+//	[self tableView:self.tableViewList didSelectRowAtIndexPath:indexPath];
+//	
+//}
+
+- (void)cell:(MHGenericCell *)cell didChangeStateForObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
 	
-	[self tableView:self.tableViewList didSelectRowAtIndexPath:indexPath];
+	[self object:object didChangeStateAtIndexPath:indexPath];
 	
 }
 
-//if selection is initiated by the cell (ie a button on the cell) instead of by the cell being selected
-//then that message should be passed on so the sam action can be taken
-- (void)cell:(MHGenericCell *)cell didDeselectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
+- (void)object:(id)object didChangeStateAtIndexPath:(NSIndexPath *)indexPath {
 	
-	[self tableView:self.tableViewList didSelectRowAtIndexPath:indexPath];
+	if (self.multipleSelection) {
+		
+		MHGenericCellState fromState	= [self cellStateForObject:object];
+		MHGenericCellState toState		= [self nextCellStateAfterState:fromState];
+		
+		[self changeStateOfObject:object fromState:fromState toState:toState];
+		
+		if ([self.selectionDelegate respondsToSelector:@selector(list:didChangeObjectStateFrom:toState:forObject:atIndexPath:)]) {
+			
+			[self.selectionDelegate list:self didChangeObjectStateFrom:[self stateFromCellState:fromState] toState:[self stateFromCellState:toState] forObject:object atIndexPath:indexPath];
+			
+		}
+		
+	} else {
+		
+		[self updateSelectedObject:object];
+		
+		if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectObject:atIndexPath:)]) {
+			
+			[self.selectionDelegate list:self didSelectObject:object atIndexPath:indexPath];
+			
+		}
+		
+	}
 	
 }
 
@@ -874,56 +1323,27 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 	[self.tableViewList deselectRowAtIndexPath:indexPath animated:YES];
 	
-	id object;
+	id object		= nil;
 	
 	if (self.showSuggestions && indexPath.section == 0) {
 		
-		object						= [self.suggestionArray objectAtIndex:indexPath.row];
+		object		= [self.suggestionArray objectAtIndex:indexPath.row];
 		
 	} else {
 		
 		if (indexPath.row < self.objectArray.count) {
-			object					= [self.objectArray objectAtIndex:indexPath.row];
+			object	= [self.objectArray objectAtIndex:indexPath.row];
 		}
 		
 	}
 	
 	if (object) {
 		
-		if (self.multipleSelection) {
-			
-			if ([self isSelected:object]) {
-				
-				[self removeSelection:object];
-				
-				if ([self.selectionDelegate respondsToSelector:@selector(list:didDeselectObject:atIndexPath:)]) {
-					[self.selectionDelegate list:self didDeselectObject:object atIndexPath:indexPath];
-				}
-				
-			} else {
-				
-				[self addSelection:object];
-				
-				if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectObject:atIndexPath:)]) {
-					[self.selectionDelegate list:self didSelectObject:object atIndexPath:indexPath];
-				}
-				
-			}
-			
-		} else {
-		
-			[self updateSelectedObject:object];
-			
-			if ([self.selectionDelegate respondsToSelector:@selector(list:didSelectObject:atIndexPath:)]) {
-				[self.selectionDelegate list:self didSelectObject:object atIndexPath:indexPath];
-			}
-			
-		}
+		[self object:object didChangeStateAtIndexPath:indexPath];
 		
 	}
 	

@@ -70,35 +70,41 @@ static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 	NSString *title		= @"";
 	
 	switch (style) {
-			
+		
 		case MHToolbarStyleBack:
 			
-			imageName = @"MH_Mobile_Icon_LeftArrow.png";
+			imageName	= @"MH_Mobile_Icon_LeftArrow.png";
 			break;
 			
 		case MHToolbarStyleCreateInteraction:
 			
-			imageName = @"MH_Mobile_Icon_NewInteraction.png";
+			imageName	= @"MH_Mobile_Icon_NewInteraction.png";
 			break;
 			
 		case MHToolbarStyleCreatePerson:
 			
-			imageName = @"MH_Mobile_Icon_AddContact.png";
+			imageName	= @"MH_Mobile_Icon_AddContact.png";
 			break;
 			
 		case MHToolbarStyleLabel:
 			
-			imageName = @"MH_Mobile_Icon_Labels.png";
+			imageName	= @"MH_Mobile_Icon_Labels.png";
 			break;
 			
 		case MHToolbarStyleMenu:
 			
-			imageName = @"MH_Mobile_Icon_Menu.png";
+			imageName	= @"MH_Mobile_Icon_Menu.png";
 			break;
 			
 		case MHToolbarStyleMore:
 			
-			imageName = @"MH_Mobile_Icon_DownArrow.png";
+			imageName	= @"MH_Mobile_Icon_DownArrow.png";
+			break;
+			
+		case MHToolbarStyleApply:
+			
+			title		= @"Apply";
+			imageName	= @"MH_Mobile_Menu_Button_Red_72";
 			break;
 			
 		case MHToolbarStyleCancel:

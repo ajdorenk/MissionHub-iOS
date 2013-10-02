@@ -14,54 +14,41 @@
 #import "MHGenericCell.h"
 #import "MHToolbar.h"
 
-@protocol MHGenericListViewControllerDelegate;
-
-@interface MHGenericListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MHGenericCellDelegate>
-
-@property (nonatomic, weak) id<MHGenericListViewControllerDelegate>	selectionDelegate;
-@property (nonatomic, strong) NSMutableArray							*objectArray;
-@property (nonatomic, strong) MHRequestOptions							*requestOptions;
-@property (nonatomic, strong) ODRefreshControl							*refreshController;
-
-@property (nonatomic, assign) BOOL										isLoading;
-@property (nonatomic, assign) BOOL										refreshIsLoading;
-@property (nonatomic, assign) BOOL										pagingIsLoading;
-@property (nonatomic, assign) BOOL										hasLoadedAllPages;
-
-@property (nonatomic, strong) NSString									*listTitle;
-@property (nonatomic, strong) NSMutableArray							*suggestionArray;
-@property (nonatomic, strong) id										selectedObject;
-@property (nonatomic, strong) NSMutableSet								*selectedSet;
-@property (nonatomic, strong) NSMutableSet								*suggestionSet;
-@property (nonatomic, assign) BOOL										multipleSelection;
-@property (nonatomic, assign) BOOL										useThreeStateCell;
-@property (nonatomic, assign) BOOL										showSuggestions;
-@property (nonatomic, assign) BOOL										showHeaders;
-@property (nonatomic, assign) BOOL										showApplyButton;
-
-- (void)refresh;
-- (BOOL)isSelected:(id)object;
-- (void)setDataFromRequestOptions:(MHRequestOptions *)options;
-- (void)setDataArray:(NSArray *)dataArray;
-- (void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
-- (void)setSuggestions:(NSSet *)suggestionsArray andSelections:(NSSet *)selectedSet;
-- (void)setSuggestions:(NSSet *)suggestionsArray andSelectionObject:(id)selectedObject;
-- (void)setObjectsWithStateAllState:(NSArray *)allState someState:(NSArray *)someState noneState:(NSArray *)noneState;
-
-@end
-
 typedef enum {
 	MHGenericListObjectStateSelectedAll,
 	MHGenericListObjectStateSelectedSome,
 	MHGenericListObjectStateSelectedNone
 } MHGenericListObjectState;
 
+@protocol MHGenericListViewControllerDelegate;
+
+@interface MHGenericListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MHGenericCellDelegate>
+
+@property (nonatomic, weak)	  id<MHGenericListViewControllerDelegate>	selectionDelegate;
+
+@property (nonatomic, strong) NSString									*listTitle;
+
+@property (nonatomic, assign) BOOL										multipleSelection;
+@property (nonatomic, assign) BOOL										showSuggestions;
+@property (nonatomic, assign) BOOL										showHeaders;
+@property (nonatomic, assign) BOOL										showApplyButton;
+
+- (void)refresh;
+- (void)setDataFromRequestOptions:(MHRequestOptions *)options;
+- (void)setDataArray:(NSArray *)dataArray;
+- (void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
+- (void)setSuggestions:(NSSet *)suggestionsArray andSelections:(NSSet *)selectedSet;
+- (void)setSuggestions:(NSSet *)suggestionsArray andSelectionObject:(id)selectedObject;
+- (void)setObjectsWithStateAllState:(NSArray *)allState someState:(NSArray *)someState;
+
+@end
+
 @protocol MHGenericListViewControllerDelegate <NSObject>
 
 @optional
 - (void)list:(MHGenericListViewController *)viewController didTapApplyButton:(UIBarButtonItem *)applyButton;
 - (void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
-- (void)list:(MHGenericListViewController *)viewController didDeselectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
-- (void)list:(MHGenericListViewController *)viewController didChangeState:(MHGenericListObjectState)state forObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
+//- (void)list:(MHGenericListViewController *)viewController didDeselectObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
+- (void)list:(MHGenericListViewController *)viewController didChangeObjectStateFrom:(MHGenericListObjectState)fromState toState:(MHGenericListObjectState)toState forObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
 
 @end

@@ -11,10 +11,13 @@
 @interface MHBlankCheckbox ()
 
 - (void)configure;
+- (void)checkBoxClicked;
 
 @end
 
 @implementation MHBlankCheckbox
+
+@synthesize state	= _state;
 
 - (id)initWithFrame:(CGRect)frame {
 	
@@ -37,15 +40,73 @@
 
 - (void)configure {
 	
-	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
-	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
-	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateHighlighted];
+	self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 	
-	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
-	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
-	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateHighlighted];
+	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateHighlighted];
+	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateHighlighted];
 	
-	self.exclusiveTouch = NO;
+	self.state			= MHBlankCheckboxStateNone;
+	
+	self.exclusiveTouch	= NO;
+	
+	[self addTarget:self action:@selector(checkBoxClicked) forControlEvents:UIControlEventTouchUpInside];
+	
+}
+
+- (void)setState:(MHBlankCheckboxState)state {
+	
+	[self willChangeValueForKey:@"state"];
+	_state	= state;
+	[self didChangeValueForKey:@"state"];
+	
+	switch (state) {
+		
+		case MHBlankCheckboxStateAll:
+			
+			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateNormal];
+			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
+			
+			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateNormal];
+			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
+			
+			break;
+			
+		case MHBlankCheckboxStateSome:
+			
+			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateNormal];
+			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateSelected];
+			
+			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateNormal];
+			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateSelected];
+			
+			break;
+			
+		case MHBlankCheckboxStateNone:
+			
+			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
+			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateSelected];
+			
+			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
+			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateSelected];
+			
+			break;
+			
+		default:
+			break;
+			
+	}
+	
+	self.selected = ( self.selected ? NO : YES );
+	
+}
+
+- (void)checkBoxClicked {
+	
+	if ([self.checkboxDelegate respondsToSelector:@selector(checkboxDidGetTapped:)]) {
+		
+		[self.checkboxDelegate checkboxDidGetTapped:self];
+		
+	}
 	
 }
 

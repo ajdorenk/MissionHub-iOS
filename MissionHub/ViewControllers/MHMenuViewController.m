@@ -87,9 +87,9 @@
 -(void)changeOrganization {
 	
 	NSLog(@"change org");
-	self.organizationViewController.selectionDelegate = self;
-	self.organizationViewController.objectArray = [NSMutableArray arrayWithArray:[self.user.allOrganizations allObjects]];
-	[self presentViewController:self.organizationViewController animated:YES completion:nil];
+//	self.organizationViewController.selectionDelegate = self;
+//	self.organizationViewController.objectArray = [NSMutableArray arrayWithArray:[self.user.allOrganizations allObjects]];
+//	[self presentViewController:self.organizationViewController animated:YES completion:nil];
 	
 }
 

@@ -9,6 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "MHCheckbox.h"
 
-@interface MHBlankCheckbox : MHCheckbox
+typedef enum {
+	MHBlankCheckboxStateAll,
+	MHBlankCheckboxStateSome,
+	MHBlankCheckboxStateNone
+} MHBlankCheckboxState;
+
+@protocol MHBlankCheckboxDelegate;
+
+@interface MHBlankCheckbox : UIButton
+
+@property (nonatomic, weak) id<MHBlankCheckboxDelegate> checkboxDelegate;
+@property (nonatomic, assign) MHBlankCheckboxState state;
+
+@end
+
+@protocol MHBlankCheckboxDelegate <NSObject>
+@optional
+-(void)checkboxDidGetTapped:(MHBlankCheckbox *)checkbox;
 
 @end
