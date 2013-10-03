@@ -206,15 +206,15 @@
 			break;
 		case MHRequestOptionsTypeBulk:
 		case MHRequestOptionsTypeBulkCreate:
-		case MHRequestOptionsTypeBulkUpdate:
 		case MHRequestOptionsTypeBulkArchive:
-		case MHRequestOptionsTypeBulkDelete:
 		case MHRequestOptionsTypeCreate:
 			methodString = @"POST";
 			break;
+		case MHRequestOptionsTypeBulkUpdate:
 		case MHRequestOptionsTypeUpdate:
 			methodString = @"PUT";
 			break;
+		case MHRequestOptionsTypeBulkDelete:
 		case MHRequestOptionsTypeDelete:
 			methodString = @"DELETE";
 			break;

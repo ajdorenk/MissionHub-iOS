@@ -91,11 +91,11 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 			
 			[person.labels enumerateObjectsUsingBlock:^(MHOrganizationalLabel *organizationalLabel, BOOL *stop) {
 				
-				NSDictionary *labelState	= [weakSelf.labelStates objectForKey:organizationalLabel.label_id];
+				NSMutableDictionary *labelState	= weakSelf.labelStates[organizationalLabel.label_id];
 				
 				if (labelState) {
 					
-					NSMutableArray *peopleWithLabel		= [labelState objectForKey:@"people"];
+					NSMutableArray *peopleWithLabel		= labelState[@"people"];
 					
 					[peopleWithLabel addObject:person];
 					
@@ -103,8 +103,8 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 					
 					NSMutableArray *peopleWithLabel		= [NSMutableArray arrayWithObject:person];
 					
-					labelState	= @{@"people": peopleWithLabel};
-					[self.labelStates setObject:labelState forKey:organizationalLabel.label_id];
+					labelState	= [NSMutableDictionary dictionaryWithDictionary:@{@"people": peopleWithLabel}];
+					self.labelStates[organizationalLabel.label_id]		= labelState;
 					
 				}
 				
@@ -117,50 +117,50 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	//run through all the labels in the organization
 	[[MHAPI sharedInstance].currentOrganization.labels enumerateObjectsUsingBlock:^(MHLabel *label, BOOL *stop) {
 		
-		NSDictionary *labelState	= [weakSelf.labelStates objectForKey:label.remoteID];
+		NSMutableDictionary *labelState	= weakSelf.labelStates[label.remoteID];
 		
 		if (labelState) {
 			
-			NSMutableArray *peopleWithLabel		= [labelState objectForKey:@"people"];
+			NSMutableArray *peopleWithLabel		= labelState[@"people"];
 			
 			if (peopleWithLabel.count == weakSelf.people.count) {
 				
-				[labelState setValue:[NSNumber numberWithInteger:MHGenericListObjectStateSelectedAll] forKey:@"beforeState"];
-				[labelState setValue:[NSNumber numberWithInteger:MHGenericListObjectStateSelectedAll] forKey:@"afterState"];
+				labelState[@"beforeState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedAll];
+				labelState[@"afterState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedAll];
 				
 				[weakSelf.labelsWithAllState addObject:label];
 				
 			} else if (peopleWithLabel.count == 0) {
 				
-				[labelState setValue:[NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone] forKey:@"beforeState"];
-				[labelState setValue:[NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone] forKey:@"afterState"];
+				labelState[@"beforeState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone];
+				labelState[@"afterState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone];
 				
 				[weakSelf.labelsWithNoneState addObject:label];
 				
 			} else {
 				
-				[labelState setValue:[NSNumber numberWithInteger:MHGenericListObjectStateSelectedSome] forKey:@"beforeState"];
-				[labelState setValue:[NSNumber numberWithInteger:MHGenericListObjectStateSelectedSome] forKey:@"afterState"];
+				labelState[@"beforeState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedSome];
+				labelState[@"afterState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedSome];
 				
 				[weakSelf.labelsWithSomeState addObject:label];
 				
 			}
 			
-			[labelState setValue:label forKey:@"label"];
+			labelState[@"label"] = label;
 			
 			
 		} else {
 			
 			NSMutableArray *peopleWithLabel		= [NSMutableArray array];
 			
-			labelState	= @{
+			labelState	= [NSMutableDictionary dictionaryWithDictionary:@{
 							@"label":		label,
 							@"people":		peopleWithLabel,
 							@"beforeState": [NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone],
 							@"afterState":	[NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone]
-							};
+							}];
 			
-			[self.labelStates setObject:labelState forKey:label.remoteID];
+			self.labelStates[label.remoteID]	= labelState;
 			
 			[weakSelf.labelsWithNoneState addObject:label];
 			
@@ -176,7 +176,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	
 	permissionLevelList.selectionDelegate	= self;
 	permissionLevelList.multipleSelection	= YES;
-	permissionLevelList.showHeaders			= YES;
+	permissionLevelList.showHeaders			= NO;
 	permissionLevelList.showSuggestions		= NO;
 	permissionLevelList.showApplyButton		= YES;
 	permissionLevelList.listTitle			= @"Label(s)";
@@ -191,10 +191,10 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	
 	if ([object isKindOfClass:[MHLabel class]]) {
 		
-		MHLabel *label = (MHLabel *)object;
-		NSDictionary *labelState	= [self.labelStates objectForKey:label.remoteID];
+		MHLabel *label					= (MHLabel *)object;
+		NSMutableDictionary *labelState	= self.labelStates[label.remoteID];
 		
-		[labelState setValue:[NSNumber numberWithInteger:toState] forKey:@"afterState"];
+		labelState[@"afterState"]		= [NSNumber numberWithInteger:toState];
 		
 	}
 	
@@ -205,11 +205,11 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	__block NSMutableArray *labelsToAdd		= [NSMutableArray array];
 	__block NSMutableArray *labelsToRemove	= [NSMutableArray array];
 	
-	[self.labelStates enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary *labelState, BOOL *stop) {
+	[self.labelStates enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary *labelState, BOOL *stop) {
 		
-		MHLabel *label							= [labelState objectForKey:@"label"];
-		MHGenericListObjectState beforeState	= [[labelState objectForKey:@"beforeState"] integerValue];
-		MHGenericListObjectState afterState		= [[labelState objectForKey:@"afterState"] integerValue];
+		MHLabel *label							= labelState[@"label"];
+		MHGenericListObjectState beforeState	= [labelState[@"beforeState"] integerValue];
+		MHGenericListObjectState afterState		= [labelState[@"afterState"] integerValue];
 		
 		if (beforeState == MHGenericListObjectStateSelectedSome && afterState == MHGenericListObjectStateSelectedAll) {
 			

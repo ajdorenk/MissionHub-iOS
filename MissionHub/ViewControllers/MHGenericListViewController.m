@@ -688,7 +688,7 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 	if (newSet) {
 		
-		[self addObject:object toSet:currentSet];
+		[self addObject:object toSet:newSet];
 		
 	}
 	

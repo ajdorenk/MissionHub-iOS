@@ -91,8 +91,13 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 	permissionLevelList.multipleSelection	= NO;
 	permissionLevelList.showHeaders			= NO;
 	permissionLevelList.showSuggestions		= NO;
-	permissionLevelList.listTitle			= @"Users";
-	[permissionLevelList setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+	permissionLevelList.listTitle			= @"Admins & Users";
+	
+	NSMutableArray *peopleYouCanAssignTo	= [NSMutableArray arrayWithArray:[[MHAPI sharedInstance].currentOrganization.users allObjects]];
+	[peopleYouCanAssignTo addObjectsFromArray:[[MHAPI sharedInstance].currentOrganization.admins allObjects]];
+	[peopleYouCanAssignTo sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+	
+	[permissionLevelList setDataArray:peopleYouCanAssignTo];
 	
 	[self.activityViewController.presentingController presentViewController:permissionLevelList animated:YES completion:nil];
 	

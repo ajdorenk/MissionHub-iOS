@@ -572,7 +572,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 		NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 		
-		dateFormatter.dateFormat = @"dd MMM yyyy                    hh:mm a";
+		dateFormatter.dateFormat = @"dd MMM yyyy - hh:mm a";
 		
 		[self.dateTime setTitle: [dateFormatter stringFromDate:date] forState: UIControlStateNormal];
 		
@@ -622,6 +622,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		[self didChangeValueForKey:@"receiversList"];
 		
 		_receiversList.selectionDelegate	= self;
+		_receiversList.multipleSelection	= NO;
 		_receiversList.listTitle			= @"Receiver";
 		[_receiversList setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
 		
@@ -746,9 +747,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
     
 	NSMutableSet *suggestions	= [NSMutableSet setWithArray:self.suggestions];
 	[suggestions addObjectsFromArray:self.selectionsFromParent];
-	NSSet *receiverSet			= (self.interaction.receiver ? [NSSet setWithObject:self.interaction.receiver] : [NSSet set]);
 	
-	[[self receiversList] setSuggestions:suggestions andSelections:receiverSet];
+	[[self receiversList] setSuggestions:suggestions andSelectionObject:self.interaction.receiver];
     [self.navigationController pushViewController:[self receiversList] animated:YES];
 
 }
@@ -863,7 +863,6 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 			if (toState == MHGenericListObjectStateSelectedAll) {
 				
 				[self.interaction addInitiatorsObject:person];
-				[self updateInterfaceForInitiators];
 				
 			}
 			
