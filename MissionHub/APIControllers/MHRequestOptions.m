@@ -591,10 +591,10 @@
 			if ([object isKindOfClass:[MHPerson class]]) {
 				
 				//TODO: create a model for contact assignments and use model
-				NSDictionary *contactAssignment = @{
+				NSMutableDictionary *contactAssignment = [NSMutableDictionary dictionaryWithDictionary:@{
 										@"person_id"		: ((MHPerson *)object).remoteID,
 										@"assigned_to_id"	: person.remoteID
-				};
+				}];
 				
 				[contactAssignmentArray addObject:contactAssignment];
 				
