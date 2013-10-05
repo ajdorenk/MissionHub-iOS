@@ -32,8 +32,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 - (id)init {
 	
     self = [super initWithTitle:@"Label"
-                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Label_48"]
-                    actionBlock:nil];
+                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Label_48"]];
     
     
     if (self) {
@@ -76,7 +75,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
-	self.activityItems	= activityItems;
+	[super prepareWithActivityItems:activityItems];
 	
 	[self.people removeAllObjects];
 	

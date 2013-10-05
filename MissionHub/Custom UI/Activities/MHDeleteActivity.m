@@ -28,8 +28,7 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 - (id)init {
 	
     self = [super initWithTitle:@"Delete"
-                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Trash_48"]
-                    actionBlock:nil];
+                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Trash_48"]];
     
     
     if (self) {
@@ -67,7 +66,7 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
-	self.activityItems	= activityItems;
+	[super prepareWithActivityItems:activityItems];
 	
 	[self.peopleToDelete removeAllObjects];
 	

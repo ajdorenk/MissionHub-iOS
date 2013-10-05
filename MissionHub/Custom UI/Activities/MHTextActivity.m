@@ -27,8 +27,7 @@ NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 - (id)init {
 	
     self = [super initWithTitle:@"Text"
-                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Text_48"]
-                    actionBlock:nil];
+                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Text_48"]];
     
     
     if (self) {
@@ -72,7 +71,7 @@ NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
-	self.activityItems	= activityItems;
+	[super prepareWithActivityItems:activityItems];
 	
 	[self.recipients removeAllObjects];
 	
