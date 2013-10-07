@@ -178,7 +178,7 @@
 			[key isEqualToString:@"timestamp"] ||
 			[key isEqualToString:@"email_updated_at"]) {
 			
-			NSString *formattedValue = [NSDate date];
+			NSString *formattedValue = value;
 			
 			if ([value length] > 21) {
 				formattedValue = [[value substringToIndex:22] stringByAppendingString:[value substringFromIndex:23]];

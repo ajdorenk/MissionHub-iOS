@@ -28,8 +28,7 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 - (id)init {
 	
     self = [super initWithTitle:@"Archive"
-                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Archive_48"]
-                    actionBlock:nil];
+                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Archive_48"]];
     
     
     if (self) {
@@ -67,7 +66,7 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
-	self.activityItems	= activityItems;
+	[super prepareWithActivityItems:activityItems];
 	
 	[self.peopleToArchive removeAllObjects];
 	

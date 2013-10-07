@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5EA72502D0A548158B56B2D8"
+               BuildableName = "libPods-MissionHub.a"
+               BlueprintName = "Pods-MissionHub"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "683910821760FD3100E01B46"
                BuildableName = "MissionHub.app"
                BlueprintName = "MissionHub"
@@ -29,12 +43,22 @@
       buildConfiguration = "Debug">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "683910A71760FD3100E01B46"
                BuildableName = "MissionHubTests.octest"
                BlueprintName = "MissionHubTests"
+               ReferencedContainer = "container:MissionHub.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6867916E17FF4EC5000106BF"
+               BuildableName = "tests.xctest"
+               BlueprintName = "tests"
                ReferencedContainer = "container:MissionHub.xcodeproj">
             </BuildableReference>
          </TestableReference>

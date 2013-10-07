@@ -27,8 +27,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 - (id)init {
 	
     self = [super initWithTitle:@"Permission"
-                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Permissions_48"]
-                    actionBlock:nil];
+                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Permissions_48"]];
     
     
     if (self) {
@@ -66,7 +65,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
-	self.activityItems	= activityItems;
+	[super prepareWithActivityItems:activityItems];
 	
 	[self.peopleToChangePermissionLevel removeAllObjects];
 	

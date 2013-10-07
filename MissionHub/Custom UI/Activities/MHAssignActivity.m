@@ -27,8 +27,7 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 - (id)init
 {
     self = [super initWithTitle:@"Assign"
-                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Assign_48"]
-                    actionBlock:nil];
+                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Assign_48"]];
     
     
     if (self) {
@@ -66,7 +65,7 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
-	self.activityItems	= activityItems;
+	[super prepareWithActivityItems:activityItems];
 	
 	[self.peopleToAssign removeAllObjects];
 	

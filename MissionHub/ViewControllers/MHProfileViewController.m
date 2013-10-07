@@ -309,9 +309,9 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 
 - (void)addLabelActivity:(id)sender {
 
-	[self labelViewController].selectionDelegate = self;
-	[self labelViewController].objectArray = [NSMutableArray arrayWithArray:[[MHAPI sharedInstance].currentUser.currentOrganization.labels allObjects]];
-	[self presentViewController:[self labelViewController] animated:YES completion:nil];
+//	[self labelViewController].selectionDelegate = self;
+//	[self labelViewController].objectArray = [NSMutableArray arrayWithArray:[[MHAPI sharedInstance].currentUser.currentOrganization.labels allObjects]];
+//	[self presentViewController:[self labelViewController] animated:YES completion:nil];
 	
 }
 

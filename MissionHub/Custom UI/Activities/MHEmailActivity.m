@@ -27,8 +27,7 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 - (id)init {
 	
     self = [super initWithTitle:@"Email"
-                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Email_48"]
-                    actionBlock:nil];
+                          image:[UIImage imageNamed:@"MH_Mobile_ActionIcon_Email_48"]];
     
     
     if (self) {
@@ -73,7 +72,7 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
 	
-	self.activityItems	= activityItems;
+	[super prepareWithActivityItems:activityItems];
 	
 	[self.recipients removeAllObjects];
 	

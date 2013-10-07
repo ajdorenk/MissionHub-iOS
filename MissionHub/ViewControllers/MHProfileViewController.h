@@ -13,9 +13,9 @@
 #import "MHProfileMenuViewController.h"
 #import "MHGenericListViewController.h"
 
-@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, MHProfileProtocol, MHProfileMenuDelegate, MHGenericListViewControllerDelegate>
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate, MHProfileProtocol, MHProfileMenuDelegate, MHGenericListViewControllerDelegate>
 
-@property (nonatomic, strong) MHPerson							*person;
+@property (nonatomic, strong) MHPerson *person;
 
 - (void)refresh;
 

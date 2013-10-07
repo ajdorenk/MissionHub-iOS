@@ -1,6 +1,6 @@
 //
-//  MHActivityViewController.h
-//  MissionHub
+// MHActivityView.h
+// MissionHub
 //
 //  Created by Michael Harrison on 9/5/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
@@ -27,32 +27,32 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MHActivityView.h"
-#import "MHActivities.h"
+#import "MHActivity.h"
 
-@protocol MHActivityViewControllerDelegate;
+extern CGFloat const MHActivityWidth;
+extern CGFloat const MHActivityHeight;
+extern CGFloat const MHActivityViewVerticalMargin;
+extern CGFloat const MHActivityViewHorizontalMargin;
+extern NSUInteger const MHActivityViewMaxRowPerPage;
+extern CGFloat const MHActivityImageWidth;
+extern CGFloat const MHActivityImageHeight;
+extern CGFloat const MHActivityLabelWidth;
+extern CGFloat const MHActivityLabelHeight;
+extern CGFloat const MHActivityPageControlHeight;
 
-@interface MHActivityViewController : UIViewController
+@interface MHActivityView : UIView <UIScrollViewDelegate>
 
-@property (nonatomic, weak) id<MHActivityViewControllerDelegate> delegate;
-@property (nonatomic, strong) UIView *backgroundView;
-@property (nonatomic, strong, readonly) NSArray *activities;
-@property (nonatomic, strong) NSArray *activityItems;
-@property (nonatomic, strong) NSDictionary *userInfo;
-@property (nonatomic, strong) MHActivityView *activityView;
-@property (nonatomic, weak) UIViewController *presentingController;
+//@property (strong, nonatomic) UIImageView *backgroundImageView;
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIPageControl *pageControl;
+@property (strong, nonatomic) NSArray *activities;
+@property (strong, nonatomic) NSArray *activityItems;
+@property (weak, nonatomic) MHActivityViewController *activityViewController;
+//@property (strong, nonatomic) UIButton *cancelButton;
+@property (nonatomic, assign) NSUInteger maxRowsPerPage;
+@property (nonatomic, assign) NSUInteger maxColumnsPerPage;
 
-+ (NSArray *)allActivities;
 
-- (id)initWithViewController:(UIViewController *)viewController activityItems:(NSArray *)activityItems activities:(NSArray *)activities;
-- (void)presentFromRootViewController;
-- (void)presentFromViewController:(UIViewController *)controller;
-
-@end
-
-@protocol MHActivityViewControllerDelegate <NSObject>
-
-@optional
-- (void)activityDidFinish:(NSString *)activityType completed:(BOOL)completed;
+- (id)initWithFrame:(CGRect)frame activityItems:(NSArray *)activityItems activities:(NSArray *)activities;
 
 @end
