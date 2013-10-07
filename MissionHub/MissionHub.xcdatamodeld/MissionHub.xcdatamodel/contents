@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F45" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MHAddress" representedClassName="MHAddress" syncable="YES">
         <attribute name="address_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="address1" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,6 +25,14 @@
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="answers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHAnswer" inverseName="answerSheet" inverseEntity="MHAnswer" syncable="YES"/>
         <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="answerSheets" inverseEntity="MHPerson" syncable="YES"/>
+    </entity>
+    <entity name="MHContactAssignment" representedClassName="MHContactAssignment" syncable="YES">
+        <attribute name="assigned_to_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="organization_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="person_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="MHEmailAddress" representedClassName="MHEmailAddress" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
@@ -198,21 +206,22 @@
         <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="user" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MHAddress" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="MHEmailAddress" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="MHInteraction" positionX="-18" positionY="3281" width="128" height="225"/>
-        <element name="MHInteractionType" positionX="313" positionY="3321" width="128" height="165"/>
-        <element name="MHLabel" positionX="259" positionY="3137" width="128" height="150"/>
-        <element name="MHOrganization" positionX="493" positionY="2574" width="128" height="270"/>
-        <element name="MHOrganizationalLabel" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="MHOrganizationalPermission" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="MHPermissionLevel" positionX="207" positionY="2921" width="128" height="135"/>
-        <element name="MHPerson" positionX="232" positionY="2453" width="128" height="570"/>
-        <element name="MHPhoneNumber" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="MHQuestion" positionX="160" positionY="192" width="128" height="255"/>
-        <element name="MHSurvey" positionX="387" positionY="3492" width="128" height="195"/>
-        <element name="MHUser" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="MHAnswerSheet" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="MHAnswer" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="MHAddress" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHAnswer" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHAnswerSheet" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHEmailAddress" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHInteraction" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHInteractionType" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHLabel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHOrganization" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHOrganizationalLabel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHOrganizationalPermission" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHPermissionLevel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHPerson" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHPhoneNumber" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHQuestion" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHSurvey" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHUser" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHContactAssignment" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

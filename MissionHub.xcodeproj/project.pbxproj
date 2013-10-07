@@ -238,6 +238,10 @@
 		68C82E761803197F00A8D5A0 /* NSSet+MHSearchForRemoteID.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */; };
 		68C82E771803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.h in Sources */ = {isa = PBXBuildFile; fileRef = 6896649D17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.h */; };
 		68C82E781803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
+		68C82E7B180333C100A8D5A0 /* MHContactAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */; };
+		68C82E7C180333C100A8D5A0 /* MHContactAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */; };
+		68C82E7F1803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */; };
+		68C82E801803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */; };
 		68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
 		68D7AA441766C98000B9B0B1 /* MHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */; };
 		68D7AA491766CE4100B9B0B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA481766CE4100B9B0B1 /* Security.framework */; };
@@ -496,6 +500,10 @@
 		68C0696417710E60007C79D6 /* MHRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRequestOperation.m; path = APIControllers/MHRequestOperation.m; sourceTree = "<group>"; };
 		68C069671772252C007C79D6 /* MHRequestOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHRequestOptions.h; path = APIControllers/MHRequestOptions.h; sourceTree = "<group>"; };
 		68C069681772252C007C79D6 /* MHRequestOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRequestOptions.m; path = APIControllers/MHRequestOptions.m; sourceTree = "<group>"; };
+		68C82E79180333C100A8D5A0 /* MHContactAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHContactAssignment.h; path = Models/MHContactAssignment.h; sourceTree = "<group>"; };
+		68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHContactAssignment.m; path = Models/MHContactAssignment.m; sourceTree = "<group>"; };
+		68C82E7D1803343E00A8D5A0 /* MHContactAssignment+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHContactAssignment+Helper.h"; path = "Models/MHContactAssignment+Helper.h"; sourceTree = "<group>"; };
+		68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHContactAssignment+Helper.m"; path = "Models/MHContactAssignment+Helper.m"; sourceTree = "<group>"; };
 		68D7AA3C1766783200B9B0B1 /* MHAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAPI.h; path = APIControllers/MHAPI.h; sourceTree = "<group>"; };
 		68D7AA3D1766783200B9B0B1 /* MHAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAPI.m; path = APIControllers/MHAPI.m; sourceTree = "<group>"; };
 		68D7AA421766C98000B9B0B1 /* MHLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLoginViewController.h; path = APIControllers/MHLoginViewController.h; sourceTree = "<group>"; };
@@ -619,6 +627,8 @@
 				68818AFB17C7FFF800624887 /* MHAnswerSheet.m */,
 				68818B0817C81E7900624887 /* MHPerson.h */,
 				68818B0917C81E7900624887 /* MHPerson.m */,
+				68C82E79180333C100A8D5A0 /* MHContactAssignment.h */,
+				68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */,
 			);
 			name = CoreDataGeneratedClasses;
 			sourceTree = "<group>";
@@ -843,6 +853,8 @@
 				6823A7D1177EC34C00DBDF3F /* MHPhoneNumber.m */,
 				6823A7CC177EC34C00DBDF3F /* MHEmailAddress.h */,
 				6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */,
+				68C82E7D1803343E00A8D5A0 /* MHContactAssignment+Helper.h */,
+				68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1251,6 +1263,7 @@
 				68478D90177E8AE20014501D /* MHLabel.m in Sources */,
 				68478D9A177E8B140014501D /* MHGenericListViewController.m in Sources */,
 				68478DAE177E8C9F0014501D /* MHPeopleSearchBar.m in Sources */,
+				68C82E7F1803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */,
 				6823A7BB177EA4C900DBDF3F /* MHQuestion.m in Sources */,
 				6823A7CE177EC34C00DBDF3F /* MHEmailAddress.m in Sources */,
 				6823A7D2177EC34C00DBDF3F /* MHPhoneNumber.m in Sources */,
@@ -1276,6 +1289,7 @@
 				689F4E551798F57500BCAFFC /* MHInfoCell.m in Sources */,
 				68B7DDA317A2F95700849F31 /* MHInteraction+Helper.m in Sources */,
 				68B7DDA717A317BD00849F31 /* MHSurvey+Helper.m in Sources */,
+				68C82E7B180333C100A8D5A0 /* MHContactAssignment.m in Sources */,
 				68B7DDAB17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */,
 				68B7DDAF17A318D600849F31 /* MHOrganizationalPermission+Helper.m in Sources */,
 				68A38F0317A998730010CAC6 /* MHTextField.m in Sources */,
@@ -1372,6 +1386,7 @@
 				68C82E57180314FB00A8D5A0 /* MHPhoneNumber.m in Sources */,
 				68C82E58180314FB00A8D5A0 /* MHEmailAddress.h in Sources */,
 				68C82E59180314FB00A8D5A0 /* MHEmailAddress.m in Sources */,
+				68C82E7C180333C100A8D5A0 /* MHContactAssignment.m in Sources */,
 				68C82E5A180314FB00A8D5A0 /* MHAPI.h in Sources */,
 				68C82E5B180314FB00A8D5A0 /* MHAPI.m in Sources */,
 				68C82E5C180314FB00A8D5A0 /* MHRequestOperation.h in Sources */,
@@ -1379,6 +1394,7 @@
 				68C82E5E180314FB00A8D5A0 /* MHRequestOptions.h in Sources */,
 				68C82E5F180314FB00A8D5A0 /* MHRequestOptions.m in Sources */,
 				68C82E60180314FB00A8D5A0 /* MHLoginViewController.h in Sources */,
+				68C82E801803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */,
 				68C82E61180314FB00A8D5A0 /* MHLoginViewController.m in Sources */,
 				68C82E62180314FB00A8D5A0 /* MHErrorHandler.h in Sources */,
 				68C82E63180314FB00A8D5A0 /* MHErrorHandler.m in Sources */,

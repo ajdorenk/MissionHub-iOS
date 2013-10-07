@@ -7,6 +7,7 @@
 //
 
 #import "MHRequestOptions.h"
+#import "MHContactAssignment+Helper.h"
 
 //orientation macros
 #define UIDeviceOrientationIsPortrait(orientation)  ((orientation) == UIDeviceOrientationPortrait || (orientation) == UIDeviceOrientationPortraitUpsideDown)
@@ -591,12 +592,12 @@
 			if ([object isKindOfClass:[MHPerson class]]) {
 				
 				//TODO: create a model for contact assignments and use model
-				NSMutableDictionary *contactAssignment = [NSMutableDictionary dictionaryWithDictionary:@{
+				MHContactAssignment *contactAssignment = [MHContactAssignment newObjectFromFields:@{
 										@"person_id"		: ((MHPerson *)object).remoteID,
 										@"assigned_to_id"	: person.remoteID
 				}];
 				
-				[contactAssignmentArray addObject:contactAssignment];
+				[contactAssignmentArray addObject:contactAssignment.jsonObject];
 				
 			}
 			
@@ -971,9 +972,9 @@
 		case MHRequestOptionsEndpointAnswers:
 			endpointString = @"MHAnswer";
 			break;
-		//case MHRequestOptionsEndpointContactAssignments:
-		//	endpointString = @"MHContactAssignment";
-		//	break;
+		case MHRequestOptionsEndpointContactAssignments:
+			endpointString = @"MHContactAssignment";
+			break;
 		case MHRequestOptionsEndpointInteractions:
 			endpointString = @"MHInteraction";
 			break;
