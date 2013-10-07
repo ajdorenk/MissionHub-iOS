@@ -4,7 +4,29 @@
 //  The contents of this file are implicitly included at the beginning of every source file.
 //
 
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+#ifdef __IPHONE_6_0
+# define LINE_BREAK_WORD_WRAP NSLineBreakByWordWrapping
+#else
+# define LINE_BREAK_WORD_WRAP UILineBreakModeWordWrap
+#endif
+
+#pragma clang diagnostic pop
+
 #ifdef __OBJC__
-	#import <UIKit/UIKit.h>
-	#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import <QuartzCore/QuartzCore.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#import "MHAppDelegate.h"
 #endif
