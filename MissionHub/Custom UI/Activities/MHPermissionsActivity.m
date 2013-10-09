@@ -11,6 +11,7 @@
 #import "MHAPI.h"
 #import "MHPermissionLevel+Helper.h"
 #import "SIAlertView.h"
+#import "NSSet+MHSearchForRemoteID.h"
 
 NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.permissions";
 
@@ -107,6 +108,36 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 		
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] bulkChangePermissionLevel:permissionLevel forPeople:self.peopleToChangePermissionLevel withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+			
+			[weakSelf.peopleToChangePermissionLevel enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
+				
+				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
+					
+					MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.admins findWithRemoteID:person.remoteID];
+					[[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
+					
+				}
+				
+				if ([permissionLevel isEqualToModel:[MHPermissionLevel admin]]) {
+					
+					[[MHAPI sharedInstance].currentOrganization addAdminsObject:person];
+					
+				}
+				
+				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
+					
+					MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
+					[[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInAdminSet];
+					
+				}
+				
+				if ([permissionLevel isEqualToModel:[MHPermissionLevel user]]) {
+					
+					[[MHAPI sharedInstance].currentOrganization addUsersObject:person];
+					
+				}
+				
+			}];
 			
 			SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
 																	andMessage:[NSString stringWithFormat:@"%d people now are: %@", weakSelf.peopleToChangePermissionLevel.count, permissionLevel.name]];

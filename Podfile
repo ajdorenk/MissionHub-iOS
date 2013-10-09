@@ -18,8 +18,9 @@ target :MissionHub do
 
 	target :tests, :exclusive => true do
 		pod 'Kiwi/XCTest', '2.2.2'
-		pod 'KIF', '2.0.0'
-		pod 'OCHamcrest', '3.0.0'
+		pod 'KIF', '~> 2.0'
+		pod 'OCHamcrest', '~> 3.0'
+		pod 'Nocilla', '~> 0.7'
 	end
 
 end

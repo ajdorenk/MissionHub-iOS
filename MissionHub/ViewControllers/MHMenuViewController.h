@@ -13,6 +13,8 @@
 
 @interface MHMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MHGenericListViewControllerDelegate>
 
--(id)setCurrentUser:(MHPerson *)currentUser;
+@property (nonatomic, retain) MHOrganization *currentOrganization;
+
+//-(id)setCurrentUser:(MHPerson *)currentUser;
 
 @end

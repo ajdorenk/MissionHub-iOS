@@ -873,10 +873,33 @@
 
 - (void)activityDidFinish:(NSString *)activityType completed:(BOOL)completed {
 	
-	//remove activity view controller
-	[self.selectedPeople removeAllObjects];
-	[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
-	[self.tableView reloadData];
+	
+	if (completed) {
+		
+		//remove activity view controller
+		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
+		[self.selectedPeople removeAllObjects];
+		
+	}
+	
+	if ([activityType isEqualToString:MHActivityTypeArchive] ||
+		[activityType isEqualToString:MHActivityTypeAssign] ||
+		[activityType isEqualToString:MHActivityTypeDelete] ||
+		[activityType isEqualToString:MHActivityTypeLabel] ||
+		[activityType isEqualToString:MHActivityTypePermissions]) {
+
+		[self refresh];
+		
+	} else if ([activityType isEqualToString:MHActivityTypeEmail] ||
+			   [activityType isEqualToString:MHActivityTypeText]) {
+		
+		[self.tableView reloadData];
+		
+	} else {
+		
+		[self.tableView reloadData];
+		
+	}
 	
 }
 

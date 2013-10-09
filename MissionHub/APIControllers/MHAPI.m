@@ -361,26 +361,47 @@ typedef enum {
 			return;
 			
 		}
+	
+		NSString *keyForFirstObject				= [[result allKeys] objectAtIndex:0];
+		NSString *endpointName					= [operation.options stringForEndpoint];
+		NSString *endpointSingularName			= [operation.options stringInSingluarFormatForEndpoint];
+		NSString *peopleEndpointName			= [operation.options stringFromEndpoint:MHRequestOptionsEndpointPeople];
+		NSString *peopleEndpointSingularName	= [operation.options stringInSingluarFormatFromEndpoint:MHRequestOptionsEndpointPeople];
+		NSString *nameOfClassForPeopleEndpoint	= [operation.options classNameFromEndpoint:MHRequestOptionsEndpointPeople];
 		
 		//if the root of the response is the singular form of the endpoint's name then the root will hold one object matching the type of the endpoint. So we put that object into a model object and put it in the model array.
-		if ([[[result allKeys] objectAtIndex:0] isEqualToString:[operation.options stringInSingluarFormatForEndpoint]]) {
+		if ([keyForFirstObject isEqualToString:endpointSingularName] || [keyForFirstObject isEqualToString:peopleEndpointSingularName]) {
 
-			NSDictionary *responseObject = [result objectForKey:[operation.options stringInSingluarFormatForEndpoint]];
+			if ([keyForFirstObject isEqualToString:peopleEndpointSingularName]) {
+				
+				endpointSingularName	= peopleEndpointSingularName;
+				nameOfClassForEndpoint	= nameOfClassForPeopleEndpoint;
+				
+			}
+			
+			NSDictionary *responseObject = [result objectForKey:endpointSingularName];
 			
 			id modelObject = [MHModel newObjectForClass:nameOfClassForEndpoint fromFields:responseObject];
 			
 			[modelArray addObject:modelObject];
 			
-		} else if ([[[result allKeys] objectAtIndex:0] isEqualToString:[operation.options stringForEndpoint]]) {
+		} else if ([keyForFirstObject isEqualToString:endpointName] || [keyForFirstObject isEqualToString:peopleEndpointName]) {
 			
-			__block NSArray *arrayOfResponseObjects = [result objectForKey:[operation.options stringForEndpoint]];
+			if ([keyForFirstObject isEqualToString:peopleEndpointSingularName]) {
+				
+				endpointName			= peopleEndpointName;
+				nameOfClassForEndpoint	= nameOfClassForPeopleEndpoint;
+				
+			}
+			
+			__block NSArray *arrayOfResponseObjects = [result objectForKey:endpointName];
 			
 			//if changed you need to also change in the request options MHRequestOptions configureForInitialContactAssignmentsPageRequestWithAssignedToID:
 			if ([operation.requestName isEqualToString:MHAPIRequestNameContactAssignmentFilter]) {
 				
 				[arrayOfResponseObjects enumerateObjectsUsingBlock:^(id responseObject, NSUInteger index, BOOL *stop) {
 					
-					id modelObject = [MHModel newObjectForClass:[operation.options classNameFromEndpoint:MHRequestOptionsEndpointPeople]
+					id modelObject = [MHModel newObjectForClass:nameOfClassForPeopleEndpoint
 													 fromFields:[responseObject objectForKey:[operation.options stringFromInclude:MHRequestOptionsIncludeConactAssignmentsPerson]]];
 					
 					[modelArray addObject:modelObject];
@@ -403,7 +424,7 @@ typedef enum {
 			
 			error = [NSError errorWithDomain:MHAPIErrorDomain
 										code:MHAPIErrorMalformedResponse
-									userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has incorrect name for root element. It should match the name of the endpoint. Please contact support@missionhub.com", @"Response JSON object has incorrect name for root element. It should match the name of the endpoint. Please contact support@missionhub.com")}];
+									userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Response JSON object has incorrect name for root element. Please contact support@missionhub.com", nil)}];
 			
 			if (operation.failBlock) {
 				operation.failBlock(error, operation.options);

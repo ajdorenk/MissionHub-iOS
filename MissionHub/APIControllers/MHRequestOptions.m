@@ -250,12 +250,14 @@
 			
 			if ([self hasFilters]) {
 				
+				__block NSMutableDictionary *filterDictionary = [NSMutableDictionary dictionary];
 				[self.filters enumerateKeysAndObjectsUsingBlock:^(NSString *filter, NSString *value, BOOL *stop) {
 					
-					NSString *filterKey				= [NSString stringWithFormat:@"filters[%@]", filter];
-					parametersDictionary[filterKey] = value;
+					filterDictionary[filter]		= value;
 					
 				}];
+				
+				parametersDictionary[@"filters"]	= filterDictionary;
 				
 			}
 			
@@ -315,12 +317,14 @@
 			
 			if ([self hasFilters]) {
 				
+				__block NSMutableDictionary *filterDictionary = [NSMutableDictionary dictionary];
 				[self.filters enumerateKeysAndObjectsUsingBlock:^(NSString *filter, NSString *value, BOOL *stop) {
 					
-					NSString *filterKey				= [NSString stringWithFormat:@"filters[%@]", filter];
-					parametersDictionary[filterKey] = value;
+					filterDictionary[filter]		= value;
 					
 				}];
+				
+				parametersDictionary[@"filters"]	= filterDictionary;
 				
 			}
 			
@@ -342,12 +346,14 @@
 			
 			if ([self hasFilters]) {
 				
+				__block NSMutableDictionary *filterDictionary = [NSMutableDictionary dictionary];
 				[self.filters enumerateKeysAndObjectsUsingBlock:^(NSString *filter, NSString *value, BOOL *stop) {
 					
-					NSString *filterKey				= [NSString stringWithFormat:@"filters[%@]", filter];
-					parametersDictionary[filterKey] = value;
+					filterDictionary[filter]		= value;
 					
 				}];
+				
+				parametersDictionary[@"filters"]	= filterDictionary;
 				
 			}
 			
@@ -617,7 +623,7 @@
 	
 	NSString *idString				= [self idStringFromPeopleArray:people];
 	NSString *addLabelIdString		= [self idStringFromLabelArray:labelsToAdd];
-	NSString *removeLabelIdString	= [self idStringFromLabelArray:labelsToAdd];
+	NSString *removeLabelIdString	= [self idStringFromLabelArray:labelsToRemove];
 	
 	
 	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];

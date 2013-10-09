@@ -23,22 +23,25 @@
 @property (nonatomic, strong, readonly) MHNavigationViewController *peopleNavigationViewController;
 @property (nonatomic, strong, readonly) MHSurveyViewController *surveyViewController;
 @property (nonatomic, strong, readonly) MHGenericListViewController *organizationViewController;
-@property (nonatomic, strong) MHPerson *user;
+//@property (nonatomic, strong) MHPerson *user;
 @property (nonatomic, strong) NSArray *menuHeaders;
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
--(void)changeOrganization;
--(void)logout;
+- (void)updateMenuArrays;
+- (void)changeOrganization;
+- (void)logout;
 
 @end
 
 @implementation MHMenuViewController
 
+@synthesize currentOrganization				= _currentOrganization;
+
 @synthesize tableView						= _tableView;
 @synthesize peopleNavigationViewController	= _peopleNavigationViewController;
 @synthesize surveyViewController			= _surveyViewController;
 @synthesize organizationViewController		= _organizationViewController;
-@synthesize user							= _user;
+//@synthesize user							= _user;
 @synthesize menuHeaders						= _menuHeaders;
 @synthesize menuItems						= _menuItems;
 
@@ -120,9 +123,10 @@
 	self.menuHeaders	= @[@"", @"LABELS", @"CONTACT ASSIGNMENTS", @"SURVEYS", @"SETTINGS"];
 	self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"ALL CONTACTS"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"CHANGE ORGANIZATION", @"LOG OUT"]]];
 	
-	if ([MHAPI sharedInstance].currentUser) {
+	if ([MHAPI sharedInstance].currentOrganization) {
 		
-		[self setCurrentUser:[MHAPI sharedInstance].currentUser];
+		self.currentOrganization	= [MHAPI sharedInstance].currentOrganization;
+		//[self setCurrentUser:[MHAPI sharedInstance].currentUser];
 		
 	}
 	
@@ -147,14 +151,49 @@
 	
 }
 
--(id)setCurrentUser:(MHPerson *)currentUser {
+-(void)setCurrentOrganization:(MHOrganization *)currentOrganization {
 	
-	self.user = currentUser;
+	[self willChangeValueForKey:@"currentOrganization"];
+	_currentOrganization	= currentOrganization;
+	[self didChangeValueForKey:@"currentOrganization"];
+	
+	[_currentOrganization addObserver:self
+						   forKeyPath:@"admins"
+							  options:NSKeyValueObservingOptionNew
+							  context:nil];
+	[_currentOrganization addObserver:self
+						   forKeyPath:@"countOfAdmins"
+							  options:NSKeyValueObservingOptionNew
+							  context:nil];
+	[_currentOrganization addObserver:self
+						   forKeyPath:@"users"
+							  options:NSKeyValueObservingOptionNew
+							  context:nil];
+	[_currentOrganization addObserver:self
+						   forKeyPath:@"countOfUsers"
+							  options:NSKeyValueObservingOptionNew
+							  context:nil];
+	
+	[self updateMenuArrays];
+	
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	
+	if ([keyPath isEqualToString:@"admins"] || [keyPath isEqualToString:@"users"] || [keyPath isEqualToString:@"countOfAdmins"] || [keyPath isEqualToString:@"countOfUsers"]) {
+		
+		[self updateMenuArrays];
+		
+	}
+	
+}
+
+- (void)updateMenuArrays {
 	
 	//setup labels array
-	if (currentUser.currentOrganization.labels) {
+	if (_currentOrganization.labels) {
 		
-		NSArray *labelArray = [[currentUser.currentOrganization.labels allObjects]
+		NSArray *labelArray = [_currentOrganization.labels.allObjects
 							   sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name"
 																						   ascending:YES
 																							selector:@selector(caseInsensitiveCompare:)]]];
@@ -171,15 +210,15 @@
 	NSArray *adminArray = @[];
 	NSArray *userArray = @[];
 	
-	if (currentUser.currentOrganization.admins) {
+	if (_currentOrganization.admins) {
 		
-		adminArray = [currentUser.currentOrganization.admins allObjects];
+		adminArray = _currentOrganization.admins.allObjects;
 		
 	}
 	
-	if (currentUser.currentOrganization.users) {
+	if (_currentOrganization.users) {
 		
-		userArray = [currentUser.currentOrganization.users allObjects];
+		userArray = _currentOrganization.users.allObjects;
 		
 	}
 	
@@ -190,9 +229,9 @@
 	[self.menuItems replaceObjectAtIndex:2 withObject:[contactAssignmentsArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]]];
 	
 	//setup survey array
-	if (currentUser.currentOrganization.surveys) {
+	if (_currentOrganization.surveys) {
 		
-		NSArray *surveyArray = [[currentUser.currentOrganization.surveys allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+		NSArray *surveyArray = [_currentOrganization.surveys.allObjects sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
 		
 		[self.menuItems replaceObjectAtIndex:3 withObject:surveyArray];
 		
@@ -202,8 +241,65 @@
 		
 	}
 	
-	return self;
 }
+
+//-(id)setCurrentUser:(MHPerson *)currentUser {
+//	
+//	self.user = currentUser;
+//	
+//	//setup labels array
+//	if (currentUser.currentOrganization.labels) {
+//		
+//		NSArray *labelArray = [[currentUser.currentOrganization.labels allObjects]
+//							   sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name"
+//																						   ascending:YES
+//																							selector:@selector(caseInsensitiveCompare:)]]];
+//		
+//		[self.menuItems replaceObjectAtIndex:1 withObject:labelArray];
+//		
+//	} else {
+//		
+//		[self.menuItems replaceObjectAtIndex:1 withObject:@[]];
+//		
+//	}
+//	
+//	//setup contact assignments array
+//	NSArray *adminArray = @[];
+//	NSArray *userArray = @[];
+//	
+//	if (currentUser.currentOrganization.admins) {
+//		
+//		adminArray = [currentUser.currentOrganization.admins allObjects];
+//		
+//	}
+//	
+//	if (currentUser.currentOrganization.users) {
+//		
+//		userArray = [currentUser.currentOrganization.users allObjects];
+//		
+//	}
+//	
+//	NSMutableArray *contactAssignmentsArray = [NSMutableArray arrayWithArray:adminArray];
+//	[contactAssignmentsArray addObjectsFromArray:userArray];
+//	contactAssignmentsArray = [contactAssignmentsArray arrayWithDuplicatesRemovedForKey:@"remoteID"];
+//	
+//	[self.menuItems replaceObjectAtIndex:2 withObject:[contactAssignmentsArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]]];
+//	
+//	//setup survey array
+//	if (currentUser.currentOrganization.surveys) {
+//		
+//		NSArray *surveyArray = [[currentUser.currentOrganization.surveys allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+//		
+//		[self.menuItems replaceObjectAtIndex:3 withObject:surveyArray];
+//		
+//	} else {
+//		
+//		[self.menuItems replaceObjectAtIndex:3 withObject:@[]];
+//		
+//	}
+//	
+//	return self;
+//}
 
 #pragma mark - Table view data source
 
