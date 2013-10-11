@@ -13,8 +13,9 @@
 #define LOGIN_BUTTON_WIDTH 180.0f
 #define LOGIN_BUTTON_HEIGHT 60.0f
 
-NSString *const FBSessionStateChangedNotification = @"com.missionhub:FBSessionStateChangedNotification";
-NSString *const MHLoginErrorDomain = @"com.missionhub.errorDomain.Login";
+NSString *const FBSessionStateChangedNotification	= @"com.missionhub:FBSessionStateChangedNotification";
+NSString *const MHLoginViewControllerLogout			= @"com.missionhub.notification.logout";
+NSString *const MHLoginErrorDomain					= @"com.missionhub.errorDomain.login";
 
 typedef enum {
 	MHLoginErrorUnknownError,
@@ -24,6 +25,16 @@ typedef enum {
 } MHLoginErrors;
 
 @interface MHLoginViewController ()
+
+@property (nonatomic, strong)				FBLoginView							*loginButtonView;
+@property (nonatomic, strong)				UIButton							*missionhubRefreshButton;
+@property (nonatomic, strong)				IBOutlet UIActivityIndicatorView	*loadingIndicator;
+@property (nonatomic, assign)				BOOL								hasRequestedMe;
+@property (nonatomic, strong) IBOutlet		UIToolbar * toolbar;
+
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
+- (void)loggedInWithToken:(NSString *)token;
+- (void)refreshMissionHubData:(id)sender;
 
 -(void)beginLoading;
 -(void)endLoading;
@@ -39,15 +50,17 @@ typedef enum {
 @synthesize hasRequestedMe		= _hasRequestedMe;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	
     if (self) {
         // Custom initialization
 		
 		//this is just here to trick the linker into keeping FBLoginView as it is only used by the storyboard file which isn't considered during compilation and so FBLoginView is optimised away.
 		[FBLoginView class];
     }
+	
     return self;
 }
 
@@ -98,6 +111,10 @@ typedef enum {
 		
 		[self loggedInWithToken:[[MHAPI sharedInstance] accessToken]];
 		
+	} else {
+		
+		[self endLoading];
+		
 	}
 	
 }
@@ -114,6 +131,13 @@ typedef enum {
 }
 
 #pragma mark - Loading Methods methods
+
+- (void)logout {
+	
+	[MHAPI sharedInstance].accessToken	= nil;
+	[FBSession.activeSession closeAndClearTokenInformation];
+	
+}
 
 -(void)beginLoading {
 	

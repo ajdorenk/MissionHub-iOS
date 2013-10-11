@@ -15,6 +15,4 @@
 
 @property (nonatomic, retain) MHOrganization *currentOrganization;
 
-//-(id)setCurrentUser:(MHPerson *)currentUser;
-
 @end

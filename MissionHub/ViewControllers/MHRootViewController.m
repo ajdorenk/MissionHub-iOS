@@ -11,6 +11,8 @@
 
 @interface MHRootViewController ()
 
+- (void)logout;
+
 @end
 
 @implementation MHRootViewController
@@ -34,6 +36,7 @@
 	
 	self.userInitiatedLogout = NO;
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:MHLoginViewControllerLogout object:nil];
 	
 	self.peopleNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNavigationViewController"];
 	
@@ -64,6 +67,13 @@
 		self.showLoginOnViewDidAppear = NO;
 		
 	}
+	
+}
+
+- (void)logout {
+	
+	[self.loginViewController logout];
+	[self presentViewController:self.loginViewController animated:NO completion:nil];
 	
 }
 

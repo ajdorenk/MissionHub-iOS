@@ -16,6 +16,14 @@
 #import "MHSurvey.h"
 #import "NSMutableArray+removeDuplicatesForKey.h"
 #import "MHGenericListViewController.h"
+#import "MHLoginViewController.h"
+
+NSString *const MHMenuErrorDomain					= @"com.missionhub.errorDomain.menu";
+
+typedef enum {
+	MHMenuErrorMenuLoading,
+	MHMenuErrorChangeOrganizationFailed
+} MHMenuError;
 
 @interface MHMenuViewController ()
 
@@ -23,7 +31,6 @@
 @property (nonatomic, strong, readonly) MHNavigationViewController *peopleNavigationViewController;
 @property (nonatomic, strong, readonly) MHSurveyViewController *surveyViewController;
 @property (nonatomic, strong, readonly) MHGenericListViewController *organizationViewController;
-//@property (nonatomic, strong) MHPerson *user;
 @property (nonatomic, strong) NSArray *menuHeaders;
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
@@ -81,6 +88,11 @@
 		_organizationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
 		[self didChangeValueForKey:@"organizationViewController"];
 		
+		_organizationViewController.selectionDelegate	= self;
+		_organizationViewController.multipleSelection	= NO;
+		_organizationViewController.listTitle			= @"Organization(s)";
+		[_organizationViewController setDataArray:[MHAPI sharedInstance].currentUser.allOrganizations.allObjects];
+		
 	}
 	
 	return _organizationViewController;
@@ -89,14 +101,59 @@
 
 -(void)changeOrganization {
 	
-	NSLog(@"change org");
-//	self.organizationViewController.selectionDelegate = self;
-//	self.organizationViewController.objectArray = [NSMutableArray arrayWithArray:[self.user.allOrganizations allObjects]];
-//	[self presentViewController:self.organizationViewController animated:YES completion:nil];
+	[self presentViewController:self.organizationViewController animated:YES completion:nil];
 	
 }
 
 -(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
+	
+	//change org
+	if ([object isKindOfClass:[MHOrganization class]]) {
+		
+		__block MHOrganization *oldOrganization	= self.currentOrganization;
+		
+		self.currentOrganization		= nil;
+		
+		MHOrganization *organization	= (MHOrganization *)object;
+		
+		[[MHAPI sharedInstance] getOrganizationWithRemoteID:organization.remoteID successBlock:^(NSArray *result, MHRequestOptions *options) {
+			
+			MHOrganization *organization = [result objectAtIndex:0];
+			
+			[[MHAPI sharedInstance].initialPeopleList removeAllObjects];
+			[MHAPI sharedInstance].currentOrganization	= organization;
+			self.currentOrganization					= organization;
+			
+			[self.tableView reloadData];
+			
+			[[MHAPI sharedInstance] getPeopleListWith:nil successBlock:^(NSArray *result, MHRequestOptions *options) {
+				
+				NSArray *peopleList	= @[];
+				
+				if ([[result objectAtIndex:0] isKindOfClass:[NSArray class]]) {
+					peopleList	= [result objectAtIndex:0];
+				}
+				
+				[[MHAPI sharedInstance].initialPeopleList addObjectsFromArray:peopleList];
+				
+			} failBlock:^(NSError *error, MHRequestOptions *options) {
+				
+			}];
+			
+		} failBlock:^(NSError *error, MHRequestOptions *options) {
+			
+			NSString *errorMessage		= [NSString stringWithFormat:@"Changing Organization failed because: %@ If the problem continues contact support@missionhub.com", [error localizedDescription]];
+			NSError *presentingError = [NSError errorWithDomain:MHMenuErrorDomain
+												 code:MHMenuErrorChangeOrganizationFailed
+											 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(errorMessage, nil)}];
+			
+			[MHErrorHandler presentError:presentingError];
+			
+			self.currentOrganization	= oldOrganization;
+			
+		}];
+		
+	}
 	
 	[self dismissViewControllerAnimated:YES completion:nil];
 	
@@ -106,34 +163,35 @@
 	
 	NSLog(@"logout");
 	
+	[[NSNotificationCenter defaultCenter] postNotificationName:MHLoginViewControllerLogout object:self];
+	
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	
     if (self) {
         // Custom initialization
     }
+	
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
 	
-	self.menuHeaders	= @[@"", @"LABELS", @"CONTACT ASSIGNMENTS", @"SURVEYS", @"SETTINGS"];
-	self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"ALL CONTACTS"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"CHANGE ORGANIZATION", @"LOG OUT"]]];
+	self.currentOrganization	= nil;
 	
 	if ([MHAPI sharedInstance].currentOrganization) {
 		
 		self.currentOrganization	= [MHAPI sharedInstance].currentOrganization;
-		//[self setCurrentUser:[MHAPI sharedInstance].currentUser];
 		
 	}
 	
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+
 	[super viewDidLoad];
 	
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
@@ -151,7 +209,7 @@
 	
 }
 
--(void)setCurrentOrganization:(MHOrganization *)currentOrganization {
+- (void)setCurrentOrganization:(MHOrganization *)currentOrganization {
 	
 	[self willChangeValueForKey:@"currentOrganization"];
 	_currentOrganization	= currentOrganization;
@@ -178,7 +236,7 @@
 	
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	
 	if ([keyPath isEqualToString:@"admins"] || [keyPath isEqualToString:@"users"] || [keyPath isEqualToString:@"countOfAdmins"] || [keyPath isEqualToString:@"countOfUsers"]) {
 		
@@ -190,121 +248,74 @@
 
 - (void)updateMenuArrays {
 	
-	//setup labels array
-	if (_currentOrganization.labels) {
+	if (_currentOrganization) {
+	
+		//setup labels array
+		if (_currentOrganization.labels) {
+			
+			NSArray *labelArray = [_currentOrganization.labels.allObjects
+								   sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name"
+																							   ascending:YES
+																								selector:@selector(caseInsensitiveCompare:)]]];
+			
+			[self.menuItems replaceObjectAtIndex:1 withObject:labelArray];
+			
+		} else {
+			
+			[self.menuItems replaceObjectAtIndex:1 withObject:@[]];
+			
+		}
 		
-		NSArray *labelArray = [_currentOrganization.labels.allObjects
-							   sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name"
-																						   ascending:YES
-																							selector:@selector(caseInsensitiveCompare:)]]];
+		//setup contact assignments array
+		NSArray *adminArray = @[];
+		NSArray *userArray = @[];
 		
-		[self.menuItems replaceObjectAtIndex:1 withObject:labelArray];
+		if (_currentOrganization.admins) {
+			
+			adminArray = _currentOrganization.admins.allObjects;
+			
+		}
+		
+		if (_currentOrganization.users) {
+			
+			userArray = _currentOrganization.users.allObjects;
+			
+		}
+		
+		NSMutableArray *contactAssignmentsArray = [NSMutableArray arrayWithArray:adminArray];
+		[contactAssignmentsArray addObjectsFromArray:userArray];
+		contactAssignmentsArray = [contactAssignmentsArray arrayWithDuplicatesRemovedForKey:@"remoteID"];
+		
+		[self.menuItems replaceObjectAtIndex:2 withObject:[contactAssignmentsArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]]];
+		
+		//setup survey array
+		if (_currentOrganization.surveys) {
+			
+			NSArray *surveyArray = [_currentOrganization.surveys.allObjects sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+			
+			[self.menuItems replaceObjectAtIndex:3 withObject:surveyArray];
+			
+		} else {
+			
+			[self.menuItems replaceObjectAtIndex:3 withObject:@[]];
+			
+		}
 		
 	} else {
 		
-		[self.menuItems replaceObjectAtIndex:1 withObject:@[]];
+		self.menuHeaders	= @[@"", @"LABELS", @"CONTACT ASSIGNMENTS", @"SURVEYS", @"SETTINGS"];
+		self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"ALL CONTACTS"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"CHANGE ORGANIZATION", @"LOG OUT"]]];
 		
 	}
 	
-	//setup contact assignments array
-	NSArray *adminArray = @[];
-	NSArray *userArray = @[];
-	
-	if (_currentOrganization.admins) {
-		
-		adminArray = _currentOrganization.admins.allObjects;
-		
-	}
-	
-	if (_currentOrganization.users) {
-		
-		userArray = _currentOrganization.users.allObjects;
-		
-	}
-	
-	NSMutableArray *contactAssignmentsArray = [NSMutableArray arrayWithArray:adminArray];
-	[contactAssignmentsArray addObjectsFromArray:userArray];
-	contactAssignmentsArray = [contactAssignmentsArray arrayWithDuplicatesRemovedForKey:@"remoteID"];
-	
-	[self.menuItems replaceObjectAtIndex:2 withObject:[contactAssignmentsArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]]];
-	
-	//setup survey array
-	if (_currentOrganization.surveys) {
-		
-		NSArray *surveyArray = [_currentOrganization.surveys.allObjects sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
-		
-		[self.menuItems replaceObjectAtIndex:3 withObject:surveyArray];
-		
-	} else {
-		
-		[self.menuItems replaceObjectAtIndex:3 withObject:@[]];
-		
-	}
+	[self.tableView reloadData];
 	
 }
 
-//-(id)setCurrentUser:(MHPerson *)currentUser {
-//	
-//	self.user = currentUser;
-//	
-//	//setup labels array
-//	if (currentUser.currentOrganization.labels) {
-//		
-//		NSArray *labelArray = [[currentUser.currentOrganization.labels allObjects]
-//							   sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name"
-//																						   ascending:YES
-//																							selector:@selector(caseInsensitiveCompare:)]]];
-//		
-//		[self.menuItems replaceObjectAtIndex:1 withObject:labelArray];
-//		
-//	} else {
-//		
-//		[self.menuItems replaceObjectAtIndex:1 withObject:@[]];
-//		
-//	}
-//	
-//	//setup contact assignments array
-//	NSArray *adminArray = @[];
-//	NSArray *userArray = @[];
-//	
-//	if (currentUser.currentOrganization.admins) {
-//		
-//		adminArray = [currentUser.currentOrganization.admins allObjects];
-//		
-//	}
-//	
-//	if (currentUser.currentOrganization.users) {
-//		
-//		userArray = [currentUser.currentOrganization.users allObjects];
-//		
-//	}
-//	
-//	NSMutableArray *contactAssignmentsArray = [NSMutableArray arrayWithArray:adminArray];
-//	[contactAssignmentsArray addObjectsFromArray:userArray];
-//	contactAssignmentsArray = [contactAssignmentsArray arrayWithDuplicatesRemovedForKey:@"remoteID"];
-//	
-//	[self.menuItems replaceObjectAtIndex:2 withObject:[contactAssignmentsArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"first_name" ascending:YES selector:@selector(caseInsensitiveCompare:)]]]];
-//	
-//	//setup survey array
-//	if (currentUser.currentOrganization.surveys) {
-//		
-//		NSArray *surveyArray = [[currentUser.currentOrganization.surveys allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
-//		
-//		[self.menuItems replaceObjectAtIndex:3 withObject:surveyArray];
-//		
-//	} else {
-//		
-//		[self.menuItems replaceObjectAtIndex:3 withObject:@[]];
-//		
-//	}
-//	
-//	return self;
-//}
-
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	
     // Return the number of sections.
     return [self.menuHeaders count];
 }
@@ -322,14 +333,14 @@
  
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
     // Return the number of rows in the section.
     return [[self.menuItems objectAtIndex:section] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
 	//create cell
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -370,68 +381,79 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+	if (self.currentOrganization) {
 	
-	//filters
-	if (indexPath.section >= 0 && indexPath.section < 4) {
-		
-		UIViewController *newTopViewController;
-		id objectForIndex = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-		
-		//surveys
-		if (indexPath.section == 3) {
+		//filters
+		if (indexPath.section >= 0 && indexPath.section < 4) {
 			
-			if ([objectForIndex isKindOfClass:[MHSurvey class]]) {
+			UIViewController *newTopViewController;
+			id objectForIndex = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			
+			//surveys
+			if (indexPath.section == 3) {
 				
-				newTopViewController = [self surveyViewController];
-				[(MHSurveyViewController *)newTopViewController displaySurvey:objectForIndex];
+				if ([objectForIndex isKindOfClass:[MHSurvey class]]) {
+					
+					newTopViewController = [self surveyViewController];
+					[(MHSurveyViewController *)newTopViewController displaySurvey:objectForIndex];
+					
+				}
+				
+			} else {
+				
+				newTopViewController = [self peopleNavigationViewController];
+				MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+				
+				//All Contacts
+				if (indexPath.section == 0) {
+					
+					[requestOptions configureForInitialPeoplePageRequest];
+					
+				//Labels
+				} else if (indexPath.section == 1) {
+					
+					[requestOptions configureForInitialPeoplePageRequest];
+					if ([objectForIndex isKindOfClass:[MHLabel class]]) {
+						[requestOptions addFilter:MHRequestOptionsFilterPeopleLabels withValue:[((MHLabel *)objectForIndex).remoteID stringValue]];
+					}
+					
+				//contact assignments
+				} else if (indexPath.section == 2) {
+					
+					[requestOptions configureForInitialPeoplePageRequest];
+					if ([objectForIndex isKindOfClass:[MHPerson class]]) {
+						[requestOptions configureForInitialPeoplePageRequestWithAssignedToID:
+						 ((MHPerson *)objectForIndex).remoteID];
+					}
+					
+				}
+				
+				[(MHNavigationViewController *)newTopViewController setDataFromRequestOptions:requestOptions];
 				
 			}
 			
-		} else {
-			
-			newTopViewController = [self peopleNavigationViewController];
-			MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
-			
-			//All Contacts
-			if (indexPath.section == 0) {
+			if (newTopViewController) {
 				
-				[requestOptions configureForInitialPeoplePageRequest];
-				
-			//Labels
-			} else if (indexPath.section == 1) {
-				
-				[requestOptions configureForInitialPeoplePageRequest];
-				if ([objectForIndex isKindOfClass:[MHLabel class]]) {
-					[requestOptions addFilter:MHRequestOptionsFilterPeopleLabels withValue:[((MHLabel *)objectForIndex).remoteID stringValue]];
-				}
-				
-			//contact assignments
-			} else if (indexPath.section == 2) {
-				
-				[requestOptions configureForInitialPeoplePageRequest];
-				if ([objectForIndex isKindOfClass:[MHPerson class]]) {
-					[requestOptions configureForInitialPeoplePageRequestWithAssignedToID:
-					 ((MHPerson *)objectForIndex).remoteID];
-				}
+				[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+					CGRect frame = self.slidingViewController.topViewController.view.frame;
+					self.slidingViewController.topViewController = newTopViewController;
+					self.slidingViewController.topViewController.view.frame = frame;
+					[self.slidingViewController resetTopView];
+				}];
 				
 			}
 			
-			[(MHNavigationViewController *)newTopViewController setDataFromRequestOptions:requestOptions];
-			
 		}
 		
-		if (newTopViewController) {
-			
-			[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-				CGRect frame = self.slidingViewController.topViewController.view.frame;
-				self.slidingViewController.topViewController = newTopViewController;
-				self.slidingViewController.topViewController.view.frame = frame;
-				[self.slidingViewController resetTopView];
-			}];
-			
-		}
+	} else {
+		
+		NSError *error = [NSError errorWithDomain:MHMenuErrorDomain
+											 code:MHMenuErrorMenuLoading
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Menu is still Loading from change of Organization. Please wait for loading to complete before tapping items.", nil)}];
+		
+		[MHErrorHandler presentError:error];
 		
 	}
 	
@@ -481,8 +503,8 @@
 	
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
+
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
