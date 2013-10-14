@@ -30,6 +30,7 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 @property (nonatomic, strong, readonly) MHProfileInteractionsViewController	*interactionsViewController;
 @property (nonatomic, strong, readonly) MHGenericListViewController			*labelViewController;
 @property (nonatomic, strong, readonly) MHProfileSurveysViewController		*surveysViewController;
+@property (nonatomic, strong, readonly) MHActivityViewController			*activityViewController;
 
 - (void)backToMenu:(id)sender;
 - (void)newInteractionActivity:(id)sender;
@@ -54,11 +55,12 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 @synthesize interactionsViewController		= _interactionsViewController;
 @synthesize labelViewController				= _labelViewController;
 @synthesize surveysViewController			= _surveysViewController;
+@synthesize activityViewController			= _activityViewController;
 
 #pragma mark - intialization methods
 
-- (void) awakeFromNib
-{
+- (void) awakeFromNib {
+	
 	// Add A and B view controllers to the array
     self.allViewControllers = @[self.infoViewController,self.interactionsViewController, self.surveysViewController];
 	
@@ -76,8 +78,8 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+	
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
@@ -206,6 +208,28 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
+- (MHActivityViewController *)activityViewController {
+	
+	if (_activityViewController == nil) {
+		
+		NSArray *activities							= [MHActivityViewController allActivities];
+		NSArray *activityItems						= ( self.person ? @[self.person] : @[]);
+		
+		[self willChangeValueForKey:@"activityViewController"];
+		_activityViewController						= [[MHActivityViewController alloc] initWithViewController:self activityItems:activityItems activities:activities];
+		[self didChangeValueForKey:@"activityViewController"];
+		
+		_activityViewController.delegate			= self;
+		_activityViewController.animateFromView		= (UIView *)self.navigationController.navigationBar;
+		_activityViewController.animationPosition	= MHActivityViewControllerAnimationPositionBottom;
+		_activityViewController.animationDirection	= MHActivityViewControllerAnimationDirectionDown;
+		
+	}
+	
+	return _activityViewController;
+	
+}
+
 - (void)setPerson:(MHPerson *)person {
 	
 	if (person) {
@@ -315,12 +339,13 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
-
-//TODO:Need to add action bar when the otherOptions button is pressed
-
 - (void)otherOptionsActivity:(id)sender {
 	
+	NSArray *activityItems						= ( self.person ? @[self.person] : @[]);
 	
+	self.activityViewController.activityItems	= activityItems;
+	
+	[self presentViewController:self.activityViewController animated:YES completion:nil];
 	
 }
 

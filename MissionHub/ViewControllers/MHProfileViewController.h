@@ -12,8 +12,9 @@
 #import "MHProfileProtocol.h"
 #import "MHProfileMenuViewController.h"
 #import "MHGenericListViewController.h"
+#import "MHActivityViewController.h"
 
-@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate, MHProfileProtocol, MHProfileMenuDelegate, MHGenericListViewControllerDelegate>
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate, MHProfileProtocol, MHProfileMenuDelegate, MHGenericListViewControllerDelegate, MHActivityViewControllerDelegate>
 
 @property (nonatomic, strong) MHPerson *person;
 

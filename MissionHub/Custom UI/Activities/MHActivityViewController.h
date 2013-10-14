@@ -30,6 +30,16 @@
 #import "MHActivityView.h"
 #import "MHActivities.h"
 
+typedef enum {
+	MHActivityViewControllerAnimationDirectionUp,
+	MHActivityViewControllerAnimationDirectionDown,
+} MHActivityViewControllerAnimationDirection;
+
+typedef enum {
+	MHActivityViewControllerAnimationPositionTop,
+	MHActivityViewControllerAnimationPositionBottom,
+} MHActivityViewControllerAnimationPosition;
+
 @protocol MHActivityViewControllerDelegate;
 
 @interface MHActivityViewController : UIViewController
@@ -41,6 +51,9 @@
 @property (nonatomic, strong) NSDictionary *userInfo;
 @property (nonatomic, strong) MHActivityView *activityView;
 @property (nonatomic, weak) UIViewController *presentingController;
+@property (nonatomic, strong) UIView *animateFromView;
+@property (nonatomic, assign) MHActivityViewControllerAnimationPosition animationPosition;
+@property (nonatomic, assign) MHActivityViewControllerAnimationDirection animationDirection;
 
 + (NSArray *)allActivities;
 
