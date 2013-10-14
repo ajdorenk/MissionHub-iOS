@@ -55,7 +55,7 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
+		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
 		
 		NSString *baseUrlString			= ( [configDictionary valueForKey:@"api_url"] ? [configDictionary valueForKey:@"api_url"] : @"" );
@@ -98,15 +98,15 @@ typedef enum {
 
 - (NSMutableURLRequest *)requestWithOptions:(MHRequestOptions *)options {
 	
-	NSMutableDictionary *parameters = [options parameters];
+	NSMutableDictionary *parameters = options.parameters;
 	parameters[@"facebook_token"]	= self.accessToken;
 	
-	if (self.currentOrganization) {
+	if (self.currentOrganization && !parameters[@"organization_id"]) {
 		parameters[@"organization_id"]	= self.currentOrganization.remoteID;
 	}
 	
-	return [self requestWithMethod:[options method]
-							  path:[options path]
+	return [self requestWithMethod:options.method
+							  path:options.path
 						parameters:parameters];
 	
 }

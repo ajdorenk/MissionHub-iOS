@@ -56,8 +56,6 @@
 @synthesize failBlock		= _failBlock;
 
 @synthesize postParams		= _postParams;
-@synthesize postData		= _postData;
-@synthesize jsonString		= _jsonString;
 
 - (id)init {
 	
@@ -104,8 +102,6 @@
 		self.postParams	= [NSMutableDictionary dictionary];
 	}
 	
-	self.postData		= nil;
-	self.jsonString		= nil;
 	self.jsonObject		= nil;
 	
 	return self;
@@ -132,8 +128,6 @@
 	returnObject.failBlock		= self.failBlock;
 	
 	returnObject.postParams		= [NSMutableDictionary dictionaryWithDictionary:self.postParams];
-	returnObject.postData		= [self.postData copy];
-	returnObject.jsonString		= [self.jsonString copy];
 	
 	return returnObject;
 }
@@ -244,6 +238,12 @@
 				
 			}
 			
+			if ([self hasPostParams]) {
+				
+				[parametersDictionary addEntriesFromDictionary:self.postParams];
+				
+			}
+			
 			break;
 			
 		case MHRequestOptionsTypeIndex:
@@ -282,6 +282,12 @@
 			if ([self hasOrderField] && [self hasOrderDirection]) {
 				
 				parametersDictionary[@"order"] = [self stringForOrders];
+				
+			}
+			
+			if ([self hasPostParams]) {
+				
+				[parametersDictionary addEntriesFromDictionary:self.postParams];
 				
 			}
 			
@@ -467,8 +473,9 @@
 	
 	[[self reset] addIncludesForOrganizationRequest];
 	self.endpoint	= MHRequestOptionsEndpointOrganizations;
-	self.remoteID	= [remoteID integerValue];
+	self.remoteID	= remoteID.integerValue;
 	self.type		= MHRequestOptionsTypeShow;
+	[self addPostParam:@"organization_id" withValue:remoteID];
 	
 	return self;
 }
@@ -476,7 +483,7 @@
 - (instancetype)configureForProfileRequestWithRemoteID:(NSNumber *)remoteID {
 	
 	[[self reset] addIncludesForProfileRequest];
-	self.remoteID	= [remoteID integerValue];
+	self.remoteID	= remoteID.integerValue;
 	self.type		= MHRequestOptionsTypeShow;
 	
 	return self;

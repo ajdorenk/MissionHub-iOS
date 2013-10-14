@@ -90,6 +90,8 @@ typedef enum {
 		
 		_organizationViewController.selectionDelegate	= self;
 		_organizationViewController.multipleSelection	= NO;
+		_organizationViewController.showSuggestions		= NO;
+		_organizationViewController.showHeaders			= NO;
 		_organizationViewController.listTitle			= @"Organization(s)";
 		[_organizationViewController setDataArray:[MHAPI sharedInstance].currentUser.allOrganizations.allObjects];
 		
@@ -101,6 +103,7 @@ typedef enum {
 
 -(void)changeOrganization {
 	
+	[_organizationViewController setDataArray:[MHAPI sharedInstance].currentUser.allOrganizations.allObjects];
 	[self presentViewController:self.organizationViewController animated:YES completion:nil];
 	
 }
@@ -126,17 +129,30 @@ typedef enum {
 			
 			[self.tableView reloadData];
 			
-			[[MHAPI sharedInstance] getPeopleListWith:nil successBlock:^(NSArray *result, MHRequestOptions *options) {
+			[[MHAPI sharedInstance] getPeopleListWith:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest] successBlock:^(NSArray *result, MHRequestOptions *options) {
 				
-				NSArray *peopleList	= @[];
-				
-				if ([[result objectAtIndex:0] isKindOfClass:[NSArray class]]) {
-					peopleList	= [result objectAtIndex:0];
-				}
+				NSArray *peopleList	= ( result ? result : @[] );
 				
 				[[MHAPI sharedInstance].initialPeopleList addObjectsFromArray:peopleList];
+				[self.peopleNavigationViewController setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+				
+				[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+					CGRect frame = self.slidingViewController.topViewController.view.frame;
+					self.slidingViewController.topViewController = self.peopleNavigationViewController;
+					self.slidingViewController.topViewController.view.frame = frame;
+					[self.slidingViewController resetTopView];
+				}];
 				
 			} failBlock:^(NSError *error, MHRequestOptions *options) {
+				
+				[self.peopleNavigationViewController setDataFromRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+				
+				[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+					CGRect frame = self.slidingViewController.topViewController.view.frame;
+					self.slidingViewController.topViewController = self.peopleNavigationViewController;
+					self.slidingViewController.topViewController.view.frame = frame;
+					[self.slidingViewController resetTopView];
+				}];
 				
 			}];
 			
@@ -164,7 +180,6 @@ typedef enum {
 	NSLog(@"logout");
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:MHLoginViewControllerLogout object:self];
-	self.tableView.contentOffset	= CGPointZero;
 	
 }
 
@@ -247,7 +262,8 @@ typedef enum {
 		
 	} else if ([keyPath isEqualToString:@"currentOrganization"]) {
 		
-		self.currentOrganization	= [MHAPI sharedInstance].currentOrganization;
+		self.tableView.contentOffset	= CGPointZero;
+		self.currentOrganization		= [MHAPI sharedInstance].currentOrganization;
 		
 	}
 	

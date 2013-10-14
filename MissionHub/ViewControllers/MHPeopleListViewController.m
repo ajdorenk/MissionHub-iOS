@@ -383,14 +383,15 @@
 
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options {
 	
-	self.requestOptions = (options ? options : [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]);
-	self.isLoading = NO;
-	self.refreshIsLoading = NO;
-	self.searchIsLoading = NO;
-	self.pagingIsLoading = NO;
-	self.searchPagingIsLoading = NO;
-	self.searchHasLoadedAllPages = NO;
+	self.requestOptions				= (options ? options : [[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]);
+	self.isLoading					= NO;
+	self.refreshIsLoading			= NO;
+	self.searchIsLoading			= NO;
+	self.pagingIsLoading			= NO;
+	self.searchPagingIsLoading		= NO;
+	self.searchHasLoadedAllPages	= NO;
 	[self.searchResultArray removeAllObjects];
+	self.tableView.contentOffset	= CGPointZero;
 	
 	if (dataArray == nil) {
 		

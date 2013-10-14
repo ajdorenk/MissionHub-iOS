@@ -94,15 +94,12 @@
 	
 	[[self peopleNavigationViewController] setDataArray:peopleList forRequestOptions:options];
 	self.topViewController = self.peopleNavigationViewController;
-	//[self resetTopView];
 	
 	[self dismissViewControllerAnimated:YES completion:^{
 		
 		[self resetTopView];
 		
 	}];
-	
-	
 	
 }
 

@@ -131,9 +131,7 @@ typedef enum {
 @property (nonatomic, assign) MHRequestOptionsOrderDirections	orderDirection;
 
 @property (nonatomic, strong) NSMutableDictionary				*postParams;
-@property (nonatomic, strong) NSData							*postData;
 @property (nonatomic, strong) id								jsonObject;
-@property (nonatomic, strong) NSString							*jsonString;
 
 @property (nonatomic, strong) void (^successBlock)(NSArray *results, MHRequestOptions *options);
 @property (nonatomic, strong) void (^failBlock)(NSError *error, MHRequestOptions *options);

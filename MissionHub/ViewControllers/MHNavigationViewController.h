@@ -13,11 +13,7 @@
 #import "MHRequestOptions.h"
 
 
-@interface MHNavigationViewController : UINavigationController {
-	
-	MHPeopleListViewController *_peopleListViewController;
-	
-}
+@interface MHNavigationViewController : UINavigationController
 
 @property (nonatomic, strong) MHPeopleListViewController *peopleListViewController;
 
