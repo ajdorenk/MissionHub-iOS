@@ -72,18 +72,18 @@
 
 - (void)logout {
 	
+	self.userInitiatedLogout = YES;
 	[self.loginViewController logout];
-	[self presentViewController:self.loginViewController animated:NO completion:nil];
 	
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+	
 	return YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
+	
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -94,9 +94,14 @@
 	
 	[[self peopleNavigationViewController] setDataArray:peopleList forRequestOptions:options];
 	self.topViewController = self.peopleNavigationViewController;
-	[self.slidingViewController resetTopView];
+	//[self resetTopView];
 	
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self dismissViewControllerAnimated:YES completion:^{
+		
+		[self resetTopView];
+		
+	}];
+	
 	
 	
 }
@@ -105,11 +110,7 @@
 	
 	if (self.userInitiatedLogout) {
 		
-		[self dismissViewControllerAnimated:YES completion:^{
-			
-			[self presentViewController:self.loginViewController animated:YES completion:nil];
-			
-		}];
+		[self presentViewController:self.loginViewController animated:YES completion:nil];
 		
 	}
 	

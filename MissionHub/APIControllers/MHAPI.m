@@ -55,7 +55,7 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config_dev" ofType:@"plist"];
+		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
 		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
 		
 		NSString *baseUrlString			= ( [configDictionary valueForKey:@"api_url"] ? [configDictionary valueForKey:@"api_url"] : @"" );
@@ -80,7 +80,7 @@ typedef enum {
         // Custom initialization
 		
 		self.surveyURL					= surveyUrl;
-		self.accessToken				= @"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD";
+		//self.accessToken				= @"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD";
 		self.parameterEncoding			= AFJSONParameterEncoding;
 		
     }
@@ -151,6 +151,18 @@ typedef enum {
 	self.currentOrganizationIsFinished	= NO;
 	
 	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
+- (void)logout {
+	
+	[self.operationQueue cancelAllOperations];
+	
+	self.accessToken					= nil;
+	self.currentUser					= nil;
+	self.currentOrganization			= nil;
+	self.initialPeopleList				= nil;
+	self.errorForInitialRequests		= nil;
 	
 }
 

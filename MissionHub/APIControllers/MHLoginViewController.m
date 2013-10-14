@@ -134,7 +134,7 @@ typedef enum {
 
 - (void)logout {
 	
-	[MHAPI sharedInstance].accessToken	= nil;
+	[[MHAPI sharedInstance] logout];
 	[FBSession.activeSession closeAndClearTokenInformation];
 	
 }

@@ -164,6 +164,7 @@ typedef enum {
 	NSLog(@"logout");
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:MHLoginViewControllerLogout object:self];
+	self.tableView.contentOffset	= CGPointZero;
 	
 }
 
@@ -187,6 +188,8 @@ typedef enum {
 		self.currentOrganization	= [MHAPI sharedInstance].currentOrganization;
 		
 	}
+	
+	[[MHAPI sharedInstance] addObserver:self forKeyPath:@"currentOrganization" options:NSKeyValueObservingOptionNew context:nil];
 	
 }
 
@@ -241,6 +244,10 @@ typedef enum {
 	if ([keyPath isEqualToString:@"admins"] || [keyPath isEqualToString:@"users"] || [keyPath isEqualToString:@"countOfAdmins"] || [keyPath isEqualToString:@"countOfUsers"]) {
 		
 		[self updateMenuArrays];
+		
+	} else if ([keyPath isEqualToString:@"currentOrganization"]) {
+		
+		self.currentOrganization	= [MHAPI sharedInstance].currentOrganization;
 		
 	}
 	
