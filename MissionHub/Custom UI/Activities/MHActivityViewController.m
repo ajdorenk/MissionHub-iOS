@@ -315,6 +315,21 @@
 	CGRect frame = self.view.frame;
 	CGRect presentingControllerFrame = self.presentingController.view.frame;
 	
+	UIView *viewToAnimateFrom	= (self.animateFromView ? self.animateFromView : self.presentingController.view);
+	CGRect currentFrame			= self.view.frame;
+	CGRect afterFrame			= currentFrame;
+	
+	CGFloat yPosition			= ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? CGRectGetMinY(viewToAnimateFrom.frame) : CGRectGetMaxY(viewToAnimateFrom.frame) );
+	
+	if (self.animationDirection == MHActivityViewControllerAnimationDirectionUp) {
+		
+		afterFrame.origin.y		= yPosition;
+		
+	} else {
+		
+		afterFrame.origin.y		= yPosition - CGRectGetHeight(currentFrame);
+		
+	}
 	
 	if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
 		frame.origin.y		= CGRectGetHeight(self.presentingController.view.frame) - [self heightForParentFrame:presentingControllerFrame];

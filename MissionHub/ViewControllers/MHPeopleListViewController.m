@@ -218,6 +218,21 @@
                                  UITextAttributeTextColor : [UIColor blackColor]
      } forState:UIControlStateNormal];
     [barButtonAppearanceInSearchBar setTitle:@""];*/
+	
+	if (self.selectedPeople.count > 0) {
+		
+		[self.activityViewController presentFromRootViewController];
+		
+	}
+	
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	
+	[super viewWillDisappear:animated];
+	
+	[self.activityViewController dismissViewControllerAnimated:NO completion:nil];
+	
 }
 
 - (void)viewDidLoad {

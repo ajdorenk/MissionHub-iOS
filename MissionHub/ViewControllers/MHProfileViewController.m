@@ -103,6 +103,14 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+	
+	[super viewWillDisappear:animated];
+	
+	[self.activityViewController dismissViewControllerAnimated:NO completion:nil];
+	
+}
+
 #pragma mark - accessor methods
 
 - (id<MHProfileProtocol>)currentTableViewContoller {
@@ -339,13 +347,25 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
-- (void)otherOptionsActivity:(id)sender {
+- (void)otherOptionsActivity:(UIButton *)sender {
 	
-	NSArray *activityItems						= ( self.person ? @[self.person] : @[]);
-	
-	self.activityViewController.activityItems	= activityItems;
-	
-	[self presentViewController:self.activityViewController animated:YES completion:nil];
+	if (sender.selected) {
+		
+		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
+		
+		sender.selected = NO;
+		
+	} else {
+		
+		NSArray *activityItems						= ( self.person ? @[self.person] : @[]);
+		
+		self.activityViewController.activityItems	= activityItems;
+		
+		[self.activityViewController presentFromViewController:self];
+		
+		sender.selected	= YES;
+		
+	}
 	
 }
 
