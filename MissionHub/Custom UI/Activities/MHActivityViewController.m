@@ -228,7 +228,8 @@
 	
 	CGRect presentingControllerFrame = self.presentingController.view.frame;
 	
-	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation)) {
+	//TODO: find a better way to check if the presenting Controller has switched the height and width yet
+	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation) && CGRectGetWidth(presentingControllerFrame) < CGRectGetHeight(presentingControllerFrame)) {
 		
 		presentingControllerFrame.size.height	= CGRectGetWidth(self.presentingController.view.frame);
 		presentingControllerFrame.size.width	= CGRectGetHeight(self.presentingController.view.frame);
@@ -252,7 +253,8 @@
 	
 	CGRect presentingControllerFrame = self.presentingController.view.frame;
 	
-	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation)) {
+	//TODO: find a better way to check if the presenting Controller has switched the height and width yet
+	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation) && CGRectGetWidth(presentingControllerFrame) < CGRectGetHeight(presentingControllerFrame)) {
 		
 		presentingControllerFrame.size.height	= CGRectGetWidth(self.presentingController.view.frame);
 		presentingControllerFrame.size.width	= CGRectGetHeight(self.presentingController.view.frame);
@@ -312,39 +314,35 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	
-	CGRect frame = self.view.frame;
 	CGRect presentingControllerFrame = self.presentingController.view.frame;
 	
-	UIView *viewToAnimateFrom	= (self.animateFromView ? self.animateFromView : self.presentingController.view);
-	CGRect currentFrame			= self.view.frame;
-	CGRect afterFrame			= currentFrame;
-	
-	CGFloat yPosition			= ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? CGRectGetMinY(viewToAnimateFrom.frame) : CGRectGetMaxY(viewToAnimateFrom.frame) );
-	
-	if (self.animationDirection == MHActivityViewControllerAnimationDirectionUp) {
-		
-		afterFrame.origin.y		= yPosition;
-		
-	} else {
-		
-		afterFrame.origin.y		= yPosition - CGRectGetHeight(currentFrame);
-		
-	}
-	
-	if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
-		frame.origin.y		= CGRectGetHeight(self.presentingController.view.frame) - [self heightForParentFrame:presentingControllerFrame];
-		frame.size.width	= CGRectGetWidth(self.presentingController.view.frame);
-	} else {
+	//if the orientation will be landscape and the presentingController's frame has not been switched.
+	//TODO: find a better way to check if the presenting Controller has switched the height and width yet
+	if (UIDeviceOrientationIsLandscape(toInterfaceOrientation) && CGRectGetWidth(presentingControllerFrame) < CGRectGetHeight(presentingControllerFrame)) {
 		
 		presentingControllerFrame.size.height	= CGRectGetWidth(self.presentingController.view.frame);
 		presentingControllerFrame.size.width	= CGRectGetHeight(self.presentingController.view.frame);
 		
-		frame.origin.y		= CGRectGetWidth(self.presentingController.view.frame) - [self heightForParentFrame:presentingControllerFrame];
-		frame.size.width	= CGRectGetHeight(self.presentingController.view.frame);
 	}
 	
-	frame.size.height			= [self heightForParentFrame:presentingControllerFrame];
-	self.view.frame				= frame;
+	UIView *viewToAnimateFrom	= (self.animateFromView ? self.animateFromView : self.presentingController.view);
+	//CGRect currentFrame			= self.view.frame;
+	CGRect afterFrame			= self.view.frame;
+	CGFloat yPosition			= ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? CGRectGetMinY(viewToAnimateFrom.frame) : CGRectGetMaxY(viewToAnimateFrom.frame) );
+	
+	if (self.animationDirection == MHActivityViewControllerAnimationDirectionUp) {
+		
+		afterFrame.origin.y		= yPosition - [self heightForParentFrame:presentingControllerFrame];
+		
+	} else {
+		
+		afterFrame.origin.y		= yPosition;
+		
+	}
+	
+	afterFrame.size.width		= CGRectGetWidth(presentingControllerFrame);
+	afterFrame.size.height		= [self heightForParentFrame:presentingControllerFrame];
+	self.view.frame				= afterFrame;
 	self.backgroundView.frame	= self.view.bounds;
 	self.activityView.frame		= self.view.bounds;
 	

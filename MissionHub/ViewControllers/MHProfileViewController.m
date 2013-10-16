@@ -347,13 +347,11 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
-- (void)otherOptionsActivity:(UIButton *)sender {
+- (void)otherOptionsActivity:(id)sender {
 	
-	if (sender.selected) {
+	if (self.activityViewController.parentViewController) {
 		
 		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
-		
-		sender.selected = NO;
 		
 	} else {
 		
@@ -362,8 +360,6 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 		self.activityViewController.activityItems	= activityItems;
 		
 		[self.activityViewController presentFromViewController:self];
-		
-		sender.selected	= YES;
 		
 	}
 	
