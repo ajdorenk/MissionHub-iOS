@@ -15,8 +15,11 @@
 #import "MHAPI.h"
 #import "MHToolbar.h"
 
-CGFloat const MHProfileNavigationBarButtonMarginVertical = 5.0f;
-CGFloat const MHProfileHeaderHeight = 150.0f;
+NSString *const MHProfileViewControllerNotificationPersonDeleted	= @"com.missionhub.MHProfileViewController.notification.personDeleted";
+NSString *const MHProfileViewControllerNotificationPersonArchived	= @"com.missionhub.MHProfileViewController.notification.personArchived";
+NSString *const MHProfileViewControllerNotificationPersonUpdated	= @"com.missionhub.MHProfileViewController.notification.personUpdated";
+CGFloat const MHProfileNavigationBarButtonMarginVertical			= 5.0f;
+CGFloat const MHProfileHeaderHeight									= 150.0f;
 
 @interface MHProfileViewController ()
 
@@ -28,15 +31,20 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 @property (nonatomic, strong, readonly) MHProfileMenuViewController			*menuViewController;
 @property (nonatomic, strong, readonly) MHProfileInfoViewController			*infoViewController;
 @property (nonatomic, strong, readonly) MHProfileInteractionsViewController	*interactionsViewController;
-@property (nonatomic, strong, readonly) MHGenericListViewController			*labelViewController;
+@property (nonatomic, strong, readonly) MHLabelActivity						*labelActivity;
 @property (nonatomic, strong, readonly) MHProfileSurveysViewController		*surveysViewController;
 @property (nonatomic, strong, readonly) MHActivityViewController			*activityViewController;
+
+- (void)refreshInfoForPerson:(MHPerson *)person onCompletion:(void (^)(void))completionBlock;
+- (void)refreshSurveyAnswersForPerson:(MHPerson *)person;
+- (void)refreshInteractionsForPerson:(MHPerson *)person;
 
 - (void)backToMenu:(id)sender;
 - (void)newInteractionActivity:(id)sender;
 - (void)addLabelActivity:(id)sender;
 - (void)otherOptionsActivity:(id)sender;
 
+- (void)updateInterfaceWithPerson:(MHPerson *)person;
 - (void)updateLayoutWithFrame:(CGRect)frame;
 - (void)updateBarButtons;
 
@@ -53,7 +61,7 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 @synthesize menuViewController				= _menuViewController;
 @synthesize infoViewController				= _infoViewController;
 @synthesize interactionsViewController		= _interactionsViewController;
-@synthesize labelViewController				= _labelViewController;
+@synthesize labelActivity					= _labelActivity;
 @synthesize surveysViewController			= _surveysViewController;
 @synthesize activityViewController			= _activityViewController;
 
@@ -72,9 +80,7 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 				 tableViewController:(UITableViewController *)self.currentTableViewContoller
 			 segmentedViewController:self.menuViewController];
 	
-	[self willChangeValueForKey:@"person"];
-	_person = [MHAPI sharedInstance].currentUser;
-	[self didChangeValueForKey:@"person"];
+	self.person = [MHAPI sharedInstance].currentUser;
 	
 }
 
@@ -188,17 +194,18 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
-- (MHGenericListViewController *)labelViewController {
+- (MHLabelActivity *)labelActivity {
 	
-	if (_labelViewController == nil) {
+	if (_labelActivity == nil) {
 		
-		[self willChangeValueForKey:@"labelViewController"];
-		_labelViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
-		[self didChangeValueForKey:@"labelViewController"];
+		[self willChangeValueForKey:@"labelActivity"];
+		_labelActivity = [[MHLabelActivity alloc] init];
+		[self didChangeValueForKey:@"labelActivity"];
+		_labelActivity.activityViewController	= self.activityViewController;
 		
 	}
 	
-	return _labelViewController;
+	return _labelActivity;
 	
 }
 
@@ -238,6 +245,158 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
+- (void)refresh {
+	
+	__weak __typeof(&*self)weakSelf = self;
+	[self refreshInfoForPerson:self.person onCompletion:^{
+		
+		[self refreshInteractionsForPerson:weakSelf.person];
+		
+	}];
+	
+}
+
+- (void)refreshInfoForPerson:(MHPerson *)person onCompletion:(void (^)(void))completionBlock {
+	
+	if (person.remoteID) {
+		
+		__weak __typeof(&*self)weakSelf = self;
+		[[MHAPI sharedInstance] getProfileForRemoteID:person.remoteID withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+			
+			if ([[result objectAtIndex:0] isKindOfClass:[MHPerson class]]) {
+				
+				[self willChangeValueForKey:@"activityViewController"];
+				_person = [result objectAtIndex:0];
+				[self didChangeValueForKey:@"activityViewController"];
+				[self updateInterfaceWithPerson:_person];
+				
+			}
+			
+			if (completionBlock) {
+				
+				completionBlock();
+				
+			}
+			
+		} failBlock:^(NSError *error, MHRequestOptions *options) {
+			
+			NSString *errorMessage = [NSString stringWithFormat:@"Could not refresh %@\'s profile because: %@ If the problem continues please contact support@missionhub.com", weakSelf.person.fullName, error.localizedDescription];
+			NSError *presentingError = [NSError errorWithDomain:error.domain
+														   code:error.code
+													   userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+			
+			[MHErrorHandler presentError:presentingError];
+			
+			if (completionBlock) {
+				
+				completionBlock();
+				
+			}
+			
+		}];
+		
+	}
+	
+}
+
+- (void)refreshSurveyAnswersForPerson:(MHPerson *)person {
+	
+	if (person.remoteID) {
+		
+		__weak __typeof(&*self)weakSelf = self;
+		[[MHAPI sharedInstance] getPersonWithSurveyAnswerSheetsForPersonWithRemoteID:person.remoteID
+																withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+																	
+																	if ([[result objectAtIndex:0] isKindOfClass:[MHPerson class]]) {
+																		
+																		MHPerson *profilePerson = [result objectAtIndex:0];
+																		
+																		[_person addAnswerSheets:profilePerson.answerSheets];
+																		
+																		[weakSelf updateInterfaceWithPerson:_person];
+																		
+																	}
+																	
+																} failBlock:^(NSError *error, MHRequestOptions *options) {
+																	
+																	NSString *errorMessage = [NSString stringWithFormat:@"Could not get Survey Answers for %@ because: %@ If the problem continues please contact support@missionhub.com", weakSelf.person.fullName, error.localizedDescription];
+																	NSError *presentingError = [NSError errorWithDomain:error.domain
+																												   code:error.code
+																											   userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+																	
+																	[MHErrorHandler presentError:presentingError];
+																	
+																}];
+		
+	}
+	
+}
+
+- (void)refreshInteractionsForPerson:(MHPerson *)person {
+	
+	if (person.remoteID) {
+	
+		__weak __typeof(&*self)weakSelf = self;
+		[[MHAPI sharedInstance] getInteractionsForPersonWithRemoteID:person.remoteID
+												withSuccessBlock:^(NSArray *resultArray, MHRequestOptions *options) {
+													
+													[[_person mutableSetValueForKey:@"createdInteractions"] removeAllObjects];
+													[[_person mutableSetValueForKey:@"initiatedInteractions"] removeAllObjects];
+													[[_person mutableSetValueForKey:@"receivedInteractions"] removeAllObjects];
+													[[_person mutableSetValueForKey:@"updatedInteractions"] removeAllObjects];
+													
+													[resultArray enumerateObjectsUsingBlock:^(id resultObject, NSUInteger index, BOOL *stop) {
+														
+														if ([resultObject isKindOfClass:[MHInteraction class]]) {
+															
+															MHInteraction *interactionObject = (MHInteraction *)resultObject;
+															
+															if (interactionObject.receiver && [[interactionObject.receiver remoteID] isEqualToNumber:[_person remoteID]]) {
+																
+																[_person addReceivedInteractionsObject:interactionObject];
+																
+															}
+															
+															if (interactionObject.creator && [[interactionObject.creator remoteID] isEqualToNumber:[_person remoteID]]) {
+																
+																[_person addCreatedInteractionsObject:interactionObject];
+																
+															}
+															
+															if (interactionObject.initiators && [interactionObject.initiators findWithRemoteID:[_person remoteID]]) {
+																
+																[_person addInitiatedInteractionsObject:interactionObject];
+																
+															}
+															
+															if (interactionObject.updater && [[interactionObject.updater remoteID] isEqualToNumber:[_person remoteID]]) {
+																
+																[_person addUpdatedInteractionsObject:interactionObject];
+																
+															}
+															
+														}
+														
+													}];
+													
+													[weakSelf updateInterfaceWithPerson:_person];
+													
+												}
+													   failBlock:^(NSError *error, MHRequestOptions *options) {
+														   
+														   NSString *errorMessage = [NSString stringWithFormat:@"Could not get Interactions for %@ because: %@ If the problem continues please contact support@missionhub.com", weakSelf.person.fullName, error.localizedDescription];
+														   NSError *presentingError = [NSError errorWithDomain:error.domain
+																										  code:error.code
+																									  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+														   
+														   [MHErrorHandler presentError:presentingError];
+														   
+													   }];
+		
+	}
+	
+}
+
 - (void)setPerson:(MHPerson *)person {
 	
 	if (person) {
@@ -245,75 +404,11 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 		[self willChangeValueForKey:@"person"];
 		_person = person;
 		[self didChangeValueForKey:@"person"];
-		[self refresh];
 		
-		[[MHAPI sharedInstance] getPersonWithSurveyAnswerSheetsForPersonWithRemoteID:person.remoteID
-													withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
-														
-														if ([[result objectAtIndex:0] isKindOfClass:[MHPerson class]]) {
-															
-															MHPerson *profilePerson = [result objectAtIndex:0];
-															
-															[_person addAnswerSheets:profilePerson.answerSheets];
-															
-														}
-														
-													} failBlock:^(NSError *error, MHRequestOptions *options) {
-														
-														[MHErrorHandler presentError:error];
-														
-													}];
+		[self updateInterfaceWithPerson:_person];
 		
-		[[MHAPI sharedInstance] getInteractionsForPersonWithRemoteID:person.remoteID
-													withSuccessBlock:^(NSArray *resultArray, MHRequestOptions *options) {
-														
-														[[_person mutableSetValueForKey:@"createdInteractions"] removeAllObjects];
-														[[_person mutableSetValueForKey:@"initiatedInteractions"] removeAllObjects];
-														[[_person mutableSetValueForKey:@"receivedInteractions"] removeAllObjects];
-														[[_person mutableSetValueForKey:@"updatedInteractions"] removeAllObjects];
-														
-														[resultArray enumerateObjectsUsingBlock:^(id resultObject, NSUInteger index, BOOL *stop) {
-															
-															if ([resultObject isKindOfClass:[MHInteraction class]]) {
-																
-																MHInteraction *interactionObject = (MHInteraction *)resultObject;
-																
-																if (interactionObject.receiver && [[interactionObject.receiver remoteID] isEqualToNumber:[_person remoteID]]) {
-																	
-																	[_person addReceivedInteractionsObject:interactionObject];
-																	
-																}
-																
-																if (interactionObject.creator && [[interactionObject.creator remoteID] isEqualToNumber:[_person remoteID]]) {
-																	
-																	[_person addCreatedInteractionsObject:interactionObject];
-																	
-																}
-																
-																if (interactionObject.initiators && [interactionObject.initiators findWithRemoteID:[_person remoteID]]) {
-																	
-																	[_person addInitiatedInteractionsObject:interactionObject];
-																	
-																}
-																
-																if (interactionObject.updater && [[interactionObject.updater remoteID] isEqualToNumber:[_person remoteID]]) {
-																	
-																	[_person addUpdatedInteractionsObject:interactionObject];
-																	
-																}
-																
-															}
-															
-														}];
-														
-														[self refresh];
-			
-		}
-														   failBlock:^(NSError *error, MHRequestOptions *options) {
-															   
-															   [MHErrorHandler presentError:error];
-			
-		}];
+		[self refreshSurveyAnswersForPerson:_person];
+		[self refreshInteractionsForPerson:_person];
 		
 	}
 	
@@ -341,9 +436,8 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 
 - (void)addLabelActivity:(id)sender {
 
-//	[self labelViewController].selectionDelegate = self;
-//	[self labelViewController].objectArray = [NSMutableArray arrayWithArray:[[MHAPI sharedInstance].currentUser.currentOrganization.labels allObjects]];
-//	[self presentViewController:[self labelViewController] animated:YES completion:nil];
+	[self.labelActivity prepareWithActivityItems:@[self.person]];
+	[self.labelActivity performActivity];
 	
 }
 
@@ -386,12 +480,41 @@ CGFloat const MHProfileHeaderHeight = 150.0f;
 	
 }
 
+#pragma mark - MHActivityViewControllerDelegate
+
+- (void)activityDidFinish:(NSString *)activityType completed:(BOOL)completed {
+	
+	if (completed) {
+	
+		if ([activityType isEqualToString:MHActivityTypeArchive] ) {
+			
+			[self dismissViewControllerAnimated:YES completion:nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:MHProfileViewControllerNotificationPersonArchived object:self];
+			
+		} else if ([activityType isEqualToString:MHActivityTypeDelete] ) {
+			
+			[self dismissViewControllerAnimated:YES completion:nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:MHProfileViewControllerNotificationPersonDeleted object:self];
+			
+		} else if ([activityType isEqualToString:MHActivityTypeAssign] ||
+				   [activityType isEqualToString:MHActivityTypeLabel] ||
+				   [activityType isEqualToString:MHActivityTypePermissions]) {
+			
+			[self refreshInfoForPerson:self.person onCompletion:nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:MHProfileViewControllerNotificationPersonUpdated object:self];
+			
+		}
+		
+	}
+	
+}
+
 #pragma mark - layout methods
 
-- (void)refresh {
+- (void)updateInterfaceWithPerson:(MHPerson *)person {
 	
-	[[self headerViewController] setPerson:self.person];
-	[[self currentTableViewContoller] setPerson:self.person];
+	[[self headerViewController] setPerson:person];
+	[[self currentTableViewContoller] setPerson:person];
 	
 }
 

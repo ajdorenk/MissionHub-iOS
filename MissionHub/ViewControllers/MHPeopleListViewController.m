@@ -82,6 +82,21 @@
 		_profileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHProfileViewController"];
 		[self didChangeValueForKey:@"profileViewController"];
 		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(refresh)
+													 name:MHProfileViewControllerNotificationPersonArchived
+												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(refresh)
+													 name:MHProfileViewControllerNotificationPersonArchived
+												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(refresh)
+													 name:MHProfileViewControllerNotificationPersonUpdated
+												   object:nil];
+		
 	}
 	
 	return _profileViewController;
@@ -831,9 +846,9 @@
 		
 	}
 	
-	[[self profileViewController] setPerson:person];
+	[self.profileViewController setPerson:person];
 	
-	[self.navigationController pushViewController:[self profileViewController] animated:YES];
+	[self.navigationController pushViewController:self.profileViewController animated:YES];
     
 }
 

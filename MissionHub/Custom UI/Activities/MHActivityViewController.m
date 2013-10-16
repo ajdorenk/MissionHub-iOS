@@ -245,11 +245,6 @@
 }
 
 - (CGFloat)height {
-    
-//	CGFloat numberOfActivities			= ( self.visibleActivities ? self.visibleActivities.count : 1 );
-//	CGFloat maxNumberOfColumnsPerPage	= floor( ( CGRectGetWidth(self.presentingController.view.frame) - MHActivityViewHorizontalMargin ) / ( MHActivityWidth + MHActivityViewHorizontalMargin ) );
-//	CGFloat numberOfRowsOnCurrentPage	= fmin(MHActivityViewMaxRowPerPage, ceil(numberOfActivities / maxNumberOfColumnsPerPage));
-//	return (CGFloat)ceil(MHActivityViewVerticalMargin + ( (MHActivityViewVerticalMargin + MHActivityHeight) * numberOfRowsOnCurrentPage ) );
 	
 	CGRect presentingControllerFrame = self.presentingController.view.frame;
 	
@@ -326,7 +321,6 @@
 	}
 	
 	UIView *viewToAnimateFrom	= (self.animateFromView ? self.animateFromView : self.presentingController.view);
-	//CGRect currentFrame			= self.view.frame;
 	CGRect afterFrame			= self.view.frame;
 	CGFloat yPosition			= ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? CGRectGetMinY(viewToAnimateFrom.frame) : CGRectGetMaxY(viewToAnimateFrom.frame) );
 	
