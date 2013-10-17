@@ -6,4 +6,4 @@ We're an open source project and always looking for more developers to help us e
 
 License
 
-MissionHub for Android is released under the MIT license: http://www.opensource.org/licenses/MIT
+MissionHub for iOS is released under the MIT license: http://www.opensource.org/licenses/MIT
