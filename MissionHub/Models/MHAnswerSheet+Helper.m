@@ -37,11 +37,12 @@
 		
 		NSArray *arrayOfObjects = relationshipObject;
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 			
 			MHAnswer *newObject = [MHAnswer newObjectFromFields:object];
 			
-			[self addAnswersObject:newObject];
+			[weakSelf addAnswersObject:newObject];
 			
 		}];
 		

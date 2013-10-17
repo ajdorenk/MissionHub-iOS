@@ -22,6 +22,8 @@
 
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
 	
+	__weak __typeof(&*self)weakSelf = self;
+	
 	if ([fieldName isEqualToString:@"labels"]) {
 		
 		NSArray *arrayOfObjects = relationshipObject;
@@ -30,7 +32,7 @@
 			
 			MHLabel *newObject = [MHLabel newObjectFromFields:object];
 			
-			[self addLabelsObject:newObject];
+			[weakSelf addLabelsObject:newObject];
 			
 		}];
 		
@@ -42,8 +44,8 @@
 			
 			MHPerson *newObject = [MHPerson newObjectFromFields:object];
 			
-			[self addAdminsObject:newObject];
-			[self addPeopleObject:newObject];
+			[weakSelf addAdminsObject:newObject];
+			[weakSelf addPeopleObject:newObject];
 			
 		}];
 		
@@ -55,8 +57,8 @@
 			
 			MHPerson *newObject = [MHPerson newObjectFromFields:object];
 			
-			[self addUsersObject:newObject];
-			[self addPeopleObject:newObject];
+			[weakSelf addUsersObject:newObject];
+			[weakSelf addPeopleObject:newObject];
 			
 		}];
 		
@@ -68,7 +70,7 @@
 			
 			MHSurvey *newObject = [MHSurvey newObjectFromFields:object];
 			
-			[self addSurveysObject:newObject];
+			[weakSelf addSurveysObject:newObject];
 			
 		}];
 		
@@ -80,7 +82,7 @@
 			
 			MHInteractionType *newObject = [MHInteractionType newObjectFromFields:object];
 			
-			[self addInteractionTypesObject:newObject];
+			[weakSelf addInteractionTypesObject:newObject];
 			
 		}];
 		

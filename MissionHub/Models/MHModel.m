@@ -24,15 +24,16 @@
 		
 		self.attributes				= [ent attributesByName];
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[self.attributes enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 			
 			if ([key isEqualToString:@"remoteID"]) {
 				
-				[self.attributes setValue:@"id" forKey:key];
+				[weakSelf.attributes setValue:@"id" forKey:key];
 				
 			} else {
 				
-				[self.attributes setValue:key forKey:key];
+				[weakSelf.attributes setValue:key forKey:key];
 				
 			}
 			
@@ -43,7 +44,7 @@
 		
 		[self.relationships enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 			
-			[self.relationships setValue:key forKey:key];
+			[weakSelf.relationships setValue:key forKey:key];
 			
 		}];
 		*/
@@ -281,10 +282,11 @@
 	__block NSMutableDictionary *jsonDictionary = [NSMutableDictionary dictionary];
 	NSDictionary *relationshipDictionary = [entity relationshipsByName];
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[[entity attributesByName] enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL *stop) {
 		
-		NSString * keyForReturnObject = [self fieldNameForJsonObjectWithKey:key];
-		id returnObject = [self valueForJsonObjectWithKey:key];
+		NSString * keyForReturnObject = [weakSelf fieldNameForJsonObjectWithKey:key];
+		id returnObject = [weakSelf valueForJsonObjectWithKey:key];
 		
 		if (returnObject && ![keyForReturnObject isEqualToString:@"id"]) {
 			
@@ -298,7 +300,7 @@
 		
 		if ([fieldName isKindOfClass:[NSString class]]) {
 			
-			[self addRelationshipObject:[self valueForKey:fieldName] forFieldName:fieldName toJsonObject:jsonDictionary];
+			[weakSelf addRelationshipObject:[weakSelf valueForKey:fieldName] forFieldName:fieldName toJsonObject:jsonDictionary];
 			
 		}
 		

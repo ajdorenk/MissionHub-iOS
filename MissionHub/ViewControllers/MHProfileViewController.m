@@ -250,7 +250,7 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	__weak __typeof(&*self)weakSelf = self;
 	[self refreshInfoForPerson:self.person onCompletion:^{
 		
-		[self refreshInteractionsForPerson:weakSelf.person];
+		[weakSelf refreshInteractionsForPerson:weakSelf.person];
 		
 	}];
 	
@@ -265,10 +265,10 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 			
 			if ([[result objectAtIndex:0] isKindOfClass:[MHPerson class]]) {
 				
-				[self willChangeValueForKey:@"activityViewController"];
+				[weakSelf willChangeValueForKey:@"activityViewController"];
 				_person = [result objectAtIndex:0];
-				[self didChangeValueForKey:@"activityViewController"];
-				[self updateInterfaceWithPerson:_person];
+				[weakSelf didChangeValueForKey:@"activityViewController"];
+				[weakSelf updateInterfaceWithPerson:_person];
 				
 			}
 			
@@ -488,20 +488,20 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	
 		if ([activityType isEqualToString:MHActivityTypeArchive] ) {
 			
-			[self dismissViewControllerAnimated:YES completion:nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:MHProfileViewControllerNotificationPersonArchived object:self];
+			[self.navigationController popViewControllerAnimated:YES];
 			
 		} else if ([activityType isEqualToString:MHActivityTypeDelete] ) {
 			
-			[self dismissViewControllerAnimated:YES completion:nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:MHProfileViewControllerNotificationPersonDeleted object:self];
+			[self.navigationController popViewControllerAnimated:YES];
 			
 		} else if ([activityType isEqualToString:MHActivityTypeAssign] ||
 				   [activityType isEqualToString:MHActivityTypeLabel] ||
 				   [activityType isEqualToString:MHActivityTypePermissions]) {
 			
-			[self refreshInfoForPerson:self.person onCompletion:nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:MHProfileViewControllerNotificationPersonUpdated object:self];
+			[self refreshInfoForPerson:self.person onCompletion:nil];
 			
 		}
 		

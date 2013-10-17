@@ -561,7 +561,7 @@
 	
 	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
 	self.type			= MHRequestOptionsTypeBulkDelete;
-	self.endpoint		= MHRequestOptionsEndpointOrganizationalPermissions;
+	self.endpoint		= MHRequestOptionsEndpointPeople;
 	
 	return self;
 }
@@ -572,7 +572,7 @@
 	
 	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
 	self.type			= MHRequestOptionsTypeBulkArchive;
-	self.endpoint		= MHRequestOptionsEndpointOrganizationalPermissions;
+	self.endpoint		= MHRequestOptionsEndpointPeople;
 	
 	return self;
 }
@@ -880,9 +880,10 @@
 	
 	__block NSString * includeString = @"";
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[self.includes enumerateIndexesUsingBlock:^(MHRequestOptionsIncludes include, BOOL *stop) {
 		
-		includeString = [includeString stringByAppendingFormat:@"%@,", [self stringFromInclude:include]];
+		includeString = [includeString stringByAppendingFormat:@"%@,", [weakSelf stringFromInclude:include]];
 		
 	}];
 	

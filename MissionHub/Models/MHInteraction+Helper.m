@@ -90,8 +90,8 @@
 		
 		if (template.length > 0) {
 			
-			[template replaceOccurrencesOfString:@"{{initiator}}" withString:[self initiatorsNames] options:NSLiteralSearch range:NSMakeRange(0, [template length])];
-			[template replaceOccurrencesOfString:@"{{receiver}}" withString:[self receiverName] options:NSLiteralSearch range:NSMakeRange(0, [template length])];
+			[template replaceOccurrencesOfString:@"{{initiator}}" withString:self.initiatorsNames options:NSLiteralSearch range:NSMakeRange(0, [template length])];
+			[template replaceOccurrencesOfString:@"{{receiver}}" withString:self.receiverName options:NSLiteralSearch range:NSMakeRange(0, [template length])];
 		
 		}
 			
@@ -135,9 +135,10 @@
 		
 	} else {
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[self.initiators.allObjects enumerateObjectsUsingBlock:^(MHPerson *initiator, NSUInteger index, BOOL *stop) {
 			
-			if (index == self.initiators.count - 1) {
+			if (index == weakSelf.initiators.count - 1) {
 				
 				//remove trailing ,
 				[initiatorsString deleteCharactersInRange:NSMakeRange([initiatorsString length] - 2, 2)];
@@ -242,11 +243,12 @@
 		
 		NSArray *arrayOfObjects = relationshipObject;
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 			
 			MHPerson *newObject = [MHPerson newObjectFromFields:object];
 			
-			[self addInitiatorsObject:newObject];
+			[weakSelf addInitiatorsObject:newObject];
 			
 		}];
 		
@@ -283,7 +285,7 @@
 	if ([fieldName isEqualToString:@"initiators"]) {
 		
 		NSSet *arrayOfObjects = (NSSet *)relationshipObject;
-		NSMutableArray *arrayOfIds = [NSMutableArray array];
+		__block NSMutableArray *arrayOfIds = [NSMutableArray array];
 		
 		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, BOOL *stop) {
 			

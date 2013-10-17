@@ -95,9 +95,10 @@
 	[[self peopleNavigationViewController] setDataArray:peopleList forRequestOptions:options];
 	self.topViewController = self.peopleNavigationViewController;
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[self dismissViewControllerAnimated:YES completion:^{
 		
-		[self resetTopView];
+		[weakSelf resetTopView];
 		
 	}];
 	
@@ -112,6 +113,12 @@
 	}
 	
 	self.userInitiatedLogout = NO;
+	
+}
+
+- (void)dealloc {
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 }
 

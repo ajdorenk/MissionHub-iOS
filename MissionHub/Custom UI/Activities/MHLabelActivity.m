@@ -103,7 +103,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 					NSMutableArray *peopleWithLabel		= [NSMutableArray arrayWithObject:person];
 					
 					labelState	= [NSMutableDictionary dictionaryWithDictionary:@{@"people": peopleWithLabel}];
-					self.labelStates[organizationalLabel.label_id]		= labelState;
+					weakSelf.labelStates[organizationalLabel.label_id]		= labelState;
 					
 				}
 				
@@ -159,7 +159,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 							@"afterState":	[NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone]
 							}];
 			
-			self.labelStates[label.remoteID]	= labelState;
+			weakSelf.labelStates[label.remoteID]	= labelState;
 			
 			[weakSelf.labelsWithNoneState addObject:label];
 			

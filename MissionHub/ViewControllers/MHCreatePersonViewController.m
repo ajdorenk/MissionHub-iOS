@@ -433,25 +433,26 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 	
 	if ([self.person validateForServerCreate:&error]) {
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] createPerson:self.person withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 			
 			MHPerson *person = [result objectAtIndex:0];
 			
-			if ([self.createPersonDelegate respondsToSelector:@selector(controller:didCreatePerson:)]) {
+			if ([weakSelf.createPersonDelegate respondsToSelector:@selector(controller:didCreatePerson:)]) {
 				
-				[self.createPersonDelegate controller:self didCreatePerson:person];
+				[weakSelf.createPersonDelegate controller:weakSelf didCreatePerson:person];
 				
 			}
 			
-			self.saveButton.enabled = YES;
+			weakSelf.saveButton.enabled = YES;
 			
-			[self.navigationController popViewControllerAnimated:YES];
+			[weakSelf.navigationController popViewControllerAnimated:YES];
 			
 		} failBlock:^(NSError *error, MHRequestOptions *options) {
 			
 			[MHErrorHandler presentError:error];
 			
-			self.saveButton.enabled = YES;
+			weakSelf.saveButton.enabled = YES;
 			
 		}];
 		
@@ -675,9 +676,10 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 	newRect.size.width	= CGRectGetWidth(self.view.frame);
     newRect.size.height = CGRectGetHeight(self.view.frame) - CGRectGetHeight(keyboardFrame);
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		
-		self.scrollView.frame = newRect;
+		weakSelf.scrollView.frame = newRect;
 		
 	} completion:nil];
 	
@@ -697,10 +699,11 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 
 - (void)keyboardWillHide:(NSNotification *)notification {
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		
-		self.scrollView.frame			= self.originalContentFrame;
-		[self.scrollView setContentOffset:self.originalContentOffset animated:YES];
+		weakSelf.scrollView.frame			= weakSelf.originalContentFrame;
+		[weakSelf.scrollView setContentOffset:weakSelf.originalContentOffset animated:YES];
 		
 	} completion:nil];
     

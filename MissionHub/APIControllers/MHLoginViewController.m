@@ -164,6 +164,7 @@ typedef enum {
 	
     // Facebook SDK * login flow *
     // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
+	__weak __typeof(&*self)weakSelf = self;
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication fallbackHandler:^(FBAppCall *call) {
         // Facebook SDK * App Linking *
         // For simplicity, this sample will ignore the link if the session is already
@@ -172,11 +173,11 @@ typedef enum {
             if ([FBSession activeSession].isOpen) {
                 NSLog(@"INFO: Ignoring app link because current session is open.");
 				
-				[self loggedInWithToken:call.accessTokenData.accessToken];
+				[weakSelf loggedInWithToken:call.accessTokenData.accessToken];
 				
             }
             else {
-                [self handleAppLink:call.accessTokenData];
+                [weakSelf handleAppLink:call.accessTokenData];
             }
         }
     }];
@@ -207,13 +208,14 @@ typedef enum {
     [FBSession setActiveSession:appLinkSession];
 	
     // ... and open it from the App Link's Token.
+	__weak __typeof(&*self)weakSelf = self;
     [appLinkSession openFromAccessTokenData:appLinkToken
                           completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                               // Forward any errors to the FBLoginView delegate.
                               if (error) {
-                                  [self loginView:nil handleError:error];
+                                  [weakSelf loginView:nil handleError:error];
                               } else {
-								  [self loggedInWithToken:session.accessTokenData.accessToken];
+								  [weakSelf loggedInWithToken:session.accessTokenData.accessToken];
 							  }
                           }];
 	
@@ -353,16 +355,17 @@ typedef enum {
 				
 				self.hasRequestedMe = YES;
 			
+				__weak __typeof(&*self)weakSelf = self;
 				[[MHAPI sharedInstance] getMeWithSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 					
-					[self endLoading];
+					[weakSelf endLoading];
 					
 					NSArray *peopleList = nil;
 					id  resultObject = [result objectAtIndex:1];
 					
 					if ([resultObject isKindOfClass:[NSError class]]) {
 						
-						[self handleError:resultObject];
+						[weakSelf handleError:resultObject];
 						
 					} else if ([resultObject isKindOfClass:[NSArray class]]) {
 						
@@ -370,22 +373,22 @@ typedef enum {
 						
 					}
 					
-					if ([self.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:peopleList:requestOptions:)]) {
+					if ([weakSelf.loginDelegate respondsToSelector:@selector(finishedLoginWithCurrentUser:peopleList:requestOptions:)]) {
 						
-						[self.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser  peopleList:peopleList requestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+						[weakSelf.loginDelegate finishedLoginWithCurrentUser:[MHAPI sharedInstance].currentUser  peopleList:peopleList requestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
 						
 					}
 					
-					self.hasRequestedMe = NO;
-					self.loggedIn		= YES;
+					weakSelf.hasRequestedMe = NO;
+					weakSelf.loggedIn		= YES;
 					
 				} failBlock:^(NSError *error, MHRequestOptions *options) {
 					
-					[self endLoading];
+					[weakSelf endLoading];
 					
-					[self handleError:error];
+					[weakSelf handleError:error];
 					
-					self.hasRequestedMe = NO;
+					weakSelf.hasRequestedMe = NO;
 					
 				}];
 				

@@ -119,39 +119,40 @@ typedef enum {
 		
 		MHOrganization *organization	= (MHOrganization *)object;
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] getOrganizationWithRemoteID:organization.remoteID successBlock:^(NSArray *result, MHRequestOptions *options) {
 			
 			MHOrganization *organization = [result objectAtIndex:0];
 			
 			[[MHAPI sharedInstance].initialPeopleList removeAllObjects];
 			[MHAPI sharedInstance].currentOrganization	= organization;
-			self.currentOrganization					= organization;
+			weakSelf.currentOrganization					= organization;
 			
-			[self.tableView reloadData];
+			[weakSelf.tableView reloadData];
 			
 			[[MHAPI sharedInstance] getPeopleListWith:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest] successBlock:^(NSArray *result, MHRequestOptions *options) {
 				
 				NSArray *peopleList	= ( result ? result : @[] );
 				
 				[[MHAPI sharedInstance].initialPeopleList addObjectsFromArray:peopleList];
-				[self.peopleNavigationViewController setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+				[weakSelf.peopleNavigationViewController setDataArray:[MHAPI sharedInstance].initialPeopleList forRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
 				
-				[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-					CGRect frame = self.slidingViewController.topViewController.view.frame;
-					self.slidingViewController.topViewController = self.peopleNavigationViewController;
-					self.slidingViewController.topViewController.view.frame = frame;
-					[self.slidingViewController resetTopView];
+				[weakSelf.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+					CGRect frame = weakSelf.slidingViewController.topViewController.view.frame;
+					weakSelf.slidingViewController.topViewController = weakSelf.peopleNavigationViewController;
+					weakSelf.slidingViewController.topViewController.view.frame = frame;
+					[weakSelf.slidingViewController resetTopView];
 				}];
 				
 			} failBlock:^(NSError *error, MHRequestOptions *options) {
 				
-				[self.peopleNavigationViewController setDataFromRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
+				[weakSelf.peopleNavigationViewController setDataFromRequestOptions:[[[MHRequestOptions alloc] init] configureForInitialPeoplePageRequest]];
 				
-				[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-					CGRect frame = self.slidingViewController.topViewController.view.frame;
-					self.slidingViewController.topViewController = self.peopleNavigationViewController;
-					self.slidingViewController.topViewController.view.frame = frame;
-					[self.slidingViewController resetTopView];
+				[weakSelf.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+					CGRect frame = weakSelf.slidingViewController.topViewController.view.frame;
+					weakSelf.slidingViewController.topViewController = weakSelf.peopleNavigationViewController;
+					weakSelf.slidingViewController.topViewController.view.frame = frame;
+					[weakSelf.slidingViewController resetTopView];
 				}];
 				
 			}];
@@ -165,7 +166,7 @@ typedef enum {
 			
 			[MHErrorHandler presentError:presentingError];
 			
-			self.currentOrganization	= oldOrganization;
+			weakSelf.currentOrganization	= oldOrganization;
 			
 		}];
 		
@@ -228,6 +229,11 @@ typedef enum {
 }
 
 - (void)setCurrentOrganization:(MHOrganization *)currentOrganization {
+	
+	[_currentOrganization removeObserver:self forKeyPath:@"admins"];
+	[_currentOrganization removeObserver:self forKeyPath:@"countOfAdmins"];
+	[_currentOrganization removeObserver:self forKeyPath:@"users"];
+	[_currentOrganization removeObserver:self forKeyPath:@"countOfUsers"];
 	
 	[self willChangeValueForKey:@"currentOrganization"];
 	_currentOrganization	= currentOrganization;
@@ -459,11 +465,12 @@ typedef enum {
 			
 			if (newTopViewController) {
 				
-				[self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-					CGRect frame = self.slidingViewController.topViewController.view.frame;
-					self.slidingViewController.topViewController = newTopViewController;
-					self.slidingViewController.topViewController.view.frame = frame;
-					[self.slidingViewController resetTopView];
+				__weak __typeof(&*self)weakSelf = self;
+				[weakSelf.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+					CGRect frame = weakSelf.slidingViewController.topViewController.view.frame;
+					weakSelf.slidingViewController.topViewController = newTopViewController;
+					weakSelf.slidingViewController.topViewController.view.frame = frame;
+					[weakSelf.slidingViewController resetTopView];
 				}];
 				
 			}
@@ -530,6 +537,13 @@ typedef enum {
 
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[MHAPI sharedInstance] removeObserver:self forKeyPath:@"currentOrganization"];
+	
 }
 
 @end

@@ -16,11 +16,12 @@
 		
 		NSArray *arrayOfObjects = relationshipObject;
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[arrayOfObjects enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 			
 			MHQuestion *newObject = [MHQuestion newObjectFromFields:object];
 			
-			[self addQuestionsObject:newObject];
+			[weakSelf addQuestionsObject:newObject];
 			
 		}];
 		

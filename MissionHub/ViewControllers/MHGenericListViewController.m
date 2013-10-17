@@ -43,8 +43,6 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 @property (nonatomic, assign) BOOL					pagingIsLoading;
 @property (nonatomic, assign) BOOL					hasLoadedAllPages;
 
-//- (void)addSelection:(id)selectionObject;
-//- (void)removeSelection:(id)selectionObject;
 - (void)updateSelectedObject:(id)selectedObject;
 
 - (void)addObject:(id)object toSet:(NSMutableSet *)set;
@@ -58,7 +56,6 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 - (void)updateBarLayoutWithParentFrame:(CGRect)parentFrame;
 - (void)updateLayoutWithParentFrame:(CGRect)parentFrame;
 
-//- (BOOL)isSelected:(id)object;
 - (MHGenericListObjectState)stateForObject:(id)object;
 - (MHGenericListObjectState)stateFromCellState:(MHGenericCellState)cellState;
 - (MHGenericCellState)cellStateForObject:(id)object;
@@ -207,42 +204,6 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 												 CGRectGetHeight(self.contentView.frame) - CGRectGetMaxY(self.listName.frame) - MHGenericListViewControllerListLableMarginBottom);
 	
 }
-
-//- (BOOL)isSelected:(id)object {
-//	
-//	__block BOOL selected = NO;
-//	
-//	if (self.multipleSelection) {
-//		
-//		[self.allStateSet enumerateObjectsUsingBlock:^(id selectedObject, BOOL *stop) {
-//			
-//			if ([selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
-//				selected	= [selectedObject isEqualToString:object];
-//			} else if ([selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
-//				selected	= [selectedObject isEqualToModel:object];
-//			} else {
-//				selected = [selectedObject isEqual:object];
-//			}
-//			
-//			*stop		= selected;
-//			
-//		}];
-//		
-//	} else {
-//		
-//		if ([self.selectedObject isKindOfClass:[NSString class]] && [object isKindOfClass:[NSString class]]) {
-//			selected = [self.selectedObject isEqualToString:object];
-//		} else if ([self.selectedObject isKindOfClass:[MHModel class]] && [object isKindOfClass:[MHModel class]]) {
-//			selected = [self.selectedObject isEqualToModel:object];
-//		} else {
-//			selected = [self.selectedObject isEqual:object];
-//		}
-//		
-//	}
-//	
-//	return selected;
-//	
-//}
 
 - (MHGenericListObjectState)stateForObject:(id)object {
 	
@@ -393,20 +354,21 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 		
 		[self.requestOptions resetPaging];
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
 										successBlock:^(NSArray *result, MHRequestOptions *options) {
 											
-											self.refreshIsLoading = NO;
+											weakSelf.refreshIsLoading = NO;
 											if (options.limit > 0) {
-												self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+												weakSelf.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
 											} else {
-												self.hasLoadedAllPages = YES;
+												weakSelf.hasLoadedAllPages = YES;
 											}
 											
 											
-											self.objectArray =  [NSMutableArray arrayWithArray:result];
-											[self.tableViewList reloadData];
-											[self.refreshController endRefreshing];
+											weakSelf.objectArray =  [NSMutableArray arrayWithArray:result];
+											[weakSelf.tableViewList reloadData];
+											[weakSelf.refreshController endRefreshing];
 											
 											
 										}
@@ -418,9 +380,9 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 																						  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
 											   
 											   [MHErrorHandler presentError:presentingError];
-											   self.refreshIsLoading = NO;
-											   [self.tableViewList reloadData];
-											   [self.refreshController endRefreshing];
+											   weakSelf.refreshIsLoading = NO;
+											   [weakSelf.tableViewList reloadData];
+											   [weakSelf.refreshController endRefreshing];
 											   
 										   }];
 		
@@ -442,19 +404,20 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	self.selectedObject			= nil;
 	
 	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
+	__weak __typeof(&*self)weakSelf = self;
 	[self.suggestionSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
 		
 		if ([suggestionObject isKindOfClass:[MHModel class]]) {
 			
 			//remove all repeats if remote ID is the same
 			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)suggestionObject valueForKey:@"remoteID"]];
-			NSArray *filteredArray = [[self.suggestionSet allObjects] filteredArrayUsingPredicate:predicate];
+			NSArray *filteredArray = [[weakSelf.suggestionSet allObjects] filteredArrayUsingPredicate:predicate];
 			
 			if ([filteredArray count] > 1) {
 				
 				for (NSInteger resultCounter = 1; resultCounter < [filteredArray count]; resultCounter++) {
 					
-					[self.suggestionSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+					[weakSelf.suggestionSet removeObject:[filteredArray objectAtIndex:resultCounter]];
 					
 				}
 				
@@ -471,13 +434,13 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 			
 			//remove all repeats if remote ID is the same
 			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)suggestionObject valueForKey:@"remoteID"]];
-			NSArray *filteredArray = [[self.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
+			NSArray *filteredArray = [[weakSelf.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
 			
 			if ([filteredArray count] > 1) {
 				
 				for (NSInteger resultCounter = 1; resultCounter < [filteredArray count]; resultCounter++) {
 					
-					[self.allStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+					[weakSelf.allStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
 					
 				}
 				
@@ -528,19 +491,20 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	self.suggestionArray	= [NSMutableArray arrayWithArray:[suggestionsSet allObjects]];
 	
 	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
+	__weak __typeof(&*self)weakSelf = self;
 	[self.suggestionSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
 		
 		if ([suggestionObject isKindOfClass:[MHModel class]]) {
 			
 			//remove all repeats if remote ID is the same
 			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)suggestionObject valueForKey:@"remoteID"]];
-			NSArray *filteredArray = [[self.suggestionSet allObjects] filteredArrayUsingPredicate:predicate];
+			NSArray *filteredArray = [[weakSelf.suggestionSet allObjects] filteredArrayUsingPredicate:predicate];
 			
 			if ([filteredArray count] > 1) {
 				
 				for (NSInteger resultCounter = 1; resultCounter < [filteredArray count]; resultCounter++) {
 					
-					[self.suggestionSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+					[weakSelf.suggestionSet removeObject:[filteredArray objectAtIndex:resultCounter]];
 					
 				}
 				
@@ -596,19 +560,20 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	self.selectedObject			= nil;
 	
 	//NSSet only allows unique entries but there could be 2 different models that hold the same data, this will remove those duplicates
+	__weak __typeof(&*self)weakSelf = self;
 	[self.allStateSet enumerateObjectsUsingBlock:^(id suggestionObject, BOOL *stop) {
 		
 		if ([suggestionObject isKindOfClass:[MHModel class]]) {
 			
 			//remove all repeats if remote ID is the same
 			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)suggestionObject valueForKey:@"remoteID"]];
-			NSArray *filteredArray = [[self.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
+			NSArray *filteredArray = [[weakSelf.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
 			
 			if ([filteredArray count] > 1) {
 				
 				for (NSInteger resultCounter = 1; resultCounter < [filteredArray count]; resultCounter++) {
 					
-					[self.allStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+					[weakSelf.allStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
 					
 				}
 				
@@ -625,13 +590,13 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 			
 			//remove all repeats if remote ID is the same
 			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)suggestionObject valueForKey:@"remoteID"]];
-			NSArray *filteredArray = [[self.someStateSet allObjects] filteredArrayUsingPredicate:predicate];
+			NSArray *filteredArray = [[weakSelf.someStateSet allObjects] filteredArrayUsingPredicate:predicate];
 			
 			if ([filteredArray count] > 1) {
 				
 				for (NSInteger resultCounter = 1; resultCounter < [filteredArray count]; resultCounter++) {
 					
-					[self.someStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
+					[weakSelf.someStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
 					
 				}
 				
@@ -789,98 +754,6 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	}
 	
 }
-
-//- (void)addSelection:(id)selectionObject {
-//	
-//	if (selectionObject) {
-//		
-//		if ([selectionObject isKindOfClass:[MHModel class]]) {
-//			
-//			//find all repeats if remote ID is the same
-//			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
-//			NSArray *filteredArray = [self.suggestionArray filteredArrayUsingPredicate:predicate];
-//			
-//			if ([filteredArray count] == 0) {
-//				
-//				[self willAddToSuggestionArray:1];
-//				[self.suggestionArray addObject:selectionObject];
-//				
-//			}
-//			
-//			predicate		= [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
-//			filteredArray	= [[self.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
-//			
-//			if ([filteredArray count] == 0) {
-//				
-//				[self.allStateSet addObject:selectionObject];
-//				
-//			}
-//			
-//		} else {
-//			
-//			//duplicate if same object
-//			if (![self.suggestionSet member:selectionObject] || ![self.allStateSet member:selectionObject]) {
-//				
-//				[self willAddToSuggestionArray:1];
-//				[self.suggestionArray addObject:selectionObject];
-//				
-//			}
-//			
-//			[self.allStateSet addObject:selectionObject];
-//			
-//		}
-//		
-//	}
-//	
-//}
-
-//- (void)removeSelection:(id)selectionObject {
-//	
-//	//remove from selectionSet
-//	if ([selectionObject isKindOfClass:[MHModel class]]) {
-//		
-//		//remove all repeats if remote ID is the same
-//		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
-//		NSArray *filteredArray = [[self.allStateSet allObjects] filteredArrayUsingPredicate:predicate];
-//		
-//		for (NSInteger resultCounter = 0; resultCounter < [filteredArray count]; resultCounter++) {
-//			
-//			[self.allStateSet removeObject:[filteredArray objectAtIndex:resultCounter]];
-//			
-//		}
-//		
-//	} else {
-//		
-//		[self.allStateSet removeObject:selectionObject];
-//		
-//	}
-//	
-//	//remove from the suggestion array unless it is a suggestion (suggestion array is an array of sugestions and selections
-//	if ([selectionObject isKindOfClass:[MHModel class]]) {
-//		
-//		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remoteID == %@", [(MHModel *)selectionObject valueForKey:@"remoteID"]];
-//		NSArray *filteredArray = [[self.suggestionSet allObjects] filteredArrayUsingPredicate:predicate];
-//		
-//		if ([filteredArray count] == 0) {
-//			
-//			[self willRemoveFromSuggestionArray:1];
-//			[self.suggestionArray removeObject:selectionObject];
-//			
-//		}
-//		
-//	} else {
-//		
-//		//if this object is a suggested object then keep it in the suggestion array and just deselect it
-//		if (![self.suggestionSet member:selectionObject]) {
-//			
-//			[self willRemoveFromSuggestionArray:1];
-//			[self.suggestionArray removeObject:selectionObject];
-//			
-//		}
-//		
-//	}
-//	
-//}
 
 - (void)updateSelectedObject:(id)selectedObject {
 	
@@ -1238,22 +1111,6 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 }
 
-////if selection is initiated by the cell (ie a button on the cell) instead of by the cell being selected
-////then that message should be passed on so the sam action can be taken
-//- (void)cell:(MHGenericCell *)cell didSelectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
-//	
-//	[self tableView:self.tableViewList didSelectRowAtIndexPath:indexPath];
-//	
-//}
-//
-////if selection is initiated by the cell (ie a button on the cell) instead of by the cell being selected
-////then that message should be passed on so the sam action can be taken
-//- (void)cell:(MHGenericCell *)cell didDeselectPerson:(id)object atIndexPath:(NSIndexPath *)indexPath {
-//	
-//	[self tableView:self.tableViewList didSelectRowAtIndexPath:indexPath];
-//	
-//}
-
 - (void)cell:(MHGenericCell *)cell didChangeStateForObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
 	
 	[self object:object didChangeStateAtIndexPath:indexPath];
@@ -1372,22 +1229,23 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 				
 				self.pagingIsLoading = YES;
 				
+				__weak __typeof(&*self)weakSelf = self;
 				[[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
 												successBlock:^(NSArray *result, MHRequestOptions *options) {
 													
 													//remove loading cell if it has been displayed
-													self.pagingIsLoading = NO;
+													weakSelf.pagingIsLoading = NO;
 													
 													if (options.limit > 0) {
-														self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+														weakSelf.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
 													} else {
-														self.hasLoadedAllPages = YES;
+														weakSelf.hasLoadedAllPages = YES;
 													}
 													
 													
 													//update array with results
-													[self.objectArray addObjectsFromArray:result];
-													[self.tableViewList reloadData];
+													[weakSelf.objectArray addObjectsFromArray:result];
+													[weakSelf.tableViewList reloadData];
 													
 												}
 												   failBlock:^(NSError *error, MHRequestOptions *options) {
@@ -1399,8 +1257,8 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 													   
 													   [MHErrorHandler presentError:presentingError];
 													   
-													   self.pagingIsLoading = NO;
-													   [self.tableViewList reloadData];
+													   weakSelf.pagingIsLoading = NO;
+													   [weakSelf.tableViewList reloadData];
 													   
 												   }];
 				

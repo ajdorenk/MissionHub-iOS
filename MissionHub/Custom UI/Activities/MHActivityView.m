@@ -127,6 +127,8 @@ CGFloat const MHActivityPageControlHeight		= 10.0f;
 
 - (void)updateVisibleActivities {
 	
+	__weak __typeof(&*self)weakSelf = self;
+	
 	[self.viewsOnDisplay enumerateObjectsUsingBlock:^(id view, NSUInteger index, BOOL *stop) {
 		
 		if ([view respondsToSelector:@selector(removeFromSuperview)]) {
@@ -135,16 +137,15 @@ CGFloat const MHActivityPageControlHeight		= 10.0f;
 			
 		}
 		
-		[self.viewsOnDisplay removeObject:view];
+		[weakSelf.viewsOnDisplay removeObject:view];
 		
 	}];
 	
-	__weak __typeof(&*self)weakSelf = self;
 	[self enumerateActivitiesWithBlock:^(MHActivity *activity, NSInteger index, NSInteger row, NSInteger column, NSInteger page) {
 		
 		if ([activity isKindOfClass:[MHActivity class]]) {
 			
-			if ([(MHActivity *)activity canPerformWithActivityItems:self.activityItems]) {
+			if ([(MHActivity *)activity canPerformWithActivityItems:weakSelf.activityItems]) {
 				
 				UIView *view = [weakSelf viewForActivity:activity
 												   index:index
@@ -152,7 +153,7 @@ CGFloat const MHActivityPageControlHeight		= 10.0f;
 													   y:(MHActivityViewVerticalMargin + (row * MHActivityHeight) + (row * MHActivityViewVerticalMargin))];
 				
 				[weakSelf.scrollView addSubview:view];
-				[self.viewsOnDisplay addObject:view];
+				[weakSelf.viewsOnDisplay addObject:view];
 				
 			}
 			

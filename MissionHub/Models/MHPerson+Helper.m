@@ -128,7 +128,7 @@
 
 -(NSString *)displayString {
 	
-	return [self fullName];
+	return self.fullName;
 	
 }
 
@@ -213,6 +213,8 @@
 
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
 	
+	__weak __typeof(&*self)weakSelf = self;
+	
 	if ([fieldName isEqualToString:@"interactions"]) {
 		
 		NSArray *arrayOfObjects = relationshipObject;
@@ -221,7 +223,7 @@
 			
 			MHInteraction *newObject = [MHInteraction newObjectFromFields:object];
 			
-			[self addReceivedInteractionsObject:newObject];
+			[weakSelf addReceivedInteractionsObject:newObject];
 			
 		}];
 		
@@ -233,7 +235,7 @@
 			
 			MHOrganization *newObject = [MHOrganization newObjectFromFields:object];
 			
-			[self addAllOrganizationsObject:newObject];
+			[weakSelf addAllOrganizationsObject:newObject];
 			
 		}];
 		
@@ -245,7 +247,7 @@
 			
 			MHOrganizationalPermission *newObject = [MHOrganizationalPermission newObjectFromFields:object];
 			
-			[self addAllOrganizationalPermissionsObject:newObject];
+			[weakSelf addAllOrganizationalPermissionsObject:newObject];
 			
 		}];
 		
@@ -263,7 +265,7 @@
 			
 			MHOrganizationalLabel *newObject = [MHOrganizationalLabel newObjectFromFields:object];
 			
-			[self addLabelsObject:newObject];
+			[weakSelf addLabelsObject:newObject];
 			
 		}];
 		
@@ -275,7 +277,7 @@
 			
 			MHEmailAddress *newObject = [MHEmailAddress newObjectFromFields:object];
 			
-			[self addEmailAddressesObject:newObject];
+			[weakSelf addEmailAddressesObject:newObject];
 			
 		}];
 		
@@ -287,7 +289,7 @@
 			
 			MHPhoneNumber *newObject = [MHPhoneNumber newObjectFromFields:object];
 			
-			[self addPhoneNumbersObject:newObject];
+			[weakSelf addPhoneNumbersObject:newObject];
 			
 		}];
 		
@@ -299,7 +301,7 @@
 			
 			MHAddress *newObject = [MHAddress newObjectFromFields:object];
 			
-			[self addAddressesObject:newObject];
+			[weakSelf addAddressesObject:newObject];
 			
 		}];
 		
@@ -311,7 +313,7 @@
 			
 			MHAnswerSheet *newObject = [MHAnswerSheet newObjectFromFields:object];
 			
-			[self addAnswerSheetsObject:newObject];
+			[weakSelf addAnswerSheetsObject:newObject];
 			
 		}];
 		

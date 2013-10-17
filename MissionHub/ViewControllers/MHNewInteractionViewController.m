@@ -310,9 +310,10 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	if ([self.interaction validateForServerCreate:&error]) {
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] createInteraction:self.interaction withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 			
-			[self.navigationController popViewControllerAnimated:YES];
+			[weakSelf.navigationController popViewControllerAnimated:YES];
 			
 		} failBlock:^(NSError *error, MHRequestOptions *options) {
 			
@@ -542,12 +543,13 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 		__block NSString *visibilityString = @"";
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[self.visibilityArray enumerateObjectsUsingBlock:^(NSDictionary *object, NSUInteger index, BOOL *stop) {
 			
 			NSString *value = [object objectForKey:@"value"];
 			NSString *title = [object objectForKey:@"title"];
 			
-			if ([value isEqualToString:[self.interaction privacy_setting]]) {
+			if ([value isEqualToString:[weakSelf.interaction privacy_setting]]) {
 				visibilityString = title;
 				*stop = YES;
 			}
@@ -729,10 +731,11 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 													CGRectGetWidth(pickerFrame),
 													CGRectGetHeight(pickerFrame));
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[UIView animateWithDuration:0.2 animations:^{
 		
-		[self interactionTypePicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
-														CGRectGetMaxY(self.view.frame) - CGRectGetHeight(pickerFrame),
+		[weakSelf interactionTypePicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
+														CGRectGetMaxY(weakSelf.view.frame) - CGRectGetHeight(pickerFrame),
 														CGRectGetWidth(pickerFrame),
 														CGRectGetHeight(pickerFrame));
 		
@@ -758,11 +761,12 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	__block NSInteger selectedRow = 0;
 
+	__weak __typeof(&*self)weakSelf = self;
 	[self.visibilityArray enumerateObjectsUsingBlock:^(NSDictionary *object, NSUInteger row, BOOL *stop) {
 		
 		NSString *value = [object objectForKey:@"value"];
 		
-		if ([value isEqualToString:[self.interaction privacy_setting]]) {
+		if ([value isEqualToString:[weakSelf.interaction privacy_setting]]) {
 			selectedRow = row;;
 			*stop = YES;
 		}
@@ -782,8 +786,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	[UIView animateWithDuration:0.2 animations:^{
 		
-		[self visibilityPicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
-														CGRectGetMaxY(self.view.frame) - CGRectGetHeight(pickerFrame),
+		[weakSelf visibilityPicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
+														CGRectGetMaxY(weakSelf.view.frame) - CGRectGetHeight(pickerFrame),
 														CGRectGetWidth(pickerFrame),
 														CGRectGetHeight(pickerFrame));
 		
@@ -806,10 +810,11 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 											   CGRectGetWidth(pickerFrame),
 											   CGRectGetHeight(pickerFrame));
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[UIView animateWithDuration:0.2 animations:^{
 		
-		[self timestampPicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
-												   CGRectGetMaxY(self.view.frame) - CGRectGetHeight(pickerFrame),
+		[weakSelf timestampPicker].frame = CGRectMake(CGRectGetMinX(pickerFrame),
+												   CGRectGetMaxY(weakSelf.view.frame) - CGRectGetHeight(pickerFrame),
 												   CGRectGetWidth(pickerFrame),
 												   CGRectGetHeight(pickerFrame));
 		
@@ -991,14 +996,15 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	__block UIView *pickerView			= [self interactionTypePicker];
 	__block CGRect pickerFrame	= pickerView.frame;
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[UIView animateWithDuration:0.2 animations:^{
 		
 		pickerView.frame = CGRectMake(CGRectGetMinX(pickerFrame),
-												  CGRectGetMaxY(self.view.frame),
+												  CGRectGetMaxY(weakSelf.view.frame),
 												  CGRectGetWidth(pickerFrame),
 												  CGRectGetHeight(pickerFrame));
 		
-		[self clearPickers];
+		[weakSelf clearPickers];
 		
 	}];
 	
@@ -1009,14 +1015,15 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	__block UIView *pickerView			= [self visibilityPicker];
 	__block CGRect pickerFrame	= pickerView.frame;
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[UIView animateWithDuration:0.2 animations:^{
 		
 		pickerView.frame = CGRectMake(CGRectGetMinX(pickerFrame),
-												  CGRectGetMaxY(self.view.frame),
+												  CGRectGetMaxY(weakSelf.view.frame),
 												  CGRectGetWidth(pickerFrame),
 												  CGRectGetHeight(pickerFrame));
 		
-		[self clearPickers];
+		[weakSelf clearPickers];
 		
 	}];
 	
@@ -1027,14 +1034,15 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	__block UIView *pickerView			= [self timestampPicker];
 	__block CGRect pickerFrame	= pickerView.frame;
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[UIView animateWithDuration:0.2 animations:^{
 		
 		pickerView.frame = CGRectMake(CGRectGetMinX(pickerFrame),
-												  CGRectGetMaxY(self.view.frame),
+												  CGRectGetMaxY(weakSelf.view.frame),
 												  CGRectGetWidth(pickerFrame),
 												  CGRectGetHeight(pickerFrame));
 		
-		[self clearPickers];
+		[weakSelf clearPickers];
 		
 	}];
 	
@@ -1099,9 +1107,10 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	self.interaction.comment		= self.comment.text;
 	self.scrollView.scrollEnabled	= YES;
 	
+	__weak __typeof(&*self)weakSelf = self;
 	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		
-		self.comment.frame = self.originalCommentFrame;
+		weakSelf.comment.frame = weakSelf.originalCommentFrame;
 		
 	} completion:nil];
     

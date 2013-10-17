@@ -275,21 +275,6 @@
 }
 
 #pragma mark -
-#pragma mark Helpers
-
-- (void)performBlock:(void (^)(void))block afterDelay:(NSTimeInterval)delay {
-	
-    block = [block copy];
-    [self performSelector:@selector(runBlockAfterDelay:) withObject:block afterDelay:delay];
-}
-
-- (void)runBlockAfterDelay:(void (^)(void))block {
-	
-	if (block != nil)
-		block();
-}
-
-#pragma mark -
 #pragma mark Orientation
 
 - (NSUInteger)supportedInterfaceOrientations {

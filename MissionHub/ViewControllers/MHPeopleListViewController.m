@@ -22,7 +22,10 @@
 
 @interface MHPeopleListViewController ()
 
--(void)setTextFieldLeftView;
+- (void)redoRequestWithPagingReset:(BOOL)resetPaging;
+- (void)personRemoved:(NSNotification *)notification;
+
+- (void)setTextFieldLeftView;
 
 - (void)addPerson:(id)sender;
 - (void)addInteraction:(id)sender;
@@ -83,17 +86,17 @@
 		[self didChangeValueForKey:@"profileViewController"];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(refresh)
+												 selector:@selector(personRemoved:)
 													 name:MHProfileViewControllerNotificationPersonArchived
 												   object:nil];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(refresh)
+												 selector:@selector(personRemoved:)
 													 name:MHProfileViewControllerNotificationPersonArchived
 												   object:nil];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(refresh)
+												 selector:@selector(personRemoved:)
 													 name:MHProfileViewControllerNotificationPersonUpdated
 												   object:nil];
 		
@@ -304,24 +307,25 @@
 		self.searchHasLoadedAllPages = NO;
 		self.searchIsLoading = YES;
 		
+		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] getResultWithOptions:self.searchRequestOptions
 										successBlock:^(NSArray *result, MHRequestOptions *options) {
 											
-											self.searchIsLoading = NO;
+											weakSelf.searchIsLoading = NO;
 											if (options.limit > 0) {
-												self.searchHasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+												weakSelf.searchHasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
 											} else {
-												self.searchHasLoadedAllPages = YES;
+												weakSelf.searchHasLoadedAllPages = YES;
 											}
 											
 											
 											if ([result count] == 0) {
-												[self.searchResultArray removeAllObjects];
+												[weakSelf.searchResultArray removeAllObjects];
 											} else {
-												self.searchResultArray =  [NSMutableArray arrayWithArray:result];
+												weakSelf.searchResultArray =  [NSMutableArray arrayWithArray:result];
 											}
 											
-											[self.searchDisplayController.searchResultsTableView reloadData];
+											[weakSelf.searchDisplayController.searchResultsTableView reloadData];
 											
 											
 										}
@@ -333,8 +337,8 @@
 																						  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
 											   
 											   [MHErrorHandler presentError:presentingError];
-											   self.searchIsLoading = NO;
-											   [self.searchDisplayController.searchResultsTableView reloadData];
+											   weakSelf.searchIsLoading = NO;
+											   [weakSelf.searchDisplayController.searchResultsTableView reloadData];
 											   
 										   }];
 	}
@@ -363,50 +367,75 @@
 -(void)refresh {
 	
 	[self.refreshController beginRefreshing];
-	[self dropViewDidBeginRefreshing:self.refreshController];
+	[self redoRequestWithPagingReset:YES];
 	
 }
 
-- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
-{
-	self.hasLoadedAllPages	= NO;
-	self.refreshIsLoading	= YES;
-	self.selectedPeople		= [NSMutableArray array];
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl {
+	
+	[self redoRequestWithPagingReset:YES];
+	
+}
+
+- (void)personRemoved:(NSNotification *)notification {
+	
+	[self redoRequestWithPagingReset:NO];
+	
+}
+
+- (void)redoRequestWithPagingReset:(BOOL)resetPaging {
+	
+	MHRequestOptions *options	= self.requestOptions;
+	self.hasLoadedAllPages		= NO;
+	self.refreshIsLoading		= YES;
+	self.selectedPeople			= [NSMutableArray array];
 	[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
 	[self.tableView reloadData];
 	
-	[self.requestOptions resetPaging];
-	
-    [[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
-									successBlock:^(NSArray *result, MHRequestOptions *options) {
+	if (resetPaging) {
 		
-										self.refreshIsLoading = NO;
-										if (options.limit > 0) {
-											self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
-										} else {
-											self.hasLoadedAllPages = YES;
-										}
-									 
-									 
-										self.peopleArray =  [NSMutableArray arrayWithArray:result];
-										[self.tableView reloadData];
-										[self.refreshController endRefreshing];
-									 
-									 
+		[options resetPaging];
+		
+	} else {
+		
+		options			= [self.requestOptions copy];
+		options.limit	+= options.offset;
+		options.offset	= 0;
+		
 	}
-									   failBlock:^(NSError *error, MHRequestOptions *options) {
+	
+	__weak __typeof(&*self)weakSelf = self;
+    [[MHAPI sharedInstance] getResultWithOptions:options
+									successBlock:^(NSArray *result, MHRequestOptions *options) {
 										
-											NSString *errorMessage = [NSString stringWithFormat:@"Failed to refresh results due to: \"%@\". Try again by pulling down on the list. If the problem continues please contact support@missionhub.com", error.localizedDescription];
-											NSError *presentingError = [NSError errorWithDomain:error.domain
-																						   code:error.code
-																					   userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
-											
-											[MHErrorHandler presentError:presentingError];
-											self.refreshIsLoading = NO;
-											[self.tableView reloadData];
-											[self.refreshController endRefreshing];
-		
-	}];
+										weakSelf.refreshIsLoading = NO;
+										if (options.limit > 0) {
+											weakSelf.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+										} else {
+											weakSelf.hasLoadedAllPages = YES;
+										}
+										
+										
+										weakSelf.peopleArray =  [NSMutableArray arrayWithArray:result];
+										[weakSelf.tableView reloadData];
+										[weakSelf.refreshController endRefreshing];
+										
+										
+									}
+									   failBlock:^(NSError *error, MHRequestOptions *options) {
+										   
+										   NSString *errorMessage = [NSString stringWithFormat:@"Failed to refresh results due to: \"%@\". Try again by pulling down on the list. If the problem continues please contact support@missionhub.com", error.localizedDescription];
+										   NSError *presentingError = [NSError errorWithDomain:error.domain
+																						  code:error.code
+																					  userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(errorMessage, nil)}];
+										   
+										   [MHErrorHandler presentError:presentingError];
+										   weakSelf.refreshIsLoading = NO;
+										   [weakSelf.tableView reloadData];
+										   [weakSelf.refreshController endRefreshing];
+										   
+									   }];
+	
 }
 
 -(void)setDataFromRequestOptions:(MHRequestOptions *)options {
@@ -744,22 +773,23 @@
 			
 			self.pagingIsLoading = YES;
 			
+			__weak __typeof(&*self)weakSelf = self;
 			[[MHAPI sharedInstance] getResultWithOptions:self.requestOptions
 											successBlock:^(NSArray *result, MHRequestOptions *options) {
 												
 												//remove loading cell if it has been displayed
-												self.pagingIsLoading = NO;
+												weakSelf.pagingIsLoading = NO;
 												
 												if (options.limit > 0) {
-													self.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+													weakSelf.hasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
 												} else {
-													self.hasLoadedAllPages = YES;
+													weakSelf.hasLoadedAllPages = YES;
 												}
 												
 												
 												//update array with results
-												[self.peopleArray addObjectsFromArray:result];
-												[self.tableView reloadData];
+												[weakSelf.peopleArray addObjectsFromArray:result];
+												[weakSelf.tableView reloadData];
 												
 											}
 											   failBlock:^(NSError *error, MHRequestOptions *options) {
@@ -771,8 +801,8 @@
 												   
 												   [MHErrorHandler presentError:presentingError];
 												   
-												   self.pagingIsLoading = NO;
-												   [self.tableView reloadData];
+												   weakSelf.pagingIsLoading = NO;
+												   [weakSelf.tableView reloadData];
 												   
 											   }];
 				
@@ -784,26 +814,27 @@
 			
 			self.searchPagingIsLoading = YES;
 			
+			__weak __typeof(&*self)weakSelf = self;
 			[[MHAPI sharedInstance] getResultWithOptions:self.searchRequestOptions
 											successBlock:^(NSArray *result, MHRequestOptions *options) {
 												
 												//remove loading cell if it has been displayed
-												self.searchPagingIsLoading = NO;
+												weakSelf.searchPagingIsLoading = NO;
 												
 												if (options.limit > 0) {
-													self.searchHasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
+													weakSelf.searchHasLoadedAllPages = ( [result count] < options.limit ? YES : NO );
 												} else {
-													self.searchHasLoadedAllPages = YES;
+													weakSelf.searchHasLoadedAllPages = YES;
 												}
 												
 												
 												//update array with results
 												if ([result count] == 0) {
-													[self.searchResultArray removeAllObjects];
+													[weakSelf.searchResultArray removeAllObjects];
 												} else {
-													self.searchResultArray =  [NSMutableArray arrayWithArray:result];
+													weakSelf.searchResultArray =  [NSMutableArray arrayWithArray:result];
 												}
-												[self.searchDisplayController.searchResultsTableView reloadData];
+												[weakSelf.searchDisplayController.searchResultsTableView reloadData];
 												
 											}
 											   failBlock:^(NSError *error, MHRequestOptions *options) {
@@ -815,8 +846,8 @@
 												   
 												   [MHErrorHandler presentError:presentingError];
 												   
-												   self.searchPagingIsLoading = NO;
-												   [self.searchDisplayController.searchResultsTableView reloadData];
+												   weakSelf.searchPagingIsLoading = NO;
+												   [weakSelf.searchDisplayController.searchResultsTableView reloadData];
 												   
 											   }];
 			
@@ -983,6 +1014,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+}
 
 @end
     
