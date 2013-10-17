@@ -113,6 +113,7 @@
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="permission" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPermissionLevel" inverseName="appliedPermissions" inverseEntity="MHPermissionLevel" syncable="YES"/>
         <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="allOrganizationalPermissions" inverseEntity="MHPerson" syncable="YES"/>
+        <relationship name="personInCurrentOrganization" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="permissionLevel" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
     <entity name="MHPermissionLevel" representedClassName="MHPermissionLevel" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
@@ -151,7 +152,7 @@
         <relationship name="emailAddresses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHEmailAddress" inverseName="person" inverseEntity="MHEmailAddress" syncable="YES"/>
         <relationship name="initiatedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="initiators" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHOrganizationalLabel" inverseName="person" inverseEntity="MHOrganizationalLabel" syncable="YES"/>
-        <relationship name="permissionLevel" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganizationalPermission" inverseName="person" inverseEntity="MHOrganizationalPermission" syncable="YES"/>
+        <relationship name="permissionLevel" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHOrganizationalPermission" inverseName="personInCurrentOrganization" inverseEntity="MHOrganizationalPermission" syncable="YES"/>
         <relationship name="phoneNumbers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHPhoneNumber" inverseName="person" inverseEntity="MHPhoneNumber" syncable="YES"/>
         <relationship name="receivedInteractions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHInteraction" inverseName="receiver" inverseEntity="MHInteraction" syncable="YES"/>
         <relationship name="surveys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHSurvey" inverseName="people" inverseEntity="MHSurvey" syncable="YES"/>
@@ -206,22 +207,22 @@
         <relationship name="person" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MHPerson" inverseName="user" inverseEntity="MHPerson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MHAddress" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHAnswer" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHAnswerSheet" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHEmailAddress" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHInteraction" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHInteractionType" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHLabel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHOrganization" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHOrganizationalLabel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHOrganizationalPermission" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHPermissionLevel" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHPerson" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHPhoneNumber" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHQuestion" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHSurvey" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHUser" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MHContactAssignment" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MHAddress" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="MHAnswer" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="MHAnswerSheet" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="MHContactAssignment" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="MHEmailAddress" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="MHInteraction" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="MHInteractionType" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="MHLabel" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="MHOrganization" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="MHOrganizationalLabel" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="MHOrganizationalPermission" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="MHPermissionLevel" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="MHPerson" positionX="0" positionY="0" width="128" height="570"/>
+        <element name="MHPhoneNumber" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="MHQuestion" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="MHSurvey" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="MHUser" positionX="0" positionY="0" width="128" height="120"/>
     </elements>
 </model>

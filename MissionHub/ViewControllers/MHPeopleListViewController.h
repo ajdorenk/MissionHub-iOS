@@ -21,45 +21,10 @@
 
 @interface MHPeopleListViewController : UITableViewController  <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MHPersonCellDelegate, MHGenericListViewControllerDelegate, UIPopoverControllerDelegate, MHCreatePersonDelegate, MHSortHeaderDelegate, MHActivityViewControllerDelegate>
 
-
-/*@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenuButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *addPersonButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *addLabelButton;
-
-*/
-
-@property (nonatomic, strong) IBOutlet UISearchBar *peopleSearchBar;
-@property (nonatomic, strong) NSMutableArray *peopleArray;
-@property (nonatomic, strong) NSMutableArray *searchResultArray;
-@property (nonatomic, strong) NSMutableArray *selectedPeople;
-@property (nonatomic, strong) MHRequestOptions *requestOptions;
-@property (nonatomic, strong) MHRequestOptions *searchRequestOptions;
-@property (nonatomic, strong) ODRefreshControl *refreshController;
-@property (nonatomic, assign) BOOL isLoading;
-@property (nonatomic, assign) BOOL refreshIsLoading;
-@property (nonatomic, assign) BOOL pagingIsLoading;
-@property (nonatomic, assign) BOOL hasLoadedAllPages;
-@property (nonatomic, assign) BOOL searchIsLoading;
-@property (nonatomic, assign) BOOL searchPagingIsLoading;
-@property (nonatomic, assign) BOOL searchHasLoadedAllPages;
-@property (nonatomic, assign) MHPersonSortFields secondaryFieldName;
-@property (nonatomic, assign) MHRequestOptionsOrderFields sortField;
-@property (nonatomic, strong) MHSortHeader *header;
-@property (nonatomic, strong) IBOutlet UIView *activityBar;
-@property (nonatomic, strong, readonly) MHProfileViewController *profileViewController;
-@property (nonatomic, strong, readonly) MHGenericListViewController *fieldSelectorViewController;
-@property (nonatomic, strong, readonly) MHNewInteractionViewController *createInteractionViewController;
-@property (nonatomic, strong, readonly) MHCreatePersonViewController *createPersonViewController;
-@property (nonatomic, strong, readonly) UIPopoverController	*createPersonPopoverViewController;
-@property (nonatomic, strong, readonly) MHActivityViewController *activityViewController;
-
--(IBAction)revealMenu:(id)sender;
--(void)refresh;
 -(void)setDataFromRequestOptions:(MHRequestOptions *)options;
 -(void)setDataArray:(NSArray *)dataArray forRequestOptions:(MHRequestOptions *)options;
--(MHProfileViewController *)profileViewController;
--(BOOL)isSelected:(MHPerson *)person;
 
+-(void)refresh;
 
 @end
 

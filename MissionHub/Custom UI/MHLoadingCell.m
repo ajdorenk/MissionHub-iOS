@@ -8,6 +8,13 @@
 
 #import "MHLoadingCell.h"
 
+@interface MHLoadingCell ()
+
+@property (nonatomic, weak) IBOutlet UILabel *messageView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *loadingIndicator;
+
+@end
+
 @implementation MHLoadingCell
 
 @synthesize loadingIndicator	= _loadingIndicator;

@@ -48,7 +48,6 @@ typedef enum {
 @synthesize peopleNavigationViewController	= _peopleNavigationViewController;
 @synthesize surveyViewController			= _surveyViewController;
 @synthesize organizationViewController		= _organizationViewController;
-//@synthesize user							= _user;
 @synthesize menuHeaders						= _menuHeaders;
 @synthesize menuItems						= _menuItems;
 

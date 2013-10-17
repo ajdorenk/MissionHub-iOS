@@ -10,12 +10,7 @@
 #import "MHStorage.h"
 #import "NSSet+MHSearchForRemoteID.h"
 
-@interface MHModel : NSManagedObject {
-	
-	NSDictionary *_attributes;
-	//NSDictionary *_relationships;
-	
-}
+@interface MHModel : NSManagedObject
 
 @property (nonatomic, strong) NSDictionary *attributes;
 //@property (nonatomic, strong) NSDictionary *relationships;

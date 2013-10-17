@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MHPerson+Helper.h"
 #import "MHProfileProtocol.h"
 
 @interface MHProfileHeaderViewController : UIViewController <UIScrollViewDelegate, MHProfileProtocol>

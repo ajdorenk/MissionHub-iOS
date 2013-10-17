@@ -7,30 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Facebook.h"
-#import "FBLoginView.h"
 #import "MHPerson+Helper.h"
 #import	"MHRequestOptions.h"
 
 extern NSString *const MHLoginViewControllerLogout;
 
-@protocol MHLoginDelegate;
+@protocol MHLoginViewControllerDelegate;
 
-@interface MHLoginViewController : UIViewController <FBLoginViewDelegate, MHLoginDelegate>
+@interface MHLoginViewController : UIViewController
 
-@property (nonatomic, strong)				id<MHLoginDelegate>					loginDelegate;
-@property (nonatomic, assign)				BOOL								loggedIn;
+@property (nonatomic, weak)				id<MHLoginViewControllerDelegate>	loginDelegate;
+@property (nonatomic, assign)			BOOL								loggedIn;
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
 - (void)handleDidBecomeActive;
 - (void)handleWillTerminate;
-- (void)handleAppLink:(FBAccessTokenData *)appLinkToken;
 
 - (void)logout;
 
 @end
 
-@protocol MHLoginDelegate <NSObject>
+@protocol MHLoginViewControllerDelegate <NSObject>
 @optional
 
 -(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList requestOptions:(MHRequestOptions *)options;

@@ -88,7 +88,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - MHLoginDelegate methods
+#pragma mark - MHLoginViewControllerDelegate methods
 
 -(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList requestOptions:(MHRequestOptions *)options {
 	

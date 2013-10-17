@@ -20,23 +20,17 @@ extern NSString *const MHAPIErrorDomain;
 
 @interface MHAPI : AFHTTPClient <MHRequestOperationDelegate>
 
-@property (nonatomic, strong) NSURL				*surveyURL;
 @property (nonatomic, strong) NSString			*accessToken;
-
 @property (nonatomic, strong) MHPerson			*currentUser;
 @property (nonatomic, strong) MHOrganization	*currentOrganization;
-@property (nonatomic, strong) MHPerson			*_anonymous;
+@property (nonatomic, strong, readonly) MHPerson*anonymous;
 @property (nonatomic, strong) NSMutableArray	*initialPeopleList;
-@property (nonatomic, assign) BOOL				currentOrganizationIsFinished;
-@property (nonatomic, assign) BOOL				initialPeopleListIsFinished;
-@property (nonatomic, strong) NSError			*errorForInitialRequests;
 
 
 + (MHAPI *)sharedInstance;
 - (id)initWithBaseURL:(NSURL *)url andSurveyURL:(NSURL *)surveyURL;
 
 //misc
-- (MHPerson *)anonymous;
 - (NSMutableURLRequest *)requestWithOptions:(MHRequestOptions *)options;
 - (NSURLRequest *)requestForSurveyWith:(NSNumber *)remoteID;
 

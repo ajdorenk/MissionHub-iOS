@@ -22,14 +22,40 @@
 
 @interface MHPeopleListViewController ()
 
+@property (nonatomic, weak) IBOutlet UISearchBar *peopleSearchBar;
+@property (nonatomic, strong) NSMutableArray *peopleArray;
+@property (nonatomic, strong) NSMutableArray *searchResultArray;
+@property (nonatomic, strong) NSMutableArray *selectedPeople;
+@property (nonatomic, strong) MHRequestOptions *requestOptions;
+@property (nonatomic, strong) MHRequestOptions *searchRequestOptions;
+@property (nonatomic, strong) ODRefreshControl *refreshController;
+@property (nonatomic, assign) BOOL isLoading;
+@property (nonatomic, assign) BOOL refreshIsLoading;
+@property (nonatomic, assign) BOOL pagingIsLoading;
+@property (nonatomic, assign) BOOL hasLoadedAllPages;
+@property (nonatomic, assign) BOOL searchIsLoading;
+@property (nonatomic, assign) BOOL searchPagingIsLoading;
+@property (nonatomic, assign) BOOL searchHasLoadedAllPages;
+@property (nonatomic, assign) MHPersonSortFields secondaryFieldName;
+@property (nonatomic, assign) MHRequestOptionsOrderFields sortField;
+@property (nonatomic, strong) MHSortHeader *header;
+@property (nonatomic, strong, readonly) MHProfileViewController *profileViewController;
+@property (nonatomic, strong, readonly) MHGenericListViewController *fieldSelectorViewController;
+@property (nonatomic, strong, readonly) MHNewInteractionViewController *createInteractionViewController;
+@property (nonatomic, strong, readonly) MHCreatePersonViewController *createPersonViewController;
+@property (nonatomic, strong, readonly) UIPopoverController	*createPersonPopoverViewController;
+@property (nonatomic, strong, readonly) MHActivityViewController *activityViewController;
+
+- (BOOL)isSelected:(MHPerson *)person;
+
 - (void)redoRequestWithPagingReset:(BOOL)resetPaging;
 - (void)personRemoved:(NSNotification *)notification;
 
-- (void)setTextFieldLeftView;
-
+- (IBAction)revealMenu:(id)sender;
 - (void)addPerson:(id)sender;
 - (void)addInteraction:(id)sender;
 
+- (void)setTextFieldLeftView;
 - (void)updateBarButtons;
 
 @end
@@ -504,8 +530,8 @@
 
 - (void)addPerson:(id)sender {
 	
-	MHPerson *newPerson = [MHPerson newObjectFromFields:nil];
-	[[self createPersonViewController] updateWithPerson:newPerson];
+	MHPerson *newPerson						= [MHPerson newObjectFromFields:nil];
+	self.createPersonViewController.person	= newPerson;
     
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 		

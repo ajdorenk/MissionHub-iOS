@@ -10,6 +10,7 @@
 #import "MHProfileViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "DWTagList.h"
+#import "MHPerson+Helper.h"
 
 #define GAP_BETWEEN_NAME_AND_LABEL_LIST 20.0f
 #define GAP_BETWEEN_LABEL_LIST_AND_LABEL_TITLE 10.0f
@@ -22,11 +23,11 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 
 @interface MHProfileHeaderViewController ()
 
-@property (strong, nonatomic) IBOutlet DWTagList *labelList;
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UIView *contentView;
-@property (strong, nonatomic) IBOutlet UILabel *labelsTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet DWTagList *labelList;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIView *contentView;
+@property (nonatomic, weak) IBOutlet UILabel *labelsTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 
 - (void)updateLayoutWithFrame:(CGRect)frame;
 

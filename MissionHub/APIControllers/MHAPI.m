@@ -33,20 +33,25 @@ typedef enum {
 
 @interface MHAPI ()
 
+@property (nonatomic, strong) NSURL				*surveyURL;
+@property (nonatomic, assign) BOOL				currentOrganizationIsFinished;
+@property (nonatomic, assign) BOOL				initialPeopleListIsFinished;
+@property (nonatomic, strong) NSError			*errorForInitialRequests;
+
 @end
 
 @implementation MHAPI
 
-@synthesize surveyURL;
-@synthesize accessToken;
+@synthesize surveyURL						= _surveyURL;
+@synthesize accessToken						= _accessToken;
 
-@synthesize currentUser;
-@synthesize currentOrganization;
-@synthesize _anonymous;
-@synthesize initialPeopleList;
-@synthesize currentOrganizationIsFinished;
-@synthesize initialPeopleListIsFinished;
-@synthesize errorForInitialRequests;
+@synthesize currentUser						= _currentUser;
+@synthesize currentOrganization				= _currentOrganization;
+@synthesize anonymous						= _anonymous;
+@synthesize initialPeopleList				= _initialPeopleList;
+@synthesize currentOrganizationIsFinished	= _currentOrganizationIsFinished;
+@synthesize initialPeopleListIsFinished		= _initialPeopleListIsFinished;
+@synthesize errorForInitialRequests			= _errorForInitialRequests;
 
 + (MHAPI *)sharedInstance {
 	

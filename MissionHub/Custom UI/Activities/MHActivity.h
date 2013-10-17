@@ -35,7 +35,7 @@ extern NSString * const MHActivityTypeDefault;
 
 @interface MHActivity : NSObject
 
-@property (nonatomic, strong) MHActivityViewController *activityViewController;
+@property (nonatomic, weak) MHActivityViewController *activityViewController;
 
 - (id)initWithTitle:(NSString *)title image:(UIImage *)image;
 

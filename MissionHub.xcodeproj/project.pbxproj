@@ -100,11 +100,15 @@
 		68631FAC17E7992C00A24B3F /* MHInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68631FAB17E7992C00A24B3F /* MHInfoHeaderCell.m */; };
 		68631FB017E91E4500A24B3F /* MH_Mobile_Menu_Button_Gray_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631FAE17E91E4500A24B3F /* MH_Mobile_Menu_Button_Gray_72.png */; };
 		68631FB217E91E4500A24B3F /* MH_Mobile_Menu_Button_Red_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 68631FAF17E91E4500A24B3F /* MH_Mobile_Menu_Button_Red_72.png */; };
+		6865808218107DF8005A5532 /* MHOrganizationalPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D53F211810787800D4574A /* MHOrganizationalPermission.m */; };
+		6865808318107DF8005A5532 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D53F231810787900D4574A /* MHPerson.m */; };
 		6867917117FF4EC6000106BF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6867917017FF4EC6000106BF /* XCTest.framework */; };
 		6867917217FF4EC6000106BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910881760FD3100E01B46 /* Foundation.framework */; };
 		6867917317FF4EC6000106BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910861760FD3100E01B46 /* UIKit.framework */; };
 		6867917917FF4EC6000106BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6867917717FF4EC6000106BF /* InfoPlist.strings */; };
 		6867918517FF6533000106BF /* MHActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6867918417FF6533000106BF /* MHActivityView.m */; };
+		68805EE818107DC00026F7DA /* MHOrganizationalPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D53F211810787800D4574A /* MHOrganizationalPermission.m */; };
+		68805EE918107DC00026F7DA /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D53F231810787900D4574A /* MHPerson.m */; };
 		68818AFC17C7FFF800624887 /* MHAnswerSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFB17C7FFF800624887 /* MHAnswerSheet.m */; };
 		68818B0017C7FFF900624887 /* MHAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFF17C7FFF900624887 /* MHAnswer.m */; };
 		68818B0417C800A300624887 /* MHAnswerSheet+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0317C800A300624887 /* MHAnswerSheet+Helper.m */; };
@@ -149,73 +153,37 @@
 		68C0696217710BF1007C79D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695E17710BF1007C79D6 /* SystemConfiguration.framework */; };
 		68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequestOperation.m */; };
 		68C069691772252C007C79D6 /* MHRequestOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C069681772252C007C79D6 /* MHRequestOptions.m */; };
-		68C82E20180314FA00A8D5A0 /* MHOrganization.h in Sources */ = {isa = PBXBuildFile; fileRef = 68478D89177E8AE20014501D /* MHOrganization.h */; };
 		68C82E21180314FA00A8D5A0 /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D88177E8AE20014501D /* MHOrganization.m */; };
-		68C82E22180314FA00A8D5A0 /* MHAddress.h in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D4177EC34C00DBDF3F /* MHAddress.h */; };
 		68C82E23180314FA00A8D5A0 /* MHAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D5177EC34D00DBDF3F /* MHAddress.m */; };
-		68C82E24180314FA00A8D5A0 /* MHInteraction.h in Sources */ = {isa = PBXBuildFile; fileRef = 68478D39177A5AA20014501D /* MHInteraction.h */; };
 		68C82E25180314FA00A8D5A0 /* MHInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D3A177A5AA20014501D /* MHInteraction.m */; };
-		68C82E26180314FA00A8D5A0 /* MHLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = 68478D8A177E8AE20014501D /* MHLabel.h */; };
 		68C82E27180314FA00A8D5A0 /* MHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D8B177E8AE20014501D /* MHLabel.m */; };
-		68C82E28180314FA00A8D5A0 /* MHOrganizationalLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C5177F804300A2E231 /* MHOrganizationalLabel.h */; };
 		68C82E29180314FA00A8D5A0 /* MHOrganizationalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */; };
-		68C82E2A180314FA00A8D5A0 /* MHOrganizationalPermission.h in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C1177F804100A2E231 /* MHOrganizationalPermission.h */; };
-		68C82E2B180314FA00A8D5A0 /* MHOrganizationalPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */; };
-		68C82E2C180314FB00A8D5A0 /* MHSurvey.h in Sources */ = {isa = PBXBuildFile; fileRef = 68478D58177A7F410014501D /* MHSurvey.h */; };
 		68C82E2D180314FB00A8D5A0 /* MHSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D59177A7F410014501D /* MHSurvey.m */; };
-		68C82E2E180314FB00A8D5A0 /* MHPermissionLevel.h in Sources */ = {isa = PBXBuildFile; fileRef = 68478D50177A784A0014501D /* MHPermissionLevel.h */; };
 		68C82E2F180314FB00A8D5A0 /* MHPermissionLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D51177A784A0014501D /* MHPermissionLevel.m */; };
-		68C82E30180314FB00A8D5A0 /* MHInteractionType.h in Sources */ = {isa = PBXBuildFile; fileRef = 68478D3C177A70200014501D /* MHInteractionType.h */; };
 		68C82E31180314FB00A8D5A0 /* MHInteractionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D3D177A70200014501D /* MHInteractionType.m */; };
-		68C82E32180314FB00A8D5A0 /* MHAnswerSheet.h in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFA17C7FFF800624887 /* MHAnswerSheet.h */; };
 		68C82E33180314FB00A8D5A0 /* MHAnswerSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFB17C7FFF800624887 /* MHAnswerSheet.m */; };
-		68C82E34180314FB00A8D5A0 /* MHPerson.h in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0817C81E7900624887 /* MHPerson.h */; };
-		68C82E35180314FB00A8D5A0 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0917C81E7900624887 /* MHPerson.m */; };
-		68C82E36180314FB00A8D5A0 /* MHModel.h in Sources */ = {isa = PBXBuildFile; fileRef = 68C06899176EB832007C79D6 /* MHModel.h */; };
 		68C82E37180314FB00A8D5A0 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
-		68C82E38180314FB00A8D5A0 /* MHStorage.h in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A61770EFBE007C79D6 /* MHStorage.h */; };
 		68C82E39180314FB00A8D5A0 /* MHStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A71770EFBE007C79D6 /* MHStorage.m */; };
-		68C82E3A180314FB00A8D5A0 /* MHPerson+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FB1782403600E6E742 /* MHPerson+Helper.h */; };
 		68C82E3B180314FB00A8D5A0 /* MHPerson+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FC1782403600E6E742 /* MHPerson+Helper.m */; };
-		68C82E3C180314FB00A8D5A0 /* MHOrganization+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F417823E4600E6E742 /* MHOrganization+Helper.h */; };
 		68C82E3D180314FB00A8D5A0 /* MHOrganization+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */; };
-		68C82E3E180314FB00A8D5A0 /* MHUser.h in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D8177EC34D00DBDF3F /* MHUser.h */; };
 		68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D9177EC34D00DBDF3F /* MHUser.m */; };
-		68C82E40180314FB00A8D5A0 /* MHInteraction+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA117A2F95600849F31 /* MHInteraction+Helper.h */; };
 		68C82E41180314FB00A8D5A0 /* MHInteraction+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA217A2F95700849F31 /* MHInteraction+Helper.m */; };
-		68C82E42180314FB00A8D5A0 /* MHInteractionType+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */; };
 		68C82E43180314FB00A8D5A0 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
-		68C82E44180314FB00A8D5A0 /* MHOrganizationalPermission+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAD17A318D100849F31 /* MHOrganizationalPermission+Helper.h */; };
 		68C82E45180314FB00A8D5A0 /* MHOrganizationalPermission+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */; };
-		68C82E46180314FB00A8D5A0 /* MHPermissionLevel+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 682C68E717B9E3A600BAD332 /* MHPermissionLevel+Helper.h */; };
 		68C82E47180314FB00A8D5A0 /* MHPermissionLevel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 682C68E817B9E3A600BAD332 /* MHPermissionLevel+Helper.m */; };
-		68C82E48180314FB00A8D5A0 /* MHOrganizationalLabel+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA917A3185700849F31 /* MHOrganizationalLabel+Helper.h */; };
 		68C82E49180314FB00A8D5A0 /* MHOrganizationalLabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAA17A3185900849F31 /* MHOrganizationalLabel+Helper.m */; };
-		68C82E4A180314FB00A8D5A0 /* MHLabel+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 68839F531794FE3000B32934 /* MHLabel+Helper.h */; };
 		68C82E4B180314FB00A8D5A0 /* MHLabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68839F541794FE3000B32934 /* MHLabel+Helper.m */; };
-		68C82E4C180314FB00A8D5A0 /* MHSurvey+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA517A317BA00849F31 /* MHSurvey+Helper.h */; };
 		68C82E4D180314FB00A8D5A0 /* MHSurvey+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA617A317BC00849F31 /* MHSurvey+Helper.m */; };
-		68C82E4E180314FB00A8D5A0 /* MHQuestion.h in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7B9177EA4C900DBDF3F /* MHQuestion.h */; };
 		68C82E4F180314FB00A8D5A0 /* MHQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7BA177EA4C900DBDF3F /* MHQuestion.m */; };
-		68C82E50180314FB00A8D5A0 /* MHAnswerSheet+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0217C800A300624887 /* MHAnswerSheet+Helper.h */; };
 		68C82E51180314FB00A8D5A0 /* MHAnswerSheet+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0317C800A300624887 /* MHAnswerSheet+Helper.m */; };
-		68C82E52180314FB00A8D5A0 /* MHAnswer.h in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFE17C7FFF900624887 /* MHAnswer.h */; };
 		68C82E53180314FB00A8D5A0 /* MHAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFF17C7FFF900624887 /* MHAnswer.m */; };
-		68C82E54180314FB00A8D5A0 /* MHAddress+Helper.h in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDB17948EC900769B71 /* MHAddress+Helper.h */; };
 		68C82E55180314FB00A8D5A0 /* MHAddress+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDC17948EC900769B71 /* MHAddress+Helper.m */; };
-		68C82E56180314FB00A8D5A0 /* MHPhoneNumber.h in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D0177EC34C00DBDF3F /* MHPhoneNumber.h */; };
 		68C82E57180314FB00A8D5A0 /* MHPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D1177EC34C00DBDF3F /* MHPhoneNumber.m */; };
-		68C82E58180314FB00A8D5A0 /* MHEmailAddress.h in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7CC177EC34C00DBDF3F /* MHEmailAddress.h */; };
 		68C82E59180314FB00A8D5A0 /* MHEmailAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7CD177EC34C00DBDF3F /* MHEmailAddress.m */; };
-		68C82E5A180314FB00A8D5A0 /* MHAPI.h in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3C1766783200B9B0B1 /* MHAPI.h */; };
 		68C82E5B180314FB00A8D5A0 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
-		68C82E5C180314FB00A8D5A0 /* MHRequestOperation.h in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696317710E60007C79D6 /* MHRequestOperation.h */; };
 		68C82E5D180314FB00A8D5A0 /* MHRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequestOperation.m */; };
-		68C82E5E180314FB00A8D5A0 /* MHRequestOptions.h in Sources */ = {isa = PBXBuildFile; fileRef = 68C069671772252C007C79D6 /* MHRequestOptions.h */; };
 		68C82E5F180314FB00A8D5A0 /* MHRequestOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C069681772252C007C79D6 /* MHRequestOptions.m */; };
-		68C82E60180314FB00A8D5A0 /* MHLoginViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA421766C98000B9B0B1 /* MHLoginViewController.h */; };
 		68C82E61180314FB00A8D5A0 /* MHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */; };
-		68C82E62180314FB00A8D5A0 /* MHErrorHandler.h in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CB17792D8F003958A0 /* MHErrorHandler.h */; };
 		68C82E63180314FB00A8D5A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68C82E64180314FB00A8D5A0 /* MissionHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 683910A01760FD3100E01B46 /* MissionHub.xcdatamodeld */; };
 		68C82E65180315A500A8D5A0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684BB41F17F32AAD00DFF97E /* Social.framework */; };
@@ -232,11 +200,8 @@
 		68C82E70180318E500A8D5A0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695C17710BF1007C79D6 /* libz.dylib */; };
 		68C82E71180318F200A8D5A0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695D17710BF1007C79D6 /* MobileCoreServices.framework */; };
 		68C82E721803190100A8D5A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695E17710BF1007C79D6 /* SystemConfiguration.framework */; };
-		68C82E731803197F00A8D5A0 /* NSDictionary+UrlEncodedString.h in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */; };
 		68C82E741803197F00A8D5A0 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
-		68C82E751803197F00A8D5A0 /* NSSet+MHSearchForRemoteID.h in Sources */ = {isa = PBXBuildFile; fileRef = 68478D5C177BA8DF0014501D /* NSSet+MHSearchForRemoteID.h */; };
 		68C82E761803197F00A8D5A0 /* NSSet+MHSearchForRemoteID.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */; };
-		68C82E771803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.h in Sources */ = {isa = PBXBuildFile; fileRef = 6896649D17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.h */; };
 		68C82E781803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
 		68C82E7B180333C100A8D5A0 /* MHContactAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */; };
 		68C82E7C180333C100A8D5A0 /* MHContactAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */; };
@@ -246,12 +211,10 @@
 		68D7AA441766C98000B9B0B1 /* MHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */; };
 		68D7AA491766CE4100B9B0B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA481766CE4100B9B0B1 /* Security.framework */; };
 		68D7AA4B1766CEF200B9B0B1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */; };
-		68D7B8C3177F804200A2E231 /* MHOrganizationalPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */; };
 		68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */; };
 		68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
 		68EC3A6217CE6D0400EE3717 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EC3A6117CE6D0400EE3717 /* CoreText.framework */; };
-		68EC3A6317CE6E4B00EE3717 /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0917C81E7900624887 /* MHPerson.m */; };
 		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
 		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
@@ -440,8 +403,6 @@
 		68818AFF17C7FFF900624887 /* MHAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswer.m; path = Models/MHAnswer.m; sourceTree = "<group>"; };
 		68818B0217C800A300624887 /* MHAnswerSheet+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHAnswerSheet+Helper.h"; path = "Models/MHAnswerSheet+Helper.h"; sourceTree = "<group>"; };
 		68818B0317C800A300624887 /* MHAnswerSheet+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHAnswerSheet+Helper.m"; path = "Models/MHAnswerSheet+Helper.m"; sourceTree = "<group>"; };
-		68818B0817C81E7900624887 /* MHPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MHPerson.h; path = Models/MHPerson.h; sourceTree = "<group>"; };
-		68818B0917C81E7900624887 /* MHPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MHPerson.m; path = Models/MHPerson.m; sourceTree = "<group>"; };
 		68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Trash_48.png; sourceTree = "<group>"; };
 		68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Text_48.png; sourceTree = "<group>"; };
 		68839F401794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Permissions_48.png; sourceTree = "<group>"; };
@@ -504,14 +465,16 @@
 		68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHContactAssignment.m; path = Models/MHContactAssignment.m; sourceTree = "<group>"; };
 		68C82E7D1803343E00A8D5A0 /* MHContactAssignment+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHContactAssignment+Helper.h"; path = "Models/MHContactAssignment+Helper.h"; sourceTree = "<group>"; };
 		68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHContactAssignment+Helper.m"; path = "Models/MHContactAssignment+Helper.m"; sourceTree = "<group>"; };
+		68D53F201810787800D4574A /* MHOrganizationalPermission.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MHOrganizationalPermission.h; path = Models/MHOrganizationalPermission.h; sourceTree = "<group>"; };
+		68D53F211810787800D4574A /* MHOrganizationalPermission.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalPermission.m; path = Models/MHOrganizationalPermission.m; sourceTree = "<group>"; };
+		68D53F221810787900D4574A /* MHPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MHPerson.h; path = Models/MHPerson.h; sourceTree = "<group>"; };
+		68D53F231810787900D4574A /* MHPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MHPerson.m; path = Models/MHPerson.m; sourceTree = "<group>"; };
 		68D7AA3C1766783200B9B0B1 /* MHAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAPI.h; path = APIControllers/MHAPI.h; sourceTree = "<group>"; };
 		68D7AA3D1766783200B9B0B1 /* MHAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAPI.m; path = APIControllers/MHAPI.m; sourceTree = "<group>"; };
 		68D7AA421766C98000B9B0B1 /* MHLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLoginViewController.h; path = APIControllers/MHLoginViewController.h; sourceTree = "<group>"; };
 		68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHLoginViewController.m; path = APIControllers/MHLoginViewController.m; sourceTree = "<group>"; };
 		68D7AA481766CE4100B9B0B1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		68D7B8C1177F804100A2E231 /* MHOrganizationalPermission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHOrganizationalPermission.h; path = Models/MHOrganizationalPermission.h; sourceTree = "<group>"; };
-		68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalPermission.m; path = Models/MHOrganizationalPermission.m; sourceTree = "<group>"; };
 		68D7B8C5177F804300A2E231 /* MHOrganizationalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHOrganizationalLabel.h; path = Models/MHOrganizationalLabel.h; sourceTree = "<group>"; };
 		68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalLabel.m; path = Models/MHOrganizationalLabel.m; sourceTree = "<group>"; };
 		68EB33CB17792D8F003958A0 /* MHErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHErrorHandler.h; path = APIControllers/MHErrorHandler.h; sourceTree = "<group>"; };
@@ -615,8 +578,6 @@
 				68478D8B177E8AE20014501D /* MHLabel.m */,
 				68D7B8C5177F804300A2E231 /* MHOrganizationalLabel.h */,
 				68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */,
-				68D7B8C1177F804100A2E231 /* MHOrganizationalPermission.h */,
-				68D7B8C2177F804100A2E231 /* MHOrganizationalPermission.m */,
 				68478D58177A7F410014501D /* MHSurvey.h */,
 				68478D59177A7F410014501D /* MHSurvey.m */,
 				68478D50177A784A0014501D /* MHPermissionLevel.h */,
@@ -625,10 +586,12 @@
 				68478D3D177A70200014501D /* MHInteractionType.m */,
 				68818AFA17C7FFF800624887 /* MHAnswerSheet.h */,
 				68818AFB17C7FFF800624887 /* MHAnswerSheet.m */,
-				68818B0817C81E7900624887 /* MHPerson.h */,
-				68818B0917C81E7900624887 /* MHPerson.m */,
 				68C82E79180333C100A8D5A0 /* MHContactAssignment.h */,
 				68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */,
+				68D53F201810787800D4574A /* MHOrganizationalPermission.h */,
+				68D53F211810787800D4574A /* MHOrganizationalPermission.m */,
+				68D53F221810787900D4574A /* MHPerson.h */,
+				68D53F231810787900D4574A /* MHPerson.m */,
 			);
 			name = CoreDataGeneratedClasses;
 			sourceTree = "<group>";
@@ -1050,7 +1013,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MH;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Cru;
 				TargetAttributes = {
 					6867916E17FF4EC5000106BF = {
@@ -1232,7 +1195,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68EC3A6317CE6E4B00EE3717 /* MHPerson.m in Sources */,
+				68805EE818107DC00026F7DA /* MHOrganizationalPermission.m in Sources */,
+				68805EE918107DC00026F7DA /* MHPerson.m in Sources */,
 				683910951760FD3100E01B46 /* main.m in Sources */,
 				683910991760FD3100E01B46 /* MHAppDelegate.m in Sources */,
 				683910A21760FD3100E01B46 /* MissionHub.xcdatamodeld in Sources */,
@@ -1269,7 +1233,6 @@
 				6823A7D2177EC34C00DBDF3F /* MHPhoneNumber.m in Sources */,
 				6823A7D6177EC34D00DBDF3F /* MHAddress.m in Sources */,
 				6823A7DA177EC34D00DBDF3F /* MHUser.m in Sources */,
-				68D7B8C3177F804200A2E231 /* MHOrganizationalPermission.m in Sources */,
 				68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */,
 				680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */,
 				680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */,
@@ -1322,81 +1285,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68C82E731803197F00A8D5A0 /* NSDictionary+UrlEncodedString.h in Sources */,
+				6865808218107DF8005A5532 /* MHOrganizationalPermission.m in Sources */,
+				6865808318107DF8005A5532 /* MHPerson.m in Sources */,
 				68C82E741803197F00A8D5A0 /* NSDictionary+UrlEncodedString.m in Sources */,
-				68C82E751803197F00A8D5A0 /* NSSet+MHSearchForRemoteID.h in Sources */,
 				68C82E761803197F00A8D5A0 /* NSSet+MHSearchForRemoteID.m in Sources */,
-				68C82E771803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.h in Sources */,
 				68C82E781803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
-				68C82E20180314FA00A8D5A0 /* MHOrganization.h in Sources */,
 				68C82E21180314FA00A8D5A0 /* MHOrganization.m in Sources */,
-				68C82E22180314FA00A8D5A0 /* MHAddress.h in Sources */,
 				68C82E23180314FA00A8D5A0 /* MHAddress.m in Sources */,
-				68C82E24180314FA00A8D5A0 /* MHInteraction.h in Sources */,
 				68C82E25180314FA00A8D5A0 /* MHInteraction.m in Sources */,
-				68C82E26180314FA00A8D5A0 /* MHLabel.h in Sources */,
 				68C82E27180314FA00A8D5A0 /* MHLabel.m in Sources */,
-				68C82E28180314FA00A8D5A0 /* MHOrganizationalLabel.h in Sources */,
 				68C82E29180314FA00A8D5A0 /* MHOrganizationalLabel.m in Sources */,
-				68C82E2A180314FA00A8D5A0 /* MHOrganizationalPermission.h in Sources */,
-				68C82E2B180314FA00A8D5A0 /* MHOrganizationalPermission.m in Sources */,
-				68C82E2C180314FB00A8D5A0 /* MHSurvey.h in Sources */,
 				68C82E2D180314FB00A8D5A0 /* MHSurvey.m in Sources */,
-				68C82E2E180314FB00A8D5A0 /* MHPermissionLevel.h in Sources */,
 				68C82E2F180314FB00A8D5A0 /* MHPermissionLevel.m in Sources */,
-				68C82E30180314FB00A8D5A0 /* MHInteractionType.h in Sources */,
 				68C82E31180314FB00A8D5A0 /* MHInteractionType.m in Sources */,
-				68C82E32180314FB00A8D5A0 /* MHAnswerSheet.h in Sources */,
 				68C82E33180314FB00A8D5A0 /* MHAnswerSheet.m in Sources */,
-				68C82E34180314FB00A8D5A0 /* MHPerson.h in Sources */,
-				68C82E35180314FB00A8D5A0 /* MHPerson.m in Sources */,
-				68C82E36180314FB00A8D5A0 /* MHModel.h in Sources */,
 				68C82E37180314FB00A8D5A0 /* MHModel.m in Sources */,
-				68C82E38180314FB00A8D5A0 /* MHStorage.h in Sources */,
 				68C82E39180314FB00A8D5A0 /* MHStorage.m in Sources */,
-				68C82E3A180314FB00A8D5A0 /* MHPerson+Helper.h in Sources */,
 				68C82E3B180314FB00A8D5A0 /* MHPerson+Helper.m in Sources */,
-				68C82E3C180314FB00A8D5A0 /* MHOrganization+Helper.h in Sources */,
 				68C82E3D180314FB00A8D5A0 /* MHOrganization+Helper.m in Sources */,
-				68C82E3E180314FB00A8D5A0 /* MHUser.h in Sources */,
 				68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */,
-				68C82E40180314FB00A8D5A0 /* MHInteraction+Helper.h in Sources */,
 				68C82E41180314FB00A8D5A0 /* MHInteraction+Helper.m in Sources */,
-				68C82E42180314FB00A8D5A0 /* MHInteractionType+Helper.h in Sources */,
 				68C82E43180314FB00A8D5A0 /* MHInteractionType+Helper.m in Sources */,
-				68C82E44180314FB00A8D5A0 /* MHOrganizationalPermission+Helper.h in Sources */,
 				68C82E45180314FB00A8D5A0 /* MHOrganizationalPermission+Helper.m in Sources */,
-				68C82E46180314FB00A8D5A0 /* MHPermissionLevel+Helper.h in Sources */,
 				68C82E47180314FB00A8D5A0 /* MHPermissionLevel+Helper.m in Sources */,
-				68C82E48180314FB00A8D5A0 /* MHOrganizationalLabel+Helper.h in Sources */,
 				68C82E49180314FB00A8D5A0 /* MHOrganizationalLabel+Helper.m in Sources */,
-				68C82E4A180314FB00A8D5A0 /* MHLabel+Helper.h in Sources */,
 				68C82E4B180314FB00A8D5A0 /* MHLabel+Helper.m in Sources */,
-				68C82E4C180314FB00A8D5A0 /* MHSurvey+Helper.h in Sources */,
 				68C82E4D180314FB00A8D5A0 /* MHSurvey+Helper.m in Sources */,
-				68C82E4E180314FB00A8D5A0 /* MHQuestion.h in Sources */,
 				68C82E4F180314FB00A8D5A0 /* MHQuestion.m in Sources */,
-				68C82E50180314FB00A8D5A0 /* MHAnswerSheet+Helper.h in Sources */,
 				68C82E51180314FB00A8D5A0 /* MHAnswerSheet+Helper.m in Sources */,
-				68C82E52180314FB00A8D5A0 /* MHAnswer.h in Sources */,
 				68C82E53180314FB00A8D5A0 /* MHAnswer.m in Sources */,
-				68C82E54180314FB00A8D5A0 /* MHAddress+Helper.h in Sources */,
 				68C82E55180314FB00A8D5A0 /* MHAddress+Helper.m in Sources */,
-				68C82E56180314FB00A8D5A0 /* MHPhoneNumber.h in Sources */,
 				68C82E57180314FB00A8D5A0 /* MHPhoneNumber.m in Sources */,
-				68C82E58180314FB00A8D5A0 /* MHEmailAddress.h in Sources */,
 				68C82E59180314FB00A8D5A0 /* MHEmailAddress.m in Sources */,
 				68C82E7C180333C100A8D5A0 /* MHContactAssignment.m in Sources */,
-				68C82E5A180314FB00A8D5A0 /* MHAPI.h in Sources */,
 				68C82E5B180314FB00A8D5A0 /* MHAPI.m in Sources */,
-				68C82E5C180314FB00A8D5A0 /* MHRequestOperation.h in Sources */,
 				68C82E5D180314FB00A8D5A0 /* MHRequestOperation.m in Sources */,
-				68C82E5E180314FB00A8D5A0 /* MHRequestOptions.h in Sources */,
 				68C82E5F180314FB00A8D5A0 /* MHRequestOptions.m in Sources */,
-				68C82E60180314FB00A8D5A0 /* MHLoginViewController.h in Sources */,
 				68C82E801803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */,
 				68C82E61180314FB00A8D5A0 /* MHLoginViewController.m in Sources */,
-				68C82E62180314FB00A8D5A0 /* MHErrorHandler.h in Sources */,
 				68C82E63180314FB00A8D5A0 /* MHErrorHandler.m in Sources */,
 				68C82E64180314FB00A8D5A0 /* MissionHub.xcdatamodeld in Sources */,
 				6891C28E17FFBE1B009D5851 /* MHAPIBulkActionTests.m in Sources */,
@@ -1589,7 +1515,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1622,7 +1547,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1653,7 +1577,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;

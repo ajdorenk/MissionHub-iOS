@@ -7,6 +7,8 @@
 //
 
 #import "MHLoginViewController.h"
+#import "Facebook.h"
+#import "FBLoginView.h"
 #import "MHAPI.h"
 #import "MHErrorHandler.h"
 
@@ -24,14 +26,15 @@ typedef enum {
 	MHLoginErrorSessionError
 } MHLoginErrors;
 
-@interface MHLoginViewController ()
+@interface MHLoginViewController () <FBLoginViewDelegate, MHLoginViewControllerDelegate>
 
 @property (nonatomic, strong)				FBLoginView							*loginButtonView;
 @property (nonatomic, strong)				UIButton							*missionhubRefreshButton;
-@property (nonatomic, strong)				IBOutlet UIActivityIndicatorView	*loadingIndicator;
+@property (nonatomic, weak)					IBOutlet UIActivityIndicatorView	*loadingIndicator;
 @property (nonatomic, assign)				BOOL								hasRequestedMe;
-@property (nonatomic, strong) IBOutlet		UIToolbar * toolbar;
+@property (nonatomic, weak) IBOutlet		UIToolbar * toolbar;
 
+- (void)handleAppLink:(FBAccessTokenData *)appLinkToken;
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
 - (void)loggedInWithToken:(NSString *)token;
 - (void)refreshMissionHubData:(id)sender;
@@ -45,9 +48,11 @@ typedef enum {
 
 @synthesize loginDelegate		= _loginDelegate;
 @synthesize loginButtonView		= _loginButtonView;
-@synthesize loadingIndicator;
+@synthesize loadingIndicator	= _loadingIndicator;
 @synthesize loggedIn			= _loggedIn;
 @synthesize hasRequestedMe		= _hasRequestedMe;
+@synthesize missionhubRefreshButton	= _missionhubRefreshButton;
+@synthesize toolbar				= _toolbar;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {

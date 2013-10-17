@@ -20,11 +20,15 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 
 @interface MHProfileInfoViewController ()
 
+@property (nonatomic, strong) NSMutableArray *sectionTitles;
+@property (nonatomic, strong) NSMutableArray *sections;
+
 @end
 
 @implementation MHProfileInfoViewController
-@synthesize sectionTitles = _sectionTitles;
-@synthesize sections = _sections;
+
+@synthesize sectionTitles	= _sectionTitles;
+@synthesize sections		= _sections;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	

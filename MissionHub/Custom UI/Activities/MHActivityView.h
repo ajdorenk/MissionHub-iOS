@@ -42,13 +42,11 @@ extern CGFloat const MHActivityPageControlHeight;
 
 @interface MHActivityView : UIView <UIScrollViewDelegate>
 
-//@property (strong, nonatomic) UIImageView *backgroundImageView;
-@property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UIPageControl *pageControl;
-@property (strong, nonatomic) NSArray *activities;
-@property (strong, nonatomic) NSArray *activityItems;
-@property (weak, nonatomic) MHActivityViewController *activityViewController;
-//@property (strong, nonatomic) UIButton *cancelButton;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) NSArray *activities;
+@property (nonatomic, strong) NSArray *activityItems;
+@property (nonatomic, weak) MHActivityViewController *activityViewController;
 @property (nonatomic, assign) NSUInteger maxRowsPerPage;
 @property (nonatomic, assign) NSUInteger maxColumnsPerPage;
 

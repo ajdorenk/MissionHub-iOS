@@ -1,5 +1,8 @@
 platform :ios, "6.0"
 
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
 xcodeproj "MissionHub"
 workspace "MissionHub"
 link_with "MissionHub"

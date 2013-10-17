@@ -32,6 +32,9 @@
 @interface MHActivityViewController ()
 
 @property (nonatomic, strong) NSMutableArray *visibleActivities;
+@property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong, readonly) NSArray *activities;
+@property (nonatomic, strong) MHActivityView *activityView;
 
 - (CGRect)frameForCurrentOrientation;
 - (NSMutableArray *)arrayOfVisibleActivitiesFromActivities:(NSArray *)activities usingActivityItems:(NSArray *)activityItems;
@@ -45,7 +48,6 @@
 @synthesize activities				= _activities;
 @synthesize visibleActivities		= _visibleActivities;
 @synthesize activityItems			= _activityItems;
-@synthesize userInfo				= _userInfo;
 @synthesize activityView			= _activityView;
 @synthesize presentingController	= _presentingController;
 

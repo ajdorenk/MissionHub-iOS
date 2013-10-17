@@ -2,7 +2,7 @@
 //  MHPerson.h
 //  MissionHub
 //
-//  Created by Michael Harrison on 8/23/13.
+//  Created by Michael Harrison on 10/17/13.
 //  Copyright (c) 2013 Cru. All rights reserved.
 //
 
@@ -34,6 +34,7 @@
 @property (nonatomic, retain) MHOrganization *adminInOrganization;
 @property (nonatomic, retain) NSSet *allOrganizationalPermissions;
 @property (nonatomic, retain) NSSet *allOrganizations;
+@property (nonatomic, retain) NSSet *answerSheets;
 @property (nonatomic, retain) NSSet *assignedConacts;
 @property (nonatomic, retain) MHPerson *assignedLeader;
 @property (nonatomic, retain) NSSet *createdInteractions;
@@ -48,7 +49,6 @@
 @property (nonatomic, retain) NSSet *updatedInteractions;
 @property (nonatomic, retain) MHUser *user;
 @property (nonatomic, retain) MHOrganization *userInOrganization;
-@property (nonatomic, retain) NSSet *answerSheets;
 @end
 
 @interface MHPerson (CoreDataGeneratedAccessors)
@@ -67,6 +67,11 @@
 - (void)removeAllOrganizationsObject:(MHOrganization *)value;
 - (void)addAllOrganizations:(NSSet *)values;
 - (void)removeAllOrganizations:(NSSet *)values;
+
+- (void)addAnswerSheetsObject:(MHAnswerSheet *)value;
+- (void)removeAnswerSheetsObject:(MHAnswerSheet *)value;
+- (void)addAnswerSheets:(NSSet *)values;
+- (void)removeAnswerSheets:(NSSet *)values;
 
 - (void)addAssignedConactsObject:(MHPerson *)value;
 - (void)removeAssignedConactsObject:(MHPerson *)value;
@@ -112,10 +117,5 @@
 - (void)removeUpdatedInteractionsObject:(MHInteraction *)value;
 - (void)addUpdatedInteractions:(NSSet *)values;
 - (void)removeUpdatedInteractions:(NSSet *)values;
-
-- (void)addAnswerSheetsObject:(MHAnswerSheet *)value;
-- (void)removeAnswerSheetsObject:(MHAnswerSheet *)value;
-- (void)addAnswerSheets:(NSSet *)values;
-- (void)removeAnswerSheets:(NSSet *)values;
 
 @end

@@ -7,8 +7,18 @@
 //
 
 #import "MHPersonCell.h"
+#import "MHCheckbox.h"
 #import "UIImageView+AFNetworking.h"
 
+@interface MHPersonCell () <MHCheckboxDelegate>
+
+@property (nonatomic, weak) IBOutlet UILabel *name;
+@property (nonatomic, weak) IBOutlet UILabel *field;
+@property (nonatomic, weak) IBOutlet UIImageView *profilePicture;
+@property (nonatomic, weak) IBOutlet MHCheckbox *checkbox;
+@property (nonatomic, weak) IBOutlet UIView *nameBackgroundView;
+
+@end
 
 @implementation MHPersonCell
 

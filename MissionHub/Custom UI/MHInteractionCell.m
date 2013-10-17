@@ -7,6 +7,7 @@
 //
 
 #import "MHInteractionCell.h"
+#import "TTTAttributedLabel.h"
 
 static NSString * const MHInteractionCellDescriptionFont	= @"ArialMT";
 static CGFloat const MHInteractionCellDescriptionFontSize	= 14;
@@ -23,6 +24,10 @@ static CGFloat const MHInteractionCellMargin				= 16.0f;
 @interface MHInteractionCell ()
 
 - (void)configure;
+
+@property (nonatomic, strong) TTTAttributedLabel *descriptionLabel;
+@property (nonatomic, strong) TTTAttributedLabel *commentLabel;
+@property (nonatomic, strong) TTTAttributedLabel *updatedLabel;
 
 @end
 

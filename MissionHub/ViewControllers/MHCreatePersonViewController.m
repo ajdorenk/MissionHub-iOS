@@ -22,6 +22,42 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 
 @interface MHCreatePersonViewController ()
 
+@property (nonatomic, weak) IBOutlet UIScrollView	*scrollView;
+
+@property (nonatomic, assign) CGSize				oldSize;
+@property (nonatomic, assign) CGRect				originalContentFrame;
+@property (nonatomic, assign) CGPoint				originalContentOffset;
+@property (nonatomic, strong) UITextField			*activeTextField;
+
+@property (nonatomic, weak) IBOutlet MHTextField	*firstName;
+@property (nonatomic, weak) IBOutlet MHTextField	*lastName;
+@property (nonatomic, weak) IBOutlet MHTextField	*email;
+@property (nonatomic, weak) IBOutlet MHTextField	*phone;
+@property (nonatomic, weak) IBOutlet MHTextField	*address1;
+@property (nonatomic, weak) IBOutlet MHTextField	*address2;
+@property (nonatomic, weak) IBOutlet MHTextField	*city;
+@property (nonatomic, weak) IBOutlet MHTextField	*state;
+@property (nonatomic, weak) IBOutlet MHTextField	*country;
+@property (nonatomic, weak) IBOutlet MHTextField	*zip;
+@property (nonatomic, weak) IBOutlet UISegmentedControl	*gender;
+@property (nonatomic, weak) IBOutlet UISegmentedControl	*permissionLevel;
+
+@property (nonatomic, weak) IBOutlet UILabel		*firstNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*lastNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*emailLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*phoneLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*address1Label;
+@property (nonatomic, weak) IBOutlet UILabel		*address2Label;
+@property (nonatomic, weak) IBOutlet UILabel		*cityLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*stateLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*countryLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*zipLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*genderLabel;
+@property (nonatomic, weak) IBOutlet UILabel		*permissionLevelLabel;
+
+@property (nonatomic, strong) UIBarButtonItem		*saveButton;
+@property (nonatomic, strong) UIBarButtonItem		*doneButton;
+
 - (void)configureTextField:(MHTextField *)textField;
 
 - (void)savePerson:(id)sender;
@@ -63,27 +99,27 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 
 @synthesize person					= _person;
 
-@synthesize scrollView;
+@synthesize scrollView				= _scrollView;
 @synthesize oldSize					= _oldSize;
 @synthesize originalContentFrame	= _originalContentFrame;
 @synthesize originalContentOffset	= _originalContentOffset;
 @synthesize activeTextField			= _activeTextField;
 
-@synthesize firstName;
-@synthesize lastName;
-@synthesize email;
-@synthesize phone;
-@synthesize address1;
-@synthesize address2;
-@synthesize city;
-@synthesize state;
-@synthesize country;
-@synthesize zip;
-@synthesize gender;
-@synthesize permissionLevel;
+@synthesize firstName				= _firstName;
+@synthesize lastName				= _lastName;
+@synthesize email					= _email;
+@synthesize phone					= _phone;
+@synthesize address1				= _address1;
+@synthesize address2				= _address2;
+@synthesize city					= _city;
+@synthesize state					= _state;
+@synthesize country					= _country;
+@synthesize zip						= _zip;
+@synthesize gender					= _gender;
+@synthesize permissionLevel			= _permissionLevel;
 
-@synthesize saveButton	= _saveButton;
-@synthesize doneButton	= _doneButton;
+@synthesize saveButton				= _saveButton;
+@synthesize doneButton				= _doneButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -174,9 +210,11 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 	
 }
 
-- (void)updateWithPerson:(MHPerson *)person {
+- (void)setPerson:(MHPerson *)person {
 	
-	self.person = person;
+	[self willChangeValueForKey:@"person"];
+	_person = person;
+	[self didChangeValueForKey:@"person"];
 	
 	[self updateInterface];
 	

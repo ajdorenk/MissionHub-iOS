@@ -9,16 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "MHProfileProtocol.h"
+#import "MHPerson+Helper.h"
 
-@interface MHProfileInfoViewController : UITableViewController <MHProfileProtocol, MFMailComposeViewControllerDelegate> {
-	
-	NSMutableArray *_sectionTitles;
-	NSMutableArray *_sections;
-	
-}
+@interface MHProfileInfoViewController : UITableViewController <MHProfileProtocol, MFMailComposeViewControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *sectionTitles;
-@property (nonatomic, strong) NSMutableArray *sections;
-
+@property (nonatomic, strong) MHPerson *person;
 
 @end

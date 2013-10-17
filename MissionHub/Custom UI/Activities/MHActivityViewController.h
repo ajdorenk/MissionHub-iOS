@@ -45,12 +45,8 @@ typedef enum {
 @interface MHActivityViewController : UIViewController
 
 @property (nonatomic, weak) id<MHActivityViewControllerDelegate> delegate;
-@property (nonatomic, strong) UIView *backgroundView;
-@property (nonatomic, strong, readonly) NSArray *activities;
-@property (nonatomic, strong) NSArray *activityItems;
-@property (nonatomic, strong) NSDictionary *userInfo;
-@property (nonatomic, strong) MHActivityView *activityView;
 @property (nonatomic, weak) UIViewController *presentingController;
+@property (nonatomic, strong) NSArray *activityItems;
 @property (nonatomic, strong) UIView *animateFromView;
 @property (nonatomic, assign) MHActivityViewControllerAnimationPosition animationPosition;
 @property (nonatomic, assign) MHActivityViewControllerAnimationDirection animationDirection;

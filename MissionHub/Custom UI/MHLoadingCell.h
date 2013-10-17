@@ -8,15 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MHLoadingCell : UITableViewCell {
-	
-	UIActivityIndicatorView	*_loadingIndicator;
-	UILabel					*_messageView;
-	
-}
-
-@property (nonatomic, strong) IBOutlet UILabel *messageView;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
+@interface MHLoadingCell : UITableViewCell
 
 -(id)showFinishedMessage;
 -(id)hideFinishedMessage;
