@@ -28,3 +28,6 @@
 [submodule "Libraries/REActivityViewController"]
 	path = Libraries/REActivityViewController
 	url = https://github.com/michaelharro/REActivityViewController.git
+[submodule "Libraries/airbrake-ios"]
+	path = Libraries/airbrake-ios
+	url = https://github.com/michaelharro/airbrake-ios.git

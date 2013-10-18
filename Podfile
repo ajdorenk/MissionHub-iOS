@@ -18,6 +18,8 @@ target :MissionHub do
 	pod 'SDSegmentedControl', '~> 1.0.1'
 	pod 'SIAlertView', '1.2'
 	pod 'TTTAttributedLabel', '~> 1.7.1'
+	pod 'NewRelicAgent', '~> 1.376'
+	pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.1'
 
 	target :tests, :exclusive => true do
 		pod 'Kiwi/XCTest', '2.2.2'
