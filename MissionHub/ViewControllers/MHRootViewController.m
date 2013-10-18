@@ -11,6 +11,9 @@
 
 @interface MHRootViewController ()
 
+@property (nonatomic, assign) BOOL	userInitiatedLogout;
+@property (nonatomic, assign) BOOL	showLoginOnViewDidAppear;
+
 - (void)logout;
 
 @end

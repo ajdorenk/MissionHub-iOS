@@ -27,6 +27,7 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 
 @implementation MHProfileInfoViewController
 
+@synthesize person			= _person;
 @synthesize sectionTitles	= _sectionTitles;
 @synthesize sections		= _sections;
 
@@ -82,7 +83,11 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
     // Dispose of any resources that can be recreated.
 }
 
--(void)setPerson:(MHPerson *)person {
+- (void)setPerson:(MHPerson *)person {
+
+	[self willChangeValueForKey:@"person"];
+	_person = person;
+	[self didChangeValueForKey:@"person"];
 	
 	if (person) {
 		

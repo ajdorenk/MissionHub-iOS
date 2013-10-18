@@ -36,6 +36,8 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 
 @implementation MHProfileHeaderViewController
 
+@synthesize person = _person;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -77,7 +79,11 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
     // Dispose of any resources that can be recreated.
 }
 
--(void)setPerson:(MHPerson *)person {
+- (void)setPerson:(MHPerson *)person {
+	
+	[self willChangeValueForKey:@"person"];
+	_person = person;
+	[self didChangeValueForKey:@"person"];
 	
 	[self setProfileImageWithUrl:person.picture];
 	[self setName:[person fullName]];
@@ -85,7 +91,7 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 	
 }
 
--(void)setProfileImageWithUrl:(NSString *)urlString {
+- (void)setProfileImageWithUrl:(NSString *)urlString {
 	
 	if (urlString == nil) {
 		
@@ -100,7 +106,7 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 	
 }
 
--(void)setName:(NSString *)nameString {
+- (void)setName:(NSString *)nameString {
 	
 	if (nameString != nil) {
 		self.nameLabel.text = nameString;
@@ -108,9 +114,8 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 
 }
 
--(void)setLabelListWithSetOfOrganizationalLabels:(NSSet *)organizationalLabels {
+- (void)setLabelListWithSetOfOrganizationalLabels:(NSSet *)organizationalLabels {
 	
-	//__block NSString *labelsString = @"";
 	__block NSMutableArray *labelArray = [NSMutableArray array];
 	
 	[organizationalLabels enumerateObjectsUsingBlock:^(id setObject, BOOL *stop) {
@@ -121,47 +126,20 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 			MHLabel *labelFromOrganizationalLabel = [[MHAPI sharedInstance].currentUser.currentOrganization.labels findWithRemoteID:organizationalLabel.label_id];
 			
 			if (labelFromOrganizationalLabel != nil) {
-				//labelsString = [labelsString stringByAppendingFormat:@"%@  •  ", labelFromOrganizationalLabel.name];
 				[labelArray addObject:labelFromOrganizationalLabel.name];
 			}
 			
 		}
 		
 	}];
-	/*
-	if ([labelsString length] > 0) {
-		
-		labelsString = [labelsString substringToIndex:[labelsString rangeOfString:@"  •  " options:NSBackwardsSearch].location];
-		
-	} else {
-		
-		labelsString = @"None";
-		
-	}
-	*/
-	
-	 
-	//self.labelsListLabel.text = labelsString;
-	
-	//[self resetLabelListSize];
 	
 	if ([labelArray count] == 0) {
 		
 		[labelArray addObject:@"No Labels for Person"];
 		
 	}
-	/*
-	if (self.labelList != nil) {
-		
-		[self.labelList removeFromSuperview];
-		
-	}
 	
-	self.labelList = [[DWTagList alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.labelsTitleLabel.frame) + 5, CGRectGetWidth(self.view.frame) - 20, CGRectGetHeight(self.view.frame) - CGRectGetMaxY(self.labelsTitleLabel.frame) - 10)];
-	*/
 	[self.labelList setTags:labelArray];
-	
-	//[self.view addSubview:self.labelList];
 	
 }
 

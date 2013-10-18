@@ -11,9 +11,11 @@
 
 @interface MHProfileHeaderViewController : UIViewController <UIScrollViewDelegate, MHProfileProtocol>
 
--(void)setProfileImageWithUrl:(NSString *)urlString;
--(void)setName:(NSString *)nameString;
--(void)setLabelListWithSetOfOrganizationalLabels:(NSSet *)organizationalLabels;
+@property (nonatomic, strong) MHPerson *person;
+
+- (void)setProfileImageWithUrl:(NSString *)urlString;
+- (void)setName:(NSString *)nameString;
+- (void)setLabelListWithSetOfOrganizationalLabels:(NSSet *)organizationalLabels;
 
 -(void)updateLayout;
 

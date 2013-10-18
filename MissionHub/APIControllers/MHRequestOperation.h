@@ -10,16 +10,7 @@
 
 @protocol MHRequestOperationDelegate;
 
-@interface MHRequestOperation : AFJSONRequestOperation {
-	
-	__weak id<MHRequestOperationDelegate>	_delegate;
-	NSString								*_requestName;
-	MHRequestOptions						*_options;
-	id										_jsonObject;
-	void (^_successBlock)(NSArray *results, MHRequestOptions *options);
-	void (^_failBlock)(NSError *error, MHRequestOptions *options);
-	
-}
+@interface MHRequestOperation : AFJSONRequestOperation
 
 @property (nonatomic, weak)		id<MHRequestOperationDelegate> delegate;
 @property (nonatomic, strong)	NSString *requestName;

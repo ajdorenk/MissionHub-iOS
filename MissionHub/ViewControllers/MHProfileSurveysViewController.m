@@ -17,14 +17,16 @@
 
 @interface MHProfileSurveysViewController ()
 
+@property (nonatomic, strong) NSMutableArray *surveyArray;
+
 - (void)configure;
 
 @end
 
 @implementation MHProfileSurveysViewController
 
-@synthesize _person;
-@synthesize _surveyArray;
+@synthesize person			= _person;
+@synthesize surveyArray		= _surveyArray;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
@@ -55,7 +57,7 @@
 
 - (void)configure {
 	
-	self._surveyArray = [NSMutableArray array];
+	self.surveyArray = [NSMutableArray array];
 	
 }
 
@@ -89,12 +91,15 @@
 	
 	if (person) {
 		
-		self._person		= person;
-		self._surveyArray	= [person.answerSheets.allObjects mutableCopy];
+		[self willChangeValueForKey:@"person"];
+		_person				= person;
+		[self didChangeValueForKey:@"person"];
 		
-		if (!self._surveyArray) {
+		self.surveyArray	= [person.answerSheets.allObjects mutableCopy];
+		
+		if (!self.surveyArray) {
 			
-			self._surveyArray = [NSMutableArray array];
+			self.surveyArray = [NSMutableArray array];
 			
 		}
 		
@@ -109,18 +114,18 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [self._surveyArray count];
+    return [self.surveyArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
 	
-	if ([self._surveyArray count] == 0) {
+	if ([self.surveyArray count] == 0) {
 		return 0;
 	}
 	
-	MHAnswerSheet *survey = [self._surveyArray objectAtIndex:section];
+	MHAnswerSheet *survey = [self.surveyArray objectAtIndex:section];
     return 1 + [survey.answers count];
 }
 
@@ -146,7 +151,7 @@
 		
 	} else {
 		
-		MHAnswerSheet *survey	= [self._surveyArray objectAtIndex:indexPath.section];
+		MHAnswerSheet *survey	= [self.surveyArray objectAtIndex:indexPath.section];
 		MHAnswer *answer		= [survey.answers.allObjects objectAtIndex:indexPath.row - 1];
 		return [MHAnswerCell heightForCellWithAnswer:answer andWidth:CGRectGetWidth(self.tableView.frame)];
 		
@@ -170,7 +175,7 @@
 		}
 		
 		// Configure the cell...
-		MHAnswerSheet *answerSheet	= [self._surveyArray objectAtIndex:indexPath.section];
+		MHAnswerSheet *answerSheet	= [self.surveyArray objectAtIndex:indexPath.section];
 		MHSurvey *survey = [[MHAPI sharedInstance].currentOrganization.surveys findWithRemoteID:answerSheet.survey_id];
 		[cell configureCellWithTitle:survey.title andDate:answerSheet.updatedAtString forTableview:tableView];
 		
@@ -186,7 +191,7 @@
 		}
 		
 		// Configure the cell...
-		MHAnswerSheet *survey	= [self._surveyArray objectAtIndex:indexPath.section];
+		MHAnswerSheet *survey	= [self.surveyArray objectAtIndex:indexPath.section];
 		MHAnswer *answer		= [survey.answers.allObjects objectAtIndex:indexPath.row - 1];
 		cell.answer				= answer;
 		

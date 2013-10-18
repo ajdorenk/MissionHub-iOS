@@ -14,13 +14,17 @@
 
 @property (nonatomic, assign) BOOL isVisible;
 @property (nonatomic, strong) MHSurvey *survey;
-@property (nonatomic, strong) IBOutlet UIToolbar *topToolbar;
 @property (nonatomic, strong) UILabel *toolbarTitle;
-@property (nonatomic, strong) IBOutlet UIView *messageView;
-@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, assign) NSInteger numberOfAssetsLoading;
 @property (nonatomic, assign) NSInteger numberOfFailedAssests;
+//@property (nonatomic, weak) IBOutlet UIBarButtonItem *backMenu;
+@property (nonatomic, weak) IBOutlet UIWebView *surveyWebView;
+@property (nonatomic, weak) IBOutlet UIView *messageView;
+@property (nonatomic, weak) IBOutlet UILabel *messageLabel;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *loadingIndicator;
+@property (nonatomic, weak) IBOutlet UIToolbar *topToolbar;
+
+- (IBAction)revealMenu:(id)sender;
 
 - (void)updateLayout;
 

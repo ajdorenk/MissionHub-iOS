@@ -8,17 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MHStorage : NSObject {
-	
-	NSManagedObjectContext			*_managedObjectContext;
-	NSManagedObjectModel			*_managedObjectModel;
-	NSPersistentStoreCoordinator	*_persistentStoreCoordinator;
-	
-}
+@interface MHStorage : NSObject
 
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (MHStorage *)sharedInstance;
 - (void)saveContext;

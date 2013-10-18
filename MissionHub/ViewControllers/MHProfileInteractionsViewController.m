@@ -14,12 +14,14 @@
 
 @interface MHProfileInteractionsViewController ()
 
+@property (nonatomic, strong) NSMutableArray *interactionArray;
+
 @end
 
 @implementation MHProfileInteractionsViewController
 
-@synthesize _person;
-@synthesize _interactionArray;
+@synthesize person				= _person;
+@synthesize interactionArray	= _interactionArray;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
@@ -40,7 +42,7 @@
 	
 	[super awakeFromNib];
 	
-	self._interactionArray = [NSMutableArray array];
+	self.interactionArray = [NSMutableArray array];
 	
 }
 
@@ -72,17 +74,20 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)setPerson:(MHPerson *)person {
+- (void)setPerson:(MHPerson *)person {
+	
+	[self willChangeValueForKey:@"person"];
+	_person = person;
+	[self didChangeValueForKey:@"person"];
 	
 	if (person) {
 		
-		self._person = person;
-		[self._interactionArray removeAllObjects];
-		[self._interactionArray addObjectsFromArray:[self._person.initiatedInteractions allObjects]];
-		[self._interactionArray addObjectsFromArray:[self._person.receivedInteractions allObjects]];
-		[self._interactionArray addObjectsFromArray:[self._person.updatedInteractions allObjects]];
-		[self._interactionArray addObjectsFromArray:[self._person.createdInteractions allObjects]];
-		[self._interactionArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
+		[self.interactionArray removeAllObjects];
+		[self.interactionArray addObjectsFromArray:[_person.initiatedInteractions allObjects]];
+		[self.interactionArray addObjectsFromArray:[_person.receivedInteractions allObjects]];
+		[self.interactionArray addObjectsFromArray:[_person.updatedInteractions allObjects]];
+		[self.interactionArray addObjectsFromArray:[_person.createdInteractions allObjects]];
+		[self.interactionArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
 		
 		[self.tableView reloadData];
 		
@@ -90,7 +95,7 @@
 	
 }
 
--(void)setInteractionArray:(NSMutableArray *)interactionArray {
+- (void)setInteractionArray:(NSMutableArray *)interactionArray {
 	
 	if (interactionArray) {
 		
@@ -115,7 +120,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2 * [self._interactionArray count];
+    return 2 * [self.interactionArray count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,15 +146,14 @@
 	} else {
 	
 		NSInteger interactionRow	= floor(indexPath.row / 2);
-		MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
+		MHInteraction *interaction = (MHInteraction *)([self.interactionArray objectAtIndex:interactionRow]);
 		return [MHInteractionCell heightForCellWithInteraction:interaction andWidth:CGRectGetWidth(self.tableView.frame)];
 		
 	}
 	
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	static NSString *headerCellIdentifier		= @"MHHeaderCell";
 	static NSString *interactionCellIdentifier	= @"MHInteractionsCell";
@@ -165,7 +169,7 @@
 		
 		// Configure the cell...
 		NSInteger interactionRow	= floor(indexPath.row / 2);
-		MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
+		MHInteraction *interaction = (MHInteraction *)([self.interactionArray objectAtIndex:interactionRow]);
 		[cell configureCellWithTitle:interaction.title andDate:interaction.timestampString forTableview:tableView];
 		
 		return cell;
@@ -181,23 +185,12 @@
 		
 		// Configure the cell...
 		NSInteger interactionRow	= floor(indexPath.row / 2);
-		MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
+		MHInteraction *interaction = (MHInteraction *)([self.interactionArray objectAtIndex:interactionRow]);
 		cell.interaction = interaction;
 		
 		return cell;
 			
 	}
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger interactionRow	= floor(indexPath.row / 2);
-	MHInteraction *interaction = (MHInteraction *)([self._interactionArray objectAtIndex:interactionRow]);
-	
-	NSLog(@"%@", [interaction jsonObject]);
-	
 }
 
 @end

@@ -15,7 +15,7 @@
 @synthesize requestName			= _requestName;
 @synthesize options				= _options;
 @synthesize jsonObject			= _jsonObject;
-@synthesize responseStatusCode;
+@synthesize responseStatusCode	= _responseStatusCode;
 @synthesize successBlock		= _successBlock;
 @synthesize failBlock			= _failBlock;
 

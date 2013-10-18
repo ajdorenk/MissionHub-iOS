@@ -12,7 +12,6 @@
 
 @interface MHProfileInteractionsViewController : UITableViewController <MHProfileProtocol>
 
-@property (nonatomic, strong) MHPerson *_person;
-@property (nonatomic, strong) NSMutableArray *_interactionArray;
+@property (nonatomic, strong) MHPerson *person;
 
 @end

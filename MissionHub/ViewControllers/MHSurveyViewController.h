@@ -14,10 +14,6 @@
 
 @interface MHSurveyViewController : UIViewController <UIWebViewDelegate>
 
-//@property (nonatomic, strong) IBOutlet UIBarButtonItem *backMenu;
-@property (nonatomic, strong) IBOutlet UIWebView *surveyWebView;
-
-- (IBAction)revealMenu:(id)sender;
--(id)displaySurvey:(MHSurvey *)surveyToDisplay;
+- (id)displaySurvey:(MHSurvey *)surveyToDisplay;
 
 @end
