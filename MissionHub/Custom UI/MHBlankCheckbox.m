@@ -10,6 +10,8 @@
 
 @interface MHBlankCheckbox ()
 
+@property (nonatomic, strong) UIImageView *checkmarkImageView;
+
 - (void)configure;
 - (void)checkBoxClicked;
 
@@ -40,10 +42,14 @@
 
 - (void)configure {
 	
-	self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//	self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//	
+//	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateHighlighted];
+//	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateHighlighted];
 	
-	[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateHighlighted];
-	[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateHighlighted];
+	self.checkmarkImageView			= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]];
+	self.checkmarkImageView.frame	= self.bounds;
+	[self addSubview:self.checkmarkImageView];
 	
 	self.state			= MHBlankCheckboxStateNone;
 	
@@ -63,31 +69,37 @@
 		
 		case MHBlankCheckboxStateAll:
 			
-			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateNormal];
-			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"];
 			
-			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateNormal];
-			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
+//			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"] forState:UIControlStateNormal];
+//			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"] forState:UIControlStateSelected];
+			
+//			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateNormal];
+//			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark.png"]forState:UIControlStateSelected];
 			
 			break;
 			
 		case MHBlankCheckboxStateSome:
 			
-			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateNormal];
-			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateSelected];
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"];
 			
-			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateNormal];
-			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateSelected];
+//			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"] forState:UIControlStateNormal];
+//			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"] forState:UIControlStateSelected];
+			
+//			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateNormal];
+//			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png"]forState:UIControlStateSelected];
 			
 			break;
 			
 		case MHBlankCheckboxStateNone:
 			
-			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
-			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateSelected];
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"];
 			
-			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
-			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateSelected];
+//			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"] forState:UIControlStateNormal];
+//			[self setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"] forState:UIControlStateSelected];
+			
+//			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateNormal];
+//			[self setImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_No_Box_No_Checkmark.png"]forState:UIControlStateSelected];
 			
 			break;
 			
@@ -96,7 +108,7 @@
 			
 	}
 	
-	self.selected = ( self.selected ? NO : YES );
+	//self.selected = ( self.selected ? NO : YES );
 	
 }
 

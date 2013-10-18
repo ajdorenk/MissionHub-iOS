@@ -78,6 +78,10 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	[super prepareWithActivityItems:activityItems];
 	
 	[self.people removeAllObjects];
+	[self.labelStates removeAllObjects];
+	[self.labelsWithAllState removeAllObjects];
+	[self.labelsWithSomeState removeAllObjects];
+	[self.labelsWithNoneState removeAllObjects];
 	
 	__weak __typeof(&*self)weakSelf = self;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
@@ -179,7 +183,14 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	permissionLevelList.showSuggestions		= NO;
 	permissionLevelList.showApplyButton		= YES;
 	permissionLevelList.listTitle			= @"Label(s)";
-	[permissionLevelList setDataArray:[[MHAPI sharedInstance].currentOrganization.labels allObjects]];
+	NSArray *sortedLabelArray				= [MHAPI sharedInstance].currentOrganization.labels.allObjects;
+	sortedLabelArray						= [sortedLabelArray sortedArrayUsingDescriptors:@[
+																							  [NSSortDescriptor sortDescriptorWithKey:@"name"
+																															ascending:YES
+																															 selector:@selector(caseInsensitiveCompare:)]
+																							  ]
+											   ];
+	[permissionLevelList setDataArray:sortedLabelArray];
 	[permissionLevelList setObjectsWithStateAllState:self.labelsWithAllState someState:self.labelsWithSomeState];
 	
 	[self.activityViewController.presentingController presentViewController:permissionLevelList animated:YES completion:nil];
