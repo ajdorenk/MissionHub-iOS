@@ -93,6 +93,7 @@ typedef enum {
 		_organizationViewController.showHeaders			= NO;
 		_organizationViewController.listTitle			= @"Organization(s)";
 		[_organizationViewController setDataArray:[MHAPI sharedInstance].currentUser.allOrganizations.allObjects];
+		[_organizationViewController setSuggestions:nil andSelectionObject:self.currentOrganization];
 		
 	}
 	
@@ -102,7 +103,8 @@ typedef enum {
 
 -(void)changeOrganization {
 	
-	[_organizationViewController setDataArray:[MHAPI sharedInstance].currentUser.allOrganizations.allObjects];
+	[self.organizationViewController setDataArray:[MHAPI sharedInstance].currentUser.allOrganizations.allObjects];
+	[self.organizationViewController setSuggestions:nil andSelectionObject:self.currentOrganization];
 	[self presentViewController:self.organizationViewController animated:YES completion:nil];
 	
 }
