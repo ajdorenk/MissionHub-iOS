@@ -113,7 +113,7 @@
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(personRemoved:)
-													 name:MHProfileViewControllerNotificationPersonArchived
+													 name:MHProfileViewControllerNotificationPersonDeleted
 												   object:nil];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
