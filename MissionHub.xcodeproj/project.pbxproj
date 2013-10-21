@@ -20,8 +20,6 @@
 		680BE7B917E49FEB00BA8C12 /* MH_Mobile_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7B817E49FEA00BA8C12 /* MH_Mobile_Logo@2x.png */; };
 		680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */; };
 		680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FC1782403600E6E742 /* MHPerson+Helper.m */; };
-		681225711767B75500D8C238 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6812256F1767B75500D8C238 /* AdSupport.framework */; };
-		681225721767B75500D8C238 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 681225701767B75500D8C238 /* libsqlite3.dylib */; };
 		6812257917681ADD00D8C238 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812257617681ADD00D8C238 /* config.plist */; };
 		6812258617681CD200D8C238 /* config_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258317681CD200D8C238 /* config_dev.plist */; };
 		6812258817681CD200D8C238 /* config_lwi.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258417681CD200D8C238 /* config_lwi.plist */; };
@@ -86,7 +84,6 @@
 		68478D9A177E8B140014501D /* MHGenericListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D95177E8B140014501D /* MHGenericListViewController.m */; };
 		68478DAE177E8C9F0014501D /* MHPeopleSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478DAD177E8C9F0014501D /* MHPeopleSearchBar.m */; };
 		68478DC9177E8CDC0014501D /* MH_Mobile_Topbar_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB8177E8CDC0014501D /* MH_Mobile_Topbar_Background.png */; };
-		684BB42017F32AAD00DFF97E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684BB41F17F32AAD00DFF97E /* Social.framework */; };
 		6851291B17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */; };
 		6851291D17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */; };
 		6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDC17948EC900769B71 /* MHAddress+Helper.m */; };
@@ -147,10 +144,6 @@
 		68B7DDAF17A318D600849F31 /* MHOrganizationalPermission+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */; };
 		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A71770EFBE007C79D6 /* MHStorage.m */; };
-		68C0695F17710BF1007C79D6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695B17710BF1007C79D6 /* CFNetwork.framework */; };
-		68C0696017710BF1007C79D6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695C17710BF1007C79D6 /* libz.dylib */; };
-		68C0696117710BF1007C79D6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695D17710BF1007C79D6 /* MobileCoreServices.framework */; };
-		68C0696217710BF1007C79D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695E17710BF1007C79D6 /* SystemConfiguration.framework */; };
 		68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequestOperation.m */; };
 		68C069691772252C007C79D6 /* MHRequestOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C069681772252C007C79D6 /* MHRequestOptions.m */; };
 		68C82E21180314FA00A8D5A0 /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D88177E8AE20014501D /* MHOrganization.m */; };
@@ -186,20 +179,10 @@
 		68C82E61180314FB00A8D5A0 /* MHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */; };
 		68C82E63180314FB00A8D5A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68C82E64180314FB00A8D5A0 /* MissionHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 683910A01760FD3100E01B46 /* MissionHub.xcdatamodeld */; };
-		68C82E65180315A500A8D5A0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684BB41F17F32AAD00DFF97E /* Social.framework */; };
 		68C82E66180315B100A8D5A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108A1760FD3100E01B46 /* CoreGraphics.framework */; };
-		68C82E67180315B900A8D5A0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EC3A6117CE6D0400EE3717 /* CoreText.framework */; };
 		68C82E68180315C300A8D5A0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681C65B317D19F550021D2EE /* MessageUI.framework */; };
-		68C82E69180315CA00A8D5A0 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6812256F1767B75500D8C238 /* AdSupport.framework */; };
-		68C82E6A180315D200A8D5A0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */; };
-		68C82E6B1803189300A8D5A0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA481766CE4100B9B0B1 /* Security.framework */; };
 		68C82E6C180318A600A8D5A0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6839108C1760FD3100E01B46 /* CoreData.framework */; };
-		68C82E6D180318B500A8D5A0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 681225701767B75500D8C238 /* libsqlite3.dylib */; };
 		68C82E6E180318C100A8D5A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9827A4177CF04200A0276A /* QuartzCore.framework */; };
-		68C82E6F180318D500A8D5A0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695B17710BF1007C79D6 /* CFNetwork.framework */; };
-		68C82E70180318E500A8D5A0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695C17710BF1007C79D6 /* libz.dylib */; };
-		68C82E71180318F200A8D5A0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695D17710BF1007C79D6 /* MobileCoreServices.framework */; };
-		68C82E721803190100A8D5A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C0695E17710BF1007C79D6 /* SystemConfiguration.framework */; };
 		68C82E741803197F00A8D5A0 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68C82E761803197F00A8D5A0 /* NSSet+MHSearchForRemoteID.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D5D177BA8DF0014501D /* NSSet+MHSearchForRemoteID.m */; };
 		68C82E781803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896649E17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m */; };
@@ -209,12 +192,9 @@
 		68C82E801803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */; };
 		68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
 		68D7AA441766C98000B9B0B1 /* MHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */; };
-		68D7AA491766CE4100B9B0B1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA481766CE4100B9B0B1 /* Security.framework */; };
-		68D7AA4B1766CEF200B9B0B1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */; };
 		68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */; };
 		68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
 		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
-		68EC3A6217CE6D0400EE3717 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EC3A6117CE6D0400EE3717 /* CoreText.framework */; };
 		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
 		AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */; };
@@ -264,8 +244,6 @@
 		680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganization+Helper.m"; path = "Models/MHOrganization+Helper.m"; sourceTree = "<group>"; };
 		680CD8FB1782403600E6E742 /* MHPerson+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHPerson+Helper.h"; path = "Models/MHPerson+Helper.h"; sourceTree = "<group>"; };
 		680CD8FC1782403600E6E742 /* MHPerson+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHPerson+Helper.m"; path = "Models/MHPerson+Helper.m"; sourceTree = "<group>"; };
-		6812256F1767B75500D8C238 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		681225701767B75500D8C238 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6812257617681ADD00D8C238 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		6812258317681CD200D8C238 /* config_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_dev.plist; sourceTree = "<group>"; };
 		6812258417681CD200D8C238 /* config_lwi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_lwi.plist; sourceTree = "<group>"; };
@@ -373,7 +351,6 @@
 		68478DAC177E8C9F0014501D /* MHPeopleSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHPeopleSearchBar.h; path = "Custom UI/MHPeopleSearchBar.h"; sourceTree = "<group>"; };
 		68478DAD177E8C9F0014501D /* MHPeopleSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHPeopleSearchBar.m; path = "Custom UI/MHPeopleSearchBar.m"; sourceTree = "<group>"; };
 		68478DB8177E8CDC0014501D /* MH_Mobile_Topbar_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Topbar_Background.png; sourceTree = "<group>"; };
-		684BB41F17F32AAD00DFF97E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Refresh_Pressed_86.png; sourceTree = "<group>"; };
 		6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Refresh_86.png; sourceTree = "<group>"; };
 		6855EDDB17948EC900769B71 /* MHAddress+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHAddress+Helper.h"; path = "Models/MHAddress+Helper.h"; sourceTree = "<group>"; };
@@ -453,10 +430,6 @@
 		68C0689A176EB832007C79D6 /* MHModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHModel.m; path = Models/MHModel.m; sourceTree = "<group>"; };
 		68C068A61770EFBE007C79D6 /* MHStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHStorage.h; path = Models/MHStorage.h; sourceTree = "<group>"; };
 		68C068A71770EFBE007C79D6 /* MHStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHStorage.m; path = Models/MHStorage.m; sourceTree = "<group>"; };
-		68C0695B17710BF1007C79D6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		68C0695C17710BF1007C79D6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		68C0695D17710BF1007C79D6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		68C0695E17710BF1007C79D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		68C0696317710E60007C79D6 /* MHRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHRequestOperation.h; path = APIControllers/MHRequestOperation.h; sourceTree = "<group>"; };
 		68C0696417710E60007C79D6 /* MHRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRequestOperation.m; path = APIControllers/MHRequestOperation.m; sourceTree = "<group>"; };
 		68C069671772252C007C79D6 /* MHRequestOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHRequestOptions.h; path = APIControllers/MHRequestOptions.h; sourceTree = "<group>"; };
@@ -473,15 +446,12 @@
 		68D7AA3D1766783200B9B0B1 /* MHAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAPI.m; path = APIControllers/MHAPI.m; sourceTree = "<group>"; };
 		68D7AA421766C98000B9B0B1 /* MHLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLoginViewController.h; path = APIControllers/MHLoginViewController.h; sourceTree = "<group>"; };
 		68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHLoginViewController.m; path = APIControllers/MHLoginViewController.m; sourceTree = "<group>"; };
-		68D7AA481766CE4100B9B0B1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		68D7B8C5177F804300A2E231 /* MHOrganizationalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHOrganizationalLabel.h; path = Models/MHOrganizationalLabel.h; sourceTree = "<group>"; };
 		68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalLabel.m; path = Models/MHOrganizationalLabel.m; sourceTree = "<group>"; };
 		68EB33CB17792D8F003958A0 /* MHErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHErrorHandler.h; path = APIControllers/MHErrorHandler.h; sourceTree = "<group>"; };
 		68EB33CC17792D8F003958A0 /* MHErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHErrorHandler.m; path = APIControllers/MHErrorHandler.m; sourceTree = "<group>"; };
 		68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteractionType+Helper.h"; path = "Models/MHInteractionType+Helper.h"; sourceTree = "<group>"; };
 		68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteractionType+Helper.m"; path = "Models/MHInteractionType+Helper.m"; sourceTree = "<group>"; };
-		68EC3A6117CE6D0400EE3717 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		68F4CC4717D10846004D6574 /* MHAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerCell.m; path = "Custom UI/MHAnswerCell.m"; sourceTree = "<group>"; };
 		68F4CC4817D10846004D6574 /* MHAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswerCell.h; path = "Custom UI/MHAnswerCell.h"; sourceTree = "<group>"; };
 		7555945037E547529374192F /* libPods-MissionHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MissionHub.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -517,19 +487,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				684BB42017F32AAD00DFF97E /* Social.framework in Frameworks */,
 				681C65B417D19F550021D2EE /* MessageUI.framework in Frameworks */,
-				68EC3A6217CE6D0400EE3717 /* CoreText.framework in Frameworks */,
-				68C0695F17710BF1007C79D6 /* CFNetwork.framework in Frameworks */,
-				68C0696017710BF1007C79D6 /* libz.dylib in Frameworks */,
-				68C0696117710BF1007C79D6 /* MobileCoreServices.framework in Frameworks */,
-				68C0696217710BF1007C79D6 /* SystemConfiguration.framework in Frameworks */,
 				6839108B1760FD3100E01B46 /* CoreGraphics.framework in Frameworks */,
 				AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */,
-				681225711767B75500D8C238 /* AdSupport.framework in Frameworks */,
-				681225721767B75500D8C238 /* libsqlite3.dylib in Frameworks */,
-				68D7AA4B1766CEF200B9B0B1 /* Accounts.framework in Frameworks */,
-				68D7AA491766CE4100B9B0B1 /* Security.framework in Frameworks */,
 				683910871760FD3100E01B46 /* UIKit.framework in Frameworks */,
 				683910891760FD3100E01B46 /* Foundation.framework in Frameworks */,
 				6839108D1760FD3100E01B46 /* CoreData.framework in Frameworks */,
@@ -541,20 +501,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68C82E721803190100A8D5A0 /* SystemConfiguration.framework in Frameworks */,
-				68C82E71180318F200A8D5A0 /* MobileCoreServices.framework in Frameworks */,
-				68C82E70180318E500A8D5A0 /* libz.dylib in Frameworks */,
-				68C82E6F180318D500A8D5A0 /* CFNetwork.framework in Frameworks */,
 				68C82E6E180318C100A8D5A0 /* QuartzCore.framework in Frameworks */,
-				68C82E6D180318B500A8D5A0 /* libsqlite3.dylib in Frameworks */,
 				68C82E6C180318A600A8D5A0 /* CoreData.framework in Frameworks */,
-				68C82E6B1803189300A8D5A0 /* Security.framework in Frameworks */,
-				68C82E6A180315D200A8D5A0 /* Accounts.framework in Frameworks */,
-				68C82E69180315CA00A8D5A0 /* AdSupport.framework in Frameworks */,
 				68C82E68180315C300A8D5A0 /* MessageUI.framework in Frameworks */,
-				68C82E67180315B900A8D5A0 /* CoreText.framework in Frameworks */,
 				68C82E66180315B100A8D5A0 /* CoreGraphics.framework in Frameworks */,
-				68C82E65180315A500A8D5A0 /* Social.framework in Frameworks */,
 				6867917117FF4EC6000106BF /* XCTest.framework in Frameworks */,
 				6867917317FF4EC6000106BF /* UIKit.framework in Frameworks */,
 				6867917217FF4EC6000106BF /* Foundation.framework in Frameworks */,
@@ -649,22 +599,12 @@
 		683910851760FD3100E01B46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				684BB41F17F32AAD00DFF97E /* Social.framework */,
 				681C65B317D19F550021D2EE /* MessageUI.framework */,
-				68EC3A6117CE6D0400EE3717 /* CoreText.framework */,
-				6812256F1767B75500D8C238 /* AdSupport.framework */,
-				68D7AA4A1766CEF200B9B0B1 /* Accounts.framework */,
-				68D7AA481766CE4100B9B0B1 /* Security.framework */,
 				683910861760FD3100E01B46 /* UIKit.framework */,
 				683910881760FD3100E01B46 /* Foundation.framework */,
 				6839108A1760FD3100E01B46 /* CoreGraphics.framework */,
 				6839108C1760FD3100E01B46 /* CoreData.framework */,
-				681225701767B75500D8C238 /* libsqlite3.dylib */,
 				AD9827A4177CF04200A0276A /* QuartzCore.framework */,
-				68C0695B17710BF1007C79D6 /* CFNetwork.framework */,
-				68C0695C17710BF1007C79D6 /* libz.dylib */,
-				68C0695D17710BF1007C79D6 /* MobileCoreServices.framework */,
-				68C0695E17710BF1007C79D6 /* SystemConfiguration.framework */,
 				683910A91760FD3100E01B46 /* SenTestingKit.framework */,
 				6867917017FF4EC6000106BF /* XCTest.framework */,
 				7555945037E547529374192F /* libPods-MissionHub.a */,
@@ -1437,7 +1377,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F17F75BF-195B-4C23-BA43-929A0E694931";
@@ -1457,7 +1397,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7D1F43DC-D292-4295-9218-E4B7D6145933";
@@ -1503,7 +1443,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "205ED601-49EB-4F03-8A14-7342D07FEE93";
@@ -1536,7 +1476,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "tests/tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1565,7 +1505,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "tests/tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1595,7 +1535,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "tests/tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
 				TEST_HOST = "$(BUNDLE_LOADER)";
