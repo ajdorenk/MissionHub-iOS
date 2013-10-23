@@ -221,7 +221,7 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	[self.createInteractionViewController updateWithInteraction:interaction andSelections:selectedPeople];
 	self.createInteractionViewController.currentPopoverController = self.createInteractionPopoverController;
 	
-	[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 	
 }
 
@@ -467,7 +467,6 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	} else {
 		
 		CGRect rect		= ((UIView *)sender).frame;
-		rect.origin.y	= 0;
 		
 		[self presentCreateInteractionViewControllerInPopoverFromRect:rect withInteraction:newInteraction andSelectedPeople:selectionArray];
 		

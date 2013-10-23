@@ -57,7 +57,7 @@
     
     UIImage *navBackground =[[UIImage imageNamed:@"MH_Mobile_Topbar_Background.png"]
                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    [[UINavigationBar appearance] setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
     self.navigationBar.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.navigationBar.layer.shadowOffset = CGSizeMake(0.0,2);
     self.navigationBar.layer.shadowOpacity = 0.05;

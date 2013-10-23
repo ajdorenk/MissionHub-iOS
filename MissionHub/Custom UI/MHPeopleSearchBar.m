@@ -7,6 +7,7 @@
 //
 
 #import "MHPeopleSearchBar.h"
+#import "MHToolbar.h"
 
 @interface MHPeopleSearchBar ()
 
@@ -35,6 +36,11 @@
     
 	if (self.searchTextField) {
 		
+		self.layer.shadowOpacity = 0.3f;
+		self.layer.shadowRadius = 2.0f;
+		self.layer.shadowColor = [UIColor blackColor].CGColor;
+		self.placeholder = @"Search";
+		
 		CGRect frame = self.searchTextField.frame;
 		frame.origin.x = 0;
 		frame.origin.y = 0;
@@ -43,13 +49,13 @@
 		self.searchTextField.frame	= frame;
 		self.searchTextField.font	= [UIFont fontWithName:@"Helvetica" size:20];
 		
-		UIImage *image					= [UIImage imageNamed:@"searchbar_image.png"];
+		UIImage *image					= [UIImage imageNamed:@"MH_Mobile_Searchbar_Image.png"];
         UIImageView *view				= [[UIImageView alloc] initWithImage:image];
         self.searchTextField.leftView	= view;
 		
 	}
     
-	self.backgroundImage		= [UIImage imageNamed:@"Searchbar_background.png"];
+	self.backgroundImage		= [UIImage imageNamed:@"MH_Mobile_Searchbar_Background.png"];
 	
 }
 

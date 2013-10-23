@@ -155,6 +155,12 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	[super viewWillAppear:animated];
 	
+	if (self.currentPopoverController && !(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)) {
+		
+		self.navigationController.navigationBar.backgroundColor	= [UIColor whiteColor];
+		
+	}
+	
 	[self updateBarButtons];
 	[self updateLayout];
 	
@@ -224,11 +230,9 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
     [self updateBarButtons];
     
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
-    
-    
-	//TODO:The initiator button label needs to be preset to the current user's name and the receiver needs to be preset if the interaction button is pressed from a profile, (as opposed to being pressed from the contact list).
 	
-    UIImage *whiteButton = [UIImage imageNamed:@"Searchbar_background.png"];
+    UIImage *whiteButton = [[UIImage imageNamed:@"MH_Mobile_Topbar_Background.png"]
+							resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];;
     
     [self.initiator setTintColor:[UIColor clearColor]];
     [self.initiator.titleLabel setFont:[UIFont fontWithName:@"Arial-ItalicMT" size:14.0]];
@@ -292,6 +296,12 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 #pragma mark - accessor methods/model methods
 
 -(void)updateWithInteraction:(MHInteraction *)interaction andSelections:(NSArray *)selections {
+	
+	if (self.navigationController.viewControllers.count > 1) {
+		
+		[self.navigationController popToRootViewControllerAnimated:NO];
+		
+	}
 	
 	self.interaction = interaction;
 	[self setSelections:selections];
@@ -454,25 +464,56 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 }
 
--(void)replaceBarButtons {
+- (void)replaceBarButtons {
 	
-	//replace the left button
-	if (self.currentPopoverController) {
+	if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
 		
-		self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		//replace the left button
+		if (self.currentPopoverController) {
+			
+			self.navigationItem.leftBarButtonItem		= [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(backToMenu:)];
+			
+			//create all the other buttons for later use
+			self.saveButton								= [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveInteraction)];
+			self.doneWithInteractionTypeButton			= [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneWithInteractionType:)];
+			self.doneWithVisibilityButton				= [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneWithVisibility:)];
+			self.doneWithDateButton						= [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneWithDate:)];
+			self.doneWithCommentButton					= [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(doneWithComment:)];
+			
+		} else {
+			
+			self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		
+			//create all the other buttons for later use
+			self.saveButton = [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(saveInteraction) forBar:self.navigationController.navigationBar];
+			self.doneWithInteractionTypeButton			= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithInteractionType:) forBar:self.navigationController.navigationBar];
+			self.doneWithVisibilityButton				= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithVisibility:) forBar:self.navigationController.navigationBar];
+			self.doneWithDateButton						= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithDate:) forBar:self.navigationController.navigationBar];
+			self.doneWithCommentButton					= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithComment:) forBar:self.navigationController.navigationBar];
+			
+		}
 		
 	} else {
+	
+		//replace the left button
+		if (self.currentPopoverController) {
+			
+			self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+			
+		} else {
+			
+			self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+			
+		}
 		
-		self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		//create all the other buttons for later use
+		self.saveButton = [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(saveInteraction) forBar:self.navigationController.navigationBar];
+		self.doneWithInteractionTypeButton			= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithInteractionType:) forBar:self.navigationController.navigationBar];
+		self.doneWithVisibilityButton				= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithVisibility:) forBar:self.navigationController.navigationBar];
+		self.doneWithDateButton						= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithDate:) forBar:self.navigationController.navigationBar];
+		self.doneWithCommentButton					= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithComment:) forBar:self.navigationController.navigationBar];
 		
 	}
-	
-	//create all the other buttons for later use
-    self.saveButton = [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(saveInteraction) forBar:self.navigationController.navigationBar];
-	self.doneWithInteractionTypeButton			= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithInteractionType:) forBar:self.navigationController.navigationBar];
-	self.doneWithVisibilityButton				= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithVisibility:) forBar:self.navigationController.navigationBar];
-	self.doneWithDateButton						= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithDate:) forBar:self.navigationController.navigationBar];
-	self.doneWithCommentButton					= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(doneWithComment:) forBar:self.navigationController.navigationBar];
 	
 }
 
@@ -1010,8 +1051,6 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 }
 
-//TODO:When the comment box moves up for the iPad, it actually moves to far up so that the top is not visible and it's not sized properly so it's also too short. I think this should be easy to fix if you just change the height differently based on whether it's an iPad or iPhone.
-
 -(void)doneWithInteractionType:(id)sender {
 	
 	__block UIView *pickerView			= [self interactionTypePicker];
@@ -1178,6 +1217,14 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	[self updateBarButtons];
 	[self updateLayout];
+	
+}
+
+#pragma mark - popover methods
+
+- (CGSize)contentSizeForViewInPopover {
+	
+	return CGSizeMake(320.0, 568);
 	
 }
 

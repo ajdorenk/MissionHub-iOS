@@ -241,7 +241,7 @@
 	self.createPersonViewController.person						= person;
 	self.createPersonViewController.currentPopoverController	= self.createPersonPopoverController;
 	
-	[self.createPersonPopoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	[self.createPersonPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 	 
 }
 
@@ -250,7 +250,7 @@
 	[self.createInteractionViewController updateWithInteraction:interaction andSelections:selectedPeople];
 	self.createInteractionViewController.currentPopoverController = self.createInteractionPopoverController;
 	
-	[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 	
 }
 
@@ -285,30 +285,16 @@
 	self.view.layer.shadowOpacity = 0.75f;
 	self.view.layer.shadowRadius = 10.0f;
 	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
-
     
-    self.peopleSearchBar.layer.shadowOpacity = 0.3f;
-    self.peopleSearchBar.layer.shadowRadius = 2.0f;
-    self.peopleSearchBar.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.peopleSearchBar.placeholder = @"Search";
-    //UITextField *text = [[self.peopleSearchBar subviews] objectAtIndex:1];
-    //[text setFont:[UIFont fontWithName:@"Helvetica" size:20]];
+	if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+		
+		[self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Topbar_Background.png"] forState:UIControlStateNormal];
+		
+	}
     
-    [self.peopleSearchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"Searchbar_background.png"] forState:UIControlStateNormal];
 	[self.activityViewController setModalInPopover:NO];
 	
 	[self updateBarButtons];
-	
-//TODO:The search bar cancel button is NOT currently customized. Not absolutely necessary but it would look nice for it to have a red or grey background instead of the blue, though I do not know how to implement that
-	
-    /*id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
-    
-    [barButtonAppearanceInSearchBar setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_Button_Save_72.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-   [barButtonAppearanceInSearchBar setTitleTextAttributes:@{
-                                      UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20],
-                                 UITextAttributeTextColor : [UIColor blackColor]
-     } forState:UIControlStateNormal];
-    [barButtonAppearanceInSearchBar setTitle:@""];*/
 	
 	if (self.selectedPeople.count > 0) {
 		
@@ -589,7 +575,6 @@
 	} else {
 		
 		CGRect rect		= ((UIView *)sender).frame;
-		rect.origin.y	= 0;
 		
 		[self presentCreatePersonViewControllerInPopoverFromRect:rect withPersonObject:newPerson];
 		
@@ -611,7 +596,6 @@
 	} else {
 		
 		CGRect rect		= ((UIView *)sender).frame;
-		rect.origin.y	= 0;
 		
 		[self presentCreateInteractionViewControllerInPopoverFromRect:rect withInteraction:newInteraction andSelectedPeople:self.selectedPeople];
 		

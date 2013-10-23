@@ -135,6 +135,12 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 	
 	[super viewWillAppear:animated];
 	
+	if (self.currentPopoverController && !(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)) {
+		
+		self.navigationController.navigationBar.backgroundColor	= [UIColor whiteColor];
+		
+	}
+	
 	[self updateBarButtons];
 	[self updateLayout];
 	
@@ -376,21 +382,46 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 
 - (void)replaceBarButtons {
 	
-	//replace the left button
-	if (self.currentPopoverController) {
+	if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
 		
-		self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		//replace the left button
+		if (self.currentPopoverController) {
+			
+			self.navigationItem.leftBarButtonItem	= [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(backToMenu:)];
+			
+			//create all the other buttons for later use
+			self.saveButton							= [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(savePerson:)];
+			self.doneButton							= [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(done:)];
+			
+		} else {
+			
+			self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+			
+			//create all the other buttons for later use
+			self.saveButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(savePerson:) forBar:self.navigationController.navigationBar];
+			self.doneButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(done:) forBar:self.navigationController.navigationBar];
+			
+		}
 		
 	} else {
+	
+		//replace the left button
+		if (self.currentPopoverController) {
+			
+			self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+			
+		} else {
+			
+			self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+			
+		}
 		
-		self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
-		
+		//create all the other buttons for later use
+		self.saveButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(savePerson:) forBar:self.navigationController.navigationBar];
+		self.doneButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(done:) forBar:self.navigationController.navigationBar];
+	
 	}
-	
-	//create all the other buttons for later use
-    self.saveButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(savePerson:) forBar:self.navigationController.navigationBar];
-	self.doneButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleDone target:self selector:@selector(done:) forBar:self.navigationController.navigationBar];
-	
+		
 }
 
 - (void)updateInterface {
@@ -876,6 +907,14 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 	
 	[self updateBarButtons];
 	[self updateLayout];
+	
+}
+
+#pragma mark - popover methods
+
+- (CGSize)contentSizeForViewInPopover {
+	
+	return CGSizeMake(320.0, 568);
 	
 }
 
