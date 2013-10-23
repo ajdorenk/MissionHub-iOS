@@ -14,6 +14,7 @@
 @interface MHCreatePersonViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, weak) id<MHCreatePersonDelegate>	createPersonDelegate;
+@property (nonatomic, weak) UIPopoverController			*currentPopoverController;
 @property (nonatomic, strong) MHPerson					*person;
 
 @end

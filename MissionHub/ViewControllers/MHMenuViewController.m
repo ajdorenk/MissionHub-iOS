@@ -92,7 +92,14 @@ typedef enum {
 		_organizationViewController.showSuggestions		= NO;
 		_organizationViewController.showHeaders			= NO;
 		_organizationViewController.listTitle			= @"Organization(s)";
-		[_organizationViewController setDataArray:[MHAPI sharedInstance].currentUser.allOrganizations.allObjects];
+		NSArray *sortedArray							= [MHAPI sharedInstance].currentUser.allOrganizations.allObjects;
+		sortedArray										= [sortedArray sortedArrayUsingDescriptors:@[
+																									 [NSSortDescriptor
+																									  sortDescriptorWithKey:@"name"
+																									  ascending:YES
+																									  selector:@selector(caseInsensitiveCompare:)]
+																									 ]];
+		[_organizationViewController setDataArray:sortedArray];
 		[_organizationViewController setSuggestions:nil andSelectionObject:self.currentOrganization];
 		
 	}
@@ -103,7 +110,14 @@ typedef enum {
 
 -(void)changeOrganization {
 	
-	[self.organizationViewController setDataArray:[MHAPI sharedInstance].currentUser.allOrganizations.allObjects];
+	NSArray *sortedArray							= [MHAPI sharedInstance].currentUser.allOrganizations.allObjects;
+	sortedArray										= [sortedArray sortedArrayUsingDescriptors:@[
+																								 [NSSortDescriptor
+																								  sortDescriptorWithKey:@"name"
+																								  ascending:YES
+																								  selector:@selector(caseInsensitiveCompare:)]
+																								 ]];
+	[self.organizationViewController setDataArray:sortedArray];
 	[self.organizationViewController setSuggestions:nil andSelectionObject:self.currentOrganization];
 	[self presentViewController:self.organizationViewController animated:YES completion:nil];
 	
@@ -113,6 +127,8 @@ typedef enum {
 	
 	//change org
 	if ([object isKindOfClass:[MHOrganization class]]) {
+		
+		self.tableView.contentOffset	= CGPointZero;
 		
 		__block MHOrganization *oldOrganization	= self.currentOrganization;
 		
@@ -127,7 +143,6 @@ typedef enum {
 			
 			[[MHAPI sharedInstance].initialPeopleList removeAllObjects];
 			[MHAPI sharedInstance].currentOrganization	= organization;
-			weakSelf.currentOrganization					= organization;
 			
 			[weakSelf.tableView reloadData];
 			

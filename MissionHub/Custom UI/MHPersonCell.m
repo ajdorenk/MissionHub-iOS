@@ -10,6 +10,8 @@
 #import "MHCheckbox.h"
 #import "UIImageView+AFNetworking.h"
 
+CGFloat static MHPersonCelliPadGap = 20.0;
+
 @interface MHPersonCell () <MHCheckboxDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *name;
@@ -22,11 +24,14 @@
 
 @implementation MHPersonCell
 
-@synthesize cellDelegate	= _cellDelegate;
-@synthesize person			= _person;
-@synthesize indexPath		= _indexPath;
-@synthesize fieldName		= _fieldName;
-@synthesize field, name, profilePicture, checkbox, nameBackgroundView;
+@synthesize cellDelegate		= _cellDelegate;
+@synthesize person				= _person;
+@synthesize indexPath			= _indexPath;
+@synthesize field				= _field;
+@synthesize name				= _name;
+@synthesize profilePicture		= _profilePicture;
+@synthesize checkbox			= _checkbox;
+@synthesize nameBackgroundView	= _nameBackgroundView;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -51,20 +56,16 @@
 
 - (void)configure {
 	
-//	self.imageView.frame						= CGRectMake(40, 7, 45, 45);
-//	self.imageView.contentMode					= UIViewContentModeScaleAspectFill;
-//	self.textLabel.frame						= CGRectMake(100, 10, 220, 26);
-//	self.textLabel.textColor					= [UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1.0];
-//	self.textLabel.font							= [UIFont fontWithName:@"ArialRoundedMTBold" size:15.0];
-//	self.detailTextLabel.frame					= CGRectMake(120, 32, 200, 26);
-//	self.detailTextLabel.font					= [UIFont fontWithName:@"ArialMT" size:14.0];
-//	self.detailTextLabel.textColor				= [UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:132.0/255.0 alpha:1.0];
-    self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
-    self.nameBackgroundView.layer.borderWidth = 1.0;
-	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		
         self.nameBackgroundView.layer.backgroundColor = [UIColor whiteColor].CGColor;
-    }
+		
+    } //else {
+		
+		self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
+		self.nameBackgroundView.layer.borderWidth = 1.0;
+		
+	//}
 	
 	self.checkbox.checkboxDelegate = self;
 	
@@ -128,15 +129,31 @@
 	
 	[super layoutSubviews];
 	
-	self.nameBackgroundView.frame	= CGRectMake(CGRectGetMinX(self.nameBackgroundView.frame),
-												 CGRectGetMinY(self.nameBackgroundView.frame),
-												 CGRectGetWidth(self.frame) - CGRectGetMinX(self.nameBackgroundView.frame) + 1,
-												 CGRectGetHeight(self.nameBackgroundView.frame));
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 	
-	self.field.frame	= CGRectMake(CGRectGetMinX(self.field.frame),
-												 CGRectGetMinY(self.field.frame),
-												 CGRectGetWidth(self.frame) - CGRectGetMinX(self.field.frame),
-												 CGRectGetHeight(self.field.frame));
+		self.nameBackgroundView.frame	= CGRectMake(CGRectGetMinX(self.nameBackgroundView.frame),
+													 CGRectGetMinY(self.nameBackgroundView.frame),
+													 CGRectGetWidth(self.frame) * 0.5,
+													 CGRectGetHeight(self.nameBackgroundView.frame) + 1);
+		
+		self.field.frame	= CGRectMake(CGRectGetMaxX(self.nameBackgroundView.frame) + MHPersonCelliPadGap,
+										 CGRectGetMinY(self.field.frame),
+										 CGRectGetWidth(self.frame) * 0.5 - MHPersonCelliPadGap,
+										 CGRectGetHeight(self.field.frame));
+		
+	} else {
+	
+		self.nameBackgroundView.frame	= CGRectMake(CGRectGetMinX(self.nameBackgroundView.frame),
+													 CGRectGetMinY(self.nameBackgroundView.frame),
+													 CGRectGetWidth(self.frame) - CGRectGetMinX(self.nameBackgroundView.frame) + 1,
+													 CGRectGetHeight(self.nameBackgroundView.frame));
+		
+		self.field.frame	= CGRectMake(CGRectGetMinX(self.field.frame),
+													 CGRectGetMinY(self.field.frame),
+													 CGRectGetWidth(self.frame) - CGRectGetMinX(self.field.frame),
+													 CGRectGetHeight(self.field.frame));
+		
+	}
 	
 }
 

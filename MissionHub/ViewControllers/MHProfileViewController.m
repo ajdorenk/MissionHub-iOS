@@ -26,6 +26,7 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 @property (nonatomic, strong) NSArray										*allViewControllers;
 @property (nonatomic, strong) UIViewController								*currentViewController;
 
+@property (nonatomic, strong, readonly) UIPopoverController					*createInteractionPopoverController;
 @property (nonatomic, strong, readonly) MHNewInteractionViewController		*createInteractionViewController;
 @property (nonatomic, strong, readonly) MHProfileHeaderViewController		*headerViewController;
 @property (nonatomic, strong, readonly) MHProfileMenuViewController			*menuViewController;
@@ -56,6 +57,7 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 @synthesize person							= _person;
 @synthesize allViewControllers				= _allViewControllers;
 @synthesize currentViewController			= _currentViewController;
+@synthesize createInteractionPopoverController = _createInteractionPopoverController;
 @synthesize createInteractionViewController	= _createInteractionViewController;
 @synthesize headerViewController			= _headerViewController;
 @synthesize menuViewController				= _menuViewController;
@@ -128,8 +130,10 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	
 	if (_createInteractionViewController == nil) {
 		
+		UIStoryboard *storyboard	= [UIStoryboard storyboardWithName:@"MissionHub_iPhone" bundle:nil];
+		
 		[self willChangeValueForKey:@"createInteractionViewController"];
-		_createInteractionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+		_createInteractionViewController = [storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
 		[self didChangeValueForKey:@"createInteractionViewController"];
 		
 	}
@@ -191,6 +195,33 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	}
 	
 	return _interactionsViewController;
+	
+}
+
+- (UIPopoverController *)createInteractionPopoverController {
+	
+	if (_createInteractionPopoverController == nil) {
+		
+		UINavigationController *navigationController	= [[UINavigationController alloc] initWithRootViewController:self.createInteractionViewController];
+		
+		[self willChangeValueForKey:@"createInteractionPopoverViewController"];
+		_createInteractionPopoverController				= [[UIPopoverController alloc] initWithContentViewController:navigationController];
+		[self didChangeValueForKey:@"createInteractionPopoverViewController"];
+		
+		_createInteractionPopoverController.delegate	= self;
+		
+	}
+	
+	return _createInteractionPopoverController;
+	
+}
+
+- (void)presentCreateInteractionViewControllerInPopoverFromRect:(CGRect)rect withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople {
+	
+	[self.createInteractionViewController updateWithInteraction:interaction andSelections:selectedPeople];
+	self.createInteractionViewController.currentPopoverController = self.createInteractionPopoverController;
+	
+	[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 	
 }
 
@@ -428,9 +459,19 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	newInteraction.receiver			= self.person;
 	NSArray *selectionArray			= (self.person ? @[self.person] : @[]);
 	
-	[[self createInteractionViewController] updateWithInteraction:newInteraction andSelections:selectionArray]; //create selected array
-	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
-    
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		
+		[self.createInteractionViewController updateWithInteraction:newInteraction andSelections:selectionArray];
+		[self.navigationController pushViewController:self.createInteractionViewController animated:YES];
+		
+	} else {
+		
+		CGRect rect		= ((UIView *)sender).frame;
+		rect.origin.y	= 0;
+		
+		[self presentCreateInteractionViewControllerInPopoverFromRect:rect withInteraction:newInteraction andSelectedPeople:selectionArray];
+		
+	}
 	
 }
 
@@ -477,6 +518,14 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 - (void)willChangeHeightOfTopViewControllerFromHeight:(CGFloat)oldHeight toHeight:(CGFloat)newHeight {
 	
 	[[self headerViewController] updateLayout];
+	
+}
+
+#pragma mark - UIPopover delegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+	
+	
 	
 }
 

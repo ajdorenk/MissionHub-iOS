@@ -96,6 +96,7 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 @implementation MHCreatePersonViewController
 
 @synthesize createPersonDelegate	= _createPersonDelegate;
+@synthesize currentPopoverController= _currentPopoverController;
 
 @synthesize person					= _person;
 
@@ -376,7 +377,15 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 - (void)replaceBarButtons {
 	
 	//replace the left button
-	self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+	if (self.currentPopoverController) {
+		
+		self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		
+	} else {
+		
+		self.navigationItem.leftBarButtonItem	= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		
+	}
 	
 	//create all the other buttons for later use
     self.saveButton							= [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(savePerson:) forBar:self.navigationController.navigationBar];
@@ -506,7 +515,16 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 
 - (void)backToMenu:(id)sender {
 	
-    [self.navigationController popViewControllerAnimated:YES];
+	if (self.currentPopoverController) {
+		
+		[self.currentPopoverController dismissPopoverAnimated:YES];
+		self.currentPopoverController	= nil;
+		
+	} else {
+		
+		[self.navigationController popViewControllerAnimated:YES];
+		
+	}
 	
 }
 
@@ -709,25 +727,30 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
     NSValue* keyboardFrameValue	= [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
 	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
     self.originalContentFrame	= self.scrollView.frame;
-	
-    //Down size your text view
-	newRect.size.width	= CGRectGetWidth(self.view.frame);
-    newRect.size.height = CGRectGetHeight(self.view.frame) - CGRectGetHeight(keyboardFrame);
-	
-	__weak __typeof(&*self)weakSelf = self;
-	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		
-		weakSelf.scrollView.frame = newRect;
-		
-	} completion:nil];
-	
 	self.originalContentOffset	= self.scrollView.contentOffset;
 	
-	if (CGRectGetMaxY(self.activeTextField.frame) > CGRectGetHeight(self.scrollView.frame) + self.scrollView.contentOffset.y) {
+	if (!self.currentPopoverController) {
+	
+		//Down size your text view
+		newRect.size.width	= CGRectGetWidth(self.view.frame);
+		newRect.size.height = CGRectGetHeight(self.view.frame) - CGRectGetHeight(keyboardFrame);
 		
-		CGPoint newContentOffset	= self.scrollView.contentOffset;
-		newContentOffset.y			= CGRectGetMaxY(self.activeTextField.frame) - ( CGRectGetHeight(keyboardFrame) * 0.5 );
-		[self.scrollView setContentOffset:newContentOffset animated:YES];
+		__weak __typeof(&*self)weakSelf = self;
+		[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+			
+			weakSelf.scrollView.frame = newRect;
+			
+		} completion:nil];
+		
+		self.originalContentOffset	= self.scrollView.contentOffset;
+		
+		if (CGRectGetMaxY(self.activeTextField.frame) > CGRectGetHeight(self.scrollView.frame) + self.scrollView.contentOffset.y) {
+			
+			CGPoint newContentOffset	= self.scrollView.contentOffset;
+			newContentOffset.y			= CGRectGetMaxY(self.activeTextField.frame) - ( CGRectGetHeight(keyboardFrame) * 0.5 );
+			[self.scrollView setContentOffset:newContentOffset animated:YES];
+			
+		}
 		
 	}
 	
@@ -737,13 +760,17 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 
 - (void)keyboardWillHide:(NSNotification *)notification {
 	
-	__weak __typeof(&*self)weakSelf = self;
-	[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+	if (!self.currentPopoverController) {
+	
+		__weak __typeof(&*self)weakSelf = self;
+		[UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+			
+			weakSelf.scrollView.frame			= weakSelf.originalContentFrame;
+			[weakSelf.scrollView setContentOffset:weakSelf.originalContentOffset animated:YES];
+			
+		} completion:nil];
 		
-		weakSelf.scrollView.frame			= weakSelf.originalContentFrame;
-		[weakSelf.scrollView setContentOffset:weakSelf.originalContentOffset animated:YES];
-		
-	} completion:nil];
+	}
     
 }
 
@@ -792,7 +819,11 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 		
 	}
 	
-	[self.scrollView setContentOffset:self.originalContentOffset animated:YES];
+	if (!self.currentPopoverController) {
+		
+		[self.scrollView setContentOffset:self.originalContentOffset animated:YES];
+		
+	}
 	
 	self.activeTextField			= nil;
 	

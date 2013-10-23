@@ -93,6 +93,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 
 @implementation MHNewInteractionViewController
 
+@synthesize currentPopoverController		= _currentPopoverController;
+
 @synthesize interaction						= _interaction;
 
 @synthesize doneWithInteractionTypeButton	= _doneWithInteractionTypeButton;
@@ -455,7 +457,15 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 -(void)replaceBarButtons {
 	
 	//replace the left button
-	self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+	if (self.currentPopoverController) {
+		
+		self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleCancel target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		
+	} else {
+		
+		self.navigationItem.leftBarButtonItem		= [MHToolbar barButtonWithStyle:MHToolbarStyleBack target:self selector:@selector(backToMenu:) forBar:self.navigationController.navigationBar];
+		
+	}
 	
 	//create all the other buttons for later use
     self.saveButton = [MHToolbar barButtonWithStyle:MHToolbarStyleSave target:self selector:@selector(saveInteraction) forBar:self.navigationController.navigationBar];
@@ -825,7 +835,18 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 }
 
 -(void)backToMenu:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+	
+	if (self.currentPopoverController) {
+		
+		[self.currentPopoverController dismissPopoverAnimated:YES];
+		self.currentPopoverController	= nil;
+		
+	} else {
+		
+		[self.navigationController popViewControllerAnimated:YES];
+		
+	}
+	
 }
 
 #pragma mark - respond to choices
@@ -1074,7 +1095,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 }
 
--(void)keyboardWillShow:(NSNotification *)notification {
+- (void)keyboardWillShow:(NSNotification *)notification {
 
     CGRect newRect				= CGRectZero;
 	NSDictionary* keyboardInfo	= [notification userInfo];
@@ -1082,41 +1103,49 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
     self.originalCommentFrame	= self.comment.frame;
 	
-	CGFloat keyboardHeight		= ( CGRectGetHeight(keyboardFrame) > CGRectGetHeight(self.view.frame) ? CGRectGetWidth(keyboardFrame) : CGRectGetHeight(keyboardFrame) );
-	
-    //Down size your text view
-	newRect.origin.y	= self.scrollView.contentOffset.y;
-	newRect.size.width	= CGRectGetWidth(self.scrollView.frame);
-    newRect.size.height = CGRectGetHeight(self.view.frame) - keyboardHeight;
-	
-	[UIView beginAnimations:nil context:nil];
-	
-    self.comment.frame = newRect;
-	
-    [UIView commitAnimations];
+	if (!self.currentPopoverController) {
+		
+		CGFloat keyboardHeight		= ( CGRectGetHeight(keyboardFrame) > CGRectGetHeight(self.view.frame) ? CGRectGetWidth(keyboardFrame) : CGRectGetHeight(keyboardFrame) );
+		
+		//Down size your text view
+		newRect.origin.y	= self.scrollView.contentOffset.y;
+		newRect.size.width	= CGRectGetWidth(self.scrollView.frame);
+		newRect.size.height = CGRectGetHeight(self.view.frame) - keyboardHeight;
+		
+		[UIView beginAnimations:nil context:nil];
+		
+		self.comment.frame = newRect;
+		
+		[UIView commitAnimations];
+		
+		self.scrollView.scrollEnabled	= NO;
+		
+	}
 	
     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithCommentButton, nil]];
 	
-	self.scrollView.scrollEnabled	= NO;
-	
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
     
 	self.interaction.comment		= self.comment.text;
-	self.scrollView.scrollEnabled	= YES;
 	
-	__weak __typeof(&*self)weakSelf = self;
-	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+	if (!self.currentPopoverController) {
 		
-		weakSelf.comment.frame = weakSelf.originalCommentFrame;
+		self.scrollView.scrollEnabled	= YES;
 		
-	} completion:nil];
+		__weak __typeof(&*self)weakSelf = self;
+		[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+			
+			weakSelf.comment.frame = weakSelf.originalCommentFrame;
+			
+		} completion:nil];
+		
+	}
     
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	
     [self clearPickers];
     

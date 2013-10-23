@@ -18,7 +18,7 @@ extern NSString *const MHProfileViewControllerNotificationPersonDeleted;
 extern NSString *const MHProfileViewControllerNotificationPersonArchived;
 extern NSString *const MHProfileViewControllerNotificationPersonUpdated;
 
-@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate, MHProfileProtocol, MHProfileMenuDelegate, MHGenericListViewControllerDelegate, MHActivityViewControllerDelegate>
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate, MHProfileProtocol, MHProfileMenuDelegate, MHGenericListViewControllerDelegate, MHActivityViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) MHPerson *person;
 

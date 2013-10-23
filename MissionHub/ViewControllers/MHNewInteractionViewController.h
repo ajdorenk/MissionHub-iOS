@@ -12,6 +12,7 @@
 
 @interface MHNewInteractionViewController : UIViewController <UITextFieldDelegate, MHGenericListViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
+@property (nonatomic, weak) UIPopoverController				*currentPopoverController;
 @property (nonatomic, strong) MHInteraction					*interaction;
 
 -(void)updateWithInteraction:(MHInteraction *)interaction andSelections:(NSArray *)selections;

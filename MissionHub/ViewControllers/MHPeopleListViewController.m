@@ -22,31 +22,35 @@
 
 @interface MHPeopleListViewController ()
 
-@property (nonatomic, weak) IBOutlet UISearchBar *peopleSearchBar;
-@property (nonatomic, strong) NSMutableArray *peopleArray;
-@property (nonatomic, strong) NSMutableArray *searchResultArray;
-@property (nonatomic, strong) NSMutableArray *selectedPeople;
-@property (nonatomic, strong) MHRequestOptions *requestOptions;
-@property (nonatomic, strong) MHRequestOptions *searchRequestOptions;
-@property (nonatomic, strong) ODRefreshControl *refreshController;
-@property (nonatomic, assign) BOOL isLoading;
-@property (nonatomic, assign) BOOL refreshIsLoading;
-@property (nonatomic, assign) BOOL pagingIsLoading;
-@property (nonatomic, assign) BOOL hasLoadedAllPages;
-@property (nonatomic, assign) BOOL searchIsLoading;
-@property (nonatomic, assign) BOOL searchPagingIsLoading;
-@property (nonatomic, assign) BOOL searchHasLoadedAllPages;
-@property (nonatomic, assign) MHPersonSortFields secondaryFieldName;
-@property (nonatomic, assign) MHRequestOptionsOrderFields sortField;
-@property (nonatomic, strong) MHSortHeader *header;
-@property (nonatomic, strong, readonly) MHProfileViewController *profileViewController;
-@property (nonatomic, strong, readonly) MHGenericListViewController *fieldSelectorViewController;
-@property (nonatomic, strong, readonly) MHNewInteractionViewController *createInteractionViewController;
-@property (nonatomic, strong, readonly) MHCreatePersonViewController *createPersonViewController;
-@property (nonatomic, strong, readonly) UIPopoverController	*createPersonPopoverViewController;
-@property (nonatomic, strong, readonly) MHActivityViewController *activityViewController;
+@property (nonatomic, weak) IBOutlet UISearchBar						*peopleSearchBar;
+@property (nonatomic, strong) NSMutableArray							*peopleArray;
+@property (nonatomic, strong) NSMutableArray							*searchResultArray;
+@property (nonatomic, strong) NSMutableArray							*selectedPeople;
+@property (nonatomic, strong) MHRequestOptions							*requestOptions;
+@property (nonatomic, strong) MHRequestOptions							*searchRequestOptions;
+@property (nonatomic, strong) ODRefreshControl							*refreshController;
+@property (nonatomic, assign) BOOL										isLoading;
+@property (nonatomic, assign) BOOL 										refreshIsLoading;
+@property (nonatomic, assign) BOOL 										pagingIsLoading;
+@property (nonatomic, assign) BOOL 										hasLoadedAllPages;
+@property (nonatomic, assign) BOOL 										searchIsLoading;
+@property (nonatomic, assign) BOOL 										searchPagingIsLoading;
+@property (nonatomic, assign) BOOL 										searchHasLoadedAllPages;
+@property (nonatomic, assign) MHPersonSortFields						secondaryFieldName;
+@property (nonatomic, assign) MHRequestOptionsOrderFields				sortField;
+@property (nonatomic, strong) MHSortHeader								*header;
+@property (nonatomic, strong, readonly) MHProfileViewController			*profileViewController;
+@property (nonatomic, strong, readonly) MHGenericListViewController		*fieldSelectorViewController;
+@property (nonatomic, strong, readonly) MHNewInteractionViewController	*createInteractionViewController;
+@property (nonatomic, strong, readonly) MHCreatePersonViewController	*createPersonViewController;
+@property (nonatomic, strong, readonly) UIPopoverController				*createPersonPopoverController;
+@property (nonatomic, strong, readonly) UIPopoverController				*createInteractionPopoverController;
+@property (nonatomic, strong, readonly) MHActivityViewController		*activityViewController;
 
 - (BOOL)isSelected:(MHPerson *)person;
+
+- (void)presentCreatePersonViewControllerInPopoverFromRect:(CGRect)rect withPersonObject:(MHPerson *)person;
+- (void)presentCreateInteractionViewControllerInPopoverFromRect:(CGRect)rect withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople;
 
 - (void)redoRequestWithPagingReset:(BOOL)resetPaging;
 - (void)personRemoved:(NSNotification *)notification;
@@ -83,7 +87,8 @@
 @synthesize fieldSelectorViewController			= _fieldSelectorViewController;
 @synthesize createInteractionViewController		= _createInteractionViewController;
 @synthesize createPersonViewController			= _createPersonViewController;
-@synthesize createPersonPopoverViewController	= _createPersonPopoverViewController;
+@synthesize createPersonPopoverController		= _createPersonPopoverController;
+@synthesize createInteractionPopoverController	= _createInteractionPopoverController;
 @synthesize activityViewController				= _activityViewController;
 
 
@@ -164,8 +169,10 @@
 	
 	if (_createInteractionViewController == nil) {
 		
+		UIStoryboard *storyboard	= [UIStoryboard storyboardWithName:@"MissionHub_iPhone" bundle:nil];
+		
 		[self willChangeValueForKey:@"createInteractionViewController"];
-		_createInteractionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
+		_createInteractionViewController = [storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
 		[self didChangeValueForKey:@"createInteractionViewController"];
 		
 	}
@@ -179,8 +186,10 @@
 	
 	if (_createPersonViewController == nil) {
 		
+		UIStoryboard *storyboard	= [UIStoryboard storyboardWithName:@"MissionHub_iPhone" bundle:nil];
+		
 		[self willChangeValueForKey:@"createPersonViewController"];
-		_createPersonViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHCreatePersonViewController"];
+		_createPersonViewController = [storyboard instantiateViewControllerWithIdentifier:@"MHCreatePersonViewController"];
 		[self didChangeValueForKey:@"createPersonViewController"];
 		
 		_createPersonViewController.createPersonDelegate = self;
@@ -191,19 +200,57 @@
 	
 }
 
-- (UIPopoverController *)createPersonPopoverViewController {
+- (UIPopoverController *)createPersonPopoverController {
 	
-	if (_createPersonPopoverViewController == nil) {
+	if (_createPersonPopoverController == nil) {
+		
+		UINavigationController *navigationController	= [[UINavigationController alloc] initWithRootViewController:self.createPersonViewController];
 		
 		[self willChangeValueForKey:@"createPersonPopoverViewController"];
-		_createPersonPopoverViewController = [[UIPopoverController alloc] initWithContentViewController:[self createPersonViewController]];
+		_createPersonPopoverController					= [[UIPopoverController alloc] initWithContentViewController:navigationController];
 		[self didChangeValueForKey:@"createPersonPopoverViewController"];
 		
-		_createPersonPopoverViewController.delegate = self;
+		_createPersonPopoverController.delegate = self;
 		
 	}
 	
-	return _createPersonPopoverViewController;
+	return _createPersonPopoverController;
+	
+}
+
+- (UIPopoverController *)createInteractionPopoverController {
+	
+	if (_createInteractionPopoverController == nil) {
+		
+		UINavigationController *navigationController	= [[UINavigationController alloc] initWithRootViewController:self.createInteractionViewController];
+		
+		[self willChangeValueForKey:@"createInteractionPopoverViewController"];
+		_createInteractionPopoverController				= [[UIPopoverController alloc] initWithContentViewController:navigationController];
+		[self didChangeValueForKey:@"createInteractionPopoverViewController"];
+		
+		_createInteractionPopoverController.delegate	= self;
+		
+	}
+	
+	return _createInteractionPopoverController;
+	
+}
+
+- (void)presentCreatePersonViewControllerInPopoverFromRect:(CGRect)rect withPersonObject:(MHPerson *)person {
+	
+	self.createPersonViewController.person						= person;
+	self.createPersonViewController.currentPopoverController	= self.createPersonPopoverController;
+	
+	[self.createPersonPopoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	 
+}
+
+- (void)presentCreateInteractionViewControllerInPopoverFromRect:(CGRect)rect withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople {
+	
+	[self.createInteractionViewController updateWithInteraction:interaction andSelections:selectedPeople];
+	self.createInteractionViewController.currentPopoverController = self.createInteractionPopoverController;
+	
+	[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 	
 }
 
@@ -420,6 +467,7 @@
 	
 	if (resetPaging) {
 		
+		self.tableView.contentOffset	= CGPointZero;
 		[options resetPaging];
 		
 	} else {
@@ -499,24 +547,25 @@
 	
 }
 
-- (void)setTextFieldLeftView
-{
+- (void)setTextFieldLeftView {
+	
     UITextField *searchField = nil;
-    for (UIView *subview in self.peopleSearchBar.subviews)
-    {
+    for (UIView *subview in self.peopleSearchBar.subviews) {
         
-        if ([subview isKindOfClass:[UITextField class]])
-        {
+        if ([subview isKindOfClass:[UITextField class]]) {
+			
             searchField = (UITextField *)subview;
             break;
         }
+		
     }
     
-    if (searchField)
-    {
+    if (searchField) {
+		
         UIImage *image = [UIImage imageNamed:@"searchbar_image.png"];
         UIImageView *view = [[UIImageView alloc] initWithImage:image];
         searchField.leftView = view;
+		
     }
     
 }
@@ -531,18 +580,20 @@
 - (void)addPerson:(id)sender {
 	
 	MHPerson *newPerson						= [MHPerson newObjectFromFields:nil];
-	self.createPersonViewController.person	= newPerson;
     
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 		
-		[self.navigationController pushViewController:[self createPersonViewController] animated:YES];
+		self.createPersonViewController.person	= newPerson;
+		[self.navigationController pushViewController:self.createPersonViewController animated:YES];
 		
 	} else {
 		
-		[[self createPersonPopoverViewController] presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+		CGRect rect		= ((UIView *)sender).frame;
+		rect.origin.y	= 0;
+		
+		[self presentCreatePersonViewControllerInPopoverFromRect:rect withPersonObject:newPerson];
 		
 	}
-    
 
 }
 
@@ -551,14 +602,26 @@
 	MHInteraction *newInteraction = [MHInteraction newObjectFromFields:nil];
 	[newInteraction addInitiators:[NSSet setWithArray:self.selectedPeople]];
 	
-	[[self createInteractionViewController] updateWithInteraction:newInteraction andSelections:self.selectedPeople]; //create selected array
-	[self.navigationController pushViewController:[self createInteractionViewController] animated:YES];
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		
+		[self.createInteractionViewController updateWithInteraction:newInteraction andSelections:self.selectedPeople];
+		[self.navigationController pushViewController:self.createInteractionViewController animated:YES];
+		
+	} else {
+		
+		CGRect rect		= ((UIView *)sender).frame;
+		rect.origin.y	= 0;
+		
+		[self presentCreateInteractionViewControllerInPopoverFromRect:rect withInteraction:newInteraction andSelectedPeople:self.selectedPeople];
+		
+	}
 
 }
 
 
 //TODO:Need to add functionality to check all contacts. Currently the function only changes the image of the checkbox in the secton header, though it should check all the contacts.
--(IBAction)checkAllContacts:(UIButton*)button {
+- (IBAction)checkAllContacts:(UIButton*)button {
     NSLog(@"Check all");
     button.selected = !button.selected;
     
