@@ -33,21 +33,16 @@
 -(void)layoutSubviews {
 	
     [super layoutSubviews];
-    
+	
 	if (self.searchTextField) {
 		
-		self.layer.shadowOpacity = 0.3f;
-		self.layer.shadowRadius = 2.0f;
-		self.layer.shadowColor = [UIColor blackColor].CGColor;
-		self.placeholder = @"Search";
-		
-		CGRect frame = self.searchTextField.frame;
-		frame.origin.x = 0;
-		frame.origin.y = 0;
-		frame.size.height = self.frame.size.height;
-		frame.size.width = self.frame.size.width;
-		self.searchTextField.frame	= frame;
-		self.searchTextField.font	= [UIFont fontWithName:@"Helvetica" size:20];
+		CGRect frame					= self.searchTextField.frame;
+		frame.origin.x					= 0;
+		frame.origin.y					= 0;
+		frame.size.height				= self.frame.size.height;
+		frame.size.width				= self.frame.size.width;
+		self.searchTextField.frame		= frame;
+		self.searchTextField.font		= [UIFont fontWithName:@"Helvetica" size:20];
 		
 		UIImage *image					= [UIImage imageNamed:@"MH_Mobile_Searchbar_Image.png"];
         UIImageView *view				= [[UIImageView alloc] initWithImage:image];
@@ -55,7 +50,11 @@
 		
 	}
     
-	self.backgroundImage		= [UIImage imageNamed:@"MH_Mobile_Searchbar_Background.png"];
+	self.layer.shadowOpacity			= 0.3f;
+	self.layer.shadowRadius				= 2.0f;
+	self.layer.shadowColor				= [UIColor blackColor].CGColor;
+	self.placeholder					= @"Search";
+	self.backgroundImage				= [UIImage imageNamed:@"MH_Mobile_Searchbar_Background.png"];
 	
 }
 

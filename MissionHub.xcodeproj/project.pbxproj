@@ -194,6 +194,12 @@
 		68D7AA441766C98000B9B0B1 /* MHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */; };
 		68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */; };
 		68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB33CC17792D8F003958A0 /* MHErrorHandler.m */; };
+		68EB9A1B1819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A191819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png */; };
+		68EB9A1C1819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A191819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png */; };
+		68EB9A1D1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A1A1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png */; };
+		68EB9A1E1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A1A1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png */; };
+		68EB9A20181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A1F181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png */; };
+		68EB9A21181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A1F181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png */; };
 		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
 		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
@@ -450,6 +456,9 @@
 		68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalLabel.m; path = Models/MHOrganizationalLabel.m; sourceTree = "<group>"; };
 		68EB33CB17792D8F003958A0 /* MHErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHErrorHandler.h; path = APIControllers/MHErrorHandler.h; sourceTree = "<group>"; };
 		68EB33CC17792D8F003958A0 /* MHErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHErrorHandler.m; path = APIControllers/MHErrorHandler.m; sourceTree = "<group>"; };
+		68EB9A191819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_AddContact_iOS7.png; sourceTree = "<group>"; };
+		68EB9A1A1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_NewInteraction_iOS7.png; sourceTree = "<group>"; };
+		68EB9A1F181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_Labels_iOS7.png; sourceTree = "<group>"; };
 		68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteractionType+Helper.h"; path = "Models/MHInteractionType+Helper.h"; sourceTree = "<group>"; };
 		68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteractionType+Helper.m"; path = "Models/MHInteractionType+Helper.m"; sourceTree = "<group>"; };
 		68F4CC4717D10846004D6574 /* MHAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerCell.m; path = "Custom UI/MHAnswerCell.m"; sourceTree = "<group>"; };
@@ -798,8 +807,11 @@
 				68478DB8177E8CDC0014501D /* MH_Mobile_Topbar_Background.png */,
 				68A38F2617AB59DA0010CAC6 /* MH_Mobile_Icon_Menu.png */,
 				680BE77E17E28D3300BA8C12 /* MH_Mobile_Icon_NewInteraction.png */,
+				68EB9A1A1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png */,
 				680BE77F17E28D3400BA8C12 /* MH_Mobile_Icon_Labels.png */,
+				68EB9A1F181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png */,
 				680BE78017E28D3500BA8C12 /* MH_Mobile_Icon_AddContact.png */,
+				68EB9A191819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png */,
 				680BE78117E28D3600BA8C12 /* MH_Mobile_Icon_LeftArrow.png */,
 				680BE78217E28D3700BA8C12 /* MH_Mobile_Icon_DownArrow.png */,
 				68A38F0517A9A9120010CAC6 /* survey.png */,
@@ -1004,6 +1016,7 @@
 				6835D5CC17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png in Resources */,
 				683AE39A176D2DC20027EDE4 /* appicon.png in Resources */,
 				683AE39C176D2DC20027EDE4 /* appicon-small@2x.png in Resources */,
+				68EB9A1D1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
 				683AE39E176D2DC20027EDE4 /* appicon-small.png in Resources */,
 				683AE3A0176D2DC20027EDE4 /* appicon-small-50.png in Resources */,
 				683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */,
@@ -1025,12 +1038,14 @@
 				68839F511794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png in Resources */,
 				6851291B17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */,
 				6851291D17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */,
+				68EB9A1B1819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png in Resources */,
 				68A38F0C17A9A9120010CAC6 /* survey.png in Resources */,
 				68A38F0E17A9A9120010CAC6 /* spiritual_convo.png in Resources */,
 				68A38F1017A9A9120010CAC6 /* gospel_pres.png in Resources */,
 				68A38F1217A9A9120010CAC6 /* prc.png in Resources */,
 				68A38F1417A9A9120010CAC6 /* label.png in Resources */,
 				68A38F1617A9A9120010CAC6 /* hs.png in Resources */,
+				68EB9A20181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
 				68A38F1817A9A9120010CAC6 /* grad.png in Resources */,
 				68A38F1B17AB58220010CAC6 /* MH_Mobile_Checkbox_No_Box_Checkmark.png in Resources */,
 				68A38F1E17AB585C0010CAC6 /* MH_Mobile_Checkbox_No_Box_No_Checkmark.png in Resources */,
@@ -1061,6 +1076,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68EB9A21181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
+				68EB9A1C1819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png in Resources */,
+				68EB9A1E1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
 				6867917917FF4EC6000106BF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,7 +14,9 @@ static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 
 @interface MHToolbar ()
 
-+ (UIBarButtonItem *)barButtonWithTitle:(NSString *)title image:(UIImage *)image target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar;
++ (UIBarButtonItem *)barButtonWithTitle:(NSString *)title image:(UIImage *)image tintColor:(UIColor *)tintColor target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar;
++ (UIBarButtonItem *)ios7barButtonWithStyle:(MHToolbarStyle)style target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar;
++ (UIBarButtonItem *)ios6andunderbarButtonWithStyle:(MHToolbarStyle)style target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar;
 - (void)configure;
 
 @end
@@ -65,6 +67,22 @@ static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 }
 
 + (UIBarButtonItem *)barButtonWithStyle:(MHToolbarStyle)style target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
+	
+	if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+		
+		// Load resources for iOS 6.1 or earlier
+		return [self ios6andunderbarButtonWithStyle:style target:target selector:selector forBar:navigationOrToolbar];
+		
+	} else {
+		
+		// Load resources for iOS 7 or later
+		return [self ios7barButtonWithStyle:style target:target selector:selector forBar:navigationOrToolbar];
+		
+	}
+	
+}
+
++ (UIBarButtonItem *)ios6andunderbarButtonWithStyle:(MHToolbarStyle)style target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
 	
 	NSString *imageName = @"";
 	NSString *title		= @"";
@@ -131,11 +149,114 @@ static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 
 	UIImage *image = [UIImage imageNamed:imageName];
 
-	return [MHToolbar barButtonWithTitle:title image:image target:target selector:selector forBar:navigationOrToolbar];
+	return [MHToolbar barButtonWithTitle:title image:image tintColor:nil target:target selector:selector forBar:navigationOrToolbar];
 
 }
 
-+ (UIBarButtonItem *)barButtonWithTitle:(NSString *)title image:(UIImage *)image target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
++ (UIBarButtonItem *)ios7barButtonWithStyle:(MHToolbarStyle)style target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
+	
+	NSString *imageName					= @"";
+	NSString *title						= @"";
+	UIBarButtonSystemItem systemItem	= UIBarButtonSystemItemDone;
+	UIColor *defaultColor				= [UIColor colorWithRed:(0.0/255.0) green:(122.0/255.0) blue:(255.0/255.0) alpha:0.9];
+	//UIColor *redColor					= [UIColor colorWithRed:(204.0/255.0) green:(58.0/255.0) blue:(13.0/255.0) alpha:0.9]; //iOS6 and under MissionHub Red
+	UIColor *redColor					= [UIColor colorWithRed:(255.0/255.0) green:(58.0/255.0) blue:(13.0/255.0) alpha:0.9]; //MissionHub Red
+	UIColor *tintColor					= defaultColor;
+	UIEdgeInsets imageInsets			= UIEdgeInsetsMake(10, 10, 10, 10);
+	
+	switch (style) {
+			
+		case MHToolbarStyleBack:
+			
+			return nil;
+			break;
+			
+		case MHToolbarStyleCreateInteraction:
+			
+			imageName	= @"MH_Mobile_Icon_NewInteraction_iOS7.png";
+			tintColor	= redColor;
+			break;
+			
+		case MHToolbarStyleCreatePerson:
+			
+			imageName	= @"MH_Mobile_Icon_AddContact_iOS7.png";
+			break;
+			
+		case MHToolbarStyleLabel:
+			
+			imageName	= @"MH_Mobile_Icon_Labels_iOS7.png";
+			break;
+			
+		case MHToolbarStyleMenu:
+			
+			title		= @"Menu";
+			break;
+			
+		case MHToolbarStyleMore:
+			
+			title		= @"More";
+			break;
+			
+		case MHToolbarStyleApply:
+			
+			title		= @"Apply";
+			tintColor	= redColor;
+			break;
+			
+		case MHToolbarStyleCancel:
+			
+			title		= @"Cancel";
+			//systemItem	= UIBarButtonSystemItemCancel;
+			tintColor	= redColor;
+			break;
+			
+		case MHToolbarStyleDone:
+			
+			title		= @"Done";
+			//systemItem	= UIBarButtonSystemItemDone;
+			tintColor	= redColor;
+			break;
+			
+		case MHToolbarStyleSave:
+			
+			title		= @"Save";
+			//systemItem	= UIBarButtonSystemItemSave;
+			tintColor	= redColor;
+			break;
+			
+		default:
+			break;
+	}
+	
+	if (title.length > 0) {
+		
+		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:target action:selector];
+		button.tintColor		= tintColor;
+		
+		return button;
+		
+	} else if (imageName.length > 0) {
+	
+		UIImage *image = [UIImage imageNamed:imageName];
+		
+		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:target action:selector];
+		button.tintColor		= tintColor;
+		button.imageInsets		= imageInsets;
+		
+		return button;
+		
+	} else {
+		
+		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:systemItem target:target action:selector];
+		button.tintColor		= tintColor;
+		
+		return button;
+		
+	}
+	
+}
+
++ (UIBarButtonItem *)barButtonWithTitle:(NSString *)title image:(UIImage *)image tintColor:(UIColor *)tintColor target:(id)target selector:(SEL)selector forBar:(UIView *)navigationOrToolbar {
 	
 	NSString *buttonTitle	= ( title ? title : @"" );
 	UIImage *buttonImage	= ( image ? image : [[UIImage alloc] init] );
@@ -158,6 +279,12 @@ static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 	button.titleLabel.font	= [UIFont fontWithName:MHToolBarBarButtonFont size:MHToolBarBarButtonFontSize];
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+	
+	if (tintColor) {
+		
+		button.tintColor	= tintColor;
+		
+	}
 	
 	if (target && selector) {
 		

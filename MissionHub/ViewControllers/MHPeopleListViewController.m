@@ -49,8 +49,8 @@
 
 - (BOOL)isSelected:(MHPerson *)person;
 
-- (void)presentCreatePersonViewControllerInPopoverFromRect:(CGRect)rect withPersonObject:(MHPerson *)person;
-- (void)presentCreateInteractionViewControllerInPopoverFromRect:(CGRect)rect withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople;
+- (void)presentCreatePersonViewControllerInPopoverFromSender:(id)sender withPersonObject:(MHPerson *)person;
+- (void)presentCreateInteractionViewControllerInPopoverFromSender:(id)sender withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople;
 
 - (void)redoRequestWithPagingReset:(BOOL)resetPaging;
 - (void)personRemoved:(NSNotification *)notification;
@@ -236,22 +236,42 @@
 	
 }
 
-- (void)presentCreatePersonViewControllerInPopoverFromRect:(CGRect)rect withPersonObject:(MHPerson *)person {
+- (void)presentCreatePersonViewControllerInPopoverFromSender:sender withPersonObject:(MHPerson *)person {
 	
 	self.createPersonViewController.person						= person;
 	self.createPersonViewController.currentPopoverController	= self.createPersonPopoverController;
 	
-	[self.createPersonPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+		
+		[self.createPersonPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+		
+	} else {
+		
+		CGRect rect	= ((UIView *)sender).frame;
+		
+		[self.createPersonPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+		
+	}
 	 
 }
 
-- (void)presentCreateInteractionViewControllerInPopoverFromRect:(CGRect)rect withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople {
+- (void)presentCreateInteractionViewControllerInPopoverFromSender:sender withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople {
 	
 	[self.createInteractionViewController updateWithInteraction:interaction andSelections:selectedPeople];
 	self.createInteractionViewController.currentPopoverController = self.createInteractionPopoverController;
 	
-	[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	if ([sender isKindOfClass:[UIBarButtonItem class]]) {
 	
+		[self.createInteractionPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	
+	} else {
+	
+		CGRect rect	= ((UIView *)sender).frame;
+		
+		[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	
+	}
+
 }
 
 - (MHActivityViewController *)activityViewController {
@@ -574,9 +594,23 @@
 		
 	} else {
 		
-		CGRect rect		= ((UIView *)sender).frame;
+		//toggle show and hide of this popover
+		if (self.createPersonPopoverController.popoverVisible) {
+			
+			[self.createPersonPopoverController dismissPopoverAnimated:YES];
+			
+		} else {
+			
+			[self presentCreatePersonViewControllerInPopoverFromSender:sender withPersonObject:newPerson];
+			
+		}
 		
-		[self presentCreatePersonViewControllerInPopoverFromRect:rect withPersonObject:newPerson];
+		//hide other popover if it is showing to avoid confusion
+		if (self.createInteractionPopoverController.popoverVisible) {
+			
+			[self.createInteractionPopoverController dismissPopoverAnimated:YES];
+			
+		}
 		
 	}
 
@@ -595,10 +629,24 @@
 		
 	} else {
 		
-		CGRect rect		= ((UIView *)sender).frame;
+		//toggle show and hide of this popover
+		if (self.createInteractionPopoverController.popoverVisible) {
+			
+			[self.createInteractionPopoverController dismissPopoverAnimated:YES];
+			
+		} else {
+			
+			[self presentCreateInteractionViewControllerInPopoverFromSender:sender withInteraction:newInteraction andSelectedPeople:self.selectedPeople];
 		
-		[self presentCreateInteractionViewControllerInPopoverFromRect:rect withInteraction:newInteraction andSelectedPeople:self.selectedPeople];
+		}
 		
+		//hide other popover if it is showing to avoid confusion
+		if (self.createPersonPopoverController.popoverVisible) {
+			
+			[self.createPersonPopoverController dismissPopoverAnimated:YES];
+			
+		}
+			
 	}
 
 }

@@ -40,6 +40,8 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 - (void)refreshSurveyAnswersForPerson:(MHPerson *)person;
 - (void)refreshInteractionsForPerson:(MHPerson *)person;
 
+- (void)presentCreateInteractionViewControllerInPopoverFromSender:(id)sender withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople;
+
 - (void)backToMenu:(id)sender;
 - (void)newInteractionActivity:(id)sender;
 - (void)addLabelActivity:(id)sender;
@@ -216,12 +218,22 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	
 }
 
-- (void)presentCreateInteractionViewControllerInPopoverFromRect:(CGRect)rect withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople {
+- (void)presentCreateInteractionViewControllerInPopoverFromSender:(id)sender withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople {
 	
 	[self.createInteractionViewController updateWithInteraction:interaction andSelections:selectedPeople];
 	self.createInteractionViewController.currentPopoverController = self.createInteractionPopoverController;
 	
-	[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+		
+		[self.createInteractionPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+		
+	} else {
+		
+		CGRect rect	= ((UIView *)sender).frame;
+		
+		[self.createInteractionPopoverController presentPopoverFromRect:rect inView:self.navigationController.navigationBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+		
+	}
 	
 }
 
@@ -466,9 +478,15 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 		
 	} else {
 		
-		CGRect rect		= ((UIView *)sender).frame;
-		
-		[self presentCreateInteractionViewControllerInPopoverFromRect:rect withInteraction:newInteraction andSelectedPeople:selectionArray];
+		if (self.createInteractionPopoverController.popoverVisible) {
+			
+			[self.createInteractionPopoverController dismissPopoverAnimated:YES];
+			
+		} else {
+			
+			[self presentCreateInteractionViewControllerInPopoverFromSender:sender withInteraction:newInteraction andSelectedPeople:selectionArray];
+			
+		}
 		
 	}
 	
