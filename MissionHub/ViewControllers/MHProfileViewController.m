@@ -19,7 +19,8 @@ NSString *const MHProfileViewControllerNotificationPersonDeleted	= @"com.mission
 NSString *const MHProfileViewControllerNotificationPersonArchived	= @"com.missionhub.MHProfileViewController.notification.personArchived";
 NSString *const MHProfileViewControllerNotificationPersonUpdated	= @"com.missionhub.MHProfileViewController.notification.personUpdated";
 CGFloat const MHProfileNavigationBarButtonMarginVertical			= 5.0f;
-CGFloat const MHProfileHeaderHeight									= 150.0f;
+CGFloat const MHProfileHeaderHeightiOS6								= 150.0f;
+CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 
 @interface MHProfileViewController ()
 
@@ -80,7 +81,7 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	[self.menuViewController setMenuDelegate:self];
 	
 	[self setupWithTopViewController:self.headerViewController
-							  height:MHProfileHeaderHeight
+							  height:( (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) ? MHProfileHeaderHeightiOS6 : MHProfileHeaderHeightiOS7 )
 				 tableViewController:(UITableViewController *)self.currentTableViewContoller
 			 segmentedViewController:self.menuViewController];
 	
@@ -589,7 +590,7 @@ CGFloat const MHProfileHeaderHeight									= 150.0f;
 	self.headerViewController.view.frame = CGRectMake(CGRectGetMinX(self.headerViewController.view.frame),
 													  CGRectGetMinY(self.headerViewController.view.frame),
 													  CGRectGetWidth(frame),
-													  MHProfileHeaderHeight);
+													  ( (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) ? MHProfileHeaderHeightiOS6 : MHProfileHeaderHeightiOS7 ));
 	[self.headerViewController updateLayout];
 	
 	self.menuViewController.view.frame	= CGRectMake(CGRectGetMinX(self.menuViewController.view.frame),

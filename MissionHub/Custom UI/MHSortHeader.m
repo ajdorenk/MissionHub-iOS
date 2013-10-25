@@ -59,7 +59,7 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 		header.tableView			= tableView;
 		header.backgroundColor	= [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
 		
-//		header.allButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//		header.allButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //		header.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
 //		header.allButton.titleLabel.textColor = [UIColor whiteColor];
 //		header.allButton.backgroundColor = [UIColor clearColor];
@@ -68,7 +68,7 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 //		[header.sortButton addTarget:header action:@selector(allButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 //		[header addSubview:header.allButton];
 		
-		header.sortButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		header.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[header.sortButton setFrame:CGRectMake(CGRectGetWidth(header.frame) - MHSortHeaderSortButtonWidth - MHSortHeaderMargin,
 													  MHSortHeaderMargin,
 													  MHSortHeaderSortButtonWidth,
@@ -84,7 +84,7 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 		[header addSubview:header.sortButton];
 		
 		//Add sortFieldButton
-		header.fieldButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		header.fieldButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[header.fieldButton setFrame:CGRectMake(CGRectGetMinX(header.sortButton.frame) - MHSortHeaderFieldButtonWidth - MHSortHeaderSpacing,
 											 MHSortHeaderMargin,
 											 MHSortHeaderFieldButtonWidth,

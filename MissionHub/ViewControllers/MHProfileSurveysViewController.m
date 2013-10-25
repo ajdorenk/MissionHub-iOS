@@ -59,6 +59,10 @@
 	
 	self.surveyArray = [NSMutableArray array];
 	
+	if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+		[self.tableView setSeparatorInset:UIEdgeInsetsZero];
+	}
+	
 }
 
 - (void)viewDidLoad

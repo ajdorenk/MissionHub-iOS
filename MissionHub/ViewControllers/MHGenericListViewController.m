@@ -131,6 +131,12 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
     self.tableViewList.layer.borderWidth	= 1.0;
     self.tableViewList.layer.borderColor	= [[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1] CGColor];
 	self.tableViewList.separatorColor		= [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1];
+	
+	if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
+		
+		[self setAutomaticallyAdjustsScrollViewInsets:NO];
+		
+	}
 
 }
 
@@ -138,8 +144,10 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	
 	self.listName.text	= ( self.listTitle ? self.listTitle : @"" );
 	
-	[self updateBarLayoutWithParentFrame:self.view.frame];
-	[self updateLayoutWithParentFrame:self.view.frame];
+	CGRect frame			= self.view.frame;
+	
+	[self updateBarLayoutWithParentFrame:frame];
+	[self updateLayoutWithParentFrame:frame];
 	
 }
 
@@ -157,14 +165,22 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 		
 	} else {
 		
+		CGFloat toolbarHeight	= 64;
+		
+		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+			
+			toolbarHeight	= 44;
+			
+		}
+		
 		if (!self.toolbar) {
 			
-			self.toolbar		= [[MHToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(parentFrame), 44)];
+			self.toolbar		= [[MHToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(parentFrame), toolbarHeight)];
 			[self.view addSubview:self.toolbar];
 			
 		} else {
 			
-			self.toolbar.frame	= CGRectMake(0, 0, CGRectGetWidth(parentFrame), 44);
+			self.toolbar.frame	= CGRectMake(0, 0, CGRectGetWidth(parentFrame), toolbarHeight);
 			
 		}
 		

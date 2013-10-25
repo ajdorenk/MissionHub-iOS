@@ -229,6 +229,10 @@ typedef enum {
 
 	[super viewDidLoad];
 	
+	if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+		[self.tableView setSeparatorInset:UIEdgeInsetsZero];
+	}
+	
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
 	self.slidingViewController.underLeftWidthLayout = ECFullWidth;
 	
@@ -240,7 +244,18 @@ typedef enum {
 	
 	[super viewWillAppear:animated];
 	
-	self.tableView.frame	= self.view.bounds;
+	if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+		
+		self.tableView.frame	= self.view.bounds;
+		
+	} else {
+		
+		CGRect frame			= self.view.bounds;
+		frame.origin.y			= 20.0;
+		frame.size.height		-= 20.0;
+		self.tableView.frame	= frame;
+		
+	}
 	
 }
 
@@ -396,8 +411,9 @@ typedef enum {
 	
 	//configure cell
 	cell.textLabel.textColor    = [UIColor colorWithRed:(192.0/255.0) green:(192.0/255.0) blue:(192.0/255.0) alpha:1.0];
-	cell.textLabel.font         = [UIFont fontWithName:@"ArialRoundedMTBold" size:14.0];
+	cell.textLabel.font         = [UIFont fontWithName:@"Arial-BoldMT" size:14.0];
 	cell.selectionStyle			= UITableViewCellSelectionStyleGray;
+	cell.backgroundColor		= [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
 	
 	//set cell value
 	id objectForCell = [[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -545,7 +561,18 @@ typedef enum {
 	
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
-	self.tableView.frame	= self.view.bounds;
+	if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+		
+		self.tableView.frame	= self.view.bounds;
+		
+	} else {
+		
+		CGRect frame			= self.view.bounds;
+		frame.origin.y			= 20.0;
+		frame.size.height		-= 20.0;
+		self.tableView.frame	= frame;
+		
+	}
 	
 }
 

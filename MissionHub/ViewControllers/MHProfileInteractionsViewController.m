@@ -44,6 +44,10 @@
 	
 	self.interactionArray = [NSMutableArray array];
 	
+	if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+		[self.tableView setSeparatorInset:UIEdgeInsetsZero];
+	}
+	
 }
 
 - (void)viewDidLoad

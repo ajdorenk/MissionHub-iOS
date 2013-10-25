@@ -43,22 +43,24 @@
 @synthesize messageLabel		= _messageLabel;
 @synthesize loadingIndicator	= _loadingIndicator;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    
+	if (self) {
         // Custom initialization
     }
-    return self;
+    
+	return self;
 }
 
--(void)awakeFromNib {
+- (void)awakeFromNib {
 
 	[super awakeFromNib];
 	
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
 	
 	[super viewWillAppear:animated];
 
@@ -83,13 +85,14 @@
   
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+	
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	
 }
 
--(void)viewDidAppear:(BOOL)animated	{
+- (void)viewDidAppear:(BOOL)animated	{
 	
 	[super viewDidAppear:animated];
 	
@@ -130,7 +133,7 @@
 	
 }
 
--(void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
 	
 	[super viewDidDisappear:animated];
 	
@@ -140,12 +143,19 @@
 
 - (void)updateLayout {
 	
-	CGRect frame = self.view.frame;
+	CGRect frame			= self.view.frame;
+	CGFloat toolbarHeight	= 64.0;
+	
+	if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+		
+		toolbarHeight		= 44.0;
+		
+	}
 	
 	self.topToolbar.frame			= CGRectMake(0,
 												 0,
 												 CGRectGetWidth(frame),
-												 CGRectGetHeight(self.topToolbar.frame));
+												 toolbarHeight);
 	
 	if ([self.topToolbar.items count] > 0) {
 		
@@ -174,7 +184,7 @@
 	
 }
 
--(id)displaySurvey:(MHSurvey *)surveyToDisplay {
+- (id)displaySurvey:(MHSurvey *)surveyToDisplay {
 	
 	self.survey = surveyToDisplay;
 	

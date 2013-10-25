@@ -7,7 +7,7 @@
 //
 
 #import "MHPeopleListViewController.h"
-
+#import "MHNavigationBar.h"
 #import "MHAPI.h"
 #import "MHPersonCell.h"
 #import "MHLoadingCell.h" 

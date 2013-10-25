@@ -45,6 +45,10 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 	self.sectionTitles = [NSMutableArray array];
 	self.sections = [NSMutableArray array];
 	
+	if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+		[self.tableView setSeparatorInset:UIEdgeInsetsZero];
+	}
+	
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

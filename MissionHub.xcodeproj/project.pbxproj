@@ -200,6 +200,8 @@
 		68EB9A1E1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A1A1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png */; };
 		68EB9A20181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A1F181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png */; };
 		68EB9A21181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EB9A1F181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png */; };
+		68EB9A331819DEE7009712EB /* MHNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB9A321819DEE7009712EB /* MHNavigationBar.m */; };
+		68EB9A341819DEE7009712EB /* MHNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB9A321819DEE7009712EB /* MHNavigationBar.m */; };
 		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
 		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */; };
@@ -459,6 +461,8 @@
 		68EB9A191819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_AddContact_iOS7.png; sourceTree = "<group>"; };
 		68EB9A1A1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_NewInteraction_iOS7.png; sourceTree = "<group>"; };
 		68EB9A1F181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_Labels_iOS7.png; sourceTree = "<group>"; };
+		68EB9A311819DEE7009712EB /* MHNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationBar.h; path = "Custom UI/MHNavigationBar.h"; sourceTree = "<group>"; };
+		68EB9A321819DEE7009712EB /* MHNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationBar.m; path = "Custom UI/MHNavigationBar.m"; sourceTree = "<group>"; };
 		68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteractionType+Helper.h"; path = "Models/MHInteractionType+Helper.h"; sourceTree = "<group>"; };
 		68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteractionType+Helper.m"; path = "Models/MHInteractionType+Helper.m"; sourceTree = "<group>"; };
 		68F4CC4717D10846004D6574 /* MHAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerCell.m; path = "Custom UI/MHAnswerCell.m"; sourceTree = "<group>"; };
@@ -912,6 +916,8 @@
 				AD3C60D717838A3C00744167 /* MHInteractionCell.m */,
 				68F4CC4817D10846004D6574 /* MHAnswerCell.h */,
 				68F4CC4717D10846004D6574 /* MHAnswerCell.m */,
+				68EB9A311819DEE7009712EB /* MHNavigationBar.h */,
+				68EB9A321819DEE7009712EB /* MHNavigationBar.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1211,6 +1217,7 @@
 				68B7DDA317A2F95700849F31 /* MHInteraction+Helper.m in Sources */,
 				68B7DDA717A317BD00849F31 /* MHSurvey+Helper.m in Sources */,
 				68C82E7B180333C100A8D5A0 /* MHContactAssignment.m in Sources */,
+				68EB9A331819DEE7009712EB /* MHNavigationBar.m in Sources */,
 				68B7DDAB17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */,
 				68B7DDAF17A318D600849F31 /* MHOrganizationalPermission+Helper.m in Sources */,
 				68A38F0317A998730010CAC6 /* MHTextField.m in Sources */,
@@ -1259,6 +1266,7 @@
 				68C82E33180314FB00A8D5A0 /* MHAnswerSheet.m in Sources */,
 				68C82E37180314FB00A8D5A0 /* MHModel.m in Sources */,
 				68C82E39180314FB00A8D5A0 /* MHStorage.m in Sources */,
+				68EB9A341819DEE7009712EB /* MHNavigationBar.m in Sources */,
 				68C82E3B180314FB00A8D5A0 /* MHPerson+Helper.m in Sources */,
 				68C82E3D180314FB00A8D5A0 /* MHOrganization+Helper.m in Sources */,
 				68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */,

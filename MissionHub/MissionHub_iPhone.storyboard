@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rU8-t6-f3q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rU8-t6-f3q">
     <dependencies>
         <deployment version="1280" defaultVersion="1280" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" id="gp3-NM-vXW">
-                                <rect key="frame" x="0.0" y="10" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.19901945153061229" green="0.19901945153061229" blue="0.19901945153061229" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.53635204081632648" green="0.53635204081632648" blue="0.53635204081632648" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -49,7 +49,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.50196078431372548" green="0.50980392156862742" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="gp3-NM-vXW" id="54D-L8-oE1"/>
@@ -165,7 +165,9 @@ select another survey.</string>
             <objects>
                 <navigationController storyboardIdentifier="MHNavigationViewController" definesPresentationContext="YES" id="fXB-nB-CIT" customClass="MHNavigationViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="jMf-Ef-WLR">
+                        <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
                         <segue destination="jKu-P9-w4S" kind="relationship" relationship="rootViewController" id="FAG-ZG-ps6"/>
