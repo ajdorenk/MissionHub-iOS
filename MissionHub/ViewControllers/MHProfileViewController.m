@@ -85,7 +85,7 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 				 tableViewController:(UITableViewController *)self.currentTableViewContoller
 			 segmentedViewController:self.menuViewController];
 	
-	self.person = [MHAPI sharedInstance].currentUser;
+	self.person = [MHPerson newObjectFromFields:nil];
 	
 }
 
@@ -313,7 +313,7 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 
 - (void)refreshInfoForPerson:(MHPerson *)person onCompletion:(void (^)(void))completionBlock {
 	
-	if (person.remoteID) {
+	if ([person.remoteID integerValue] > 0) {
 		
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] getProfileForRemoteID:person.remoteID withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
@@ -356,7 +356,7 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 
 - (void)refreshSurveyAnswersForPerson:(MHPerson *)person {
 	
-	if (person.remoteID) {
+	if ([person.remoteID integerValue] > 0) {
 		
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] getPersonWithSurveyAnswerSheetsForPersonWithRemoteID:person.remoteID
@@ -389,7 +389,7 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 
 - (void)refreshInteractionsForPerson:(MHPerson *)person {
 	
-	if (person.remoteID) {
+	if ([person.remoteID integerValue] > 0) {
 	
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] getInteractionsForPersonWithRemoteID:person.remoteID

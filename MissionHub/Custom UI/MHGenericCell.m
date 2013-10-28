@@ -47,6 +47,7 @@ CGFloat const MHGenericCellMarginHorizontal	= 5.0;
 
 - (void)configure {
 	
+	self.backgroundColor			= [UIColor whiteColor];
 	self.checkmark.checkboxDelegate = self;
 	
 }

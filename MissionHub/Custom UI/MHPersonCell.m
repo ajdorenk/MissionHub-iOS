@@ -67,7 +67,8 @@ CGFloat static MHPersonCelliPadGap = 20.0;
 		
 	//}
 	
-	self.checkbox.checkboxDelegate = self;
+	self.backgroundColor			= [UIColor whiteColor];
+	self.checkbox.checkboxDelegate	= self;
 	
 }
 
