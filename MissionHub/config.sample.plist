@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>development_mode</key>
+	<true/>
+	<key>test_mode</key>
+	<false/>
+	<key>release_mode</key>
+	<false/>
+	<key>development_url</key>
+	<string>http://local.missionhub.com:7888/</string>
+	<key>devlopment_short_url</key>
+	<string>http://local.mhub.cc:7888/</string>
+	<key>staging_url</key>
+	<string>https://stage.missionhub.com/</string>
+	<key>staging_short_url</key>
+	<string>http://stage.mhub.cc/</string>
+	<key>prodution_url</key>
+	<string>https://www.missionhub.com/</string>
+	<key>production_short_url</key>
+	<string>http://mhub.cc/</string>
+	<key>api_path</key>
+	<string>apis/v3/</string>
+	<key>survey_path</key>
+	<string>s/</string>
+	<key>errbit_api_key</key>
+	<string></string>
+	<key>google_analytics_api_key</key>
+	<string></string>
+	<key>newrelic_api_key</key>
+	<string></string>
+</dict>
+</plist>

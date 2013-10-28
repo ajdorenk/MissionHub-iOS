@@ -20,3 +20,4 @@ DerivedData
 # Pods
 Pods
 Podfile.lock
+*config.plist

@@ -9,6 +9,34 @@
 /* Begin PBXBuildFile section */
 		2282B2366177466DB63DF9D1 /* libPods-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D11C346F9140469F8AC1C8 /* libPods-tests.a */; };
 		6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6801976217CFE88200DCE330 /* MHHeaderCell.m */; };
+		68095005181EDCA500DB0018 /* GCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FEB181EDCA500DB0018 /* GCAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095006181EDCA500DB0018 /* GCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FEB181EDCA500DB0018 /* GCAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095007181EDCA500DB0018 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FEF181EDCA500DB0018 /* DDXMLElementAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095008181EDCA500DB0018 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FEF181EDCA500DB0018 /* DDXMLElementAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095009181EDCA500DB0018 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FF2181EDCA500DB0018 /* NSString+DDXML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6809500A181EDCA500DB0018 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FF2181EDCA500DB0018 /* NSString+DDXML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6809500B181EDCA500DB0018 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FF5181EDCA500DB0018 /* DDXMLDocument.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6809500C181EDCA500DB0018 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FF5181EDCA500DB0018 /* DDXMLDocument.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6809500D181EDCA500DB0018 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FF7181EDCA500DB0018 /* DDXMLElement.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6809500E181EDCA500DB0018 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FF7181EDCA500DB0018 /* DDXMLElement.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6809500F181EDCA500DB0018 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FF9181EDCA500DB0018 /* DDXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095010181EDCA500DB0018 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FF9181EDCA500DB0018 /* DDXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095011181EDCA500DB0018 /* ABNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FFE181EDCA500DB0018 /* ABNotice.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095012181EDCA500DB0018 /* ABNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 68094FFE181EDCA500DB0018 /* ABNotice.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095013181EDCA500DB0018 /* ABNotifier.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68094FFF181EDCA500DB0018 /* ABNotifier.bundle */; };
+		68095014181EDCA500DB0018 /* ABNotifier.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68094FFF181EDCA500DB0018 /* ABNotifier.bundle */; };
+		68095015181EDCA500DB0018 /* ABNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 68095001181EDCA500DB0018 /* ABNotifier.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095016181EDCA500DB0018 /* ABNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 68095001181EDCA500DB0018 /* ABNotifier.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095017181EDCA500DB0018 /* ABNotifierFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68095004181EDCA500DB0018 /* ABNotifierFunctions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		68095018181EDCA500DB0018 /* ABNotifierFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68095004181EDCA500DB0018 /* ABNotifierFunctions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6809501A181EE1A300DB0018 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68095019181EE1A300DB0018 /* libxml2.dylib */; };
+		6809501B181EE1B000DB0018 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68095019181EE1A300DB0018 /* libxml2.dylib */; };
+		6809501D181EE95100DB0018 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809501C181EE95100DB0018 /* SystemConfiguration.framework */; };
+		6809501E181EE96300DB0018 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809501C181EE95100DB0018 /* SystemConfiguration.framework */; };
+		68095021181EEBAA00DB0018 /* MHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 68095020181EEBAA00DB0018 /* MHConfig.m */; };
+		68095022181EEBAA00DB0018 /* MHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 68095020181EEBAA00DB0018 /* MHConfig.m */; };
+		68095024181F0D0A00DB0018 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68095023181F0D0A00DB0018 /* config.plist */; };
+		68095025181F0D0A00DB0018 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68095023181F0D0A00DB0018 /* config.plist */; };
 		680B401A17E0DE8700A5E62B /* MHSortHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 680B401917E0DE8700A5E62B /* MHSortHeader.m */; };
 		680BE77A17E2606400BA8C12 /* MH_Mobile_ColumnButton_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE77817E2606400BA8C12 /* MH_Mobile_ColumnButton_40.png */; };
 		680BE77C17E2606400BA8C12 /* MH_Mobile_SortButton_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE77917E2606400BA8C12 /* MH_Mobile_SortButton_40.png */; };
@@ -20,10 +48,7 @@
 		680BE7B917E49FEB00BA8C12 /* MH_Mobile_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE7B817E49FEA00BA8C12 /* MH_Mobile_Logo@2x.png */; };
 		680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */; };
 		680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FC1782403600E6E742 /* MHPerson+Helper.m */; };
-		6812257917681ADD00D8C238 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812257617681ADD00D8C238 /* config.plist */; };
-		6812258617681CD200D8C238 /* config_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258317681CD200D8C238 /* config_dev.plist */; };
-		6812258817681CD200D8C238 /* config_lwi.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258417681CD200D8C238 /* config_lwi.plist */; };
-		6812258A17681CD200D8C238 /* config_stage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258517681CD200D8C238 /* config_stage.plist */; };
+		6812257917681ADD00D8C238 /* config.sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812257617681ADD00D8C238 /* config.sample.plist */; };
 		68134F951782748300227C2A /* MH_Mobile_PersonCell_Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68134F941782748300227C2A /* MH_Mobile_PersonCell_Placeholder.png */; };
 		68145B901790FFA6008145EA /* MHProfileInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68145B8F1790FFA6008145EA /* MHProfileInfoViewController.m */; };
 		68145B9417910867008145EA /* MHSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68145B9317910867008145EA /* MHSegmentedControl.m */; };
@@ -238,6 +263,33 @@
 		39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tests.xcconfig"; path = "Pods/Pods-tests.xcconfig"; sourceTree = "<group>"; };
 		6801976117CFE88200DCE330 /* MHHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHHeaderCell.h; path = "Custom UI/MHHeaderCell.h"; sourceTree = "<group>"; };
 		6801976217CFE88200DCE330 /* MHHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHHeaderCell.m; path = "Custom UI/MHHeaderCell.m"; sourceTree = "<group>"; };
+		68094FEA181EDCA500DB0018 /* GCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCAlertView.h; sourceTree = "<group>"; };
+		68094FEB181EDCA500DB0018 /* GCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCAlertView.m; sourceTree = "<group>"; };
+		68094FEE181EDCA500DB0018 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		68094FEF181EDCA500DB0018 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		68094FF1181EDCA500DB0018 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		68094FF2181EDCA500DB0018 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		68094FF3181EDCA500DB0018 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		68094FF4181EDCA500DB0018 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		68094FF5181EDCA500DB0018 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		68094FF6181EDCA500DB0018 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		68094FF7181EDCA500DB0018 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		68094FF8181EDCA500DB0018 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		68094FF9181EDCA500DB0018 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		68094FFB181EDCA500DB0018 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		68094FFD181EDCA500DB0018 /* ABNotice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNotice.h; sourceTree = "<group>"; };
+		68094FFE181EDCA500DB0018 /* ABNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNotice.m; sourceTree = "<group>"; };
+		68094FFF181EDCA500DB0018 /* ABNotifier.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ABNotifier.bundle; sourceTree = "<group>"; };
+		68095000181EDCA500DB0018 /* ABNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNotifier.h; sourceTree = "<group>"; };
+		68095001181EDCA500DB0018 /* ABNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNotifier.m; sourceTree = "<group>"; };
+		68095002181EDCA500DB0018 /* ABNotifierDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNotifierDelegate.h; sourceTree = "<group>"; };
+		68095003181EDCA500DB0018 /* ABNotifierFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNotifierFunctions.h; sourceTree = "<group>"; };
+		68095004181EDCA500DB0018 /* ABNotifierFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNotifierFunctions.m; sourceTree = "<group>"; };
+		68095019181EE1A300DB0018 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		6809501C181EE95100DB0018 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6809501F181EEBAA00DB0018 /* MHConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHConfig.h; path = APIControllers/MHConfig.h; sourceTree = "<group>"; };
+		68095020181EEBAA00DB0018 /* MHConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHConfig.m; path = APIControllers/MHConfig.m; sourceTree = "<group>"; };
+		68095023181F0D0A00DB0018 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		680B401817E0DE8700A5E62B /* MHSortHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSortHeader.h; path = "Custom UI/MHSortHeader.h"; sourceTree = "<group>"; };
 		680B401917E0DE8700A5E62B /* MHSortHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSortHeader.m; path = "Custom UI/MHSortHeader.m"; sourceTree = "<group>"; };
 		680BE77817E2606400BA8C12 /* MH_Mobile_ColumnButton_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ColumnButton_40.png; sourceTree = "<group>"; };
@@ -252,10 +304,7 @@
 		680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganization+Helper.m"; path = "Models/MHOrganization+Helper.m"; sourceTree = "<group>"; };
 		680CD8FB1782403600E6E742 /* MHPerson+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHPerson+Helper.h"; path = "Models/MHPerson+Helper.h"; sourceTree = "<group>"; };
 		680CD8FC1782403600E6E742 /* MHPerson+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHPerson+Helper.m"; path = "Models/MHPerson+Helper.m"; sourceTree = "<group>"; };
-		6812257617681ADD00D8C238 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
-		6812258317681CD200D8C238 /* config_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_dev.plist; sourceTree = "<group>"; };
-		6812258417681CD200D8C238 /* config_lwi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_lwi.plist; sourceTree = "<group>"; };
-		6812258517681CD200D8C238 /* config_stage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_stage.plist; sourceTree = "<group>"; };
+		6812257617681ADD00D8C238 /* config.sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.sample.plist; sourceTree = "<group>"; };
 		68134F941782748300227C2A /* MH_Mobile_PersonCell_Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_PersonCell_Placeholder.png; sourceTree = "<group>"; };
 		68145B8E1790FFA6008145EA /* MHProfileInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileInfoViewController.h; path = ViewControllers/MHProfileInfoViewController.h; sourceTree = "<group>"; };
 		68145B8F1790FFA6008145EA /* MHProfileInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileInfoViewController.m; path = ViewControllers/MHProfileInfoViewController.m; sourceTree = "<group>"; };
@@ -500,6 +549,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6809501E181EE96300DB0018 /* SystemConfiguration.framework in Frameworks */,
+				6809501A181EE1A300DB0018 /* libxml2.dylib in Frameworks */,
 				681C65B417D19F550021D2EE /* MessageUI.framework in Frameworks */,
 				6839108B1760FD3100E01B46 /* CoreGraphics.framework in Frameworks */,
 				AD9827A5177CF04200A0276A /* QuartzCore.framework in Frameworks */,
@@ -514,6 +565,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6809501D181EE95100DB0018 /* SystemConfiguration.framework in Frameworks */,
+				6809501B181EE1B000DB0018 /* libxml2.dylib in Frameworks */,
 				68C82E6E180318C100A8D5A0 /* QuartzCore.framework in Frameworks */,
 				68C82E6C180318A600A8D5A0 /* CoreData.framework in Frameworks */,
 				68C82E68180315C300A8D5A0 /* MessageUI.framework in Frameworks */,
@@ -528,6 +581,92 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68094FE7181EDC3100DB0018 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				68094FE8181EDCA500DB0018 /* Airbrake */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		68094FE8181EDCA500DB0018 /* Airbrake */ = {
+			isa = PBXGroup;
+			children = (
+				68094FE9181EDCA500DB0018 /* gcalertview */,
+				68094FEC181EDCA500DB0018 /* kissxml */,
+				68094FFC181EDCA500DB0018 /* notifier */,
+			);
+			name = Airbrake;
+			path = "Libraries/airbrake-ios/Airbrake";
+			sourceTree = "<group>";
+		};
+		68094FE9181EDCA500DB0018 /* gcalertview */ = {
+			isa = PBXGroup;
+			children = (
+				68094FEA181EDCA500DB0018 /* GCAlertView.h */,
+				68094FEB181EDCA500DB0018 /* GCAlertView.m */,
+			);
+			path = gcalertview;
+			sourceTree = "<group>";
+		};
+		68094FEC181EDCA500DB0018 /* kissxml */ = {
+			isa = PBXGroup;
+			children = (
+				68094FED181EDCA500DB0018 /* Additions */,
+				68094FF0181EDCA500DB0018 /* Categories */,
+				68094FF3181EDCA500DB0018 /* DDXML.h */,
+				68094FF4181EDCA500DB0018 /* DDXMLDocument.h */,
+				68094FF5181EDCA500DB0018 /* DDXMLDocument.m */,
+				68094FF6181EDCA500DB0018 /* DDXMLElement.h */,
+				68094FF7181EDCA500DB0018 /* DDXMLElement.m */,
+				68094FF8181EDCA500DB0018 /* DDXMLNode.h */,
+				68094FF9181EDCA500DB0018 /* DDXMLNode.m */,
+				68094FFA181EDCA500DB0018 /* Private */,
+			);
+			path = kissxml;
+			sourceTree = "<group>";
+		};
+		68094FED181EDCA500DB0018 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				68094FEE181EDCA500DB0018 /* DDXMLElementAdditions.h */,
+				68094FEF181EDCA500DB0018 /* DDXMLElementAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		68094FF0181EDCA500DB0018 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				68094FF1181EDCA500DB0018 /* NSString+DDXML.h */,
+				68094FF2181EDCA500DB0018 /* NSString+DDXML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		68094FFA181EDCA500DB0018 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				68094FFB181EDCA500DB0018 /* DDXMLPrivate.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		68094FFC181EDCA500DB0018 /* notifier */ = {
+			isa = PBXGroup;
+			children = (
+				68094FFD181EDCA500DB0018 /* ABNotice.h */,
+				68094FFE181EDCA500DB0018 /* ABNotice.m */,
+				68094FFF181EDCA500DB0018 /* ABNotifier.bundle */,
+				68095000181EDCA500DB0018 /* ABNotifier.h */,
+				68095001181EDCA500DB0018 /* ABNotifier.m */,
+				68095002181EDCA500DB0018 /* ABNotifierDelegate.h */,
+				68095003181EDCA500DB0018 /* ABNotifierFunctions.h */,
+				68095004181EDCA500DB0018 /* ABNotifierFunctions.m */,
+			);
+			path = notifier;
+			sourceTree = "<group>";
+		};
 		680CD8FF178240C900E6E742 /* CoreDataGeneratedClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,6 +732,7 @@
 				6839108E1760FD3100E01B46 /* MissionHub */,
 				683910B01760FD3100E01B46 /* MissionHubTests */,
 				6867917417FF4EC6000106BF /* tests */,
+				68094FE7181EDC3100DB0018 /* Libraries */,
 				683910851760FD3100E01B46 /* Frameworks */,
 				683910841760FD3100E01B46 /* Products */,
 				14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */,
@@ -612,6 +752,8 @@
 		683910851760FD3100E01B46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6809501C181EE95100DB0018 /* SystemConfiguration.framework */,
+				68095019181EE1A300DB0018 /* libxml2.dylib */,
 				681C65B317D19F550021D2EE /* MessageUI.framework */,
 				683910861760FD3100E01B46 /* UIKit.framework */,
 				683910881760FD3100E01B46 /* Foundation.framework */,
@@ -655,10 +797,8 @@
 				683AE396176D2DC20027EDE4 /* appicon-small-50.png */,
 				683AE397176D2DC20027EDE4 /* appicon-72.png */,
 				683AE390176D2B1F0027EDE4 /* Entitlements.plist */,
-				6812257617681ADD00D8C238 /* config.plist */,
-				6812258317681CD200D8C238 /* config_dev.plist */,
-				6812258417681CD200D8C238 /* config_lwi.plist */,
-				6812258517681CD200D8C238 /* config_stage.plist */,
+				6812257617681ADD00D8C238 /* config.sample.plist */,
+				68095023181F0D0A00DB0018 /* config.plist */,
 				683910901760FD3100E01B46 /* MissionHub-Info.plist */,
 				683910911760FD3100E01B46 /* InfoPlist.strings */,
 				683910941760FD3100E01B46 /* main.m */,
@@ -864,6 +1004,8 @@
 		68D7AA3B176677DA00B9B0B1 /* API Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6809501F181EEBAA00DB0018 /* MHConfig.h */,
+				68095020181EEBAA00DB0018 /* MHConfig.m */,
 				68D7AA3C1766783200B9B0B1 /* MHAPI.h */,
 				68D7AA3D1766783200B9B0B1 /* MHAPI.m */,
 				68C0696317710E60007C79D6 /* MHRequestOperation.h */,
@@ -1013,13 +1155,12 @@
 				6839109F1760FD3100E01B46 /* Default-568h@2x.png in Resources */,
 				683910CC1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
 				683910CF1760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
-				6812257917681ADD00D8C238 /* config.plist in Resources */,
-				6812258617681CD200D8C238 /* config_dev.plist in Resources */,
-				6812258817681CD200D8C238 /* config_lwi.plist in Resources */,
-				6812258A17681CD200D8C238 /* config_stage.plist in Resources */,
+				6812257917681ADD00D8C238 /* config.sample.plist in Resources */,
+				68095013181EDCA500DB0018 /* ABNotifier.bundle in Resources */,
 				683AE391176D2B1F0027EDE4 /* Entitlements.plist in Resources */,
 				683AE398176D2DC20027EDE4 /* appicon@2x.png in Resources */,
 				6835D5CC17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png in Resources */,
+				68095024181F0D0A00DB0018 /* config.plist in Resources */,
 				683AE39A176D2DC20027EDE4 /* appicon.png in Resources */,
 				683AE39C176D2DC20027EDE4 /* appicon-small@2x.png in Resources */,
 				68EB9A1D1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
@@ -1083,6 +1224,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				68EB9A21181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
+				68095014181EDCA500DB0018 /* ABNotifier.bundle in Resources */,
+				68095025181F0D0A00DB0018 /* config.plist in Resources */,
 				68EB9A1C1819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png in Resources */,
 				68EB9A1E1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
 				6867917917FF4EC6000106BF /* InfoPlist.strings in Resources */,
@@ -1164,7 +1307,9 @@
 				683910951760FD3100E01B46 /* main.m in Sources */,
 				683910991760FD3100E01B46 /* MHAppDelegate.m in Sources */,
 				683910A21760FD3100E01B46 /* MissionHub.xcdatamodeld in Sources */,
+				68095011181EDCA500DB0018 /* ABNotice.m in Sources */,
 				683910D31761087600E01B46 /* MHRootViewController.m in Sources */,
+				68095017181EDCA500DB0018 /* ABNotifierFunctions.m in Sources */,
 				683910D81761356000E01B46 /* MHMenuViewController.m in Sources */,
 				683910E0176144BE00E01B46 /* MHPeopleListViewController.m in Sources */,
 				683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */,
@@ -1177,12 +1322,14 @@
 				6867918517FF6533000106BF /* MHActivityView.m in Sources */,
 				68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */,
 				68C069691772252C007C79D6 /* MHRequestOptions.m in Sources */,
+				6809500D181EDCA500DB0018 /* DDXMLElement.m in Sources */,
 				68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */,
 				68EB33CD17792D8F003958A0 /* MHErrorHandler.m in Sources */,
 				68478D3B177A5AA20014501D /* MHInteraction.m in Sources */,
 				68478D3E177A70200014501D /* MHInteractionType.m in Sources */,
 				68478D52177A784A0014501D /* MHPermissionLevel.m in Sources */,
 				68478D5A177A7F420014501D /* MHSurvey.m in Sources */,
+				68095009181EDCA500DB0018 /* NSString+DDXML.m in Sources */,
 				68478D5E177BA8E00014501D /* NSSet+MHSearchForRemoteID.m in Sources */,
 				AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */,
 				AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */,
@@ -1192,7 +1339,9 @@
 				68478D9A177E8B140014501D /* MHGenericListViewController.m in Sources */,
 				68478DAE177E8C9F0014501D /* MHPeopleSearchBar.m in Sources */,
 				68C82E7F1803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */,
+				6809500B181EDCA500DB0018 /* DDXMLDocument.m in Sources */,
 				6823A7BB177EA4C900DBDF3F /* MHQuestion.m in Sources */,
+				68095015181EDCA500DB0018 /* ABNotifier.m in Sources */,
 				6823A7CE177EC34C00DBDF3F /* MHEmailAddress.m in Sources */,
 				6823A7D2177EC34C00DBDF3F /* MHPhoneNumber.m in Sources */,
 				6823A7D6177EC34D00DBDF3F /* MHAddress.m in Sources */,
@@ -1203,6 +1352,7 @@
 				AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */,
 				AD3C60DC178761E200744167 /* MHProfileInteractionsViewController.m in Sources */,
 				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
+				68095021181EEBAA00DB0018 /* MHConfig.m in Sources */,
 				AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
 				6896649F17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
 				68145B901790FFA6008145EA /* MHProfileInfoViewController.m in Sources */,
@@ -1215,6 +1365,7 @@
 				ADCCBA311795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */,
 				689F4E551798F57500BCAFFC /* MHInfoCell.m in Sources */,
 				68B7DDA317A2F95700849F31 /* MHInteraction+Helper.m in Sources */,
+				68095007181EDCA500DB0018 /* DDXMLElementAdditions.m in Sources */,
 				68B7DDA717A317BD00849F31 /* MHSurvey+Helper.m in Sources */,
 				68C82E7B180333C100A8D5A0 /* MHContactAssignment.m in Sources */,
 				68EB9A331819DEE7009712EB /* MHNavigationBar.m in Sources */,
@@ -1226,6 +1377,7 @@
 				68818AFC17C7FFF800624887 /* MHAnswerSheet.m in Sources */,
 				68818B0017C7FFF900624887 /* MHAnswer.m in Sources */,
 				68818B0417C800A300624887 /* MHAnswerSheet+Helper.m in Sources */,
+				68095005181EDCA500DB0018 /* GCAlertView.m in Sources */,
 				68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
 				6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */,
 				68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */,
@@ -1235,6 +1387,7 @@
 				682462D717D90E2B00E1AFBB /* MHPermissionsActivity.m in Sources */,
 				682462DB17D9252F00E1AFBB /* MHDeleteActivity.m in Sources */,
 				682462DF17D9318700E1AFBB /* MHActivity.m in Sources */,
+				6809500F181EDCA500DB0018 /* DDXMLNode.m in Sources */,
 				682462E317D9425F00E1AFBB /* MHArchiveActivity.m in Sources */,
 				682462E717D9429E00E1AFBB /* MHEmailActivity.m in Sources */,
 				682462EB17D942B600E1AFBB /* MHTextActivity.m in Sources */,
@@ -1268,27 +1421,37 @@
 				68C82E39180314FB00A8D5A0 /* MHStorage.m in Sources */,
 				68EB9A341819DEE7009712EB /* MHNavigationBar.m in Sources */,
 				68C82E3B180314FB00A8D5A0 /* MHPerson+Helper.m in Sources */,
+				6809500E181EDCA500DB0018 /* DDXMLElement.m in Sources */,
+				68095012181EDCA500DB0018 /* ABNotice.m in Sources */,
 				68C82E3D180314FB00A8D5A0 /* MHOrganization+Helper.m in Sources */,
 				68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */,
+				68095010181EDCA500DB0018 /* DDXMLNode.m in Sources */,
 				68C82E41180314FB00A8D5A0 /* MHInteraction+Helper.m in Sources */,
 				68C82E43180314FB00A8D5A0 /* MHInteractionType+Helper.m in Sources */,
 				68C82E45180314FB00A8D5A0 /* MHOrganizationalPermission+Helper.m in Sources */,
 				68C82E47180314FB00A8D5A0 /* MHPermissionLevel+Helper.m in Sources */,
 				68C82E49180314FB00A8D5A0 /* MHOrganizationalLabel+Helper.m in Sources */,
 				68C82E4B180314FB00A8D5A0 /* MHLabel+Helper.m in Sources */,
+				68095006181EDCA500DB0018 /* GCAlertView.m in Sources */,
 				68C82E4D180314FB00A8D5A0 /* MHSurvey+Helper.m in Sources */,
 				68C82E4F180314FB00A8D5A0 /* MHQuestion.m in Sources */,
 				68C82E51180314FB00A8D5A0 /* MHAnswerSheet+Helper.m in Sources */,
 				68C82E53180314FB00A8D5A0 /* MHAnswer.m in Sources */,
 				68C82E55180314FB00A8D5A0 /* MHAddress+Helper.m in Sources */,
 				68C82E57180314FB00A8D5A0 /* MHPhoneNumber.m in Sources */,
+				68095022181EEBAA00DB0018 /* MHConfig.m in Sources */,
 				68C82E59180314FB00A8D5A0 /* MHEmailAddress.m in Sources */,
 				68C82E7C180333C100A8D5A0 /* MHContactAssignment.m in Sources */,
 				68C82E5B180314FB00A8D5A0 /* MHAPI.m in Sources */,
 				68C82E5D180314FB00A8D5A0 /* MHRequestOperation.m in Sources */,
+				68095018181EDCA500DB0018 /* ABNotifierFunctions.m in Sources */,
+				68095016181EDCA500DB0018 /* ABNotifier.m in Sources */,
 				68C82E5F180314FB00A8D5A0 /* MHRequestOptions.m in Sources */,
+				6809500C181EDCA500DB0018 /* DDXMLDocument.m in Sources */,
 				68C82E801803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */,
+				6809500A181EDCA500DB0018 /* NSString+DDXML.m in Sources */,
 				68C82E61180314FB00A8D5A0 /* MHLoginViewController.m in Sources */,
+				68095008181EDCA500DB0018 /* DDXMLElementAdditions.m in Sources */,
 				68C82E63180314FB00A8D5A0 /* MHErrorHandler.m in Sources */,
 				68C82E64180314FB00A8D5A0 /* MissionHub.xcdatamodeld in Sources */,
 				6891C28E17FFBE1B009D5851 /* MHAPIBulkActionTests.m in Sources */,
@@ -1396,17 +1559,39 @@
 			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Karl Kranich (E7Z4W7Z7H7)";
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/DWTagList\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK/FacebookSDK\"",
+					"\"${PODS_ROOT}/Headers/GoogleAnalytics-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/KIF\"",
+					"\"${PODS_ROOT}/Headers/Kiwi\"",
+					"\"${PODS_ROOT}/Headers/M6ParallaxController\"",
+					"\"${PODS_ROOT}/Headers/NewRelicAgent\"",
+					"\"${PODS_ROOT}/Headers/Nocilla\"",
+					"\"${PODS_ROOT}/Headers/OCHamcrest\"",
+					"\"${PODS_ROOT}/Headers/ODRefreshControl\"",
+					"\"${PODS_ROOT}/Headers/SDSegmentedControl\"",
+					"\"${PODS_ROOT}/Headers/SIAlertView\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F17F75BF-195B-4C23-BA43-929A0E694931";
+				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1416,17 +1601,39 @@
 			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc (3EQ94S9G86)";
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/DWTagList\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK/FacebookSDK\"",
+					"\"${PODS_ROOT}/Headers/GoogleAnalytics-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/KIF\"",
+					"\"${PODS_ROOT}/Headers/Kiwi\"",
+					"\"${PODS_ROOT}/Headers/M6ParallaxController\"",
+					"\"${PODS_ROOT}/Headers/NewRelicAgent\"",
+					"\"${PODS_ROOT}/Headers/Nocilla\"",
+					"\"${PODS_ROOT}/Headers/OCHamcrest\"",
+					"\"${PODS_ROOT}/Headers/ODRefreshControl\"",
+					"\"${PODS_ROOT}/Headers/SDSegmentedControl\"",
+					"\"${PODS_ROOT}/Headers/SIAlertView\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7D1F43DC-D292-4295-9218-E4B7D6145933";
+				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1462,17 +1669,39 @@
 			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc (3EQ94S9G86)";
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionHub/MissionHub-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/DWTagList\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK/FacebookSDK\"",
+					"\"${PODS_ROOT}/Headers/GoogleAnalytics-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/KIF\"",
+					"\"${PODS_ROOT}/Headers/Kiwi\"",
+					"\"${PODS_ROOT}/Headers/M6ParallaxController\"",
+					"\"${PODS_ROOT}/Headers/NewRelicAgent\"",
+					"\"${PODS_ROOT}/Headers/Nocilla\"",
+					"\"${PODS_ROOT}/Headers/OCHamcrest\"",
+					"\"${PODS_ROOT}/Headers/ODRefreshControl\"",
+					"\"${PODS_ROOT}/Headers/SDSegmentedControl\"",
+					"\"${PODS_ROOT}/Headers/SIAlertView\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "205ED601-49EB-4F03-8A14-7342D07FEE93";
+				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Adhoc;
@@ -1501,6 +1730,26 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/DWTagList\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK/FacebookSDK\"",
+					"\"${PODS_ROOT}/Headers/GoogleAnalytics-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/KIF\"",
+					"\"${PODS_ROOT}/Headers/Kiwi\"",
+					"\"${PODS_ROOT}/Headers/M6ParallaxController\"",
+					"\"${PODS_ROOT}/Headers/NewRelicAgent\"",
+					"\"${PODS_ROOT}/Headers/Nocilla\"",
+					"\"${PODS_ROOT}/Headers/OCHamcrest\"",
+					"\"${PODS_ROOT}/Headers/ODRefreshControl\"",
+					"\"${PODS_ROOT}/Headers/SDSegmentedControl\"",
+					"\"${PODS_ROOT}/Headers/SIAlertView\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1530,6 +1779,26 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/DWTagList\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK/FacebookSDK\"",
+					"\"${PODS_ROOT}/Headers/GoogleAnalytics-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/KIF\"",
+					"\"${PODS_ROOT}/Headers/Kiwi\"",
+					"\"${PODS_ROOT}/Headers/M6ParallaxController\"",
+					"\"${PODS_ROOT}/Headers/NewRelicAgent\"",
+					"\"${PODS_ROOT}/Headers/Nocilla\"",
+					"\"${PODS_ROOT}/Headers/OCHamcrest\"",
+					"\"${PODS_ROOT}/Headers/ODRefreshControl\"",
+					"\"${PODS_ROOT}/Headers/SDSegmentedControl\"",
+					"\"${PODS_ROOT}/Headers/SIAlertView\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1560,6 +1829,26 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/DWTagList\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/Facebook-iOS-SDK/FacebookSDK\"",
+					"\"${PODS_ROOT}/Headers/GoogleAnalytics-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/KIF\"",
+					"\"${PODS_ROOT}/Headers/Kiwi\"",
+					"\"${PODS_ROOT}/Headers/M6ParallaxController\"",
+					"\"${PODS_ROOT}/Headers/NewRelicAgent\"",
+					"\"${PODS_ROOT}/Headers/Nocilla\"",
+					"\"${PODS_ROOT}/Headers/OCHamcrest\"",
+					"\"${PODS_ROOT}/Headers/ODRefreshControl\"",
+					"\"${PODS_ROOT}/Headers/SDSegmentedControl\"",
+					"\"${PODS_ROOT}/Headers/SIAlertView\"",
+					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";

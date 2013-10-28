@@ -8,20 +8,23 @@
 
 #import "MHAppDelegate.h"
 #import "MHStorage.h"
+#import "MHConfig.h"
+#import "ABNotifier.h"
+#import <NewRelicAgent/NewRelicAgent.h>
 
 @implementation MHAppDelegate
 
 @synthesize loginViewController;
 
-void uncaughtExceptionHandler(NSException *exception) {
-    NSLog(@"CRASH: %@", exception);
-    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-    // Internal error reporting
-}
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	
+	[ABNotifier startNotifierWithAPIKey:[MHConfig sharedInstance].apiKeyErrbit
+						environmentName:ABNotifierAutomaticEnvironment
+								 useSSL:YES
+							   delegate:nil];
+	
+	[NewRelicAgent startWithApplicationToken:[MHConfig sharedInstance].apiKeyNewRelic];
+	
     return YES;
 }
 
