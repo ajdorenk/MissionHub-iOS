@@ -35,6 +35,8 @@
 		6809501E181EE96300DB0018 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6809501C181EE95100DB0018 /* SystemConfiguration.framework */; };
 		68095021181EEBAA00DB0018 /* MHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 68095020181EEBAA00DB0018 /* MHConfig.m */; };
 		68095022181EEBAA00DB0018 /* MHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 68095020181EEBAA00DB0018 /* MHConfig.m */; };
+		68095024181F0D0A00DB0018 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68095023181F0D0A00DB0018 /* config.plist */; };
+		68095025181F0D0A00DB0018 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68095023181F0D0A00DB0018 /* config.plist */; };
 		680B401A17E0DE8700A5E62B /* MHSortHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 680B401917E0DE8700A5E62B /* MHSortHeader.m */; };
 		680BE77A17E2606400BA8C12 /* MH_Mobile_ColumnButton_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE77817E2606400BA8C12 /* MH_Mobile_ColumnButton_40.png */; };
 		680BE77C17E2606400BA8C12 /* MH_Mobile_SortButton_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 680BE77917E2606400BA8C12 /* MH_Mobile_SortButton_40.png */; };
@@ -47,9 +49,6 @@
 		680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8F517823E4600E6E742 /* MHOrganization+Helper.m */; };
 		680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 680CD8FC1782403600E6E742 /* MHPerson+Helper.m */; };
 		6812257917681ADD00D8C238 /* config.sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812257617681ADD00D8C238 /* config.sample.plist */; };
-		6812258617681CD200D8C238 /* config_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258317681CD200D8C238 /* config_dev.plist */; };
-		6812258817681CD200D8C238 /* config_lwi.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258417681CD200D8C238 /* config_lwi.plist */; };
-		6812258A17681CD200D8C238 /* config_stage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6812258517681CD200D8C238 /* config_stage.plist */; };
 		68134F951782748300227C2A /* MH_Mobile_PersonCell_Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68134F941782748300227C2A /* MH_Mobile_PersonCell_Placeholder.png */; };
 		68145B901790FFA6008145EA /* MHProfileInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68145B8F1790FFA6008145EA /* MHProfileInfoViewController.m */; };
 		68145B9417910867008145EA /* MHSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 68145B9317910867008145EA /* MHSegmentedControl.m */; };
@@ -290,6 +289,7 @@
 		6809501C181EE95100DB0018 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6809501F181EEBAA00DB0018 /* MHConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHConfig.h; path = APIControllers/MHConfig.h; sourceTree = "<group>"; };
 		68095020181EEBAA00DB0018 /* MHConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHConfig.m; path = APIControllers/MHConfig.m; sourceTree = "<group>"; };
+		68095023181F0D0A00DB0018 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		680B401817E0DE8700A5E62B /* MHSortHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSortHeader.h; path = "Custom UI/MHSortHeader.h"; sourceTree = "<group>"; };
 		680B401917E0DE8700A5E62B /* MHSortHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSortHeader.m; path = "Custom UI/MHSortHeader.m"; sourceTree = "<group>"; };
 		680BE77817E2606400BA8C12 /* MH_Mobile_ColumnButton_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ColumnButton_40.png; sourceTree = "<group>"; };
@@ -305,9 +305,6 @@
 		680CD8FB1782403600E6E742 /* MHPerson+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHPerson+Helper.h"; path = "Models/MHPerson+Helper.h"; sourceTree = "<group>"; };
 		680CD8FC1782403600E6E742 /* MHPerson+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHPerson+Helper.m"; path = "Models/MHPerson+Helper.m"; sourceTree = "<group>"; };
 		6812257617681ADD00D8C238 /* config.sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.sample.plist; sourceTree = "<group>"; };
-		6812258317681CD200D8C238 /* config_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_dev.plist; sourceTree = "<group>"; };
-		6812258417681CD200D8C238 /* config_lwi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_lwi.plist; sourceTree = "<group>"; };
-		6812258517681CD200D8C238 /* config_stage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config_stage.plist; sourceTree = "<group>"; };
 		68134F941782748300227C2A /* MH_Mobile_PersonCell_Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_PersonCell_Placeholder.png; sourceTree = "<group>"; };
 		68145B8E1790FFA6008145EA /* MHProfileInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileInfoViewController.h; path = ViewControllers/MHProfileInfoViewController.h; sourceTree = "<group>"; };
 		68145B8F1790FFA6008145EA /* MHProfileInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileInfoViewController.m; path = ViewControllers/MHProfileInfoViewController.m; sourceTree = "<group>"; };
@@ -801,9 +798,7 @@
 				683AE397176D2DC20027EDE4 /* appicon-72.png */,
 				683AE390176D2B1F0027EDE4 /* Entitlements.plist */,
 				6812257617681ADD00D8C238 /* config.sample.plist */,
-				6812258317681CD200D8C238 /* config_dev.plist */,
-				6812258417681CD200D8C238 /* config_lwi.plist */,
-				6812258517681CD200D8C238 /* config_stage.plist */,
+				68095023181F0D0A00DB0018 /* config.plist */,
 				683910901760FD3100E01B46 /* MissionHub-Info.plist */,
 				683910911760FD3100E01B46 /* InfoPlist.strings */,
 				683910941760FD3100E01B46 /* main.m */,
@@ -1161,13 +1156,11 @@
 				683910CC1760FEEF00E01B46 /* MissionHub_iPhone.storyboard in Resources */,
 				683910CF1760FF1200E01B46 /* MissionHub_iPad.storyboard in Resources */,
 				6812257917681ADD00D8C238 /* config.sample.plist in Resources */,
-				6812258617681CD200D8C238 /* config_dev.plist in Resources */,
-				6812258817681CD200D8C238 /* config_lwi.plist in Resources */,
-				6812258A17681CD200D8C238 /* config_stage.plist in Resources */,
 				68095013181EDCA500DB0018 /* ABNotifier.bundle in Resources */,
 				683AE391176D2B1F0027EDE4 /* Entitlements.plist in Resources */,
 				683AE398176D2DC20027EDE4 /* appicon@2x.png in Resources */,
 				6835D5CC17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png in Resources */,
+				68095024181F0D0A00DB0018 /* config.plist in Resources */,
 				683AE39A176D2DC20027EDE4 /* appicon.png in Resources */,
 				683AE39C176D2DC20027EDE4 /* appicon-small@2x.png in Resources */,
 				68EB9A1D1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
@@ -1232,6 +1225,7 @@
 			files = (
 				68EB9A21181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
 				68095014181EDCA500DB0018 /* ABNotifier.bundle in Resources */,
+				68095025181F0D0A00DB0018 /* config.plist in Resources */,
 				68EB9A1C1819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png in Resources */,
 				68EB9A1E1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
 				6867917917FF4EC6000106BF /* InfoPlist.strings in Resources */,
