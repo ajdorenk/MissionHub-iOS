@@ -10,6 +10,7 @@
 #import "MHStorage.h"
 #import "MHConfig.h"
 #import "ABNotifier.h"
+#import <NewRelicAgent/NewRelicAgent.h>
 
 @implementation MHAppDelegate
 
@@ -21,6 +22,8 @@
 						environmentName:ABNotifierAutomaticEnvironment
 								 useSSL:YES
 							   delegate:nil];
+	
+	[NewRelicAgent startWithApplicationToken:[MHConfig sharedInstance].apiKeyNewRelic];
 	
     return YES;
 }
