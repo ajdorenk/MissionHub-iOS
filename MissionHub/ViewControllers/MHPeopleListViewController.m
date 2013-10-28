@@ -286,7 +286,7 @@
 		[self didChangeValueForKey:@"activityViewController"];
 		
 		_activityViewController.delegate			= self;
-		_activityViewController.animateFromView		= self.view;
+		//_activityViewController.animateFromView		= self.view;
 		_activityViewController.animationPosition	= MHActivityViewControllerAnimationPositionBottom;
 		_activityViewController.animationDirection	= MHActivityViewControllerAnimationDirectionUp;
 		

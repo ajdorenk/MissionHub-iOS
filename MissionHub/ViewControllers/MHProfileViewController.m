@@ -279,9 +279,20 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 		[self didChangeValueForKey:@"activityViewController"];
 		
 		_activityViewController.delegate			= self;
-		_activityViewController.animateFromView		= (UIView *)self.navigationController.navigationBar;
-		_activityViewController.animationPosition	= MHActivityViewControllerAnimationPositionBottom;
-		_activityViewController.animationDirection	= MHActivityViewControllerAnimationDirectionDown;
+		
+		if ((floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)) {
+			
+			_activityViewController.animateFromView		= self.view;
+			_activityViewController.animationPosition	= MHActivityViewControllerAnimationPositionTop;
+			_activityViewController.animationDirection	= MHActivityViewControllerAnimationDirectionDown;
+			
+		} else {
+			
+			_activityViewController.animateFromView		= (UIView *)self.navigationController.navigationBar;
+			_activityViewController.animationPosition	= MHActivityViewControllerAnimationPositionBottom;
+			_activityViewController.animationDirection	= MHActivityViewControllerAnimationDirectionDown;
+			
+		}
 		
 	}
 	

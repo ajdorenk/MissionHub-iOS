@@ -146,11 +146,20 @@
 	__typeof (&*self) __weak weakSelf = self;
 	[UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:^{
 		
-		UIView *viewToAnimateFrom	= (weakSelf.animateFromView ? weakSelf.animateFromView : weakSelf.presentingController.view);
 		CGRect currentFrame			= weakSelf.frameForCurrentOrientation;
 		CGRect afterFrame			= currentFrame;
 		
-		CGFloat yPosition			= ( weakSelf.animationPosition == MHActivityViewControllerAnimationPositionTop ? CGRectGetMinY(viewToAnimateFrom.frame) : CGRectGetMaxY(viewToAnimateFrom.frame) );
+		CGFloat yPosition			= 0;
+		
+		if (self.animateFromView) {
+			
+			yPosition = ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? CGRectGetMinY(self.animateFromView.frame) : CGRectGetMaxY(self.animateFromView.frame) );
+			
+		} else {
+			
+			yPosition = ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? 0 : CGRectGetHeight(self.presentingController.view.frame) );
+			
+		}
 		
 		if (self.animationDirection == MHActivityViewControllerAnimationDirectionUp) {
 			
@@ -196,12 +205,21 @@
 	
     [super didMoveToParentViewController:parent];
 	
-	UIView *viewToAnimateFrom	= (self.animateFromView ? self.animateFromView : self.presentingController.view);
 	CGRect currentFrame			= self.frameForCurrentOrientation;
 	__block CGRect beforeFrame	= currentFrame;
 	__block CGRect afterFrame	= currentFrame;
 	
-	CGFloat yPosition			= ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? CGRectGetMinY(viewToAnimateFrom.frame) : CGRectGetMaxY(viewToAnimateFrom.frame) );
+	CGFloat yPosition			= 0;
+	
+	if (self.animateFromView) {
+		
+		yPosition = ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? CGRectGetMinY(self.animateFromView.frame) : CGRectGetMaxY(self.animateFromView.frame) );
+		
+	} else {
+	
+		yPosition = ( self.animationPosition == MHActivityViewControllerAnimationPositionTop ? 0 : CGRectGetHeight(self.presentingController.view.frame) );
+		
+	}
 	
 	if (self.animationDirection == MHActivityViewControllerAnimationDirectionUp) {
 		
