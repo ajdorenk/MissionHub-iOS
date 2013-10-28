@@ -7,7 +7,7 @@
 //
 
 #import "MHAPI.h"
-#import "AFHTTPClient.h"
+#import "MHConfig.h"
 #import "MHRequestOperation.h"
 #import "MHPerson+Helper.h"
 
@@ -60,16 +60,7 @@ typedef enum {
 	
 	dispatch_once(&onceToken, ^{
 		
-		NSString *configFilePath		= [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
-		NSDictionary *configDictionary	= [NSDictionary dictionaryWithContentsOfFile:configFilePath];
-		
-		NSString *baseUrlString			= ( [configDictionary valueForKey:@"api_url"] ? [configDictionary valueForKey:@"api_url"] : @"" );
-		NSString *surveyUrlString		= ( [configDictionary valueForKey:@"survey_url"] ? [configDictionary valueForKey:@"survey_url"] : @"" );
-		
-		NSURL *baseURL					= [NSURL URLWithString:baseUrlString];
-		NSURL *surveyURL				= [NSURL URLWithString:surveyUrlString];
-		
-		sharedInstance					= [[MHAPI alloc] initWithBaseURL:baseURL andSurveyURL:surveyURL];
+		sharedInstance					= [[MHAPI alloc] initWithAPIURL:[MHConfig sharedInstance].apiUrl andSurveyURL:[MHConfig sharedInstance].surveyUrl];
 		
 	});
 	
@@ -77,7 +68,7 @@ typedef enum {
 		
 }
 
-- (id)initWithBaseURL:(NSURL *)url andSurveyURL:(NSURL *)surveyUrl {
+- (id)initWithAPIURL:(NSURL *)url andSurveyURL:(NSURL *)surveyUrl {
 	
     self = [super initWithBaseURL:url];
 	

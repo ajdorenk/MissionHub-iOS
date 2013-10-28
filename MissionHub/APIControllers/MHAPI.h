@@ -28,7 +28,7 @@ extern NSString *const MHAPIErrorDomain;
 
 
 + (MHAPI *)sharedInstance;
-- (id)initWithBaseURL:(NSURL *)url andSurveyURL:(NSURL *)surveyURL;
+- (id)initWithAPIURL:(NSURL *)url andSurveyURL:(NSURL *)surveyUrl;
 
 //misc
 - (NSMutableURLRequest *)requestWithOptions:(MHRequestOptions *)options;
