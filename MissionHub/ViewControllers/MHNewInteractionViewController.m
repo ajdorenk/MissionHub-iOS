@@ -729,8 +729,6 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		_timestampPicker = [[UIDatePicker alloc] init];
 		[self didChangeValueForKey:@"timestampPicker"];
 		
-		_timestampPicker					= [[UIDatePicker alloc] init];
-		_timestampPicker.backgroundColor	= [UIColor blackColor];
 		[_timestampPicker addTarget:self action:@selector(timestampChanged:) forControlEvents:UIControlEventValueChanged];
 		
 	}
