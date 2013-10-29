@@ -8,6 +8,7 @@
 
 #import "MHRootViewController.h"
 #import "MHPeopleListViewController.h"
+#import "MHGoogleAnalyticsTracker.h"
 
 @interface MHRootViewController ()
 
@@ -20,10 +21,10 @@
 
 @implementation MHRootViewController
 
-@synthesize loginViewController;
-@synthesize peopleNavigationViewController;
-@synthesize userInitiatedLogout;
-@synthesize showLoginOnViewDidAppear;
+@synthesize loginViewController				= _loginViewController;
+@synthesize peopleNavigationViewController	= _peopleNavigationViewController;
+@synthesize userInitiatedLogout				= _userInitiatedLogout;
+@synthesize showLoginOnViewDidAppear		= _showLoginOnViewDidAppear;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,7 +36,7 @@
     return self;
 }
 
--(void)awakeFromNib {
+- (void)awakeFromNib {
 	
 	self.userInitiatedLogout = NO;
 	
@@ -66,6 +67,7 @@
 	
 	if (self.showLoginOnViewDidAppear) {
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:@"Login"];
 		[self presentViewController:self.loginViewController animated:NO completion:nil];
 		self.showLoginOnViewDidAppear = NO;
 		
@@ -93,7 +95,7 @@
 
 #pragma mark - MHLoginViewControllerDelegate methods
 
--(void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList requestOptions:(MHRequestOptions *)options {
+- (void)finishedLoginWithCurrentUser:(MHPerson *)currentUser peopleList:(NSArray *)peopleList requestOptions:(MHRequestOptions *)options {
 	
 	[[self peopleNavigationViewController] setDataArray:peopleList forRequestOptions:options];
 	self.topViewController = self.peopleNavigationViewController;
@@ -107,10 +109,11 @@
 	
 }
 
--(void)finishedLogout {
+- (void)finishedLogout {
 	
 	if (self.userInitiatedLogout) {
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:@"Login"];
 		[self presentViewController:self.loginViewController animated:YES completion:nil];
 		
 	}

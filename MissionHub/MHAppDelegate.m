@@ -11,6 +11,7 @@
 #import "MHConfig.h"
 #import "ABNotifier.h"
 #import <NewRelicAgent/NewRelicAgent.h>
+#import "MHGoogleAnalyticsTracker.h"
 
 @implementation MHAppDelegate
 
@@ -24,6 +25,8 @@
 							   delegate:nil];
 	
 	[NewRelicAgent startWithApplicationToken:[MHConfig sharedInstance].apiKeyNewRelic];
+	
+	[MHGoogleAnalyticsTracker start];
 	
     return YES;
 }

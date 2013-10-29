@@ -111,6 +111,8 @@
 		68478DC9177E8CDC0014501D /* MH_Mobile_Topbar_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 68478DB8177E8CDC0014501D /* MH_Mobile_Topbar_Background.png */; };
 		6851291B17A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */; };
 		6851291D17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */; };
+		685542C51820485600161563 /* MHGoogleAnalyticsTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 685542C41820485600161563 /* MHGoogleAnalyticsTracker.m */; };
+		685542C61820485600161563 /* MHGoogleAnalyticsTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 685542C41820485600161563 /* MHGoogleAnalyticsTracker.m */; };
 		6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6855EDDC17948EC900769B71 /* MHAddress+Helper.m */; };
 		685923A117AC427F0047A5A5 /* MH_Mobile_Checkbox_UnChecked_48_padded.png in Resources */ = {isa = PBXBuildFile; fileRef = 6859239E17AC427F0047A5A5 /* MH_Mobile_Checkbox_UnChecked_48_padded.png */; };
 		685923A317AC427F0047A5A5 /* MH_Mobile_Checkbox_Checked_48_padded.png in Resources */ = {isa = PBXBuildFile; fileRef = 6859239F17AC427F0047A5A5 /* MH_Mobile_Checkbox_Checked_48_padded.png */; };
@@ -410,6 +412,8 @@
 		68478DB8177E8CDC0014501D /* MH_Mobile_Topbar_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Topbar_Background.png; sourceTree = "<group>"; };
 		6851291917A32FC70091B215 /* MH_Mobile_Button_Refresh_Pressed_86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Refresh_Pressed_86.png; sourceTree = "<group>"; };
 		6851291A17A32FC70091B215 /* MH_Mobile_Button_Refresh_86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Button_Refresh_86.png; sourceTree = "<group>"; };
+		685542C31820485600161563 /* MHGoogleAnalyticsTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHGoogleAnalyticsTracker.h; path = APIControllers/MHGoogleAnalyticsTracker.h; sourceTree = "<group>"; };
+		685542C41820485600161563 /* MHGoogleAnalyticsTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHGoogleAnalyticsTracker.m; path = APIControllers/MHGoogleAnalyticsTracker.m; sourceTree = "<group>"; };
 		6855EDDB17948EC900769B71 /* MHAddress+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHAddress+Helper.h"; path = "Models/MHAddress+Helper.h"; sourceTree = "<group>"; };
 		6855EDDC17948EC900769B71 /* MHAddress+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHAddress+Helper.m"; path = "Models/MHAddress+Helper.m"; sourceTree = "<group>"; };
 		6855EDDF17949ECB00769B71 /* MHProfileProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileProtocol.h; path = ViewControllers/MHProfileProtocol.h; sourceTree = "<group>"; };
@@ -1016,6 +1020,8 @@
 				68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */,
 				68EB33CB17792D8F003958A0 /* MHErrorHandler.h */,
 				68EB33CC17792D8F003958A0 /* MHErrorHandler.m */,
+				685542C31820485600161563 /* MHGoogleAnalyticsTracker.h */,
+				685542C41820485600161563 /* MHGoogleAnalyticsTracker.m */,
 			);
 			name = "API Controllers";
 			sourceTree = "<group>";
@@ -1340,6 +1346,7 @@
 				68478DAE177E8C9F0014501D /* MHPeopleSearchBar.m in Sources */,
 				68C82E7F1803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */,
 				6809500B181EDCA500DB0018 /* DDXMLDocument.m in Sources */,
+				685542C51820485600161563 /* MHGoogleAnalyticsTracker.m in Sources */,
 				6823A7BB177EA4C900DBDF3F /* MHQuestion.m in Sources */,
 				68095015181EDCA500DB0018 /* ABNotifier.m in Sources */,
 				6823A7CE177EC34C00DBDF3F /* MHEmailAddress.m in Sources */,
@@ -1434,6 +1441,7 @@
 				68C82E4B180314FB00A8D5A0 /* MHLabel+Helper.m in Sources */,
 				68095006181EDCA500DB0018 /* GCAlertView.m in Sources */,
 				68C82E4D180314FB00A8D5A0 /* MHSurvey+Helper.m in Sources */,
+				685542C61820485600161563 /* MHGoogleAnalyticsTracker.m in Sources */,
 				68C82E4F180314FB00A8D5A0 /* MHQuestion.m in Sources */,
 				68C82E51180314FB00A8D5A0 /* MHAnswerSheet+Helper.m in Sources */,
 				68C82E53180314FB00A8D5A0 /* MHAnswer.m in Sources */,

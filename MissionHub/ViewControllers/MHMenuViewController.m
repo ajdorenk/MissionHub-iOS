@@ -17,6 +17,7 @@
 #import "NSMutableArray+removeDuplicatesForKey.h"
 #import "MHGenericListViewController.h"
 #import "MHLoginViewController.h"
+#import "MHGoogleAnalyticsTracker.h"
 
 NSString *const MHMenuErrorDomain					= @"com.missionhub.errorDomain.menu";
 
@@ -121,6 +122,8 @@ typedef enum {
 	[self.organizationViewController setSuggestions:nil andSelectionObject:self.currentOrganization];
 	[self presentViewController:self.organizationViewController animated:YES completion:nil];
 	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:@"Change Organization"];
+	
 }
 
 -(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
@@ -135,6 +138,12 @@ typedef enum {
 		self.currentOrganization		= nil;
 		
 		MHOrganization *organization	= (MHOrganization *)object;
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:@"Change Organization"
+																  category:MHGoogleAnalyticsCategoryCell
+																	action:MHGoogleAnalyticsActionTap
+																	 label:@"organization"
+																	 value:organization.remoteID];
 		
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] getOrganizationWithRemoteID:organization.remoteID successBlock:^(NSArray *result, MHRequestOptions *options) {
@@ -256,6 +265,14 @@ typedef enum {
 		self.tableView.frame	= frame;
 		
 	}
+	
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	
+	[[[MHGoogleAnalyticsTracker sharedInstance] setScreenName:@"Menu"] sendScreenView];
 	
 }
 
@@ -457,8 +474,14 @@ typedef enum {
 				
 				if ([objectForIndex isKindOfClass:[MHSurvey class]]) {
 					
-					newTopViewController = [self surveyViewController];
-					[(MHSurveyViewController *)newTopViewController displaySurvey:objectForIndex];
+					MHSurvey *survey		= (MHSurvey *)objectForIndex;
+					newTopViewController	= [self surveyViewController];
+					[(MHSurveyViewController *)newTopViewController displaySurvey:survey];
+					
+					[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell
+																			  action:MHGoogleAnalyticsActionTap
+																			   label:@"survey"
+																			   value:survey.remoteID];
 					
 				}
 				
@@ -472,21 +495,41 @@ typedef enum {
 					
 					[requestOptions configureForInitialPeoplePageRequest];
 					
+					[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell label:@"all_contacts"];
+					
 				//Labels
 				} else if (indexPath.section == 1) {
 					
 					[requestOptions configureForInitialPeoplePageRequest];
+					
 					if ([objectForIndex isKindOfClass:[MHLabel class]]) {
-						[requestOptions addFilter:MHRequestOptionsFilterPeopleLabels withValue:[((MHLabel *)objectForIndex).remoteID stringValue]];
+						
+						MHLabel *label	= (MHLabel *)objectForIndex;
+						[requestOptions addFilter:MHRequestOptionsFilterPeopleLabels withValue:[label.remoteID stringValue]];
+						
+						[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell
+																				  action:MHGoogleAnalyticsActionTap
+																				   label:@"label"
+																				   value:label.remoteID];
+						
 					}
 					
 				//contact assignments
 				} else if (indexPath.section == 2) {
 					
 					[requestOptions configureForInitialPeoplePageRequest];
+					
 					if ([objectForIndex isKindOfClass:[MHPerson class]]) {
+						
+						MHPerson *person = (MHPerson *)objectForIndex;
 						[requestOptions configureForInitialPeoplePageRequestWithAssignedToID:
-						 ((MHPerson *)objectForIndex).remoteID];
+						 person.remoteID];
+						
+						[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell
+																				  action:MHGoogleAnalyticsActionTap
+																				   label:@"contact_assignment"
+																				   value:person.remoteID];
+						
 					}
 					
 				}
@@ -524,10 +567,12 @@ typedef enum {
 		
 		if (indexPath.row == 0) {
 			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell label:@"change_organization"];
 			[self changeOrganization];
 			
 		} else if (indexPath.row == 1) {
 			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell label:@"logout"];
 			[self logout];
 			
 		}
