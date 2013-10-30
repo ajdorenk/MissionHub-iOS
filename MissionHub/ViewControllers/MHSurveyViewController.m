@@ -9,6 +9,9 @@
 #import "MHSurveyViewController.h"
 #import "MHAPI.h"
 #import "MHToolbar.h"
+#import "MHGoogleAnalyticsTracker.h"
+
+NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 
 @interface MHSurveyViewController ()
 
@@ -130,6 +133,8 @@
 	}
 	
 	[self displaySurvey:self.survey];
+	
+	[[[MHGoogleAnalyticsTracker sharedInstance] setScreenName:MHGoogleAnalyticsTrackerSurveyScreenName] sendScreenView];
 	
 }
 

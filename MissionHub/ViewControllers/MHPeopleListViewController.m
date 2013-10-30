@@ -14,10 +14,22 @@
 #import "MHPeopleSearchBar.h"
 #import "MHToolbar.h"
 #import "UIImageView+AFNetworking.h"
+#import "MHGoogleAnalyticsTracker.h"
 
 
-#define HEADER_HEIGHT 32.0f
-#define ROW_HEIGHT 61.0f
+CGFloat MHPeopleListViewControllerRowHeight = 61.0;
+
+NSString * const MHGoogleAnalyticsTrackerPeopleListScreenName						= @"PeopleList";
+NSString * const MHGoogleAnalyticsTrackerPeopleListSearchScreenName					= @"PeopleListSearch";
+NSString * const MHGoogleAnalyticsTrackerPeopleListMenuButtonTap					= @"menu";
+NSString * const MHGoogleAnalyticsTrackerPeopleListCreatePersonButtonTap			= @"create_person";
+NSString * const MHGoogleAnalyticsTrackerPeopleListCreateInteractionButtonTap		= @"create_interaction";
+NSString * const MHGoogleAnalyticsTrackerPeopleListSearch							= @"search";
+NSString * const MHGoogleAnalyticsTrackerPeopleListChooseSecondaryFieldButtonTap	= @"choose_secondary_field";
+NSString * const MHGoogleAnalyticsTrackerPeopleListSortButtonTap					= @"sort";
+NSString * const MHGoogleAnalyticsTrackerPeopleListCheckboxButtonTap				= @"person_selected";
+NSString * const MHGoogleAnalyticsTrackerPeopleListPersonCellTap					= @"person";
+NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load";
 
 
 @interface MHPeopleListViewController ()
@@ -324,6 +336,14 @@
 	
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	
+	[[[MHGoogleAnalyticsTracker sharedInstance] setScreenName:MHGoogleAnalyticsTrackerPeopleListScreenName] sendScreenView];
+	
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
 	
 	[super viewWillDisappear:animated];
@@ -434,6 +454,11 @@
 	self.searchHasLoadedAllPages	= NO;
 	self.searchRequestOptions.offset = 0;
 	self.searchRequestOptions.limit = 0;
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategorySearchbar
+															  action:MHGoogleAnalyticsActionTap
+															   label:MHGoogleAnalyticsTrackerPeopleListSearch
+															   value:nil];
 	
 }
 
@@ -581,6 +606,8 @@
 	
 	[self.slidingViewController anchorTopViewTo:ECRight];
 	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerPeopleListMenuButtonTap];
+	
 }
 
 - (void)addPerson:(id)sender {
@@ -592,6 +619,8 @@
 		self.createPersonViewController.person	= newPerson;
 		[self.navigationController pushViewController:self.createPersonViewController animated:YES];
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerPeopleListCreatePersonButtonTap];
+		
 	} else {
 		
 		//toggle show and hide of this popover
@@ -602,6 +631,8 @@
 		} else {
 			
 			[self presentCreatePersonViewControllerInPopoverFromSender:sender withPersonObject:newPerson];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerPeopleListCreatePersonButtonTap];
 			
 		}
 		
@@ -627,6 +658,8 @@
 		[self.createInteractionViewController updateWithInteraction:newInteraction andSelections:self.selectedPeople];
 		[self.navigationController pushViewController:self.createInteractionViewController animated:YES];
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerPeopleListCreateInteractionButtonTap];
+		
 	} else {
 		
 		//toggle show and hide of this popover
@@ -638,6 +671,8 @@
 			
 			[self presentCreateInteractionViewControllerInPopoverFromSender:sender withInteraction:newInteraction andSelectedPeople:self.selectedPeople];
 		
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerPeopleListCreateInteractionButtonTap];
+			
 		}
 		
 		//hide other popover if it is showing to avoid confusion
@@ -672,7 +707,9 @@
 
 -(void)fieldButtonPressed {
 	
-    [self presentViewController:[self fieldSelectorViewController] animated:YES completion:Nil];
+    [self presentViewController:[self fieldSelectorViewController] animated:YES completion:nil];
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerPeopleListChooseSecondaryFieldButtonTap];
     
 }
 
@@ -689,6 +726,8 @@
 	}
 	
 	[self refresh];
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerPeopleListSortButtonTap];
 	
 }
 
@@ -737,7 +776,7 @@
 	//NSLog(@"%f : %f", self.tableView.contentSize.width, self.tableView.contentSize.height);
 	//NSLog(@"%f : %f", self.tableView.contentOffset.x, self.tableView.contentOffset.y);
 	//NSLog(@"%f : %f", self.tableView.frame.size.width, self.tableView.frame.size.height);
-	//NSLog(@"%f, %f, %f, %f, %f", self.searchDisplayController.searchBar.frame.size.height, ROW_HEIGHT, HEADER_HEIGHT,  self.tableView.frame.size.height, self.tableView.contentSize.height);
+	//NSLog(@"%f, %f, %f, %f, %f", self.searchDisplayController.searchBar.frame.size.height, MHPeopleListViewControllerRowHeight, HEADER_HEIGHT,  self.tableView.frame.size.height, self.tableView.contentSize.height);
 	
 	if (tableView == self.searchDisplayController.searchResultsTableView) {
 		
@@ -876,7 +915,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return ROW_HEIGHT;
+    return MHPeopleListViewControllerRowHeight;
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -886,7 +925,7 @@
 	NSInteger maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
 	
 	// Change 10.0 to adjust the distance from bottom
-	if (maximumOffset - currentOffset > 0.0 && maximumOffset - currentOffset <= 5.0f * ROW_HEIGHT) {
+	if (maximumOffset - currentOffset > 0.0 && maximumOffset - currentOffset <= 5.0f * MHPeopleListViewControllerRowHeight) {
 		
 		if ([scrollView isEqual:self.tableView] && !self.hasLoadedAllPages && !self.pagingIsLoading) {
 				
@@ -926,6 +965,11 @@
 												   [weakSelf.tableView reloadData];
 												   
 											   }];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryList
+																	  action:MHGoogleAnalyticsActionSwipe
+																	   label:MHGoogleAnalyticsTrackerPeopleListPageLoad
+																	   value:[NSNumber numberWithUnsignedInteger:self.requestOptions.offset + self.requestOptions.limit]];
 				
 		}
 		
@@ -972,6 +1016,12 @@
 												   
 											   }];
 			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerPeopleListSearchScreenName
+																	  category:MHGoogleAnalyticsCategoryList
+																	  action:MHGoogleAnalyticsActionSwipe
+																	   label:MHGoogleAnalyticsTrackerPeopleListPageLoad
+																	   value:[NSNumber numberWithUnsignedInteger:self.searchRequestOptions.offset + self.searchRequestOptions.limit]];
+			
 		}
 		
 	}
@@ -986,13 +1036,28 @@
 	
 	if (self.searchDisplayController.searchResultsTableView == tableView) {
 		
-		person = [self.searchResultArray objectAtIndex:indexPath.row];
+		if (indexPath.row < self.searchResultArray.count) {
+		
+			person = [self.searchResultArray objectAtIndex:indexPath.row];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerPeopleListSearchScreenName
+																	  category:MHGoogleAnalyticsCategoryCell
+																		action:MHGoogleAnalyticsActionTap
+																		 label:MHGoogleAnalyticsTrackerPeopleListPersonCellTap
+																		 value:nil];
+			
+		}
 		
 	} else {
 		
 		if (indexPath.row < self.peopleArray.count) {
 			
 			person = [self.peopleArray objectAtIndex:indexPath.row];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell
+																	  action:MHGoogleAnalyticsActionTap
+																	   label:MHGoogleAnalyticsTrackerPeopleListPersonCellTap
+																	   value:nil];
 			
 		}
 		
@@ -1020,6 +1085,11 @@
 		
 	}
 	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
+															  action:MHGoogleAnalyticsActionTap
+															   label:MHGoogleAnalyticsTrackerPeopleListCheckboxButtonTap
+															   value:[NSNumber numberWithUnsignedInteger:self.selectedPeople.count]];
+	
 }
 
 -(void)cell:(MHPersonCell *)cell didDeselectPerson:(MHPerson *)person atIndexPath:(NSIndexPath *)indexPath {
@@ -1037,6 +1107,11 @@
 		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
 		
 	}
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
+															  action:MHGoogleAnalyticsActionTap
+															   label:MHGoogleAnalyticsTrackerPeopleListCheckboxButtonTap
+															   value:[NSNumber numberWithUnsignedInteger:self.selectedPeople.count]];
 	
 }
 

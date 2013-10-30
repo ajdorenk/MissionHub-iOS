@@ -19,7 +19,18 @@
 #import "MHLoginViewController.h"
 #import "MHGoogleAnalyticsTracker.h"
 
-NSString *const MHMenuErrorDomain					= @"com.missionhub.errorDomain.menu";
+NSString *const MHMenuErrorDomain												= @"com.missionhub.errorDomain.menu";
+
+NSString *const MHGoogleAnalyticsTrackerMenuScreenName							= @"Menu";
+NSString *const MHGoogleAnalyticsTrackerChangeOrganizationScreenName			= @"Change Organization";
+NSString *const MHGoogleAnalyticsTrackerChangeOrganizationOrganizationCellTap	= @"organization";
+NSString *const MHGoogleAnalyticsTrackerMenuAllContactsCellTap					= @"all_contacts";
+NSString *const MHGoogleAnalyticsTrackerMenuSurveyCellTap						= @"survey";
+NSString *const MHGoogleAnalyticsTrackerMenuLabelCellTap						= @"label";
+NSString *const MHGoogleAnalyticsTrackerMenuContactAssignmentCellTap			= @"contact_assignment";
+NSString *const MHGoogleAnalyticsTrackerMenuChangeOrganizationCellTap			= @"change_organization";
+NSString *const MHGoogleAnalyticsTrackerMenuLogoutCellTap						= @"logout";
+
 
 typedef enum {
 	MHMenuErrorMenuLoading,
@@ -122,7 +133,7 @@ typedef enum {
 	[self.organizationViewController setSuggestions:nil andSelectionObject:self.currentOrganization];
 	[self presentViewController:self.organizationViewController animated:YES completion:nil];
 	
-	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:@"Change Organization"];
+	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerChangeOrganizationScreenName];
 	
 }
 
@@ -139,10 +150,10 @@ typedef enum {
 		
 		MHOrganization *organization	= (MHOrganization *)object;
 		
-		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:@"Change Organization"
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerChangeOrganizationScreenName
 																  category:MHGoogleAnalyticsCategoryCell
 																	action:MHGoogleAnalyticsActionTap
-																	 label:@"organization"
+																	 label:MHGoogleAnalyticsTrackerChangeOrganizationOrganizationCellTap
 																	 value:organization.remoteID];
 		
 		__weak __typeof(&*self)weakSelf = self;
@@ -202,8 +213,6 @@ typedef enum {
 }
 
 -(void)logout {
-	
-	NSLog(@"logout");
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:MHLoginViewControllerLogout object:self];
 	
@@ -272,7 +281,7 @@ typedef enum {
 	
 	[super viewDidAppear:animated];
 	
-	[[[MHGoogleAnalyticsTracker sharedInstance] setScreenName:@"Menu"] sendScreenView];
+	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName];
 	
 }
 
@@ -478,10 +487,11 @@ typedef enum {
 					newTopViewController	= [self surveyViewController];
 					[(MHSurveyViewController *)newTopViewController displaySurvey:survey];
 					
-					[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell
-																			  action:MHGoogleAnalyticsActionTap
-																			   label:@"survey"
-																			   value:survey.remoteID];
+					[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
+																			  category:MHGoogleAnalyticsCategoryCell
+																				action:MHGoogleAnalyticsActionTap
+																				 label:MHGoogleAnalyticsTrackerMenuSurveyCellTap
+																				 value:survey.remoteID];
 					
 				}
 				
@@ -495,7 +505,11 @@ typedef enum {
 					
 					[requestOptions configureForInitialPeoplePageRequest];
 					
-					[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell label:@"all_contacts"];
+					[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
+																			  category:MHGoogleAnalyticsCategoryCell
+																				action:MHGoogleAnalyticsActionTap
+																				 label:MHGoogleAnalyticsTrackerMenuAllContactsCellTap
+																				 value:nil];
 					
 				//Labels
 				} else if (indexPath.section == 1) {
@@ -507,10 +521,11 @@ typedef enum {
 						MHLabel *label	= (MHLabel *)objectForIndex;
 						[requestOptions addFilter:MHRequestOptionsFilterPeopleLabels withValue:[label.remoteID stringValue]];
 						
-						[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell
-																				  action:MHGoogleAnalyticsActionTap
-																				   label:@"label"
-																				   value:label.remoteID];
+						[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
+																				  category:MHGoogleAnalyticsCategoryCell
+																					action:MHGoogleAnalyticsActionTap
+																					 label:MHGoogleAnalyticsTrackerMenuLabelCellTap
+																					 value:label.remoteID];
 						
 					}
 					
@@ -525,10 +540,11 @@ typedef enum {
 						[requestOptions configureForInitialPeoplePageRequestWithAssignedToID:
 						 person.remoteID];
 						
-						[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell
-																				  action:MHGoogleAnalyticsActionTap
-																				   label:@"contact_assignment"
-																				   value:person.remoteID];
+						[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
+																				  category:MHGoogleAnalyticsCategoryCell
+																					action:MHGoogleAnalyticsActionTap
+																					 label:MHGoogleAnalyticsTrackerMenuContactAssignmentCellTap
+																					 value:nil];
 						
 					}
 					
@@ -567,12 +583,20 @@ typedef enum {
 		
 		if (indexPath.row == 0) {
 			
-			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell label:@"change_organization"];
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
+																	  category:MHGoogleAnalyticsCategoryCell
+																		action:MHGoogleAnalyticsActionTap
+																		 label:MHGoogleAnalyticsTrackerMenuChangeOrganizationCellTap
+																		 value:nil];
 			[self changeOrganization];
 			
 		} else if (indexPath.row == 1) {
 			
-			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCell label:@"logout"];
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
+																	  category:MHGoogleAnalyticsCategoryCell
+																		action:MHGoogleAnalyticsActionTap
+																		 label:MHGoogleAnalyticsTrackerMenuLogoutCellTap
+																		 value:nil];
 			[self logout];
 			
 		}

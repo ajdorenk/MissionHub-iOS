@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const MHGoogleAnalyticsCategoryUI;
+extern NSString * const MHGoogleAnalyticsCategoryBackgroundProcess;
 extern NSString * const MHGoogleAnalyticsCategoryButton;
 extern NSString * const MHGoogleAnalyticsCategoryCell;
+extern NSString * const MHGoogleAnalyticsCategoryCheckbox;
+extern NSString * const MHGoogleAnalyticsCategorySearchbar;
+extern NSString * const MHGoogleAnalyticsCategoryList;
+
 extern NSString * const MHGoogleAnalyticsActionTap;
 extern NSString * const MHGoogleAnalyticsActionSwipe;
 

@@ -10,6 +10,10 @@
 #import "MHPeopleListViewController.h"
 #import "MHGoogleAnalyticsTracker.h"
 
+NSString * const MHGoogleAnalyticsTrackerLoginScreenName				= @"Login";
+NSString * const MHGoogleAnalyticsTrackerLoginLoggedInAction			= @"logged_in";
+NSString * const MHGoogleAnalyticsTrackerLoginLoggedInOrganizationLabel	= @"organization";
+
 @interface MHRootViewController ()
 
 @property (nonatomic, assign) BOOL	userInitiatedLogout;
@@ -67,7 +71,7 @@
 	
 	if (self.showLoginOnViewDidAppear) {
 		
-		[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:@"Login"];
+		[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName];
 		[self presentViewController:self.loginViewController animated:NO completion:nil];
 		self.showLoginOnViewDidAppear = NO;
 		
@@ -107,13 +111,19 @@
 		
 	}];
 	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName
+															  category:MHGoogleAnalyticsCategoryBackgroundProcess
+																action:MHGoogleAnalyticsTrackerLoginLoggedInAction
+																 label:MHGoogleAnalyticsTrackerLoginLoggedInOrganizationLabel
+																 value:currentUser.currentOrganization.remoteID];
+	
 }
 
 - (void)finishedLogout {
 	
 	if (self.userInitiatedLogout) {
 		
-		[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:@"Login"];
+		[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName];
 		[self presentViewController:self.loginViewController animated:YES completion:nil];
 		
 	}

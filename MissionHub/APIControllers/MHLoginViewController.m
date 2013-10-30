@@ -39,8 +39,9 @@ typedef enum {
 - (void)loggedInWithToken:(NSString *)token;
 - (void)refreshMissionHubData:(id)sender;
 
--(void)beginLoading;
--(void)endLoading;
+- (void)resetViews;
+- (void)beginLoading;
+- (void)endLoading;
 
 @end
 
@@ -107,8 +108,8 @@ typedef enum {
 	
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
+	
     [super viewDidAppear:animated];
 	// Do any additional setup after loading the view.
 	
@@ -141,21 +142,23 @@ typedef enum {
 	
 	[[MHAPI sharedInstance] logout];
 	[FBSession.activeSession closeAndClearTokenInformation];
-	
+
 }
 
--(void)beginLoading {
+- (void)beginLoading {
 	
 	self.loginButtonView.userInteractionEnabled = NO;
 	self.loginButtonView.hidden = YES;
+	self.missionhubRefreshButton.hidden = YES;
 	[self.loadingIndicator startAnimating];
 	
 }
 
--(void)endLoading {
+- (void)endLoading {
 	
 	self.loginButtonView.userInteractionEnabled = YES;
 	self.loginButtonView.hidden = NO;
+	self.missionhubRefreshButton.hidden = YES;
 	[self.loadingIndicator stopAnimating];
 	
 }

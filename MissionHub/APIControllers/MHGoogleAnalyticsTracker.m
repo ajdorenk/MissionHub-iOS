@@ -13,11 +13,16 @@
 #import <GoogleAnalytics-iOS-SDK/GAITracker.h>
 #import <GoogleAnalytics-iOS-SDK/GAIDictionaryBuilder.h>
 
-NSString * const MHGoogleAnalyticsCategoryUI	= @"UI";
-NSString * const MHGoogleAnalyticsCategoryButton= @"Button";
-NSString * const MHGoogleAnalyticsCategoryCell	= @"Cell";
-NSString * const MHGoogleAnalyticsActionTap		= @"Tap";
-NSString * const MHGoogleAnalyticsActionSwipe	= @"Swipe";
+NSString * const MHGoogleAnalyticsCategoryUI				= @"ui";
+NSString * const MHGoogleAnalyticsCategoryBackgroundProcess	= @"background_process";
+NSString * const MHGoogleAnalyticsCategoryButton			= @"button";
+NSString * const MHGoogleAnalyticsCategoryCell				= @"cell";
+NSString * const MHGoogleAnalyticsCategoryCheckbox			= @"checkbox";
+NSString * const MHGoogleAnalyticsCategorySearchbar			= @"searchbar";
+NSString * const MHGoogleAnalyticsCategoryList				= @"list";
+
+NSString * const MHGoogleAnalyticsActionTap		= @"tap";
+NSString * const MHGoogleAnalyticsActionSwipe	= @"swipe";
 
 @interface MHGoogleAnalyticsTracker ()
 
@@ -100,7 +105,7 @@ NSString * const MHGoogleAnalyticsActionSwipe	= @"Swipe";
 
 - (void)sendEventWithCategory:(NSString *)category action:(NSString *)action label:(NSString *)label value:(NSNumber *)value {
 	
-	NSString *categoryName	= ( category	? category		: MHGoogleAnalyticsCategoryUI );
+	NSString *categoryName	= ( category	? category		: MHGoogleAnalyticsCategoryButton );
 	NSString *actionName	= ( action		? action		: MHGoogleAnalyticsActionTap );
 	NSString *labelName		= ( label		? label			: @"" );
 	NSNumber *number		= ( value		? value			: nil );
@@ -135,7 +140,7 @@ NSString * const MHGoogleAnalyticsActionSwipe	= @"Swipe";
 - (void)sendEventWithScreenName:(NSString *)screenName category:(NSString *)category action:(NSString *)action label:(NSString *)label value:(NSNumber *)value {
 	
 	NSString *screen		= ( screenName	? screenName	: @"" );
-	NSString *categoryName	= ( category	? category		: MHGoogleAnalyticsCategoryUI );
+	NSString *categoryName	= ( category	? category		: MHGoogleAnalyticsCategoryButton );
 	NSString *actionName	= ( action		? action		: MHGoogleAnalyticsActionTap );
 	NSString *labelName		= ( label		? label			: @"" );
 	NSNumber *number		= ( value		? value			: nil );
