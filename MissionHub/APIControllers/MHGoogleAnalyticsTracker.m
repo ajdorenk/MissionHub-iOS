@@ -20,6 +20,8 @@ NSString * const MHGoogleAnalyticsCategoryCell				= @"cell";
 NSString * const MHGoogleAnalyticsCategoryCheckbox			= @"checkbox";
 NSString * const MHGoogleAnalyticsCategorySearchbar			= @"searchbar";
 NSString * const MHGoogleAnalyticsCategoryList				= @"list";
+NSString * const MHGoogleAnalyticsCategoryPopover			= @"popover";
+NSString * const MHGoogleAnalyticsCategoryActivityBar		= @"activity_bar";
 
 NSString * const MHGoogleAnalyticsActionTap		= @"tap";
 NSString * const MHGoogleAnalyticsActionSwipe	= @"swipe";

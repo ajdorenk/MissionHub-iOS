@@ -11,6 +11,12 @@
 #import "MHInteraction+Helper.h"
 #import "MHAPI.h"
 #import "MHToolbar.h"
+#import "MHGoogleAnalyticsTracker.h"
+
+NSString * const MHGoogleAnalyticsTrackerCreateInteractionScreenName	= @"Create Interaction";
+NSString * const MHGoogleAnalyticsTrackerCreateInteractionSaveButtonTap	= @"save";
+NSString * const MHGoogleAnalyticsTrackerCreateInteractionBackButtonTap	= @"back";
+NSString * const MHGoogleAnalyticsTrackerCreateInteractionCancelButtonTap= @"cancel";
 
 CGFloat const MHNewInteractionViewControllerViewMarginHorizontal		= 20.0f;
 CGFloat const MHNewInteractionViewControllerViewMarginVertical			= 10.0f;
@@ -179,6 +185,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerCreateInteractionScreenName];
+	
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -320,10 +328,14 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	NSError *error;
 	
+	self.saveButton.enabled = NO;
+	
 	if ([self.interaction validateForServerCreate:&error]) {
 		
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] createInteraction:self.interaction withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+			
+			weakSelf.saveButton.enabled = YES;
 			
 			[weakSelf.navigationController popViewControllerAnimated:YES];
 			
@@ -331,11 +343,27 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 			
 			[MHErrorHandler presentError:error];
 			
+			weakSelf.saveButton.enabled = YES;
+			
 		}];
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreateInteractionScreenName
+																  category:MHGoogleAnalyticsCategoryButton
+																	action:MHGoogleAnalyticsActionTap
+																	 label:MHGoogleAnalyticsTrackerCreateInteractionSaveButtonTap
+																	 value:@1];
 		
 	} else {
 		
 		[MHErrorHandler presentError:error];
+		
+		self.saveButton.enabled = YES;
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreateInteractionScreenName
+																  category:MHGoogleAnalyticsCategoryButton
+																	action:MHGoogleAnalyticsActionTap
+																	 label:MHGoogleAnalyticsTrackerCreateInteractionSaveButtonTap
+																	 value:@0];
 		
 	}
 	
@@ -880,9 +908,15 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		[self.currentPopoverController dismissPopoverAnimated:YES];
 		self.currentPopoverController	= nil;
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreateInteractionScreenName
+																	 label:MHGoogleAnalyticsTrackerCreateInteractionCancelButtonTap];
+		
 	} else {
 		
 		[self.navigationController popViewControllerAnimated:YES];
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreateInteractionScreenName
+																	 label:MHGoogleAnalyticsTrackerCreateInteractionBackButtonTap];
 		
 	}
 	

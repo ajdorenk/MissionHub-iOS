@@ -24,6 +24,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListSearchScreenName					= @"Peop
 NSString * const MHGoogleAnalyticsTrackerPeopleListMenuButtonTap					= @"menu";
 NSString * const MHGoogleAnalyticsTrackerPeopleListCreatePersonButtonTap			= @"create_person";
 NSString * const MHGoogleAnalyticsTrackerPeopleListCreateInteractionButtonTap		= @"create_interaction";
+NSString * const MHGoogleAnalyticsTrackerPeopleListDismissPopover					= @"dismiss";
 NSString * const MHGoogleAnalyticsTrackerPeopleListSearch							= @"search";
 NSString * const MHGoogleAnalyticsTrackerPeopleListChooseSecondaryFieldButtonTap	= @"choose_secondary_field";
 NSString * const MHGoogleAnalyticsTrackerPeopleListSortButtonTap					= @"sort";
@@ -628,6 +629,11 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 			
 			[self.createPersonPopoverController dismissPopoverAnimated:YES];
 			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryPopover
+																	  action:MHGoogleAnalyticsActionTap
+																	   label:MHGoogleAnalyticsTrackerPeopleListDismissPopover
+																	   value:nil];
+			
 		} else {
 			
 			[self presentCreatePersonViewControllerInPopoverFromSender:sender withPersonObject:newPerson];
@@ -666,6 +672,11 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		if (self.createInteractionPopoverController.popoverVisible) {
 			
 			[self.createInteractionPopoverController dismissPopoverAnimated:YES];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryPopover
+																	  action:MHGoogleAnalyticsActionTap
+																	   label:MHGoogleAnalyticsTrackerPeopleListDismissPopover
+																	   value:nil];
 			
 		} else {
 			
@@ -1119,7 +1130,10 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 	
-	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryPopover
+															  action:MHGoogleAnalyticsActionTap
+															   label:MHGoogleAnalyticsTrackerPeopleListDismissPopover
+															   value:nil];
 	
 }
 
@@ -1162,6 +1176,14 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		[self.tableView reloadData];
 		
 	}
+	
+	NSArray *typeComponents	= [activityType componentsSeparatedByString:@"."];
+	NSString *type			= ([typeComponents lastObject] ? [typeComponents lastObject] : MHActivityTypeDefault );
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryActivityBar
+															  action:MHGoogleAnalyticsActionTap
+															   label:type
+															   value:[NSNumber numberWithBool:completed]];
 	
 }
 

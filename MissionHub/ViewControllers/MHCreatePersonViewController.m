@@ -10,6 +10,12 @@
 #import "MHAPI.h"
 #import "MHOrganization+Helper.h"
 #import "MHToolbar.h"
+#import "MHGoogleAnalyticsTracker.h"
+
+NSString * const MHGoogleAnalyticsTrackerCreatePersonScreenName		= @"Create Person";
+NSString * const MHGoogleAnalyticsTrackerCreatePersonSaveButtonTap	= @"save";
+NSString * const MHGoogleAnalyticsTrackerCreatePersonBackButtonTap	= @"back";
+NSString * const MHGoogleAnalyticsTrackerCreatePersonCancelButtonTap= @"cancel";
 
 CGFloat const MHCreatePersonViewControllerMarginVertical			= 20.0;
 CGFloat const MHCreatePersonViewControllerViewMarginHorizontal		= 20.0f;
@@ -158,6 +164,8 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerCreatePersonScreenName];
 	
 }
 
@@ -534,11 +542,23 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 			
 		}];
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreatePersonScreenName
+																  category:MHGoogleAnalyticsCategoryButton
+																	action:MHGoogleAnalyticsActionTap
+																	 label:MHGoogleAnalyticsTrackerCreatePersonSaveButtonTap
+																	 value:@1];
+		
 	} else {
 		
 		[MHErrorHandler presentError:error];
 		
 		self.saveButton.enabled = YES;
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreatePersonScreenName
+																  category:MHGoogleAnalyticsCategoryButton
+																	action:MHGoogleAnalyticsActionTap
+																	 label:MHGoogleAnalyticsTrackerCreatePersonSaveButtonTap
+																	 value:@0];
 		
 	}
 	
@@ -551,9 +571,15 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 		[self.currentPopoverController dismissPopoverAnimated:YES];
 		self.currentPopoverController	= nil;
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreatePersonScreenName
+																	 label:MHGoogleAnalyticsTrackerCreatePersonCancelButtonTap];
+		
 	} else {
 		
 		[self.navigationController popViewControllerAnimated:YES];
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreatePersonScreenName
+																	 label:MHGoogleAnalyticsTrackerCreatePersonBackButtonTap];
 		
 	}
 	

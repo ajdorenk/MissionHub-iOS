@@ -15,6 +15,8 @@ extern NSString * const MHGoogleAnalyticsCategoryCell;
 extern NSString * const MHGoogleAnalyticsCategoryCheckbox;
 extern NSString * const MHGoogleAnalyticsCategorySearchbar;
 extern NSString * const MHGoogleAnalyticsCategoryList;
+extern NSString * const MHGoogleAnalyticsCategoryPopover;
+extern NSString * const MHGoogleAnalyticsCategoryActivityBar;
 
 extern NSString * const MHGoogleAnalyticsActionTap;
 extern NSString * const MHGoogleAnalyticsActionSwipe;

@@ -14,6 +14,17 @@
 #import "MHNewInteractionViewController.h"
 #import "MHAPI.h"
 #import "MHToolbar.h"
+#import "MHGoogleAnalyticsTracker.h"
+
+NSString * const MHGoogleAnalyticsTrackerProfileScreenName					= @"Profile";
+NSString * const MHGoogleAnalyticsTrackerProfileCreateInteractionButtonTap	= @"create_interaction";
+NSString * const MHGoogleAnalyticsTrackerProfileLabelButtonTap				= @"label";
+NSString * const MHGoogleAnalyticsTrackerProfileMoreButtonTap				= @"more";
+NSString * const MHGoogleAnalyticsTrackerProfileBackButtonTap				= @"back";
+NSString * const MHGoogleAnalyticsTrackerProfileDismissPopover				= @"dismiss";
+NSString * const MHGoogleAnalyticsTrackerProfileInfoTabButtonTap			= @"info_tab";
+NSString * const MHGoogleAnalyticsTrackerProfileInteractionsTabButtonTap	= @"interactions_tab";
+NSString * const MHGoogleAnalyticsTrackerProfileSurveyAnswersTabButtonTap	= @"survey_answers_tab";
 
 NSString *const MHProfileViewControllerNotificationPersonDeleted	= @"com.missionhub.MHProfileViewController.notification.personDeleted";
 NSString *const MHProfileViewControllerNotificationPersonArchived	= @"com.missionhub.MHProfileViewController.notification.personArchived";
@@ -111,6 +122,8 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 	
 	[[self menuViewController] setMenuSelection:0];
 	[self switchTableViewController:[self.allViewControllers objectAtIndex:0]];
+	
+	[[[MHGoogleAnalyticsTracker sharedInstance] setScreenName:MHGoogleAnalyticsTrackerProfileScreenName] sendScreenView];
 	
 }
 
@@ -475,6 +488,8 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 	
     [self.navigationController popViewControllerAnimated:YES];
 	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerProfileBackButtonTap];
+	
 }
 
 - (void)newInteractionActivity:(id)sender {
@@ -488,15 +503,24 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 		[self.createInteractionViewController updateWithInteraction:newInteraction andSelections:selectionArray];
 		[self.navigationController pushViewController:self.createInteractionViewController animated:YES];
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerProfileCreateInteractionButtonTap];
+		
 	} else {
 		
 		if (self.createInteractionPopoverController.popoverVisible) {
 			
 			[self.createInteractionPopoverController dismissPopoverAnimated:YES];
 			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryPopover
+																	  action:MHGoogleAnalyticsActionTap
+																	   label:MHGoogleAnalyticsTrackerProfileDismissPopover
+																	   value:nil];
+			
 		} else {
 			
 			[self presentCreateInteractionViewControllerInPopoverFromSender:sender withInteraction:newInteraction andSelectedPeople:selectionArray];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerProfileCreateInteractionButtonTap];
 			
 		}
 		
@@ -508,6 +532,8 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 
 	[self.labelActivity prepareWithActivityItems:@[self.person]];
 	[self.labelActivity performActivity];
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerProfileLabelButtonTap];
 	
 }
 
@@ -525,6 +551,8 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 		
 		[self.activityViewController presentFromViewController:self];
 		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerProfileMoreButtonTap];
+		
 	}
 	
 }
@@ -534,13 +562,21 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 - (void)menuDidChangeSelection:(NSInteger)selection {
 	
 	[self switchTableViewController:[self.allViewControllers objectAtIndex:selection]];
-	[[self currentTableViewContoller] setPerson:self.person];
+	[self.currentTableViewContoller setPerson:self.person];
 	
-}
-
--(void)list:(MHGenericListViewController *)viewController didSelectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
-	
-	[self dismissViewControllerAnimated:YES completion:nil];
+	if ([self.currentViewController isEqual:self.infoViewController]) {
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerProfileInfoTabButtonTap];
+		
+	} else if ([self.currentViewController isEqual:self.interactionsViewController]) {
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerProfileInteractionsTabButtonTap];
+		
+	} else if ([self.currentViewController isEqual:self.surveysViewController]) {
+		
+		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithLabel:MHGoogleAnalyticsTrackerProfileSurveyAnswersTabButtonTap];
+		
+	}
 	
 }
 
@@ -554,7 +590,10 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 	
-	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryPopover
+															  action:MHGoogleAnalyticsActionTap
+															   label:MHGoogleAnalyticsTrackerProfileDismissPopover
+															   value:nil];
 	
 }
 
@@ -584,6 +623,14 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 		}
 		
 	}
+	
+	NSArray *typeComponents	= [activityType componentsSeparatedByString:@"."];
+	NSString *type			= ([typeComponents lastObject] ? [typeComponents lastObject] : MHActivityTypeDefault );
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryActivityBar
+															  action:MHGoogleAnalyticsActionTap
+															   label:type
+															   value:[NSNumber numberWithBool:completed]];
 	
 }
 
