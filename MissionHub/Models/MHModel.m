@@ -128,7 +128,7 @@
 	
 	
 	
-	if (fields != nil) {
+	if (fields != nil && [fields class] != [NSNull class]) {
 		
 		for (NSString *fieldName in fields) {
 			
@@ -139,8 +139,6 @@
 					[self setValue:[fields objectForKey:fieldName] forKey:[self.attributes objectForKey:fieldName]];
 					
 				}
-				
-				
 				
 			} else {
 				
@@ -154,7 +152,11 @@
 					
 				} else {
 				
-					[self setRelationshipsObject:[fields objectForKey:fieldName] forFieldName:fieldName];
+					if ([[fields objectForKey:fieldName] class] != [NSNull class]) {
+					
+						[self setRelationshipsObject:[fields objectForKey:fieldName] forFieldName:fieldName];
+						
+					}
 					
 				}
 				
