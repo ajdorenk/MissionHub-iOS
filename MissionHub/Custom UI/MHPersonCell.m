@@ -58,14 +58,15 @@ CGFloat static MHPersonCelliPadGap = 20.0;
 	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		
-        self.nameBackgroundView.layer.backgroundColor = [UIColor whiteColor].CGColor;
+        self.nameBackgroundView.layer.backgroundColor	= [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
+		self.nameBackgroundView.frame					= CGRectMake(CGRectGetWidth(self.frame) * 0.5, 0.0, 1.0, CGRectGetHeight(self.frame));
 		
-    } //else {
+    } else {
 		
 		self.nameBackgroundView.layer.borderColor = [UIColor colorWithRed:215.0/255.0 green:215.0/255.0 blue:215.0/255.0 alpha:1.0].CGColor;
 		self.nameBackgroundView.layer.borderWidth = 1.0;
 		
-	//}
+	}
 	
 	self.backgroundColor			= [UIColor whiteColor];
 	self.checkbox.checkboxDelegate	= self;
@@ -132,15 +133,12 @@ CGFloat static MHPersonCelliPadGap = 20.0;
 	
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 	
-		self.nameBackgroundView.frame	= CGRectMake(CGRectGetMinX(self.nameBackgroundView.frame),
-													 CGRectGetMinY(self.nameBackgroundView.frame),
-													 CGRectGetWidth(self.frame) * 0.5,
-													 CGRectGetHeight(self.nameBackgroundView.frame) + 1);
+		self.nameBackgroundView.frame	= CGRectMake(CGRectGetWidth(self.frame) * 0.5, 0.0, 1.0, CGRectGetHeight(self.frame));
 		
-		self.field.frame	= CGRectMake(CGRectGetMaxX(self.nameBackgroundView.frame) + MHPersonCelliPadGap,
-										 CGRectGetMinY(self.field.frame),
-										 CGRectGetWidth(self.frame) * 0.5 - MHPersonCelliPadGap,
-										 CGRectGetHeight(self.field.frame));
+		self.field.frame				= CGRectMake(CGRectGetMaxX(self.nameBackgroundView.frame) + MHPersonCelliPadGap,
+													 CGRectGetMinY(self.field.frame),
+													 CGRectGetWidth(self.frame) * 0.5 - MHPersonCelliPadGap,
+													 CGRectGetHeight(self.field.frame));
 		
 	} else {
 	
