@@ -60,6 +60,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 @property (nonatomic, weak) IBOutlet UILabel				*commentLabel;
 @property (nonatomic, weak) IBOutlet UITextField			*comment;
 @property (nonatomic, assign) CGRect						originalCommentFrame;
+@property (nonatomic, assign) CGPoint						originalContentOffset;
 
 @property (nonatomic, strong, readonly) MHGenericListViewController	*initiatorsList;
 @property (nonatomic, strong, readonly) UIPickerView				*interactionTypePicker;
@@ -124,6 +125,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 @synthesize dateTime						= _dateTime;
 @synthesize comment							= _comment;
 @synthesize originalCommentFrame			= _originalCommentFrame;
+@synthesize originalContentOffset			= _originalContentOffset;
 
 @synthesize initiatorLabel					= _initiatorLabel;
 @synthesize interactionTypeLabel			= _interactionTypeLabel;
@@ -185,7 +187,15 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 	
+	[self.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerCreateInteractionScreenName];
+	
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	
+	NSLog(@"%@", change);
 	
 }
 
@@ -1168,26 +1178,38 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 
 - (void)keyboardWillShow:(NSNotification *)notification {
 
-    CGRect newRect				= CGRectZero;
-	NSDictionary* keyboardInfo	= [notification userInfo];
-    NSValue* keyboardFrameValue	= [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
-    self.originalCommentFrame	= self.comment.frame;
+//    CGRect newRect				= CGRectZero;
+//	NSDictionary* keyboardInfo	= [notification userInfo];
+//    NSValue* keyboardFrameValue	= [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+//	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
+//    self.originalCommentFrame	= self.comment.frame;
 	
 	if (!self.currentPopoverController) {
 		
-		CGFloat keyboardHeight		= ( CGRectGetHeight(keyboardFrame) > CGRectGetHeight(self.view.frame) ? CGRectGetWidth(keyboardFrame) : CGRectGetHeight(keyboardFrame) );
+//		CGFloat keyboardHeight		= ( CGRectGetHeight(keyboardFrame) > CGRectGetHeight(self.view.frame) ? CGRectGetWidth(keyboardFrame) : CGRectGetHeight(keyboardFrame) );
 		
 		//Down size your text view
-		newRect.origin.y	= self.scrollView.contentOffset.y;
-		newRect.size.width	= CGRectGetWidth(self.scrollView.frame);
-		newRect.size.height = CGRectGetHeight(self.view.frame) - keyboardHeight;
+//		newRect.origin.y	= self.scrollView.contentOffset.y;
+//		newRect.size.width	= CGRectGetWidth(self.scrollView.frame);
+//		newRect.size.height = CGRectGetHeight(self.view.frame) - keyboardHeight;
+//		
+//		[UIView beginAnimations:nil context:nil];
+//		
+//		self.comment.frame = newRect;
+//		
+//		[UIView commitAnimations];
 		
-		[UIView beginAnimations:nil context:nil];
+		self.originalContentOffset	= self.scrollView.contentOffset;
 		
-		self.comment.frame = newRect;
+		CGFloat naviagtionBarHeight	= 0.0;
 		
-		[UIView commitAnimations];
+		if (!(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)) {
+			
+			naviagtionBarHeight	= CGRectGetHeight(self.navigationController.navigationBar.frame) + 20.0;
+			
+		}
+		
+		[self.scrollView setContentOffset:CGPointMake(0, CGRectGetMinY(self.commentLabel.frame) - MHNewInteractionViewControllerLabelMarginTop - naviagtionBarHeight) animated:YES];
 		
 		self.scrollView.scrollEnabled	= NO;
 		
@@ -1205,12 +1227,16 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 		self.scrollView.scrollEnabled	= YES;
 		
-		__weak __typeof(&*self)weakSelf = self;
-		[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-			
-			weakSelf.comment.frame = weakSelf.originalCommentFrame;
-			
-		} completion:nil];
+		[self.scrollView setContentOffset:self.originalContentOffset animated:YES];
+		
+		self.originalContentOffset	= CGPointZero;
+		
+//		__weak __typeof(&*self)weakSelf = self;
+//		[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+//			
+//			weakSelf.comment.frame = weakSelf.originalCommentFrame;
+//			
+//		} completion:nil];
 		
 	}
     
