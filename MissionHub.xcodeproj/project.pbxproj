@@ -1122,6 +1122,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Cru;
 				TargetAttributes = {
+					683910821760FD3100E01B46 = {
+						DevelopmentTeam = 3EQ94S9G86;
+					};
 					6867916E17FF4EC5000106BF = {
 						TestTargetID = 683910821760FD3100E01B46;
 					};
@@ -1566,7 +1569,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Karl Kranich (E7Z4W7Z7H7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1598,7 +1602,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F17F75BF-195B-4C23-BA43-929A0E694931";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1608,7 +1612,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc (3EQ94S9G86)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1640,7 +1645,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7D1F43DC-D292-4295-9218-E4B7D6145933";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1676,7 +1681,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc (3EQ94S9G86)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1708,7 +1714,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "205ED601-49EB-4F03-8A14-7342D07FEE93";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
