@@ -28,6 +28,7 @@ typedef enum {
 
 @interface MHLoginViewController () <FBLoginViewDelegate, MHLoginViewControllerDelegate>
 
+@property (nonatomic, strong)				UIImageView							*logoImageView;
 @property (nonatomic, strong)				FBLoginView							*loginButtonView;
 @property (nonatomic, strong)				UIButton							*missionhubRefreshButton;
 @property (nonatomic, weak)					IBOutlet UIActivityIndicatorView	*loadingIndicator;
@@ -39,7 +40,6 @@ typedef enum {
 - (void)loggedInWithToken:(NSString *)token;
 - (void)refreshMissionHubData:(id)sender;
 
-- (void)resetViews;
 - (void)beginLoading;
 - (void)endLoading;
 
@@ -48,6 +48,7 @@ typedef enum {
 @implementation MHLoginViewController
 
 @synthesize loginDelegate		= _loginDelegate;
+@synthesize logoImageView		= _logoImageView;
 @synthesize loginButtonView		= _loginButtonView;
 @synthesize loadingIndicator	= _loadingIndicator;
 @synthesize loggedIn			= _loggedIn;
@@ -431,21 +432,25 @@ typedef enum {
 
 #pragma mark - orientation methods
 
-- (NSUInteger)supportedInterfaceOrientations {
-	
-    return UIInterfaceOrientationPortrait;
-	
-}
-
 - (BOOL)shouldAutorotate {
 	
-    return NO;
+    return YES;
 	
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
 	
-    return NO;
+    return YES;
+	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+	
+	
+	self.logoImageView.frame	= CGRectMake(0.5 * (CGRectGetWidth(frame) - CGRectGetWidth(self.logoImageView.frame)), CGRectGetMinY(self.logoImageView.frame), CGRectGetWidth(self.logoImageView.frame), CGRectGetHeight(self.logoImageView.frame));
 	
 }
 

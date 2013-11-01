@@ -19,8 +19,8 @@
 
 CGFloat MHPeopleListViewControllerRowHeight = 61.0;
 
-NSString * const MHGoogleAnalyticsTrackerPeopleListScreenName						= @"PeopleList";
-NSString * const MHGoogleAnalyticsTrackerPeopleListSearchScreenName					= @"PeopleListSearch";
+NSString * const MHGoogleAnalyticsTrackerPeopleListScreenName						= @"People List";
+NSString * const MHGoogleAnalyticsTrackerPeopleListSearchScreenName					= @"People List Search";
 NSString * const MHGoogleAnalyticsTrackerPeopleListMenuButtonTap					= @"menu";
 NSString * const MHGoogleAnalyticsTrackerPeopleListCreatePersonButtonTap			= @"create_person";
 NSString * const MHGoogleAnalyticsTrackerPeopleListCreateInteractionButtonTap		= @"create_interaction";
@@ -28,7 +28,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListDismissPopover					= @"dismis
 NSString * const MHGoogleAnalyticsTrackerPeopleListSearch							= @"search";
 NSString * const MHGoogleAnalyticsTrackerPeopleListChooseSecondaryFieldButtonTap	= @"choose_secondary_field";
 NSString * const MHGoogleAnalyticsTrackerPeopleListSortButtonTap					= @"sort";
-NSString * const MHGoogleAnalyticsTrackerPeopleListCheckboxButtonTap				= @"person_selected";
+NSString * const MHGoogleAnalyticsTrackerPeopleListCheckboxSelectedButtonTap		= @"person_selected";
+NSString * const MHGoogleAnalyticsTrackerPeopleListCheckboxDeselectedButtonTap		= @"person_deselected";
 NSString * const MHGoogleAnalyticsTrackerPeopleListPersonCellTap					= @"person";
 NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load";
 
@@ -962,6 +963,11 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 												[weakSelf.peopleArray addObjectsFromArray:result];
 												[weakSelf.tableView reloadData];
 												
+												[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryList
+																										  action:MHGoogleAnalyticsActionSwipe
+																										   label:MHGoogleAnalyticsTrackerPeopleListPageLoad
+																										   value:[NSNumber numberWithUnsignedInteger:weakSelf.peopleArray.count - weakSelf.requestOptions.offset]];
+												
 											}
 											   failBlock:^(NSError *error, MHRequestOptions *options) {
 												   
@@ -976,11 +982,6 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 												   [weakSelf.tableView reloadData];
 												   
 											   }];
-			
-			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryList
-																	  action:MHGoogleAnalyticsActionSwipe
-																	   label:MHGoogleAnalyticsTrackerPeopleListPageLoad
-																	   value:[NSNumber numberWithUnsignedInteger:self.requestOptions.offset + self.requestOptions.limit]];
 				
 		}
 		
@@ -1012,6 +1013,12 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 												}
 												[weakSelf.searchDisplayController.searchResultsTableView reloadData];
 												
+												[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerPeopleListSearchScreenName
+																										  category:MHGoogleAnalyticsCategoryList
+																											action:MHGoogleAnalyticsActionSwipe
+																											 label:MHGoogleAnalyticsTrackerPeopleListPageLoad
+																											 value:[NSNumber numberWithUnsignedInteger:weakSelf.searchResultArray.count - weakSelf.searchRequestOptions.offset]];
+												
 											}
 											   failBlock:^(NSError *error, MHRequestOptions *options) {
 												   
@@ -1026,12 +1033,6 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 												   [weakSelf.searchDisplayController.searchResultsTableView reloadData];
 												   
 											   }];
-			
-			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerPeopleListSearchScreenName
-																	  category:MHGoogleAnalyticsCategoryList
-																	  action:MHGoogleAnalyticsActionSwipe
-																	   label:MHGoogleAnalyticsTrackerPeopleListPageLoad
-																	   value:[NSNumber numberWithUnsignedInteger:self.searchRequestOptions.offset + self.searchRequestOptions.limit]];
 			
 		}
 		
@@ -1098,8 +1099,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
 															  action:MHGoogleAnalyticsActionTap
-															   label:MHGoogleAnalyticsTrackerPeopleListCheckboxButtonTap
-															   value:[NSNumber numberWithUnsignedInteger:self.selectedPeople.count]];
+															   label:MHGoogleAnalyticsTrackerPeopleListCheckboxSelectedButtonTap
+															   value:@1];
 	
 }
 
@@ -1121,8 +1122,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
 															  action:MHGoogleAnalyticsActionTap
-															   label:MHGoogleAnalyticsTrackerPeopleListCheckboxButtonTap
-															   value:[NSNumber numberWithUnsignedInteger:self.selectedPeople.count]];
+															   label:MHGoogleAnalyticsTrackerPeopleListCheckboxDeselectedButtonTap
+															   value:@1];
 	
 }
 

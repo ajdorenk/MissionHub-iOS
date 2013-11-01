@@ -154,7 +154,7 @@ typedef enum {
 																  category:MHGoogleAnalyticsCategoryCell
 																	action:MHGoogleAnalyticsActionTap
 																	 label:MHGoogleAnalyticsTrackerChangeOrganizationOrganizationCellTap
-																	 value:organization.remoteID];
+																	 value:nil];
 		
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] getOrganizationWithRemoteID:organization.remoteID successBlock:^(NSArray *result, MHRequestOptions *options) {
@@ -491,7 +491,7 @@ typedef enum {
 																			  category:MHGoogleAnalyticsCategoryCell
 																				action:MHGoogleAnalyticsActionTap
 																				 label:MHGoogleAnalyticsTrackerMenuSurveyCellTap
-																				 value:survey.remoteID];
+																				 value:nil];
 					
 				}
 				
@@ -525,7 +525,7 @@ typedef enum {
 																				  category:MHGoogleAnalyticsCategoryCell
 																					action:MHGoogleAnalyticsActionTap
 																					 label:MHGoogleAnalyticsTrackerMenuLabelCellTap
-																					 value:label.remoteID];
+																					 value:nil];
 						
 					}
 					

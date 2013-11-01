@@ -115,7 +115,7 @@ NSString * const MHGoogleAnalyticsTrackerLoginLoggedInOrganizationLabel	= @"orga
 															  category:MHGoogleAnalyticsCategoryBackgroundProcess
 																action:MHGoogleAnalyticsTrackerLoginLoggedInAction
 																 label:MHGoogleAnalyticsTrackerLoginLoggedInOrganizationLabel
-																 value:currentUser.currentOrganization.remoteID];
+																 value:nil];
 	
 }
 
