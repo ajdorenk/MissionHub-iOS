@@ -79,6 +79,7 @@
                     </view>
                     <connections>
                         <outlet property="loadingIndicator" destination="RNJ-Aa-RMZ" id="O1m-nN-wZo"/>
+                        <outlet property="logoImageView" destination="DOQ-Dp-rpz" id="eGR-pW-HMQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNI-ba-RDb" userLabel="First Responder" sceneMemberID="firstResponder"/>

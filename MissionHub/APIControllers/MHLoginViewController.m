@@ -12,12 +12,14 @@
 #import "MHAPI.h"
 #import "MHErrorHandler.h"
 
-#define LOGIN_BUTTON_WIDTH 180.0f
-#define LOGIN_BUTTON_HEIGHT 60.0f
+CGFloat const MHLoginViewControllerLoginButtonWidth			= 180.0f;
+CGFloat const MHLoginViewControllerLoginButtonHeight		= 60.0f;
+CGFloat const MHLoginViewControllerLoginButtonSpacing		= 40.0f;
+CGFloat const MHLoginViewControllerLoadingIndicatorSpacing	= 20.0f;
 
-NSString *const FBSessionStateChangedNotification	= @"com.missionhub:FBSessionStateChangedNotification";
-NSString *const MHLoginViewControllerLogout			= @"com.missionhub.notification.logout";
-NSString *const MHLoginErrorDomain					= @"com.missionhub.errorDomain.login";
+NSString *const FBSessionStateChangedNotification			= @"com.missionhub:FBSessionStateChangedNotification";
+NSString *const MHLoginViewControllerLogout					= @"com.missionhub.notification.logout";
+NSString *const MHLoginErrorDomain							= @"com.missionhub.errorDomain.login";
 
 typedef enum {
 	MHLoginErrorUnknownError,
@@ -28,12 +30,11 @@ typedef enum {
 
 @interface MHLoginViewController () <FBLoginViewDelegate, MHLoginViewControllerDelegate>
 
-@property (nonatomic, strong)				UIImageView							*logoImageView;
+@property (nonatomic, weak)					IBOutlet UIImageView				*logoImageView;
 @property (nonatomic, strong)				FBLoginView							*loginButtonView;
 @property (nonatomic, strong)				UIButton							*missionhubRefreshButton;
 @property (nonatomic, weak)					IBOutlet UIActivityIndicatorView	*loadingIndicator;
 @property (nonatomic, assign)				BOOL								hasRequestedMe;
-@property (nonatomic, weak) IBOutlet		UIToolbar * toolbar;
 
 - (void)handleAppLink:(FBAccessTokenData *)appLinkToken;
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
@@ -42,6 +43,8 @@ typedef enum {
 
 - (void)beginLoading;
 - (void)endLoading;
+
+- (void)updateLayout:(CGRect)frame;
 
 @end
 
@@ -54,7 +57,6 @@ typedef enum {
 @synthesize loggedIn			= _loggedIn;
 @synthesize hasRequestedMe		= _hasRequestedMe;
 @synthesize missionhubRefreshButton	= _missionhubRefreshButton;
-@synthesize toolbar				= _toolbar;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -78,16 +80,16 @@ typedef enum {
 	
 	self.loginButtonView	= [[FBLoginView alloc] initWithReadPermissions:@[@"user_birthday",@"email",@"user_interests",@"user_location",@"user_education_history"]];
 	
-	//NSLog(@"%f, %f, %f, %f", CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
-	//	  CGRectGetMidY(self.view.frame) - (LOGIN_BUTTON_HEIGHT / 2),
-	//	  LOGIN_BUTTON_WIDTH,
-	//	  LOGIN_BUTTON_HEIGHT);
+	//NSLog(@"%f, %f, %f, %f", CGRectGetMidX(self.view.frame) - (MHLoginViewControllerLoginButtonWidth / 2),
+	//	  CGRectGetMidY(self.view.frame) - (MHLoginViewControllerLoginButtonHeight / 2),
+	//	  MHLoginViewControllerLoginButtonWidth,
+	//	  MHLoginViewControllerLoginButtonHeight);
 	
 	self.loginButtonView.delegate	= self;
-	self.loginButtonView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (LOGIN_BUTTON_WIDTH / 2),
+	self.loginButtonView.frame		= CGRectMake(CGRectGetMidX(self.view.frame) - (MHLoginViewControllerLoginButtonWidth / 2),
 											 CGRectGetMidY(self.view.frame),
-											 LOGIN_BUTTON_WIDTH,
-											 LOGIN_BUTTON_HEIGHT);
+											 MHLoginViewControllerLoginButtonWidth,
+											 MHLoginViewControllerLoginButtonHeight);
 	
 	[self.view addSubview:self.loginButtonView];
 	
@@ -106,6 +108,17 @@ typedef enum {
 	self.missionhubRefreshButton.hidden = YES;
 	
 	[self.view addSubview:self.missionhubRefreshButton];
+	
+	CGRect frame = self.view.frame;
+	
+	if (UIDeviceOrientationIsLandscape(self.interfaceOrientation)) {
+		
+		frame.size.height	= CGRectGetWidth(self.view.frame);
+		frame.size.width	= CGRectGetHeight(self.view.frame);
+		
+	}
+	
+	[self updateLayout:frame];
 	
 }
 
@@ -448,10 +461,40 @@ typedef enum {
 	
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
+	CGRect frame = self.view.frame;
 	
+	if (UIDeviceOrientationIsLandscape(toInterfaceOrientation)) {
+		
+		frame.size.height	= CGRectGetWidth(self.view.frame);
+		frame.size.width	= CGRectGetHeight(self.view.frame);
+		
+	}
 	
-	self.logoImageView.frame	= CGRectMake(0.5 * (CGRectGetWidth(frame) - CGRectGetWidth(self.logoImageView.frame)), CGRectGetMinY(self.logoImageView.frame), CGRectGetWidth(self.logoImageView.frame), CGRectGetHeight(self.logoImageView.frame));
+	[self updateLayout:frame];
 	
 }
+
+- (void)updateLayout:(CGRect)frame {
+	
+	self.logoImageView.frame			= CGRectMake(0.5 * (CGRectGetWidth(frame) - CGRectGetWidth(self.logoImageView.frame)),
+													 CGRectGetMinY(self.logoImageView.frame),
+													 CGRectGetWidth(self.logoImageView.frame),
+													 CGRectGetHeight(self.logoImageView.frame));
+	
+	self.loginButtonView.frame			= CGRectMake(0.5 * (CGRectGetWidth(frame) - CGRectGetWidth(self.loginButtonView.frame)),
+													 CGRectGetMaxY(self.logoImageView.frame) + MHLoginViewControllerLoginButtonSpacing,
+													 CGRectGetWidth(self.loginButtonView.frame),
+													 CGRectGetHeight(self.loginButtonView.frame));
+	
+	self.missionhubRefreshButton.frame	= self.loginButtonView.frame;
+	
+	self.loadingIndicator.frame			= CGRectMake(0.5 * (CGRectGetWidth(frame) - CGRectGetWidth(self.loadingIndicator.frame)),
+													 CGRectGetMaxY(self.loginButtonView.frame) + MHLoginViewControllerLoadingIndicatorSpacing,
+													 CGRectGetWidth(self.loadingIndicator.frame),
+													 CGRectGetHeight(self.loadingIndicator.frame));
+	
+}
+
+
 
 @end

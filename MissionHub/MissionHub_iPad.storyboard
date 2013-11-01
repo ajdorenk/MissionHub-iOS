@@ -84,6 +84,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <connections>
                         <outlet property="loadingIndicator" destination="Fq0-ow-SdL" id="vja-M8-JwL"/>
+                        <outlet property="logoImageView" destination="X7N-qN-F3o" id="Rbs-pf-YNU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tcs-4r-aUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
