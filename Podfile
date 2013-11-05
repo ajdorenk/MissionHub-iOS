@@ -20,7 +20,6 @@ target :MissionHub do
 	pod 'TTTAttributedLabel', '~> 1.7.1'
 	pod 'NewRelicAgent', '~> 1.376'
 	pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.1'
-	pod 'MYIntroduction', :git => 'https://github.com/MatthewYork/iPhone-IntroductionTutorial.git'
 
 	target :tests, :exclusive => true do
 		pod 'Kiwi/XCTest', '2.2.2'

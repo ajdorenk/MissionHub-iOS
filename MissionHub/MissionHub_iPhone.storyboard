@@ -12,6 +12,12 @@
                     <view key="view" contentMode="scaleToFill" id="C3G-zZ-xK1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default-blur.png" id="iKg-Qh-O6D">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="HJj-9h-dka"/>
@@ -58,6 +64,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHz-p3-ci1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="517" y="78"/>
+        </scene>
+        <!--Introduction View Controller-->
+        <scene sceneID="5Dv-Xa-vSk">
+            <objects>
+                <viewController storyboardIdentifier="MHIntroductionViewController" id="iZ4-0m-PGW" customClass="MHIntroductionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Y5-ne-yhw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vi3-Dh-FvR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="-1324"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="mef-o3-o50">
@@ -918,6 +938,7 @@ select another survey.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Default-blur.png" width="320" height="568"/>
         <image name="MH_Mobile_Icon_Menu.png" width="72" height="72"/>
         <image name="MH_Mobile_Logo.png" width="440" height="406"/>
     </resources>

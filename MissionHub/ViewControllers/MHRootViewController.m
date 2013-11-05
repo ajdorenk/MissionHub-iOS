@@ -7,18 +7,28 @@
 //
 
 #import "MHRootViewController.h"
+#import "MHIntroductionViewController.h"
 #import "MHPeopleListViewController.h"
 #import "MHGoogleAnalyticsTracker.h"
 
+NSString * const MHGoogleAnalyticsTrackerIntroductionScreenName			= @"Introduction Tutorial";
 NSString * const MHGoogleAnalyticsTrackerLoginScreenName				= @"Login";
 NSString * const MHGoogleAnalyticsTrackerLoginLoggedInAction			= @"logged_in";
 NSString * const MHGoogleAnalyticsTrackerLoginLoggedInOrganizationLabel	= @"organization";
 
-@interface MHRootViewController ()
+static NSString * const introductionHasBeenViewed						= @"introductionHasBeenViewed";
 
+@interface MHRootViewController () <MHLoginViewControllerDelegate>
+
+@property (nonatomic, strong, readonly) MHLoginViewController			*loginViewController;
+@property (nonatomic, strong, readonly) MHNavigationViewController		*peopleNavigationViewController;
+@property (nonatomic, strong, readonly) MHIntroductionViewController	*introductionViewController;
 @property (nonatomic, assign) BOOL	userInitiatedLogout;
 @property (nonatomic, assign) BOOL	showLoginOnViewDidAppear;
 
+- (void)showLogin;
+- (void)showIntroduction;
+- (void)introductionFinished;
 - (void)logout;
 
 @end
@@ -27,36 +37,33 @@ NSString * const MHGoogleAnalyticsTrackerLoginLoggedInOrganizationLabel	= @"orga
 
 @synthesize loginViewController				= _loginViewController;
 @synthesize peopleNavigationViewController	= _peopleNavigationViewController;
+@synthesize introductionViewController		= _introductionViewController;
 @synthesize userInitiatedLogout				= _userInitiatedLogout;
 @synthesize showLoginOnViewDidAppear		= _showLoginOnViewDidAppear;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    
+	if (self) {
         // Custom initialization
 		self.userInitiatedLogout = NO;
     }
-    return self;
+    
+	return self;
 }
 
 - (void)awakeFromNib {
 	
-	self.userInitiatedLogout = NO;
+	self.showLoginOnViewDidAppear		= YES;
+	self.userInitiatedLogout			= NO;
 	
+	MHAppDelegate *appdelegate			= (MHAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appdelegate.loginViewController		= self.loginViewController;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showIntroduction) name:MHIntroductionViewControllerShow object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(introductionFinished) name:MHIntroductionViewControllerFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:MHLoginViewControllerLogout object:nil];
-	
-	self.peopleNavigationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHNavigationViewController"];
-	
-	self.loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MHLoginViewController"];
-	self.loginViewController.loginDelegate = self;
-	self.loginViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-	self.loginViewController.modalTransitionStyle	= UIModalTransitionStyleCoverVertical;
-	
-	MHAppDelegate *appdelegate		= (MHAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appdelegate.loginViewController	= self.loginViewController;
-	
-	self.showLoginOnViewDidAppear = YES;
 	
 }
 
@@ -71,9 +78,92 @@ NSString * const MHGoogleAnalyticsTrackerLoginLoggedInOrganizationLabel	= @"orga
 	
 	if (self.showLoginOnViewDidAppear) {
 		
-		[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName];
-		[self presentViewController:self.loginViewController animated:NO completion:nil];
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:introductionHasBeenViewed]) {
+			
+			[self showLogin];
+			
+		} else {
+			
+			[self showIntroduction];
+			
+		}
+		
 		self.showLoginOnViewDidAppear = NO;
+		
+	}
+	
+}
+
+- (MHLoginViewController *)loginViewController {
+	
+	if (_loginViewController == nil) {
+		
+		_loginViewController							= [self.storyboard instantiateViewControllerWithIdentifier:@"MHLoginViewController"];
+		_loginViewController.loginDelegate				= self;
+		_loginViewController.modalPresentationStyle		= UIModalPresentationFullScreen;
+		_loginViewController.modalTransitionStyle		= UIModalTransitionStyleCoverVertical;
+		
+	}
+	
+	return _loginViewController;
+	
+}
+
+- (MHNavigationViewController *)peopleNavigationViewController {
+	
+	if (_peopleNavigationViewController == nil) {
+		
+		_peopleNavigationViewController					= [self.storyboard instantiateViewControllerWithIdentifier:@"MHNavigationViewController"];
+		
+	}
+	
+	return _peopleNavigationViewController;
+	
+}
+
+- (MHIntroductionViewController *)introductionViewController {
+	
+	if (_introductionViewController == nil) {
+		
+		_introductionViewController							= [self.storyboard instantiateViewControllerWithIdentifier:@"MHIntroductionViewController"];
+		_introductionViewController.modalPresentationStyle	= UIModalPresentationFullScreen;
+		_introductionViewController.modalTransitionStyle	= UIModalTransitionStyleCoverVertical;
+		
+	}
+	
+	return _introductionViewController;
+	
+}
+
+- (void)showLogin {
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName];
+	[self presentViewController:self.loginViewController animated:NO completion:nil];
+	
+}
+
+- (void)showIntroduction {
+	
+	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerIntroductionScreenName];
+	[self presentViewController:self.introductionViewController animated:YES completion:nil];
+	
+}
+
+- (void)introductionFinished {
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:introductionHasBeenViewed]) {
+		
+		[self.loginViewController dismissViewControllerAnimated:YES completion:nil];
+		
+	} else {
+		
+		[self.loginViewController dismissViewControllerAnimated:YES completion:^{
+			
+			[self showLogin];
+			
+		}];
+		
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:introductionHasBeenViewed];
 		
 	}
 	
@@ -123,8 +213,7 @@ NSString * const MHGoogleAnalyticsTrackerLoginLoggedInOrganizationLabel	= @"orga
 	
 	if (self.userInitiatedLogout) {
 		
-		[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName];
-		[self presentViewController:self.loginViewController animated:YES completion:nil];
+		[self showLogin];
 		
 	}
 	

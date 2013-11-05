@@ -12,9 +12,6 @@
 #import "MHPeopleListViewController.h"
 #import "MHAPI.h"
 
-@interface MHRootViewController : ECSlidingViewController <MHLoginViewControllerDelegate>
-
-@property (nonatomic, strong) MHLoginViewController			*loginViewController;
-@property (nonatomic, strong) MHNavigationViewController	*peopleNavigationViewController;
+@interface MHRootViewController : ECSlidingViewController
 
 @end

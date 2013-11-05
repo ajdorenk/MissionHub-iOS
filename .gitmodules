@@ -31,3 +31,6 @@
 [submodule "Libraries/airbrake-ios"]
 	path = Libraries/airbrake-ios
 	url = https://github.com/michaelharro/airbrake-ios.git
+[submodule "Libraries/MYBlurIntroductionView"]
+	path = Libraries/MYBlurIntroductionView
+	url = https://github.com/michaelharro/MYBlurIntroductionView.git

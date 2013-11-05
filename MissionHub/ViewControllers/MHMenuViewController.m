@@ -17,6 +17,7 @@
 #import "NSMutableArray+removeDuplicatesForKey.h"
 #import "MHGenericListViewController.h"
 #import "MHLoginViewController.h"
+#import "MHIntroductionViewController.h"
 #import "MHGoogleAnalyticsTracker.h"
 
 NSString *const MHMenuErrorDomain												= @"com.missionhub.errorDomain.menu";
@@ -28,6 +29,7 @@ NSString *const MHGoogleAnalyticsTrackerMenuAllContactsCellTap					= @"all_conta
 NSString *const MHGoogleAnalyticsTrackerMenuSurveyCellTap						= @"survey";
 NSString *const MHGoogleAnalyticsTrackerMenuLabelCellTap						= @"label";
 NSString *const MHGoogleAnalyticsTrackerMenuContactAssignmentCellTap			= @"contact_assignment";
+NSString *const MHGoogleAnalyticsTrackerMenuHelpCellTap							= @"help";
 NSString *const MHGoogleAnalyticsTrackerMenuChangeOrganizationCellTap			= @"change_organization";
 NSString *const MHGoogleAnalyticsTrackerMenuLogoutCellTap						= @"logout";
 
@@ -47,6 +49,7 @@ typedef enum {
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
 - (void)updateMenuArrays;
+- (void)help;
 - (void)changeOrganization;
 - (void)logout;
 
@@ -117,6 +120,12 @@ typedef enum {
 	}
 	
 	return _organizationViewController;
+	
+}
+
+- (void)help {
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:MHIntroductionViewControllerShow object:self];
 	
 }
 
@@ -390,7 +399,7 @@ typedef enum {
 	} else {
 		
 		self.menuHeaders	= @[@"", @"LABELS", @"CONTACT ASSIGNMENTS", @"SURVEYS", @"SETTINGS"];
-		self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"ALL CONTACTS"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"CHANGE ORGANIZATION", @"LOG OUT"]]];
+		self.menuItems		= [NSMutableArray arrayWithArray:@[@[@"ALL CONTACTS"],@[@"Loading..."],@[@"Loading..."],@[@"Loading..."],@[@"HELP", @"CHANGE ORGANIZATION", @"LOG OUT"]]];
 		
 	}
 	
@@ -582,6 +591,15 @@ typedef enum {
 	if (indexPath.section == 4) {
 		
 		if (indexPath.row == 0) {
+		
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
+																	  category:MHGoogleAnalyticsCategoryCell
+																		action:MHGoogleAnalyticsActionTap
+																		 label:MHGoogleAnalyticsTrackerMenuHelpCellTap
+																		 value:nil];
+			[self help];
+			
+		} else if (indexPath.row == 1) {
 			
 			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
 																	  category:MHGoogleAnalyticsCategoryCell
@@ -590,7 +608,7 @@ typedef enum {
 																		 value:nil];
 			[self changeOrganization];
 			
-		} else if (indexPath.row == 1) {
+		} else if (indexPath.row == 2) {
 			
 			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerMenuScreenName
 																	  category:MHGoogleAnalyticsCategoryCell
