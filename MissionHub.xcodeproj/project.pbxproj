@@ -171,6 +171,14 @@
 		68B7DDA717A317BD00849F31 /* MHSurvey+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDA617A317BC00849F31 /* MHSurvey+Helper.m */; };
 		68B7DDAB17A3185B00849F31 /* MHOrganizationalLabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAA17A3185900849F31 /* MHOrganizationalLabel+Helper.m */; };
 		68B7DDAF17A318D600849F31 /* MHOrganizationalPermission+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */; };
+		68BE4632182ACE6A00A9B245 /* MHWelcomePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BE4631182ACE6A00A9B245 /* MHWelcomePanel.m */; };
+		68BE4633182ACE6A00A9B245 /* MHWelcomePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BE4631182ACE6A00A9B245 /* MHWelcomePanel.m */; };
+		68BE4635182ACF4800A9B245 /* WelcomePanel_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE4634182ACF4800A9B245 /* WelcomePanel_iPhone.xib */; };
+		68BE4636182ACF4800A9B245 /* WelcomePanel_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE4634182ACF4800A9B245 /* WelcomePanel_iPhone.xib */; };
+		68BE4638182ACF6500A9B245 /* WelcomePanel_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE4637182ACF6500A9B245 /* WelcomePanel_iPad.xib */; };
+		68BE4639182ACF6500A9B245 /* WelcomePanel_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE4637182ACF6500A9B245 /* WelcomePanel_iPad.xib */; };
+		68BE463B182AF1AA00A9B245 /* MH_Mobile_WelcomeToMissionHub@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE463A182AF1AA00A9B245 /* MH_Mobile_WelcomeToMissionHub@2x.png */; };
+		68BE463C182AF1AA00A9B245 /* MH_Mobile_WelcomeToMissionHub@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE463A182AF1AA00A9B245 /* MH_Mobile_WelcomeToMissionHub@2x.png */; };
 		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A71770EFBE007C79D6 /* MHStorage.m */; };
 		68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequestOperation.m */; };
@@ -539,6 +547,11 @@
 		68B7DDAA17A3185900849F31 /* MHOrganizationalLabel+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganizationalLabel+Helper.m"; path = "Models/MHOrganizationalLabel+Helper.m"; sourceTree = "<group>"; };
 		68B7DDAD17A318D100849F31 /* MHOrganizationalPermission+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHOrganizationalPermission+Helper.h"; path = "Models/MHOrganizationalPermission+Helper.h"; sourceTree = "<group>"; };
 		68B7DDAE17A318D400849F31 /* MHOrganizationalPermission+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHOrganizationalPermission+Helper.m"; path = "Models/MHOrganizationalPermission+Helper.m"; sourceTree = "<group>"; };
+		68BE4630182ACE6A00A9B245 /* MHWelcomePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHWelcomePanel.h; path = "Custom UI/Introduction/MHWelcomePanel.h"; sourceTree = "<group>"; };
+		68BE4631182ACE6A00A9B245 /* MHWelcomePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHWelcomePanel.m; path = "Custom UI/Introduction/MHWelcomePanel.m"; sourceTree = "<group>"; };
+		68BE4634182ACF4800A9B245 /* WelcomePanel_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomePanel_iPhone.xib; path = "Custom UI/Introduction/WelcomePanel_iPhone.xib"; sourceTree = "<group>"; };
+		68BE4637182ACF6500A9B245 /* WelcomePanel_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomePanel_iPad.xib; path = "Custom UI/Introduction/WelcomePanel_iPad.xib"; sourceTree = "<group>"; };
+		68BE463A182AF1AA00A9B245 /* MH_Mobile_WelcomeToMissionHub@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MH_Mobile_WelcomeToMissionHub@2x.png"; path = "Resources/MH_Mobile_WelcomeToMissionHub@2x.png"; sourceTree = "<group>"; };
 		68C06899176EB832007C79D6 /* MHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHModel.h; path = Models/MHModel.h; sourceTree = "<group>"; };
 		68C0689A176EB832007C79D6 /* MHModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHModel.m; path = Models/MHModel.m; sourceTree = "<group>"; };
 		68C068A61770EFBE007C79D6 /* MHStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHStorage.h; path = Models/MHStorage.h; sourceTree = "<group>"; };
@@ -1129,30 +1142,35 @@
 			children = (
 				68F8D628182813E700AF2E20 /* MHIntroductionViewController.h */,
 				68F8D627182813E700AF2E20 /* MHIntroductionViewController.m */,
+				68BE4630182ACE6A00A9B245 /* MHWelcomePanel.h */,
+				68BE4631182ACE6A00A9B245 /* MHWelcomePanel.m */,
 				68F8D6231828134400AF2E20 /* MHIntroductionPanel.h */,
 				68F8D6241828134400AF2E20 /* MHIntroductionPanel.m */,
 				68F8D63118281B0F00AF2E20 /* Default-blur@2x.png */,
 				684B0E781829AFED001C3318 /* Default-blur@2x~ipad.png */,
-				68F8D63418295D0900AF2E20 /* MH_Mobile_Introduction_5_description.png */,
-				68F8D63518295D0900AF2E20 /* MH_Mobile_Introduction_3_description.png */,
-				68F8D63618295D0900AF2E20 /* MH_Mobile_Introduction_2_description.png */,
-				68F8D63818295D0900AF2E20 /* MH_Mobile_Introduction_4_description.png */,
-				68F8D63918295D0900AF2E20 /* MH_Mobile_Introduction_4.png */,
-				68F8D63A18295D0900AF2E20 /* MH_Mobile_Introduction_5.png */,
-				68F8D63B18295D0900AF2E20 /* MH_Mobile_Introduction_3.png */,
-				68F8D63C18295D0900AF2E20 /* MH_Mobile_Introduction_2.png */,
+				68BE4634182ACF4800A9B245 /* WelcomePanel_iPhone.xib */,
+				68BE4637182ACF6500A9B245 /* WelcomePanel_iPad.xib */,
+				68BE463A182AF1AA00A9B245 /* MH_Mobile_WelcomeToMissionHub@2x.png */,
 				68F8D62B1828177800AF2E20 /* Panel1_iPhone.xib */,
-				68F8D6521829600000AF2E20 /* Panel2_iPhone.xib */,
-				68F8D6551829601400AF2E20 /* Panel3_iPhone.xib */,
-				68F8D6581829602400AF2E20 /* Panel4_iPhone.xib */,
-				68F8D65B1829603300AF2E20 /* Panel5_iPhone.xib */,
 				68F8D62E182817A900AF2E20 /* Panel1_iPad.xib */,
-				68F8D65E1829609000AF2E20 /* Panel2_iPad.xib */,
-				68F8D6611829609D00AF2E20 /* Panel3_iPad.xib */,
-				68F8D664182960AE00AF2E20 /* Panel4_iPad.xib */,
-				68F8D667182960BA00AF2E20 /* Panel5_iPad.xib */,
 				68F8D63D18295D0900AF2E20 /* MH_Mobile_Introduction_1.png */,
 				68F8D63718295D0900AF2E20 /* MH_Mobile_Introduction_1_description.png */,
+				68F8D6521829600000AF2E20 /* Panel2_iPhone.xib */,
+				68F8D65E1829609000AF2E20 /* Panel2_iPad.xib */,
+				68F8D63C18295D0900AF2E20 /* MH_Mobile_Introduction_2.png */,
+				68F8D63618295D0900AF2E20 /* MH_Mobile_Introduction_2_description.png */,
+				68F8D6551829601400AF2E20 /* Panel3_iPhone.xib */,
+				68F8D6611829609D00AF2E20 /* Panel3_iPad.xib */,
+				68F8D63B18295D0900AF2E20 /* MH_Mobile_Introduction_3.png */,
+				68F8D63518295D0900AF2E20 /* MH_Mobile_Introduction_3_description.png */,
+				68F8D6581829602400AF2E20 /* Panel4_iPhone.xib */,
+				68F8D664182960AE00AF2E20 /* Panel4_iPad.xib */,
+				68F8D63918295D0900AF2E20 /* MH_Mobile_Introduction_4.png */,
+				68F8D63818295D0900AF2E20 /* MH_Mobile_Introduction_4_description.png */,
+				68F8D65B1829603300AF2E20 /* Panel5_iPhone.xib */,
+				68F8D667182960BA00AF2E20 /* Panel5_iPad.xib */,
+				68F8D63A18295D0900AF2E20 /* MH_Mobile_Introduction_5.png */,
+				68F8D63418295D0900AF2E20 /* MH_Mobile_Introduction_5_description.png */,
 			);
 			name = Intoduction;
 			sourceTree = "<group>";
@@ -1292,6 +1310,7 @@
 			files = (
 				683910931760FD3100E01B46 /* InfoPlist.strings in Resources */,
 				68F8D65F1829609000AF2E20 /* Panel2_iPad.xib in Resources */,
+				68BE4638182ACF6500A9B245 /* WelcomePanel_iPad.xib in Resources */,
 				6839109B1760FD3100E01B46 /* Default.png in Resources */,
 				6839109D1760FD3100E01B46 /* Default@2x.png in Resources */,
 				6839109F1760FD3100E01B46 /* Default-568h@2x.png in Resources */,
@@ -1332,6 +1351,7 @@
 				68839F451794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */,
 				68F8D6561829601400AF2E20 /* Panel3_iPhone.xib in Resources */,
 				68839F471794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */,
+				68BE4635182ACF4800A9B245 /* WelcomePanel_iPhone.xib in Resources */,
 				68839F491794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png in Resources */,
 				68F8D64E18295D0900AF2E20 /* MH_Mobile_Introduction_2.png in Resources */,
 				68839F4B1794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png in Resources */,
@@ -1348,6 +1368,7 @@
 				68A38F0E17A9A9120010CAC6 /* spiritual_convo.png in Resources */,
 				68A38F1017A9A9120010CAC6 /* gospel_pres.png in Resources */,
 				68A38F1217A9A9120010CAC6 /* prc.png in Resources */,
+				68BE463B182AF1AA00A9B245 /* MH_Mobile_WelcomeToMissionHub@2x.png in Resources */,
 				68A38F1417A9A9120010CAC6 /* label.png in Resources */,
 				68A38F1617A9A9120010CAC6 /* hs.png in Resources */,
 				68EB9A20181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
@@ -1387,6 +1408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68F8D64B18295D0900AF2E20 /* MH_Mobile_Introduction_5.png in Resources */,
+				68BE4639182ACF6500A9B245 /* WelcomePanel_iPad.xib in Resources */,
 				68F8D64318295D0900AF2E20 /* MH_Mobile_Introduction_2_description.png in Resources */,
 				68F8D64518295D0900AF2E20 /* MH_Mobile_Introduction_1_description.png in Resources */,
 				68EB9A21181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
@@ -1405,6 +1427,8 @@
 				684B0E7A1829AFED001C3318 /* Default-blur@2x~ipad.png in Resources */,
 				68F8D64D18295D0900AF2E20 /* MH_Mobile_Introduction_3.png in Resources */,
 				68F8D669182960BA00AF2E20 /* Panel5_iPad.xib in Resources */,
+				68BE4636182ACF4800A9B245 /* WelcomePanel_iPhone.xib in Resources */,
+				68BE463C182AF1AA00A9B245 /* MH_Mobile_WelcomeToMissionHub@2x.png in Resources */,
 				68EB9A1E1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
 				68F8D65118295D0900AF2E20 /* MH_Mobile_Introduction_1.png in Resources */,
 				68F8D666182960AE00AF2E20 /* Panel4_iPad.xib in Resources */,
@@ -1540,6 +1564,7 @@
 				680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */,
 				68F8D629182813E700AF2E20 /* MHIntroductionViewController.m in Sources */,
 				AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */,
+				68BE4632182ACE6A00A9B245 /* MHWelcomePanel.m in Sources */,
 				AD3C60DC178761E200744167 /* MHProfileInteractionsViewController.m in Sources */,
 				68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */,
 				68095021181EEBAA00DB0018 /* MHConfig.m in Sources */,
@@ -1614,6 +1639,7 @@
 				68EB9A341819DEE7009712EB /* MHNavigationBar.m in Sources */,
 				68C82E3B180314FB00A8D5A0 /* MHPerson+Helper.m in Sources */,
 				6809500E181EDCA500DB0018 /* DDXMLElement.m in Sources */,
+				68BE4633182ACE6A00A9B245 /* MHWelcomePanel.m in Sources */,
 				68095012181EDCA500DB0018 /* ABNotice.m in Sources */,
 				68C82E3D180314FB00A8D5A0 /* MHOrganization+Helper.m in Sources */,
 				68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */,

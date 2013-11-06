@@ -8,6 +8,7 @@
 
 #import "MHIntroductionViewController.h"
 #import "MYBlurIntroductionView.h"
+#import "MHWelcomePanel.h"
 #import "MHIntroductionPanel.h"
 
 NSString * const MHIntroductionViewControllerShow		= @"com.missionhub.notification.introductionviewcontroller.show";
@@ -69,6 +70,7 @@ NSString * const MHIntroductionViewControllerFinished	= @"com.missionhub.notific
 	}
 	
     //Create custom panel with events
+	MHWelcomePanel *welcomePanel	= [[MHWelcomePanel alloc] initWithFrame:frame nibNamed:[NSString stringWithFormat:@"WelcomePanel_%@", deviceName]];
 	MHIntroductionPanel *panel1 = [[MHIntroductionPanel alloc] initWithFrame:frame nibNamed:[NSString stringWithFormat:@"Panel1_%@", deviceName]];
 	MHIntroductionPanel *panel2 = [[MHIntroductionPanel alloc] initWithFrame:frame nibNamed:[NSString stringWithFormat:@"Panel2_%@", deviceName]];
 	MHIntroductionPanel *panel3 = [[MHIntroductionPanel alloc] initWithFrame:frame nibNamed:[NSString stringWithFormat:@"Panel3_%@", deviceName]];
@@ -76,7 +78,7 @@ NSString * const MHIntroductionViewControllerFinished	= @"com.missionhub.notific
 	MHIntroductionPanel *panel5 = [[MHIntroductionPanel alloc] initWithFrame:frame nibNamed:[NSString stringWithFormat:@"Panel5_%@", deviceName]];
     
     //Add panels to an array
-    NSArray *panels = @[panel1, panel2, panel3, panel4, panel5];
+    NSArray *panels = @[welcomePanel, panel1, panel2, panel3, panel4, panel5];
     
     //Create the introduction view and set its delegate
     self.introductionView = [[MYBlurIntroductionView alloc] initWithFrame:frame];

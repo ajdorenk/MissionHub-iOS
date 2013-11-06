@@ -13,7 +13,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default-blur.png" id="iKg-Qh-O6D">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default.png" id="iKg-Qh-O6D">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -938,7 +938,7 @@ select another survey.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="Default-blur.png" width="320" height="568"/>
+        <image name="Default.png" width="320" height="480"/>
         <image name="MH_Mobile_Icon_Menu.png" width="72" height="72"/>
         <image name="MH_Mobile_Logo.png" width="440" height="406"/>
     </resources>

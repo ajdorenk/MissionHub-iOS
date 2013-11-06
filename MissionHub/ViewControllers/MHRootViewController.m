@@ -28,6 +28,7 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 
 - (void)showLoginAnimated:(BOOL)animated;
 - (void)showIntroductionAnimated:(BOOL)animated;
+- (void)showIntroduction;
 - (void)introductionFinished;
 - (void)logout;
 
@@ -140,6 +141,12 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName];
 	[self presentViewController:self.loginViewController animated:animated completion:nil];
+	
+}
+
+- (void)showIntroduction {
+	
+	[self showIntroductionAnimated:YES];
 	
 }
 
