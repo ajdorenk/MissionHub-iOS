@@ -101,7 +101,11 @@ NSString * const MHIntroductionViewControllerFinished	= @"com.missionhub.notific
 
 - (void)introduction:(MYBlurIntroductionView *)introductionView didFinishWithType:(MYFinishType)finishType {
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:MHIntroductionViewControllerFinished object:self];
+	[self dismissViewControllerAnimated:NO completion:^{
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:MHIntroductionViewControllerFinished object:self];
+		
+	}];
 	
 }
 

@@ -26,8 +26,8 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 @property (nonatomic, assign) BOOL	userInitiatedLogout;
 @property (nonatomic, assign) BOOL	showLoginOnViewDidAppear;
 
-- (void)showLogin;
-- (void)showIntroduction;
+- (void)showLoginAnimated:(BOOL)animated;
+- (void)showIntroductionAnimated:(BOOL)animated;
 - (void)introductionFinished;
 - (void)logout;
 
@@ -55,6 +55,7 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 
 - (void)awakeFromNib {
 	
+	self.shouldAddPanGestureRecognizerToTopViewSnapshot	= YES;
 	self.showLoginOnViewDidAppear		= YES;
 	self.userInitiatedLogout			= NO;
 	
@@ -80,11 +81,11 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 		
 		if ([[NSUserDefaults standardUserDefaults] boolForKey:introductionHasBeenViewed]) {
 			
-			[self showLogin];
+			[self showLoginAnimated:NO];
 			
 		} else {
 			
-			[self showIntroduction];
+			[self showIntroductionAnimated:NO];
 			
 		}
 		
@@ -135,17 +136,17 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 	
 }
 
-- (void)showLogin {
+- (void)showLoginAnimated:(BOOL)animated {
 	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName];
-	[self presentViewController:self.loginViewController animated:NO completion:nil];
+	[self presentViewController:self.loginViewController animated:animated completion:nil];
 	
 }
 
-- (void)showIntroduction {
+- (void)showIntroductionAnimated:(BOOL)animated {
 	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerIntroductionScreenName];
-	[self presentViewController:self.introductionViewController animated:YES completion:nil];
+	[self presentViewController:self.introductionViewController animated:animated completion:nil];
 	
 }
 
@@ -157,11 +158,7 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 		
 	} else {
 		
-		[self.loginViewController dismissViewControllerAnimated:YES completion:^{
-			
-			[self showLogin];
-			
-		}];
+		[self showLoginAnimated:NO];
 		
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:introductionHasBeenViewed];
 		
@@ -195,7 +192,7 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 	self.topViewController = self.peopleNavigationViewController;
 	
 	__weak __typeof(&*self)weakSelf = self;
-	[self dismissViewControllerAnimated:YES completion:^{
+	[self.loginViewController dismissViewControllerAnimated:YES completion:^{
 		
 		[weakSelf resetTopView];
 		
@@ -213,7 +210,7 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 	
 	if (self.userInitiatedLogout) {
 		
-		[self showLogin];
+		[self showLoginAnimated:YES];
 		
 	}
 	
