@@ -259,7 +259,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
     
     [self updateBarButtons];
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
+    self.navigationItem.rightBarButtonItem	= self.saveButton;
 	
     UIImage *whiteButton = [[UIImage imageNamed:@"MH_Mobile_Topbar_Background.png"]
 							resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];;
@@ -460,9 +460,9 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	self.scrollView.contentSize			= CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetMaxY(self.comment.frame) + MHNewInteractionViewControllerViewMarginVertical);
 	
-	[self clearPickers];
-	
 	self.navigationItem.rightBarButtonItem	= self.saveButton;
+	
+	[self clearPickers];
 	
 }
 
@@ -789,6 +789,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 
 
 -(void)chooseInteractionType:(id)sender {
+	
+	[self clearPickers];
     
 	__block NSInteger selectedRow = 0;
 	MHInteractionType *type = self.interaction.type;
@@ -829,7 +831,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 	}];
 	
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithInteractionTypeButton, nil]];
+    self.navigationItem.rightBarButtonItem	= self.doneWithInteractionTypeButton;
     
 }
 
@@ -846,6 +848,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 
 
 -(void)chooseVisibility:(id)sender {
+	
+	[self clearPickers];
 	
 	__block NSInteger selectedRow = 0;
 
@@ -881,11 +885,13 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 	}];
 	
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithVisibilityButton, nil]];
+    self.navigationItem.rightBarButtonItem	= self.doneWithVisibilityButton;
 	
 }
 
 -(void)chooseDate:(id)sender {
+	
+	[self clearPickers];
 	
 	[self.view addSubview:[self timestampPicker]];
 	
@@ -908,7 +914,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 	}];
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithDateButton, nil]];
+    self.navigationItem.rightBarButtonItem	= self.doneWithDateButton;
     
 }
 
@@ -1156,7 +1162,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		[[self timestampPicker] removeFromSuperview];
 	}
 	
-	[self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.saveButton, nil]];
+	self.navigationItem.rightBarButtonItem	= self.saveButton;
 	
 }
 
@@ -1178,7 +1184,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 	}
 	
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:self.doneWithCommentButton, nil]];
+    self.navigationItem.rightBarButtonItem	= self.doneWithCommentButton;
 	
 }
 
@@ -1227,8 +1233,15 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
-	[self updateBarButtons];
 	[self updateLayout];
+	
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	
+	[self updateBarButtons];
 	
 }
 
