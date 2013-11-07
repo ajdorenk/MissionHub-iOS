@@ -29,6 +29,7 @@
             <connections>
                 <outlet property="backgroundView" destination="M0z-tv-zEf" id="zWh-ra-Pag"/>
                 <outlet property="bottomView" destination="4Wd-vv-U57" id="UHk-0l-zHC"/>
+                <outlet property="topView" destination="DOc-h2-PbO" id="rbu-gx-wfE"/>
             </connections>
         </view>
     </objects>

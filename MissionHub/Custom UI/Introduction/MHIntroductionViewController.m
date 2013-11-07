@@ -17,6 +17,7 @@ NSString * const MHIntroductionViewControllerFinished	= @"com.missionhub.notific
 @interface MHIntroductionViewController () <MYIntroductionDelegate>
 
 @property (nonatomic, strong) MYBlurIntroductionView *introductionView;
+@property (nonatomic, strong) UIView *footerView;
 
 - (void)configure;
 
@@ -25,6 +26,7 @@ NSString * const MHIntroductionViewControllerFinished	= @"com.missionhub.notific
 @implementation MHIntroductionViewController
 
 @synthesize introductionView	= _introductionView;
+@synthesize footerView			= _footerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	
@@ -60,6 +62,26 @@ NSString * const MHIntroductionViewControllerFinished	= @"com.missionhub.notific
 	
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	
+	[UIView animateWithDuration:0.3 animations:^{
+		
+		self.footerView.alpha	= 1.0;
+		
+	}];
+	
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	
+	[super viewDidDisappear:animated];
+	
+	self.footerView.alpha	= 0.0;
+	
+}
+
 - (void)configure {
     
 	CGRect frame			= self.view.bounds;
@@ -88,13 +110,14 @@ NSString * const MHIntroductionViewControllerFinished	= @"com.missionhub.notific
     //Build the introduction with desired panels
     [self.introductionView buildIntroductionWithPanels:panels];
     
-	UIView *footerView	= [[UIView alloc] initWithFrame:CGRectMake(0,
+	self.footerView	= [[UIView alloc] initWithFrame:CGRectMake(0,
 																   CGRectGetMinY(self.introductionView.PageControl.frame),
 																   CGRectGetWidth(self.introductionView.frame),
 																   CGRectGetMaxY(self.introductionView.frame) - CGRectGetMinY(self.introductionView.PageControl.frame))];
-	footerView.autoresizingMask	= UIViewAutoresizingFlexibleWidth;
-	footerView.backgroundColor	= [UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:0.5];
-	[self.introductionView insertSubview:footerView belowSubview:self.introductionView.PageControl];
+	self.footerView.autoresizingMask	= UIViewAutoresizingFlexibleWidth;
+	self.footerView.backgroundColor		= [UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:0.5];
+	self.footerView.alpha				= 0.0;
+	[self.introductionView insertSubview:self.footerView belowSubview:self.introductionView.PageControl];
 	
 	//Add the introduction to the view
 	[self.view addSubview:self.introductionView];
@@ -109,6 +132,17 @@ NSString * const MHIntroductionViewControllerFinished	= @"com.missionhub.notific
 		
 	}];
 	
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+	
+	return UIInterfaceOrientationMaskPortrait;
+	
+}
+
+- (BOOL)shouldAutorotate {
+	
+	return NO;
 }
 
 @end

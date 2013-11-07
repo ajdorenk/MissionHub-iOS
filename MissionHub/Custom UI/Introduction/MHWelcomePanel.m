@@ -52,6 +52,8 @@
     self.bottomView.layer.cornerRadius	= 20;
     self.bottomView.clipsToBounds		= YES;
 	
+	self.backgroundView.autoresizingMask= UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	
 	self.originalFrame					= self.topView.frame;
 	
 }
@@ -64,7 +66,7 @@
 	self.topView.frame				= CGRectMake(self.topView.center.x, self.topView.center.y, 0, 0);
 	
 	__weak __typeof(&*self)weakSelf = self;
-	[UIView animateWithDuration:0.3 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+	[UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 		
 		weakSelf.backgroundView.alpha	= 0.0;
 		weakSelf.bottomView.alpha		= 0.0;
