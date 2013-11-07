@@ -143,19 +143,20 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 
 #pragma mark - initialization
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    
+	if (self) {
         // Custom initialization
     }
-    return self;
+    
+	return self;
 }
 
--(void)awakeFromNib {
+- (void)awakeFromNib {
 	
 	[super awakeFromNib];
-    
     
 }
 
@@ -187,15 +188,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 	
-	[self.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendScreenViewWithScreenName:MHGoogleAnalyticsTrackerCreateInteractionScreenName];
-	
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	
-	NSLog(@"%@", change);
 	
 }
 
@@ -215,10 +208,29 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 }
 
 -(void)viewDidLoad {
+	
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	
+	if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets)]) {
+		[self setAutomaticallyAdjustsScrollViewInsets:NO];
+	}
+	
+	self.originalContentOffset	= self.scrollView.contentOffset;
+	
+	if (!(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)) {
+		
+		NSInteger statusBarHeight	= 0.0;
+		
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+			statusBarHeight			= -20;
+		}
+		
+		self.originalContentOffset	= CGPointMake(self.originalContentOffset.x, statusBarHeight - CGRectGetHeight(self.navigationController.navigationBar.frame));
+		
+	}
     
-    [self.comment setDelegate:self];
+    self.comment.delegate	= self;
 	
 	if (!self.interaction) {
 		
@@ -447,17 +459,6 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 													 MHNewInteractionViewControllerTextFieldHeight);
 	
 	self.scrollView.contentSize			= CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetMaxY(self.comment.frame) + MHNewInteractionViewControllerViewMarginVertical);
-	self.scrollView.contentOffset		= CGPointZero;
-	
-	if (CGRectGetHeight(self.view.frame) > self.scrollView.contentSize.height) {
-		
-		self.scrollView.scrollEnabled	= NO;
-		
-	} else {
-		
-		self.scrollView.scrollEnabled	= YES;
-		
-	}
 	
 	[self clearPickers];
 	
@@ -989,23 +990,6 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 }
 
-//-(void)list:(MHGenericListViewController *)viewController didDeselectObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
-//	
-//	if ([object isKindOfClass:[MHPerson class]]) {
-//		
-//		MHPerson *person = (MHPerson *)object;
-//		
-//		if ([viewController isEqual:[self initiatorsList]]) {
-//			
-//			[self.interaction removeInitiatorsObject:person];
-//			[self updateInterfaceForInitiators];
-//			
-//		}
-//		
-//	}
-//	
-//}
-
 #pragma mark - Picker view data source
 
 // tell the picker how many components it will have
@@ -1177,29 +1161,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-
-//    CGRect newRect				= CGRectZero;
-//	NSDictionary* keyboardInfo	= [notification userInfo];
-//    NSValue* keyboardFrameValue	= [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-//	CGRect keyboardFrame		= [keyboardFrameValue CGRectValue];
-//    self.originalCommentFrame	= self.comment.frame;
 	
 	if (!self.currentPopoverController) {
-		
-//		CGFloat keyboardHeight		= ( CGRectGetHeight(keyboardFrame) > CGRectGetHeight(self.view.frame) ? CGRectGetWidth(keyboardFrame) : CGRectGetHeight(keyboardFrame) );
-		
-		//Down size your text view
-//		newRect.origin.y	= self.scrollView.contentOffset.y;
-//		newRect.size.width	= CGRectGetWidth(self.scrollView.frame);
-//		newRect.size.height = CGRectGetHeight(self.view.frame) - keyboardHeight;
-//		
-//		[UIView beginAnimations:nil context:nil];
-//		
-//		self.comment.frame = newRect;
-//		
-//		[UIView commitAnimations];
-		
-		self.originalContentOffset	= self.scrollView.contentOffset;
 		
 		CGFloat naviagtionBarHeight	= 0.0;
 		
@@ -1228,15 +1191,6 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		self.scrollView.scrollEnabled	= YES;
 		
 		[self.scrollView setContentOffset:self.originalContentOffset animated:YES];
-		
-		self.originalContentOffset	= CGPointZero;
-		
-//		__weak __typeof(&*self)weakSelf = self;
-//		[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-//			
-//			weakSelf.comment.frame = weakSelf.originalCommentFrame;
-//			
-//		} completion:nil];
 		
 	}
     
