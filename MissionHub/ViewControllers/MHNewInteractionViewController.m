@@ -218,7 +218,13 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	self.originalContentOffset	= self.scrollView.contentOffset;
 	
-	if (!(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)) {
+	if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+		
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			self.originalContentOffset	= CGPointMake(self.originalContentOffset.x, -CGRectGetHeight(self.navigationController.navigationBar.frame));
+		}
+	
+	} else {
 		
 		NSInteger statusBarHeight	= 0.0;
 		
@@ -357,9 +363,24 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] createInteraction:self.interaction withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 			
+			if ([weakSelf.createInteractionDelegate respondsToSelector:@selector(controller:didCreateInteraction:)]) {
+				
+				[weakSelf.createInteractionDelegate controller:weakSelf didCreateInteraction:weakSelf.interaction];
+				
+			}
+			
 			weakSelf.saveButton.enabled = YES;
 			
-			[weakSelf.navigationController popViewControllerAnimated:YES];
+			if (weakSelf.currentPopoverController) {
+				
+				[weakSelf.currentPopoverController dismissPopoverAnimated:YES];
+				weakSelf.currentPopoverController	= nil;
+				
+			} else {
+				
+				[weakSelf.navigationController popViewControllerAnimated:YES];
+				
+			}
 			
 		} failBlock:^(NSError *error, MHRequestOptions *options) {
 			
@@ -1167,6 +1188,18 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
+	
+	if ([[self interactionTypePicker] superview]) {
+		[[self interactionTypePicker] removeFromSuperview];
+	}
+	
+	if ([[self visibilityPicker] superview]) {
+		[[self visibilityPicker] removeFromSuperview];
+	}
+	
+	if ([[self timestampPicker] superview]) {
+		[[self timestampPicker] removeFromSuperview];
+	}
 	
 	if (!self.currentPopoverController) {
 		

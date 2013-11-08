@@ -121,8 +121,8 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 	self.showApplyButton	= NO;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+	
     [super viewDidLoad];
 	
 	self.refreshController = [[ODRefreshControl alloc] initInScrollView:self.tableViewList];

@@ -11,6 +11,7 @@
 #import "MHPerson+Helper.h"
 #import "MHProfileProtocol.h"
 #import "MHProfileMenuViewController.h"
+#import "MHNewInteractionViewController.h"
 #import "MHGenericListViewController.h"
 #import "MHActivityViewController.h"
 
@@ -18,7 +19,7 @@ extern NSString *const MHProfileViewControllerNotificationPersonDeleted;
 extern NSString *const MHProfileViewControllerNotificationPersonArchived;
 extern NSString *const MHProfileViewControllerNotificationPersonUpdated;
 
-@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate, MHProfileProtocol, MHProfileMenuDelegate, MHGenericListViewControllerDelegate, MHActivityViewControllerDelegate, UIPopoverControllerDelegate>
+@interface MHProfileViewController : M6ParallaxController <UIGestureRecognizerDelegate, MHProfileProtocol, MHProfileMenuDelegate, MHGenericListViewControllerDelegate, MHCreateInteractionDelegate, MHActivityViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) MHPerson *person;
 

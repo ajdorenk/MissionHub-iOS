@@ -11,7 +11,6 @@
 #import "MHProfileHeaderViewController.h"
 #import "MHProfileInfoViewController.h"
 #import "MHProfileInteractionsViewController.h"
-#import "MHNewInteractionViewController.h"
 #import "MHAPI.h"
 #import "MHToolbar.h"
 #import "MHGoogleAnalyticsTracker.h"
@@ -151,6 +150,8 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 		[self willChangeValueForKey:@"createInteractionViewController"];
 		_createInteractionViewController = [storyboard instantiateViewControllerWithIdentifier:@"MHNewInteractionViewController"];
 		[self didChangeValueForKey:@"createInteractionViewController"];
+		
+		_createInteractionViewController.createInteractionDelegate	= self;
 		
 	}
 	
@@ -475,6 +476,7 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 		
 		[self updateInterfaceWithPerson:_person];
 		
+		[self refreshInfoForPerson:_person onCompletion:nil];
 		[self refreshSurveyAnswersForPerson:_person];
 		[self refreshInteractionsForPerson:_person];
 		
@@ -631,6 +633,15 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 															  action:MHGoogleAnalyticsActionTap
 															   label:type
 															   value:[NSNumber numberWithBool:completed]];
+	
+}
+
+
+#pragma mark - MHActivityViewControllerDelegate
+
+- (void)controller:(MHNewInteractionViewController *)controller didCreateInteraction:(MHInteraction *)interaction {
+	
+	[self refreshInteractionsForPerson:self.person];
 	
 }
 

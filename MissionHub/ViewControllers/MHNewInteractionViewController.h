@@ -10,13 +10,24 @@
 #import "MHGenericListViewController.h"
 #import "MHInteraction.h"
 
+@protocol MHCreateInteractionDelegate;
+
 @interface MHNewInteractionViewController : UIViewController <UITextFieldDelegate, MHGenericListViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
+@property (nonatomic, weak) id<MHCreateInteractionDelegate>	createInteractionDelegate;
 @property (nonatomic, weak) UIPopoverController				*currentPopoverController;
 @property (nonatomic, strong) MHInteraction					*interaction;
 
 -(void)updateWithInteraction:(MHInteraction *)interaction andSelections:(NSArray *)selections;
 -(void)saveInteraction;
 -(void)setSelections:(NSArray *)selections;
+
+@end
+
+
+@protocol MHCreateInteractionDelegate <NSObject>
+
+@optional
+- (void)controller:(MHNewInteractionViewController *)controller didCreateInteraction:(MHInteraction *)interaction;
 
 @end

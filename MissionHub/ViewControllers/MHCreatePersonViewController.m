@@ -532,7 +532,16 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 			
 			weakSelf.saveButton.enabled = YES;
 			
-			[weakSelf.navigationController popViewControllerAnimated:YES];
+			if (weakSelf.currentPopoverController) {
+				
+				[weakSelf.currentPopoverController dismissPopoverAnimated:YES];
+				weakSelf.currentPopoverController	= nil;
+				
+			} else {
+				
+				[weakSelf.navigationController popViewControllerAnimated:YES];
+				
+			}
 			
 		} failBlock:^(NSError *error, MHRequestOptions *options) {
 			
