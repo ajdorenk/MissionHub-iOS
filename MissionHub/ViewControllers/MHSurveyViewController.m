@@ -215,10 +215,7 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 		[[NSURLCache sharedURLCache] removeCachedResponseForRequest:self.surveyWebView.request];
 		[[NSURLCache sharedURLCache] removeAllCachedResponses];
 		
-		NSMutableURLRequest *surveyRequest = [NSMutableURLRequest requestWithURL:[[MHAPI sharedInstance] requestForSurveyWith:self.survey.remoteID].URL
-										cachePolicy:NSURLRequestReloadIgnoringCacheData
-									timeoutInterval:10000];
-		[surveyRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+		NSURLRequest *surveyRequest	= [[MHAPI sharedInstance] requestForSurveyWith:self.survey.remoteID];
 		
 		NSLog(@"%@", [surveyRequest.URL absoluteString]);
 		
@@ -241,24 +238,13 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 
-	//if (self.numberOfAssetsLoading == 0) {
-		
-//		self.messageView.hidden			= NO;
-//		self.messageLabel.hidden		= YES;
-//		self.loadingIndicator.hidden	= NO;
-//		[self.loadingIndicator startAnimating];
-//		[self.view bringSubviewToFront:self.messageView];
-		
-	//}
-	
 	self.numberOfAssetsLoading++;
-//	NSLog(@"start: %d - %@", self.numberOfAssetsLoading, [request.URL absoluteString]);
+	
 	return YES;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
 	
-//	NSLog(@"%@", [webView.request.URL absoluteString]);
 	self.numberOfFailedAssests	= 0;
 	
 }
@@ -266,16 +252,7 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
 	
 	self.numberOfAssetsLoading--;
-//	NSLog(@"finish: %d", self.numberOfAssetsLoading);
-//	if (!self.numberOfAssetsLoading) {
-//	
-//		self.messageView.hidden			= YES;
-//		self.messageLabel.hidden		= YES;
-//		self.loadingIndicator.hidden	= YES;
-//		[self.loadingIndicator stopAnimating];
-//		[self.view bringSubviewToFront:self.surveyWebView];
-//		
-//	}
+
 	self.messageView.hidden = YES;
 	
 }
@@ -285,20 +262,7 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 	
 	self.numberOfAssetsLoading--;
 	self.numberOfFailedAssests++;
-//	NSLog(@"fail: %d", self.numberOfAssetsLoading);
-//	if (self.numberOfAssetsLoading) {
-//		
-//		self.messageView.hidden = NO;
-//		self.messageLabel.hidden = NO;
-//		self.loadingIndicator.hidden	= YES;
-//		[self.loadingIndicator stopAnimating];
-//		[self.view bringSubviewToFront:self.messageView];
-//	
-//	} else {
-//		
-//		self.messageView.hidden = YES;
-//		
-//	}
+
 	self.messageView.hidden = YES;
 
 }

@@ -348,7 +348,7 @@ typedef enum {
 -(NSURLRequest *)requestForSurveyWith:(NSNumber *)remoteID {
 	
 	NSURL *url				= [NSURL URLWithString:[remoteID stringValue] relativeToURL:self.surveyURL];
-	NSURLRequest *request	= [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+	NSURLRequest *request	= [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
 	
 	return request;
 }
