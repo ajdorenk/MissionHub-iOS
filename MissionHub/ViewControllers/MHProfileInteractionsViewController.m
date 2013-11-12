@@ -11,6 +11,7 @@
 #import "MHHeaderCell.h"
 #import "MHInteractionCell.h"
 #import "MHInteractionType.h"
+#import "NSMutableArray+removeDuplicatesForKey.h"
 
 @interface MHProfileInteractionsViewController ()
 
@@ -91,7 +92,8 @@
 		[self.interactionArray addObjectsFromArray:[_person.receivedInteractions allObjects]];
 		[self.interactionArray addObjectsFromArray:[_person.updatedInteractions allObjects]];
 		[self.interactionArray addObjectsFromArray:[_person.createdInteractions allObjects]];
-		[self.interactionArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:YES]]];
+		self.interactionArray	= [self.interactionArray arrayWithDuplicatesRemovedForKey:@"remoteID"];
+		[self.interactionArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO]]];
 		
 		[self.tableView reloadData];
 		

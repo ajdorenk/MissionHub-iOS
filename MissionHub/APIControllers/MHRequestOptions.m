@@ -665,6 +665,7 @@
 
 - (instancetype)addIncludesForInteractionsRequest {
 	
+	[self addInclude:MHRequestOptionsIncludeInteractionsReceiver];
 	[self addInclude:MHRequestOptionsIncludeInteractionsCreator];
 	[self addInclude:MHRequestOptionsIncludeInteractionsInitiators];
 	[self addInclude:MHRequestOptionsIncludeInteractionsInteractionType];

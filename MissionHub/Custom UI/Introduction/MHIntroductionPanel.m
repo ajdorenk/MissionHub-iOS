@@ -43,11 +43,11 @@
 - (void)configure {
 	
 	self.topView.alpha					= 0.0;
-    self.topView.layer.cornerRadius		= 60;
+    //self.topView.layer.cornerRadius		= 60;
     self.topView.clipsToBounds			= YES;
 	
 	self.bottomView.alpha				= 1.0;
-    self.bottomView.layer.cornerRadius	= 60;
+    //crself.bottomView.layer.cornerRadius	= 60;
     self.bottomView.clipsToBounds		= YES;
 	
 }
