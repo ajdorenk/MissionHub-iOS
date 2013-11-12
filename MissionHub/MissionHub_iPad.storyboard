@@ -139,6 +139,10 @@
                                             </connections>
                                         </button>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8qN-pQ-4hf"/>
+                                    <barButtonItem title="Survey" style="plain" id="HZo-Qp-eEA"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0RG-q1-FhC"/>
+                                    <barButtonItem title="Reload" style="plain" id="agm-Cz-itH"/>
                                 </items>
                             </toolbar>
                             <webView contentMode="scaleToFill" id="OKF-D7-pkj">
@@ -180,6 +184,7 @@ select another survey.</string>
                         <outlet property="messageLabel" destination="w0w-cY-9S4" id="hcU-Ej-FbA"/>
                         <outlet property="messageView" destination="eIv-RX-sMa" id="yR9-CN-iti"/>
                         <outlet property="surveyWebView" destination="OKF-D7-pkj" id="W34-7Y-DSI"/>
+                        <outlet property="titleItem" destination="HZo-Qp-eEA" id="Ubo-Mz-qAl"/>
                         <outlet property="topToolbar" destination="na3-S4-YEm" id="nLU-3U-Zve"/>
                     </connections>
                 </viewController>

@@ -122,7 +122,7 @@ static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 		case MHToolbarStyleApply:
 			
 			title		= @"Apply";
-			imageName	= @"MH_Mobile_Menu_Button_Red_72";
+			imageName	= @"MH_Mobile_Menu_Button_Red_72.png";
 			break;
 			
 		case MHToolbarStyleCancel:
@@ -141,6 +141,12 @@ static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 			
 			//title		= @"Save";
 			imageName	= @"MH_Mobile_Button_Save_72.png";
+			break;
+			
+		case MHToolbarStyleStartAgain:
+			
+			title		= @"Reload";
+			imageName	= @"MH_Mobile_Menu_Button_Red_72.png";
 			break;
 			
 		default:
@@ -222,6 +228,11 @@ static NSString * const MHToolBarBarButtonFont		= @"Arial-BoldMT";
 			title		= @"Save";
 			//systemItem	= UIBarButtonSystemItemSave;
 			tintColor	= redColor;
+			break;
+			
+		case MHToolbarStyleStartAgain:
+			
+			title		= @"Reload";
 			break;
 			
 		default:

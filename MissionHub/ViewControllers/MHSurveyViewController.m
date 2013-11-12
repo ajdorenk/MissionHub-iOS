@@ -26,6 +26,7 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 @property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, weak) IBOutlet UIToolbar *topToolbar;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *titleItem;
 
 - (IBAction)revealMenu:(id)sender;
 
@@ -45,6 +46,7 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 @synthesize messageView			= _messageView;
 @synthesize messageLabel		= _messageLabel;
 @synthesize loadingIndicator	= _loadingIndicator;
+@synthesize titleItem			= _titleItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	
@@ -105,28 +107,30 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 	
 	if (self.survey.title) {
 		
-		UILabel *labelForTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 230, 25)];
-		labelForTitle.textAlignment = NSTextAlignmentCenter;
-		labelForTitle.font = [UIFont systemFontOfSize:14.0];
-		labelForTitle.textColor = [UIColor blackColor];
-		labelForTitle.backgroundColor = [UIColor clearColor];
-		labelForTitle.adjustsFontSizeToFitWidth = NO;
-		labelForTitle.text = self.survey.title;
-		self.toolbarTitle = labelForTitle;
-		
-		UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView: labelForTitle];
-		//UIBarButtonItem *flexibleSpace1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-		
-		if ([self.topToolbar.items count] == 2) {
+		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
 			
-			NSMutableArray *itemArray = [NSMutableArray arrayWithArray:self.topToolbar.items];
-			[itemArray replaceObjectAtIndex:1 withObject:titleItem];
-			[self.topToolbar setItems:itemArray animated:NO];
+			UILabel *labelForTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 230, 25)];
+			labelForTitle.textAlignment = NSTextAlignmentCenter;
+			labelForTitle.font = [UIFont systemFontOfSize:14.0];
+			labelForTitle.textColor = [UIColor blackColor];
+			labelForTitle.backgroundColor = [UIColor clearColor];
+			labelForTitle.adjustsFontSizeToFitWidth = NO;
+			labelForTitle.text = self.survey.title;
+			self.toolbarTitle = labelForTitle;
 			
+			UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView: labelForTitle];
+			
+			if (self.topToolbar.items.count > 2) {
+				
+				NSMutableArray *itemArray = [NSMutableArray arrayWithArray:self.topToolbar.items];
+				[itemArray replaceObjectAtIndex:2 withObject:titleItem];
+				[self.topToolbar setItems:itemArray animated:NO];
+				
+			}
 			
 		} else {
 			
-			[self.topToolbar setItems:[self.topToolbar.items arrayByAddingObjectsFromArray:@[titleItem]] animated:NO];
+			self.titleItem.title	= self.survey.title;
 			
 		}
 		
@@ -162,10 +166,11 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 												 CGRectGetWidth(frame),
 												 toolbarHeight);
 	
-	if ([self.topToolbar.items count] > 0) {
+	if ([self.topToolbar.items count] > 1) {
 		
 		NSMutableArray *itemArray	= [NSMutableArray arrayWithArray:self.topToolbar.items];
 		[itemArray replaceObjectAtIndex:0 withObject:[MHToolbar barButtonWithStyle:MHToolbarStyleMenu target:self selector:@selector(revealMenu:) forBar:self.topToolbar]];
+		[itemArray replaceObjectAtIndex:itemArray.count - 1 withObject:[MHToolbar barButtonWithStyle:MHToolbarStyleStartAgain target:self selector:@selector(reload:) forBar:self.topToolbar]];
 		[self.topToolbar setItems:itemArray animated:NO];
 		
 	}
@@ -189,18 +194,45 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 	
 }
 
+- (IBAction)reload:(id)sender {
+	
+	[self displaySurvey:self.survey];
+	
+}
+
 - (id)displaySurvey:(MHSurvey *)surveyToDisplay {
 	
 	self.survey = surveyToDisplay;
 	
 	if (self.survey.remoteID > 0 && self.isVisible) {
 		
-		NSURLRequest *surveyRequest = [[MHAPI sharedInstance] requestForSurveyWith:self.survey.remoteID];
+		NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        NSArray* facebookCookies = cookies.cookies;
+        for (NSHTTPCookie* cookie in facebookCookies) {
+            [cookies deleteCookie:cookie];
+        }
+		
+		[[NSURLCache sharedURLCache] removeCachedResponseForRequest:self.surveyWebView.request];
+		[[NSURLCache sharedURLCache] removeAllCachedResponses];
+		
+		NSMutableURLRequest *surveyRequest = [NSMutableURLRequest requestWithURL:[[MHAPI sharedInstance] requestForSurveyWith:self.survey.remoteID].URL
+										cachePolicy:NSURLRequestReloadIgnoringCacheData
+									timeoutInterval:10000];
+		[surveyRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
 		
 		NSLog(@"%@", [surveyRequest.URL absoluteString]);
 		
 		[self.surveyWebView stopLoading];
 		[self.surveyWebView loadRequest:surveyRequest];
+		
+		self.messageView.hidden			= NO;
+		self.messageLabel.hidden		= YES;
+		self.loadingIndicator.hidden	= NO;
+		[self.loadingIndicator startAnimating];
+		[self.view bringSubviewToFront:self.messageView];
+		
+		self.numberOfFailedAssests		= 0;
+		self.numberOfAssetsLoading		= 0;
 		
 	}
 	
@@ -211,22 +243,22 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 
 	//if (self.numberOfAssetsLoading == 0) {
 		
-		self.messageView.hidden			= NO;
-		self.messageLabel.hidden		= YES;
-		self.loadingIndicator.hidden	= NO;
-		[self.loadingIndicator startAnimating];
-		[self.view bringSubviewToFront:self.messageView];
+//		self.messageView.hidden			= NO;
+//		self.messageLabel.hidden		= YES;
+//		self.loadingIndicator.hidden	= NO;
+//		[self.loadingIndicator startAnimating];
+//		[self.view bringSubviewToFront:self.messageView];
 		
 	//}
 	
 	self.numberOfAssetsLoading++;
-	NSLog(@"start: %d - %@", self.numberOfAssetsLoading, [request.URL absoluteString]);
+//	NSLog(@"start: %d - %@", self.numberOfAssetsLoading, [request.URL absoluteString]);
 	return YES;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
 	
-	NSLog(@"%@", [webView.request.URL absoluteString]);
+//	NSLog(@"%@", [webView.request.URL absoluteString]);
 	self.numberOfFailedAssests	= 0;
 	
 }
@@ -234,7 +266,7 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
 	
 	self.numberOfAssetsLoading--;
-	NSLog(@"finish: %d", self.numberOfAssetsLoading);
+//	NSLog(@"finish: %d", self.numberOfAssetsLoading);
 //	if (!self.numberOfAssetsLoading) {
 //	
 //		self.messageView.hidden			= YES;
@@ -253,7 +285,7 @@ NSString * const MHGoogleAnalyticsTrackerSurveyScreenName	= @"Survey";
 	
 	self.numberOfAssetsLoading--;
 	self.numberOfFailedAssests++;
-	NSLog(@"fail: %d", self.numberOfAssetsLoading);
+//	NSLog(@"fail: %d", self.numberOfAssetsLoading);
 //	if (self.numberOfAssetsLoading) {
 //		
 //		self.messageView.hidden = NO;

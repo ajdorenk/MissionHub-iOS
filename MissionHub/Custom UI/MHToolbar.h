@@ -18,7 +18,8 @@ typedef enum {
 	MHToolbarStyleSave,
 	MHToolbarStyleDone,
 	MHToolbarStyleCancel,
-	MHToolbarStyleApply
+	MHToolbarStyleApply,
+	MHToolbarStyleStartAgain
 } MHToolbarStyle;
 
 extern CGFloat const MHToolBarBarButtonMarginVertical;
