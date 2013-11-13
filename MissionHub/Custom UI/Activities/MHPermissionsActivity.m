@@ -94,6 +94,66 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 	permissionLevelList.listTitle			= @"Permission Levels";
 	[permissionLevelList setDataArray:@[[MHPermissionLevel admin], [MHPermissionLevel user], [MHPermissionLevel noPermissions]]];
 	
+	if (self.peopleToChangePermissionLevel.count == 1) {
+		
+		MHPerson *person					= self.peopleToChangePermissionLevel[0];
+		MHPermissionLevel *permissionLevel	= [MHPermissionLevel noPermissions];
+		
+		if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
+			
+			permissionLevel	= [MHPermissionLevel user];
+			
+		} else if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
+			
+			permissionLevel	= [MHPermissionLevel admin];
+			
+		}
+		
+		[permissionLevelList setSuggestions:nil andSelectionObject:permissionLevel];
+		
+	} else {
+		
+		__block MHPermissionLevel *permissionLevel	= nil;
+		
+		[self.peopleToChangePermissionLevel enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
+			
+			if (permissionLevel) {
+			
+				if (![person.permissionLevel.permission_id isEqualToNumber:permissionLevel.remoteID]) {
+					
+					permissionLevel	= nil;
+					*stop			= YES;
+					
+				}
+				
+			} else {
+				
+				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel noPermissions].remoteID]) {
+					
+					permissionLevel	= [MHPermissionLevel noPermissions];
+					
+				} else if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
+					
+					permissionLevel	= [MHPermissionLevel user];
+					
+				} else if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
+					
+					permissionLevel	= [MHPermissionLevel admin];
+					
+				}
+				
+			}
+			
+		}];
+		
+		if (permissionLevel) {
+			
+			[permissionLevelList setSuggestions:nil andSelectionObject:permissionLevel];
+			
+		}
+		
+	}
+	
 	[self.activityViewController.presentingController presentViewController:permissionLevelList animated:YES completion:nil];
 	
 }
