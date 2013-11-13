@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,15 +12,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MH_Mobile_Introduction_1.png" id="tOH-tI-q1H">
-                    <rect key="frame" x="184" y="44" width="400" height="840"/>
+                    <rect key="frame" x="61" y="44" width="646" height="840"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" id="7ym-bH-WVf">
-                    <rect key="frame" x="184" y="44" width="400" height="840"/>
+                    <rect key="frame" x="61" y="44" width="646" height="840"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MH_Mobile_Introduction_1_description.png" id="yeP-en-Ia4">
-                            <rect key="frame" x="0.0" y="0.0" width="400" height="840"/>
+                            <rect key="frame" x="0.0" y="0.0" width="646" height="840"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                     </subviews>
@@ -36,7 +36,7 @@
         </view>
     </objects>
     <resources>
-        <image name="MH_Mobile_Introduction_1.png" width="754" height="1590"/>
-        <image name="MH_Mobile_Introduction_1_description.png" width="754" height="1590"/>
+        <image name="MH_Mobile_Introduction_1.png" width="1935" height="2514"/>
+        <image name="MH_Mobile_Introduction_1_description.png" width="1935" height="2514"/>
     </resources>
 </document>

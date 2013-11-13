@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -20,7 +20,7 @@
                     <rect key="frame" x="162" y="69" width="440" height="406"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MH_Mobile_WelcomeToMissionHub.png" id="DOc-h2-PbO">
-                    <rect key="frame" x="264" y="518" width="240" height="197"/>
+                    <rect key="frame" x="64" y="500" width="640" height="324"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -35,6 +35,6 @@
     </objects>
     <resources>
         <image name="MH_Mobile_Logo.png" width="440" height="406"/>
-        <image name="MH_Mobile_WelcomeToMissionHub.png" width="440" height="406"/>
+        <image name="MH_Mobile_WelcomeToMissionHub.png" width="320" height="162"/>
     </resources>
 </document>

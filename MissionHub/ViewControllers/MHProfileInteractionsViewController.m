@@ -86,12 +86,12 @@
 	[self didChangeValueForKey:@"person"];
 	
 	if (person) {
-		
+		//TODO:Sort out which interaction should really be listed
 		[self.interactionArray removeAllObjects];
-		[self.interactionArray addObjectsFromArray:[_person.initiatedInteractions allObjects]];
+//		[self.interactionArray addObjectsFromArray:[_person.initiatedInteractions allObjects]];
 		[self.interactionArray addObjectsFromArray:[_person.receivedInteractions allObjects]];
-		[self.interactionArray addObjectsFromArray:[_person.updatedInteractions allObjects]];
-		[self.interactionArray addObjectsFromArray:[_person.createdInteractions allObjects]];
+//		[self.interactionArray addObjectsFromArray:[_person.updatedInteractions allObjects]];
+//		[self.interactionArray addObjectsFromArray:[_person.createdInteractions allObjects]];
 		self.interactionArray	= [self.interactionArray arrayWithDuplicatesRemovedForKey:@"remoteID"];
 		[self.interactionArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO]]];
 		
