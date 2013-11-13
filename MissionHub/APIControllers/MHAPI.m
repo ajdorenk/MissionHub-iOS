@@ -361,7 +361,7 @@ typedef enum {
 	NSDictionary *result						= operation.jsonObject;
 	
 	//try parsing, creating and filling model objects. These use key value coding to set values in the model objects which means if the field names in the response json change then it will throw an exception. We want to catch that.
-	//@try {
+	@try {
 
 		if (![operation hasAcceptableStatusCode]) {
 			
@@ -514,7 +514,7 @@ typedef enum {
 		}
 		
 		
-	/*
+	
 	}
 	@catch (NSException *exception) {
 		
@@ -532,7 +532,7 @@ typedef enum {
 		//nothing to clean up with ARC. YAY!
 		return;
 	}
-	*/
+	
 	
 }
 
