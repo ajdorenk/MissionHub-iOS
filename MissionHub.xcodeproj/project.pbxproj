@@ -85,6 +85,22 @@
 		6834AD6618353445006EBD3F /* MH_AppIcon_IOS_100.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD5B18353445006EBD3F /* MH_AppIcon_IOS_100.png */; };
 		6834AD6718353445006EBD3F /* MH_AppIcon_IOS_144.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD5C18353445006EBD3F /* MH_AppIcon_IOS_144.png */; };
 		6834AD6818353445006EBD3F /* MH_AppIcon_IOS_144.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD5C18353445006EBD3F /* MH_AppIcon_IOS_144.png */; };
+		6834AD6D18357098006EBD3F /* MH_AppIcon_IOS_152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD6918357098006EBD3F /* MH_AppIcon_IOS_152.png */; };
+		6834AD6E18357098006EBD3F /* MH_AppIcon_IOS_152.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD6918357098006EBD3F /* MH_AppIcon_IOS_152.png */; };
+		6834AD6F18357098006EBD3F /* MH_AppIcon_IOS_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD6A18357098006EBD3F /* MH_AppIcon_IOS_120.png */; };
+		6834AD7018357098006EBD3F /* MH_AppIcon_IOS_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD6A18357098006EBD3F /* MH_AppIcon_IOS_120.png */; };
+		6834AD7118357098006EBD3F /* MH_AppIcon_IOS_80.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD6B18357098006EBD3F /* MH_AppIcon_IOS_80.png */; };
+		6834AD7218357098006EBD3F /* MH_AppIcon_IOS_80.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD6B18357098006EBD3F /* MH_AppIcon_IOS_80.png */; };
+		6834AD7318357098006EBD3F /* MH_AppIcon_IOS_76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD6C18357098006EBD3F /* MH_AppIcon_IOS_76.png */; };
+		6834AD7418357098006EBD3F /* MH_AppIcon_IOS_76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD6C18357098006EBD3F /* MH_AppIcon_IOS_76.png */; };
+		6834AD791835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD751835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png */; };
+		6834AD7A1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD751835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png */; };
+		6834AD7B1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD761835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png */; };
+		6834AD7C1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD761835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png */; };
+		6834AD7D1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD771835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png */; };
+		6834AD7E1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD771835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png */; };
+		6834AD7F1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD781835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait@2x.png */; };
+		6834AD801835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6834AD781835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait@2x.png */; };
 		6835D5CC17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6835D5CB17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png */; };
 		683910871760FD3100E01B46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910861760FD3100E01B46 /* UIKit.framework */; };
 		683910891760FD3100E01B46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683910881760FD3100E01B46 /* Foundation.framework */; };
@@ -439,6 +455,14 @@
 		6834AD5A18353445006EBD3F /* MH_AppIcon_IOS_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_AppIcon_IOS_58.png; sourceTree = "<group>"; };
 		6834AD5B18353445006EBD3F /* MH_AppIcon_IOS_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_AppIcon_IOS_100.png; sourceTree = "<group>"; };
 		6834AD5C18353445006EBD3F /* MH_AppIcon_IOS_144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_AppIcon_IOS_144.png; sourceTree = "<group>"; };
+		6834AD6918357098006EBD3F /* MH_AppIcon_IOS_152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_AppIcon_IOS_152.png; sourceTree = "<group>"; };
+		6834AD6A18357098006EBD3F /* MH_AppIcon_IOS_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_AppIcon_IOS_120.png; sourceTree = "<group>"; };
+		6834AD6B18357098006EBD3F /* MH_AppIcon_IOS_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_AppIcon_IOS_80.png; sourceTree = "<group>"; };
+		6834AD6C18357098006EBD3F /* MH_AppIcon_IOS_76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_AppIcon_IOS_76.png; sourceTree = "<group>"; };
+		6834AD751835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_DefaultImage_ipad_landscape.png; sourceTree = "<group>"; };
+		6834AD761835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_DefaultImage_ipad_portrait.png; sourceTree = "<group>"; };
+		6834AD771835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MH_Mobile_DefaultImage_ipad_landscape@2x.png"; sourceTree = "<group>"; };
+		6834AD781835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MH_Mobile_DefaultImage_ipad_portrait@2x.png"; sourceTree = "<group>"; };
 		6835D5CB17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png; sourceTree = "<group>"; };
 		683910831760FD3100E01B46 /* MissionHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissionHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		683910861760FD3100E01B46 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -941,8 +965,12 @@
 				6834AD5818353445006EBD3F /* MH_AppIcon_IOS_40.png */,
 				6834AD5918353445006EBD3F /* MH_AppIcon_IOS_50.png */,
 				6834AD5A18353445006EBD3F /* MH_AppIcon_IOS_58.png */,
+				6834AD6C18357098006EBD3F /* MH_AppIcon_IOS_76.png */,
+				6834AD6B18357098006EBD3F /* MH_AppIcon_IOS_80.png */,
 				6834AD5B18353445006EBD3F /* MH_AppIcon_IOS_100.png */,
+				6834AD6A18357098006EBD3F /* MH_AppIcon_IOS_120.png */,
 				6834AD5C18353445006EBD3F /* MH_AppIcon_IOS_144.png */,
+				6834AD6918357098006EBD3F /* MH_AppIcon_IOS_152.png */,
 				683AE390176D2B1F0027EDE4 /* Entitlements.plist */,
 				6812257617681ADD00D8C238 /* config.sample.plist */,
 				68095023181F0D0A00DB0018 /* config.plist */,
@@ -957,6 +985,10 @@
 				68631F9F17E74E8B00A24B3F /* Default-Landscape@2x~ipad.png */,
 				68631FA017E74E8B00A24B3F /* Default-Portrait@2x~ipad.png */,
 				68631FA117E74E8B00A24B3F /* Default-Portrait~ipad.png */,
+				6834AD751835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png */,
+				6834AD761835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png */,
+				6834AD771835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png */,
+				6834AD781835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1384,6 +1416,7 @@
 				6812257917681ADD00D8C238 /* config.sample.plist in Resources */,
 				68095013181EDCA500DB0018 /* ABNotifier.bundle in Resources */,
 				683AE391176D2B1F0027EDE4 /* Entitlements.plist in Resources */,
+				6834AD7118357098006EBD3F /* MH_AppIcon_IOS_80.png in Resources */,
 				68F8D65C1829603300AF2E20 /* Panel5_iPhone.xib in Resources */,
 				6834AD5F18353445006EBD3F /* MH_AppIcon_IOS_40.png in Resources */,
 				683AE398176D2DC20027EDE4 /* appicon@2x.png in Resources */,
@@ -1409,12 +1442,14 @@
 				AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
 				AD75F7AA178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png in Resources */,
 				AD75F7AC178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png in Resources */,
+				6834AD7B1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png in Resources */,
 				684B0E791829AFED001C3318 /* Default-blur@2x~ipad.png in Resources */,
 				6834AD6718353445006EBD3F /* MH_AppIcon_IOS_144.png in Resources */,
 				68145B9B17911052008145EA /* MH_Mobile_Profile_Header_Placeholder.png in Resources */,
 				68839F451794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png in Resources */,
 				683938F91832FAA900234BED /* MH_Mobile_Introduction_4_description.png in Resources */,
 				68F8D6561829601400AF2E20 /* Panel3_iPhone.xib in Resources */,
+				6834AD7F1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait@2x.png in Resources */,
 				68839F471794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png in Resources */,
 				68BE4635182ACF4800A9B245 /* WelcomePanel_iPhone.xib in Resources */,
 				68839F491794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png in Resources */,
@@ -1430,6 +1465,7 @@
 				68EB9A1B1819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png in Resources */,
 				68A38F0C17A9A9120010CAC6 /* survey.png in Resources */,
 				6846CEC11834388B00DCB086 /* MH_Mobile_Introduction_3~ipad.png in Resources */,
+				6834AD6F18357098006EBD3F /* MH_AppIcon_IOS_120.png in Resources */,
 				6846CEB91834388B00DCB086 /* MH_Mobile_Introduction_5~ipad.png in Resources */,
 				683938F71832FAA900234BED /* MH_Mobile_Introduction_5.png in Resources */,
 				68A38F0E17A9A9120010CAC6 /* spiritual_convo.png in Resources */,
@@ -1437,6 +1473,7 @@
 				68A38F1217A9A9120010CAC6 /* prc.png in Resources */,
 				68A38F1417A9A9120010CAC6 /* label.png in Resources */,
 				68A38F1617A9A9120010CAC6 /* hs.png in Resources */,
+				6834AD6D18357098006EBD3F /* MH_AppIcon_IOS_152.png in Resources */,
 				68EB9A20181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
 				68A38F1817A9A9120010CAC6 /* grad.png in Resources */,
 				68A38F1B17AB58220010CAC6 /* MH_Mobile_Checkbox_No_Box_Checkmark.png in Resources */,
@@ -1456,6 +1493,7 @@
 				683938F61832FAA900234BED /* MH_Mobile_Introduction_3_description.png in Resources */,
 				680BE78517E28D3800BA8C12 /* MH_Mobile_Icon_Labels.png in Resources */,
 				6846CEBD1834388B00DCB086 /* MH_Mobile_Introduction_4~ipad.png in Resources */,
+				6834AD7318357098006EBD3F /* MH_AppIcon_IOS_76.png in Resources */,
 				680BE78717E28D3800BA8C12 /* MH_Mobile_Icon_AddContact.png in Resources */,
 				6846CEB71834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png in Resources */,
 				680BE78917E28D3800BA8C12 /* MH_Mobile_Icon_LeftArrow.png in Resources */,
@@ -1466,7 +1504,9 @@
 				6846CEBB1834388B00DCB086 /* MH_Mobile_Introduction_4_description~ipad.png in Resources */,
 				680BE7B917E49FEB00BA8C12 /* MH_Mobile_Logo@2x.png in Resources */,
 				68631FA217E74E8B00A24B3F /* Default-Landscape~ipad.png in Resources */,
+				6834AD791835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png in Resources */,
 				68631FA417E74E8B00A24B3F /* Default-Landscape@2x~ipad.png in Resources */,
+				6834AD7D1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png in Resources */,
 				68F8D63218281B0F00AF2E20 /* Default-blur@2x.png in Resources */,
 				6846CEBF1834388B00DCB086 /* MH_Mobile_Introduction_3_description~ipad.png in Resources */,
 				68631FA617E74E8B00A24B3F /* Default-Portrait@2x~ipad.png in Resources */,
@@ -1494,13 +1534,16 @@
 				68F8D6601829609000AF2E20 /* Panel2_iPad.xib in Resources */,
 				684B0E7A1829AFED001C3318 /* Default-blur@2x~ipad.png in Resources */,
 				6834AD6618353445006EBD3F /* MH_AppIcon_IOS_100.png in Resources */,
+				6834AD7418357098006EBD3F /* MH_AppIcon_IOS_76.png in Resources */,
 				6846CEBE1834388B00DCB086 /* MH_Mobile_Introduction_4~ipad.png in Resources */,
 				68F8D669182960BA00AF2E20 /* Panel5_iPad.xib in Resources */,
 				6834AD6018353445006EBD3F /* MH_AppIcon_IOS_40.png in Resources */,
+				6834AD7218357098006EBD3F /* MH_AppIcon_IOS_80.png in Resources */,
 				68BE4636182ACF4800A9B245 /* WelcomePanel_iPhone.xib in Resources */,
 				6846CEC21834388B00DCB086 /* MH_Mobile_Introduction_3~ipad.png in Resources */,
 				68EB9A1E1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
 				6846CEC01834388B00DCB086 /* MH_Mobile_Introduction_3_description~ipad.png in Resources */,
+				6834AD7E1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png in Resources */,
 				6834AD6818353445006EBD3F /* MH_AppIcon_IOS_144.png in Resources */,
 				6846CEBA1834388B00DCB086 /* MH_Mobile_Introduction_5~ipad.png in Resources */,
 				6846CEC41834388B00DCB086 /* MH_Mobile_Introduction_1~ipad.png in Resources */,
@@ -1510,12 +1553,17 @@
 				68F8D6571829601400AF2E20 /* Panel3_iPhone.xib in Resources */,
 				68F8D630182817A900AF2E20 /* Panel1_iPad.xib in Resources */,
 				6846CEB81834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png in Resources */,
+				6834AD7018357098006EBD3F /* MH_AppIcon_IOS_120.png in Resources */,
 				6834AD5E18353445006EBD3F /* MH_AppIcon_IOS_29.png in Resources */,
 				6846CEC81834388B00DCB086 /* MH_Mobile_Introduction_2_description~ipad.png in Resources */,
 				6834AD6418353445006EBD3F /* MH_AppIcon_IOS_58.png in Resources */,
 				68F8D65A1829602400AF2E20 /* Panel4_iPhone.xib in Resources */,
+				6834AD801835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait@2x.png in Resources */,
 				6846CEC61834388B00DCB086 /* MH_Mobile_Introduction_1_description~ipad.png in Resources */,
+				6834AD7A1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png in Resources */,
+				6834AD7C1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png in Resources */,
 				6867917917FF4EC6000106BF /* InfoPlist.strings in Resources */,
+				6834AD6E18357098006EBD3F /* MH_AppIcon_IOS_152.png in Resources */,
 				68F8D65D1829603300AF2E20 /* Panel5_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,8 @@
 	<string>appicon.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
+		<string>MH_AppIcon_IOS_80</string>
+		<string>MH_AppIcon_IOS_120</string>
 		<string>MH_AppIcon_IOS_58</string>
 		<string>MH_AppIcon_IOS_29</string>
 		<string>appicon.png</string>
@@ -23,6 +25,9 @@
 	</array>
 	<key>CFBundleIconFiles~ipad</key>
 	<array>
+		<string>MH_AppIcon_IOS_80</string>
+		<string>MH_AppIcon_IOS_152</string>
+		<string>MH_AppIcon_IOS_76</string>
 		<string>MH_AppIcon_IOS_58</string>
 		<string>MH_AppIcon_IOS_29</string>
 		<string>MH_AppIcon_IOS_100</string>
@@ -65,6 +70,29 @@
 	<string>MissionHub</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UILaunchImages~ipad</key>
+	<array>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>MH_Mobile_DefaultImage_ipad_portrait</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{768, 1024}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>MH_Mobile_DefaultImage_ipad_landscape</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Landscape</string>
+			<key>UILaunchImageSize</key>
+			<string>{768, 1024}</string>
+		</dict>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>MissionHub_iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>
