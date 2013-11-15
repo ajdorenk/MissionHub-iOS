@@ -497,6 +497,7 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 - (void)newInteractionActivity:(id)sender {
 	
 	MHInteraction *newInteraction	= [MHInteraction newObjectFromFields:nil];
+	[newInteraction setDefaultsForNewObject];
 	newInteraction.receiver			= self.person;
 	NSArray *selectionArray			= (self.person ? @[self.person] : @[]);
 	

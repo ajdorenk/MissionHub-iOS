@@ -10,7 +10,7 @@
 
 @implementation MHPerson (Helper)
 
-- (void)setDefaults {
+- (void)setDefaultsForNewObject {
 	
 	self.gender = @"Male";
 	

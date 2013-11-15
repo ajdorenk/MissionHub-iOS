@@ -28,7 +28,7 @@
 	
 }
 
--(void)setDefaults {
+- (void)setDefaultsForNewObject {
 	
 	//turn this into defaults
 	[self addInitiatorsObject:[MHAPI sharedInstance].currentUser];

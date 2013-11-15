@@ -615,7 +615,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 - (void)addPerson:(id)sender {
 	
 	MHPerson *newPerson						= [MHPerson newObjectFromFields:nil];
-    
+    [newPerson setDefaultsForNewObject];
+	
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 		
 		self.createPersonViewController.person	= newPerson;
@@ -657,6 +658,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 - (void)addInteraction:(id)sender {
 	
 	MHInteraction *newInteraction = [MHInteraction newObjectFromFields:nil];
+	[newInteraction setDefaultsForNewObject];
 	[newInteraction addInitiators:[NSSet setWithArray:self.selectedPeople]];
 	
 	

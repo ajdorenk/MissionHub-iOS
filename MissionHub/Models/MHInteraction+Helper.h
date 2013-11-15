@@ -20,6 +20,8 @@ typedef enum {
 
 @interface MHInteraction (Helper)
 
+- (void)setDefaultsForNewObject;
+
 + (NSDateFormatter *)dateFormatter;
 + (NSString *)stringForPrivacySetting:(MHInteractionPrivacySettings)privacySetting;
 - (NSString *)title;

@@ -1949,7 +1949,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Campus Crusade for Christ Inc (3EQ94S9G86)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -33,6 +33,8 @@ typedef enum {
 
 @interface MHPerson (Helper)
 
+- (void)setDefaultsForNewObject;
+
 -(NSString *)valueForSortField:(MHPersonSortFields)sortField;
 +(NSString *)fieldNameForSortField:(MHPersonSortFields)sortField;
 
