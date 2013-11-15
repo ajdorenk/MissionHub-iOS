@@ -44,7 +44,7 @@ describe(@"MHAPIChangeOrganization", ^{
 			
 			[[theBlock(^{
 				
-				for (NSInteger organizationCounter = 0; organizationCounter <= 10000; organizationCounter++) {
+				for (NSInteger organizationCounter = 1; organizationCounter <= 100; organizationCounter++) {
 					
 					[[MHAPI sharedInstance] getOrganizationWithRemoteID:[NSNumber numberWithInteger:organizationCounter] successBlock:^(NSArray *result, MHRequestOptions *options) {
 						

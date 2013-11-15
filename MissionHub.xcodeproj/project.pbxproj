@@ -132,9 +132,9 @@
 		683AE391176D2B1F0027EDE4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683AE390176D2B1F0027EDE4 /* Entitlements.plist */; };
 		683AE398176D2DC20027EDE4 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE392176D2DC20027EDE4 /* appicon@2x.png */; };
 		683AE39A176D2DC20027EDE4 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE393176D2DC20027EDE4 /* appicon.png */; };
-		683AE39C176D2DC20027EDE4 /* appicon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE394176D2DC20027EDE4 /* appicon-small@2x.png */; };
-		683AE39E176D2DC20027EDE4 /* appicon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE395176D2DC20027EDE4 /* appicon-small.png */; };
-		683AE3A0176D2DC20027EDE4 /* appicon-small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE396176D2DC20027EDE4 /* appicon-small-50.png */; };
+		683AE39C176D2DC20027EDE4 /* appicon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE394176D2DC20027EDE4 /* appicon-Small@2x.png */; };
+		683AE39E176D2DC20027EDE4 /* appicon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE395176D2DC20027EDE4 /* appicon-Small.png */; };
+		683AE3A0176D2DC20027EDE4 /* appicon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE396176D2DC20027EDE4 /* appicon-Small-50.png */; };
 		683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE397176D2DC20027EDE4 /* appicon-72.png */; };
 		6840C39717AD7B8900C2DB26 /* MHBlankCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6840C39617AD7B8900C2DB26 /* MHBlankCheckbox.m */; };
 		6846CE8E1834127C00DCB086 /* MHAPIChangeOrganizationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846CE8D1834127C00DCB086 /* MHAPIChangeOrganizationTest.m */; };
@@ -507,9 +507,9 @@
 		683AE390176D2B1F0027EDE4 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		683AE392176D2DC20027EDE4 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
 		683AE393176D2DC20027EDE4 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
-		683AE394176D2DC20027EDE4 /* appicon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-small@2x.png"; sourceTree = "<group>"; };
-		683AE395176D2DC20027EDE4 /* appicon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-small.png"; sourceTree = "<group>"; };
-		683AE396176D2DC20027EDE4 /* appicon-small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-small-50.png"; sourceTree = "<group>"; };
+		683AE394176D2DC20027EDE4 /* appicon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-Small@2x.png"; sourceTree = "<group>"; };
+		683AE395176D2DC20027EDE4 /* appicon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-Small.png"; sourceTree = "<group>"; };
+		683AE396176D2DC20027EDE4 /* appicon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-Small-50.png"; sourceTree = "<group>"; };
 		683AE397176D2DC20027EDE4 /* appicon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-72.png"; sourceTree = "<group>"; };
 		6840C39517AD7B8900C2DB26 /* MHBlankCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHBlankCheckbox.h; path = "Custom UI/MHBlankCheckbox.h"; sourceTree = "<group>"; };
 		6840C39617AD7B8900C2DB26 /* MHBlankCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHBlankCheckbox.m; path = "Custom UI/MHBlankCheckbox.m"; sourceTree = "<group>"; };
@@ -957,9 +957,9 @@
 			children = (
 				683AE392176D2DC20027EDE4 /* appicon@2x.png */,
 				683AE393176D2DC20027EDE4 /* appicon.png */,
-				683AE394176D2DC20027EDE4 /* appicon-small@2x.png */,
-				683AE395176D2DC20027EDE4 /* appicon-small.png */,
-				683AE396176D2DC20027EDE4 /* appicon-small-50.png */,
+				683AE394176D2DC20027EDE4 /* appicon-Small@2x.png */,
+				683AE395176D2DC20027EDE4 /* appicon-Small.png */,
+				683AE396176D2DC20027EDE4 /* appicon-Small-50.png */,
 				683AE397176D2DC20027EDE4 /* appicon-72.png */,
 				6834AD5718353445006EBD3F /* MH_AppIcon_IOS_29.png */,
 				6834AD5818353445006EBD3F /* MH_AppIcon_IOS_40.png */,
@@ -1426,11 +1426,11 @@
 				683AE39A176D2DC20027EDE4 /* appicon.png in Resources */,
 				68F8D62C1828177800AF2E20 /* Panel1_iPhone.xib in Resources */,
 				6834AD6118353445006EBD3F /* MH_AppIcon_IOS_50.png in Resources */,
-				683AE39C176D2DC20027EDE4 /* appicon-small@2x.png in Resources */,
+				683AE39C176D2DC20027EDE4 /* appicon-Small@2x.png in Resources */,
 				68EB9A1D1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
-				683AE39E176D2DC20027EDE4 /* appicon-small.png in Resources */,
+				683AE39E176D2DC20027EDE4 /* appicon-Small.png in Resources */,
 				683938F81832FAA900234BED /* MH_Mobile_Introduction_5_description.png in Resources */,
-				683AE3A0176D2DC20027EDE4 /* appicon-small-50.png in Resources */,
+				683AE3A0176D2DC20027EDE4 /* appicon-Small-50.png in Resources */,
 				683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */,
 				68478DC9177E8CDC0014501D /* MH_Mobile_Topbar_Background.png in Resources */,
 				6823A7C2177EB00100DBDF3F /* MH_Mobile_Searchbar_Background.png in Resources */,
