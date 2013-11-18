@@ -11,9 +11,9 @@ target :MissionHub do
 
 	pod 'Facebook-iOS-SDK', '3.5'
 	pod 'AFNetworking', '~> 1.3.1'
-	pod 'DWTagList', :git => 'https://github.com/michaelharro/DWTagList.git'
+	pod 'DWTagList', :git => 'https://github.com/CruGlobal/DWTagList.git'
 	pod 'ECSlidingViewController', '~> 1.0.1'
-	pod 'M6ParallaxController', :git => 'https://github.com/michaelharro/M6ParallaxController.git'
+	pod 'M6ParallaxController', :git => 'https://github.com/CruGlobal/M6ParallaxController.git'
 	pod 'ODRefreshControl', '~> 1.1.0'
 	pod 'SDSegmentedControl', '~> 1.0.1'
 	pod 'SIAlertView', '1.2'
