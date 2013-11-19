@@ -95,6 +95,24 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 							  
 							  [[MHAPI sharedInstance] bulkDeletePeople:weakSelf.peopleToDelete withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 								  
+								  [weakSelf.peopleToDelete enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
+									  
+									  if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
+										  
+										  MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.admins findWithRemoteID:person.remoteID];
+										  [[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
+										  
+									  }
+									  
+									  if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
+										  
+										  MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
+										  [[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInAdminSet];
+										  
+									  }
+									  
+								  }];
+								  
 								  SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
 																				   andMessage:[NSString stringWithFormat:@"%d people were successfully deleted?", weakSelf.peopleToDelete.count]];
 								  [successAlertView addButtonWithTitle:@"Ok"
