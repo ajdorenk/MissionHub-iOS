@@ -20,7 +20,7 @@ target :MissionHub do
 	pod 'TTTAttributedLabel', '~> 1.7.1'
 	pod 'NewRelicAgent', '~> 1.376'
 	pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.1'
-	pod 'Airbrake-iOS', :git => 'https://github.com/CruGlobal/airbrake-ios.git'
+	#pod 'Airbrake-iOS', :git => 'https://github.com/CruGlobal/airbrake-ios.git'
 	pod 'MYBlurIntroductionView', :git => 'https://github.com/CruGlobal/MYBlurIntroductionView.git'
 
 	target :tests, :exclusive => true do

@@ -1,0 +1,3 @@
+[submodule "Libraries/Airbrake-iOS"]
+	path = Libraries/Airbrake-iOS
+	url = https://github.com/CruGlobal/airbrake-ios.git
