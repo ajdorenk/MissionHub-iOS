@@ -9,7 +9,7 @@ link_with "MissionHub"
 
 target :MissionHub do
 
-	pod 'Facebook-iOS-SDK', '3.5'
+	pod 'Facebook-iOS-SDK', '~> 3.9'
 	pod 'AFNetworking', '~> 1.3.1'
 	pod 'DWTagList', :git => 'https://github.com/CruGlobal/DWTagList.git'
 	pod 'ECSlidingViewController', '~> 1.0.1'
