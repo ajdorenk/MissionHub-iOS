@@ -552,11 +552,16 @@ select another survey.</string>
                                         <color key="textColor" red="0.50196078430000002" green="0.50980392159999999" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" id="hvE-ds-j50" userLabel="Text Field - Comment" customClass="MHTextField">
-                                        <rect key="frame" x="27" y="361" width="266" height="93"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="wo6-N0-9k6">
+                                        <rect key="frame" x="27" y="356" width="266" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
-                                    </textField>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BjY-Hn-6pi" id="BQV-Ml-LpW"/>
+                                        </connections>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
@@ -564,7 +569,7 @@ select another survey.</string>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="comment" destination="hvE-ds-j50" id="eIq-mk-rQe"/>
+                        <outlet property="comment" destination="wo6-N0-9k6" id="fmx-HC-X5v"/>
                         <outlet property="commentLabel" destination="8jV-I0-Zfk" id="sHw-Ti-vyz"/>
                         <outlet property="dateTime" destination="k2S-Bc-nTY" id="ebT-8G-tUY"/>
                         <outlet property="dateTimeLabel" destination="3s7-1y-Lmo" id="2Bf-Qm-X6A"/>

@@ -12,6 +12,7 @@
 #import "MHAPI.h"
 #import "MHToolbar.h"
 #import "MHGoogleAnalyticsTracker.h"
+#import "MHTextView.h"
 
 NSString * const MHGoogleAnalyticsTrackerCreateInteractionScreenName	= @"Create Interaction";
 NSString * const MHGoogleAnalyticsTrackerCreateInteractionSaveButtonTap	= @"save";
@@ -58,7 +59,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 @property (nonatomic, weak) IBOutlet UILabel				*dateTimeLabel;
 @property (nonatomic, weak) IBOutlet UIButton				*dateTime;
 @property (nonatomic, weak) IBOutlet UILabel				*commentLabel;
-@property (nonatomic, weak) IBOutlet UITextField			*comment;
+@property (nonatomic, weak) IBOutlet UITextView				*comment;
 @property (nonatomic, assign) CGRect						originalCommentFrame;
 @property (nonatomic, assign) CGPoint						originalContentOffset;
 
@@ -249,8 +250,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	NSString *orgName = ([[[[MHAPI sharedInstance] currentUser] currentOrganization] name] ? [[[[MHAPI sharedInstance] currentUser] currentOrganization] name] : @"");
 	
 	self.visibilityArray = [NSMutableArray arrayWithArray:@[
-							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingEveryone],		@"title": @"Everyone"},
-							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingParent],			@"title": [NSString stringWithFormat:@"Everyone in Parent of %@", orgName]}, //TODO: on login grab the name of the parent org and use it here
+//							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingEveryone],		@"title": @"Everyone"},
+//							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingParent],			@"title": [NSString stringWithFormat:@"Everyone in Parent of %@", orgName]}, //TODO: on login grab the name of the parent org and use it here
 							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingOrganization],	@"title": [NSString stringWithFormat:@"Everyone in %@", orgName]},
 							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingAdmins],			@"title": [NSString stringWithFormat:@"Admins in %@", orgName]},
 							@{@"value": [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingMe],				@"title": @"Only Me"}
@@ -320,8 +321,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
     self.comment.layer.backgroundColor	= [[UIColor whiteColor] CGColor];
     self.comment.layer.borderColor		= [[UIColor colorWithRed:223.0/255.0 green:223.0/255.0 blue:223.0/255.0 alpha:1]CGColor];
     self.comment.layer.borderWidth		= 1.0f;
-	self.comment.returnKeyType			= UIReturnKeyDone;
-	self.comment.clearButtonMode		= UITextFieldViewModeNever;
+	self.comment.returnKeyType			= UIReturnKeyDefault;
     
     self.originalCommentFrame = self.comment.frame;
 	
@@ -484,6 +484,24 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	self.navigationItem.rightBarButtonItem	= self.saveButton;
 	
 	[self clearPickers];
+	
+	self.interactionTypePicker.frame	= CGRectMake(CGRectGetMinX(self.interactionTypePicker.frame),
+													 CGRectGetMinY(self.interactionTypePicker.frame),
+													 CGRectGetWidth(self.scrollView.frame),
+													 CGRectGetHeight(self.interactionTypePicker.frame)
+													 );
+	
+	self.visibilityPicker.frame	= CGRectMake(CGRectGetMinX(self.visibilityPicker.frame),
+													 CGRectGetMinY(self.visibilityPicker.frame),
+													 CGRectGetWidth(self.scrollView.frame),
+													 CGRectGetHeight(self.visibilityPicker.frame)
+													 );
+	
+	self.timestampPicker.frame	= CGRectMake(CGRectGetMinX(self.timestampPicker.frame),
+													 CGRectGetMinY(self.timestampPicker.frame),
+													 CGRectGetWidth(self.scrollView.frame),
+													 CGRectGetHeight(self.timestampPicker.frame)
+													 );
 	
 }
 
@@ -654,11 +672,17 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 		__block NSString *visibilityString = @"";
 		
+//		if (self.visibilityArray.count > 0) {
+//			
+//			visibilityString	= self.visibilityArray[0][@"title"];
+//			
+//		}
+		
 		__weak __typeof(&*self)weakSelf = self;
 		[self.visibilityArray enumerateObjectsUsingBlock:^(NSDictionary *object, NSUInteger index, BOOL *stop) {
 			
-			NSString *value = [object objectForKey:@"value"];
-			NSString *title = [object objectForKey:@"title"];
+			NSString *value = object[@"value"];
+			NSString *title = object[@"title"];
 			
 			if ([value isEqualToString:[weakSelf.interaction privacy_setting]]) {
 				visibilityString = title;
@@ -1233,13 +1257,6 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 	}
     
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	
-    [self clearPickers];
-    
-    return NO;
 }
 
 #pragma mark - orientation methods

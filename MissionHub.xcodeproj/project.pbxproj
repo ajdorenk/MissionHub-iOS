@@ -286,6 +286,8 @@
 		68C82E7C180333C100A8D5A0 /* MHContactAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */; };
 		68C82E7F1803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */; };
 		68C82E801803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */; };
+		68C9FE67183E5D7800A2AE89 /* MHTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C9FE66183E5D7800A2AE89 /* MHTextView.m */; };
+		68C9FE68183E5D7800A2AE89 /* MHTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C9FE66183E5D7800A2AE89 /* MHTextView.m */; };
 		68D7AA3E1766783200B9B0B1 /* MHAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA3D1766783200B9B0B1 /* MHAPI.m */; };
 		68D7AA441766C98000B9B0B1 /* MHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7AA431766C98000B9B0B1 /* MHLoginViewController.m */; };
 		68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B8C6177F804300A2E231 /* MHOrganizationalLabel.m */; };
@@ -635,6 +637,8 @@
 		68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHContactAssignment.m; path = Models/MHContactAssignment.m; sourceTree = "<group>"; };
 		68C82E7D1803343E00A8D5A0 /* MHContactAssignment+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHContactAssignment+Helper.h"; path = "Models/MHContactAssignment+Helper.h"; sourceTree = "<group>"; };
 		68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHContactAssignment+Helper.m"; path = "Models/MHContactAssignment+Helper.m"; sourceTree = "<group>"; };
+		68C9FE65183E5D7800A2AE89 /* MHTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHTextView.h; path = "Custom UI/MHTextView.h"; sourceTree = "<group>"; };
+		68C9FE66183E5D7800A2AE89 /* MHTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHTextView.m; path = "Custom UI/MHTextView.m"; sourceTree = "<group>"; };
 		68D53F201810787800D4574A /* MHOrganizationalPermission.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MHOrganizationalPermission.h; path = Models/MHOrganizationalPermission.h; sourceTree = "<group>"; };
 		68D53F211810787800D4574A /* MHOrganizationalPermission.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MHOrganizationalPermission.m; path = Models/MHOrganizationalPermission.m; sourceTree = "<group>"; };
 		68D53F221810787900D4574A /* MHPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MHPerson.h; path = Models/MHPerson.h; sourceTree = "<group>"; };
@@ -1281,6 +1285,8 @@
 				68F4CC4717D10846004D6574 /* MHAnswerCell.m */,
 				68EB9A311819DEE7009712EB /* MHNavigationBar.h */,
 				68EB9A321819DEE7009712EB /* MHNavigationBar.m */,
+				68C9FE65183E5D7800A2AE89 /* MHTextView.h */,
+				68C9FE66183E5D7800A2AE89 /* MHTextView.m */,
 			);
 			name = "Custom UI";
 			sourceTree = "<group>";
@@ -1651,6 +1657,7 @@
 				68478D8E177E8AE20014501D /* MHOrganization.m in Sources */,
 				68478D90177E8AE20014501D /* MHLabel.m in Sources */,
 				68478D9A177E8B140014501D /* MHGenericListViewController.m in Sources */,
+				68C9FE67183E5D7800A2AE89 /* MHTextView.m in Sources */,
 				68478DAE177E8C9F0014501D /* MHPeopleSearchBar.m in Sources */,
 				68C82E7F1803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */,
 				685542C51820485600161563 /* MHGoogleAnalyticsTracker.m in Sources */,
@@ -1775,6 +1782,7 @@
 				68C82E61180314FB00A8D5A0 /* MHLoginViewController.m in Sources */,
 				68C82E63180314FB00A8D5A0 /* MHErrorHandler.m in Sources */,
 				68C82E64180314FB00A8D5A0 /* MissionHub.xcdatamodeld in Sources */,
+				68C9FE68183E5D7800A2AE89 /* MHTextView.m in Sources */,
 				6891C28E17FFBE1B009D5851 /* MHAPIBulkActionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

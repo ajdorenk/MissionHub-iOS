@@ -12,7 +12,7 @@
 
 @protocol MHCreateInteractionDelegate;
 
-@interface MHNewInteractionViewController : UIViewController <UITextFieldDelegate, MHGenericListViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface MHNewInteractionViewController : UIViewController <UITextViewDelegate, MHGenericListViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic, weak) id<MHCreateInteractionDelegate>	createInteractionDelegate;
 @property (nonatomic, weak) UIPopoverController				*currentPopoverController;
