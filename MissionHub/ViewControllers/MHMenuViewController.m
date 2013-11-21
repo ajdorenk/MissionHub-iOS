@@ -19,6 +19,7 @@
 #import "MHLoginViewController.h"
 #import "MHIntroductionViewController.h"
 #import "MHGoogleAnalyticsTracker.h"
+#import "ABNotifier.h"
 
 NSString *const MHMenuErrorDomain												= @"com.missionhub.errorDomain.menu";
 
@@ -172,6 +173,8 @@ typedef enum {
 			
 			[[MHAPI sharedInstance].initialPeopleList removeAllObjects];
 			[MHAPI sharedInstance].currentOrganization	= organization;
+			
+			[ABNotifier setEnvironmentValue:[[MHAPI sharedInstance].currentOrganization.remoteID stringValue] forKey:@"organization_id"];
 			
 			[weakSelf.tableView reloadData];
 			

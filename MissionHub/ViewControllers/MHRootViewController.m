@@ -10,6 +10,7 @@
 #import "MHIntroductionViewController.h"
 #import "MHPeopleListViewController.h"
 #import "MHGoogleAnalyticsTracker.h"
+#import "ABNotifier.h"
 
 NSString * const MHGoogleAnalyticsTrackerIntroductionScreenName			= @"Introduction Tutorial";
 NSString * const MHGoogleAnalyticsTrackerLoginScreenName				= @"Login";
@@ -204,6 +205,9 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 		[weakSelf resetTopView];
 		
 	}];
+	
+	[ABNotifier setEnvironmentValue:[currentUser.remoteID stringValue] forKey:@"person_id"];
+	[ABNotifier setEnvironmentValue:[currentUser.currentOrganization.remoteID stringValue] forKey:@"organization_id"];
 	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName
 															  category:MHGoogleAnalyticsCategoryBackgroundProcess
