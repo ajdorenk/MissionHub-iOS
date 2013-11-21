@@ -34,7 +34,7 @@
 	[self addInitiatorsObject:[MHAPI sharedInstance].currentUser];
 	self.type			= [[[MHAPI sharedInstance].currentUser.currentOrganization interactionTypes] findWithRemoteID:@1]; //comment interaction type has id=1
 	self.comment		= @"";
-	self.privacy_setting = [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingEveryone];
+	self.privacy_setting = [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingOrganization];
 	self.timestamp		= [NSDate date];
 	self.created_at		= [NSDate date];
 	self.updated_at		= [NSDate date];
