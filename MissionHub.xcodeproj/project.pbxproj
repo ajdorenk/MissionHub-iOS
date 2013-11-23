@@ -301,6 +301,10 @@
 		68EB9A331819DEE7009712EB /* MHNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB9A321819DEE7009712EB /* MHNavigationBar.m */; };
 		68EB9A341819DEE7009712EB /* MHNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB9A321819DEE7009712EB /* MHNavigationBar.m */; };
 		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
+		68F2FFB81840334300E3C6E9 /* MHCallActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F2FFB71840334300E3C6E9 /* MHCallActivity.m */; };
+		68F2FFB91840334300E3C6E9 /* MHCallActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F2FFB71840334300E3C6E9 /* MHCallActivity.m */; };
+		68F2FFBB1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F2FFBA1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png */; };
+		68F2FFBC1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F2FFBA1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png */; };
 		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		68F8D6251828134400AF2E20 /* MHIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F8D6241828134400AF2E20 /* MHIntroductionPanel.m */; };
 		68F8D6261828134400AF2E20 /* MHIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F8D6241828134400AF2E20 /* MHIntroductionPanel.m */; };
@@ -658,6 +662,9 @@
 		68EB9A321819DEE7009712EB /* MHNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationBar.m; path = "Custom UI/MHNavigationBar.m"; sourceTree = "<group>"; };
 		68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteractionType+Helper.h"; path = "Models/MHInteractionType+Helper.h"; sourceTree = "<group>"; };
 		68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteractionType+Helper.m"; path = "Models/MHInteractionType+Helper.m"; sourceTree = "<group>"; };
+		68F2FFB61840334300E3C6E9 /* MHCallActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHCallActivity.h; path = "Custom UI/Activities/MHCallActivity.h"; sourceTree = "<group>"; };
+		68F2FFB71840334300E3C6E9 /* MHCallActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCallActivity.m; path = "Custom UI/Activities/MHCallActivity.m"; sourceTree = "<group>"; };
+		68F2FFBA1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Call_48.png; sourceTree = "<group>"; };
 		68F4CC4717D10846004D6574 /* MHAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerCell.m; path = "Custom UI/MHAnswerCell.m"; sourceTree = "<group>"; };
 		68F4CC4817D10846004D6574 /* MHAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswerCell.h; path = "Custom UI/MHAnswerCell.h"; sourceTree = "<group>"; };
 		68F8D6231828134400AF2E20 /* MHIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHIntroductionPanel.h; path = "Custom UI/Introduction/MHIntroductionPanel.h"; sourceTree = "<group>"; };
@@ -803,6 +810,8 @@
 				682462E617D9429E00E1AFBB /* MHEmailActivity.m */,
 				682462E917D942B500E1AFBB /* MHTextActivity.h */,
 				682462EA17D942B500E1AFBB /* MHTextActivity.m */,
+				68F2FFB61840334300E3C6E9 /* MHCallActivity.h */,
+				68F2FFB71840334300E3C6E9 /* MHCallActivity.m */,
 			);
 			name = Activities;
 			sourceTree = "<group>";
@@ -1104,6 +1113,7 @@
 				68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */,
 				68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */,
 				68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */,
+				68F2FFBA1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png */,
 				68631FAE17E91E4500A24B3F /* MH_Mobile_Menu_Button_Gray_72.png */,
 				68631FAF17E91E4500A24B3F /* MH_Mobile_Menu_Button_Red_72.png */,
 				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
@@ -1462,6 +1472,7 @@
 				68A38F1E17AB585C0010CAC6 /* MH_Mobile_Checkbox_No_Box_No_Checkmark.png in Resources */,
 				68A38F2217AB59400010CAC6 /* MH_Mobile_Checkbox_PartiallyChecked_24.png in Resources */,
 				68A38F2417AB59400010CAC6 /* MH_Mobile_Checkbox_Checkmark_24.png in Resources */,
+				68F2FFBB1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png in Resources */,
 				68A38F2717AB59DB0010CAC6 /* MH_Mobile_Icon_Menu.png in Resources */,
 				68F8D668182960BA00AF2E20 /* Panel5_iPad.xib in Resources */,
 				685923A117AC427F0047A5A5 /* MH_Mobile_Checkbox_UnChecked_48_padded.png in Resources */,
@@ -1544,6 +1555,7 @@
 				6846CEC61834388B00DCB086 /* MH_Mobile_Introduction_1_description~ipad.png in Resources */,
 				6834AD7A1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png in Resources */,
 				6834AD7C1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png in Resources */,
+				68F2FFBC1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png in Resources */,
 				6867917917FF4EC6000106BF /* InfoPlist.strings in Resources */,
 				6834AD6E18357098006EBD3F /* MH_AppIcon_IOS_152.png in Resources */,
 				68F8D65D1829603300AF2E20 /* Panel5_iPhone.xib in Resources */,
@@ -1705,6 +1717,7 @@
 				68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
 				6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */,
 				68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */,
+				68F2FFB81840334300E3C6E9 /* MHCallActivity.m in Sources */,
 				681C65B117D185170021D2EE /* MHAddressCell.m in Sources */,
 				682462CE17D90C3500E1AFBB /* MHLabelActivity.m in Sources */,
 				682462D317D90DDC00E1AFBB /* MHAssignActivity.m in Sources */,
@@ -1731,6 +1744,7 @@
 				6865808318107DF8005A5532 /* MHPerson.m in Sources */,
 				68C82E741803197F00A8D5A0 /* NSDictionary+UrlEncodedString.m in Sources */,
 				68C82E761803197F00A8D5A0 /* NSSet+MHSearchForRemoteID.m in Sources */,
+				68F2FFB91840334300E3C6E9 /* MHCallActivity.m in Sources */,
 				68C82E781803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
 				68C82E21180314FA00A8D5A0 /* MHOrganization.m in Sources */,
 				68C82E23180314FA00A8D5A0 /* MHAddress.m in Sources */,
