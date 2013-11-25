@@ -16,6 +16,9 @@ extern NSString * const MHOrganizationalPermissionStatusCompleted;
 
 @interface MHOrganizationalPermission (Helper)
 
-- (NSArray *)followupStatuses;
++ (NSArray *)arrayOfFollowupStatusesForDisplay;
++ (NSString *)statusFromStatusForDisplay:(NSString *)statusForDisplay;
+- (NSString *)status;
+- (NSString *)statusForDisplay;
 
 @end

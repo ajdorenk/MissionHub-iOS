@@ -9,18 +9,19 @@
 #import "MHStatusActivity.h"
 #import "MHActivityViewController.h"
 #import "MHAPI.h"
+#import "MHOrganizationalPermission+Helper.h"
 #import "MHPermissionLevel+Helper.h"
 #import "SIAlertView.h"
 
 NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status";
 
-@interface MHPermissionsActivity ()
+@interface MHStatusActivity ()
 
 @property (nonatomic, strong) NSMutableArray *peopleToChangeStatus;
 
 @end
 
-@implementation MHPermissionsActivity
+@implementation MHStatusActivity
 
 @synthesize peopleToChangeStatus	= _peopleToChangeStatus;
 
@@ -91,69 +92,47 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 	statusList.showHeaders			= NO;
 	statusList.showSuggestions		= NO;
 	statusList.listTitle			= @"Status";
-	[statusList setDataArray:@[[MHPermissionLevel admin], [MHPermissionLevel user], [MHPermissionLevel noPermissions]]];
+	[statusList setDataArray:[MHOrganizationalPermission arrayOfFollowupStatusesForDisplay]];
 	
 	if (self.peopleToChangeStatus.count == 1) {
 		
-		MHPerson *person					= self.peopleToChangeStatus[0];
-		MHPermissionLevel *permissionLevel	= [MHPermissionLevel noPermissions];
+		MHPerson *person			= self.peopleToChangeStatus[0];
+		NSString *status			= person.permissionLevel.status;
 		
-		if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
-			
-			permissionLevel	= [MHPermissionLevel user];
-			
-		} else if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
-			
-			permissionLevel	= [MHPermissionLevel admin];
-			
-		}
-		
-		[permissionLevelList setSuggestions:nil andSelectionObject:permissionLevel];
+		[statusList setSuggestions:nil andSelectionObject:status];
 		
 	} else {
 		
-		__block MHPermissionLevel *permissionLevel	= nil;
+		__block NSString *status	= nil;
 		
-		[self.peopleToChangePermissionLevel enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
+		[self.peopleToChangeStatus enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
 			
-			if (permissionLevel) {
+			if (status) {
 				
-				if (![person.permissionLevel.permission_id isEqualToNumber:permissionLevel.remoteID]) {
+				if (![person.permissionLevel.status isEqualToString:status]) {
 					
-					permissionLevel	= nil;
-					*stop			= YES;
+					status	= nil;
+					*stop	= YES;
 					
 				}
 				
 			} else {
 				
-				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel noPermissions].remoteID]) {
-					
-					permissionLevel	= [MHPermissionLevel noPermissions];
-					
-				} else if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
-					
-					permissionLevel	= [MHPermissionLevel user];
-					
-				} else if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
-					
-					permissionLevel	= [MHPermissionLevel admin];
-					
-				}
+				status		= person.permissionLevel.status;
 				
 			}
 			
 		}];
 		
-		if (permissionLevel) {
+		if (status) {
 			
-			[permissionLevelList setSuggestions:nil andSelectionObject:permissionLevel];
+			[statusList setSuggestions:nil andSelectionObject:statusList];
 			
 		}
 		
 	}
 	
-	[self.activityViewController.presentingController presentViewController:permissionLevelList animated:YES completion:nil];
+	[self.activityViewController.presentingController presentViewController:statusList animated:YES completion:nil];
 	
 }
 
@@ -161,45 +140,16 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 	
 	[self.activityViewController.presentingController dismissViewControllerAnimated:YES completion:nil];
 	
-	if ([object isKindOfClass:[MHPermissionLevel class]]) {
+	if ([object isKindOfClass:[NSString class]]) {
 		
-		__block MHPermissionLevel *permissionLevel	= (MHPermissionLevel *)object;
+		__block NSString *status = (NSString *)object;
+		NSString *statusCode	= [MHOrganizationalPermission statusFromStatusForDisplay:status];
 		
 		__weak __typeof(&*self)weakSelf = self;
-		[[MHAPI sharedInstance] bulkChangePermissionLevel:permissionLevel forPeople:self.peopleToChangePermissionLevel withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
-			
-			[weakSelf.peopleToChangePermissionLevel enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
-				
-				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
-					
-					MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.admins findWithRemoteID:person.remoteID];
-					[[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
-					
-				}
-				
-				if ([permissionLevel isEqualToModel:[MHPermissionLevel admin]]) {
-					
-					[[MHAPI sharedInstance].currentOrganization addAdminsObject:person];
-					
-				}
-				
-				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
-					
-					MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
-					[[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInAdminSet];
-					
-				}
-				
-				if ([permissionLevel isEqualToModel:[MHPermissionLevel user]]) {
-					
-					[[MHAPI sharedInstance].currentOrganization addUsersObject:person];
-					
-				}
-				
-			}];
+		[[MHAPI sharedInstance] bulkChangeStatus:statusCode forPeople:self.peopleToChangeStatus withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 			
 			SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																	andMessage:[NSString stringWithFormat:@"%d people now are: %@", weakSelf.peopleToChangePermissionLevel.count, permissionLevel.name]];
+																	andMessage:[NSString stringWithFormat:@"%d people now have the status: %@", weakSelf.peopleToChangeStatus.count, status]];
 			[successAlertView addButtonWithTitle:@"Ok"
 											type:SIAlertViewButtonTypeDestructive
 										 handler:^(SIAlertView *alertView) {
@@ -215,7 +165,7 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 			
 		} failBlock:^(NSError *error, MHRequestOptions *options) {
 			
-			NSString *message				= [NSString stringWithFormat:@"Changing permissions for %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToChangePermissionLevel.count, [error localizedDescription]];
+			NSString *message				= [NSString stringWithFormat:@"Changing status for %d people failed because: %@ If the problem persists please contact support@mission.com", weakSelf.peopleToChangeStatus.count, [error localizedDescription]];
 			NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 															 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 			
@@ -228,3 +178,5 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 	}
 	
 }
+
+@end

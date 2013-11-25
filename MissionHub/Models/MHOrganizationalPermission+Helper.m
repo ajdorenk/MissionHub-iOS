@@ -16,7 +16,7 @@ NSString * const MHOrganizationalPermissionStatusCompleted			= @"completed";
 
 @implementation MHOrganizationalPermission (Helper)
 
-- (NSArray *)followupStatuses {
++ (NSArray *)arrayOfFollowupStatusesForDisplay {
 	
 	return @[
 			 MHOrganizationalPermissionStatusUncontacted,
@@ -25,6 +25,47 @@ NSString * const MHOrganizationalPermissionStatusCompleted			= @"completed";
 			 MHOrganizationalPermissionStatusDoNotContact,
 			 MHOrganizationalPermissionStatusCompleted
 			 ];
+	
+}
+
++ (NSString *)statusFromStatusForDisplay:(NSString *)statusForDisplay {
+	
+	//TODO: convert status back to regular status (once convertion for readability actually happens).
+	return statusForDisplay;
+	
+}
+
+
+- (NSString *)status {
+	
+	NSString *status	= MHOrganizationalPermissionStatusUncontacted;
+	
+	if ([self.followup_status isEqualToString:MHOrganizationalPermissionStatusAttemptedContact]) {
+		
+		status	= MHOrganizationalPermissionStatusAttemptedContact;
+		
+	} else if ([self.followup_status isEqualToString:MHOrganizationalPermissionStatusContacted]) {
+		
+		status	= MHOrganizationalPermissionStatusContacted;
+		
+	} else if ([self.followup_status isEqualToString:MHOrganizationalPermissionStatusCompleted]) {
+		
+		status	= MHOrganizationalPermissionStatusCompleted;
+		
+	} else if ([self.followup_status isEqualToString:MHOrganizationalPermissionStatusDoNotContact]) {
+		
+		status	= MHOrganizationalPermissionStatusDoNotContact;
+		
+	}
+	
+	return status;
+	
+}
+
+- (NSString *)statusForDisplay {
+	
+	//TODO: Convert to capitolized with spaces.
+	return [self status];
 	
 }
 
