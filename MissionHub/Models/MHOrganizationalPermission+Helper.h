@@ -8,6 +8,14 @@
 
 #import "MHOrganizationalPermission.h"
 
+extern NSString * const MHOrganizationalPermissionStatusUncontacted;
+extern NSString * const MHOrganizationalPermissionStatusAttemptedContact;
+extern NSString * const MHOrganizationalPermissionStatusContacted;
+extern NSString * const MHOrganizationalPermissionStatusDoNotContact;
+extern NSString * const MHOrganizationalPermissionStatusCompleted;
+
 @interface MHOrganizationalPermission (Helper)
+
+- (NSArray *)followupStatuses;
 
 @end

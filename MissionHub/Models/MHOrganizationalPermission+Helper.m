@@ -8,7 +8,25 @@
 
 #import "MHOrganizationalPermission+Helper.h"
 
+NSString * const MHOrganizationalPermissionStatusUncontacted		= @"uncontacted";
+NSString * const MHOrganizationalPermissionStatusAttemptedContact	= @"attempted_contact";
+NSString * const MHOrganizationalPermissionStatusContacted			= @"contacted";
+NSString * const MHOrganizationalPermissionStatusDoNotContact		= @"do_not_contact";
+NSString * const MHOrganizationalPermissionStatusCompleted			= @"completed";
+
 @implementation MHOrganizationalPermission (Helper)
+
+- (NSArray *)followupStatuses {
+	
+	return @[
+			 MHOrganizationalPermissionStatusUncontacted,
+			 MHOrganizationalPermissionStatusAttemptedContact,
+			 MHOrganizationalPermissionStatusContacted,
+			 MHOrganizationalPermissionStatusDoNotContact,
+			 MHOrganizationalPermissionStatusCompleted
+			 ];
+	
+}
 
 -(void)setRelationshipsObject:(id)relationshipObject forFieldName:(NSString *)fieldName {
 	
