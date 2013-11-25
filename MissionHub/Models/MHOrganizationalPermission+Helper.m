@@ -16,7 +16,7 @@ NSString * const MHOrganizationalPermissionStatusCompleted			= @"completed";
 
 @implementation MHOrganizationalPermission (Helper)
 
-+ (NSArray *)arrayOfFollowupStatusesForDisplay {
++ (NSArray *)arrayOfFollowupStatuses {
 	
 	return @[
 			 MHOrganizationalPermissionStatusUncontacted,
@@ -28,6 +28,25 @@ NSString * const MHOrganizationalPermissionStatusCompleted			= @"completed";
 	
 }
 
++ (NSArray *)arrayOfFollowupStatusesForDisplay {
+	
+	return @[
+			 [MHOrganizationalPermission statusForDisplayFromStatus:MHOrganizationalPermissionStatusUncontacted],
+			 [MHOrganizationalPermission statusForDisplayFromStatus:MHOrganizationalPermissionStatusAttemptedContact],
+			 [MHOrganizationalPermission statusForDisplayFromStatus:MHOrganizationalPermissionStatusContacted],
+			 [MHOrganizationalPermission statusForDisplayFromStatus:MHOrganizationalPermissionStatusDoNotContact],
+			 [MHOrganizationalPermission statusForDisplayFromStatus:MHOrganizationalPermissionStatusCompleted]
+			 ];
+	
+}
+
++ (NSString *)statusForDisplayFromStatus:(NSString *)status {
+	
+	//TODO: Convert to capitolized with spaces.
+	return status;
+	
+}
+
 + (NSString *)statusFromStatusForDisplay:(NSString *)statusForDisplay {
 	
 	//TODO: convert status back to regular status (once convertion for readability actually happens).
@@ -35,6 +54,24 @@ NSString * const MHOrganizationalPermissionStatusCompleted			= @"completed";
 	
 }
 
++ (BOOL)isValidStatus:(NSString *)statusForValidation {
+	
+	__block BOOL valid	= NO;
+	
+	[[MHOrganizationalPermission arrayOfFollowupStatuses] enumerateObjectsUsingBlock:^(NSString *status, NSUInteger index, BOOL *stop) {
+		
+		if ([statusForValidation isEqualToString:status]) {
+			
+			valid	= YES;
+			*stop	= YES;
+			
+		}
+		
+	}];
+	
+	return valid;
+	
+}
 
 - (NSString *)status {
 	
@@ -64,8 +101,7 @@ NSString * const MHOrganizationalPermissionStatusCompleted			= @"completed";
 
 - (NSString *)statusForDisplay {
 	
-	//TODO: Convert to capitolized with spaces.
-	return [self status];
+	return [MHOrganizationalPermission statusForDisplayFromStatus:self.status];
 	
 }
 

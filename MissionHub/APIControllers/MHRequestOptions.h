@@ -156,6 +156,7 @@ typedef enum {
 - (instancetype)configureForBulkDeleteRequestForPeople:(NSArray *)people;
 - (instancetype)configureForBulkArchiveRequestForPeople:(NSArray *)people;
 - (instancetype)configureForBulkPermissionLevelRequestWithNewPermissionLevel:(MHPermissionLevel *)permissionLevel forPeople:(NSArray *)people;
+- (instancetype)configureForBulkStatusRequestWithNewStatus:(NSString *)status forPeople:(NSArray *)people;
 - (instancetype)configureForBulkAssignmentRequestWithLeader:(MHPerson *)person forPeople:(NSArray *)people;
 - (instancetype)configureForBulkLabelingRequestWithLabelsToAdd:(NSArray *)labelsToAdd labelsToRemove:(NSArray *)labelsToRemove forPeople:(NSArray *)people;
 
