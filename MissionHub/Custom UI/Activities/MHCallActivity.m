@@ -136,7 +136,8 @@ NSString * const MHActivityTypeCall	= @"com.missionhub.mhactivity.type.call";
 	
 	if (self.phoneNumberString) {
 	
-		NSString *phoneUrlString	= [NSString stringWithFormat:@"tel:%@", self.phoneNumberString];
+		NSString *cleanedString = [[self.phoneNumberString componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+		NSString *phoneUrlString	= [NSString stringWithFormat:@"tel:%@", cleanedString];
 		NSURL *url					= [NSURL URLWithString:phoneUrlString];
 		NSURLRequest *request		= [NSURLRequest requestWithURL:url];
 		
