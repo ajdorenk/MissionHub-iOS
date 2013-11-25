@@ -301,6 +301,10 @@
 		68EB9A331819DEE7009712EB /* MHNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB9A321819DEE7009712EB /* MHNavigationBar.m */; };
 		68EB9A341819DEE7009712EB /* MHNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB9A321819DEE7009712EB /* MHNavigationBar.m */; };
 		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
+		68F2FFBE1841387500E3C6E9 /* MH_Mobile_ActionIcon_Status_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F2FFBD1841387500E3C6E9 /* MH_Mobile_ActionIcon_Status_48.png */; };
+		68F2FFBF1841387500E3C6E9 /* MH_Mobile_ActionIcon_Status_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F2FFBD1841387500E3C6E9 /* MH_Mobile_ActionIcon_Status_48.png */; };
+		68F2FFC2184139D200E3C6E9 /* MHStatusActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F2FFC1184139D200E3C6E9 /* MHStatusActivity.m */; };
+		68F2FFC3184139D200E3C6E9 /* MHStatusActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F2FFC1184139D200E3C6E9 /* MHStatusActivity.m */; };
 		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		68F8D6251828134400AF2E20 /* MHIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F8D6241828134400AF2E20 /* MHIntroductionPanel.m */; };
 		68F8D6261828134400AF2E20 /* MHIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F8D6241828134400AF2E20 /* MHIntroductionPanel.m */; };
@@ -658,6 +662,9 @@
 		68EB9A321819DEE7009712EB /* MHNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationBar.m; path = "Custom UI/MHNavigationBar.m"; sourceTree = "<group>"; };
 		68EC3A5D17CD186E00EE3717 /* MHInteractionType+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHInteractionType+Helper.h"; path = "Models/MHInteractionType+Helper.h"; sourceTree = "<group>"; };
 		68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MHInteractionType+Helper.m"; path = "Models/MHInteractionType+Helper.m"; sourceTree = "<group>"; };
+		68F2FFBD1841387500E3C6E9 /* MH_Mobile_ActionIcon_Status_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Status_48.png; sourceTree = "<group>"; };
+		68F2FFC0184139D200E3C6E9 /* MHStatusActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHStatusActivity.h; path = "Custom UI/Activities/MHStatusActivity.h"; sourceTree = "<group>"; };
+		68F2FFC1184139D200E3C6E9 /* MHStatusActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHStatusActivity.m; path = "Custom UI/Activities/MHStatusActivity.m"; sourceTree = "<group>"; };
 		68F4CC4717D10846004D6574 /* MHAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerCell.m; path = "Custom UI/MHAnswerCell.m"; sourceTree = "<group>"; };
 		68F4CC4817D10846004D6574 /* MHAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswerCell.h; path = "Custom UI/MHAnswerCell.h"; sourceTree = "<group>"; };
 		68F8D6231828134400AF2E20 /* MHIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHIntroductionPanel.h; path = "Custom UI/Introduction/MHIntroductionPanel.h"; sourceTree = "<group>"; };
@@ -803,6 +810,8 @@
 				682462E617D9429E00E1AFBB /* MHEmailActivity.m */,
 				682462E917D942B500E1AFBB /* MHTextActivity.h */,
 				682462EA17D942B500E1AFBB /* MHTextActivity.m */,
+				68F2FFC0184139D200E3C6E9 /* MHStatusActivity.h */,
+				68F2FFC1184139D200E3C6E9 /* MHStatusActivity.m */,
 			);
 			name = Activities;
 			sourceTree = "<group>";
@@ -1104,6 +1113,7 @@
 				68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */,
 				68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */,
 				68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */,
+				68F2FFBD1841387500E3C6E9 /* MH_Mobile_ActionIcon_Status_48.png */,
 				68631FAE17E91E4500A24B3F /* MH_Mobile_Menu_Button_Gray_72.png */,
 				68631FAF17E91E4500A24B3F /* MH_Mobile_Menu_Button_Red_72.png */,
 				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
@@ -1456,6 +1466,7 @@
 				68A38F1417A9A9120010CAC6 /* label.png in Resources */,
 				68A38F1617A9A9120010CAC6 /* hs.png in Resources */,
 				6834AD6D18357098006EBD3F /* MH_AppIcon_IOS_152.png in Resources */,
+				68F2FFBE1841387500E3C6E9 /* MH_Mobile_ActionIcon_Status_48.png in Resources */,
 				68EB9A20181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
 				68A38F1817A9A9120010CAC6 /* grad.png in Resources */,
 				68A38F1B17AB58220010CAC6 /* MH_Mobile_Checkbox_No_Box_Checkmark.png in Resources */,
@@ -1517,6 +1528,7 @@
 				6834AD6618353445006EBD3F /* MH_AppIcon_IOS_100.png in Resources */,
 				6834AD7418357098006EBD3F /* MH_AppIcon_IOS_76.png in Resources */,
 				6846CEBE1834388B00DCB086 /* MH_Mobile_Introduction_4~ipad.png in Resources */,
+				68F2FFBF1841387500E3C6E9 /* MH_Mobile_ActionIcon_Status_48.png in Resources */,
 				68F8D669182960BA00AF2E20 /* Panel5_iPad.xib in Resources */,
 				6842D8C8183BB54F00815BB9 /* ABNotifier.bundle in Resources */,
 				6834AD6018353445006EBD3F /* MH_AppIcon_IOS_40.png in Resources */,
@@ -1655,6 +1667,7 @@
 				AD98278D177C93B500A0276A /* MHProfileViewController.m in Sources */,
 				AD982794177C9D6700A0276A /* MHProfileHeaderViewController.m in Sources */,
 				68478D8E177E8AE20014501D /* MHOrganization.m in Sources */,
+				68F2FFC2184139D200E3C6E9 /* MHStatusActivity.m in Sources */,
 				68478D90177E8AE20014501D /* MHLabel.m in Sources */,
 				68478D9A177E8B140014501D /* MHGenericListViewController.m in Sources */,
 				68C9FE67183E5D7800A2AE89 /* MHTextView.m in Sources */,
@@ -1777,6 +1790,7 @@
 				68F8D6261828134400AF2E20 /* MHIntroductionPanel.m in Sources */,
 				68C82E5B180314FB00A8D5A0 /* MHAPI.m in Sources */,
 				68C82E5D180314FB00A8D5A0 /* MHRequestOperation.m in Sources */,
+				68F2FFC3184139D200E3C6E9 /* MHStatusActivity.m in Sources */,
 				68C82E5F180314FB00A8D5A0 /* MHRequestOptions.m in Sources */,
 				68C82E801803343E00A8D5A0 /* MHContactAssignment+Helper.m in Sources */,
 				68C82E61180314FB00A8D5A0 /* MHLoginViewController.m in Sources */,
