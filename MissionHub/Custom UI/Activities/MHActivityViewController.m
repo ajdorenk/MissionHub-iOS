@@ -56,12 +56,13 @@
 	MHLabelActivity *labelActivity				= [[MHLabelActivity alloc] init];
 	MHAssignActivity *assignActivity			= [[MHAssignActivity alloc] init];
 	MHPermissionsActivity *permissionsActivity	= [[MHPermissionsActivity alloc] init];
+	MHStatusActivity *statusActivity			= [[MHStatusActivity alloc] init];
 	MHDeleteActivity *deleteActivity			= [[MHDeleteActivity alloc] init];
 	MHArchiveActivity *archiveActivity			= [[MHArchiveActivity alloc] init];
 	MHEmailActivity *emailActivity				= [[MHEmailActivity alloc] init];
 	MHTextActivity *textActivity				= [[MHTextActivity alloc] init];
 	
-	return @[ deleteActivity, archiveActivity, permissionsActivity, assignActivity, labelActivity, emailActivity, textActivity ];
+	return @[ deleteActivity, archiveActivity, permissionsActivity, statusActivity, assignActivity, labelActivity, emailActivity, textActivity ];
 	
 }
 
