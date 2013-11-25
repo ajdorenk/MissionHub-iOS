@@ -196,6 +196,8 @@
 		6867918517FF6533000106BF /* MHActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6867918417FF6533000106BF /* MHActivityView.m */; };
 		68805EE818107DC00026F7DA /* MHOrganizationalPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D53F211810787800D4574A /* MHOrganizationalPermission.m */; };
 		68805EE918107DC00026F7DA /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D53F231810787900D4574A /* MHPerson.m */; };
+		688074301843F2EC00901A0C /* MHDirectionsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6880742F1843F2EC00901A0C /* MHDirectionsActivity.m */; };
+		688074311843F2EC00901A0C /* MHDirectionsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6880742F1843F2EC00901A0C /* MHDirectionsActivity.m */; };
 		68818AFC17C7FFF800624887 /* MHAnswerSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFB17C7FFF800624887 /* MHAnswerSheet.m */; };
 		68818B0017C7FFF900624887 /* MHAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFF17C7FFF900624887 /* MHAnswer.m */; };
 		68818B0417C800A300624887 /* MHAnswerSheet+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0317C800A300624887 /* MHAnswerSheet+Helper.m */; };
@@ -569,6 +571,8 @@
 		6867917C17FF4EC6000106BF /* tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tests-Prefix.pch"; sourceTree = "<group>"; };
 		6867918317FF6533000106BF /* MHActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHActivityView.h; path = "Custom UI/Activities/MHActivityView.h"; sourceTree = "<group>"; };
 		6867918417FF6533000106BF /* MHActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHActivityView.m; path = "Custom UI/Activities/MHActivityView.m"; sourceTree = "<group>"; };
+		6880742E1843F2EC00901A0C /* MHDirectionsActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHDirectionsActivity.h; path = "Custom UI/Activities/MHDirectionsActivity.h"; sourceTree = "<group>"; };
+		6880742F1843F2EC00901A0C /* MHDirectionsActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHDirectionsActivity.m; path = "Custom UI/Activities/MHDirectionsActivity.m"; sourceTree = "<group>"; };
 		68818AFA17C7FFF800624887 /* MHAnswerSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswerSheet.h; path = Models/MHAnswerSheet.h; sourceTree = "<group>"; };
 		68818AFB17C7FFF800624887 /* MHAnswerSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerSheet.m; path = Models/MHAnswerSheet.m; sourceTree = "<group>"; };
 		68818AFE17C7FFF900624887 /* MHAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswer.h; path = Models/MHAnswer.h; sourceTree = "<group>"; };
@@ -803,6 +807,8 @@
 				682462E617D9429E00E1AFBB /* MHEmailActivity.m */,
 				682462E917D942B500E1AFBB /* MHTextActivity.h */,
 				682462EA17D942B500E1AFBB /* MHTextActivity.m */,
+				6880742E1843F2EC00901A0C /* MHDirectionsActivity.h */,
+				6880742F1843F2EC00901A0C /* MHDirectionsActivity.m */,
 			);
 			name = Activities;
 			sourceTree = "<group>";
@@ -1711,6 +1717,7 @@
 				682462D717D90E2B00E1AFBB /* MHPermissionsActivity.m in Sources */,
 				682462DB17D9252F00E1AFBB /* MHDeleteActivity.m in Sources */,
 				682462DF17D9318700E1AFBB /* MHActivity.m in Sources */,
+				688074301843F2EC00901A0C /* MHDirectionsActivity.m in Sources */,
 				682462E317D9425F00E1AFBB /* MHArchiveActivity.m in Sources */,
 				682462E717D9429E00E1AFBB /* MHEmailActivity.m in Sources */,
 				682462EB17D942B600E1AFBB /* MHTextActivity.m in Sources */,
@@ -1756,6 +1763,7 @@
 				68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */,
 				68C82E41180314FB00A8D5A0 /* MHInteraction+Helper.m in Sources */,
 				6842D8C4183BB54F00815BB9 /* DDXMLNode.m in Sources */,
+				688074311843F2EC00901A0C /* MHDirectionsActivity.m in Sources */,
 				68C82E43180314FB00A8D5A0 /* MHInteractionType+Helper.m in Sources */,
 				6846CE8E1834127C00DCB086 /* MHAPIChangeOrganizationTest.m in Sources */,
 				68C82E45180314FB00A8D5A0 /* MHOrganizationalPermission+Helper.m in Sources */,
