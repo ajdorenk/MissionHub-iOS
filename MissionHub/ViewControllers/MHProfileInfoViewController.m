@@ -338,41 +338,40 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 	
 	if (indexPath.row > 0) {
 	
-		id objectForCell = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+		id objectForCell				= [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+		NSArray *activityItems			= @[];
 		
 		if ([objectForCell isKindOfClass:[MHEmailAddress class]]) {
 			
-			if ([(MHEmailAddress *)objectForCell email].length > 0) {
-				
-				NSArray *toRecipents = [NSArray arrayWithObject:[(MHEmailAddress *)objectForCell email]];
-				
-				MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-				mc.mailComposeDelegate = self;
-				[mc setToRecipients:toRecipents];
-				
-				// Present mail view controller on screen
-				[self presentViewController:mc animated:YES completion:NULL];
+			MHEmailAddress *email		= (MHEmailAddress *)objectForCell;
 			
-			}
+			activityItems				= @[email];
 			
 		} else if ([objectForCell isKindOfClass:[MHPhoneNumber class]]) {
 			
-			NSString *phoneNumber = [(MHPhoneNumber *)objectForCell number];
-			NSString *cleanedString = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
-			NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+			MHPhoneNumber *phoneNumber	= (MHPhoneNumber *)objectForCell;
 			
-			[[UIApplication sharedApplication] openURL:telURL];
+			activityItems				= @[phoneNumber];
+			
+//			NSString *phoneNumber = [(MHPhoneNumber *)objectForCell number];
+//			NSString *cleanedString = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+//			NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+//			
+//			[[UIApplication sharedApplication] openURL:telURL];
 			
 		} else if ([objectForCell isKindOfClass:[MHAddress class]]) {
 			
-			NSString *address = [(MHAddress *)objectForCell displayString];
-			NSString *googleAddressString = [address stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-			NSString *urlEncodedString	= [[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", googleAddressString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-			NSURL *addressURL = [NSURL URLWithString:urlEncodedString];
+			MHAddress *address			= (MHAddress *)objectForCell;
 			
-			[[UIApplication sharedApplication] openURL:addressURL];
+			activityItems				= @[address];
+			
+		} else {
+			
+			activityItems				= @[self.person];
 			
 		}
+		
+		//TODO: Launch menu
 		
 	}
 	
