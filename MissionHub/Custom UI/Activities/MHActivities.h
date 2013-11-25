@@ -13,3 +13,4 @@
 #import "MHArchiveActivity.h"
 #import "MHEmailActivity.h"
 #import "MHTextActivity.h"
+#import "MHDirectionsActivity.h"

@@ -198,6 +198,8 @@
 		68805EE918107DC00026F7DA /* MHPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D53F231810787900D4574A /* MHPerson.m */; };
 		688074301843F2EC00901A0C /* MHDirectionsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6880742F1843F2EC00901A0C /* MHDirectionsActivity.m */; };
 		688074311843F2EC00901A0C /* MHDirectionsActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6880742F1843F2EC00901A0C /* MHDirectionsActivity.m */; };
+		688074331843FA6400901A0C /* MH_Mobile_ActionIcon_Directions_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 688074321843FA6400901A0C /* MH_Mobile_ActionIcon_Directions_48.png */; };
+		688074341843FA6400901A0C /* MH_Mobile_ActionIcon_Directions_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 688074321843FA6400901A0C /* MH_Mobile_ActionIcon_Directions_48.png */; };
 		68818AFC17C7FFF800624887 /* MHAnswerSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFB17C7FFF800624887 /* MHAnswerSheet.m */; };
 		68818B0017C7FFF900624887 /* MHAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818AFF17C7FFF900624887 /* MHAnswer.m */; };
 		68818B0417C800A300624887 /* MHAnswerSheet+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68818B0317C800A300624887 /* MHAnswerSheet+Helper.m */; };
@@ -573,6 +575,7 @@
 		6867918417FF6533000106BF /* MHActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHActivityView.m; path = "Custom UI/Activities/MHActivityView.m"; sourceTree = "<group>"; };
 		6880742E1843F2EC00901A0C /* MHDirectionsActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHDirectionsActivity.h; path = "Custom UI/Activities/MHDirectionsActivity.h"; sourceTree = "<group>"; };
 		6880742F1843F2EC00901A0C /* MHDirectionsActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHDirectionsActivity.m; path = "Custom UI/Activities/MHDirectionsActivity.m"; sourceTree = "<group>"; };
+		688074321843FA6400901A0C /* MH_Mobile_ActionIcon_Directions_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Directions_48.png; sourceTree = "<group>"; };
 		68818AFA17C7FFF800624887 /* MHAnswerSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswerSheet.h; path = Models/MHAnswerSheet.h; sourceTree = "<group>"; };
 		68818AFB17C7FFF800624887 /* MHAnswerSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAnswerSheet.m; path = Models/MHAnswerSheet.m; sourceTree = "<group>"; };
 		68818AFE17C7FFF900624887 /* MHAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAnswer.h; path = Models/MHAnswer.h; sourceTree = "<group>"; };
@@ -1110,6 +1113,7 @@
 				68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */,
 				68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */,
 				68839F441794E85A00B32934 /* MH_Mobile_ActionIcon_Archive_48.png */,
+				688074321843FA6400901A0C /* MH_Mobile_ActionIcon_Directions_48.png */,
 				68631FAE17E91E4500A24B3F /* MH_Mobile_Menu_Button_Gray_72.png */,
 				68631FAF17E91E4500A24B3F /* MH_Mobile_Menu_Button_Red_72.png */,
 				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
@@ -1426,6 +1430,7 @@
 				68134F951782748300227C2A /* MH_Mobile_PersonCell_Placeholder.png in Resources */,
 				68F8D6591829602400AF2E20 /* Panel4_iPhone.xib in Resources */,
 				AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png in Resources */,
+				688074331843FA6400901A0C /* MH_Mobile_ActionIcon_Directions_48.png in Resources */,
 				68F8D6621829609D00AF2E20 /* Panel3_iPad.xib in Resources */,
 				AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
 				AD75F7AA178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png in Resources */,
@@ -1515,6 +1520,7 @@
 				6846CECA1834388B00DCB086 /* MH_Mobile_Introduction_2~ipad.png in Resources */,
 				68095025181F0D0A00DB0018 /* config.plist in Resources */,
 				68EB9A1C1819615A009712EB /* MH_Mobile_Icon_AddContact_iOS7.png in Resources */,
+				688074341843FA6400901A0C /* MH_Mobile_ActionIcon_Directions_48.png in Resources */,
 				68F8D62D1828177800AF2E20 /* Panel1_iPhone.xib in Resources */,
 				6846CEBC1834388B00DCB086 /* MH_Mobile_Introduction_4_description~ipad.png in Resources */,
 				68F8D63318281B0F00AF2E20 /* Default-blur@2x.png in Resources */,

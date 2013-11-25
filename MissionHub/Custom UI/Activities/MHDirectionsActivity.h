@@ -8,6 +8,8 @@
 
 #import "MHActivity.h"
 
+extern NSString * const MHActivityTypeDirections;
+
 @interface MHDirectionsActivity : MHActivity
 
 @end
