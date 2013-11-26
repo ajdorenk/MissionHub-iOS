@@ -618,7 +618,8 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 			
 		} else if ([activityType isEqualToString:MHActivityTypeAssign] ||
 				   [activityType isEqualToString:MHActivityTypeLabel] ||
-				   [activityType isEqualToString:MHActivityTypePermissions]) {
+				   [activityType isEqualToString:MHActivityTypePermissions] ||
+				   [activityType isEqualToString:MHActivityTypeStatus]) {
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:MHProfileViewControllerNotificationPersonUpdated object:self];
 			[self refreshInfoForPerson:self.person onCompletion:nil];
