@@ -60,8 +60,9 @@
 	MHArchiveActivity *archiveActivity			= [[MHArchiveActivity alloc] init];
 	MHEmailActivity *emailActivity				= [[MHEmailActivity alloc] init];
 	MHTextActivity *textActivity				= [[MHTextActivity alloc] init];
+	MHCallActivity *callActivity				= [[MHCallActivity alloc] init];
 	
-	return @[ deleteActivity, archiveActivity, permissionsActivity, assignActivity, labelActivity, emailActivity, textActivity ];
+	return @[ deleteActivity, archiveActivity, permissionsActivity, assignActivity, labelActivity, emailActivity, textActivity, callActivity ];
 	
 }
 

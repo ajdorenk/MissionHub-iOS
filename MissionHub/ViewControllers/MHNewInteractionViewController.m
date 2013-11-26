@@ -672,12 +672,6 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		
 		__block NSString *visibilityString = @"";
 		
-//		if (self.visibilityArray.count > 0) {
-//			
-//			visibilityString	= self.visibilityArray[0][@"title"];
-//			
-//		}
-		
 		__weak __typeof(&*self)weakSelf = self;
 		[self.visibilityArray enumerateObjectsUsingBlock:^(NSDictionary *object, NSUInteger index, BOOL *stop) {
 			
