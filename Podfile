@@ -9,7 +9,7 @@ link_with "MissionHub"
 
 target :MissionHub do
 
-	pod 'Facebook-iOS-SDK', '3.5'
+	pod 'Facebook-iOS-SDK', '~> 3.9'
 	pod 'AFNetworking', '~> 1.3.1'
 	pod 'DWTagList', :git => 'https://github.com/CruGlobal/DWTagList.git'
 	pod 'ECSlidingViewController', '~> 1.0.1'
@@ -22,6 +22,7 @@ target :MissionHub do
 	pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.1'
 	#pod 'Airbrake-iOS', :git => 'https://github.com/CruGlobal/airbrake-ios.git'
 	pod 'MYBlurIntroductionView', :git => 'https://github.com/CruGlobal/MYBlurIntroductionView.git'
+	pod 'TransformerKit', '~> 0.3.0'
 
 	target :tests, :exclusive => true do
 		pod 'Kiwi/XCTest', '2.2.2'

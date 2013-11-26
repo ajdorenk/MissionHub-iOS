@@ -7,6 +7,7 @@
 //
 
 #import "MHPerson+Helper.h"
+#import "MHOrganizationalPermission+Helper.h"
 
 @implementation MHPerson (Helper)
 
@@ -174,7 +175,7 @@
 
 -(NSString *)followupStatus {
 	
-	return ( [self.permissionLevel followup_status] ? [self.permissionLevel followup_status] : @"");
+	return ( self.permissionLevel.statusForDisplay ? self.permissionLevel.statusForDisplay : @"");
 	
 }
 
