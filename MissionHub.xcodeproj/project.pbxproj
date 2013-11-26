@@ -238,6 +238,8 @@
 		68BE4636182ACF4800A9B245 /* WelcomePanel_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE4634182ACF4800A9B245 /* WelcomePanel_iPhone.xib */; };
 		68BE4638182ACF6500A9B245 /* WelcomePanel_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE4637182ACF6500A9B245 /* WelcomePanel_iPad.xib */; };
 		68BE4639182ACF6500A9B245 /* WelcomePanel_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE4637182ACF6500A9B245 /* WelcomePanel_iPad.xib */; };
+		68BEBEBF18455874004CB064 /* MHStatusActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BEBEBE18455874004CB064 /* MHStatusActivity.m */; };
+		68BEBEC1184558AE004CB064 /* MH_Mobile_ActionIcon_Status_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BEBEC0184558AE004CB064 /* MH_Mobile_ActionIcon_Status_48.png */; };
 		68C0689B176EB832007C79D6 /* MHModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0689A176EB832007C79D6 /* MHModel.m */; };
 		68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A71770EFBE007C79D6 /* MHStorage.m */; };
 		68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequestOperation.m */; };
@@ -302,9 +304,7 @@
 		68EB9A341819DEE7009712EB /* MHNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB9A321819DEE7009712EB /* MHNavigationBar.m */; };
 		68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC3A5E17CD186E00EE3717 /* MHInteractionType+Helper.m */; };
 		68F2FFB81840334300E3C6E9 /* MHCallActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F2FFB71840334300E3C6E9 /* MHCallActivity.m */; };
-		68F2FFB91840334300E3C6E9 /* MHCallActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F2FFB71840334300E3C6E9 /* MHCallActivity.m */; };
 		68F2FFBB1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F2FFBA1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png */; };
-		68F2FFBC1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F2FFBA1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png */; };
 		68F4CC4917D10846004D6574 /* MHAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F4CC4717D10846004D6574 /* MHAnswerCell.m */; };
 		68F8D6251828134400AF2E20 /* MHIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F8D6241828134400AF2E20 /* MHIntroductionPanel.m */; };
 		68F8D6261828134400AF2E20 /* MHIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F8D6241828134400AF2E20 /* MHIntroductionPanel.m */; };
@@ -629,6 +629,9 @@
 		68BE4631182ACE6A00A9B245 /* MHWelcomePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHWelcomePanel.m; path = "Custom UI/Introduction/MHWelcomePanel.m"; sourceTree = "<group>"; };
 		68BE4634182ACF4800A9B245 /* WelcomePanel_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomePanel_iPhone.xib; path = "Custom UI/Introduction/WelcomePanel_iPhone.xib"; sourceTree = "<group>"; };
 		68BE4637182ACF6500A9B245 /* WelcomePanel_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WelcomePanel_iPad.xib; path = "Custom UI/Introduction/WelcomePanel_iPad.xib"; sourceTree = "<group>"; };
+		68BEBEBD18455874004CB064 /* MHStatusActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHStatusActivity.h; path = "Custom UI/Activities/MHStatusActivity.h"; sourceTree = "<group>"; };
+		68BEBEBE18455874004CB064 /* MHStatusActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHStatusActivity.m; path = "Custom UI/Activities/MHStatusActivity.m"; sourceTree = "<group>"; };
+		68BEBEC0184558AE004CB064 /* MH_Mobile_ActionIcon_Status_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_ActionIcon_Status_48.png; sourceTree = "<group>"; };
 		68C06899176EB832007C79D6 /* MHModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHModel.h; path = Models/MHModel.h; sourceTree = "<group>"; };
 		68C0689A176EB832007C79D6 /* MHModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHModel.m; path = Models/MHModel.m; sourceTree = "<group>"; };
 		68C068A61770EFBE007C79D6 /* MHStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHStorage.h; path = Models/MHStorage.h; sourceTree = "<group>"; };
@@ -802,6 +805,8 @@
 				682462D217D90DDC00E1AFBB /* MHAssignActivity.m */,
 				682462D517D90E2B00E1AFBB /* MHPermissionsActivity.h */,
 				682462D617D90E2B00E1AFBB /* MHPermissionsActivity.m */,
+				68BEBEBD18455874004CB064 /* MHStatusActivity.h */,
+				68BEBEBE18455874004CB064 /* MHStatusActivity.m */,
 				682462D917D9252F00E1AFBB /* MHDeleteActivity.h */,
 				682462DA17D9252F00E1AFBB /* MHDeleteActivity.m */,
 				682462E117D9425E00E1AFBB /* MHArchiveActivity.h */,
@@ -1109,6 +1114,7 @@
 				68839F3E1794E85A00B32934 /* MH_Mobile_ActionIcon_Trash_48.png */,
 				68839F3F1794E85A00B32934 /* MH_Mobile_ActionIcon_Text_48.png */,
 				68839F401794E85A00B32934 /* MH_Mobile_ActionIcon_Permissions_48.png */,
+				68BEBEC0184558AE004CB064 /* MH_Mobile_ActionIcon_Status_48.png */,
 				68839F411794E85A00B32934 /* MH_Mobile_ActionIcon_Label_48.png */,
 				68839F421794E85A00B32934 /* MH_Mobile_ActionIcon_Email_48.png */,
 				68839F431794E85A00B32934 /* MH_Mobile_ActionIcon_Assign_48.png */,
@@ -1396,6 +1402,7 @@
 				6842D8C7183BB54F00815BB9 /* ABNotifier.bundle in Resources */,
 				683910931760FD3100E01B46 /* InfoPlist.strings in Resources */,
 				68F8D65F1829609000AF2E20 /* Panel2_iPad.xib in Resources */,
+				68BEBEC1184558AE004CB064 /* MH_Mobile_ActionIcon_Status_48.png in Resources */,
 				683938FD1832FAA900234BED /* MH_Mobile_Introduction_1_description.png in Resources */,
 				68BE4638182ACF6500A9B245 /* WelcomePanel_iPad.xib in Resources */,
 				6839109B1760FD3100E01B46 /* Default.png in Resources */,
@@ -1555,7 +1562,6 @@
 				6846CEC61834388B00DCB086 /* MH_Mobile_Introduction_1_description~ipad.png in Resources */,
 				6834AD7A1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape.png in Resources */,
 				6834AD7C1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png in Resources */,
-				68F2FFBC1840383A00E3C6E9 /* MH_Mobile_ActionIcon_Call_48.png in Resources */,
 				6867917917FF4EC6000106BF /* InfoPlist.strings in Resources */,
 				6834AD6E18357098006EBD3F /* MH_AppIcon_IOS_152.png in Resources */,
 				68F8D65D1829603300AF2E20 /* Panel5_iPhone.xib in Resources */,
@@ -1694,6 +1700,7 @@
 				6842D8BB183BB54F00815BB9 /* DDXMLElementAdditions.m in Sources */,
 				68145B9417910867008145EA /* MHSegmentedControl.m in Sources */,
 				68145B9817910984008145EA /* MHProfileMenuViewController.m in Sources */,
+				68BEBEBF18455874004CB064 /* MHStatusActivity.m in Sources */,
 				6855EDDD17948ECA00769B71 /* MHAddress+Helper.m in Sources */,
 				68839F551794FE3000B32934 /* MHLabel+Helper.m in Sources */,
 				68839F591795000500B32934 /* MHGenericCell.m in Sources */,
@@ -1744,7 +1751,6 @@
 				6865808318107DF8005A5532 /* MHPerson.m in Sources */,
 				68C82E741803197F00A8D5A0 /* NSDictionary+UrlEncodedString.m in Sources */,
 				68C82E761803197F00A8D5A0 /* NSSet+MHSearchForRemoteID.m in Sources */,
-				68F2FFB91840334300E3C6E9 /* MHCallActivity.m in Sources */,
 				68C82E781803197F00A8D5A0 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
 				68C82E21180314FA00A8D5A0 /* MHOrganization.m in Sources */,
 				68C82E23180314FA00A8D5A0 /* MHAddress.m in Sources */,
