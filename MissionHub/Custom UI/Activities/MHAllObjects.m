@@ -7,10 +7,14 @@
 //
 
 #import "MHAllObjects.h"
+#import "MHAPI.h"
 
 @interface MHAllObjects ()
 
 @property (nonatomic, strong) NSDate *lastSync;
+@property (nonatomic, assign) BOOL isDownloading;
+
+- (void)sync;
 
 @end
 
@@ -18,6 +22,7 @@
 
 @synthesize requestOptions	= _requestOptions;
 @synthesize lastSync		= _lastSync;
+@synthesize isDownloading	= _isDownloading;
 
 - (void)setRequestOptions:(MHRequestOptions *)requestOptions {
 	
@@ -29,6 +34,28 @@
 	_requestOptions.limit	= 0;
 	
 	self.lastSync			= nil;
+	
+	[self sync];
+	
+}
+
+- (void)sync {
+	
+	if (self.lastSync) {
+		
+		
+		
+	} else {
+		
+		
+		
+	}
+	
+}
+
+- (void)getPeopleListWithSuccessBlock:(void (^)(NSArray *peopleList))successBlock failBlock:(void (^)(NSError *error))failBlock {
+	
+	
 	
 }
 
