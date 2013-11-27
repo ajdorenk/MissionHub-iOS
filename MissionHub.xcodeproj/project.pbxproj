@@ -225,6 +225,8 @@
 		68A38F2417AB59400010CAC6 /* MH_Mobile_Checkbox_Checkmark_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A38F2117AB593F0010CAC6 /* MH_Mobile_Checkbox_Checkmark_24.png */; };
 		68A38F2717AB59DB0010CAC6 /* MH_Mobile_Icon_Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A38F2617AB59DA0010CAC6 /* MH_Mobile_Icon_Menu.png */; };
 		68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */; };
+		68A8A0A418465A6F002549F6 /* MHAllObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A8A0A318465A6F002549F6 /* MHAllObjects.m */; };
+		68A8A0A518465A6F002549F6 /* MHAllObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A8A0A318465A6F002549F6 /* MHAllObjects.m */; };
 		68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68ACD0A217DFB80B003630F0 /* MHToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ACD0A117DFB80A003630F0 /* MHToolbar.m */; };
 		68ACD0A617DFBF00003630F0 /* MHStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ACD0A517DFBF00003630F0 /* MHStyle.m */; };
@@ -611,6 +613,8 @@
 		68A38F2617AB59DA0010CAC6 /* MH_Mobile_Icon_Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_Menu.png; sourceTree = "<group>"; };
 		68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLoadingCell.h; path = "Custom UI/MHLoadingCell.h"; sourceTree = "<group>"; };
 		68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHLoadingCell.m; path = "Custom UI/MHLoadingCell.m"; sourceTree = "<group>"; };
+		68A8A0A218465A6F002549F6 /* MHAllObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAllObjects.h; path = "Custom UI/Activities/MHAllObjects.h"; sourceTree = "<group>"; };
+		68A8A0A318465A6F002549F6 /* MHAllObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAllObjects.m; path = "Custom UI/Activities/MHAllObjects.m"; sourceTree = "<group>"; };
 		68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncodedString.h"; sourceTree = "<group>"; };
 		68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncodedString.m"; sourceTree = "<group>"; };
 		68ACD0A017DFB80A003630F0 /* MHToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHToolbar.h; path = "Custom UI/MHToolbar.h"; sourceTree = "<group>"; };
@@ -817,6 +821,8 @@
 				682462EA17D942B500E1AFBB /* MHTextActivity.m */,
 				68F2FFB61840334300E3C6E9 /* MHCallActivity.h */,
 				68F2FFB71840334300E3C6E9 /* MHCallActivity.m */,
+				68A8A0A218465A6F002549F6 /* MHAllObjects.h */,
+				68A8A0A318465A6F002549F6 /* MHAllObjects.m */,
 			);
 			name = Activities;
 			sourceTree = "<group>";
@@ -1655,6 +1661,7 @@
 				AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */,
 				AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */,
 				68C0689B176EB832007C79D6 /* MHModel.m in Sources */,
+				68A8A0A418465A6F002549F6 /* MHAllObjects.m in Sources */,
 				68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */,
 				6867918517FF6533000106BF /* MHActivityView.m in Sources */,
 				6842D8B9183BB54F00815BB9 /* GCAlertView.m in Sources */,
@@ -1775,6 +1782,7 @@
 				68C82E3D180314FB00A8D5A0 /* MHOrganization+Helper.m in Sources */,
 				68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */,
 				68C82E41180314FB00A8D5A0 /* MHInteraction+Helper.m in Sources */,
+				68A8A0A518465A6F002549F6 /* MHAllObjects.m in Sources */,
 				6842D8C4183BB54F00815BB9 /* DDXMLNode.m in Sources */,
 				68C82E43180314FB00A8D5A0 /* MHInteractionType+Helper.m in Sources */,
 				6846CE8E1834127C00DCB086 /* MHAPIChangeOrganizationTest.m in Sources */,
