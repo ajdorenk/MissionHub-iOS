@@ -295,7 +295,7 @@ typedef enum {
 
 - (void)bulkChangeStatus:(NSString *)status forPeople:(NSArray *)people withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
 	
-	if ([MHOrganizationalPermission isValidStatus:status]) {
+	if (![MHOrganizationalPermission isValidStatus:status]) {
 		
 		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
 		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain

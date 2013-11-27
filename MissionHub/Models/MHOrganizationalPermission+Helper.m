@@ -7,6 +7,7 @@
 //
 
 #import "MHOrganizationalPermission+Helper.h"
+#import "TransformerKit.h"
 
 NSString * const MHOrganizationalPermissionStatusUncontacted		= @"uncontacted";
 NSString * const MHOrganizationalPermissionStatusAttemptedContact	= @"attempted_contact";
@@ -43,14 +44,16 @@ NSString * const MHOrganizationalPermissionStatusCompleted			= @"completed";
 + (NSString *)statusForDisplayFromStatus:(NSString *)status {
 	
 	//TODO: Convert to capitolized with spaces.
-	return status;
+	NSString *spacedString	= [status stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+	return [[NSValueTransformer valueTransformerForName:TTTCapitalizedStringTransformerName] transformedValue:spacedString];
 	
 }
 
 + (NSString *)statusFromStatusForDisplay:(NSString *)statusForDisplay {
 	
 	//TODO: convert status back to regular status (once convertion for readability actually happens).
-	return statusForDisplay;
+	NSString *lowerCase	= [[NSValueTransformer valueTransformerForName:TTTLowercaseStringTransformerName] transformedValue:statusForDisplay];
+	return [[NSValueTransformer valueTransformerForName:TTTSnakeCaseStringTransformerName] transformedValue:lowerCase];
 	
 }
 
