@@ -10,6 +10,7 @@
 #import "MHConfig.h"
 #import "MHRequestOperation.h"
 #import "MHPerson+Helper.h"
+#import "MHOrganizationalPermission+Helper.h"
 
 NSString *const MHAPIErrorDomain = @"com.missionhub.errorDomain.API";
 NSString *const MHAPIRequestNameMe = @"com.missionhub.API.requestName.me";
@@ -287,6 +288,38 @@ typedef enum {
 	}
 	
 	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForBulkPermissionLevelRequestWithNewPermissionLevel:permissionLevel forPeople:people];
+	
+	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
+	
+}
+
+- (void)bulkChangeStatus:(NSString *)status forPeople:(NSArray *)people withSuccessBlock:(void (^)(NSArray *result, MHRequestOptions *options))successBlock failBlock:(void (^)(NSError *error, MHRequestOptions *options))failBlock {
+	
+	if (![MHOrganizationalPermission isValidStatus:status]) {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"Invalid Status.", nil)}];
+		
+		failBlock(error, requestOptions);
+		return;
+		
+	}
+	
+	if (people.count <= 0) {
+		
+		MHRequestOptions *requestOptions = [[MHRequestOptions alloc] init];
+		NSError *error = [NSError errorWithDomain:MHAPIErrorDomain
+											 code:MHAPIErrorMissingDataInRequest
+										 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"No People to change Status for.", nil)}];
+		
+		failBlock(error, requestOptions);
+		return;
+		
+	}
+	
+	MHRequestOptions *requestOptions = [[[MHRequestOptions alloc] init] configureForBulkStatusRequestWithNewStatus:status forPeople:people];
 	
 	[self getResultWithOptions:requestOptions successBlock:successBlock failBlock:failBlock];
 	

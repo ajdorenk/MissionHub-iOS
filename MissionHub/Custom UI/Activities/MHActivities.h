@@ -14,3 +14,4 @@
 #import "MHEmailActivity.h"
 #import "MHTextActivity.h"
 #import "MHCallActivity.h"
+#import "MHStatusActivity.h"

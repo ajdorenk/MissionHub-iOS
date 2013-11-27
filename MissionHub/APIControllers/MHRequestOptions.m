@@ -593,6 +593,21 @@
 	return self;
 }
 
+- (instancetype)configureForBulkStatusRequestWithNewStatus:(NSString *)status forPeople:(NSArray *)people {
+	
+	NSString *idString				= [self idStringFromPeopleArray:people];
+	
+	[[self reset] addFilter:MHRequestOptionsFilterPeopleIds withValue:idString];
+	self.type						= MHRequestOptionsTypeBulk;
+	self.endpoint					= MHRequestOptionsEndpointOrganizationalPermissions;
+	
+	if (status.length > 0) {
+		[self addPostParam:@"followup_status" withValue:status];
+	}
+	
+	return self;
+}
+
 - (instancetype)configureForBulkAssignmentRequestWithLeader:(MHPerson *)person forPeople:(NSArray *)people {
 	
 	if (person) {

@@ -1165,7 +1165,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		[activityType isEqualToString:MHActivityTypeAssign] ||
 		[activityType isEqualToString:MHActivityTypeDelete] ||
 		[activityType isEqualToString:MHActivityTypeLabel] ||
-		[activityType isEqualToString:MHActivityTypePermissions]) {
+		[activityType isEqualToString:MHActivityTypePermissions] ||
+		[activityType isEqualToString:MHActivityTypeStatus]) {
 
 		[self refresh];
 		
