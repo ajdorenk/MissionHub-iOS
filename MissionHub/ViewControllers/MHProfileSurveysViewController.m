@@ -107,6 +107,8 @@
 			
 		}
 		
+		[self.surveyArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"updated_at" ascending:NO]]];
+		
 		[self.tableView reloadData];
 		
 	}
