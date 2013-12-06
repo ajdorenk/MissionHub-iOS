@@ -19,6 +19,7 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 
 @property (nonatomic, weak) id<MHSortHeaderDelegate>delegate;
 @property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong) UIImageView *checkmarkImageView;
 @property (nonatomic, strong) UIButton *allButton;
 @property (nonatomic, strong) UIButton *fieldButton;
 @property (nonatomic, strong) UIButton *sortButton;
@@ -55,19 +56,23 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
     if (header) {
         // Initialization code
 		
-		header.delegate			= delegate;
-		header.tableView			= tableView;
-		header.backgroundColor	= [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
+		header.delegate					= delegate;
+		header.tableView				= tableView;
+		header.backgroundColor			= [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
 		
-		header.allButton = [UIButton buttonWithType:UIButtonTypeCustom];
-		header.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
-		[header.allButton setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_SortButton_40.png"] forState:UIControlStateNormal];
+		header.allButton				= [UIButton buttonWithType:UIButtonTypeCustom];
+		header.allButton.frame			= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
 		header.allButton.titleLabel.textColor = [UIColor blackColor];
-		header.allButton.backgroundColor = [UIColor clearColor];
-		header.allButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+		//header.allButton.backgroundColor = [UIColor clearColor];
+		header.allButton.titleLabel.textAlignment = UITextAlignmentRight;
 		header.allButton.titleLabel.text = @"All";
-		[header.sortButton addTarget:header action:@selector(allButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+		[header.allButton addTarget:header action:@selector(allButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 		[header addSubview:header.allButton];
+		
+		header.checkmarkImageView		= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_48.png"]];
+		header.checkmarkImageView.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderHeight - 2 * MHSortHeaderMargin, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
+		header.checkmarkImageView.userInteractionEnabled	= NO;
+		[header addSubview:header.checkmarkImageView];
 		
 		header.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[header.sortButton setFrame:CGRectMake(CGRectGetWidth(header.frame) - MHSortHeaderSortButtonWidth - MHSortHeaderMargin,
@@ -106,7 +111,65 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 	
 }
 
+- (void)setCheckboxState:(MHSortHeaderCheckboxState)checkboxState {
+	
+	[self willChangeValueForKey:@"checkboxState"];
+	_checkboxState	= checkboxState;
+	[self didChangeValueForKey:@"checkboxState"];
+	
+	switch (checkboxState) {
+			
+		case MHSortHeaderCheckboxStateAll:
+			
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_48"];
+			
+			break;
+			
+		case MHSortHeaderCheckboxStatePartial:
+			
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_PartiallyChecked_48"];
+			
+			break;
+			
+		case MHSortHeaderCheckboxStateNone:
+			
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_48"];
+			
+			break;
+			
+		default:
+			break;
+			
+	}
+	
+}
+
 - (void)allButtonPressed:(id)sender {
+	
+	switch (self.checkboxState) {
+			
+		case MHSortHeaderCheckboxStateAll: {
+			
+			self.checkboxState	= MHSortHeaderCheckboxStateNone;
+			
+			break;
+			
+		} case MHSortHeaderCheckboxStatePartial: {
+			
+			self.checkboxState	= MHSortHeaderCheckboxStateAll;
+			
+			break;
+			
+		} case MHSortHeaderCheckboxStateNone: {
+			
+			self.checkboxState	= MHSortHeaderCheckboxStateAll;
+			
+			break;
+			
+		} default:
+			break;
+			
+	}
     
 	if ([self.delegate respondsToSelector:@selector(allButtonPressed)]) {
 		
