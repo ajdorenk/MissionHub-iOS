@@ -24,7 +24,7 @@ extern CGFloat const MHSortHeaderHeight;
 @protocol MHSortHeaderDelegate <NSObject>
 
 @optional
-//- (void)allButtonPressed;
+- (void)allButtonPressed;
 - (void)sortDirectionDidChangeTo:(MHRequestOptionsOrderDirections)direction;
 - (void)fieldButtonPressed;
 

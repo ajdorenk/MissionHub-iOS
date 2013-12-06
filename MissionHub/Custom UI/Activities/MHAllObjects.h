@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) MHRequestOptions *requestOptions;
 
+- (void)getPeopleListWithSuccessBlock:(void (^)(NSArray *peopleList))successBlock failBlock:(void (^)(NSError *error))failBlock;
+
 @end

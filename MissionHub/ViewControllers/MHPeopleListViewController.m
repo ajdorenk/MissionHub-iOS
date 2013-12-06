@@ -701,22 +701,10 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 }
 
 
-//TODO:Need to add functionality to check all contacts. Currently the function only changes the image of the checkbox in the secton header, though it should check all the contacts.
-- (IBAction)checkAllContacts:(UIButton*)button {
-    NSLog(@"Check all");
-    button.selected = !button.selected;
-    
-    if (button.selected) {
-        UIImage *checkedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_24.png"];
-        [button setFrame:CGRectMake(13.0, 5.0, 18, 19)];
-        [button setBackgroundImage:checkedBox forState:UIControlStateNormal];
-    }
-    else{
-         UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
-        [button setFrame:CGRectMake(13.0, 9.0, 15, 15)];
-        [button setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
-
-    }
+- (void)allButtonPressed {
+	
+	//TODO: Do something now that the all button has been pushed
+	
 }
 
 -(void)fieldButtonPressed {

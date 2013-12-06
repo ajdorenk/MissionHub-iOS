@@ -11,7 +11,7 @@
 CGFloat const MHSortHeaderMargin			= 5.0f;
 CGFloat const MHSortHeaderSpacing			= 10.0f;
 CGFloat const MHSortHeaderHeight			= 32.0f;
-//CGFloat const MHSortHeaderAllButtonWidth	= 20.0f;
+CGFloat const MHSortHeaderAllButtonWidth	= 60.0f;
 CGFloat const MHSortHeaderFieldButtonWidth	= 150.0f;
 CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 
@@ -19,20 +19,20 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 
 @property (nonatomic, weak) id<MHSortHeaderDelegate>delegate;
 @property (nonatomic, weak) UITableView *tableView;
-//@property (nonatomic, strong) UIButton *allButton;
+@property (nonatomic, strong) UIButton *allButton;
 @property (nonatomic, strong) UIButton *fieldButton;
 @property (nonatomic, strong) UIButton *sortButton;
 
 - (void)sortOnOff:(UIButton *)button;
 - (void)chooseSortField:(id)sender;
-//- (void)allButtonPressed:(id)sender;
+- (void)allButtonPressed:(id)sender;
 
 @end
 
 @implementation MHSortHeader
 
 @synthesize tableView		= _tableView;
-//@synthesize allButton		= _allButton;
+@synthesize allButton		= _allButton;
 @synthesize fieldButton		= _fieldButton;
 @synthesize sortButton		= _sortButton;
 
@@ -59,14 +59,15 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 		header.tableView			= tableView;
 		header.backgroundColor	= [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
 		
-//		header.allButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//		header.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
-//		header.allButton.titleLabel.textColor = [UIColor whiteColor];
-//		header.allButton.backgroundColor = [UIColor clearColor];
-//		header.allButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-//		header.allButton.titleLabel.text = @"All";
-//		[header.sortButton addTarget:header action:@selector(allButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-//		[header addSubview:header.allButton];
+		header.allButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		header.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
+		[header.allButton setBackgroundImage:[UIImage imageNamed:@"MH_Mobile_SortButton_40.png"] forState:UIControlStateNormal];
+		header.allButton.titleLabel.textColor = [UIColor blackColor];
+		header.allButton.backgroundColor = [UIColor clearColor];
+		header.allButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+		header.allButton.titleLabel.text = @"All";
+		[header.sortButton addTarget:header action:@selector(allButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+		[header addSubview:header.allButton];
 		
 		header.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[header.sortButton setFrame:CGRectMake(CGRectGetWidth(header.frame) - MHSortHeaderSortButtonWidth - MHSortHeaderMargin,
@@ -105,15 +106,15 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 	
 }
 
-//- (void)allButtonPressed:(id)sender {
-//    
-//	if ([self.delegate respondsToSelector:@selector(allButtonPressed)]) {
-//		
-//		[self.delegate allButtonPressed];
-//		
-//	}
-//	
-//}
+- (void)allButtonPressed:(id)sender {
+    
+	if ([self.delegate respondsToSelector:@selector(allButtonPressed)]) {
+		
+		[self.delegate allButtonPressed];
+		
+	}
+	
+}
 
 - (void)chooseSortField:(id)sender {
     
@@ -174,7 +175,7 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 												   MHSortHeaderHeight - 2 * MHSortHeaderMargin)];
 	
 	
-	//self.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
+	self.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
 	
 }
 
