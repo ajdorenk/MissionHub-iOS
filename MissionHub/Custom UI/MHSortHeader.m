@@ -74,6 +74,8 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 		header.checkmarkImageView.userInteractionEnabled	= NO;
 		[header addSubview:header.checkmarkImageView];
 		
+		header.checkboxState			= MHSortHeaderCheckboxStateNone;
+		
 		header.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[header.sortButton setFrame:CGRectMake(CGRectGetWidth(header.frame) - MHSortHeaderSortButtonWidth - MHSortHeaderMargin,
 													  MHSortHeaderMargin,
