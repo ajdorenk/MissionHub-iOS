@@ -32,7 +32,7 @@ extern CGFloat const MHSortHeaderHeight;
 @protocol MHSortHeaderDelegate <NSObject>
 
 @optional
-- (void)allButtonPressed;
+- (void)allButtonPressedWithNewState:(MHSortHeaderCheckboxState)state;
 - (void)sortDirectionDidChangeTo:(MHRequestOptionsOrderDirections)direction;
 - (void)fieldButtonPressed;
 

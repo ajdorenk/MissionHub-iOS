@@ -173,9 +173,9 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 			
 	}
     
-	if ([self.delegate respondsToSelector:@selector(allButtonPressed)]) {
+	if ([self.delegate respondsToSelector:@selector(allButtonPressedWithNewState:)]) {
 		
-		[self.delegate allButtonPressed];
+		[self.delegate allButtonPressedWithNewState:self.checkboxState];
 		
 	}
 	

@@ -15,7 +15,7 @@
 #import "MHToolbar.h"
 #import "UIImageView+AFNetworking.h"
 #import "MHGoogleAnalyticsTracker.h"
-
+#import "MHAllObjects.h"
 
 CGFloat MHPeopleListViewControllerRowHeight = 61.0;
 
@@ -53,6 +53,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 @property (nonatomic, assign) MHPersonSortFields						secondaryFieldName;
 @property (nonatomic, assign) MHRequestOptionsOrderFields				sortField;
 @property (nonatomic, strong) MHSortHeader								*header;
+@property (nonatomic, assign) BOOL										userHasCheckedSelectAll;
 @property (nonatomic, strong, readonly) MHProfileViewController			*profileViewController;
 @property (nonatomic, strong, readonly) MHGenericListViewController		*fieldSelectorViewController;
 @property (nonatomic, strong, readonly) MHNewInteractionViewController	*createInteractionViewController;
@@ -97,6 +98,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 @synthesize secondaryFieldName					= _secondaryFieldName;
 @synthesize sortField							= _sortField;
 @synthesize header								= _header;
+@synthesize userHasCheckedSelectAll				= _userHasCheckedSelectAll;
 @synthesize profileViewController				= _profileViewController;
 @synthesize fieldSelectorViewController			= _fieldSelectorViewController;
 @synthesize createInteractionViewController		= _createInteractionViewController;
@@ -701,9 +703,28 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 }
 
 
-- (void)allButtonPressed {
+- (void)allButtonPressedWithNewState:(MHSortHeaderCheckboxState)state {
 	
-	//TODO: Do something now that the all button has been pushed
+	[self.selectedPeople removeAllObjects];
+	
+	switch (state) {
+		case MHSortHeaderCheckboxStateAll:
+		case MHSortHeaderCheckboxStatePartial:
+			
+			self.userHasCheckedSelectAll	= YES;
+			
+			break;
+		case MHSortHeaderCheckboxStateNone:
+			
+			self.userHasCheckedSelectAll	= NO;
+			
+			break;
+			
+		default:
+			break;
+	}
+	
+	[self.tableView reloadData];
 	
 }
 
@@ -744,7 +765,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		
 	}];
 	
-	return selected;
+	//if a person is in the selectedPeople list after the user has checked Select All that means the user has deselected them and we should invert the result
+	return ( self.userHasCheckedSelectAll ? !selected : selected );
 	
 }
 
@@ -847,9 +869,9 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 			MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		
 			// Configure the cell...
-				if (cell == nil) {
-					cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-				}
+			if (cell == nil) {
+				cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+			}
 			
 			MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
 				//Display person in the table cell
@@ -1076,11 +1098,30 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	if (person) {
 		
 		[self.selectedPeople addObject:person];
-		self.activityViewController.activityItems	= self.selectedPeople;
+		
+		if (self.userHasCheckedSelectAll) {
+			
+			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
+			
+		} else {
+		
+			self.activityViewController.activityItems	= self.selectedPeople;
+			
+		}
 		
 	}
 	
 	if ([self.selectedPeople count] == 1) {
+		
+		if (self.userHasCheckedSelectAll) {
+			
+			self.header.checkboxState	= MHSortHeaderCheckboxStatePartial;
+			
+		} else {
+			
+			self.header.checkboxState	= MHSortHeaderCheckboxStateNone;
+			
+		}
 		
 		//launch activity view controller
 		[self.activityViewController presentFromRootViewController];
@@ -1099,11 +1140,30 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	if (person) {
 		
 		[self.selectedPeople removeObject:person];
-		self.activityViewController.activityItems	= self.selectedPeople;
+		
+		if (self.userHasCheckedSelectAll) {
+			
+			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
+			
+		} else {
+			
+			self.activityViewController.activityItems	= self.selectedPeople;
+			
+		}
 		
 	}
 	
 	if ([self.selectedPeople count] == 0) {
+		
+		if (self.userHasCheckedSelectAll) {
+			
+			self.header.checkboxState	= MHSortHeaderCheckboxStateAll;
+			
+		} else {
+			
+			self.header.checkboxState	= MHSortHeaderCheckboxStateNone;
+			
+		}
 		
 		//remove activity view controller
 		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];

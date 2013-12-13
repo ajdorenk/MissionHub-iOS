@@ -11,8 +11,7 @@
 
 @interface MHAllObjects : NSObject
 
-@property (nonatomic, strong) MHRequestOptions *requestOptions;
-
+- (instancetype)initWithRequestOptions:(MHRequestOptions *)requestOptions andDeselectedPeople:(NSArray *)deselectedPeople;
 - (void)getPeopleListWithSuccessBlock:(void (^)(NSArray *peopleList))successBlock failBlock:(void (^)(NSError *error))failBlock;
 
 @end
