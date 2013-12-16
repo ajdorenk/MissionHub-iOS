@@ -30,6 +30,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListChooseSecondaryFieldButtonTap
 NSString * const MHGoogleAnalyticsTrackerPeopleListSortButtonTap					= @"sort";
 NSString * const MHGoogleAnalyticsTrackerPeopleListCheckboxSelectedButtonTap		= @"person_selected";
 NSString * const MHGoogleAnalyticsTrackerPeopleListCheckboxDeselectedButtonTap		= @"person_deselected";
+NSString * const MHGoogleAnalyticsTrackerPeopleListSelectAllButtonTap				= @"all_people_selected";
 NSString * const MHGoogleAnalyticsTrackerPeopleListPersonCellTap					= @"person";
 NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load";
 
@@ -709,18 +710,35 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	switch (state) {
 		case MHSortHeaderCheckboxStateAll:
-		case MHSortHeaderCheckboxStatePartial:
+		case MHSortHeaderCheckboxStatePartial: {
 			
 			self.userHasCheckedSelectAll	= YES;
 			
+			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
+			[self.activityViewController presentFromRootViewController];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
+																	  action:MHGoogleAnalyticsActionTap
+																	   label:MHGoogleAnalyticsTrackerPeopleListSelectAllButtonTap
+																	   value:@1];
+			
 			break;
-		case MHSortHeaderCheckboxStateNone:
+			
+		} case MHSortHeaderCheckboxStateNone: {
 			
 			self.userHasCheckedSelectAll	= NO;
 			
+			self.activityViewController.activityItems	= self.selectedPeople;
+			[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
+																	  action:MHGoogleAnalyticsActionTap
+																	   label:MHGoogleAnalyticsTrackerPeopleListSelectAllButtonTap
+																	   value:@0];
+			
 			break;
 			
-		default:
+		} default:
 			break;
 	}
 	

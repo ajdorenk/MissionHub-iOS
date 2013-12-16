@@ -13,6 +13,7 @@
 #import "MHOrganizationalLabel+Helper.h"
 #import "MHLabel+Helper.h"
 #import "SIAlertView.h"
+#import "MHAllObjects.h"
 
 NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 
@@ -23,11 +24,13 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 @property (nonatomic, strong) NSMutableArray *labelsWithAllState;
 @property (nonatomic, strong) NSMutableArray *labelsWithSomeState;
 @property (nonatomic, strong) NSMutableArray *labelsWithNoneState;
-
+@property (nonatomic, strong, readonly) MHGenericListViewController *labelViewController;
 
 @end
 
 @implementation MHLabelActivity
+
+@synthesize labelViewController	= _labelViewController;
 
 - (id)init {
 	
@@ -60,7 +63,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	__block BOOL hasPeople = NO;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		if ([object isKindOfClass:[MHPerson class]]) {
+		if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHAllObjects class]]) {
 			
 			hasPeople	= YES;
 			*stop		= YES;
@@ -112,6 +115,12 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 				}
 				
 			}];
+			
+		} else if ([object isKindOfClass:[MHAllObjects class]]) {
+			
+			[weakSelf.people removeAllObjects];
+			[weakSelf.people addObject:object];
+			*stop	= YES;
 			
 		}
 		
@@ -175,25 +184,159 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 
 - (void)performActivity {
 	
-	MHGenericListViewController *permissionLevelList	= [self.activityViewController.presentingController.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+	if (self.people.count) {
+		
+		if ([self.people[0] isKindOfClass:[MHAllObjects class]]) {
+			
+			MHAllObjects *allPeople	= self.people[0];
+			
+			__weak typeof(self)weakSelf = self;
+			[allPeople getPeopleListWithSuccessBlock:^(NSArray *peopleList) {
+				
+				[weakSelf.people removeAllObjects];
+				[weakSelf.people addObjectsFromArray:peopleList];
+				
+				[weakSelf.people enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
+						
+					[person.labels enumerateObjectsUsingBlock:^(MHOrganizationalLabel *organizationalLabel, BOOL *stop) {
+						
+						NSMutableDictionary *labelState	= weakSelf.labelStates[organizationalLabel.label_id];
+						
+						if (labelState) {
+							
+							NSMutableArray *peopleWithLabel		= labelState[@"people"];
+							
+							[peopleWithLabel addObject:person];
+							
+						} else {
+							
+							NSMutableArray *peopleWithLabel		= [NSMutableArray arrayWithObject:person];
+							
+							labelState	= [NSMutableDictionary dictionaryWithDictionary:@{@"people": peopleWithLabel}];
+							weakSelf.labelStates[organizationalLabel.label_id]		= labelState;
+							
+						}
+						
+					}];
+					
+				}];
+				
+				//run through all the labels in the organization
+				[[MHAPI sharedInstance].currentOrganization.labels enumerateObjectsUsingBlock:^(MHLabel *label, BOOL *stop) {
+					
+					NSMutableDictionary *labelState	= weakSelf.labelStates[label.remoteID];
+					
+					if (labelState) {
+						
+						NSMutableArray *peopleWithLabel		= labelState[@"people"];
+						
+						if (peopleWithLabel.count == weakSelf.people.count) {
+							
+							labelState[@"beforeState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedAll];
+							labelState[@"afterState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedAll];
+							
+							[weakSelf.labelsWithAllState addObject:label];
+							
+						} else if (peopleWithLabel.count == 0) {
+							
+							labelState[@"beforeState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone];
+							labelState[@"afterState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone];
+							
+							[weakSelf.labelsWithNoneState addObject:label];
+							
+						} else {
+							
+							labelState[@"beforeState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedSome];
+							labelState[@"afterState"]	= [NSNumber numberWithInteger:MHGenericListObjectStateSelectedSome];
+							
+							[weakSelf.labelsWithSomeState addObject:label];
+							
+						}
+						
+						labelState[@"label"] = label;
+						
+						
+					} else {
+						
+						NSMutableArray *peopleWithLabel		= [NSMutableArray array];
+						
+						labelState	= [NSMutableDictionary dictionaryWithDictionary:@{
+																					  @"label":		label,
+																					  @"people":		peopleWithLabel,
+																					  @"beforeState": [NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone],
+																					  @"afterState":	[NSNumber numberWithInteger:MHGenericListObjectStateSelectedNone]
+																					  }];
+						
+						weakSelf.labelStates[label.remoteID]	= labelState;
+						
+						[weakSelf.labelsWithNoneState addObject:label];
+						
+					}
+					
+				}];
+				
+				NSArray *sortedLabelArray				= [MHAPI sharedInstance].currentOrganization.labels.allObjects;
+				sortedLabelArray						= [sortedLabelArray sortedArrayUsingDescriptors:@[
+																										  [NSSortDescriptor sortDescriptorWithKey:@"name"
+																																		ascending:YES
+																																		 selector:@selector(caseInsensitiveCompare:)]
+																										  ]
+														   ];
+				[self.labelViewController setDataArray:sortedLabelArray];
+				[self.labelViewController setObjectsWithStateAllState:self.labelsWithAllState someState:self.labelsWithSomeState];
+				
+				[self.activityViewController.presentingController presentViewController:self.labelViewController animated:YES completion:nil];
+				
+			} failBlock:^(NSError *error) {
+				
+				NSString *message				= [NSString stringWithFormat:@"We can't update labels for this list of people because we couldn't retrieve it. If the problem persists please contact support@mission.com"];
+				NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
+																 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
+				
+				[MHErrorHandler presentError:presentationError];
+				
+				[weakSelf activityDidFinish:NO];
+				
+			}];
+			
+		} else {
+			
+			NSArray *sortedLabelArray				= [MHAPI sharedInstance].currentOrganization.labels.allObjects;
+			sortedLabelArray						= [sortedLabelArray sortedArrayUsingDescriptors:@[
+																									  [NSSortDescriptor sortDescriptorWithKey:@"name"
+																																	ascending:YES
+																																	 selector:@selector(caseInsensitiveCompare:)]
+																									  ]
+													   ];
+			[self.labelViewController setDataArray:sortedLabelArray];
+			[self.labelViewController setObjectsWithStateAllState:self.labelsWithAllState someState:self.labelsWithSomeState];
+			
+			[self.activityViewController.presentingController presentViewController:self.labelViewController animated:YES completion:nil];
+			
+		}
+		
+	}
 	
-	permissionLevelList.selectionDelegate	= self;
-	permissionLevelList.multipleSelection	= YES;
-	permissionLevelList.showHeaders			= NO;
-	permissionLevelList.showSuggestions		= NO;
-	permissionLevelList.showApplyButton		= YES;
-	permissionLevelList.listTitle			= @"Label(s)";
-	NSArray *sortedLabelArray				= [MHAPI sharedInstance].currentOrganization.labels.allObjects;
-	sortedLabelArray						= [sortedLabelArray sortedArrayUsingDescriptors:@[
-																							  [NSSortDescriptor sortDescriptorWithKey:@"name"
-																															ascending:YES
-																															 selector:@selector(caseInsensitiveCompare:)]
-																							  ]
-											   ];
-	[permissionLevelList setDataArray:sortedLabelArray];
-	[permissionLevelList setObjectsWithStateAllState:self.labelsWithAllState someState:self.labelsWithSomeState];
+}
+
+- (MHGenericListViewController *)labelViewController {
 	
-	[self.activityViewController.presentingController presentViewController:permissionLevelList animated:YES completion:nil];
+	if (!_labelViewController) {
+	
+		[self willChangeValueForKey:@"labelViewController"];
+		_labelViewController	= [self.activityViewController.presentingController.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		[self didChangeValueForKey:@"labelViewController"];
+			
+		_labelViewController.selectionDelegate	= self;
+		_labelViewController.multipleSelection	= YES;
+		_labelViewController.showHeaders		= NO;
+		_labelViewController.showSuggestions	= NO;
+		_labelViewController.showApplyButton	= YES;
+		_labelViewController.listTitle			= @"Label(s)";
+		
+	}
+	
+	return _labelViewController;
 	
 }
 
