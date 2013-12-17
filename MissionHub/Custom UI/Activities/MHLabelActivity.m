@@ -189,8 +189,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 		
 		if ([self.people[0] isKindOfClass:[MHAllObjects class]]) {
 			
-			__block DejalActivityView *loadingViewController	= [DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."];
-			loadingViewController.showNetworkActivityIndicator	= YES;
+			[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
 			
 			MHAllObjects *allPeople	= self.people[0];
 			
