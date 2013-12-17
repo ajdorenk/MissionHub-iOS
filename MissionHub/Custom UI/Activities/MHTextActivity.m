@@ -11,6 +11,7 @@
 #import "MHPerson+Helper.h"
 #import "MHPhoneNumber.h"
 #import "MHErrorHandler.h"
+#import "MHAllObjects.h"
 
 NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 
@@ -52,7 +53,7 @@ NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 		__block BOOL hasPeopleOrPhoneNumber = NO;
 		[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 			
-			if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHPhoneNumber class]]) {
+			if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHPhoneNumber class]] || [object isKindOfClass:[MHAllObjects class]]) {
 				
 				hasPeopleOrPhoneNumber	= YES;
 				*stop					= YES;

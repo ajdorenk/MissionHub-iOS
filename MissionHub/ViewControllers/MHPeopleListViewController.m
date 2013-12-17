@@ -64,6 +64,9 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 @property (nonatomic, strong, readonly) MHActivityViewController		*activityViewController;
 
 - (BOOL)isSelected:(MHPerson *)person;
+- (BOOL)everyoneIsSelected;
+- (BOOL)noPeopleAreSelected;
+- (BOOL)somePeopleAreSelected;
 
 - (void)presentCreatePersonViewControllerInPopoverFromSender:(id)sender withPersonObject:(MHPerson *)person;
 - (void)presentCreateInteractionViewControllerInPopoverFromSender:(id)sender withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople;
@@ -715,7 +718,10 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 			self.userHasCheckedSelectAll	= YES;
 			
 			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
-			[self.activityViewController presentFromRootViewController];
+			
+			if (!self.activityViewController.view.superview) {
+				[self.activityViewController presentFromRootViewController];
+			}
 			
 			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
 																	  action:MHGoogleAnalyticsActionTap
@@ -785,6 +791,42 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	//if a person is in the selectedPeople list after the user has checked Select All that means the user has deselected them and we should invert the result
 	return ( self.userHasCheckedSelectAll ? !selected : selected );
+	
+}
+
+- (BOOL)everyoneIsSelected {
+	
+	if ( (self.userHasCheckedSelectAll && self.selectedPeople.count == 0) ||													//if select all button is used and non are deselected
+		 (!self.userHasCheckedSelectAll && self.selectedPeople.count == self.peopleArray.count && self.hasLoadedAllPages) ) {	//if select all button is not used and all are selected
+		
+		return YES;
+		
+	} else {
+		
+		return NO;
+		
+	}
+	
+}
+
+- (BOOL)noPeopleAreSelected {
+	
+	if ( (self.userHasCheckedSelectAll && self.selectedPeople.count == self.peopleArray.count && self.hasLoadedAllPages) ||		//if select all button is used and all are deselected
+		(!self.userHasCheckedSelectAll && self.selectedPeople.count == 0) ) {													//if select all button is not used and no one is selected
+		return YES;
+	} else {
+		return NO;
+	}
+	
+}
+
+- (BOOL)somePeopleAreSelected {
+	
+	if (self.everyoneIsSelected || self.noPeopleAreSelected) {
+		return NO;
+	} else {
+		return YES;
+	}
 	
 }
 
@@ -1115,34 +1157,40 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	if (person) {
 		
-		[self.selectedPeople addObject:person];
-		
 		if (self.userHasCheckedSelectAll) {
 			
+			[self.selectedPeople removeObject:person];
 			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
 			
 		} else {
-		
+			
+			[self.selectedPeople addObject:person];
 			self.activityViewController.activityItems	= self.selectedPeople;
 			
 		}
 		
 	}
 	
-	if ([self.selectedPeople count] == 1) {
+	if ( self.everyoneIsSelected ) {
 		
-		if (self.userHasCheckedSelectAll) {
-			
-			self.header.checkboxState	= MHSortHeaderCheckboxStatePartial;
-			
-		} else {
-			
-			self.header.checkboxState	= MHSortHeaderCheckboxStateNone;
-			
-		}
+		self.header.checkboxState	= MHSortHeaderCheckboxStateAll;
+		
+	} else if ( self.noPeopleAreSelected ) {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStateNone;
+		
+	} else {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStatePartial;
+		
+	}
+	
+	if ( !self.noPeopleAreSelected ) {
 		
 		//launch activity view controller
-		[self.activityViewController presentFromRootViewController];
+		if (!self.activityViewController.view.superview) {
+			[self.activityViewController presentFromRootViewController];
+		}
 		
 	}
 	
@@ -1157,31 +1205,35 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	if (person) {
 		
-		[self.selectedPeople removeObject:person];
-		
 		if (self.userHasCheckedSelectAll) {
 			
+			[self.selectedPeople addObject:person];
 			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
 			
 		} else {
 			
+			[self.selectedPeople removeObject:person];
 			self.activityViewController.activityItems	= self.selectedPeople;
 			
 		}
 		
 	}
 	
-	if ([self.selectedPeople count] == 0) {
+	if ( self.everyoneIsSelected ) {
 		
-		if (self.userHasCheckedSelectAll) {
-			
-			self.header.checkboxState	= MHSortHeaderCheckboxStateAll;
-			
-		} else {
-			
-			self.header.checkboxState	= MHSortHeaderCheckboxStateNone;
-			
-		}
+		self.header.checkboxState	= MHSortHeaderCheckboxStateAll;
+		
+	} else if ( self.noPeopleAreSelected ) {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStateNone;
+		
+	} else {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStatePartial;
+		
+	}
+	
+	if ( self.noPeopleAreSelected ) {
 		
 		//remove activity view controller
 		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];

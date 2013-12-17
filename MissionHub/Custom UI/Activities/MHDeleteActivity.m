@@ -12,6 +12,7 @@
 #import "MHErrorHandler.h"
 #import "MHPerson+Helper.h"
 #import "SIAlertView.h"
+#import "MHAllObjects.h"
 
 NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete";
 
@@ -51,7 +52,7 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 	__block BOOL hasPeople = NO;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		if ([object isKindOfClass:[MHPerson class]]) {
+		if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHAllObjects class]]) {
 			
 			hasPeople	= YES;
 			*stop		= YES;

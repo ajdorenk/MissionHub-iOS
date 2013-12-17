@@ -12,6 +12,7 @@
 #import "MHOrganizationalPermission+Helper.h"
 #import "MHPermissionLevel+Helper.h"
 #import "SIAlertView.h"
+#import "MHAllObjects.h"
 
 NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status";
 
@@ -51,7 +52,7 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 	__block BOOL hasPeople = NO;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		if ([object isKindOfClass:[MHPerson class]]) {
+		if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHAllObjects class]]) {
 			
 			hasPeople	= YES;
 			*stop		= YES;

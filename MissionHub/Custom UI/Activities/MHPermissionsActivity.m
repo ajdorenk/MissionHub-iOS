@@ -12,6 +12,7 @@
 #import "MHPermissionLevel+Helper.h"
 #import "SIAlertView.h"
 #import "NSSet+MHSearchForRemoteID.h"
+#import "MHAllObjects.h"
 
 NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.permissions";
 
@@ -51,7 +52,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 	__block BOOL hasPeople = NO;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		if ([object isKindOfClass:[MHPerson class]]) {
+		if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHAllObjects class]]) {
 			
 			hasPeople	= YES;
 			*stop		= YES;

@@ -11,6 +11,7 @@
 #import "MHAPI.h"
 #import "MHPerson+Helper.h"
 #import "SIAlertView.h"
+#import "MHAllObjects.h"
 
 NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign";
 
@@ -50,7 +51,7 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 	__block BOOL hasPeople = NO;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		if ([object isKindOfClass:[MHPerson class]]) {
+		if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHAllObjects class]]) {
 			
 			hasPeople	= YES;
 			*stop		= YES;

@@ -11,6 +11,7 @@
 #import "MHPerson+Helper.h"
 #import "MHEmailAddress.h"
 #import "MHErrorHandler.h"
+#import "MHAllObjects.h"
 
 NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 
@@ -53,7 +54,7 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 		__block BOOL hasPeopleOrEmail = NO;
 		[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 			
-			if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHEmailAddress class]]) {
+			if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHEmailAddress class]] || [object isKindOfClass:[MHAllObjects class]]) {
 				
 				hasPeopleOrEmail	= YES;
 				*stop				= YES;
