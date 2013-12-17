@@ -501,6 +501,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	self.hasLoadedAllPages		= NO;
 	self.refreshIsLoading		= YES;
 	self.selectedPeople			= [NSMutableArray array];
+	self.userHasCheckedSelectAll	= NO;
+	self.header.checkboxState		= MHSortHeaderCheckboxStateNone;
 	[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
 	[self.tableView reloadData];
 	
@@ -577,8 +579,11 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		
 	} else {
 		
-		self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
-		self.hasLoadedAllPages = ( [dataArray count] < options.limit ? YES : NO );
+		self.peopleArray				= [NSMutableArray arrayWithArray:dataArray];
+		self.hasLoadedAllPages			= ( [dataArray count] < options.limit ? YES : NO );
+		self.selectedPeople				= [NSMutableArray array];
+		self.userHasCheckedSelectAll	= NO;
+		self.header.checkboxState		= MHSortHeaderCheckboxStateNone;
 		
 	}
 	
@@ -778,7 +783,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 }
 
--(BOOL)isSelected:(MHPerson *)person {
+- (BOOL)isSelected:(MHPerson *)person {
 	
 	__block BOOL selected = NO;
 	
@@ -1276,6 +1281,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		//remove activity view controller
 		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
 		[self.selectedPeople removeAllObjects];
+		self.userHasCheckedSelectAll	= NO;
+		self.header.checkboxState		= MHSortHeaderCheckboxStateNone;
 		
 	}
 	
