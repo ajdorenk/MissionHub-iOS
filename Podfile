@@ -23,6 +23,7 @@ target :MissionHub do
 	#pod 'Airbrake-iOS', :git => 'https://github.com/CruGlobal/airbrake-ios.git'
 	pod 'MYBlurIntroductionView', :git => 'https://github.com/CruGlobal/MYBlurIntroductionView.git'
 	pod 'TransformerKit', '~> 0.3.0'
+	pod 'DejalActivityView', '~> 1.1'
 
 	target :tests, :exclusive => true do
 		pod 'Kiwi/XCTest', '2.2.2'

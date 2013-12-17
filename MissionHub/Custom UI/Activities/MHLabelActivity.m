@@ -14,6 +14,7 @@
 #import "MHLabel+Helper.h"
 #import "SIAlertView.h"
 #import "MHAllObjects.h"
+#import "DejalActivityView.h"
 
 NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 
@@ -188,6 +189,9 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 		
 		if ([self.people[0] isKindOfClass:[MHAllObjects class]]) {
 			
+			__block DejalActivityView *loadingViewController	= [DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."];
+			loadingViewController.showNetworkActivityIndicator	= YES;
+			
 			MHAllObjects *allPeople	= self.people[0];
 			
 			__weak typeof(self)weakSelf = self;
@@ -287,7 +291,11 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 				
 				[self.activityViewController.presentingController presentViewController:self.labelViewController animated:YES completion:nil];
 				
+				[DejalBezelActivityView removeViewAnimated:YES];
+				
 			} failBlock:^(NSError *error) {
+				
+				[DejalBezelActivityView removeViewAnimated:YES];
 				
 				NSString *message				= [NSString stringWithFormat:@"We can't update labels for this list of people because we couldn't retrieve it. If the problem persists please contact support@mission.com"];
 				NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
