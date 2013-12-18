@@ -96,6 +96,27 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 			
 			[weakSelf.people addObject:person];
 			
+		} else if ([object isKindOfClass:[MHAllObjects class]]) {
+			
+			[weakSelf.people removeAllObjects];
+			[weakSelf.people addObject:object];
+			*stop	= YES;
+			
+		}
+		
+	}];
+	
+}
+
+- (void)performActivity {
+	
+	__weak typeof(self)weakSelf = self;
+	[self returnPeopleFromArray:self.people withCompletionBlock:^(NSArray *peopleList) {
+		
+		weakSelf.people	= [peopleList mutableCopy];
+		
+		[peopleList enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
+			
 			[person.labels enumerateObjectsUsingBlock:^(MHOrganizationalLabel *organizationalLabel, BOOL *stop) {
 				
 				NSMutableDictionary *labelState	= weakSelf.labelStates[organizationalLabel.label_id];
@@ -117,24 +138,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 				
 			}];
 			
-		} else if ([object isKindOfClass:[MHAllObjects class]]) {
-			
-			[weakSelf.people removeAllObjects];
-			[weakSelf.people addObject:object];
-			*stop	= YES;
-			
-		}
-		
-	}];
-	
-}
-
-- (void)performActivity {
-	
-	__weak typeof(self)weakSelf = self;
-	[self returnPeopleFromArray:self.people withCompletionBlock:^(NSArray *peopleList) {
-		
-		weakSelf.people	= [peopleList mutableCopy];
+		}];
 		
 		//run through all the labels in the organization
 		[[MHAPI sharedInstance].currentOrganization.labels enumerateObjectsUsingBlock:^(MHLabel *label, BOOL *stop) {
