@@ -166,8 +166,12 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 
 - (void)assignPeople:(NSArray *)people toPerson:(MHPerson *)person {
 	
+	[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
+	
 	__weak __typeof(&*self)weakSelf = self;
 	[[MHAPI sharedInstance] bulkAssignPeople:people toPerson:person withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+		
+		[DejalBezelActivityView removeViewAnimated:YES];
 		
 		SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
 																andMessage:[NSString stringWithFormat:@"%d people are now assigned to: %@", people.count, person.fullName]];
@@ -185,6 +189,8 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 		[weakSelf activityDidFinish:YES];
 		
 	} failBlock:^(NSError *error, MHRequestOptions *options) {
+		
+		[DejalBezelActivityView removeViewAnimated:YES];
 		
 		NSString *message				= [NSString stringWithFormat:@"Assigning %d people to %@ failed because: %@. If the problem persists please contact support@mission.com", people.count, person.fullName, [error localizedDescription]];
 		NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain

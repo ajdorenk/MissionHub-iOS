@@ -362,6 +362,8 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 
 - (void)list:(MHGenericListViewController *)viewController didTapApplyButton:(UIBarButtonItem *)applyButton {
 	
+	[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
+	
 	__block NSMutableArray *labelsToAdd		= [NSMutableArray array];
 	__block NSMutableArray *labelsToRemove	= [NSMutableArray array];
 	
@@ -410,6 +412,8 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	__weak __typeof(&*self)weakSelf = self;
 	[[MHAPI sharedInstance] bulkChangeLabelsWithLabelsToAdd:labelsToAdd labelsToRemove:labelsToRemove forPeople:self.people withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 		
+		[DejalBezelActivityView removeViewAnimated:YES];
+		
 		SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
 																andMessage:[NSString stringWithFormat:@"%d people have had their labels updated!", weakSelf.people.count]];
 		[successAlertView addButtonWithTitle:@"Ok"
@@ -427,6 +431,8 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 		
 		
 	} failBlock:^(NSError *error, MHRequestOptions *options) {
+		
+		[DejalBezelActivityView removeViewAnimated:YES];
 		
 		NSString *message				= [NSString stringWithFormat:@"Updating labels for %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.people.count, [error localizedDescription]];
 		NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
