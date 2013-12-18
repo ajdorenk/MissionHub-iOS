@@ -336,7 +336,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	[self updateBarButtons];
 	
-	if (self.selectedPeople.count > 0) {
+	if (!self.noPeopleAreSelected) {
 		
 		[self.activityViewController presentFromRootViewController];
 		
