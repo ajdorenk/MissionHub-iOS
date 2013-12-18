@@ -118,45 +118,13 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 
 - (void)performActivity {
 	
-	if (self.peopleToChangeStatus.count) {
+	__weak typeof(self)weakSelf = self;
+	[self returnPeopleFromArray:self.peopleToChangeStatus withCompletionBlock:^(NSArray *peopleList) {
 		
-		if ([self.peopleToChangeStatus[0] isKindOfClass:[MHAllObjects class]]) {
-			
-			[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
-			
-			MHAllObjects *allPeople	= self.peopleToChangeStatus[0];
-			
-			__weak typeof(self)weakSelf = self;
-			[allPeople getPeopleListWithSuccessBlock:^(NSArray *peopleList) {
-				
-				[weakSelf.peopleToChangeStatus removeAllObjects];
-				[weakSelf.peopleToChangeStatus addObjectsFromArray:peopleList];
-				
-				[DejalBezelActivityView removeViewAnimated:YES];
-				
-				[self displayViewController];
-				
-			} failBlock:^(NSError *error) {
-				
-				[DejalBezelActivityView removeViewAnimated:YES];
-				
-				NSString *message				= [NSString stringWithFormat:@"We can't change status for anyone on this list of people because we couldn't retrieve the rest of the list. If the problem persists please contact support@mission.com"];
-				NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
-																 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
-				
-				[MHErrorHandler presentError:presentationError];
-				
-				[weakSelf activityDidFinish:NO];
-				
-			}];
-			
-		} else {
-			
-			[self displayViewController];
-			
-		}
+		weakSelf.peopleToChangeStatus = [peopleList mutableCopy];
+		[weakSelf displayViewController];
 		
-	}
+	}];
 	
 }
 

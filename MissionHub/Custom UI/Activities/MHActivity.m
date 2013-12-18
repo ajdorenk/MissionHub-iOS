@@ -28,6 +28,8 @@
 
 #import "MHActivity.h"
 #import "MHActivityViewController.h"
+#import "MHAllObjects.h"
+#import "DejalActivityView.h"
 
 NSString * const MHActivityTypeDefault	= @"com.missionhub.mhactivity.type.default";
 
@@ -100,6 +102,53 @@ NSString * const MHActivityTypeDefault	= @"com.missionhub.mhactivity.type.defaul
 	if ([activityViewController.delegate respondsToSelector:@selector(activityDidFinish:completed:)]) {
 		
 		[activityViewController.delegate activityDidFinish:self.activityType completed:completed];
+		
+	}
+	
+}
+
+#pragma mark - Helper methods
+
+- (void)returnPeopleFromArray:(NSArray *)array withCompletionBlock:(void (^)(NSArray *peopleList))onCompletion {
+	
+	if (array.count) {
+		
+		if ([array[0] isKindOfClass:[MHAllObjects class]]) {
+			
+			[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
+			
+			MHAllObjects *allPeople	= array[0];
+			
+			__weak typeof(self)weakSelf = self;
+			[allPeople getPeopleListWithSuccessBlock:^(NSArray *peopleList) {
+				
+				[DejalBezelActivityView removeViewAnimated:YES];
+				
+				onCompletion(peopleList);
+				
+			} failBlock:^(NSError *error) {
+				
+				[DejalBezelActivityView removeViewAnimated:YES];
+				
+				NSString *message				= [NSString stringWithFormat:@"We were unable to complete this action because we couldn't retreive everyone you selected. Please try again. If the problem persists please contact support@mission.com"];
+				NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
+																 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
+				
+				[MHErrorHandler presentError:presentationError];
+				
+				[weakSelf activityDidFinish:NO];
+				
+			}];
+			
+		} else {
+			
+			onCompletion(array);
+			
+		}
+		
+	} else {
+		
+			onCompletion(@[]);
 		
 	}
 	

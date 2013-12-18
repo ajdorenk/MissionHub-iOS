@@ -118,45 +118,13 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 
 - (void)performActivity {
 	
-	if (self.peopleToChangePermissionLevel.count) {
+	__weak typeof(self)weakSelf = self;
+	[self returnPeopleFromArray:self.peopleToChangePermissionLevel withCompletionBlock:^(NSArray *peopleList) {
 		
-		if ([self.peopleToChangePermissionLevel[0] isKindOfClass:[MHAllObjects class]]) {
-			
-			[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
-			
-			MHAllObjects *allPeople	= self.peopleToChangePermissionLevel[0];
-			
-			__weak typeof(self)weakSelf = self;
-			[allPeople getPeopleListWithSuccessBlock:^(NSArray *peopleList) {
-				
-				[weakSelf.peopleToChangePermissionLevel removeAllObjects];
-				[weakSelf.peopleToChangePermissionLevel addObjectsFromArray:peopleList];
-				
-				[DejalBezelActivityView removeViewAnimated:YES];
-				
-				[self displayViewController];
-				
-			} failBlock:^(NSError *error) {
-				
-				[DejalBezelActivityView removeViewAnimated:YES];
-				
-				NSString *message				= [NSString stringWithFormat:@"We can't change permission for anyone on this list of people because we couldn't retrieve the rest of the list. If the problem persists please contact support@mission.com"];
-				NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
-																 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
-				
-				[MHErrorHandler presentError:presentationError];
-				
-				[weakSelf activityDidFinish:NO];
-				
-			}];
-			
-		} else {
-			
-			[self displayViewController];
-			
-		}
+		weakSelf.peopleToChangePermissionLevel = [peopleList mutableCopy];
+		[weakSelf displayViewController];
 		
-	}
+	}];
 	
 }
 

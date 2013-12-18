@@ -120,45 +120,14 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 		
 		__block MHPerson *person	= (MHPerson *)object;
 		
-		if (self.peopleToAssign.count) {
+		__weak typeof(self)weakSelf = self;
+		[self returnPeopleFromArray:self.peopleToAssign withCompletionBlock:^(NSArray *peopleList) {
 			
-			if ([self.peopleToAssign[0] isKindOfClass:[MHAllObjects class]]) {
-				
-				[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
-				
-				MHAllObjects *allPeople	= self.peopleToAssign[0];
-				
-				__weak typeof(self)weakSelf = self;
-				[allPeople getPeopleListWithSuccessBlock:^(NSArray *peopleList) {
-					
-					[weakSelf.peopleToAssign removeAllObjects];
-					[weakSelf.peopleToAssign addObjectsFromArray:peopleList];
-					
-					[self assignPeople:weakSelf.peopleToAssign toPerson:person];
-					
-					[DejalBezelActivityView removeViewAnimated:YES];
-					
-				} failBlock:^(NSError *error) {
-					
-					[DejalBezelActivityView removeViewAnimated:YES];
-					
-					NSString *message				= [NSString stringWithFormat:@"We can't assign anyone on this list of people because we couldn't retrieve it. If the problem persists please contact support@mission.com"];
-					NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
-																	 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
-					
-					[MHErrorHandler presentError:presentationError];
-					
-					[weakSelf activityDidFinish:NO];
-					
-				}];
-				
-			} else {
-				
-				[self assignPeople:self.peopleToAssign toPerson:person];
-				
-			}
+			weakSelf.peopleToAssign = [peopleList mutableCopy];
 			
-		}
+			[weakSelf assignPeople:weakSelf.peopleToAssign toPerson:person];
+			
+		}];
 		
 	}
 	
