@@ -80,37 +80,15 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 	__weak __typeof(&*self)weakSelf = self;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		MHPerson *person				= nil;
-		MHEmailAddress *emailAddress	= nil;
-		NSString *emailString			= @"";
-		
 		if ([object isKindOfClass:[MHPerson class]]) {
 			
-			person	= (MHPerson *)object;
+			[weakSelf.recipients addObject:object];
 			
-			if (person.primaryEmail) {
-				
-				emailString	= person.primaryEmail;
-				
-			}
+		} else if ([object isKindOfClass:[MHAllObjects class]]) {
 			
-		}
-		
-		if ([object isKindOfClass:[MHEmailAddress class]]) {
-			
-			emailAddress	= (MHEmailAddress *)object;
-			
-			if (emailAddress.email) {
-				
-				emailString	= emailAddress.email;
-				
-			}
-			
-		}
-		
-		if (emailString.length > 0) {
-			
-			[weakSelf.recipients addObject:emailString];
+			[weakSelf.recipients removeAllObjects];
+			[weakSelf.recipients addObject:object];
+			*stop	= YES;
 			
 		}
 		
@@ -120,12 +98,57 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 
 - (void)performActivity {
 	
-	MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
-	mailComposeViewController.mailComposeDelegate = self;
-	
-	[mailComposeViewController setToRecipients:self.recipients];
-	
-	[self.activityViewController.presentingController presentViewController:mailComposeViewController animated:YES completion:nil];
+	__weak typeof(self)weakSelf = self;
+	[self returnPeopleFromArray:self.recipients withCompletionBlock:^(NSArray *peopleOrEmailList) {
+		
+		MFMailComposeViewController *mailComposeViewController	= [[MFMailComposeViewController alloc] init];
+		mailComposeViewController.mailComposeDelegate			= weakSelf;
+		
+		NSMutableArray *toArray	= [NSMutableArray array];
+		
+		[peopleOrEmailList enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+			
+			MHPerson *person				= nil;
+			MHEmailAddress *emailAddress	= nil;
+			NSString *emailString			= @"";
+			
+			if ([object isKindOfClass:[MHPerson class]]) {
+				
+				person	= (MHPerson *)object;
+				
+				if (person.primaryEmail) {
+					
+					emailString	= person.primaryEmail;
+					
+				}
+				
+			}
+			
+			if ([object isKindOfClass:[MHEmailAddress class]]) {
+				
+				emailAddress	= (MHEmailAddress *)object;
+				
+				if (emailAddress.email) {
+					
+					emailString	= emailAddress.email;
+					
+				}
+				
+			}
+			
+			if (emailString.length > 0) {
+				
+				[toArray addObject:emailString];
+				
+			}
+			
+		}];
+		
+		[mailComposeViewController setToRecipients:toArray];
+		
+		[weakSelf.activityViewController.presentingController presentViewController:mailComposeViewController animated:YES completion:nil];
+		
+	}];
 	
 }
 

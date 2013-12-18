@@ -78,6 +78,12 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 			
 			[weakSelf.peopleToArchive addObject:object];
 			
+		} else if ([object isKindOfClass:[MHAllObjects class]]) {
+			
+			[weakSelf.peopleToArchive removeAllObjects];
+			[weakSelf.peopleToArchive addObject:object];
+			*stop	= YES;
+			
 		}
 		
 	}];
@@ -94,51 +100,57 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 							 type:SIAlertViewButtonTypeDestructive
 						  handler:^(SIAlertView *alertView) {
 							  
-							  [[MHAPI sharedInstance] bulkArchivePeople:weakSelf.peopleToArchive withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+							  [weakSelf returnPeopleFromArray:weakSelf.peopleToArchive withCompletionBlock:^(NSArray *peopleList) {
 								  
-								  [weakSelf.peopleToArchive enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
+								  weakSelf.peopleToArchive	= [peopleList mutableCopy];
+								  
+								  [[MHAPI sharedInstance] bulkArchivePeople:weakSelf.peopleToArchive withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 									  
-									  if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
+									  [weakSelf.peopleToArchive enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
 										  
-										  MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.admins findWithRemoteID:person.remoteID];
-										  [[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
+										  if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
+											  
+											  MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.admins findWithRemoteID:person.remoteID];
+											  [[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
+											  
+										  }
 										  
-									  }
+										  if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
+											  
+											  MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
+											  [[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInAdminSet];
+											  
+										  }
+										  
+									  }];
 									  
-									  if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
-										  
-										  MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
-										  [[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInAdminSet];
-										  
-									  }
+									  SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
+																							  andMessage:[NSString stringWithFormat:@"%d people were successfully archived?", weakSelf.peopleToArchive.count]];
+									  [successAlertView addButtonWithTitle:@"Ok"
+																	  type:SIAlertViewButtonTypeDestructive
+																   handler:^(SIAlertView *alertView) {
+																	   
+																   }];
+									  
+									  successAlertView.transitionStyle = SIAlertViewTransitionStyleDropDown;
+									  successAlertView.backgroundStyle = SIAlertViewBackgroundStyleGradient;
+									  
+									  [successAlertView show];
+									  
+									  [weakSelf activityDidFinish:YES];
+									  
+								  } failBlock:^(NSError *error, MHRequestOptions *options) {
+									  
+									  NSString *message				= [NSString stringWithFormat:@"Archiving %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToArchive.count, [error localizedDescription]];
+									  NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
+																					   code: [error code]
+																				   userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
+									  
+									  [MHErrorHandler presentError:presentationError];
+									  
+									  [weakSelf activityDidFinish:NO];
 									  
 								  }];
-								  
-								  SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																				   andMessage:[NSString stringWithFormat:@"%d people were successfully archived?", weakSelf.peopleToArchive.count]];
-								  [successAlertView addButtonWithTitle:@"Ok"
-														   type:SIAlertViewButtonTypeDestructive
-														handler:^(SIAlertView *alertView) {
-															
-														}];
-								  
-								  successAlertView.transitionStyle = SIAlertViewTransitionStyleDropDown;
-								  successAlertView.backgroundStyle = SIAlertViewBackgroundStyleGradient;
-								  
-								  [successAlertView show];
-								  
-								  [weakSelf activityDidFinish:YES];
-								  
-							  } failBlock:^(NSError *error, MHRequestOptions *options) {
-								  
-								  NSString *message				= [NSString stringWithFormat:@"Archiving %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToArchive.count, [error localizedDescription]];
-								  NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
-																				   code: [error code]
-																			   userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
-								  
-								  [MHErrorHandler presentError:presentationError];
-								  
-								  [weakSelf activityDidFinish:NO];
 								  
 							  }];
 							  

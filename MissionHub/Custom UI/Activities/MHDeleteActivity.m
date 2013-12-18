@@ -100,7 +100,7 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 							 type:SIAlertViewButtonTypeDestructive
 						  handler:^(SIAlertView *alertView) {
 							  
-							  [weakSelf returnPeopleFromArray:self.peopleToDelete withCompletionBlock:^(NSArray *peopleList) {
+							  [weakSelf returnPeopleFromArray:weakSelf.peopleToDelete withCompletionBlock:^(NSArray *peopleList) {
 								  
 								  weakSelf.peopleToDelete	= [peopleList mutableCopy];
 								  
