@@ -158,8 +158,6 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 		
 	}
 	
-	
-	
 }
 
 - (void)displayViewController {
