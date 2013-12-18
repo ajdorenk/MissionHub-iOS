@@ -234,7 +234,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 	
 	if ([object isKindOfClass:[MHPermissionLevel class]]) {
 		
-		[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
+		[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Apply Permission Level..."].showNetworkActivityIndicator	= YES;
 		
 		__block MHPermissionLevel *permissionLevel        = (MHPermissionLevel *)object;
 		

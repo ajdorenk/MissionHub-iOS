@@ -166,7 +166,7 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 
 - (void)assignPeople:(NSArray *)people toPerson:(MHPerson *)person {
 	
-	[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
+	[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Assigning People..."].showNetworkActivityIndicator	= YES;
 	
 	__weak __typeof(&*self)weakSelf = self;
 	[[MHAPI sharedInstance] bulkAssignPeople:people toPerson:person withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {

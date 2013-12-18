@@ -362,7 +362,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 
 - (void)list:(MHGenericListViewController *)viewController didTapApplyButton:(UIBarButtonItem *)applyButton {
 	
-	[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Loading People..."].showNetworkActivityIndicator	= YES;
+	[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Labeling People..."].showNetworkActivityIndicator	= YES;
 	
 	__block NSMutableArray *labelsToAdd		= [NSMutableArray array];
 	__block NSMutableArray *labelsToRemove	= [NSMutableArray array];
