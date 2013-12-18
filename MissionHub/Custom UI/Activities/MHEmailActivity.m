@@ -101,9 +101,6 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 	__weak typeof(self)weakSelf = self;
 	[self returnPeopleFromArray:self.recipients withCompletionBlock:^(NSArray *peopleOrEmailList) {
 		
-		MFMailComposeViewController *mailComposeViewController	= [[MFMailComposeViewController alloc] init];
-		mailComposeViewController.mailComposeDelegate			= weakSelf;
-		
 		NSMutableArray *toArray	= [NSMutableArray array];
 		
 		[peopleOrEmailList enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
@@ -143,6 +140,9 @@ NSString * const MHActivityTypeEmail	= @"com.missionhub.mhactivity.type.email";
 			}
 			
 		}];
+		
+		MFMailComposeViewController *mailComposeViewController	= [[MFMailComposeViewController alloc] init];
+		mailComposeViewController.mailComposeDelegate			= weakSelf;
 		
 		[mailComposeViewController setToRecipients:toArray];
 		
