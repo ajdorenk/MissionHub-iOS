@@ -93,7 +93,7 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 - (void)performActivity {
 	
 	SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Warning"
-													 andMessage:[NSString stringWithFormat:@"Are you sure you want to delete %d people?", self.peopleToDelete.count]];
+													 andMessage:[NSString stringWithFormat:@"Are you sure you want to delete these people?"]];
 	
 	__weak __typeof(&*self)weakSelf = self;
 	[alertView addButtonWithTitle:@"Yes"

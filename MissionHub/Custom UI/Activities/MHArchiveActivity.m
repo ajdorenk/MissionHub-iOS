@@ -93,7 +93,7 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 - (void)performActivity {
 	
 	SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Warning"
-													 andMessage:[NSString stringWithFormat:@"Are you sure you want to archive %d people?", self.peopleToArchive.count]];
+													 andMessage:[NSString stringWithFormat:@"Are you sure you want to archive these people?"]];
 	
 	__weak __typeof(&*self)weakSelf = self;
 	[alertView addButtonWithTitle:@"Yes"

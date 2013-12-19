@@ -212,7 +212,9 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
 					
 					MHPerson *personObjectInAdminSet        = (MHPerson *)[[MHAPI sharedInstance].currentOrganization.admins findWithRemoteID:person.remoteID];
-					[[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
+					if (personObjectInAdminSet) {
+						[[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
+					}
 					
 				}
 				
@@ -224,8 +226,10 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 				
 				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
 					
-					MHPerson *personObjectInAdminSet        = (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
-					[[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInAdminSet];
+					MHPerson *personObjectInUserSet        = (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
+					if (personObjectInUserSet) {
+						[[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInUserSet];
+					}
 					
 				}
 				
