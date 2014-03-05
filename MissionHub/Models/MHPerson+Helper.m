@@ -175,7 +175,7 @@
 
 -(NSString *)followupStatus {
 	
-	if ([self.permissionLevel isEqualToModel:[MHPermissionLevel noPermissions]] &&
+	if ([self.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel noPermissions].remoteID] &&
 		self.permissionLevel.statusForDisplay) {
 		
 		return self.permissionLevel.statusForDisplay;
