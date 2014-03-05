@@ -175,7 +175,16 @@
 
 -(NSString *)followupStatus {
 	
-	return ( self.permissionLevel.statusForDisplay ? self.permissionLevel.statusForDisplay : @"");
+	if ([self.permissionLevel isEqualToModel:[MHPermissionLevel noPermissions]] &&
+		self.permissionLevel.statusForDisplay) {
+		
+		return self.permissionLevel.statusForDisplay;
+		
+	} else {
+		
+		return @"";
+		
+	}
 	
 }
 

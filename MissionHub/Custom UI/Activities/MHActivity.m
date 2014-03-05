@@ -130,7 +130,7 @@ NSString * const MHActivityTypeDefault	= @"com.missionhub.mhactivity.type.defaul
 				
 				[DejalBezelActivityView removeViewAnimated:YES];
 				
-				NSString *message				= [NSString stringWithFormat:@"We were unable to complete this action because we couldn't retreive everyone you selected. Please try again. If the problem persists please contact support@mission.com"];
+				NSString *message				= [NSString stringWithFormat:@"We were unable to complete this action because we couldn't retrieve everyone you selected. Please try again. If the problem persists please contact support@mission.com"];
 				NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 																 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 				
