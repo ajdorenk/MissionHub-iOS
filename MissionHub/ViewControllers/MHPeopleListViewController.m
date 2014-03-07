@@ -400,7 +400,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	}
 	
 	[self.header updateInterfaceWithSortField:self.secondaryFieldName];
-	[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:self.requestOptions.orderDirection];
+	[self.requestOptions setOrderField:self.sortField orderDirection:self.requestOptions.orderDirection];
 	[self refresh];
 	[self dismissViewControllerAnimated:YES completion:nil];
 	
