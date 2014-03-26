@@ -11,12 +11,16 @@
 #import "MHAPI.h"
 #import "MHPerson+Helper.h"
 #import "SIAlertView.h"
+#import "MHAllObjects.h"
+#import "DejalActivityView.h"
 
 NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign";
 
 @interface MHAssignActivity ()
 
 @property (nonatomic, strong) NSMutableArray *peopleToAssign;
+
+- (void)assignPeople:(NSArray *)people toPerson:(MHPerson *)person;
 
 @end
 
@@ -50,7 +54,7 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 	__block BOOL hasPeople = NO;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		if ([object isKindOfClass:[MHPerson class]]) {
+		if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHAllObjects class]]) {
 			
 			hasPeople	= YES;
 			*stop		= YES;
@@ -75,6 +79,12 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 		if ([object isKindOfClass:[MHPerson class]]) {
 			
 			[weakSelf.peopleToAssign addObject:object];
+			
+		} else if ([object isKindOfClass:[MHAllObjects class]]) {
+			
+			[weakSelf.peopleToAssign removeAllObjects];
+			[weakSelf.peopleToAssign addObject:object];
+			*stop	= YES;
 			
 		}
 		
@@ -110,37 +120,56 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 		
 		__block MHPerson *person	= (MHPerson *)object;
 		
-		__weak __typeof(&*self)weakSelf = self;
-		[[MHAPI sharedInstance] bulkAssignPeople:self.peopleToAssign toPerson:person withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+		__weak typeof(self)weakSelf = self;
+		[self returnPeopleFromArray:self.peopleToAssign withCompletionBlock:^(NSArray *peopleList) {
 			
-			SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																	andMessage:[NSString stringWithFormat:@"%d people are now assigned to: %@", weakSelf.peopleToAssign.count, person.fullName]];
-			[successAlertView addButtonWithTitle:@"Ok"
-											type:SIAlertViewButtonTypeDestructive
-										 handler:^(SIAlertView *alertView) {
-											 
-										 }];
+			weakSelf.peopleToAssign = [peopleList mutableCopy];
 			
-			successAlertView.transitionStyle = SIAlertViewTransitionStyleDropDown;
-			successAlertView.backgroundStyle = SIAlertViewBackgroundStyleGradient;
-			
-			[successAlertView show];
-			
-			[weakSelf activityDidFinish:YES];
-			
-		} failBlock:^(NSError *error, MHRequestOptions *options) {
-			
-			NSString *message				= [NSString stringWithFormat:@"Assigning %d people to %@ failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToAssign.count, person.fullName, [error localizedDescription]];
-			NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
-															 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
-			
-			[MHErrorHandler presentError:presentationError];
-			
-			[weakSelf activityDidFinish:NO];
+			[weakSelf assignPeople:weakSelf.peopleToAssign toPerson:person];
 			
 		}];
 		
 	}
+	
+}
+
+- (void)assignPeople:(NSArray *)people toPerson:(MHPerson *)person {
+	
+	[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Assigning People..."].showNetworkActivityIndicator	= YES;
+	
+	__weak __typeof(&*self)weakSelf = self;
+	[[MHAPI sharedInstance] bulkAssignPeople:people toPerson:person withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
+		
+		[DejalBezelActivityView removeViewAnimated:YES];
+		
+		SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
+																andMessage:[NSString stringWithFormat:@"%lu people are now assigned to: %@", (unsigned long)people.count, person.fullName]];
+		[successAlertView addButtonWithTitle:@"Ok"
+										type:SIAlertViewButtonTypeDestructive
+									 handler:^(SIAlertView *alertView) {
+										 
+									 }];
+		
+		successAlertView.transitionStyle = SIAlertViewTransitionStyleDropDown;
+		successAlertView.backgroundStyle = SIAlertViewBackgroundStyleGradient;
+		
+		[successAlertView show];
+		
+		[weakSelf activityDidFinish:YES];
+		
+	} failBlock:^(NSError *error, MHRequestOptions *options) {
+		
+		[DejalBezelActivityView removeViewAnimated:YES];
+		
+		NSString *message				= [NSString stringWithFormat:@"Assigning %lu people to %@ failed because: %@. If the problem persists please contact support@mission.com", (unsigned long)people.count, person.fullName, [error localizedDescription]];
+		NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
+														 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
+		
+		[MHErrorHandler presentError:presentationError];
+		
+		[weakSelf activityDidFinish:NO];
+		
+	}];
 	
 }
 

@@ -15,7 +15,7 @@
 #import "MHToolbar.h"
 #import "UIImageView+AFNetworking.h"
 #import "MHGoogleAnalyticsTracker.h"
-
+#import "MHAllObjects.h"
 
 CGFloat MHPeopleListViewControllerRowHeight = 61.0;
 
@@ -30,6 +30,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListChooseSecondaryFieldButtonTap
 NSString * const MHGoogleAnalyticsTrackerPeopleListSortButtonTap					= @"sort";
 NSString * const MHGoogleAnalyticsTrackerPeopleListCheckboxSelectedButtonTap		= @"person_selected";
 NSString * const MHGoogleAnalyticsTrackerPeopleListCheckboxDeselectedButtonTap		= @"person_deselected";
+NSString * const MHGoogleAnalyticsTrackerPeopleListSelectAllButtonTap				= @"all_people_selected";
 NSString * const MHGoogleAnalyticsTrackerPeopleListPersonCellTap					= @"person";
 NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load";
 
@@ -53,6 +54,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 @property (nonatomic, assign) MHPersonSortFields						secondaryFieldName;
 @property (nonatomic, assign) MHRequestOptionsOrderFields				sortField;
 @property (nonatomic, strong) MHSortHeader								*header;
+@property (nonatomic, assign) BOOL										userHasCheckedSelectAll;
 @property (nonatomic, strong, readonly) MHProfileViewController			*profileViewController;
 @property (nonatomic, strong, readonly) MHGenericListViewController		*fieldSelectorViewController;
 @property (nonatomic, strong, readonly) MHNewInteractionViewController	*createInteractionViewController;
@@ -62,6 +64,9 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 @property (nonatomic, strong, readonly) MHActivityViewController		*activityViewController;
 
 - (BOOL)isSelected:(MHPerson *)person;
+- (BOOL)everyoneIsSelected;
+- (BOOL)noPeopleAreSelected;
+- (BOOL)somePeopleAreSelected;
 
 - (void)presentCreatePersonViewControllerInPopoverFromSender:(id)sender withPersonObject:(MHPerson *)person;
 - (void)presentCreateInteractionViewControllerInPopoverFromSender:(id)sender withInteraction:(MHInteraction *)interaction andSelectedPeople:(NSArray *)selectedPeople;
@@ -97,6 +102,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 @synthesize secondaryFieldName					= _secondaryFieldName;
 @synthesize sortField							= _sortField;
 @synthesize header								= _header;
+@synthesize userHasCheckedSelectAll				= _userHasCheckedSelectAll;
 @synthesize profileViewController				= _profileViewController;
 @synthesize fieldSelectorViewController			= _fieldSelectorViewController;
 @synthesize createInteractionViewController		= _createInteractionViewController;
@@ -330,7 +336,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	[self updateBarButtons];
 	
-	if (self.selectedPeople.count > 0) {
+	if (!self.noPeopleAreSelected) {
 		
 		[self.activityViewController presentFromRootViewController];
 		
@@ -394,7 +400,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	}
 	
 	[self.header updateInterfaceWithSortField:self.secondaryFieldName];
-	[[self.requestOptions clearOrders] setOrderField:self.sortField orderDirection:self.requestOptions.orderDirection];
+	[self.requestOptions setOrderField:self.sortField orderDirection:self.requestOptions.orderDirection];
 	[self refresh];
 	[self dismissViewControllerAnimated:YES completion:nil];
 	
@@ -495,6 +501,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	self.hasLoadedAllPages		= NO;
 	self.refreshIsLoading		= YES;
 	self.selectedPeople			= [NSMutableArray array];
+	self.userHasCheckedSelectAll	= NO;
+	self.header.checkboxState		= MHSortHeaderCheckboxStateNone;
 	[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
 	[self.tableView reloadData];
 	
@@ -571,8 +579,11 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		
 	} else {
 		
-		self.peopleArray = [NSMutableArray arrayWithArray:dataArray];
-		self.hasLoadedAllPages = ( [dataArray count] < options.limit ? YES : NO );
+		self.peopleArray				= [NSMutableArray arrayWithArray:dataArray];
+		self.hasLoadedAllPages			= ( [dataArray count] < options.limit ? YES : NO );
+		self.selectedPeople				= [NSMutableArray array];
+		self.userHasCheckedSelectAll	= NO;
+		self.header.checkboxState		= MHSortHeaderCheckboxStateNone;
 		
 	}
 	
@@ -701,22 +712,49 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 }
 
 
-//TODO:Need to add functionality to check all contacts. Currently the function only changes the image of the checkbox in the secton header, though it should check all the contacts.
-- (IBAction)checkAllContacts:(UIButton*)button {
-    NSLog(@"Check all");
-    button.selected = !button.selected;
-    
-    if (button.selected) {
-        UIImage *checkedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_24.png"];
-        [button setFrame:CGRectMake(13.0, 5.0, 18, 19)];
-        [button setBackgroundImage:checkedBox forState:UIControlStateNormal];
-    }
-    else{
-         UIImage *uncheckedBox = [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_24.png"];
-        [button setFrame:CGRectMake(13.0, 9.0, 15, 15)];
-        [button setBackgroundImage:uncheckedBox forState:UIControlStateNormal];
-
-    }
+- (void)allButtonPressedWithNewState:(MHSortHeaderCheckboxState)state {
+	
+	[self.selectedPeople removeAllObjects];
+	
+	switch (state) {
+		case MHSortHeaderCheckboxStateAll:
+		case MHSortHeaderCheckboxStatePartial: {
+			
+			self.userHasCheckedSelectAll	= YES;
+			
+			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
+			
+			if (!self.activityViewController.view.superview) {
+				[self.activityViewController presentFromRootViewController];
+			}
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
+																	  action:MHGoogleAnalyticsActionTap
+																	   label:MHGoogleAnalyticsTrackerPeopleListSelectAllButtonTap
+																	   value:@1];
+			
+			break;
+			
+		} case MHSortHeaderCheckboxStateNone: {
+			
+			self.userHasCheckedSelectAll	= NO;
+			
+			self.activityViewController.activityItems	= self.selectedPeople;
+			[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
+			
+			[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryCheckbox
+																	  action:MHGoogleAnalyticsActionTap
+																	   label:MHGoogleAnalyticsTrackerPeopleListSelectAllButtonTap
+																	   value:@0];
+			
+			break;
+			
+		} default:
+			break;
+	}
+	
+	[self.tableView reloadData];
+	
 }
 
 -(void)fieldButtonPressed {
@@ -745,7 +783,7 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 }
 
--(BOOL)isSelected:(MHPerson *)person {
+- (BOOL)isSelected:(MHPerson *)person {
 	
 	__block BOOL selected = NO;
 	
@@ -756,7 +794,44 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		
 	}];
 	
-	return selected;
+	//if a person is in the selectedPeople list after the user has checked Select All that means the user has deselected them and we should invert the result
+	return ( self.userHasCheckedSelectAll ? !selected : selected );
+	
+}
+
+- (BOOL)everyoneIsSelected {
+	
+	if ( (self.userHasCheckedSelectAll && self.selectedPeople.count == 0) ||													//if select all button is used and non are deselected
+		 (!self.userHasCheckedSelectAll && self.selectedPeople.count == self.peopleArray.count && self.hasLoadedAllPages) ) {	//if select all button is not used and all are selected
+		
+		return YES;
+		
+	} else {
+		
+		return NO;
+		
+	}
+	
+}
+
+- (BOOL)noPeopleAreSelected {
+	
+	if ( (self.userHasCheckedSelectAll && self.selectedPeople.count == self.peopleArray.count && self.hasLoadedAllPages) ||		//if select all button is used and all are deselected
+		(!self.userHasCheckedSelectAll && self.selectedPeople.count == 0) ) {													//if select all button is not used and no one is selected
+		return YES;
+	} else {
+		return NO;
+	}
+	
+}
+
+- (BOOL)somePeopleAreSelected {
+	
+	if (self.everyoneIsSelected || self.noPeopleAreSelected) {
+		return NO;
+	} else {
+		return YES;
+	}
 	
 }
 
@@ -859,9 +934,9 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 			MHPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		
 			// Configure the cell...
-				if (cell == nil) {
-					cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-				}
+			if (cell == nil) {
+				cell = [[MHPersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+			}
 			
 			MHPerson *person = [self.peopleArray objectAtIndex:indexPath.row];
 				//Display person in the table cell
@@ -1087,15 +1162,40 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	if (person) {
 		
-		[self.selectedPeople addObject:person];
-		self.activityViewController.activityItems	= self.selectedPeople;
+		if (self.userHasCheckedSelectAll) {
+			
+			[self.selectedPeople removeObject:person];
+			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
+			
+		} else {
+			
+			[self.selectedPeople addObject:person];
+			self.activityViewController.activityItems	= self.selectedPeople;
+			
+		}
 		
 	}
 	
-	if ([self.selectedPeople count] == 1) {
+	if ( self.everyoneIsSelected ) {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStateAll;
+		
+	} else if ( self.noPeopleAreSelected ) {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStateNone;
+		
+	} else {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStatePartial;
+		
+	}
+	
+	if ( !self.noPeopleAreSelected ) {
 		
 		//launch activity view controller
-		[self.activityViewController presentFromRootViewController];
+		if (!self.activityViewController.view.superview) {
+			[self.activityViewController presentFromRootViewController];
+		}
 		
 	}
 	
@@ -1110,12 +1210,35 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 	
 	if (person) {
 		
-		[self.selectedPeople removeObject:person];
-		self.activityViewController.activityItems	= self.selectedPeople;
+		if (self.userHasCheckedSelectAll) {
+			
+			[self.selectedPeople addObject:person];
+			self.activityViewController.activityItems	= @[[[MHAllObjects alloc] initWithRequestOptions:self.requestOptions andDeselectedPeople:self.selectedPeople]];
+			
+		} else {
+			
+			[self.selectedPeople removeObject:person];
+			self.activityViewController.activityItems	= self.selectedPeople;
+			
+		}
 		
 	}
 	
-	if ([self.selectedPeople count] == 0) {
+	if ( self.everyoneIsSelected ) {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStateAll;
+		
+	} else if ( self.noPeopleAreSelected ) {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStateNone;
+		
+	} else {
+		
+		self.header.checkboxState	= MHSortHeaderCheckboxStatePartial;
+		
+	}
+	
+	if ( self.noPeopleAreSelected ) {
 		
 		//remove activity view controller
 		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
@@ -1158,6 +1281,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 		//remove activity view controller
 		[self.activityViewController dismissViewControllerAnimated:YES completion:nil];
 		[self.selectedPeople removeAllObjects];
+		self.userHasCheckedSelectAll	= NO;
+		self.header.checkboxState		= MHSortHeaderCheckboxStateNone;
 		
 	}
 	

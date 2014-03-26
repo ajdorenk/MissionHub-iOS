@@ -1,11 +1,9 @@
-platform :ios, "5.0"
+platform :ios, '5.0'
 
 # ignore all warnings from all pods
 inhibit_all_warnings!
 
-xcodeproj "MissionHub"
-workspace "MissionHub"
-link_with "MissionHub"
+link_with 'MissionHub', 'tests'
 
 target :MissionHub do
 
@@ -18,13 +16,14 @@ target :MissionHub do
 	pod 'SDSegmentedControl', '~> 1.0.1'
 	pod 'SIAlertView', '1.2'
 	pod 'TTTAttributedLabel', '~> 1.7.1'
-	pod 'NewRelicAgent', '~> 1.376'
-	pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.1'
+	pod 'NewRelicAgent', '~> 3.256'
+	pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.3'
 	#pod 'Airbrake-iOS', :git => 'https://github.com/CruGlobal/airbrake-ios.git'
 	pod 'MYBlurIntroductionView', :git => 'https://github.com/CruGlobal/MYBlurIntroductionView.git'
 	pod 'TransformerKit', '~> 0.3.0'
+	pod 'DejalActivityView', '~> 1.1'
 
-	target :tests, :exclusive => true do
+	target :tests do
 		pod 'Kiwi/XCTest', '2.2.2'
 		pod 'KIF', '~> 2.0'
 		pod 'OCHamcrest', '~> 3.0'

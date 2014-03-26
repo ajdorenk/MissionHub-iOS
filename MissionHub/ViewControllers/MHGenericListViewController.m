@@ -853,7 +853,7 @@ CGFloat const MHGenericListViewControllerListLableMarginBottom		= 0.0f;
 		
 	} else if (numberOfObjectsAddedToSuggestionArray < 0) {
 		
-		[self willRemoveFromSuggestionArray:abs(numberOfObjectsAddedToSuggestionArray)];
+		[self willRemoveFromSuggestionArray:labs(numberOfObjectsAddedToSuggestionArray)];
 		
 	}
 	

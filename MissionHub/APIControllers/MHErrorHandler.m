@@ -13,7 +13,7 @@
 
 +(void)presentError:(NSError *)error {
 	
-	NSLog(@"Error (%d) in Domain (%@): %@", [error code], [error domain], [error localizedDescription]);
+	NSLog(@"Error (%ld) in Domain (%@): %@", (long)[error code], [error domain], [error localizedDescription]);
 	
 	SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Warning" andMessage:[error localizedDescription]];
     [alertView addButtonWithTitle:@"Ok"

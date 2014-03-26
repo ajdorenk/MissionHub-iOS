@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2282B2366177466DB63DF9D1 /* libPods-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D11C346F9140469F8AC1C8 /* libPods-tests.a */; };
+		2AD193B2F763470C836A729A /* libPods-MissionHub-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDECB20059B7466C9B71F4E2 /* libPods-MissionHub-tests.a */; };
 		6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6801976217CFE88200DCE330 /* MHHeaderCell.m */; };
 		6809501A181EE1A300DB0018 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68095019181EE1A300DB0018 /* libxml2.dylib */; };
 		6809501B181EE1B000DB0018 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68095019181EE1A300DB0018 /* libxml2.dylib */; };
@@ -225,6 +226,8 @@
 		68A38F2417AB59400010CAC6 /* MH_Mobile_Checkbox_Checkmark_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A38F2117AB593F0010CAC6 /* MH_Mobile_Checkbox_Checkmark_24.png */; };
 		68A38F2717AB59DB0010CAC6 /* MH_Mobile_Icon_Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A38F2617AB59DA0010CAC6 /* MH_Mobile_Icon_Menu.png */; };
 		68A68BCF1787B2BF00927DF8 /* MHLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */; };
+		68A8A0A418465A6F002549F6 /* MHAllObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A8A0A318465A6F002549F6 /* MHAllObjects.m */; };
+		68A8A0A518465A6F002549F6 /* MHAllObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A8A0A318465A6F002549F6 /* MHAllObjects.m */; };
 		68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */; };
 		68ACD0A217DFB80B003630F0 /* MHToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ACD0A117DFB80A003630F0 /* MHToolbar.m */; };
 		68ACD0A617DFBF00003630F0 /* MHStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68ACD0A517DFBF00003630F0 /* MHStyle.m */; };
@@ -244,6 +247,12 @@
 		68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C068A71770EFBE007C79D6 /* MHStorage.m */; };
 		68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C0696417710E60007C79D6 /* MHRequestOperation.m */; };
 		68C069691772252C007C79D6 /* MHRequestOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C069681772252C007C79D6 /* MHRequestOptions.m */; };
+		68C0A54918527AFE001352DD /* MH_Mobile_Checkbox_Checked_48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A54618527AFE001352DD /* MH_Mobile_Checkbox_Checked_48@2x.png */; };
+		68C0A54A18527AFE001352DD /* MH_Mobile_Checkbox_Checked_48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A54618527AFE001352DD /* MH_Mobile_Checkbox_Checked_48@2x.png */; };
+		68C0A54B18527AFE001352DD /* MH_Mobile_Checkbox_PartiallyChecked_48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A54718527AFE001352DD /* MH_Mobile_Checkbox_PartiallyChecked_48@2x.png */; };
+		68C0A54C18527AFE001352DD /* MH_Mobile_Checkbox_PartiallyChecked_48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A54718527AFE001352DD /* MH_Mobile_Checkbox_PartiallyChecked_48@2x.png */; };
+		68C0A54D18527AFE001352DD /* MH_Mobile_Checkbox_Unchecked_48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A54818527AFE001352DD /* MH_Mobile_Checkbox_Unchecked_48@2x.png */; };
+		68C0A54E18527AFE001352DD /* MH_Mobile_Checkbox_Unchecked_48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C0A54818527AFE001352DD /* MH_Mobile_Checkbox_Unchecked_48@2x.png */; };
 		68C82E21180314FA00A8D5A0 /* MHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D88177E8AE20014501D /* MHOrganization.m */; };
 		68C82E23180314FA00A8D5A0 /* MHAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6823A7D5177EC34D00DBDF3F /* MHAddress.m */; };
 		68C82E25180314FA00A8D5A0 /* MHInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 68478D3A177A5AA20014501D /* MHInteraction.m */; };
@@ -611,6 +620,8 @@
 		68A38F2617AB59DA0010CAC6 /* MH_Mobile_Icon_Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Icon_Menu.png; sourceTree = "<group>"; };
 		68A68BCD1787B2BF00927DF8 /* MHLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHLoadingCell.h; path = "Custom UI/MHLoadingCell.h"; sourceTree = "<group>"; };
 		68A68BCE1787B2BF00927DF8 /* MHLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHLoadingCell.m; path = "Custom UI/MHLoadingCell.m"; sourceTree = "<group>"; };
+		68A8A0A218465A6F002549F6 /* MHAllObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHAllObjects.h; path = "Custom UI/Activities/MHAllObjects.h"; sourceTree = "<group>"; };
+		68A8A0A318465A6F002549F6 /* MHAllObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHAllObjects.m; path = "Custom UI/Activities/MHAllObjects.m"; sourceTree = "<group>"; };
 		68AB5AB117739FF700FA1558 /* NSDictionary+UrlEncodedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncodedString.h"; sourceTree = "<group>"; };
 		68AB5AB217739FF700FA1558 /* NSDictionary+UrlEncodedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncodedString.m"; sourceTree = "<group>"; };
 		68ACD0A017DFB80A003630F0 /* MHToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHToolbar.h; path = "Custom UI/MHToolbar.h"; sourceTree = "<group>"; };
@@ -640,6 +651,9 @@
 		68C0696417710E60007C79D6 /* MHRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRequestOperation.m; path = APIControllers/MHRequestOperation.m; sourceTree = "<group>"; };
 		68C069671772252C007C79D6 /* MHRequestOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHRequestOptions.h; path = APIControllers/MHRequestOptions.h; sourceTree = "<group>"; };
 		68C069681772252C007C79D6 /* MHRequestOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHRequestOptions.m; path = APIControllers/MHRequestOptions.m; sourceTree = "<group>"; };
+		68C0A54618527AFE001352DD /* MH_Mobile_Checkbox_Checked_48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MH_Mobile_Checkbox_Checked_48@2x.png"; sourceTree = "<group>"; };
+		68C0A54718527AFE001352DD /* MH_Mobile_Checkbox_PartiallyChecked_48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MH_Mobile_Checkbox_PartiallyChecked_48@2x.png"; sourceTree = "<group>"; };
+		68C0A54818527AFE001352DD /* MH_Mobile_Checkbox_Unchecked_48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MH_Mobile_Checkbox_Unchecked_48@2x.png"; sourceTree = "<group>"; };
 		68C82E79180333C100A8D5A0 /* MHContactAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHContactAssignment.h; path = Models/MHContactAssignment.h; sourceTree = "<group>"; };
 		68C82E7A180333C100A8D5A0 /* MHContactAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHContactAssignment.m; path = Models/MHContactAssignment.m; sourceTree = "<group>"; };
 		68C82E7D1803343E00A8D5A0 /* MHContactAssignment+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MHContactAssignment+Helper.h"; path = "Models/MHContactAssignment+Helper.h"; sourceTree = "<group>"; };
@@ -686,6 +700,7 @@
 		68F8D664182960AE00AF2E20 /* Panel4_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Panel4_iPad.xib; path = "Custom UI/Introduction/Panel4_iPad.xib"; sourceTree = "<group>"; };
 		68F8D667182960BA00AF2E20 /* Panel5_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Panel5_iPad.xib; path = "Custom UI/Introduction/Panel5_iPad.xib"; sourceTree = "<group>"; };
 		7555945037E547529374192F /* libPods-MissionHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MissionHub.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub-tests.xcconfig"; path = "Pods/Pods-MissionHub-tests.xcconfig"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
 		AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationViewController.m; path = ViewControllers/MHNavigationViewController.m; sourceTree = "<group>"; };
 		AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
@@ -711,6 +726,7 @@
 		ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCreatePersonViewController.m; path = ViewControllers/MHCreatePersonViewController.m; sourceTree = "<group>"; };
 		ADCCBA2F1795101800A613F3 /* MHProfileSurveysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileSurveysViewController.h; path = ViewControllers/MHProfileSurveysViewController.h; sourceTree = "<group>"; };
 		ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileSurveysViewController.m; path = ViewControllers/MHProfileSurveysViewController.m; sourceTree = "<group>"; };
+		CDECB20059B7466C9B71F4E2 /* libPods-MissionHub-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MissionHub-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -744,6 +760,7 @@
 				6867917317FF4EC6000106BF /* UIKit.framework in Frameworks */,
 				6867917217FF4EC6000106BF /* Foundation.framework in Frameworks */,
 				2282B2366177466DB63DF9D1 /* libPods-tests.a in Frameworks */,
+				2AD193B2F763470C836A729A /* libPods-MissionHub-tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,6 +834,8 @@
 				682462EA17D942B500E1AFBB /* MHTextActivity.m */,
 				68F2FFB61840334300E3C6E9 /* MHCallActivity.h */,
 				68F2FFB71840334300E3C6E9 /* MHCallActivity.m */,
+				68A8A0A218465A6F002549F6 /* MHAllObjects.h */,
+				68A8A0A318465A6F002549F6 /* MHAllObjects.m */,
 			);
 			name = Activities;
 			sourceTree = "<group>";
@@ -832,6 +851,7 @@
 				683910841760FD3100E01B46 /* Products */,
 				14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */,
 				39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */,
+				829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -859,6 +879,7 @@
 				6867917017FF4EC6000106BF /* XCTest.framework */,
 				7555945037E547529374192F /* libPods-MissionHub.a */,
 				26D11C346F9140469F8AC1C8 /* libPods-tests.a */,
+				CDECB20059B7466C9B71F4E2 /* libPods-MissionHub-tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1124,13 +1145,16 @@
 				68631FAF17E91E4500A24B3F /* MH_Mobile_Menu_Button_Red_72.png */,
 				AD75F7AB178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png */,
 				AD75F7A9178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png */,
-				68A38F2017AB593F0010CAC6 /* MH_Mobile_Checkbox_PartiallyChecked_24.png */,
 				68A38F2117AB593F0010CAC6 /* MH_Mobile_Checkbox_Checkmark_24.png */,
 				68A38F1D17AB585C0010CAC6 /* MH_Mobile_Checkbox_No_Box_No_Checkmark.png */,
 				6835D5CB17FC712800B713C5 /* MH_Mobile_Checkbox_No_Box_Checkmark_Dash.png */,
 				68A38F1A17AB58220010CAC6 /* MH_Mobile_Checkbox_No_Box_Checkmark.png */,
 				AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */,
 				AD3C60E4178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png */,
+				68A38F2017AB593F0010CAC6 /* MH_Mobile_Checkbox_PartiallyChecked_24.png */,
+				68C0A54618527AFE001352DD /* MH_Mobile_Checkbox_Checked_48@2x.png */,
+				68C0A54718527AFE001352DD /* MH_Mobile_Checkbox_PartiallyChecked_48@2x.png */,
+				68C0A54818527AFE001352DD /* MH_Mobile_Checkbox_Unchecked_48@2x.png */,
 				680BE77817E2606400BA8C12 /* MH_Mobile_ColumnButton_40.png */,
 				680BE77917E2606400BA8C12 /* MH_Mobile_SortButton_40.png */,
 				68145B9A17911052008145EA /* MH_Mobile_Profile_Header_Placeholder.png */,
@@ -1439,6 +1463,7 @@
 				AD3C60E5178B0FF000744167 /* MH_Mobile_Checkbox_Checked_24.png in Resources */,
 				68F8D6621829609D00AF2E20 /* Panel3_iPad.xib in Resources */,
 				AD2434F1178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png in Resources */,
+				68C0A54918527AFE001352DD /* MH_Mobile_Checkbox_Checked_48@2x.png in Resources */,
 				AD75F7AA178F2B3700F6BA94 /* MH_Mobile_Button_Save_72.png in Resources */,
 				AD75F7AC178F2B3C00F6BA94 /* MH_Mobile_Button_Done_72.png in Resources */,
 				6834AD7B1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_portrait.png in Resources */,
@@ -1473,6 +1498,7 @@
 				68A38F1417A9A9120010CAC6 /* label.png in Resources */,
 				68A38F1617A9A9120010CAC6 /* hs.png in Resources */,
 				6834AD6D18357098006EBD3F /* MH_AppIcon_IOS_152.png in Resources */,
+				68C0A54B18527AFE001352DD /* MH_Mobile_Checkbox_PartiallyChecked_48@2x.png in Resources */,
 				68EB9A20181975CD009712EB /* MH_Mobile_Icon_Labels_iOS7.png in Resources */,
 				68A38F1817A9A9120010CAC6 /* grad.png in Resources */,
 				68A38F1B17AB58220010CAC6 /* MH_Mobile_Checkbox_No_Box_Checkmark.png in Resources */,
@@ -1493,6 +1519,7 @@
 				683938F61832FAA900234BED /* MH_Mobile_Introduction_3_description.png in Resources */,
 				680BE78517E28D3800BA8C12 /* MH_Mobile_Icon_Labels.png in Resources */,
 				6846CEBD1834388B00DCB086 /* MH_Mobile_Introduction_4~ipad.png in Resources */,
+				68C0A54D18527AFE001352DD /* MH_Mobile_Checkbox_Unchecked_48@2x.png in Resources */,
 				6834AD7318357098006EBD3F /* MH_AppIcon_IOS_76.png in Resources */,
 				680BE78717E28D3800BA8C12 /* MH_Mobile_Icon_AddContact.png in Resources */,
 				6846CEB71834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png in Resources */,
@@ -1543,7 +1570,9 @@
 				6846CEC21834388B00DCB086 /* MH_Mobile_Introduction_3~ipad.png in Resources */,
 				68EB9A1E1819615A009712EB /* MH_Mobile_Icon_NewInteraction_iOS7.png in Resources */,
 				6846CEC01834388B00DCB086 /* MH_Mobile_Introduction_3_description~ipad.png in Resources */,
+				68C0A54C18527AFE001352DD /* MH_Mobile_Checkbox_PartiallyChecked_48@2x.png in Resources */,
 				6834AD7E1835711E006EBD3F /* MH_Mobile_DefaultImage_ipad_landscape@2x.png in Resources */,
+				68C0A54E18527AFE001352DD /* MH_Mobile_Checkbox_Unchecked_48@2x.png in Resources */,
 				6834AD6818353445006EBD3F /* MH_AppIcon_IOS_144.png in Resources */,
 				6846CEBA1834388B00DCB086 /* MH_Mobile_Introduction_5~ipad.png in Resources */,
 				6846CEC41834388B00DCB086 /* MH_Mobile_Introduction_1~ipad.png in Resources */,
@@ -1554,6 +1583,7 @@
 				68F8D630182817A900AF2E20 /* Panel1_iPad.xib in Resources */,
 				6846CEB81834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png in Resources */,
 				6834AD7018357098006EBD3F /* MH_AppIcon_IOS_120.png in Resources */,
+				68C0A54A18527AFE001352DD /* MH_Mobile_Checkbox_Checked_48@2x.png in Resources */,
 				6834AD5E18353445006EBD3F /* MH_AppIcon_IOS_29.png in Resources */,
 				6846CEC81834388B00DCB086 /* MH_Mobile_Introduction_2_description~ipad.png in Resources */,
 				6834AD6418353445006EBD3F /* MH_AppIcon_IOS_58.png in Resources */,
@@ -1613,7 +1643,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-MissionHub-tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EF363F63DC6D4B5CA0D4C95C /* Check Pods Manifest.lock */ = {
@@ -1655,6 +1685,7 @@
 				AD301130176FE4D900D53E35 /* MHCheckbox.m in Sources */,
 				AD301134176FE4D900D53E35 /* MHPersonCell.m in Sources */,
 				68C0689B176EB832007C79D6 /* MHModel.m in Sources */,
+				68A8A0A418465A6F002549F6 /* MHAllObjects.m in Sources */,
 				68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */,
 				6867918517FF6533000106BF /* MHActivityView.m in Sources */,
 				6842D8B9183BB54F00815BB9 /* GCAlertView.m in Sources */,
@@ -1775,6 +1806,7 @@
 				68C82E3D180314FB00A8D5A0 /* MHOrganization+Helper.m in Sources */,
 				68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */,
 				68C82E41180314FB00A8D5A0 /* MHInteraction+Helper.m in Sources */,
+				68A8A0A518465A6F002549F6 /* MHAllObjects.m in Sources */,
 				6842D8C4183BB54F00815BB9 /* DDXMLNode.m in Sources */,
 				68C82E43180314FB00A8D5A0 /* MHInteractionType+Helper.m in Sources */,
 				6846CE8E1834127C00DCB086 /* MHAPIChangeOrganizationTest.m in Sources */,
@@ -2054,7 +2086,7 @@
 		};
 		6867917F17FF4EC6000106BF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
@@ -2095,6 +2127,7 @@
 					"\"${PODS_ROOT}/Headers/SIAlertView\"",
 					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
 					"$(SDKROOT)/usr/include/libxml2",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2106,7 +2139,7 @@
 		};
 		6867918017FF4EC6000106BF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
@@ -2144,6 +2177,7 @@
 					"\"${PODS_ROOT}/Headers/SIAlertView\"",
 					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
 					"$(SDKROOT)/usr/include/libxml2",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2156,7 +2190,7 @@
 		};
 		6867918117FF4EC6000106BF /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
@@ -2194,6 +2228,7 @@
 					"\"${PODS_ROOT}/Headers/SIAlertView\"",
 					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
 					"$(SDKROOT)/usr/include/libxml2",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

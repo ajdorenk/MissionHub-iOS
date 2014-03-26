@@ -12,18 +12,24 @@
 #import "MHOrganizationalPermission+Helper.h"
 #import "MHPermissionLevel+Helper.h"
 #import "SIAlertView.h"
+#import "MHAllObjects.h"
+#import "DejalActivityView.h"
 
 NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status";
 
 @interface MHStatusActivity ()
 
 @property (nonatomic, strong) NSMutableArray *peopleToChangeStatus;
+@property (nonatomic, strong, readonly) MHGenericListViewController *statusViewController;
+
+- (void)displayViewController;
 
 @end
 
 @implementation MHStatusActivity
 
 @synthesize peopleToChangeStatus	= _peopleToChangeStatus;
+@synthesize statusViewController	= _statusViewController;
 
 - (id)init {
 	
@@ -40,6 +46,27 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
     return self;
 }
 
+- (MHGenericListViewController *)statusViewController {
+	
+	if (!_statusViewController) {
+		
+		[self willChangeValueForKey:@"statusViewController"];
+		_statusViewController	= [self.activityViewController.presentingController.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		[self didChangeValueForKey:@"statusViewController"];
+		
+		_statusViewController.selectionDelegate	= self;
+		_statusViewController.multipleSelection	= NO;
+		_statusViewController.showHeaders		= NO;
+		_statusViewController.showSuggestions	= NO;
+		_statusViewController.listTitle			= @"Status";
+		[_statusViewController setDataArray:[MHOrganizationalPermission arrayOfFollowupStatusesForDisplay]];
+		
+	}
+	
+	return _statusViewController;
+	
+}
+
 - (NSString *)activityType {
 	
 	return MHActivityTypeStatus;
@@ -51,7 +78,7 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 	__block BOOL hasPeople = NO;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		if ([object isKindOfClass:[MHPerson class]]) {
+		if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHAllObjects class]]) {
 			
 			hasPeople	= YES;
 			*stop		= YES;
@@ -77,6 +104,12 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 			
 			[weakSelf.peopleToChangeStatus addObject:object];
 			
+		} else if ([object isKindOfClass:[MHAllObjects class]]) {
+			
+			[weakSelf.peopleToChangeStatus removeAllObjects];
+			[weakSelf.peopleToChangeStatus addObject:object];
+			*stop	= YES;
+			
 		}
 		
 	}];
@@ -85,21 +118,24 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 
 - (void)performActivity {
 	
-	MHGenericListViewController *statusList	= [self.activityViewController.presentingController.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+	__weak typeof(self)weakSelf = self;
+	[self returnPeopleFromArray:self.peopleToChangeStatus withCompletionBlock:^(NSArray *peopleList) {
+		
+		weakSelf.peopleToChangeStatus = [peopleList mutableCopy];
+		[weakSelf displayViewController];
+		
+	}];
 	
-	statusList.selectionDelegate	= self;
-	statusList.multipleSelection	= NO;
-	statusList.showHeaders			= NO;
-	statusList.showSuggestions		= NO;
-	statusList.listTitle			= @"Status";
-	[statusList setDataArray:[MHOrganizationalPermission arrayOfFollowupStatusesForDisplay]];
+}
+
+- (void)displayViewController {
 	
 	if (self.peopleToChangeStatus.count == 1) {
 		
 		MHPerson *person			= self.peopleToChangeStatus[0];
 		NSString *status			= person.permissionLevel.status;
 		
-		[statusList setSuggestions:nil andSelectionObject:status];
+		[self.statusViewController setSuggestions:nil andSelectionObject:status];
 		
 	} else {
 		
@@ -126,13 +162,13 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 		
 		if (status) {
 			
-			[statusList setSuggestions:nil andSelectionObject:statusList];
+			[self.statusViewController setSuggestions:nil andSelectionObject:status];
 			
 		}
 		
 	}
 	
-	[self.activityViewController.presentingController presentViewController:statusList animated:YES completion:nil];
+	[self.activityViewController.presentingController presentViewController:self.statusViewController animated:YES completion:nil];
 	
 }
 
@@ -145,11 +181,15 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 		__block NSString *status = (NSString *)object;
 		NSString *statusCode	= [MHOrganizationalPermission statusFromStatusForDisplay:status];
 		
+		[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Applying Status..."].showNetworkActivityIndicator	= YES;
+		
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] bulkChangeStatus:statusCode forPeople:self.peopleToChangeStatus withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
 			
+			[DejalBezelActivityView removeViewAnimated:YES];
+			
 			SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																	andMessage:[NSString stringWithFormat:@"%d people now have the status: %@", weakSelf.peopleToChangeStatus.count, status]];
+																	andMessage:[NSString stringWithFormat:@"%lu people now have the status: %@", (unsigned long)weakSelf.peopleToChangeStatus.count, status]];
 			[successAlertView addButtonWithTitle:@"Ok"
 											type:SIAlertViewButtonTypeDestructive
 										 handler:^(SIAlertView *alertView) {
@@ -164,8 +204,10 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 			[weakSelf activityDidFinish:YES];
 			
 		} failBlock:^(NSError *error, MHRequestOptions *options) {
+
+			[DejalBezelActivityView removeViewAnimated:YES];
 			
-			NSString *message				= [NSString stringWithFormat:@"Changing status for %d people failed because: %@ If the problem persists please contact support@mission.com", weakSelf.peopleToChangeStatus.count, [error localizedDescription]];
+			NSString *message				= [NSString stringWithFormat:@"Changing status for %lu people failed because: %@ If the problem persists please contact support@mission.com", (unsigned long)weakSelf.peopleToChangeStatus.count, [error localizedDescription]];
 			NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 															 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 			

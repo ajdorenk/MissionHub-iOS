@@ -11,6 +11,7 @@
 #import "MHPerson+Helper.h"
 #import "MHPhoneNumber.h"
 #import "MHErrorHandler.h"
+#import "MHAllObjects.h"
 
 NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 
@@ -52,7 +53,7 @@ NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 		__block BOOL hasPeopleOrPhoneNumber = NO;
 		[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 			
-			if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHPhoneNumber class]]) {
+			if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHPhoneNumber class]] || [object isKindOfClass:[MHAllObjects class]]) {
 				
 				hasPeopleOrPhoneNumber	= YES;
 				*stop					= YES;
@@ -78,37 +79,15 @@ NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 	__weak __typeof(&*self)weakSelf = self;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		MHPerson *person			= nil;
-		MHPhoneNumber *phoneNumber	= nil;
-		NSString *phoneNumberString	= @"";
-		
 		if ([object isKindOfClass:[MHPerson class]]) {
 			
-			person	= (MHPerson *)object;
+			[weakSelf.recipients addObject:object];
 			
-			if (person.primaryPhone) {
-				
-				phoneNumberString	= person.primaryPhone;
-				
-			}
+		} else if ([object isKindOfClass:[MHAllObjects class]]) {
 			
-		}
-		
-		if ([object isKindOfClass:[MHPhoneNumber class]]) {
-			
-			phoneNumber	= (MHPhoneNumber *)object;
-			
-			if (phoneNumber.number) {
-				
-				phoneNumberString	= phoneNumber.number;
-				
-			}
-			
-		}
-		
-		if (phoneNumberString.length > 0) {
-			
-			[weakSelf.recipients addObject:phoneNumberString];
+			[weakSelf.recipients removeAllObjects];
+			[weakSelf.recipients addObject:object];
+			*stop	= YES;
 			
 		}
 		
@@ -118,12 +97,57 @@ NSString * const MHActivityTypeText	= @"com.missionhub.mhactivity.type.text";
 
 - (void)performActivity {
 	
-	MFMessageComposeViewController *messageComposeViewController = [[MFMessageComposeViewController alloc] init];
-	messageComposeViewController.messageComposeDelegate = self;
-	
-	messageComposeViewController.recipients	= self.recipients;
-	
-	[self.activityViewController.presentingController presentViewController:messageComposeViewController animated:YES completion:nil];
+	__weak __typeof(&*self)weakSelf = self;
+	[self returnPeopleFromArray:self.recipients withCompletionBlock:^(NSArray *peopleOrPhoneNumberList) {
+		
+		NSMutableArray *toArray	= [NSMutableArray array];
+		
+		[peopleOrPhoneNumberList enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+			
+			MHPerson *person			= nil;
+			MHPhoneNumber *phoneNumber	= nil;
+			NSString *phoneNumberString	= @"";
+			
+			if ([object isKindOfClass:[MHPerson class]]) {
+				
+				person	= (MHPerson *)object;
+				
+				if (person.primaryPhone) {
+					
+					phoneNumberString	= person.primaryPhone;
+					
+				}
+				
+			}
+			
+			if ([object isKindOfClass:[MHPhoneNumber class]]) {
+				
+				phoneNumber	= (MHPhoneNumber *)object;
+				
+				if (phoneNumber.number) {
+					
+					phoneNumberString	= phoneNumber.number;
+					
+				}
+				
+			}
+			
+			if (phoneNumberString.length > 0) {
+				
+				[toArray addObject:phoneNumberString];
+				
+			}
+			
+		}];
+		
+		MFMessageComposeViewController *messageComposeViewController	= [[MFMessageComposeViewController alloc] init];
+		messageComposeViewController.messageComposeDelegate				= weakSelf;
+		
+		messageComposeViewController.recipients							= toArray;
+		
+		[weakSelf.activityViewController.presentingController presentViewController:messageComposeViewController animated:YES completion:nil];
+		
+	}];
 	
 }
 

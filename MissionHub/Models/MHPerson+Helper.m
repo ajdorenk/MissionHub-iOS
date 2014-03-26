@@ -175,7 +175,16 @@
 
 -(NSString *)followupStatus {
 	
-	return ( self.permissionLevel.statusForDisplay ? self.permissionLevel.statusForDisplay : @"");
+	if ([self.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel noPermissions].remoteID] &&
+		self.permissionLevel.statusForDisplay) {
+		
+		return self.permissionLevel.statusForDisplay;
+		
+	} else {
+		
+		return @"";
+		
+	}
 	
 }
 

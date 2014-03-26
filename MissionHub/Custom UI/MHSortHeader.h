@@ -10,11 +10,19 @@
 #import "MHPerson+Helper.h"
 #import "MHRequestOptions.h"
 
+typedef enum {
+	MHSortHeaderCheckboxStateAll,
+	MHSortHeaderCheckboxStatePartial,
+	MHSortHeaderCheckboxStateNone
+} MHSortHeaderCheckboxState;
+
 extern CGFloat const MHSortHeaderHeight;
 
 @protocol MHSortHeaderDelegate;
 
 @interface MHSortHeader : UIView
+
+@property (nonatomic, assign) MHSortHeaderCheckboxState checkboxState;
 
 + (instancetype)headerWithTableView:(UITableView *)tableView sortField:(MHPersonSortFields)sortField delegate:(id<MHSortHeaderDelegate>)delegate;
 - (void)updateInterfaceWithSortField:(MHPersonSortFields)sortField;
@@ -24,7 +32,7 @@ extern CGFloat const MHSortHeaderHeight;
 @protocol MHSortHeaderDelegate <NSObject>
 
 @optional
-//- (void)allButtonPressed;
+- (void)allButtonPressedWithNewState:(MHSortHeaderCheckboxState)state;
 - (void)sortDirectionDidChangeTo:(MHRequestOptionsOrderDirections)direction;
 - (void)fieldButtonPressed;
 

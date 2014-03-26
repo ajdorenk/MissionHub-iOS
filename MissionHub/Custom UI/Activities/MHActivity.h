@@ -47,4 +47,7 @@ extern NSString * const MHActivityTypeDefault;
 - (void)performActivity;
 - (void)activityDidFinish:(BOOL)completed;
 
+//if all people request fails then it will just end the activity and will not call the completion block
+- (void)returnPeopleFromArray:(NSArray *)array withCompletionBlock:(void (^)(NSArray *peopleList))onCompletion;
+
 @end

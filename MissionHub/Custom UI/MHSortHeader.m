@@ -11,7 +11,7 @@
 CGFloat const MHSortHeaderMargin			= 5.0f;
 CGFloat const MHSortHeaderSpacing			= 10.0f;
 CGFloat const MHSortHeaderHeight			= 32.0f;
-//CGFloat const MHSortHeaderAllButtonWidth	= 20.0f;
+CGFloat const MHSortHeaderAllButtonWidth	= 60.0f;
 CGFloat const MHSortHeaderFieldButtonWidth	= 150.0f;
 CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 
@@ -19,20 +19,21 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 
 @property (nonatomic, weak) id<MHSortHeaderDelegate>delegate;
 @property (nonatomic, weak) UITableView *tableView;
-//@property (nonatomic, strong) UIButton *allButton;
+@property (nonatomic, strong) UIImageView *checkmarkImageView;
+@property (nonatomic, strong) UIButton *allButton;
 @property (nonatomic, strong) UIButton *fieldButton;
 @property (nonatomic, strong) UIButton *sortButton;
 
 - (void)sortOnOff:(UIButton *)button;
 - (void)chooseSortField:(id)sender;
-//- (void)allButtonPressed:(id)sender;
+- (void)allButtonPressed:(id)sender;
 
 @end
 
 @implementation MHSortHeader
 
 @synthesize tableView		= _tableView;
-//@synthesize allButton		= _allButton;
+@synthesize allButton		= _allButton;
 @synthesize fieldButton		= _fieldButton;
 @synthesize sortButton		= _sortButton;
 
@@ -55,18 +56,25 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
     if (header) {
         // Initialization code
 		
-		header.delegate			= delegate;
-		header.tableView			= tableView;
-		header.backgroundColor	= [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
+		header.delegate					= delegate;
+		header.tableView				= tableView;
+		header.backgroundColor			= [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1];
 		
-//		header.allButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//		header.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
-//		header.allButton.titleLabel.textColor = [UIColor whiteColor];
-//		header.allButton.backgroundColor = [UIColor clearColor];
-//		header.allButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-//		header.allButton.titleLabel.text = @"All";
-//		[header.sortButton addTarget:header action:@selector(allButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-//		[header addSubview:header.allButton];
+		header.allButton				= [UIButton buttonWithType:UIButtonTypeCustom];
+		header.allButton.frame			= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
+		header.allButton.titleLabel.textColor = [UIColor blackColor];
+		//header.allButton.backgroundColor = [UIColor clearColor];
+		header.allButton.titleLabel.textAlignment = UITextAlignmentRight;
+		header.allButton.titleLabel.text = @"All";
+		[header.allButton addTarget:header action:@selector(allButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+		[header addSubview:header.allButton];
+		
+		header.checkmarkImageView		= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_48.png"]];
+		header.checkmarkImageView.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderHeight - 2 * MHSortHeaderMargin, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
+		header.checkmarkImageView.userInteractionEnabled	= NO;
+		[header addSubview:header.checkmarkImageView];
+		
+		header.checkboxState			= MHSortHeaderCheckboxStateNone;
 		
 		header.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[header.sortButton setFrame:CGRectMake(CGRectGetWidth(header.frame) - MHSortHeaderSortButtonWidth - MHSortHeaderMargin,
@@ -105,15 +113,73 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 	
 }
 
-//- (void)allButtonPressed:(id)sender {
-//    
-//	if ([self.delegate respondsToSelector:@selector(allButtonPressed)]) {
-//		
-//		[self.delegate allButtonPressed];
-//		
-//	}
-//	
-//}
+- (void)setCheckboxState:(MHSortHeaderCheckboxState)checkboxState {
+	
+	[self willChangeValueForKey:@"checkboxState"];
+	_checkboxState	= checkboxState;
+	[self didChangeValueForKey:@"checkboxState"];
+	
+	switch (checkboxState) {
+			
+		case MHSortHeaderCheckboxStateAll:
+			
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_Checked_48"];
+			
+			break;
+			
+		case MHSortHeaderCheckboxStatePartial:
+			
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_PartiallyChecked_48"];
+			
+			break;
+			
+		case MHSortHeaderCheckboxStateNone:
+			
+			self.checkmarkImageView.image	= [UIImage imageNamed:@"MH_Mobile_Checkbox_Unchecked_48"];
+			
+			break;
+			
+		default:
+			break;
+			
+	}
+	
+}
+
+- (void)allButtonPressed:(id)sender {
+	
+	switch (self.checkboxState) {
+			
+		case MHSortHeaderCheckboxStateAll: {
+			
+			self.checkboxState	= MHSortHeaderCheckboxStateNone;
+			
+			break;
+			
+		} case MHSortHeaderCheckboxStatePartial: {
+			
+			self.checkboxState	= MHSortHeaderCheckboxStateAll;
+			
+			break;
+			
+		} case MHSortHeaderCheckboxStateNone: {
+			
+			self.checkboxState	= MHSortHeaderCheckboxStateAll;
+			
+			break;
+			
+		} default:
+			break;
+			
+	}
+    
+	if ([self.delegate respondsToSelector:@selector(allButtonPressedWithNewState:)]) {
+		
+		[self.delegate allButtonPressedWithNewState:self.checkboxState];
+		
+	}
+	
+}
 
 - (void)chooseSortField:(id)sender {
     
@@ -174,7 +240,7 @@ CGFloat const MHSortHeaderSortButtonWidth	= 60.0f;
 												   MHSortHeaderHeight - 2 * MHSortHeaderMargin)];
 	
 	
-	//self.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
+	self.allButton.frame	= CGRectMake(MHSortHeaderMargin, MHSortHeaderMargin, MHSortHeaderAllButtonWidth, MHSortHeaderHeight - 2 * MHSortHeaderMargin);
 	
 }
 

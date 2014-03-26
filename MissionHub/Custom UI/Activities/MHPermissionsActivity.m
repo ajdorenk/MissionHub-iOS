@@ -12,18 +12,24 @@
 #import "MHPermissionLevel+Helper.h"
 #import "SIAlertView.h"
 #import "NSSet+MHSearchForRemoteID.h"
+#import "MHAllObjects.h"
+#import "DejalActivityView.h"
 
 NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.permissions";
 
 @interface MHPermissionsActivity ()
 
 @property (nonatomic, strong) NSMutableArray *peopleToChangePermissionLevel;
+@property (nonatomic, strong, readonly) MHGenericListViewController *permissionLevelViewController;
+
+- (void)displayViewController;
 
 @end
 
 @implementation MHPermissionsActivity
 
 @synthesize peopleToChangePermissionLevel	= _peopleToChangePermissionLevel;
+@synthesize permissionLevelViewController	= _permissionLevelViewController;
 
 - (id)init {
 	
@@ -40,6 +46,27 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
     return self;
 }
 
+- (MHGenericListViewController *)permissionLevelViewController {
+	
+	if (!_permissionLevelViewController) {
+		
+		[self willChangeValueForKey:@"permissionLevelViewController"];
+		_permissionLevelViewController	= [self.activityViewController.presentingController.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+		[self didChangeValueForKey:@"permissionLevelViewController"];
+		
+		_permissionLevelViewController.selectionDelegate	= self;
+		_permissionLevelViewController.multipleSelection	= NO;
+		_permissionLevelViewController.showHeaders			= NO;
+		_permissionLevelViewController.showSuggestions		= NO;
+		_permissionLevelViewController.listTitle			= @"Permission Levels";
+		[_permissionLevelViewController setDataArray:@[[MHPermissionLevel admin], [MHPermissionLevel user], [MHPermissionLevel noPermissions]]];
+		
+	}
+	
+	return _permissionLevelViewController;
+	
+}
+
 - (NSString *)activityType {
 	
 	return MHActivityTypePermissions;
@@ -51,7 +78,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 	__block BOOL hasPeople = NO;
 	[activityItems enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
 		
-		if ([object isKindOfClass:[MHPerson class]]) {
+		if ([object isKindOfClass:[MHPerson class]] || [object isKindOfClass:[MHAllObjects class]]) {
 			
 			hasPeople	= YES;
 			*stop		= YES;
@@ -77,6 +104,12 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 			
 			[weakSelf.peopleToChangePermissionLevel addObject:object];
 			
+		} else if ([object isKindOfClass:[MHAllObjects class]]) {
+			
+			[weakSelf.peopleToChangePermissionLevel removeAllObjects];
+			[weakSelf.peopleToChangePermissionLevel addObject:object];
+			*stop	= YES;
+			
 		}
 		
 	}];
@@ -85,14 +118,17 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 
 - (void)performActivity {
 	
-	MHGenericListViewController *permissionLevelList	= [self.activityViewController.presentingController.storyboard instantiateViewControllerWithIdentifier:@"MHGenericListViewController"];
+	__weak typeof(self)weakSelf = self;
+	[self returnPeopleFromArray:self.peopleToChangePermissionLevel withCompletionBlock:^(NSArray *peopleList) {
+		
+		weakSelf.peopleToChangePermissionLevel = [peopleList mutableCopy];
+		[weakSelf displayViewController];
+		
+	}];
 	
-	permissionLevelList.selectionDelegate	= self;
-	permissionLevelList.multipleSelection	= NO;
-	permissionLevelList.showHeaders			= NO;
-	permissionLevelList.showSuggestions		= NO;
-	permissionLevelList.listTitle			= @"Permission Levels";
-	[permissionLevelList setDataArray:@[[MHPermissionLevel admin], [MHPermissionLevel user], [MHPermissionLevel noPermissions]]];
+}
+
+- (void)displayViewController {
 	
 	if (self.peopleToChangePermissionLevel.count == 1) {
 		
@@ -109,7 +145,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 			
 		}
 		
-		[permissionLevelList setSuggestions:nil andSelectionObject:permissionLevel];
+		[self.permissionLevelViewController setSuggestions:nil andSelectionObject:permissionLevel];
 		
 	} else {
 		
@@ -118,7 +154,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 		[self.peopleToChangePermissionLevel enumerateObjectsUsingBlock:^(MHPerson *person, NSUInteger index, BOOL *stop) {
 			
 			if (permissionLevel) {
-			
+				
 				if (![person.permissionLevel.permission_id isEqualToNumber:permissionLevel.remoteID]) {
 					
 					permissionLevel	= nil;
@@ -148,13 +184,13 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 		
 		if (permissionLevel) {
 			
-			[permissionLevelList setSuggestions:nil andSelectionObject:permissionLevel];
+			[self.permissionLevelViewController setSuggestions:nil andSelectionObject:permissionLevel];
 			
 		}
 		
 	}
 	
-	[self.activityViewController.presentingController presentViewController:permissionLevelList animated:YES completion:nil];
+	[self.activityViewController.presentingController presentViewController:self.permissionLevelViewController animated:YES completion:nil];
 	
 }
 
@@ -164,7 +200,9 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 	
 	if ([object isKindOfClass:[MHPermissionLevel class]]) {
 		
-		__block MHPermissionLevel *permissionLevel	= (MHPermissionLevel *)object;
+		[DejalBezelActivityView activityViewForView:self.activityViewController.parentViewController.view withLabel:@"Apply Permission Level..."].showNetworkActivityIndicator	= YES;
+		
+		__block MHPermissionLevel *permissionLevel        = (MHPermissionLevel *)object;
 		
 		__weak __typeof(&*self)weakSelf = self;
 		[[MHAPI sharedInstance] bulkChangePermissionLevel:permissionLevel forPeople:self.peopleToChangePermissionLevel withSuccessBlock:^(NSArray *result, MHRequestOptions *options) {
@@ -173,8 +211,10 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 				
 				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel admin].remoteID]) {
 					
-					MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.admins findWithRemoteID:person.remoteID];
-					[[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
+					MHPerson *personObjectInAdminSet        = (MHPerson *)[[MHAPI sharedInstance].currentOrganization.admins findWithRemoteID:person.remoteID];
+					if (personObjectInAdminSet) {
+						[[MHAPI sharedInstance].currentOrganization removeAdminsObject:personObjectInAdminSet];
+					}
 					
 				}
 				
@@ -186,8 +226,10 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 				
 				if ([person.permissionLevel.permission_id isEqualToNumber:[MHPermissionLevel user].remoteID]) {
 					
-					MHPerson *personObjectInAdminSet	= (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
-					[[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInAdminSet];
+					MHPerson *personObjectInUserSet        = (MHPerson *)[[MHAPI sharedInstance].currentOrganization.users findWithRemoteID:person.remoteID];
+					if (personObjectInUserSet) {
+						[[MHAPI sharedInstance].currentOrganization removeUsersObject:personObjectInUserSet];
+					}
 					
 				}
 				
@@ -199,8 +241,10 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 				
 			}];
 			
+			[DejalBezelActivityView removeViewAnimated:YES];
+			
 			SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																	andMessage:[NSString stringWithFormat:@"%d people now are: %@", weakSelf.peopleToChangePermissionLevel.count, permissionLevel.name]];
+																	andMessage:[NSString stringWithFormat:@"%lu people now are: %@", (unsigned long)weakSelf.peopleToChangePermissionLevel.count, permissionLevel.name]];
 			[successAlertView addButtonWithTitle:@"Ok"
 											type:SIAlertViewButtonTypeDestructive
 										 handler:^(SIAlertView *alertView) {
@@ -216,9 +260,11 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 			
 		} failBlock:^(NSError *error, MHRequestOptions *options) {
 			
-			NSString *message				= [NSString stringWithFormat:@"Changing permissions for %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToChangePermissionLevel.count, [error localizedDescription]];
-			NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
-															 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
+			[DejalBezelActivityView removeViewAnimated:YES];
+			
+			NSString *message                                = [NSString stringWithFormat:@"Changing permissions for %lu people failed because: %@. If the problem persists please contact support@mission.com", (unsigned long)weakSelf.peopleToChangePermissionLevel.count, [error localizedDescription]];
+			NSError *presentationError        = [NSError errorWithDomain:MHAPIErrorDomain
+																	code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 			
 			[MHErrorHandler presentError:presentationError];
 			
