@@ -256,8 +256,8 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 	[self.labelStates enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary *labelState, BOOL *stop) {
 		
 		MHLabel *label							= labelState[@"label"];
-		MHGenericListObjectState beforeState	= [labelState[@"beforeState"] integerValue];
-		MHGenericListObjectState afterState		= [labelState[@"afterState"] integerValue];
+		MHGenericListObjectState beforeState	= (MHGenericListObjectState)[labelState[@"beforeState"] integerValue];
+		MHGenericListObjectState afterState		= (MHGenericListObjectState)[labelState[@"afterState"] integerValue];
 		
 		if (beforeState == MHGenericListObjectStateSelectedSome && afterState == MHGenericListObjectStateSelectedAll) {
 			
@@ -301,7 +301,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 		[DejalBezelActivityView removeViewAnimated:YES];
 		
 		SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																andMessage:[NSString stringWithFormat:@"%d people have had their labels updated!", weakSelf.people.count]];
+																andMessage:[NSString stringWithFormat:@"%lu people have had their labels updated!", (unsigned long)weakSelf.people.count]];
 		[successAlertView addButtonWithTitle:@"Ok"
 										type:SIAlertViewButtonTypeDestructive
 									 handler:^(SIAlertView *alertView) {
@@ -320,7 +320,7 @@ NSString * const MHActivityTypeLabel	= @"com.missionhub.mhactivity.type.label";
 		
 		[DejalBezelActivityView removeViewAnimated:YES];
 		
-		NSString *message				= [NSString stringWithFormat:@"Updating labels for %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.people.count, [error localizedDescription]];
+		NSString *message				= [NSString stringWithFormat:@"Updating labels for %lu people failed because: %@. If the problem persists please contact support@mission.com", (unsigned long)weakSelf.people.count, [error localizedDescription]];
 		NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 														 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 		

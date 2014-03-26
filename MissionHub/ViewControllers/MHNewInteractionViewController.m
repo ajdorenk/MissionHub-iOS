@@ -618,7 +618,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	if ([self.interaction.initiators count] > 1) {
 		
-		textForInitiatorButton = [NSString stringWithFormat:@"%@ +%d", [[[self.interaction.initiators allObjects] objectAtIndex:0] fullName], [self.interaction.initiators count] - 1];
+		textForInitiatorButton = [NSString stringWithFormat:@"%@ +%lu", [[[self.interaction.initiators allObjects] objectAtIndex:0] fullName], [self.interaction.initiators count] - 1];
 		
 	}
     

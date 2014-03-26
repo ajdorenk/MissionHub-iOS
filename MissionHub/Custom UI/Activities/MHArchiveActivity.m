@@ -125,7 +125,7 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 									  }];
 									  
 									  SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																							  andMessage:[NSString stringWithFormat:@"%d people were successfully archived?", weakSelf.peopleToArchive.count]];
+																							  andMessage:[NSString stringWithFormat:@"%lu people were successfully archived!", (unsigned long)weakSelf.peopleToArchive.count]];
 									  [successAlertView addButtonWithTitle:@"Ok"
 																	  type:SIAlertViewButtonTypeDestructive
 																   handler:^(SIAlertView *alertView) {
@@ -141,7 +141,7 @@ NSString * const MHActivityTypeArchive	= @"com.missionhub.mhactivity.type.archiv
 									  
 								  } failBlock:^(NSError *error, MHRequestOptions *options) {
 									  
-									  NSString *message				= [NSString stringWithFormat:@"Archiving %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToArchive.count, [error localizedDescription]];
+									  NSString *message				= [NSString stringWithFormat:@"Archiving %lu people failed because: %@. If the problem persists please contact support@mission.com", (unsigned long)weakSelf.peopleToArchive.count, [error localizedDescription]];
 									  NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 																					   code: [error code]
 																				   userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];

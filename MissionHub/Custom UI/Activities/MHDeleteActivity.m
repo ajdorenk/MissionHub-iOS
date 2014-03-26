@@ -125,7 +125,7 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 									  }];
 									  
 									  SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																							  andMessage:[NSString stringWithFormat:@"%d people were successfully deleted?", weakSelf.peopleToDelete.count]];
+																							  andMessage:[NSString stringWithFormat:@"%lu people were successfully deleted!", (unsigned long)weakSelf.peopleToDelete.count]];
 									  [successAlertView addButtonWithTitle:@"Ok"
 																	  type:SIAlertViewButtonTypeDestructive
 																   handler:^(SIAlertView *alertView) {
@@ -141,7 +141,7 @@ NSString * const MHActivityTypeDelete	= @"com.missionhub.mhactivity.type.delete"
 									  
 								  } failBlock:^(NSError *error, MHRequestOptions *options) {
 									  
-									  NSString *message				= [NSString stringWithFormat:@"Deleting %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToDelete.count, [error localizedDescription]];
+									  NSString *message				= [NSString stringWithFormat:@"Deleting %lu people failed because: %@. If the problem persists please contact support@mission.com", (unsigned long)weakSelf.peopleToDelete.count, [error localizedDescription]];
 									  NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 																					   code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 									  

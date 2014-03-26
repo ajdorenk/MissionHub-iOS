@@ -143,7 +143,7 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 		[DejalBezelActivityView removeViewAnimated:YES];
 		
 		SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																andMessage:[NSString stringWithFormat:@"%d people are now assigned to: %@", people.count, person.fullName]];
+																andMessage:[NSString stringWithFormat:@"%lu people are now assigned to: %@", (unsigned long)people.count, person.fullName]];
 		[successAlertView addButtonWithTitle:@"Ok"
 										type:SIAlertViewButtonTypeDestructive
 									 handler:^(SIAlertView *alertView) {
@@ -161,7 +161,7 @@ NSString * const MHActivityTypeAssign	= @"com.missionhub.mhactivity.type.assign"
 		
 		[DejalBezelActivityView removeViewAnimated:YES];
 		
-		NSString *message				= [NSString stringWithFormat:@"Assigning %d people to %@ failed because: %@. If the problem persists please contact support@mission.com", people.count, person.fullName, [error localizedDescription]];
+		NSString *message				= [NSString stringWithFormat:@"Assigning %lu people to %@ failed because: %@. If the problem persists please contact support@mission.com", (unsigned long)people.count, person.fullName, [error localizedDescription]];
 		NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 														 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 		

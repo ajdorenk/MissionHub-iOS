@@ -189,7 +189,7 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 			[DejalBezelActivityView removeViewAnimated:YES];
 			
 			SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																	andMessage:[NSString stringWithFormat:@"%d people now have the status: %@", weakSelf.peopleToChangeStatus.count, status]];
+																	andMessage:[NSString stringWithFormat:@"%lu people now have the status: %@", (unsigned long)weakSelf.peopleToChangeStatus.count, status]];
 			[successAlertView addButtonWithTitle:@"Ok"
 											type:SIAlertViewButtonTypeDestructive
 										 handler:^(SIAlertView *alertView) {
@@ -207,7 +207,7 @@ NSString * const MHActivityTypeStatus	= @"com.missionhub.mhactivity.type.status"
 
 			[DejalBezelActivityView removeViewAnimated:YES];
 			
-			NSString *message				= [NSString stringWithFormat:@"Changing status for %d people failed because: %@ If the problem persists please contact support@mission.com", weakSelf.peopleToChangeStatus.count, [error localizedDescription]];
+			NSString *message				= [NSString stringWithFormat:@"Changing status for %lu people failed because: %@ If the problem persists please contact support@mission.com", (unsigned long)weakSelf.peopleToChangeStatus.count, [error localizedDescription]];
 			NSError *presentationError	= [NSError errorWithDomain:MHAPIErrorDomain
 															 code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 			

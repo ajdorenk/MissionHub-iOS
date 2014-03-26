@@ -153,7 +153,7 @@
 		case MHRequestOptionsTypeUpdate:
 		case MHRequestOptionsTypeDelete:
 			
-			pathString = [NSString stringWithFormat:@"%@/%d", [self stringForEndpoint], [self remoteID]];
+			pathString = [NSString stringWithFormat:@"%@/%lu", [self stringForEndpoint], (unsigned long)[self remoteID]];
 			break;
 			
 		case MHRequestOptionsTypeBulk:
@@ -897,8 +897,9 @@
 	__block NSString * includeString = @"";
 	
 	__weak __typeof(&*self)weakSelf = self;
-	[self.includes enumerateIndexesUsingBlock:^(MHRequestOptionsIncludes include, BOOL *stop) {
+	[self.includes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop) {
 		
+		MHRequestOptionsIncludes include	= (MHRequestOptionsIncludes)index;
 		includeString = [includeString stringByAppendingFormat:@"%@,", [weakSelf stringFromInclude:include]];
 		
 	}];

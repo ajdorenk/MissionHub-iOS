@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2282B2366177466DB63DF9D1 /* libPods-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D11C346F9140469F8AC1C8 /* libPods-tests.a */; };
+		2AD193B2F763470C836A729A /* libPods-MissionHub-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDECB20059B7466C9B71F4E2 /* libPods-MissionHub-tests.a */; };
 		6801976317CFE88200DCE330 /* MHHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6801976217CFE88200DCE330 /* MHHeaderCell.m */; };
 		6809501A181EE1A300DB0018 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68095019181EE1A300DB0018 /* libxml2.dylib */; };
 		6809501B181EE1B000DB0018 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68095019181EE1A300DB0018 /* libxml2.dylib */; };
@@ -699,6 +700,7 @@
 		68F8D664182960AE00AF2E20 /* Panel4_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Panel4_iPad.xib; path = "Custom UI/Introduction/Panel4_iPad.xib"; sourceTree = "<group>"; };
 		68F8D667182960BA00AF2E20 /* Panel5_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Panel5_iPad.xib; path = "Custom UI/Introduction/Panel5_iPad.xib"; sourceTree = "<group>"; };
 		7555945037E547529374192F /* libPods-MissionHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MissionHub.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub-tests.xcconfig"; path = "Pods/Pods-MissionHub-tests.xcconfig"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
 		AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationViewController.m; path = ViewControllers/MHNavigationViewController.m; sourceTree = "<group>"; };
 		AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 		ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHCreatePersonViewController.m; path = ViewControllers/MHCreatePersonViewController.m; sourceTree = "<group>"; };
 		ADCCBA2F1795101800A613F3 /* MHProfileSurveysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileSurveysViewController.h; path = ViewControllers/MHProfileSurveysViewController.h; sourceTree = "<group>"; };
 		ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileSurveysViewController.m; path = ViewControllers/MHProfileSurveysViewController.m; sourceTree = "<group>"; };
+		CDECB20059B7466C9B71F4E2 /* libPods-MissionHub-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MissionHub-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -757,6 +760,7 @@
 				6867917317FF4EC6000106BF /* UIKit.framework in Frameworks */,
 				6867917217FF4EC6000106BF /* Foundation.framework in Frameworks */,
 				2282B2366177466DB63DF9D1 /* libPods-tests.a in Frameworks */,
+				2AD193B2F763470C836A729A /* libPods-MissionHub-tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,6 +851,7 @@
 				683910841760FD3100E01B46 /* Products */,
 				14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */,
 				39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */,
+				829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -874,6 +879,7 @@
 				6867917017FF4EC6000106BF /* XCTest.framework */,
 				7555945037E547529374192F /* libPods-MissionHub.a */,
 				26D11C346F9140469F8AC1C8 /* libPods-tests.a */,
+				CDECB20059B7466C9B71F4E2 /* libPods-MissionHub-tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1637,7 +1643,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-MissionHub-tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EF363F63DC6D4B5CA0D4C95C /* Check Pods Manifest.lock */ = {
@@ -2080,7 +2086,7 @@
 		};
 		6867917F17FF4EC6000106BF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
@@ -2121,6 +2127,7 @@
 					"\"${PODS_ROOT}/Headers/SIAlertView\"",
 					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
 					"$(SDKROOT)/usr/include/libxml2",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2132,7 +2139,7 @@
 		};
 		6867918017FF4EC6000106BF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
@@ -2170,6 +2177,7 @@
 					"\"${PODS_ROOT}/Headers/SIAlertView\"",
 					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
 					"$(SDKROOT)/usr/include/libxml2",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2182,7 +2190,7 @@
 		};
 		6867918117FF4EC6000106BF /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
@@ -2220,6 +2228,7 @@
 					"\"${PODS_ROOT}/Headers/SIAlertView\"",
 					"\"${PODS_ROOT}/Headers/TTTAttributedLabel\"",
 					"$(SDKROOT)/usr/include/libxml2",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = "tests/tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

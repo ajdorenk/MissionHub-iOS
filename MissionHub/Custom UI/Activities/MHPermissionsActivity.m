@@ -244,7 +244,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 			[DejalBezelActivityView removeViewAnimated:YES];
 			
 			SIAlertView *successAlertView = [[SIAlertView alloc] initWithTitle:@"Success"
-																	andMessage:[NSString stringWithFormat:@"%d people now are: %@", weakSelf.peopleToChangePermissionLevel.count, permissionLevel.name]];
+																	andMessage:[NSString stringWithFormat:@"%lu people now are: %@", (unsigned long)weakSelf.peopleToChangePermissionLevel.count, permissionLevel.name]];
 			[successAlertView addButtonWithTitle:@"Ok"
 											type:SIAlertViewButtonTypeDestructive
 										 handler:^(SIAlertView *alertView) {
@@ -262,7 +262,7 @@ NSString * const MHActivityTypePermissions	= @"com.missionhub.mhactivity.type.pe
 			
 			[DejalBezelActivityView removeViewAnimated:YES];
 			
-			NSString *message                                = [NSString stringWithFormat:@"Changing permissions for %d people failed because: %@. If the problem persists please contact support@mission.com", weakSelf.peopleToChangePermissionLevel.count, [error localizedDescription]];
+			NSString *message                                = [NSString stringWithFormat:@"Changing permissions for %lu people failed because: %@. If the problem persists please contact support@mission.com", (unsigned long)weakSelf.peopleToChangePermissionLevel.count, [error localizedDescription]];
 			NSError *presentationError        = [NSError errorWithDomain:MHAPIErrorDomain
 																	code: [error code] userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(message, nil)}];
 			
