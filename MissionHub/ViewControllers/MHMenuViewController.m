@@ -172,7 +172,8 @@ typedef enum {
 			MHOrganization *organization = [result objectAtIndex:0];
 			
 			[[MHAPI sharedInstance].initialPeopleList removeAllObjects];
-			[MHAPI sharedInstance].currentOrganization	= organization;
+			[MHAPI sharedInstance].currentOrganization				= organization;
+			[MHAPI sharedInstance].currentUser.currentOrganization	= organization; //depreciated, use [MHAPI sharedInstance].currentOrganization instead
 			
 			[ABNotifier setEnvironmentValue:[[MHAPI sharedInstance].currentOrganization.remoteID stringValue] forKey:@"organization_id"];
 			

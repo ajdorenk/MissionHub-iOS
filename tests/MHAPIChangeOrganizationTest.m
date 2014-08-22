@@ -60,7 +60,7 @@ describe(@"MHAPIChangeOrganization", ^{
 							
 						} failBlock:^(NSError *error, MHRequestOptions *options) {
 							
-							NSLog(@"Change Org %d failed: %@", organizationCounter, [error localizedDescription]);
+							NSLog(@"Change Org %ld failed: %@", (long)organizationCounter, [error localizedDescription]);
 							
 						}];
 						

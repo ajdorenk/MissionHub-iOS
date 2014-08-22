@@ -122,8 +122,8 @@ CGFloat const MHProfileHeaderContentBuffer = 40.0f;
 		
 		if ([setObject isKindOfClass:[MHOrganizationalLabel class]]) {
 			
-			MHOrganizationalLabel *organizationalLabel = (MHOrganizationalLabel *)setObject;
-			MHLabel *labelFromOrganizationalLabel = [[MHAPI sharedInstance].currentUser.currentOrganization.labels findWithRemoteID:organizationalLabel.label_id];
+            MHOrganizationalLabel *organizationalLabel = (MHOrganizationalLabel *)setObject;
+			MHLabel *labelFromOrganizationalLabel = [[MHAPI sharedInstance].currentOrganization.labels findWithRemoteID:organizationalLabel.label_id];
 			
 			if (labelFromOrganizationalLabel != nil) {
 				[labelArray addObject:labelFromOrganizationalLabel.name];

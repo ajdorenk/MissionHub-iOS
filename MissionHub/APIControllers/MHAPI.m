@@ -489,8 +489,8 @@ typedef enum {
 			
 		} else if ([operation.requestName isEqualToString:MHAPIRequestNameCurrentOrganization]) {
 			
-			self.currentUser.currentOrganization	= [modelArray objectAtIndex:0];
-			self.currentOrganization				= self.currentUser.currentOrganization;
+			self.currentOrganization				= [modelArray objectAtIndex:0];
+			self.currentUser.currentOrganization	= self.currentOrganization; //depreciated, use self.currentOrganization instead. Keep this line for legacy calls.
 			self.currentOrganizationIsFinished		= YES;
 			
 			if (self.initialPeopleListIsFinished) {

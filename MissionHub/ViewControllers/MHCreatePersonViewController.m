@@ -734,14 +734,14 @@ CGFloat const MHCreatePersonViewControllerGenderWidth				= 135.0f;
 	
 	switch (level) {
 		case 0:
-			[self organizationalPermissionLevel].permission		= [[MHAPI sharedInstance].currentUser.currentOrganization permissionLevelWithRemoteID:MHPermissionLevelRemoteIdAdmin];
+			[self organizationalPermissionLevel].permission		= [[MHAPI sharedInstance].currentOrganization permissionLevelWithRemoteID:MHPermissionLevelRemoteIdAdmin];
 			break;
 		case 1:
-			[self organizationalPermissionLevel].permission		= [[MHAPI sharedInstance].currentUser.currentOrganization permissionLevelWithRemoteID:MHPermissionLevelRemoteIdUser];
+			[self organizationalPermissionLevel].permission		= [[MHAPI sharedInstance].currentOrganization permissionLevelWithRemoteID:MHPermissionLevelRemoteIdUser];
 			break;
 			
 		default:
-			[self organizationalPermissionLevel].permission		= [[MHAPI sharedInstance].currentUser.currentOrganization permissionLevelWithRemoteID:MHPermissionLevelRemoteIdNoPermissions];
+			[self organizationalPermissionLevel].permission		= [[MHAPI sharedInstance].currentOrganization permissionLevelWithRemoteID:MHPermissionLevelRemoteIdNoPermissions];
 			break;
 	}
 																   
