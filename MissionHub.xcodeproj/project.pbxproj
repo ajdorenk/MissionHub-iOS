@@ -1384,7 +1384,7 @@
 				ORGANIZATIONNAME = Cru;
 				TargetAttributes = {
 					683910821760FD3100E01B46 = {
-						DevelopmentTeam = 3EQ94S9G86;
+						DevelopmentTeam = DQ48D9BF2V;
 					};
 					6867916E17FF4EC5000106BF = {
 						TestTargetID = 683910821760FD3100E01B46;
@@ -1967,7 +1967,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1981,7 +1981,7 @@
 			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Cru Global, Inc (DQ48D9BF2V)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cru Global, Inc (DQ48D9BF2V)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2008,7 +2008,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2075,7 +2075,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "MissionHub/MissionHub-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
