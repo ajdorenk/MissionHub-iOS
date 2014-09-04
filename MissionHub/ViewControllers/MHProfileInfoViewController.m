@@ -344,14 +344,14 @@ CGFloat const MHProfileInfoViewControllerHeaderCellMargin	= 10.0;
 			
 			if ([(MHEmailAddress *)objectForCell email].length > 0) {
 				
-				NSArray *toRecipents = [NSArray arrayWithObject:[(MHEmailAddress *)objectForCell email]];
-				
-				MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-				mc.mailComposeDelegate = self;
-				[mc setToRecipients:toRecipents];
-				
-				// Present mail view controller on screen
-				[self presentViewController:mc animated:YES completion:NULL];
+//				NSArray *toRecipents = [NSArray arrayWithObject:[(MHEmailAddress *)objectForCell email]];
+//				
+//				MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+//				mc.mailComposeDelegate = self;
+//				[mc setToRecipients:toRecipents];
+//				
+//				// Present mail view controller on screen
+//				[self presentViewController:mc animated:YES completion:NULL];
 			
 			}
 			
