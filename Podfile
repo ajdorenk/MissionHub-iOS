@@ -1,4 +1,4 @@
-platform :ios, '5.0'
+platform :ios, '6.0'
 
 # ignore all warnings from all pods
 inhibit_all_warnings!
@@ -7,7 +7,7 @@ link_with 'MissionHub', 'tests'
 
 target :MissionHub do
 
-	pod 'Facebook-iOS-SDK', '~> 3.9'
+	pod 'Facebook-iOS-SDK', '~> 3.17'
 	pod 'AFNetworking', '~> 1.3.1'
 	pod 'DWTagList', :git => 'https://github.com/CruGlobal/DWTagList.git'
 	pod 'ECSlidingViewController', '~> 1.0.1'
