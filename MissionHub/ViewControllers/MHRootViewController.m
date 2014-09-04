@@ -206,8 +206,10 @@ static NSString * const introductionHasBeenViewed						= @"introductionHasBeenVi
 		
 	}];
 	
-	[ABNotifier setEnvironmentValue:[currentUser.remoteID stringValue] forKey:@"person_id"];
-	[ABNotifier setEnvironmentValue:[currentUser.currentOrganization.remoteID stringValue] forKey:@"organization_id"];
+	[ABNotifier setEnvironmentValue:([currentUser.remoteID stringValue] ? [currentUser.remoteID stringValue] : @"" )
+							 forKey:@"person_id"];
+	[ABNotifier setEnvironmentValue:([currentUser.currentOrganization.remoteID stringValue] ? [currentUser.currentOrganization.remoteID stringValue] : @"")
+							 forKey:@"organization_id"];
 	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerLoginScreenName
 															  category:MHGoogleAnalyticsCategoryBackgroundProcess
