@@ -222,7 +222,7 @@ typedef enum {
 	
     // Initialize a new blank session instance...
     FBSession *appLinkSession = [[FBSession alloc] initWithAppID:nil
-                                                     permissions:@[@"user_birthday",@"email",@"offline_access",@"user_interests",@"user_location",@"user_education_history"]
+                                                     permissions:@[@"public_profile", @"email", @"user_friends", @"user_birthday", @"user_hometown"]
                                                  defaultAudience:FBSessionDefaultAudienceNone
                                                  urlSchemeSuffix:nil
                                               tokenCacheStrategy:[FBSessionTokenCachingStrategy nullCacheInstance] ];
