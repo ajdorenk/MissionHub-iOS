@@ -118,26 +118,6 @@
 		683AE3A0176D2DC20027EDE4 /* appicon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE396176D2DC20027EDE4 /* appicon-Small-50.png */; };
 		683AE3A2176D2DC20027EDE4 /* appicon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 683AE397176D2DC20027EDE4 /* appicon-72.png */; };
 		6840C39717AD7B8900C2DB26 /* MHBlankCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 6840C39617AD7B8900C2DB26 /* MHBlankCheckbox.m */; };
-		6842D8B9183BB54F00815BB9 /* GCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D89F183BB54F00815BB9 /* GCAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8BA183BB54F00815BB9 /* GCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D89F183BB54F00815BB9 /* GCAlertView.m */; };
-		6842D8BB183BB54F00815BB9 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8A3183BB54F00815BB9 /* DDXMLElementAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8BC183BB54F00815BB9 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8A3183BB54F00815BB9 /* DDXMLElementAdditions.m */; };
-		6842D8BD183BB54F00815BB9 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8A6183BB54F00815BB9 /* NSString+DDXML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8BE183BB54F00815BB9 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8A6183BB54F00815BB9 /* NSString+DDXML.m */; };
-		6842D8BF183BB54F00815BB9 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8A9183BB54F00815BB9 /* DDXMLDocument.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8C0183BB54F00815BB9 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8A9183BB54F00815BB9 /* DDXMLDocument.m */; };
-		6842D8C1183BB54F00815BB9 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8AB183BB54F00815BB9 /* DDXMLElement.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8C2183BB54F00815BB9 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8AB183BB54F00815BB9 /* DDXMLElement.m */; };
-		6842D8C3183BB54F00815BB9 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8AD183BB54F00815BB9 /* DDXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8C4183BB54F00815BB9 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8AD183BB54F00815BB9 /* DDXMLNode.m */; };
-		6842D8C5183BB54F00815BB9 /* ABNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8B2183BB54F00815BB9 /* ABNotice.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8C6183BB54F00815BB9 /* ABNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8B2183BB54F00815BB9 /* ABNotice.m */; };
-		6842D8C7183BB54F00815BB9 /* ABNotifier.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6842D8B3183BB54F00815BB9 /* ABNotifier.bundle */; };
-		6842D8C8183BB54F00815BB9 /* ABNotifier.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6842D8B3183BB54F00815BB9 /* ABNotifier.bundle */; };
-		6842D8C9183BB54F00815BB9 /* ABNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8B5183BB54F00815BB9 /* ABNotifier.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8CA183BB54F00815BB9 /* ABNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8B5183BB54F00815BB9 /* ABNotifier.m */; };
-		6842D8CB183BB54F00815BB9 /* ABNotifierFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8B8183BB54F00815BB9 /* ABNotifierFunctions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6842D8CC183BB54F00815BB9 /* ABNotifierFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842D8B8183BB54F00815BB9 /* ABNotifierFunctions.m */; };
 		6846CE8E1834127C00DCB086 /* MHAPIChangeOrganizationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6846CE8D1834127C00DCB086 /* MHAPIChangeOrganizationTest.m */; };
 		6846CEB71834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6846CEAD1834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png */; };
 		6846CEB81834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6846CEAD1834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png */; };
@@ -370,9 +350,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub.xcconfig"; path = "Pods/Pods-MissionHub.xcconfig"; sourceTree = "<group>"; };
+		1B4C6EE1A13763C1DB0A87D5 /* Pods-MissionHub-tests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub-tests.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-MissionHub-tests/Pods-MissionHub-tests.adhoc.xcconfig"; sourceTree = "<group>"; };
+		1FF4367C5E5407E6E10950F3 /* Pods-MissionHub.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-MissionHub/Pods-MissionHub.adhoc.xcconfig"; sourceTree = "<group>"; };
 		26D11C346F9140469F8AC1C8 /* libPods-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tests.xcconfig"; path = "Pods/Pods-tests.xcconfig"; sourceTree = "<group>"; };
 		6801976117CFE88200DCE330 /* MHHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHHeaderCell.h; path = "Custom UI/MHHeaderCell.h"; sourceTree = "<group>"; };
 		6801976217CFE88200DCE330 /* MHHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHHeaderCell.m; path = "Custom UI/MHHeaderCell.m"; sourceTree = "<group>"; };
 		68095019181EE1A300DB0018 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -503,28 +483,6 @@
 		683AE397176D2DC20027EDE4 /* appicon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon-72.png"; sourceTree = "<group>"; };
 		6840C39517AD7B8900C2DB26 /* MHBlankCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHBlankCheckbox.h; path = "Custom UI/MHBlankCheckbox.h"; sourceTree = "<group>"; };
 		6840C39617AD7B8900C2DB26 /* MHBlankCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHBlankCheckbox.m; path = "Custom UI/MHBlankCheckbox.m"; sourceTree = "<group>"; };
-		6842D89E183BB54F00815BB9 /* GCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCAlertView.h; sourceTree = "<group>"; };
-		6842D89F183BB54F00815BB9 /* GCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCAlertView.m; sourceTree = "<group>"; };
-		6842D8A2183BB54F00815BB9 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
-		6842D8A3183BB54F00815BB9 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
-		6842D8A5183BB54F00815BB9 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
-		6842D8A6183BB54F00815BB9 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
-		6842D8A7183BB54F00815BB9 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
-		6842D8A8183BB54F00815BB9 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
-		6842D8A9183BB54F00815BB9 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
-		6842D8AA183BB54F00815BB9 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
-		6842D8AB183BB54F00815BB9 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
-		6842D8AC183BB54F00815BB9 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
-		6842D8AD183BB54F00815BB9 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
-		6842D8AF183BB54F00815BB9 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
-		6842D8B1183BB54F00815BB9 /* ABNotice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNotice.h; sourceTree = "<group>"; };
-		6842D8B2183BB54F00815BB9 /* ABNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNotice.m; sourceTree = "<group>"; };
-		6842D8B3183BB54F00815BB9 /* ABNotifier.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ABNotifier.bundle; sourceTree = "<group>"; };
-		6842D8B4183BB54F00815BB9 /* ABNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNotifier.h; sourceTree = "<group>"; };
-		6842D8B5183BB54F00815BB9 /* ABNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNotifier.m; sourceTree = "<group>"; };
-		6842D8B6183BB54F00815BB9 /* ABNotifierDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNotifierDelegate.h; sourceTree = "<group>"; };
-		6842D8B7183BB54F00815BB9 /* ABNotifierFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABNotifierFunctions.h; sourceTree = "<group>"; };
-		6842D8B8183BB54F00815BB9 /* ABNotifierFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABNotifierFunctions.m; sourceTree = "<group>"; };
 		6846CE8D1834127C00DCB086 /* MHAPIChangeOrganizationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHAPIChangeOrganizationTest.m; sourceTree = "<group>"; };
 		6846CEAD1834388B00DCB086 /* MH_Mobile_Introduction_5_description~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MH_Mobile_Introduction_5_description~ipad.png"; path = "Custom UI/Introduction/MH_Mobile_Introduction_5_description~ipad.png"; sourceTree = "<group>"; };
 		6846CEAE1834388B00DCB086 /* MH_Mobile_Introduction_5~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MH_Mobile_Introduction_5~ipad.png"; path = "Custom UI/Introduction/MH_Mobile_Introduction_5~ipad.png"; sourceTree = "<group>"; };
@@ -700,7 +658,8 @@
 		68F8D664182960AE00AF2E20 /* Panel4_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Panel4_iPad.xib; path = "Custom UI/Introduction/Panel4_iPad.xib"; sourceTree = "<group>"; };
 		68F8D667182960BA00AF2E20 /* Panel5_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Panel5_iPad.xib; path = "Custom UI/Introduction/Panel5_iPad.xib"; sourceTree = "<group>"; };
 		7555945037E547529374192F /* libPods-MissionHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MissionHub.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub-tests.xcconfig"; path = "Pods/Pods-MissionHub-tests.xcconfig"; sourceTree = "<group>"; };
+		9B5114710215F9A6825EDB1F /* Pods-MissionHub-tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub-tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MissionHub-tests/Pods-MissionHub-tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A002F8D568CE18CA6B433255 /* Pods-MissionHub-tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub-tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MissionHub-tests/Pods-MissionHub-tests.release.xcconfig"; sourceTree = "<group>"; };
 		AD010D35177BA42A00E6F0E6 /* MHNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHNavigationViewController.h; path = ViewControllers/MHNavigationViewController.h; sourceTree = "<group>"; };
 		AD010D36177BA43000E6F0E6 /* MHNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHNavigationViewController.m; path = ViewControllers/MHNavigationViewController.m; sourceTree = "<group>"; };
 		AD2434F0178B238C00FA16F2 /* MH_Mobile_Checkbox_Unchecked_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MH_Mobile_Checkbox_Unchecked_24.png; sourceTree = "<group>"; };
@@ -727,6 +686,8 @@
 		ADCCBA2F1795101800A613F3 /* MHProfileSurveysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHProfileSurveysViewController.h; path = ViewControllers/MHProfileSurveysViewController.h; sourceTree = "<group>"; };
 		ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileSurveysViewController.m; path = ViewControllers/MHProfileSurveysViewController.m; sourceTree = "<group>"; };
 		CDECB20059B7466C9B71F4E2 /* libPods-MissionHub-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MissionHub-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3C0804ED4119F0D7A94F35E /* Pods-MissionHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-MissionHub/Pods-MissionHub.release.xcconfig"; sourceTree = "<group>"; };
+		F46BCD73D4983F9ACFC5FC2E /* Pods-MissionHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MissionHub/Pods-MissionHub.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -767,14 +728,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		68094FE7181EDC3100DB0018 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				6842D89C183BB54F00815BB9 /* Airbrake */,
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
 		680CD8FF178240C900E6E742 /* CoreDataGeneratedClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,12 +799,9 @@
 				6839108E1760FD3100E01B46 /* MissionHub */,
 				683910B01760FD3100E01B46 /* MissionHubTests */,
 				6867917417FF4EC6000106BF /* tests */,
-				68094FE7181EDC3100DB0018 /* Libraries */,
 				683910851760FD3100E01B46 /* Frameworks */,
 				683910841760FD3100E01B46 /* Products */,
-				14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */,
-				39A134236E8E4D0885E390EE /* Pods-tests.xcconfig */,
-				829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */,
+				B51D8A53B8A999F290450953 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1043,84 +993,6 @@
 				68C82E7E1803343E00A8D5A0 /* MHContactAssignment+Helper.m */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		6842D89C183BB54F00815BB9 /* Airbrake */ = {
-			isa = PBXGroup;
-			children = (
-				6842D89D183BB54F00815BB9 /* gcalertview */,
-				6842D8A0183BB54F00815BB9 /* kissxml */,
-				6842D8B0183BB54F00815BB9 /* notifier */,
-			);
-			name = Airbrake;
-			path = "Libraries/Airbrake-iOS/Airbrake";
-			sourceTree = "<group>";
-		};
-		6842D89D183BB54F00815BB9 /* gcalertview */ = {
-			isa = PBXGroup;
-			children = (
-				6842D89E183BB54F00815BB9 /* GCAlertView.h */,
-				6842D89F183BB54F00815BB9 /* GCAlertView.m */,
-			);
-			path = gcalertview;
-			sourceTree = "<group>";
-		};
-		6842D8A0183BB54F00815BB9 /* kissxml */ = {
-			isa = PBXGroup;
-			children = (
-				6842D8A1183BB54F00815BB9 /* Additions */,
-				6842D8A4183BB54F00815BB9 /* Categories */,
-				6842D8A7183BB54F00815BB9 /* DDXML.h */,
-				6842D8A8183BB54F00815BB9 /* DDXMLDocument.h */,
-				6842D8A9183BB54F00815BB9 /* DDXMLDocument.m */,
-				6842D8AA183BB54F00815BB9 /* DDXMLElement.h */,
-				6842D8AB183BB54F00815BB9 /* DDXMLElement.m */,
-				6842D8AC183BB54F00815BB9 /* DDXMLNode.h */,
-				6842D8AD183BB54F00815BB9 /* DDXMLNode.m */,
-				6842D8AE183BB54F00815BB9 /* Private */,
-			);
-			path = kissxml;
-			sourceTree = "<group>";
-		};
-		6842D8A1183BB54F00815BB9 /* Additions */ = {
-			isa = PBXGroup;
-			children = (
-				6842D8A2183BB54F00815BB9 /* DDXMLElementAdditions.h */,
-				6842D8A3183BB54F00815BB9 /* DDXMLElementAdditions.m */,
-			);
-			path = Additions;
-			sourceTree = "<group>";
-		};
-		6842D8A4183BB54F00815BB9 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				6842D8A5183BB54F00815BB9 /* NSString+DDXML.h */,
-				6842D8A6183BB54F00815BB9 /* NSString+DDXML.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		6842D8AE183BB54F00815BB9 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				6842D8AF183BB54F00815BB9 /* DDXMLPrivate.h */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		6842D8B0183BB54F00815BB9 /* notifier */ = {
-			isa = PBXGroup;
-			children = (
-				6842D8B1183BB54F00815BB9 /* ABNotice.h */,
-				6842D8B2183BB54F00815BB9 /* ABNotice.m */,
-				6842D8B3183BB54F00815BB9 /* ABNotifier.bundle */,
-				6842D8B4183BB54F00815BB9 /* ABNotifier.h */,
-				6842D8B5183BB54F00815BB9 /* ABNotifier.m */,
-				6842D8B6183BB54F00815BB9 /* ABNotifierDelegate.h */,
-				6842D8B7183BB54F00815BB9 /* ABNotifierFunctions.h */,
-				6842D8B8183BB54F00815BB9 /* ABNotifierFunctions.m */,
-			);
-			path = notifier;
 			sourceTree = "<group>";
 		};
 		68478DB0177E8CDC0014501D /* Resources */ = {
@@ -1331,6 +1203,19 @@
 			name = "Custom UI";
 			sourceTree = "<group>";
 		};
+		B51D8A53B8A999F290450953 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F46BCD73D4983F9ACFC5FC2E /* Pods-MissionHub.debug.xcconfig */,
+				D3C0804ED4119F0D7A94F35E /* Pods-MissionHub.release.xcconfig */,
+				1FF4367C5E5407E6E10950F3 /* Pods-MissionHub.adhoc.xcconfig */,
+				9B5114710215F9A6825EDB1F /* Pods-MissionHub-tests.debug.xcconfig */,
+				A002F8D568CE18CA6B433255 /* Pods-MissionHub-tests.release.xcconfig */,
+				1B4C6EE1A13763C1DB0A87D5 /* Pods-MissionHub-tests.adhoc.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1423,7 +1308,6 @@
 				6846CEC51834388B00DCB086 /* MH_Mobile_Introduction_1_description~ipad.png in Resources */,
 				683938F41832FAA900234BED /* MH_Mobile_Introduction_2_description.png in Resources */,
 				6846CEC91834388B00DCB086 /* MH_Mobile_Introduction_2~ipad.png in Resources */,
-				6842D8C7183BB54F00815BB9 /* ABNotifier.bundle in Resources */,
 				683910931760FD3100E01B46 /* InfoPlist.strings in Resources */,
 				68F8D65F1829609000AF2E20 /* Panel2_iPad.xib in Resources */,
 				68BEBEC1184558AE004CB064 /* MH_Mobile_ActionIcon_Status_48.png in Resources */,
@@ -1563,7 +1447,6 @@
 				6834AD7418357098006EBD3F /* MH_AppIcon_IOS_76.png in Resources */,
 				6846CEBE1834388B00DCB086 /* MH_Mobile_Introduction_4~ipad.png in Resources */,
 				68F8D669182960BA00AF2E20 /* Panel5_iPad.xib in Resources */,
-				6842D8C8183BB54F00815BB9 /* ABNotifier.bundle in Resources */,
 				6834AD6018353445006EBD3F /* MH_AppIcon_IOS_40.png in Resources */,
 				6834AD7218357098006EBD3F /* MH_AppIcon_IOS_80.png in Resources */,
 				68BE4636182ACF4800A9B245 /* WelcomePanel_iPhone.xib in Resources */,
@@ -1628,7 +1511,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-MissionHub-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MissionHub/Pods-MissionHub-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BC20AE0DCBC34FA0A1786BA1 /* Copy Pods Resources */ = {
@@ -1643,7 +1526,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-MissionHub-tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MissionHub-tests/Pods-MissionHub-tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EF363F63DC6D4B5CA0D4C95C /* Check Pods Manifest.lock */ = {
@@ -1671,11 +1554,9 @@
 				68805EE818107DC00026F7DA /* MHOrganizationalPermission.m in Sources */,
 				68805EE918107DC00026F7DA /* MHPerson.m in Sources */,
 				683910951760FD3100E01B46 /* main.m in Sources */,
-				6842D8C9183BB54F00815BB9 /* ABNotifier.m in Sources */,
 				683910991760FD3100E01B46 /* MHAppDelegate.m in Sources */,
 				683910A21760FD3100E01B46 /* MissionHub.xcdatamodeld in Sources */,
 				683910D31761087600E01B46 /* MHRootViewController.m in Sources */,
-				6842D8C3183BB54F00815BB9 /* DDXMLNode.m in Sources */,
 				683910D81761356000E01B46 /* MHMenuViewController.m in Sources */,
 				683910E0176144BE00E01B46 /* MHPeopleListViewController.m in Sources */,
 				683910E41761548700E01B46 /* MHSurveyViewController.m in Sources */,
@@ -1688,8 +1569,6 @@
 				68A8A0A418465A6F002549F6 /* MHAllObjects.m in Sources */,
 				68C068A81770EFBE007C79D6 /* MHStorage.m in Sources */,
 				6867918517FF6533000106BF /* MHActivityView.m in Sources */,
-				6842D8B9183BB54F00815BB9 /* GCAlertView.m in Sources */,
-				6842D8C1183BB54F00815BB9 /* DDXMLElement.m in Sources */,
 				68C0696517710E60007C79D6 /* MHRequestOperation.m in Sources */,
 				68C069691772252C007C79D6 /* MHRequestOptions.m in Sources */,
 				68AB5AB317739FF700FA1558 /* NSDictionary+UrlEncodedString.m in Sources */,
@@ -1697,7 +1576,6 @@
 				68478D3B177A5AA20014501D /* MHInteraction.m in Sources */,
 				68478D3E177A70200014501D /* MHInteractionType.m in Sources */,
 				68478D52177A784A0014501D /* MHPermissionLevel.m in Sources */,
-				6842D8CB183BB54F00815BB9 /* ABNotifierFunctions.m in Sources */,
 				68478D5A177A7F420014501D /* MHSurvey.m in Sources */,
 				68478D5E177BA8E00014501D /* NSSet+MHSearchForRemoteID.m in Sources */,
 				AD010D37177BA43400E6F0E6 /* MHNavigationViewController.m in Sources */,
@@ -1717,7 +1595,6 @@
 				6823A7DA177EC34D00DBDF3F /* MHUser.m in Sources */,
 				68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */,
 				680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */,
-				6842D8BD183BB54F00815BB9 /* NSString+DDXML.m in Sources */,
 				680CD8FD1782403600E6E742 /* MHPerson+Helper.m in Sources */,
 				68F8D629182813E700AF2E20 /* MHIntroductionViewController.m in Sources */,
 				AD3C60D817838A3C00744167 /* MHInteractionCell.m in Sources */,
@@ -1728,7 +1605,6 @@
 				AD2434F4178C9CDA00FA16F2 /* MHNewInteractionViewController.m in Sources */,
 				6896649F17907982001EDA64 /* NSMutableArray+removeDuplicatesForKey.m in Sources */,
 				68145B901790FFA6008145EA /* MHProfileInfoViewController.m in Sources */,
-				6842D8BB183BB54F00815BB9 /* DDXMLElementAdditions.m in Sources */,
 				68145B9417910867008145EA /* MHSegmentedControl.m in Sources */,
 				68145B9817910984008145EA /* MHProfileMenuViewController.m in Sources */,
 				68BEBEBF18455874004CB064 /* MHStatusActivity.m in Sources */,
@@ -1747,9 +1623,7 @@
 				68A38F0317A998730010CAC6 /* MHTextField.m in Sources */,
 				6840C39717AD7B8900C2DB26 /* MHBlankCheckbox.m in Sources */,
 				682C68E917B9E3A600BAD332 /* MHPermissionLevel+Helper.m in Sources */,
-				6842D8C5183BB54F00815BB9 /* ABNotice.m in Sources */,
 				68818AFC17C7FFF800624887 /* MHAnswerSheet.m in Sources */,
-				6842D8BF183BB54F00815BB9 /* DDXMLDocument.m in Sources */,
 				68818B0017C7FFF900624887 /* MHAnswer.m in Sources */,
 				68818B0417C800A300624887 /* MHAnswerSheet+Helper.m in Sources */,
 				68EC3A5F17CD186E00EE3717 /* MHInteractionType+Helper.m in Sources */,
@@ -1789,30 +1663,22 @@
 				68C82E27180314FA00A8D5A0 /* MHLabel.m in Sources */,
 				68C82E29180314FA00A8D5A0 /* MHOrganizationalLabel.m in Sources */,
 				68C82E2D180314FB00A8D5A0 /* MHSurvey.m in Sources */,
-				6842D8BA183BB54F00815BB9 /* GCAlertView.m in Sources */,
 				68C82E2F180314FB00A8D5A0 /* MHPermissionLevel.m in Sources */,
-				6842D8C0183BB54F00815BB9 /* DDXMLDocument.m in Sources */,
-				6842D8BC183BB54F00815BB9 /* DDXMLElementAdditions.m in Sources */,
 				68C82E31180314FB00A8D5A0 /* MHInteractionType.m in Sources */,
-				6842D8C6183BB54F00815BB9 /* ABNotice.m in Sources */,
-				6842D8CA183BB54F00815BB9 /* ABNotifier.m in Sources */,
 				68C82E33180314FB00A8D5A0 /* MHAnswerSheet.m in Sources */,
 				68C82E37180314FB00A8D5A0 /* MHModel.m in Sources */,
 				68C82E39180314FB00A8D5A0 /* MHStorage.m in Sources */,
 				68EB9A341819DEE7009712EB /* MHNavigationBar.m in Sources */,
 				68C82E3B180314FB00A8D5A0 /* MHPerson+Helper.m in Sources */,
-				6842D8C2183BB54F00815BB9 /* DDXMLElement.m in Sources */,
 				68BE4633182ACE6A00A9B245 /* MHWelcomePanel.m in Sources */,
 				68C82E3D180314FB00A8D5A0 /* MHOrganization+Helper.m in Sources */,
 				68C82E3F180314FB00A8D5A0 /* MHUser.m in Sources */,
 				68C82E41180314FB00A8D5A0 /* MHInteraction+Helper.m in Sources */,
 				68A8A0A518465A6F002549F6 /* MHAllObjects.m in Sources */,
-				6842D8C4183BB54F00815BB9 /* DDXMLNode.m in Sources */,
 				68C82E43180314FB00A8D5A0 /* MHInteractionType+Helper.m in Sources */,
 				6846CE8E1834127C00DCB086 /* MHAPIChangeOrganizationTest.m in Sources */,
 				68C82E45180314FB00A8D5A0 /* MHOrganizationalPermission+Helper.m in Sources */,
 				68C82E47180314FB00A8D5A0 /* MHPermissionLevel+Helper.m in Sources */,
-				6842D8CC183BB54F00815BB9 /* ABNotifierFunctions.m in Sources */,
 				68C82E49180314FB00A8D5A0 /* MHOrganizationalLabel+Helper.m in Sources */,
 				68C82E4B180314FB00A8D5A0 /* MHLabel+Helper.m in Sources */,
 				68C82E4D180314FB00A8D5A0 /* MHSurvey+Helper.m in Sources */,
@@ -1823,7 +1689,6 @@
 				68C82E55180314FB00A8D5A0 /* MHAddress+Helper.m in Sources */,
 				68C82E57180314FB00A8D5A0 /* MHPhoneNumber.m in Sources */,
 				68095022181EEBAA00DB0018 /* MHConfig.m in Sources */,
-				6842D8BE183BB54F00815BB9 /* NSString+DDXML.m in Sources */,
 				68C82E59180314FB00A8D5A0 /* MHEmailAddress.m in Sources */,
 				68C82E7C180333C100A8D5A0 /* MHContactAssignment.m in Sources */,
 				68F8D6261828134400AF2E20 /* MHIntroductionPanel.m in Sources */,
@@ -1937,7 +1802,7 @@
 		};
 		683910BC1760FD3100E01B46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
+			baseConfigurationReference = F46BCD73D4983F9ACFC5FC2E /* Pods-MissionHub.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1978,7 +1843,7 @@
 		};
 		683910BD1760FD3100E01B46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
+			baseConfigurationReference = D3C0804ED4119F0D7A94F35E /* Pods-MissionHub.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Cru Global, Inc (DQ48D9BF2V)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Cru Global, Inc (DQ48D9BF2V)";
@@ -2045,7 +1910,7 @@
 		};
 		68478DD0177E93490014501D /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14CDC5A2761443C7B38F43C5 /* Pods-MissionHub.xcconfig */;
+			baseConfigurationReference = 1FF4367C5E5407E6E10950F3 /* Pods-MissionHub.adhoc.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2086,7 +1951,7 @@
 		};
 		6867917F17FF4EC6000106BF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
+			baseConfigurationReference = 9B5114710215F9A6825EDB1F /* Pods-MissionHub-tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
@@ -2139,7 +2004,7 @@
 		};
 		6867918017FF4EC6000106BF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
+			baseConfigurationReference = A002F8D568CE18CA6B433255 /* Pods-MissionHub-tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;
@@ -2190,7 +2055,7 @@
 		};
 		6867918117FF4EC6000106BF /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 829EBCB0907A453798A95213 /* Pods-MissionHub-tests.xcconfig */;
+			baseConfigurationReference = 1B4C6EE1A13763C1DB0A87D5 /* Pods-MissionHub-tests.adhoc.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MissionHub.app/MissionHub";
 				CLANG_ENABLE_MODULES = YES;

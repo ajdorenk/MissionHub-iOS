@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '6.0'
 
 # ignore all warnings from all pods
@@ -18,7 +20,7 @@ target :MissionHub do
 	pod 'TTTAttributedLabel', '~> 1.7.1'
 	pod 'NewRelicAgent', '~> 3.256'
 	pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.3'
-	#pod 'Airbrake-iOS', :git => 'https://github.com/CruGlobal/airbrake-ios.git'
+	pod 'Airbrake-iOS', :git => 'https://github.com/CruGlobal/airbrake-ios.git', :tag => '3.1.8'
 	pod 'MYBlurIntroductionView', :git => 'https://github.com/CruGlobal/MYBlurIntroductionView.git'
 	pod 'TransformerKit', '~> 0.3.0'
 	pod 'DejalActivityView', '~> 1.1'
