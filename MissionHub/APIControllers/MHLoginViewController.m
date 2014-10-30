@@ -7,8 +7,7 @@
 //
 
 #import "MHLoginViewController.h"
-#import "Facebook.h"
-#import "FBLoginView.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "MHAPI.h"
 #import "MHErrorHandler.h"
 
