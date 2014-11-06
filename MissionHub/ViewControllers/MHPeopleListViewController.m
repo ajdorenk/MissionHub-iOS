@@ -1256,6 +1256,8 @@ NSString * const MHGoogleAnalyticsTrackerPeopleListPageLoad							= @"page_load"
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 	
+	[self.createInteractionViewController clearInteraction];
+	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryPopover
 															  action:MHGoogleAnalyticsActionTap
 															   label:MHGoogleAnalyticsTrackerPeopleListDismissPopover

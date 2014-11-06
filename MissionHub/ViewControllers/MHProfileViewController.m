@@ -593,6 +593,10 @@ CGFloat const MHProfileHeaderHeightiOS7								= 214.0f;
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 	
+	[self.createInteractionViewController clearInteraction];
+	[self.interactionsViewController setPerson:self.person];
+	[self.interactionsViewController.tableView reloadData];
+	
 	[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithCategory:MHGoogleAnalyticsCategoryPopover
 															  action:MHGoogleAnalyticsActionTap
 															   label:MHGoogleAnalyticsTrackerProfileDismissPopover

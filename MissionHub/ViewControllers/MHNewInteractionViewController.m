@@ -40,6 +40,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 @property (nonatomic, strong) UIBarButtonItem				*doneWithDateButton;
 @property (nonatomic, strong) UIBarButtonItem				*doneWithCommentButton;
 @property (nonatomic, strong) UIBarButtonItem				*saveButton;
+@property (nonatomic, assign, readwrite) BOOL				isSaving;
 
 @property (nonatomic, strong) NSMutableArray				*interactionTypeArray;
 @property (nonatomic, strong) NSMutableArray				*visibilityArray;
@@ -329,6 +330,18 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 }
 
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+	
+	[super didMoveToParentViewController:parent];
+	
+	if (!parent) {
+	
+		[self clearInteraction];
+		
+	}
+	
+}
+
 #pragma mark - accessor methods/model methods
 
 -(void)updateWithInteraction:(MHInteraction *)interaction andSelections:(NSArray *)selections {
@@ -357,6 +370,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	NSError *error;
 	
 	self.saveButton.enabled = NO;
+	self.isSaving = YES;
 	
 	if ([self.interaction validateForServerCreate:&error]) {
 		
@@ -382,11 +396,14 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 				
 			}
 			
+			self.isSaving = NO;
+			
 		} failBlock:^(NSError *error, MHRequestOptions *options) {
 			
 			[MHErrorHandler presentError:error];
 			
 			weakSelf.saveButton.enabled = YES;
+			self.isSaving = NO;
 			
 		}];
 		
@@ -407,6 +424,27 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 																	action:MHGoogleAnalyticsActionTap
 																	 label:MHGoogleAnalyticsTrackerCreateInteractionSaveButtonTap
 																	 value:@0];
+		
+	}
+	
+}
+
+-(void)clearInteraction {
+	
+	if (!self.isSaving) {
+		
+		self.interaction.type			= [[[MHAPI sharedInstance].currentOrganization interactionTypes] findWithRemoteID:@1];
+		self.interaction.comment		= @"";
+		self.interaction.privacy_setting = [MHInteraction stringForPrivacySetting:MHInteractionPrivacySettingOrganization];
+		self.interaction.timestamp		= [NSDate date];
+		self.interaction.created_at		= [NSDate date];
+		self.interaction.updated_at		= [NSDate date];
+		
+		self.interaction.receiver		= nil;
+		self.interaction.creator		= [MHAPI sharedInstance].currentUser;
+		self.interaction.updater		= [MHAPI sharedInstance].currentUser;
+		[self.interaction removeInitiators:self.interaction.initiators];
+		[self.interaction addInitiatorsObject:[MHAPI sharedInstance].currentUser];
 		
 	}
 	
@@ -618,7 +656,7 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	
 	if ([self.interaction.initiators count] > 1) {
 		
-		textForInitiatorButton = [NSString stringWithFormat:@"%@ +%lu", [[[self.interaction.initiators allObjects] objectAtIndex:0] fullName], [self.interaction.initiators count] - 1];
+		textForInitiatorButton = [NSString stringWithFormat:@"%@ +%u", [[[self.interaction.initiators allObjects] objectAtIndex:0] fullName], [self.interaction.initiators count] - 1];
 		
 	}
     
@@ -964,6 +1002,8 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 		[self.currentPopoverController dismissPopoverAnimated:YES];
 		self.currentPopoverController	= nil;
 		
+		[self clearInteraction];
+		
 		[[MHGoogleAnalyticsTracker sharedInstance] sendEventWithScreenName:MHGoogleAnalyticsTrackerCreateInteractionScreenName
 																	 label:MHGoogleAnalyticsTrackerCreateInteractionCancelButtonTap];
 		
@@ -1236,6 +1276,16 @@ CGFloat const MHNewInteractionViewControllerTextFieldHeight				= 95.0f;
 	}
 	
     self.navigationItem.rightBarButtonItem	= self.doneWithCommentButton;
+	
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+	
+	if ([textView isEqual:self.comment]) {
+		
+		self.interaction.comment		= self.comment.text;
+		
+	}
 	
 }
 

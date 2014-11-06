@@ -17,9 +17,11 @@
 @property (nonatomic, weak) id<MHCreateInteractionDelegate>	createInteractionDelegate;
 @property (nonatomic, weak) UIPopoverController				*currentPopoverController;
 @property (nonatomic, strong) MHInteraction					*interaction;
+@property (nonatomic, assign, readonly)	BOOL				isSaving;
 
 -(void)updateWithInteraction:(MHInteraction *)interaction andSelections:(NSArray *)selections;
 -(void)saveInteraction;
+-(void)clearInteraction;
 -(void)setSelections:(NSArray *)selections;
 
 @end
