@@ -18,6 +18,7 @@
 @interface MHProfileSurveysViewController ()
 
 @property (nonatomic, strong) NSMutableArray *surveyArray;
+@property (nonatomic, strong) NSMutableDictionary *answers;
 
 - (void)configure;
 
@@ -57,7 +58,8 @@
 
 - (void)configure {
 	
-	self.surveyArray = [NSMutableArray array];
+	self.surveyArray	= [NSMutableArray array];
+	self.answers		= [NSMutableDictionary dictionary];
 	
 	if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
 		[self.tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -108,6 +110,13 @@
 		}
 		
 		[self.surveyArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"updated_at" ascending:NO]]];
+		self.answers = [NSMutableDictionary dictionary];
+		
+		for (MHAnswerSheet *answerSheet in self.surveyArray) {
+			
+			self.answers[answerSheet.survey_id] = [answerSheet.answers sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"question_id" ascending:YES]]];
+			
+		}
 		
 		[self.tableView reloadData];
 		
@@ -132,7 +141,7 @@
 	}
 	
 	MHAnswerSheet *survey = [self.surveyArray objectAtIndex:section];
-    return 1 + [survey.answers count];
+    return 1 + [self.answers[survey.survey_id] count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,7 +167,7 @@
 	} else {
 		
 		MHAnswerSheet *survey	= [self.surveyArray objectAtIndex:indexPath.section];
-		MHAnswer *answer		= [survey.answers.allObjects objectAtIndex:indexPath.row - 1];
+		MHAnswer *answer		= [self.answers[survey.survey_id] objectAtIndex:indexPath.row - 1];
 		return [MHAnswerCell heightForCellWithAnswer:answer andWidth:CGRectGetWidth(self.tableView.frame)];
 		
 	}
@@ -198,7 +207,7 @@
 		
 		// Configure the cell...
 		MHAnswerSheet *survey	= [self.surveyArray objectAtIndex:indexPath.section];
-		MHAnswer *answer		= [survey.answers.allObjects objectAtIndex:indexPath.row - 1];
+		MHAnswer *answer		= [self.answers[survey.survey_id] objectAtIndex:indexPath.row - 1];
 		cell.answer				= answer;
 		
 		return cell;
