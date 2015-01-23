@@ -100,7 +100,7 @@
 		
 		_baseUrl					= [NSURL URLWithString:baseUrlString];
 		_apiUrl						= [NSURL URLWithString:apiPathString relativeToURL:_baseUrl];
-		_surveyUrl					= [NSURL URLWithString:surveyPathString relativeToURL:_baseUrl];
+		_surveyUrl					= [NSURL URLWithString:surveyPathString relativeToURL:[NSURL URLWithString:shortUrlString]];
 		
 		//set api keys
 		_apiKeyErrbit				= ( [configDictionary valueForKey:@"errbit_api_key"] ? [configDictionary valueForKey:@"errbit_api_key"] : @"" );

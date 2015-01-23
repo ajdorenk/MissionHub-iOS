@@ -77,7 +77,6 @@ typedef enum {
         // Custom initialization
 		
 		self.surveyURL					= surveyUrl;
-		//self.accessToken				= @"CAADULZADslC0BALRH2Sk20bELjdMtQSl943Le7wwofpVzyF1DwZBgcQzkspboiOmZCNc3bZCugwMdE8QKtFqpOzcetJfcj5OEfwZCJIuE09RYnncz9DMFAbNLJuZCo0yjZCRZA9iYOoLLynI6jlXsXSYicPqZC9renHvdoaZABwz18FwZDZD";
 		self.parameterEncoding			= AFJSONParameterEncoding;
 		
     }
