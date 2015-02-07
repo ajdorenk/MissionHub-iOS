@@ -10,7 +10,6 @@
 #import "MHStorage.h"
 #import "MHConfig.h"
 #import "ABNotifier.h"
-#import <NewRelicAgent/NewRelicAgent.h>
 #import "MHGoogleAnalyticsTracker.h"
 
 @implementation MHAppDelegate

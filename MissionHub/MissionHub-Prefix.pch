@@ -27,4 +27,5 @@
 	#import <MobileCoreServices/MobileCoreServices.h>
 	#import <SystemConfiguration/SystemConfiguration.h>
 	#import "MHAppDelegate.h"
+    #import <NewRelicAgent/NewRelic.h>
 #endif
