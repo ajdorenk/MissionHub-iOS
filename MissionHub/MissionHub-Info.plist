@@ -70,6 +70,14 @@
 	<string>MissionHub</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Authorize always</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Authorize when in use</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchImages~ipad</key>
 	<array>
 		<dict>

@@ -337,6 +337,8 @@
 		ADCCBA201794DDA300A613F3 /* MHCreatePersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA1F1794DDA100A613F3 /* MHCreatePersonViewController.m */; };
 		ADCCBA311795101C00A613F3 /* MHProfileSurveysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */; };
 		D67754C132734DD0AB94FD28 /* libPods-MissionHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7555945037E547529374192F /* libPods-MissionHub.a */; };
+		D991A61D1A869B52007B96A7 /* MHLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D991A61C1A869B52007B96A7 /* MHLocationManager.m */; };
+		D991A61F1A86A0F2007B96A7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D991A61E1A86A0F2007B96A7 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -687,6 +689,9 @@
 		ADCCBA301795101A00A613F3 /* MHProfileSurveysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHProfileSurveysViewController.m; path = ViewControllers/MHProfileSurveysViewController.m; sourceTree = "<group>"; };
 		CDECB20059B7466C9B71F4E2 /* libPods-MissionHub-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MissionHub-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3C0804ED4119F0D7A94F35E /* Pods-MissionHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-MissionHub/Pods-MissionHub.release.xcconfig"; sourceTree = "<group>"; };
+		D991A61B1A869B52007B96A7 /* MHLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHLocationManager.h; sourceTree = "<group>"; };
+		D991A61C1A869B52007B96A7 /* MHLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHLocationManager.m; sourceTree = "<group>"; };
+		D991A61E1A86A0F2007B96A7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F46BCD73D4983F9ACFC5FC2E /* Pods-MissionHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissionHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MissionHub/Pods-MissionHub.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -695,6 +700,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D991A61F1A86A0F2007B96A7 /* CoreLocation.framework in Frameworks */,
 				6809501E181EE96300DB0018 /* SystemConfiguration.framework in Frameworks */,
 				6809501A181EE1A300DB0018 /* libxml2.dylib in Frameworks */,
 				681C65B417D19F550021D2EE /* MessageUI.framework in Frameworks */,
@@ -817,6 +823,7 @@
 		683910851760FD3100E01B46 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D991A61E1A86A0F2007B96A7 /* CoreLocation.framework */,
 				6809501C181EE95100DB0018 /* SystemConfiguration.framework */,
 				68095019181EE1A300DB0018 /* libxml2.dylib */,
 				681C65B317D19F550021D2EE /* MessageUI.framework */,
@@ -837,6 +844,7 @@
 		6839108E1760FD3100E01B46 /* MissionHub */ = {
 			isa = PBXGroup;
 			children = (
+				D991A61A1A869B1C007B96A7 /* GeoFence */,
 				683AE38F176D2A030027EDE4 /* Models */,
 				68D7AA3B176677DA00B9B0B1 /* API Controllers */,
 				683910D51761095000E01B46 /* View Controllers */,
@@ -1216,6 +1224,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D991A61A1A869B1C007B96A7 /* GeoFence */ = {
+			isa = PBXGroup;
+			children = (
+				D991A61B1A869B52007B96A7 /* MHLocationManager.h */,
+				D991A61C1A869B52007B96A7 /* MHLocationManager.m */,
+			);
+			name = GeoFence;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1270,6 +1287,11 @@
 				TargetAttributes = {
 					683910821760FD3100E01B46 = {
 						DevelopmentTeam = DQ48D9BF2V;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					6867916E17FF4EC5000106BF = {
 						TestTargetID = 683910821760FD3100E01B46;
@@ -1592,6 +1614,7 @@
 				6823A7CE177EC34C00DBDF3F /* MHEmailAddress.m in Sources */,
 				6823A7D2177EC34C00DBDF3F /* MHPhoneNumber.m in Sources */,
 				6823A7D6177EC34D00DBDF3F /* MHAddress.m in Sources */,
+				D991A61D1A869B52007B96A7 /* MHLocationManager.m in Sources */,
 				6823A7DA177EC34D00DBDF3F /* MHUser.m in Sources */,
 				68D7B8C7177F804300A2E231 /* MHOrganizationalLabel.m in Sources */,
 				680CD8F617823E4600E6E742 /* MHOrganization+Helper.m in Sources */,

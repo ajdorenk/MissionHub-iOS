@@ -11,6 +11,7 @@
 #import "MHConfig.h"
 #import "ABNotifier.h"
 #import "MHGoogleAnalyticsTracker.h"
+#import "MHLocationManager.h"
 
 @implementation MHAppDelegate
 
@@ -26,6 +27,9 @@
 	[NewRelicAgent startWithApplicationToken:[MHConfig sharedInstance].apiKeyNewRelic];
 	
 	[MHGoogleAnalyticsTracker start];
+    
+    [MHLocationManager sharedManager];
+    NSLog(@"MHLocationManager (shared) initiated");
 	
     return YES;
 }
