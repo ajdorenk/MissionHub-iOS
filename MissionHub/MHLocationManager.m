@@ -11,6 +11,13 @@
 
 @implementation MHLocationManager
 
+/*
+ TODO...
+ 1) Insert time delay into geo-fence notification so that it doesn't notify you simply if you drive by the campus
+ 2) Make the alert button "Ok, sure!" functional (i.e., when clicked change to the organization of the campus the user just left, could also offer to open up the add user or add interaction views, but that may be a lower priority since the buttons to add user/interaction are already visible at the top of most pages.)
+ 3) Provide option to disable geofencing (it will drain the battery and could become annoying to some users)
+ */
+
 + (id)sharedManager {
     static MHLocationManager *sharedMyManager = nil;
     static dispatch_once_t onceToken;
@@ -21,11 +28,22 @@
 }
 
 - (void)addGeofenceAtLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude withRadius:(CLLocationDistance)radius andIdentifier:(NSString *)identifier {
-    
-    CLRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(latitude, longitude) radius:radius identifier:identifier];
-    [self.locationManager startMonitoringForRegion:region];
-    [self.geofences addObject:region];
-    NSLog(@"Geofence added for region: %@ with lat: %lf, lng: %lf", identifier, latitude, longitude);
+   
+    bool geofenceFound = NO;
+    for (CLRegion *reg in self.locationManager.monitoredRegions) {
+        if ([reg.identifier isEqualToString:identifier]) {
+            geofenceFound = YES;
+            break;
+        }
+    }
+    if (geofenceFound) {
+        NSLog(@"Geofence already exists for region: %@ with lat: %lf, lng: %lf", identifier, latitude, longitude);
+    } else {
+        CLRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(latitude, longitude) radius:radius identifier:identifier];
+        [self.locationManager startMonitoringForRegion:region];
+        [self.geofences addObject:region];
+        NSLog(@"Geofence added for region: %@ with lat: %lf, lng: %lf", identifier, latitude, longitude);
+    }
 }
 
 - (id)init {
