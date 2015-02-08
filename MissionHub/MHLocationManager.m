@@ -20,6 +20,14 @@
     return sharedMyManager;
 }
 
+- (void)addGeofenceAtLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude withRadius:(CLLocationDistance)radius andIdentifier:(NSString *)identifier {
+    
+    CLRegion *region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(latitude, longitude) radius:radius identifier:identifier];
+    [self.locationManager startMonitoringForRegion:region];
+    [self.geofences addObject:region];
+    NSLog(@"Geofence added for region: %@ with lat: %lf, lng: %lf", identifier, latitude, longitude);
+}
+
 - (id)init {
     if (self = [super init]) {
         
@@ -52,18 +60,17 @@
             for (CLRegion *reg in self.locationManager.monitoredRegions) {
                 [self.locationManager stopMonitoringForRegion:reg];
             }
-            
-            //TODO: This should get appropriate region based on user -> campus -> geolocation info
+/*
             // DEBUG/DEV TEST REGION: Brandeis University
             CLRegion *brandeisRegion = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(42.365685, -71.258595) radius:1600 identifier:@"Brandeis University"];
+            [self.locationManager startMonitoringForRegion:brandeisRegion];
+            [self.geofences addObject:brandeisRegion];
+ 
             // DEBUG/DEV TEST REGION: Olin College
             CLRegion *olinRegion = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(42.291867, -71.264374) radius:1600 identifier:@"Olin College"];
-            
-            [self.locationManager startMonitoringForRegion:brandeisRegion];
             [self.locationManager startMonitoringForRegion:olinRegion];
-            [self.geofences addObject:brandeisRegion];
             [self.geofences addObject:olinRegion];
-            
+*/
         }
         
         // Location updates are only for showing location info useful for testing. Not necessary for region monitoring functionality; should probably be removed eventually to conserve battery.
@@ -80,21 +87,6 @@
 //    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Entered Region: %@",region.identifier] message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     NSLog(@"Entered Region : %@", region.identifier);
     
-    //TODO: Implement local notifications for when the app is not running or in the background.
-    /*
-    //implement local notification:
-    UIApplication *app = [UIApplication sharedApplication];
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    if (notification == nil)
-        return;
-    notification.alertBody = [NSString stringWithFormat:@"Entered Region: %@",region.identifier];
-    notification.alertAction = @"OK";
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    notification.applicationIconBadgeNumber = 1;
-    [app presentLocalNotificationNow:notification];
-    */
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
@@ -102,7 +94,6 @@
     [[[UIAlertView alloc] initWithTitle:@"Leaving campus" message:[NSString stringWithFormat:@"It appears you've left %@. You should log your interactions before you forget!",region.identifier] delegate:self cancelButtonTitle:@"Not now" otherButtonTitles:@"Ok, sure!", nil] show];
     NSLog(@"Exited Region : %@", region.identifier);
     
-    //TODO: Implement local notifications for when the app is not running or in the background.
     //implement local notification:
     UIApplication *app = [UIApplication sharedApplication];
     UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
@@ -110,7 +101,6 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
     
     UILocalNotification *notification = [[UILocalNotification alloc] init];
-//    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     if (notification == nil)
         return;

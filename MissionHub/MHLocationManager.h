@@ -24,5 +24,6 @@
 @property (weak, nonatomic) id <MHLocationManagerDelegate> delegate;
 
 + (id)sharedManager;
+- (void)addGeofenceAtLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude withRadius:(CLLocationDistance)radius andIdentifier:(NSString *)identifier;
 
 @end

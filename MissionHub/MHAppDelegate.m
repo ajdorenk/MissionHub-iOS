@@ -29,7 +29,6 @@
 	[MHGoogleAnalyticsTracker start];
     
     [MHLocationManager sharedManager];
-    NSLog(@"MHLocationManager (shared) initiated");
 	
     return YES;
 }

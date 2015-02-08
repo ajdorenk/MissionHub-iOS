@@ -20,6 +20,8 @@
 #import "MHIntroductionViewController.h"
 #import "MHGoogleAnalyticsTracker.h"
 #import "ABNotifier.h"
+#import "MHLocationManager.h"
+
 
 NSString *const MHMenuErrorDomain												= @"com.missionhub.errorDomain.menu";
 
@@ -299,6 +301,44 @@ typedef enum {
 }
 
 - (void)setCurrentOrganization:(MHOrganization *)currentOrganization {
+    
+    // Sets 1 mile (1600 meter) geofence around organization
+    if (currentOrganization.name) {
+        NSRange range = [currentOrganization.name rangeOfString:@"at"];
+        if (range.location == NSNotFound) {
+            // If an "at" doesn't exist in the organization name, then the organization is likely
+            // a conference and its location is not easily "googlable"
+        } else {
+            // In this case, an "at" exists in the name. Thus, we guess that this organization
+            // is a typical University/College, so we strip the "Cru at" or "Greek at" etc. from
+            // the beginning of the name and assume everything after is the proper organization name
+            NSString *strippedName = [currentOrganization.name substringFromIndex:(NSMaxRange(range)+1)];
+            
+            // Next we call the Google Places API with the name of the organization in order to
+            // get the latitude and longitude coordinates of the school/campus/university/etc.
+            NSString *googleAPIKey = @"AIzaSyCzhdjvYfJVvi3tFCV2btS5oZb0cuzwadk";
+            NSString *unescapedUrlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?query=%@&key=%@", strippedName, googleAPIKey];
+            NSString *escapedUrlString = [unescapedUrlString stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
+            NSURL *url = [NSURL URLWithString:escapedUrlString];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *response,
+                                                       NSData *data, NSError *connectionError)
+             {
+                 if (data.length > 0 && connectionError == nil)
+                 {
+                     NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data
+                                                                              options:0
+                                                                                error:NULL];
+                     // Finally, we set up a 1 mile (1600 meter) geofence around the campus lat/long coordinates
+                     MHLocationManager *lm = [MHLocationManager sharedManager];
+                     [lm addGeofenceAtLatitude:[responseJSON[@"results"][0][@"geometry"][@"location"][@"lat"] doubleValue] longitude:[responseJSON[@"results"][0][@"geometry"][@"location"][@"lng"] doubleValue] withRadius:1600 andIdentifier:strippedName];
+                 }
+             }];
+            
+        }
+    }
 	
 	[_currentOrganization removeObserver:self forKeyPath:@"admins"];
 	[_currentOrganization removeObserver:self forKeyPath:@"countOfAdmins"];
